@@ -1,0 +1,278 @@
+<!doctype html>
+{%extends "base.html"%}
+  {%block head%}
+   {%load staticfiles%}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>▒ SEAL ▒</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static "css/recommend.css" %}">
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+    <script>
+      $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
+      $.fn.slider.Constructor.prototype.enable = function () {
+        if (this.touchCapable) {
+          // Touch: Bind touch events:
+          this.picker.on({
+            touchstart: $.proxy(this.mousedown, this)
+          });
+        } else {
+          this.picker.on({
+            mousedown: $.proxy(this.mousedown, this)
+          });
+        }
+      }
+    </script>
+
+    <script>
+      $(function(){
+        var sl1 = $('#sl1').slider(),
+            sl2 = $('#sl2').slider(),
+            sl3 = $('#sl3').slider(),
+            sl4 = $('#sl4').slider(),
+            sl5 = $('#sl5').slider(),
+            sl6 = $('#sl6').slider();
+
+        $('#enable1').click(function(){$('#sl1').slider('enable')});
+        $('#disable1').click(function(){$('#sl1').slider('disable')});
+        $('#enable2').click(function(){$('#sl2').slider('enable')});
+        $('#disable2').click(function(){$('#sl2').slider('disable')});
+        $('#enable3').click(function(){$('#sl3').slider('enable')});
+        $('#disable3').click(function(){$('#sl3').slider('disable')});
+        $('#enable4').click(function(){$('#sl4').slider('enable')});
+        $('#disable4').click(function(){$('#sl4').slider('disable')});
+        $('#enable5').click(function(){$('#sl5').slider('enable')});
+        $('#disable5').click(function(){$('#sl5').slider('disable')});
+        $('#enable6').click(function(){$('#sl6').slider('enable')});
+        $('#disable6').click(function(){$('#sl6').slider('disable')});
+
+        $('#disable1').on('click', function(){$('#sl1').slider('setValue', 5);});
+        $('#disable2').on('click', function(){$('#sl2').slider('setValue', 5);});
+        $('#disable3').on('click', function(){$('#sl3').slider('setValue', 5);});
+        $('#disable4').on('click', function(){$('#sl4').slider('setValue', 5);});
+        $('#disable5').on('click', function(){$('#sl5').slider('setValue', 5);});
+        $('#disable6').on('click', function(){$('#sl6').slider('setValue', 5);});
+      });
+    </script>
+
+
+    
+    
+
+     {%endblock%}
+
+     {%block content%}
+
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-8 col-sm-10 col-xs-10">
+
+
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-heart"></i> 강의 추천하기</h2>
+
+        <div id="coursenameheader" class="ui column">
+                
+          <p id="ccode_p">[<span id="ccode"></span>]<br />
+          <span id="cname"></span><br />
+          <span id="cprof"></span></p>
+
+        </div>
+
+        <script>
+          var ccode = "ECE20018",
+              cname = "C 프로그래밍",
+              cprof = "최창범 교수님";
+
+          var eccode = document.getElementById('ccode'),
+              ecname = document.getElementById('cname'),
+              ecprof = document.getElementById('cprof');
+
+          eccode.textContent = ccode;
+          ecname.textContent = cname;
+          ecprof.textContent = cprof;
+        </script>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <div id="cautions">
+          <p>* SEAL은 한동대학생이 자신이 들은 수업 중 다른 학우들에게 추천하고 싶은 수업을 추천하는 사이트 입니다.</p>
+          <p>* 추천의 기준 위에 마우스 커서를 올리면 구체적으로 어떤 기준인지 설명을 보실 수 있습니다.</p>
+          <p>* 가운데에서 양쪽으로 각각 4단계씩 있습니다. 자신이 생각하기에 이 수업은 어느방향으로 어느정도인지 표시해주십시오.</p>
+          <p>* 만약에 자신은 이 기준을 판단할 수 없다면 X버튼을 눌러주시면 됩니다.</p>
+          <p>* 추천 기준을 다 정했다면 오른쪽 밑의 추천하기버튼을 눌러주시면 됩니다.</p>
+        </div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <div id="recommending" class="ui column">
+
+          <div id="blankspace" class="ui column"></div>
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">진도 속도</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable1" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">강의 교재</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable2" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">실질적 도움</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable3" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">질문에 대한 대답</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable4" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable4" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">시험 방식</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable5" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div class="left floated center aligned three wide column">과제물 방식</div>
+            <div class="left floated center aligned two wide column">
+              <button id="enable6" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <button id="disable6" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+            <div class="left floated right aligned two wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
+            </div>
+          </div>
+
+          <div id="recommendbtn" class="ui grid">
+            <div class="thirteen wide column"></div>
+            <div class="three wide column">
+              <button id="recommendbtn_d" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-heart"></i> 추천하기</button>
+            </div>
+          </div>
+
+          <script>
+            $(function(){
+              $("[data-toggle=tooltip]").tooltip();
+            });
+            $('#recommendbtn_d').on('click', function(){
+              var data1 = $('#sl1').data('slider').getValue(),
+                  data2 = $('#sl2').data('slider').getValue(),
+                  data3 = $('#sl3').data('slider').getValue(),
+                  data4 = $('#sl4').data('slider').getValue(),
+                  data5 = $('#sl5').data('slider').getValue(),
+                  data6 = $('#sl6').data('slider').getValue();
+            });
+          </script>
+
+        </div>
+        
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+
+        
+
+
+        <div id="h_sectiondivider" class="ui section divider"></div>     
+
+    
+
+   {%endblock%}
+</html>

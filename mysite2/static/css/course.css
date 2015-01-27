@@ -1,0 +1,30 @@
+
+#ccode_p {
+	font-size: 20px;
+}
+
+#cname {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#cprof {
+	font-size: 30px;
+}
+
+#h_sectiondivider {
+	border: none;
+}
+
+#h_innersectiondivider {
+	border: none;
+}
+
+#recommending {
+	padding: 20px;
+	border: 1px solid #87cefa;
+	border-radius: 10px;
+	box-shadow: 3px 3px 1px #888888;
+	font-weight: bold;
+	color: black;
+}

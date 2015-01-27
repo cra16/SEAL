@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+	ServerName abcde.cafe1234.com
+	DocumentRoot "/srv/www/mysite2"
+		
+	<Directory "/srv/www/mysite2">
+		Require all granted
+#		AllowOverride all		
+	</Directory>	
+	WSGIDaemonProcess mysite.djangoserver processes=2 threads=15 display-name=%{GROUP}
+	WSGIProcessGroup mysite.djangoserver
+
+	WSGIScriptAlias / /srv/www/mysite2/apache/django.wsgi
+
+	Alias /  /usr/local/lib/python3.4/dist-packages/django/contrib/admin/static
+	<Directory "/usr/local/lib/python3.4/dis-packages/django/contrib/admin/static">
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Require all granted
+	</Directory>
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	
+</VirtualHost>
+

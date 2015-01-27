@@ -1,0 +1,615 @@
+<!doctype html>
+{% extends "base.html" %}
+
+   
+   
+{% load staticfiles %}
+       
+
+
+   
+  
+   {% block head %}    
+     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
+    
+   
+   <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
+
+     
+    <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
+    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>    
+   
+    <script>
+      $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
+      $.fn.slider.Constructor.prototype.enable = function () {
+        if (this.touchCapable) {
+          // Touch: Bind touch events:
+          this.picker.on({
+            touchstart: $.proxy(this.mousedown, this)
+          });
+        } else {
+          this.picker.on({
+            mousedown: $.proxy(this.mousedown, this)
+          });
+        }
+      }
+    </script>   
+    
+       <script>
+      $(function(){
+        var sl1 = $('#sl11').slider();
+            sl2 = $('#sl12').slider(),
+            sl3 = $('#sl13').slider(),
+            sl4 = $('#sl14').slider(),
+            sl4 = $('#sl21').slider(),
+            sl4 = $('#sl22').slider(),
+            sl4 = $('#sl23').slider(),
+            sl4 = $('#sl24').slider(),
+            sl4 = $('#sl31').slider(),
+            sl4 = $('#sl32').slider(),
+            sl4 = $('#sl33').slider(),
+            sl4 = $('#sl34').slider(),
+            sl4 = $('#sl41').slider(),
+            sl4 = $('#sl42').slider(),
+            sl4 = $('#sl43').slider(),
+            sl4 = $('#sl44').slider(),
+            sl4 = $('#sl51').slider(),
+            sl4 = $('#sl52').slider(),
+            sl4 = $('#sl53').slider(),
+            sl4 = $('#sl54').slider(),
+            sl4 = $('#sl61').slider(),
+            sl4 = $('#sl62').slider(),
+            sl4 = $('#sl63').slider(),
+            sl4 = $('#sl64').slider(),
+            sl4 = $('#sl71').slider(),
+            sl4 = $('#sl72').slider(),
+            sl4 = $('#sl73').slider(),
+            sl4 = $('#sl74').slider();
+
+        $('#sl11').slider('disable');
+        $('#sl12').slider('disable');
+        $('#sl13').slider('disable');
+        $('#sl14').slider('disable');
+        $('#sl21').slider('disable');
+        $('#sl22').slider('disable');
+        $('#sl23').slider('disable');
+        $('#sl24').slider('disable');
+        $('#sl31').slider('disable');
+        $('#sl32').slider('disable');
+        $('#sl33').slider('disable');
+        $('#sl34').slider('disable');
+        $('#sl41').slider('disable');
+        $('#sl42').slider('disable');
+        $('#sl43').slider('disable');
+        $('#sl44').slider('disable');
+        $('#sl51').slider('disable');
+        $('#sl52').slider('disable');
+        $('#sl53').slider('disable');
+        $('#sl54').slider('disable');
+        $('#sl61').slider('disable');
+        $('#sl62').slider('disable');
+        $('#sl63').slider('disable');
+        $('#sl64').slider('disable');
+        $('#sl71').slider('disable');
+        $('#sl72').slider('disable');
+        $('#sl73').slider('disable');
+        $('#sl74').slider('disable');
+
+        $("[data-toggle=tooltip]").tooltip();
+      });
+    </script>
+
+    {% endblock%}
+    
+ 
+  <body>
+    {% block content %}  
+    
+    
+
+    <div class="containerss"></div>
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-10 col-xs-10">
+
+      <div class="ui small blue message">
+        <span class="header" style="text-align:left">
+          <div style="text-align:right"><i class="glyphicon glyphicon-remove"></i></div>
+          Welcome!
+        </span>
+        <p>어서 오세요. 한동대 학생들의 실력 향상을 위한 강의 추천 웹서비스!<br/>
+        [Students' Excellent Achievement in Learning]을 지향하는 SEAL입니다.</p>
+      </div>
+
+      <div class="ui small red message">
+        <span class="header" style="text-align:left">
+        <div style="text-align:right"><i class="glyphicon glyphicon-remove"></i></div>
+        What is SEAL?
+        </span>
+        <p>아직 SEAL의 사용 방법을 잘 모르시나요? 상단 바의 <a href="about.html"><u>About</u></a>을 참고하세요! 궁금한 게 있으시면 <a href="qna.html"><u>Q&A 페이지</u></a>에 질문을 등록해주세요.</p>
+      </div>
+
+      <h2 class="ui header">
+        <i class="glyphicon glyphicon-book"></i> Courses
+      </h2>
+
+      <div class="ui small form">
+        <div class="four fields">
+          <div class="field">
+            <label>학기 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">2015 / Winter</div>
+                <div class="item" data-value="2">2014 / 2</div>
+                <div class="item" data-value="3">2014 / Summer</div>
+                <div class="item" data-value="4">2014 / 1</div>
+                <div class="item" data-value="5">2014 / Winter</div>
+                <div class="item" data-value="6">2013 / 2</div>
+                <div class="item" data-value="7">2013 / Summer</div>
+                <div class="item" data-value="8">2013 / 1</div>
+                <div class="item" data-value="9">2013 / Winter</div>
+                <div class="item" data-value="10">2012 / 2</div>
+                <div class="item" data-value="11">2012 / Summer</div>
+                <div class="item" data-value="12">2012 / 1</div>
+                <div class="item" data-value="13">2012 / Winter</div>
+                <div class="item" data-value="14">2011 / 2</div>
+                <div class="item" data-value="15">2011 / Summer</div>
+                <div class="item" data-value="16">2011 / 1</div>
+                <div class="item" data-value="17">2011 / Winter</div>
+              </div>
+            </div> 
+          </div>
+          <div class="field">
+            <label>학부 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">글로벌리더십학부</div>
+                <div class="item" data-value="2">창의융합교육원</div>
+                <div class="item" data-value="3">Global Edison Academy</div>
+                <div class="item" data-value="4">국제어문학부</div>
+                <div class="item" data-value="5">언론정보문화학부</div>
+                <div class="item" data-value="6">경영경제학부</div>
+                <div class="item" data-value="7">법학부</div>
+                <div class="item" data-value="8">상담심리사회복지학부</div>
+                <div class="item" data-value="9">생명과학부</div>
+                <div class="item" data-value="10">전산전자공학부</div>
+                <div class="item" data-value="11">산업정보디자인학부</div>
+                <div class="item" data-value="12">기계제어공학부</div>
+                <div class="item" data-value="13">공간환경시스템공학부</div>
+                <div class="item" data-value="14">산업교육학부</div>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <div class="ui small tabular filter menu">
+        <a class="active item" data-tab="unread">1전공</a>
+        <a class="item" data-tab="saved">2전공</a>
+        <a class="item" data-tab="all">All</a>
+      </div>
+
+      <div class="ui very relaxed column grid">
+        <div class="column">
+          <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum1"></span> LIKES</center>
+              </div>
+                    
+              <div id="firstcourse">    
+                [<span id="ccode1"></span>]
+                <p><a href="course.html"><span class="cname" id="cname1"></span></a></p>
+                <p><a href="#"><span id="cprof1"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl11" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl12" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl13" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl14" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum2"></span> LIKES</center>
+              </div>
+                    
+              <div id="secondcourse">
+                [<span id="ccode2"></span>]
+                <p><a href="#"><span class="cname" id="cname2"></span></a></p>
+                <p><a href="#"><span id="cprof2"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl21" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl22" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl23" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl24" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum3"></span> LIKES</center>
+              </div>
+                    
+              <div id="thirdcourse">
+                [<span id="ccode3"></span>]
+                <p><a href="#"><span class="cname" id="cname3"></span></a></p>
+                <p><a href="#"><span id="cprof3"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl31" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl32" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl33" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl34" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum4"></span> LIKES</center>
+              </div>
+                    
+              <div id="fourthcourse">
+                [<span id="ccode4"></span>]
+                <p><a href="#"><span class="cname" id="cname4"></span></a></p>
+                <p><a href="#"><span id="cprof4"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl41" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl42" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl43" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl44" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum5"></span> LIKES</center>
+              </div>
+                    
+              <div id="fifthcourse">
+                [<span id="ccode5"></span>]
+                <p><a href="#"><span class="cname" id="cname5"></span></a></p>
+                <p><a href="#"><span id="cprof5"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl51" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl52" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl53" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl54" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+          
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum6"></span> LIKES</center>
+              </div>
+                    
+              <div id="sixthcourse">
+                [<span id="ccode6"></span>]
+                <p><a href="#"><span class="cname" id="cname6"></span></a></p>
+                <p><a href="#"><span id="cprof6"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sl61" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sl62" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sl63" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sl64" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+                
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum7"></span> LIKES</center>
+              </div>
+                    
+              <div id="seventhcourse">
+                [<span id="ccode7"></span>]
+                <p><a href="#"><span class="cname" id="cname7"></span></a></p>
+                <p><a href="#"><span id="cprof7"></span></a></p>
+              </div>
+
+              <div id="recommendtop">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함 </a>
+                  <input type="text" id="sl71" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다"> 느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨 </a>
+                  <input type="text" id="sl72" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다"> 자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주 </a>
+                  <input type="text" id="sl73" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다"> 강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움 </a>
+                  <input type="text" id="sl74" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다"> 교외 도움</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum1"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode1"></span>]
+              <p><a href="#"><span class="cname" id="cname1"></span></a></p>
+              <p><a href="#"><span id="cprof1"></span></a></p>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum2"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode2"></span>]
+              <p><a href="#"><span class="cname" id="cname2"></span></a></p>
+              <p><a href="#"><span id="cprof2"></span></a></p>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum3"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode3"></span>]
+              <p><a href="#"><span class="cname" id="cname3"></span></a></p>
+              <p><a href="#"><span id="cprof3"></span></a></p>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum4"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode4"></span>]
+              <p><a href="#"><span class="cname" id="cname4"></span></a></p>
+              <p><a href="#"><span id="cprof4"></span></a></p>
+            </div>
+
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum5"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode5"></span>]
+              <p><a href="#"><span class="cname" id="cname5"></span></a></p>
+              <p><a href="#"><span id="cprof5"></span></a></p>
+            </div>
+
+            <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
+
+              <div class="ui raised segment">
+                <div class="left floated ui compact segment">
+                  <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                  <center><span id="likenum6"></span> LIKES</center>
+                </div>
+                          
+                [<span id="ccode6"></span>]
+                <p><a href="#"><span class="cname" id="cname6"></span></a></p>
+                <p><a href="#"><span id="cprof6"></span></a></p>
+              </div>
+
+              <div class="ui raised segment">
+                <div class="left floated ui compact segment">
+                  <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                  <center><span id="likenum7"></span> LIKES</center>
+                </div>
+                          
+                [<span id="ccode7"></span>]
+                <p><a href="#"><span class="cname" id="cname7"></span></a></p>
+                <p><a href="#"><span id="cprof7"></span></a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div class="current">Showing <b>7</b> of 50</div>
+
+          <div class="ui small text menu">
+            <a class="icon item"><i class="icon left arrow"></i></a>
+            <a class="active item">1</a>
+            <a class="item">2</a>
+            <a class="item">3</a>
+            <a class="item">4</a>
+            <a class="item">5</a>
+            <a class="icon item"><i class="icon right arrow"></i></a>
+          </div>
+          
+        </div>
+      </div>
+
+      <script>
+        var ccode1 = "ECE20018",
+            cname1 = "C 프로그래밍",
+            cprof1 = "최창범 교수님",
+
+            ccode2 = "ECE20002",
+            cname2 = "자바 프로그래밍",
+            cprof2 = "김인중 교수님",
+
+            ccode3 = "ECE20003",
+            cname3 = "논리설계",
+            cprof3 = "한윤식 교수님",
+
+            ccode4 = "ECE20004",
+            cname4 = "이산수학",
+            cprof4 = "이건 교수님",
+
+            ccode5 = "ECE20005",
+            cname5 = "컴퓨터 구조",
+            cprof5 = "용환기 교수님",
+
+            ccode6 = "ECE20006",
+            cname6 = "Data Structure",
+            cprof6 = "이강 교수님",
+
+            ccode7 = "ECE20007",
+            cname7 = "공학설계입문",
+            cprof7 = "한윤식 교수님",
+
+            likenum1 = 120,
+            likenum2 = 114,
+            likenum3 = 106,
+            likenum4 = 97,
+            likenum5 = 95,
+            likenum6 = 88,
+            likenum7 = 82;
+
+        var eccode1 = document.getElementById('ccode1'),
+            ecname1 = document.getElementById('cname1'),
+            ecprof1 = document.getElementById('cprof1'),
+             
+            eccode2 = document.getElementById('ccode2'),
+            ecname2 = document.getElementById('cname2'),
+            ecprof2 = document.getElementById('cprof2'),
+
+            eccode3 = document.getElementById('ccode3'),
+            ecname3 = document.getElementById('cname3'),
+            ecprof3 = document.getElementById('cprof3'),
+
+            eccode4 = document.getElementById('ccode4'),
+            ecname4 = document.getElementById('cname4'),
+            ecprof4 = document.getElementById('cprof4'),
+
+            eccode5 = document.getElementById('ccode5'),
+            ecname5 = document.getElementById('cname5'),
+            ecprof5 = document.getElementById('cprof5'),
+
+            eccode6 = document.getElementById('ccode6'),
+            ecname6 = document.getElementById('cname6'),
+            ecprof6 = document.getElementById('cprof6'),
+
+            eccode7 = document.getElementById('ccode7'),
+            ecname7 = document.getElementById('cname7'),
+            ecprof7 = document.getElementById('cprof7'),
+
+            elikenum1 = document.getElementById('likenum1'),
+            elikenum2 = document.getElementById('likenum2'),
+            elikenum3 = document.getElementById('likenum3'),
+            elikenum4 = document.getElementById('likenum4'),
+            elikenum5 = document.getElementById('likenum5'),
+            elikenum6 = document.getElementById('likenum6'),
+            elikenum7 = document.getElementById('likenum7');
+
+        eccode1.textContent = ccode1;
+        ecname1.textContent = cname1;
+        ecprof1.textContent = cprof1;
+
+        eccode2.textContent = ccode2;
+        ecname2.textContent = cname2;
+        ecprof2.textContent = cprof2;
+
+        eccode3.textContent = ccode3;
+        ecname3.textContent = cname3;
+        ecprof3.textContent = cprof3;
+
+        eccode4.textContent = ccode4;
+        ecname4.textContent = cname4;
+        ecprof4.textContent = cprof4;
+
+        eccode5.textContent = ccode5;
+        ecname5.textContent = cname5;
+        ecprof5.textContent = cprof5;
+
+        eccode6.textContent = ccode6;
+        ecname6.textContent = cname6;
+        ecprof6.textContent = cprof6;
+
+        eccode7.textContent = ccode7;
+        ecname7.textContent = cname7;
+        ecprof7.textContent = cprof7;
+
+        elikenum1.textContent = likenum1;
+        elikenum2.textContent = likenum2;
+        elikenum3.textContent = likenum3;
+        elikenum4.textContent = likenum4;
+        elikenum5.textContent = likenum5;
+        elikenum6.textContent = likenum6;
+        elikenum7.textContent = likenum7;
+
+      </script>
+
+    {%endblock%}
+  </body>
+</html>

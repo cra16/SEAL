@@ -24,16 +24,16 @@
 
       <div class="col-md-8 col-sm-10 col-xs-10">
 
-        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)<a href="qna.html"> <div style="margin-top:20px" class="ui right floated tiny teal button">
+        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)<a href="/mysite2/QnA/"> <div style="margin-top:20px" class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
 
         <div id="h_sectiondivider" class="ui section divider"></div>
 
             <div id="qna_border_q" class="ui raised segment">
-              <div class="ui large blue ribbon label">추천이 어려워요ㅠㅠ</div>
+              <div class="ui large blue ribbon label">{{Board.TextName}}</div>
               <p></p>
-              <div class="ui tiny black ribbon label">김시은　2015.01.22 19:24</div>
-              <p class="qna_content">어려워요 어려워요 어려우어요어오엉 ㅜㅠㅜㅠㅠ!!</p>
+              <div class="ui tiny black ribbon label">{{Board.TextWriter}}　{{Board.created}}</div>
+              <p class="qna_content">{{Board.Text}}</p>
             </div>  
             
             <div id="qna_border_a" class="ui raised segment">

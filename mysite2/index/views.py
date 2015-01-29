@@ -37,9 +37,21 @@ def QnAMain(request):
 	count=QnABoard.objects.count()
 
 	TotalCount = (count/8)+1
+
+	if TotalCount ==1:
+                        Next = 1
+        else :
+              Next =TotalCount
+        Previous=1
 	
 	PageBoard = QnABoard.objects.order_by('-id')[0:7]
-	return render_to_response("QnA.html",{'user':request.user,'PageBoard':PageBoard, 'TotalCount' : range(0,TotalCount)})
+	return render_to_response("QnA.html",
+				  {'user':request.user,
+				   'PageBoard':PageBoard, 
+				   'TotalCount' : range(0,TotalCount), 
+				   'Previous' : Previous, 
+				   'Next' : Next,
+					})
 
 def QnA(request,offset): 
 	
@@ -47,17 +59,48 @@ def QnA(request,offset):
 		offset = int(offset)
 	except ValueError:
 		raise Http404()
-	PageFirst = (offset-1)*6+1
-        PageLast = (offset-1)*6 + 7	
+	PageFirst = (offset-1)*6
+        PageLast = (offset-1)*6 + 6
   	PageBoard = QnABoard.objects.order_by('-id')[PageFirst:PageLast]
 	
+        Page = dict()
 	count = QnABoard.objects.count()
-	TotalCount = (count/8)+1	
-
- 	return render_to_response("QnA.html",{'user':request.user, 'PageBoard':PageBoard,'TotalCount' : range(0,TotalCount)} )
+	TotalCount = (count/8)+1
+	if offset == 1:
+	   if TotalCount ==1:
+       	  		Next = offset
+	   else : 
+           	Next =offset +1
+	   Previous=1
+        elif offset ==TotalCount:
+	   Previous=offset-1
+	   Next = TotalCount
+        else:
+	   Previous = offset-1
+	   Next = offset +1
+       
+ 	return render_to_response("QnA.html",
+				  {'user':request.user, 
+				   'PageBoard':PageBoard,
+				   'TotalCount' : range(0,TotalCount), 
+	       			   'Previous' : Previous, 
+				   'Next' : Next} )
 
 def QnAWrite(request):
   	return render_to_response("subscribe_faq.html",{'user':request.user})
 
+def QnARead(request, offset):
+	try:
+		offset = int(offset)
+	except ValueError:
+		raise Http404()
 
+	Current = QnABoard.objects.filter(id=offset).get()
+	
+	
+	return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
+
+def Course(request):
+	
+	return render_to_response("course.html", {'user':request.user})
 # Create your views here.

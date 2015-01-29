@@ -23,6 +23,8 @@ urlpatterns = patterns('',
 	url(r'^QnA/page/(\d+)$',QnA),
 	url(r'^QnA/$',QnAMain),
 	url(r'^QnA/Write/$',QnAWrite),
+	url(r'^QnA/(\d+)/$',QnARead),
+	url(r'^Course/$',Course),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 

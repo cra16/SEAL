@@ -39,10 +39,10 @@ def QnAMain(request):
 	TotalCount = (count/8)+1
 
 	if TotalCount ==1:
-                        Next = 1
-        else :
-              Next =TotalCount
-        Previous=1
+		Next = 1
+	else:
+		Next =TotalCount
+	Previous=1
 	
 	PageBoard = QnABoard.objects.order_by('-id')[0:7]
 	return render_to_response("QnA.html",
@@ -60,26 +60,26 @@ def QnA(request,offset):
 	except ValueError:
 		raise Http404()
 	PageFirst = (offset-1)*6
-        PageLast = (offset-1)*6 + 6
-  	PageBoard = QnABoard.objects.order_by('-id')[PageFirst:PageLast]
+	PageLast = (offset-1)*6 + 6
+	PageBoard = QnABoard.objects.order_by('-id')[PageFirst:PageLast]
 	
-        Page = dict()
+	Page = dict()
 	count = QnABoard.objects.count()
 	TotalCount = (count/8)+1
 	if offset == 1:
 	   if TotalCount ==1:
-       	  		Next = offset
+		   Next = offset
 	   else : 
-           	Next =offset +1
+		   Next =offset +1
 	   Previous=1
-        elif offset ==TotalCount:
+	elif offset ==TotalCount:
 	   Previous=offset-1
 	   Next = TotalCount
-        else:
+	else:
 	   Previous = offset-1
 	   Next = offset +1
        
- 	return render_to_response("QnA.html",
+	return render_to_response("QnA.html",
 				  {'user':request.user, 
 				   'PageBoard':PageBoard,
 				   'TotalCount' : range(0,TotalCount), 
@@ -103,4 +103,8 @@ def QnARead(request, offset):
 def Course(request):
 	
 	return render_to_response("course.html", {'user':request.user})
+
+def Notice(request):
+
+	return render_to_response("notice.html", {'user':request.user})
 # Create your views here.

@@ -27,27 +27,23 @@ def register(request):
 def register_success(request):
     return render_to_response('success.html',)
     
-def logout_page(request):
-    logout(request)
-    return HttpResponseRedirect('/')
 
 @csrf_exempt
 def loginCheck(request):
-       	if request.method == 'POST':
-           username = request.POST['UserID']
-           userpassword = request.POST['UserPassword']
-      	   user = authenticate(username = username, password=userpassword)
-   	   if user is not None:
-         	auth_login(request,user)
-         	return render_to_response('index.html',{'user':request.user})
-	
-     	   else:
-		return render_to_response('login.html')
+		if request.method == 'POST':
+			username = request.POST['UserID']
+			userpassword = request.POST['UserPassword']
+			user = authenticate(username = username, password=userpassword)
+			if user is not None:
+				auth_login(request,user)
+				return render_to_response('index.html',{'user':request.user})
+			else:
+				return render_to_response('login.html')
          
-        elif request.user.username =="":
-		return render_to_response('login.html')
-	else:
-		return render_to_response('index.html',{'user':request.user})
+		elif request.user.username =="":
+			return render_to_response('login.html')
+		else:
+			return render_to_response('index.html',{'user':request.user})
 		
       
 	
@@ -55,8 +51,9 @@ def loginCheck(request):
 def login(request):
     return render_to_response('login.html')
     
-def loginSuccess(request):
-    return HttpResponseRedirect('/mysite2/home')
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/mysite2')
 
 def index(request):
     return render_to_response('index.html')

@@ -72,7 +72,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/mysite2/QnA">Q&A</a></li>
-                  <li><a href="#">공지사항</a></li>
+                  <li><a href="/mysite2/Notice">공지사항</a></li>
                   <li><a href="/mysite2/Judgement">신고</a></li>
                   <li><a href="#">개선요구사항</a></li>
                   <li><a href="">SITEMAP</a></li>
@@ -139,7 +139,8 @@
 
     <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
                     
-      <h3><a href="#"><span id="name"></span></a> <span id="detail"><br /><span id="year"></span>학번 / <span id="major"></span></span></h3>
+
+	<h3><a href="#"><span id="name">{{user.LastName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year"></span>학번 / {{user.StuNumber}}<span id="major"></span></span></h3>
 
       <p><span id="label"><a href="#">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
 

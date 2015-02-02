@@ -166,28 +166,7 @@ def Notice(request,offset):
 					   'TotalCount' : range(0,TotalCount), 
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
-def Notice_Read(request):
-	if request.user.username =="":
-			return HttpResponseRedirect("/mysite2")
-	else:
-		count=Notice_Board.objects.count()
 
-		TotalCount = (count/8)+1
-
-		if TotalCount ==1:
-			Next = 1
-		else:
-			Next =TotalCount
-		Previous=1
-	
-		PageBoard = QnABoard.objects.order_by('-id')[0:7]	
-		return render_to_response("QnA.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
-					   })
 def Notice_Read(request,offset):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")

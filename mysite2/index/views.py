@@ -130,5 +130,37 @@ def Notice(request):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
-		return render_to_response("notice.html", {'user':request.user})
+
+		count=Notice_Board.objects.count()
+
+		TotalCount = (count/8)+1
+
+		if TotalCount ==1:
+			Next = 1
+		else:
+			Next =TotalCount
+		Previous=1
+	
+		PageBoard = QnABoard.objects.order_by('-id')[0:7]	
+		return render_to_response("QnA.html",
+					  {'user':request.user,
+					   'PageBoard':PageBoard, 
+					   'TotalCount' : range(0,TotalCount), 
+					   'Previous' : Previous, 
+					   'Next' : Next,
+					   })
+def Notice_Read(request,offset):
+	if request.user.username =="":
+		return  HttpResponseRedirect("/mysite2")
+	else:
+		try:
+			offset = int(offset)
+		except ValueError:
+			raise Http404()
+
+		Current = Notice_Board.objects.filter(id=offset).get()
+	
+	
+		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
+		
 # Create your views here.

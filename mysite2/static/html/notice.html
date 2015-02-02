@@ -51,99 +51,31 @@
                 
                 
                 <tbody class="qna_sub">
-                   <tr id="qna1">
-                    <td><center><span id="qna_num7">7</span></center></td>
-                    <td class="qna_title"><a href="notice-contents.html">어서오세요! SEAL입니다!</a><span> <img src="../fonts/latest.gif"></span></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.22</center></td>
-                    <td><center><span id="qna_click1"></span></center></td>
+                  {%for Board in PageBoard%}
+				  
+				  <tr id="qna1">
+                    <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
+                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span> <img src="../fonts/latest.gif"></span></td>
+                    <td><center>{{Board.TextWriter}}</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
                   </tr>
-                  <tr id="qna2">
-                    <td><center><span id="qna_num6">6</span></center></td>
-                    <td class="qna_title"><a href="#">SEAL을 어떻게 사용해야할지 잘 모르시겠나요?</a><span> <img src="../fonts/latest.gif"></span></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.22</center></td>
-                    <td><center><span id="qna_click2"></span></center></td>
-                  </tr>
-                  <tr id="qna3">
-                    <td><center><span id="qna_num5">5</span></center></td>
-                    <td class="qna_title"><a href="#">읽어보세요! 한동대 학생들을 위해 탄생한 SEAL의 제공 목적은?</a></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.20</center></td>
-                    <td><center><span id="qna_click3"></span></center></td>
-                  </tr>
-                  <tr id="qna4">
-                    <td><center><span id="qna_num4">4</span></center></td>
-                    <td class="qna_title"><a href="#">당신은 TA이신가요?</a></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.18</center></td>
-                    <td><center><span id="qna_click4"></span></center></td>
-                  </tr>
-                  <tr id="qna5">
-                    <td><center><span id="qna_num3">3</span></center></td>
-                    <td class="qna_title"><a href="#">새내기인가요?</a></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.18</center></td>
-                    <td><center><span id="qna_click5"></span></center></td>
-                  </tr>
-                  <tr id="qna6">
-                    <td><center><span id="qna_num2">2</span></center></td>
-                    <td class="qna_title"><a href="#">왜 이름이 SEAL일까요?</a></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.17</center></td>
-                    <td><center><span id="qna_click6"></span></center></td>
-                  </tr>
-                  <tr id="qna7">
-                    <td><center><span id="qna_num1">1</span></center></td>
-                    <td class="qna_title"><a href="#">복학생이라면 읽어보세요!</a></td>
-                    <td><center>관리자</center></td>
-                    <td><center>2015.01.15</center></td>
-                    <td><center><span id="qna_click7"></span></center></td>
-                  </tr>
+				  {%endfor%}
+                  
                 </tbody>
               </table>
       
-     <script>
-         
-        var qna_num1 = 1,
-            qna_num2 = 2,
-            qna_num3 = 3,
-            qna_num4 = 4,
-            qna_num5 = 5,
-            qna_num6 = 6,
-            qna_num7 = 7;
-
-        var eqna_num1 = document.getElementById('qna_num1'),
-            eqna_num2 = document.getElementById('qna_num2'),
-            eqna_num3 = document.getElementById('qna_num3'),
-            eqna_num4 = document.getElementById('qna_num4'),
-            eqna_num5 = document.getElementById('qna_num5'),
-            eqna_num6 = document.getElementById('qna_num6'),
-            eqna_num7 = document.getElementById('qna_num7');
-
-        eqna_num1.textContent = qna_num1;
-        eqna_num2.textContent = qna_num2;
-        eqna_num3.textContent = qna_num3;
-        eqna_num4.textContent = qna_num4;
-        eqna_num5.textContent = qna_num5;
-        eqna_num6.textContent = qna_num6;
-        eqna_num7.textContent = qna_num7; 
-
-      </script>
-                                                 
+               
                                           
               <center><div class="ui borderless pagination menu">
-              <a class="item">
+              <a class="item" href ="/mysite2/Notice/Page/{{Previous}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-              <a class="item">1</a>
-              <a class="item">2</a>
-              <a class="item">3</a>
-              <a class="item">4</a>
-              <a class="item">5</a>
-              <a class="item">6</a>
-              <a class="item">
-                Next <i class="glyphicon glyphicon-menu-right"></i>
+			   {% for i in  TotalCount %}
+				 <a href = "/mysite2/Notice/Page/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+               {% endfor%}
+              <a class="item" href = "/mysite2/Notice/Page{{Next}}">
+                Next <i class="glyphicon glyphicon-menu-right" ></i>
               </a>
             </div></center>
               

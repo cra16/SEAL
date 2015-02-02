@@ -25,7 +25,9 @@ urlpatterns = patterns('',
 	url(r'^QnA/Write/$',QnAWrite),
 	url(r'^QnA/(\d+)/$',QnARead),
 	url(r'^Course/$',Course),
-	url(r'^Notice/$',Notice),
+	url(r'^Notice/$',NoticeMain),
+	url(r'^Notice/Page/(\d+)$',Notice),
+	url(r'^Notice/(\d+)/$',Notice_Read),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 

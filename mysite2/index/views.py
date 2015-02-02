@@ -120,16 +120,57 @@ def QnARead(request, offset):
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request):
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("course.html", {'user':request.user})
+#def Course(request):
+#	if request.user.username =="":
+#		return  HttpResponseRedirect("/mysite2")
+##	else:
+#		return render_to_response("course.html", {'user':request.user})
 
-def Notice(request):
+def NoticeMain(request):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
+		return render_to_response("notice.html", {'user':request.user})
+
+def Notice(request,offset):
+	if request.user.username =="":
+		return  HttpResponseRedirect("/mysite2")
+	else :	
+		try:
+			offset = int(offset)
+		except ValueError:
+			raise Http404()
+		PageFirst = (offset-1)*6
+		PageLast = (offset-1)*6 + 6
+		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast]
+	
+		Page = dict()
+		count = Notice_Board.objects.count()
+		TotalCount = (count/8)+1
+		if offset == 1:
+			if TotalCount ==1:
+				Next = offset
+			else : 
+				Next =offset +1
+			Previous=1
+		elif offset ==TotalCount:
+			Previous=offset-1
+			Next = TotalCount
+		else:
+			Previous = offset-1
+			Next = offset +1
+       
+		return render_to_response("notice.html",
+					  {'user':request.user, 
+					   'PageBoard':PageBoard,
+					   'TotalCount' : range(0,TotalCount), 
+	       			   'Previous' : Previous, 
+					   'Next' : Next} )
+def Notice_Read(request):
+	if request.user.username =="":
+			return HttpResponseRedirect("/mysite2")
+	else:
+<<<<<<< .merge_file_a05664
 
 		count=Notice_Board.objects.count()
 
@@ -153,6 +194,8 @@ def Notice_Read(request,offset):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
+=======
+>>>>>>> .merge_file_a09064
 		try:
 			offset = int(offset)
 		except ValueError:
@@ -162,5 +205,8 @@ def Notice_Read(request,offset):
 	
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
+<<<<<<< .merge_file_a05664
 		
+=======
+>>>>>>> .merge_file_a09064
 # Create your views here.

@@ -167,9 +167,9 @@ def Notice(request,offset):
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 
-def Notice_Read(request,offset):
-#	if request.user.username =="":
-#		return  HttpResponseRedirect("/mysite2")
+def Notice_Read(request, offset):
+	if request.user.username =="":
+		return  HttpResponseRedirect("/mysite2")
 	else:
 		try:
 			offset = int(offset)

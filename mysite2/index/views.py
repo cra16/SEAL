@@ -170,8 +170,6 @@ def Notice_Read(request):
 	if request.user.username =="":
 			return HttpResponseRedirect("/mysite2")
 	else:
-<<<<<<< .merge_file_a05664
-
 		count=Notice_Board.objects.count()
 
 		TotalCount = (count/8)+1
@@ -194,8 +192,6 @@ def Notice_Read(request,offset):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
-=======
->>>>>>> .merge_file_a09064
 		try:
 			offset = int(offset)
 		except ValueError:
@@ -205,8 +201,7 @@ def Notice_Read(request,offset):
 	
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
-<<<<<<< .merge_file_a05664
+
 		
-=======
->>>>>>> .merge_file_a09064
+
 # Create your views here.

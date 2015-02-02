@@ -26,7 +26,7 @@ urlpatterns = patterns('',
 	url(r'^QnA/(\d+)/$',QnARead),
 	url(r'^Notice/$',NoticeMain),
 	url(r'^Notice/Page/(\d+)$',Notice),
-	url(r'^Notice/(\d+)/$',Notice_Read),
+	#url(r'^Notice/(\d+)/$',Notice_Read),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 

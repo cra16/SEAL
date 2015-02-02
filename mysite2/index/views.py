@@ -120,11 +120,11 @@ def QnARead(request, offset):
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request):
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("course.html", {'user':request.user})
+#def Course(request):
+#	if request.user.username =="":
+#		return  HttpResponseRedirect("/mysite2")
+##	else:
+#		return render_to_response("course.html", {'user':request.user})
 
 def NoticeMain(request):
 	if request.user.username =="":
@@ -166,4 +166,17 @@ def Notice(request,offset):
 					   'TotalCount' : range(0,TotalCount), 
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
+def Notice_Read(request):
+	if request.user.username =="":
+			return HttpResponseRedirect("/mysite2")
+	else:
+		try:
+			offset = int(offset)
+		except ValueError:
+			raise Http404()
+
+		Current = Notice_Board.objects.filter(id=offset).get()
+	
+	
+		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 # Create your views here.

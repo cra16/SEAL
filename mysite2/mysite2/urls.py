@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 	url(r'^Notice/$',NoticeMain),
 	url(r'^Notice/Page/(\d+)$',Notice),
 	url(r'^Notice/(\d+)/$',Notice_Read),
+	url(r'^Register,Register),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 

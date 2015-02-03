@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="register.css" />
+    <script type="text/javascript" src="register.js"></script>
+
+    <title>SEAL - Login</title>
+
+  </head>
+  <body>
+
+    <div class="container" style="padding:100px 0">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="registercontainer">
+
+        <div class="box" id="mycontent-left-register">
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+            <p class="detail">캐치프레이즈</p>
+            <p class="detail2">설명1</p>
+            <p class="detail2">설명2</p>
+        </div>
+         
+
+        <div class="box" id="mycontent-right">
+
+
+          <form>
+
+            <div class="form-group" method="post" action="#">
+              <label class="control-label" for="username">아이디</label>
+              <input type="text" id="username" class="form-control" placeholder="아이디">
+
+              <label class="control-label" for="password" style="padding-top: 15px;">비밀번호</label>
+              <input type="password" id="password" class="form-control" placeholder="비밀번호">
+
+              <label class="control-label" for="password" style="padding-top: 15px;">비밀번호 재입력</label>
+              <input type="password" id="repassword" class="form-control" placeholder="비밀번호">
+
+              <label class="control-label" for="name" style="padding-top: 15px;">이름</label>
+              <input type="text" id="name" class="form-control" placeholder="이름">
+
+              <label class="control-label" for="stu_id" style="padding-top: 15px;">학번</label>
+              <input type="text" id="stu_id" class="form-control" placeholder="학번">
+
+              <label class="control-label" for="major1" style="padding-top: 15px;">제1전공</label>
+               <div></div>
+                <select id="firstmajor">
+                <option value="1">글로벌리더십학부</option>
+                <option value="2">창의융합교육원</option>
+                <option value="3">Global Edison Academy</option>
+                <option value="4">국제어문학부</option>
+                <option value="5">언론정보문화학부</option>
+                <option value="6">경영경제학부</option>
+                <option value="7">법학부</option>
+                <option value="8">상담심리사회복지학부</option>
+                <option value="9">생명과학부</option>
+                <option value="10">전산전자공학부</option>
+                <option value="11">산업정보디자인학부</option>
+                <option value="12">기계제어공학부</option>
+                <option value="13">공간환경시스템공학부</option>
+                <option value="14">산업교육학부</option>
+                </select>
+                <div></div>
+                
+              <label class="control-label" for="major2" style="padding-top: 15px;">제2전공</label>
+               <div></div>
+                <select id="secondmajor">
+                <option value="1">글로벌리더십학부</option>
+                <option value="2">창의융합교육원</option>
+                <option value="3">Global Edison Academy</option>
+                <option value="4">국제어문학부</option>
+                <option value="5">언론정보문화학부</option>
+                <option value="6">경영경제학부</option>
+                <option value="7">법학부</option>
+                <option value="8">상담심리사회복지학부</option>
+                <option value="9">생명과학부</option>
+                <option value="10">전산전자공학부</option>
+                <option value="11">산업정보디자인학부</option>
+                <option value="12">기계제어공학부</option>
+                <option value="13">공간환경시스템공학부</option>
+                <option value="14">산업교육학부</option>
+                </select>
+                <div></div>
+                
+            </div>
+
+            <div class="form-group" method="post" action="#">
+              
+              <input type="button" id="register" value="Register" class="btn btn-info">
+              <input type="button" id="cancel" value="Cancel" class="btn btn-info">
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-sm-2"></div>      
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+  </body>
+</html>

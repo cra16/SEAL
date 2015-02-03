@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/css/bootstrap.min.css">
+
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="loginpractice.css" />
+    <script type="text/javascript" src="loginpractice.js"></script>
+
+    <title>SEAL - Login</title>
+
+  </head>
+  <body>
+
+    <div class="container" style="padding:100px 0">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="logincontainer">
+
+        <div class="box" id="mycontent-left">
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+            <p class="detail">캐치프레이즈</p>
+            <p class="detail2">설명1</p>
+            <p class="detail2">설명2</p>
+        </div>
+         
+
+        <div class="box" id="mycontent-right">
+
+
+          <form>
+
+            <div class="form-group" method="post" action="#">
+              <label class="control-label" for="username">아이디</label>
+              <input type="text" id="username" class="form-control" placeholder="아이디">
+              <label class="control-label" for="password" style="padding-top: 15px;">비밀번호</label>
+              <input type="password" id="password" class="form-control" placeholder="비밀번호">
+            </div>
+
+            <div class="form-group" method="post" action="#">
+              <input type="button" id="login" value="Login" class="btn btn-info">
+              <input type="button" id="register" value="Register" class="btn btn-info">
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-sm-2"></div>      
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+  </body>
+</html>

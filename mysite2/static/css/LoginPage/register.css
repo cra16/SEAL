@@ -1,4 +1,4 @@
-#logincontainer{
+#registercontainer{
 	border: 2px solid;
 	border-radius: 25px;
 	border-color: #87cefa;
@@ -52,4 +52,8 @@ label{
 
 .detail2{
 	font-size: 12px;
+}
+
+a{
+	font-size: 11px;
 }

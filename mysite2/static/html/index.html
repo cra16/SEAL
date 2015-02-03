@@ -31,22 +31,23 @@
 
     <div class="col-md-8 col-sm-10 col-xs-10">
 
-      <div class="ui small blue message">
-        <span class="header" style="text-align:left">
-          <div style="text-align:right"><i class="glyphicon glyphicon-remove"></i></div>
-          Welcome!
-        </span>
-        <p>어서 오세요. 한동대 학생들의 실력 향상을 위한 강의 추천 웹서비스!<br/>
-        [Students' Excellent Achievement in Learning]을 지향하는 SEAL입니다.</p>
+               <div class="ui small blue message">
+      <div class="header" style="text-align:left">
+        Welcome!
+        <span><i style="margin-left:738px" class="glyphicon glyphicon-remove"></i></span>
       </div>
+      <p>어서 오세요. 한동대 학생들의 실력 향상을 위한 강의 추천 웹서비스!<br/>
+      &lt;<b>S</b>tudents' <b>E</b>xcellent <b>A</b>chievement in <b>L</b>earning&gt;을 지향하는 <b style="color:teal; font-size:15px">SEAL</b>입니다.</p>
+    </div>
 
-      <div class="ui small red message">
-        <span class="header" style="text-align:left">
-        <div style="text-align:right"><i class="glyphicon glyphicon-remove"></i></div>
+        <div class="ui small red message">
+      <div class="header" style="text-align:left">
         What is SEAL?
-        </span>
-        <p>아직 SEAL의 사용 방법을 잘 모르시나요? 상단 바의 <a href="about.html"><u>About</u></a>을 참고하세요! 궁금한 게 있으시면 <a href="qna.html"><u>Q&A 페이지</u></a>에 질문을 등록해주세요.</p>
+        <span><i style="margin-left:711px" class="glyphicon glyphicon-remove"></i></span>
       </div>
+      <p>아직 SEAL의 사용 방법을 잘 모르시나요? 상단 바의 <a href="about.html"><u>About</u></a>을 참고하세요! 궁금한 게 있으시면 <a href="qna.html"><u>Q&A 페이지</u></a>에 질문을 등록해주세요.</p>
+    </div>    
+
 
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
@@ -116,9 +117,6 @@
         <a class="item" data-tab="all">All</a>
       </div>
 
-
-{% for Board in PageBoard%}
-
       <div class="ui very relaxed column grid">
         <div class="column">
           <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
@@ -129,9 +127,9 @@
               </div>
                     
               <div id="firstcourse">    
-                <span id="ccode{{forloop.counter}}">{{PageBoard.Code}}</span>
-                <p><a href="course.html"><span class="cname" id="cname{{forloop.counter}}">{{PageBoard.CourseName}}</span></a></p>
-                <p><a href="#"><span id="cprof{{forloop.counter}}">{{PageBoard.Category}}</span></a></p>
+                [<span id="ccode1"></span>]
+                <p><a href="course.html"><span class="cname" id="cname1"></span></a></p>
+                <p><a href="#"><span id="cprof1"></span></a></p>
               </div>
 
               <div id="recommendtop">
@@ -149,11 +147,14 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
             </div>
-{% endfor%}
 
-           
-
-          <div id="secondcourse">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum2"></span> LIKES</center>
+              </div>
+                    
+              <div id="secondcourse">
                 [<span id="ccode2"></span>]
                 <p><a href="#"><span class="cname" id="cname2"></span></a></p>
                 <p><a href="#"><span id="cprof2"></span></a></p>
@@ -420,6 +421,7 @@
                               
         </div>
       </div>
+
 
 
     {%endblock%}

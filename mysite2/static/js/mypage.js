@@ -4,7 +4,7 @@ $(function(){
   $('#spanyear').text({{%user.profile.StuNumber%}});  
   $('#spannum1').text({{%user.profile.FirstMajor%}});  
   $('#spannum2').text({{%user.profile.SencondMajor%}});  
-  $('#spannum3').text({{%user.username%}});  
+  $('#spannum3').text('{{%user.username%}}');  
   $('#spannum4').text('*******');  
   $('#spannum5').text('3');
   $('#spannum6').text('4');

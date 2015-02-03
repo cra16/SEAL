@@ -5,7 +5,7 @@ $(function(){
         rnum1 = 13,
 
         coursename2 = "도술학개론",
-        pname2 = {{user.Profile.LastName}},
+        pname2 = "{{user.Profile.LastName}}",
         rnum2 = 13,
 
         coursename3 = "도술학개론",

@@ -38,10 +38,10 @@ def loginCheck(request):
 				auth_login(request,user)
 				return render_to_response('index.html',{'user':request.user})
 			else:
-				return render_to_response('login.html')
+				return render_to_response('/loginpage/login.html')
          
 		elif request.user.username =="":
-			return render_to_response('login.html')
+			return render_to_response('/loginpage/login.html')
 		else:
 			return render_to_response('index.html',{'user':request.user})
 		
@@ -49,7 +49,7 @@ def loginCheck(request):
 	
 
 def login(request):
-    return render_to_response('login.html')
+    return render_to_response('/loginPage/login.html')
     
 def logout_page(request):
     logout(request)

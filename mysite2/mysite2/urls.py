@@ -31,5 +31,6 @@ urlpatterns = patterns('',
 	url(r'^Register,Register),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
+	url(r'^update/$','lecture.views.lec_update'),
 
 )

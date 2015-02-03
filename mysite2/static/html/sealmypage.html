@@ -20,6 +20,7 @@
     
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "css/mypage.css" %}">
+    <script type="text/javascript" src="{% static "js/mypage.js" %}"></script>
     <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
    
   {% endblock%}
@@ -37,57 +38,57 @@
       <div id="myprofile" class="ui column">
         
         <div id="myname" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">이름</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.profile.LastName}}</span></div> 
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">이름</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column"><span id="spanname" class="thirdcolumn"></span></div> 
         </div>
 
         <div id="yrnum" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">학번</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.profile.StuNumber}}</span></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">학번</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column"><span id="spanyear" class="thirdcolumn"></span></div>  
         </div>
 
         <div id="firstmajor" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">제1전공</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.FirstMajor}}</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">제1전공 변경</button></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">제1전공</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span id="spannum1" class="thirdcolumn"></span></div>
+          <div class="right floated four wide column"></div>  
         </div>
 
         <div id="secondmajor" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">제2전공</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.SencondMajor}}</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">제2전공 변경</button></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">제2전공</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span id="spannum2" class="thirdcolumn"></span></div>
+          <div class="right floated four wide column"></div>  
         </div>
 
         <div id="id" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">아이디</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.username}}</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">아이디 변경</button></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">아이디</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span id="spannum3" class="thirdcolumn"></span></div>
+          <div class="right floated four wide column"></div>  
         </div>
 
         <div id="pw" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">비밀번호</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">********</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">비밀번호 변경</button></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">비밀번호</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span id="spannum4" class="thirdcolumn"></span></div>
+          <div class="right floated four wide column"><button id="btnnum4" class="btn btn-info btn-block">비밀번호 변경</button></div>  
         </div>
 
         <div id="recomcourse" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 추천한 강의</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">3개</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">목록으로 가기</button></div> 
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">내가 추천한 강의</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span class="thirdcolumn"><span id="spannum5"></span>개</span></div>
+          <div class="right floated four wide column"><button id="btnnum5" class="btn btn-info btn-block">목록으로 가기</button></div> 
         </div>
 
         <div id="wantcourse" class="ui grid">
-          <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 듣고 싶은 강의</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">4개</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">목록으로 가기</button></div>  
+          <div class="left floated right aligned three wide column"><span class="firstcolumn">듣고 싶은 강의</span></div>
+          <div class="left floated center aligned one wide column"><span class="secondcolumn">:</span></div>
+          <div class="left floated left aligned eight wide column"><span class="thirdcolumn"><span id="spannum6"></span>개</span></div>
+          <div class="right floated four wide column"><button id="btnnum6" class="btn btn-info btn-block">목록으로 가기</button></div>  
         </div>
 
       </div>

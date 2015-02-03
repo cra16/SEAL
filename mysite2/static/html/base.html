@@ -24,8 +24,11 @@
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap-slider.js" %}"></script>
     <script type="text/javascript" src="{% static "js/feed.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/semantic.js" %}"></script>   
+    <script type="text/javascript" src="{% static "js/semantic.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/best.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/profile.js"%}"></script>
     <script type="text/javascript" src="{% static "js/IndexPage/main.js"%}"></script>
+    
     
     {% block head %}
      아아아   
@@ -72,10 +75,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="/mysite2/QnA">Q&A</a></li>
-                  <li><a href="/mysite2/Notice">공지사항</a></li>
+                  <li><a href="notice.html">공지사항</a></li>
                   <li><a href="/mysite2/Judgement">신고</a></li>
-                  <li><a href="#">개선요구사항</a></li>
-                  <li><a href="">SITEMAP</a></li>
+                  <li><a href="subscribe_improve.html">개선요구사항</a></li>
+                  <li><a href="sitemap.html">SITEMAP</a></li>
                 </ul>
               </li>
             </ul>
@@ -139,36 +142,13 @@
 
     <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
                     
+      <h3><a href="sealmypage.html"><span id="name"></span></a> <span id="detail"><br /><span id="year"></span>학번 / <span id="major"></span></span></h3>
 
-	<h3><a href="#"><span id="name">{{user.LastName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year"></span>학번 / {{user.StuNumber}}<span id="major"></span></span></h3>
+      <p><span id="label"><a href="mycourses.html">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
 
-      <p><span id="label"><a href="#">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
-
-      <p id="last"><span id="label"><a href="#">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
+      <p id="last"><span id="label"><a href="mycourses.html">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
 
       <a href="/mysite2/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
-
-
-      <script>
-        var name = "{{user.profile.LastName}}",
-            year = "{{user.profile.StuNumber}}",
-            major = "{{user.profile.FirstMajor}}",
-            num1 = 3,
-            num2 = 4;
-
-        var ename = document.getElementById('name'),
-            eyear = document.getElementById('year'),
-            emajor = document.getElementById('major'),
-            enum1 = document.getElementById('num1'),
-            enum2 = document.getElementById('num2');
-
-        ename.textContent = name;
-        eyear.textContent = year;
-        emajor.textContent = major;
-        enum1.textContent = num1;
-        enum2.textContent = num2;
-
-      </script>
 
     </profile>
 
@@ -204,46 +184,6 @@
       </span>
 
     </best>
-
-    <script>
-
-      var coursename1 = "도술학개론",
-          pname1 = "홍길동 교수님",
-          rnum1 = 13,
-
-          coursename2 = "도술학개론",
-          pname2 = "홍길동 교수님",
-          rnum2 = 13,
-
-          coursename3 = "도술학개론",
-          pname3 = "홍길동 교수님",
-          rnum3 = 13;
-
-      var ecoursename1 = document.getElementById('coursename1'),
-          epname1 = document.getElementById('pname1'),
-          ernum1 = document.getElementById('rnum1'),
-
-          ecoursename2 = document.getElementById('coursename2'),
-          epname2 = document.getElementById('pname2'),
-          ernum2 = document.getElementById('rnum2'),
-
-          ecoursename3 = document.getElementById('coursename3'),
-          epname3 = document.getElementById('pname3'),
-          ernum3 = document.getElementById('rnum3');
-
-      ecoursename1.textContent = coursename1;
-      epname1.textContent = pname1;
-      ernum1.textContent = rnum1;
-
-      ecoursename2.textContent = coursename2;
-      epname2.textContent = pname2;
-      ernum2.textContent = rnum2;
-
-      ecoursename3.textContent = coursename3;
-      epname3.textContent = pname3;
-      ernum3.textContent = rnum3;
-
-    </script>
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 

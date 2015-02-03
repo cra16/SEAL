@@ -53,9 +53,6 @@
 	color: black;
 }
 
-#recommendbtn {
-}
-
 #recommendbtn_d {
 	font-size: 20px;
 	font-weight: bold;
@@ -74,4 +71,66 @@
 #disable1, #disable2, #disable3, #disable4, #disable5, #disable6 {
 	background-color: #b22222;
 	color: white;
+}
+
+#firstcolumn{
+	color: #ff7f50;
+}
+#secondcolumn{
+	color: #9370db;
+}
+#thirdcolumn{
+	color: #2e8b57;
+}
+#fourthcolumn{
+	color: #008b8b;
+}
+#fifthcolumn{
+	color: #808000;
+}
+#sixthcolumn{
+	color: #ba55d3;
+}
+
+
+#sl1C .slider-handle{
+	background: #ff7f50;
+}
+#sl1C .slider-selection{
+	background: #ff7f50;
+}
+
+#sl2C .slider-handle{
+	background: #9370db;
+}
+#sl2C .slider-selection{
+	background: #9370db;
+}
+
+#sl3C .slider-handle{
+	background: #2e8b57;
+}
+#sl3C .slider-selection{
+	background: #2e8b57;
+}
+
+#sl4C .slider-handle{
+	background: #008b8b;
+}
+#sl4C .slider-selection{
+	background: #008b8b;
+}
+
+#sl5C .slider-handle{
+	background: #808000;
+}
+#sl5C .slider-selection{
+	background: #808000;
+}
+
+#sl6C .slider-handle{
+	background: #ba55d3;
+}
+#sl6C .slider-selection{
+	background: #ba55d3;
 }

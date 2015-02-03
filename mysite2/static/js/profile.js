@@ -1,8 +1,8 @@
 $(function(){
 
 	var name = {{%user.profile.LastName%}},
-	    year = 14,
-	    major = "전산전자공학부",
+	    year = {{%user.profile.StuNumber%}},
+	    major ={{%user.profile.FirstMajor%}},
 	    num1 = 3,
 	    num2 = 4;
 

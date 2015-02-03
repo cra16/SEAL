@@ -13,13 +13,19 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def Register(request):
-	   
+	if request.method=='POST':
+		UserID = request.POST['username']
+		UserPassword =request.POST['userpassword']
+		UserEmail = request.POST['email']
+		
+
+		return render_to_response('login.html')
+	else:
+		return render_to_response('login.html')
 
 
-	return render_to_response('register.html')
+	
 
-def register_success(request):
-    return render_to_response('success.html',)
     
 
 @csrf_exempt
@@ -52,6 +58,18 @@ def logout_page(request):
 def index(request):
     return render_to_response('index.html')
 
+
+def Confirm(request):
+	
+	if request.method =='POST':
+		UserStuNumber = request.POST['year']
+		UserName = request.POST['username']
+		UserPassword = request.POST['userpassword']
+
+		return render_to_response('register.html')
+
+	else :
+		return render_to_response('confirm.html')
 
 
 # Create your views here.

@@ -20,6 +20,18 @@ var sl1 = $('#sl1').slider(),
     sl5 = $('#sl5').slider(),
     sl6 = $('#sl6').slider();
 
+$(function(){
+              $("[data-toggle=tooltip]").tooltip();
+            });
+            $('#recommendbtn_d').on('click', function(){
+              var data1 = $('#sl1').data('slider').getValue(),
+                  data2 = $('#sl2').data('slider').getValue(),
+                  data3 = $('#sl3').data('slider').getValue(),
+                  data4 = $('#sl4').data('slider').getValue(),
+                  data5 = $('#sl5').data('slider').getValue(),
+                  data6 = $('#sl6').data('slider').getValue();
+            });
+
 $('#enable1').click(function(){$('#sl1').slider('enable')});
 $('#disable1').click(function(){$('#sl1').slider('disable')});
 $('#enable2').click(function(){$('#sl2').slider('enable')});

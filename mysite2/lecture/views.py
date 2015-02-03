@@ -6,7 +6,7 @@ import xlrd
 # Create your views here.
 
 def lec_update(request):
-	file_location = "/opt/bitnami/apps/django/django_projects/mysite2/gasul_table/gasul.xlsx"
+	file_location = "/opt/bitnami/apps/django/django_projects/darkzero/mysite2/gasul_table/gasul.xlsx"
 	workbook = xlrd.open_workbook(file_location)
 	sheet = workbook.sheet_by_index(0)
 	lec_lst = []

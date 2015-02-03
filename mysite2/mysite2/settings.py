@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'blog',
     'login',
     'index',
-   
+    'lecture',   
 #    'CustomUser',
 
 )

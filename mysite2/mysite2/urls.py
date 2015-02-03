@@ -29,5 +29,6 @@ urlpatterns = patterns('',
 	url(r'^Notice/(\d+)/$',Notice_Read),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
+	url(r'^update/$','lecture.views.lec_update'),
 
 )

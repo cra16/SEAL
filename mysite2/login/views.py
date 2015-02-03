@@ -41,7 +41,7 @@ def loginCheck(request):
 				return render_to_response('login.html')
          
 		elif request.user.username =="":
-			return render_to_response('login.html')
+			return render_to_response('	login.html')
 		else:
 			return render_to_response('index.html',{'user':request.user})
 		

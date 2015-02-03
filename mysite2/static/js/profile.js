@@ -1,6 +1,6 @@
 $(function(){
 
-	var name = {{user.profile.LastName}},
+	var name = "{%user.profile.LastName%}",
 	    year = 14,
 	    major = "전산전자공학부",
 	    num1 = 3,

@@ -120,11 +120,11 @@ def QnARead(request, offset):
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-#def Course(request):
-#	if request.user.username =="":
-#		return  HttpResponseRedirect("/mysite2")
-##	else:
-#		return render_to_response("course.html", {'user':request.user})
+def Course(request):
+	if request.user.username =="":
+		return  HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("course.html", {'user':request.user})
 
 def NoticeMain(request):
 	if request.user.username =="":

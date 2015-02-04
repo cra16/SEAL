@@ -50,7 +50,7 @@ var ecprof1 = document.getElementsByName('cprof')[0];
 
 var elikenum1 = document.getElementById('likenum1');
 
-eccode1.textContent = document.getElementsByName('ccode')[0].value;
+eccode1.textContent = document.getElementById('ccode1').value;
 ecname1.textContent = "아";
 ecprof1.textContent = cprof[0];
 

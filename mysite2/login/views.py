@@ -73,7 +73,7 @@ def loginCheck(request):
 	
 			PageBoard = Lecture.objects.order_by('-id')[0:7]	
 			return render_to_response("index.html",
-					  {'user':request.user,
+					  {
 					   'PageBoard':PageBoard, 
 					   'TotalCount' : range(0,TotalCount), 
 					   'Previous' : Previous, 

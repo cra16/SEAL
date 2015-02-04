@@ -49,6 +49,8 @@ var ecprof1 = document.getElementsByName('cprof')[0];
 
 var elikenum1 = document.getElementById('likenum1');
 
+document.getElementsByName('ccode')[0].value="Ал";
+
 eccode1.textContent = document.getElementsByName('ccode')[0].value;
 ecname1.textContent = cname[0];
 ecprof1.textContent = cprof[0];

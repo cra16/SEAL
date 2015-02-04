@@ -44,7 +44,7 @@ for(var i =0; i< ccodeheader.length; i++)
 var likenum1 = 120;
    
 
-var eccode1 = document.getElementByName('ccode')[0];
+var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[1];
 var ecprof1 = document.getElementsByName('cprof')[0];
 

@@ -1,6 +1,6 @@
 $(function(){
 
-	var name = {% user.profile.LastName %};
+	var name = {{% user.profile.LastName %}};
 	var year = '{{ user.profile.StuNumber }}';
 	var major ='{{ user.profile.FirstMajor }}';
 	var num1 = 3;

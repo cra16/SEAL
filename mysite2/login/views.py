@@ -2,7 +2,7 @@
 # -*- coding: euc-kr -*-
 
 from login.forms import *
-from lecture.model import *
+from lecture.models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render_to_response

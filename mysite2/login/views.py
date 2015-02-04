@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def Register(request):
 	if request.method=='POST':
-		UserID = request.POST['userID']
+		UserID = request.POST['userIAD']
 		UserPassword =request.POST['userpassword']
 		UserEmail = request.POST['email']
 		

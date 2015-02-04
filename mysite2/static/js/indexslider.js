@@ -20,7 +20,7 @@ $.fn.slider.Constructor.prototype.enable = function ()
 var sl1 = $('#sl11').slider(),
     sl2 = $('#sl12').slider(),
     sl3 = $('#sl13').slider(),
-    sl4 = $('#sl14').slider(),
+    sl4 = $('#sl14').slider();
 
 $('#sl11').slider('disable');
 $('#sl12').slider('disable');

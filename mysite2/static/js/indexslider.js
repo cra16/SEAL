@@ -1,7 +1,7 @@
-$(function(){
-
-$.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
-$.fn.slider.Constructor.prototype.enable = function () 
+$(function()
+{
+	$.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
+	$.fn.slider.Constructor.prototype.enable = function () 
 	{
 		if (this.touchCapable) 
 		{
@@ -20,7 +20,7 @@ $.fn.slider.Constructor.prototype.enable = function ()
 var sl1 = $('#sl11').slider(),
     sl2 = $('#sl12').slider(),
     sl3 = $('#sl13').slider(),
-    sl4 = $('#sl14').slider(),
+    sl4 = $('#sl14').slider();
 
 $('#sl11').slider('disable');
 $('#sl12').slider('disable');
@@ -53,3 +53,4 @@ ecprof1.textContent = cprof1;
 
 
 elikenum1.textContent = likenum1;
+});

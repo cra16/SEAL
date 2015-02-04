@@ -46,13 +46,13 @@ var likenum1 = 120;
 
 var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[1];
-var ecprof1 = document.getElementsByName('cprof')[0];
+var ecprof1 = document.getElementsByName('cprof')[2];
 
 var elikenum1 = document.getElementById('likenum1');
 
 eccode1.textContent = "냠";
-ecname1.textContent = "아";
-ecprof1.textContent = document.getElementsByName('cprof')[i].value;
+ecname1.textContent = document.getElementsByName('cname')[1];;
+ecprof1.textContent = "후";
 
 elikenum1.textContent = likenum1;
 });

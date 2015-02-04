@@ -52,7 +52,7 @@ var elikenum1 = document.getElementById('likenum1');
 
 eccode1.textContent = "냠";
 ecname1.textContent = "아";
-ecprof1.textContent = cprof[0];
+ecprof1.textContent = document.getElementsByName('cprof')[i].value;
 
 elikenum1.textContent = likenum1;
 });

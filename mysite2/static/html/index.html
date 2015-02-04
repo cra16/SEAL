@@ -14,9 +14,9 @@
      
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+ <!--   <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
-
+-->
     {% endblock%}
     
  
@@ -179,7 +179,7 @@
 		
               <a href = "/mysite2/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
               {% endfor%}
-              <a class="item" href = "/mysite2{{Next}}>
+              <a class="item" href = "/mysite2{{Next}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

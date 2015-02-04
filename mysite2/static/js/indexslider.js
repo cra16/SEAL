@@ -45,15 +45,15 @@ for(var i =0; i< ccodeheader.length; i++)
 }
 var likenum1 = 120;
    
-var eccode1 = document.getElementByNames('ccode')[0].value.;
-var ecname1 = document.getElementByNames('cname')[0].value;
-var ecprof1 = document.getElementByNames('cprof')[0].vaule;
+var eccode1 = document.getElementByName('ccode');
+var ecname1 = document.getElementByName('cname');
+var ecprof1 = document.getElementByName('cprof');
 
 var elikenum1 = document.getElementById('likenum1');
 
-eccode1.textContent = ccode1;
-ecname1.textContent = cname1;
-ecprof1.textContent = cprof1;
+eccode1.textContent = ccode[0];
+ecname1.textContent = cname[0];
+ecprof1.textContent = cprof[0];
 
 elikenum1.textContent = likenum1;
 });

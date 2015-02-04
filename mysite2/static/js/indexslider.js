@@ -48,11 +48,4 @@ ecname1.textContent = cname1;
 ecprof1.textContent = cprof1;
 
 elikenum1.textContent = likenum1;
-
-<<<<<<< .merge_file_a12080
-)};
-
-
-=======
 });
->>>>>>> .merge_file_a07584

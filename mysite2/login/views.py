@@ -19,6 +19,7 @@ def Register(request):
 		UserPassword =request.POST['userpassword']
 		UserEmail = request.POST['email']
 		
+		User.object.create_user(username =UserID, password = UserPassword, email=UesrEmail)
 
 		return render_to_response('login.html')
 	else:

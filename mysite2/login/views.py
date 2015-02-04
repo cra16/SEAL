@@ -94,7 +94,7 @@ def logout_page(request):
 
     
 
-@csrf_exempt
+@csrf_exempt	
 def Confirm(request):
 	
 	if request.method =='POST':

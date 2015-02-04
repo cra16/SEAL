@@ -38,12 +38,14 @@ var cprof = document.getElementsByName('cprof')
 
 var likenum1 = 120;
    
+document.getElementsByName('ccode')[0].value = 1;
 
 var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[1];
 var ecprof1 = document.getElementsByName('cprof')[2];
 
 var elikenum1 = document.getElementById('likenum1');
+
 
 eccode1.textContent = ccode[0].value;
 ecname1.textContent = cname[1];

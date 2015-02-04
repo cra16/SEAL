@@ -120,17 +120,18 @@
       <div class="ui very relaxed column grid">
         <div class="column">
           
-		 
+		
 		  <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
-            {% for Board in PageBoard%}   
-			<div class="ui raised segment">           
+		    {% for Board in PageBoard%}
+            <div class="ui raised segment">
+             
 			  <div class="left floated ui compact segment">
                 <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
                 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
               </div>
                     
               <div id="firstcourse">    
-                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="{{Board.Code}}">{{Board.Code}}</span>]
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="{{Board.Code}}"></span>]
                 <p><a href="course.html"><span class="cname" name="cname" value = "{{Board.CourseName}}"></span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof"></span></a></p>
               </div>
@@ -151,14 +152,14 @@
               </div>
             </div>
 
-            {% endfor%}
+              {% endfor%} 
 
           </div>
-        
+     
 
-
+		{% for Board in PageBoard%}
       <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
-					{% for Board in PageBoard%}
+
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
                 <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
@@ -169,12 +170,12 @@
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board.CourseName}}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}" name = "cprof2"></span></a></p>
             </div>
-		 {%endfor%}
-	
+
           </div>
-		
+		 {%endfor%}
+			{% for Board in PageBoard%}
 		    <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
-		{% for Board in PageBoard%}
+
               <div class="ui raised segment">
                 <div class="left floated ui compact segment">
                   <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>

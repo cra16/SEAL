@@ -34,7 +34,7 @@ $("[data-toggle=tooltip]").tooltip();
 var ccodeheader = document.getElementsByName('ccode');
 var ccode = new Array();
 var cname = new Array();
-var cporf = new Array();
+var cprof = new Array();
 for(var i =0; i< ccodeheader.length; i++)
 {
 	ccode[i] = document.getElementsByName('ccode')[i].value;

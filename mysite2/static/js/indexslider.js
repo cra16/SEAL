@@ -14,10 +14,10 @@ $.fn.slider.Constructor.prototype.enable = function () {
   }
 }
 
-var sl1 = $('#sl11').slider(),
-    sl2 = $('#sl12').slider(),
-    sl3 = $('#sl13').slider(),
-    sl4 = $('#sl14').slider();
+var sl1 = $('#sl11').slider();
+var sl2 = $('#sl12').slider();
+var sl3 = $('#sl13').slider();
+var sl4 = $('#sl14').slider();
 
 $('#sl11').slider('disable');
 $('#sl12').slider('disable');
@@ -31,17 +31,17 @@ $('#sl14').slider('setValue', 5);
 
 $("[data-toggle=tooltip]").tooltip();
 
-var ccode1 = "ECE20018",
-    cname1 = "C 프로그래밍",
-    cprof1 = "최창범 교수님";
+var ccode1 = "ECE20018";
+var cname1 = "C 프로그래밍";
+var cprof1 = "최창범 교수님";
 
-var    likenum1 = 120;
+var likenum1 = 120;
    
-var eccode1 = document.getElementById('ccode1'),
-    ecname1 = document.getElementById('cname1'),
-    ecprof1 = document.getElementById('cprof1');
+var eccode1 = document.getElementById('ccode1');
+var ecname1 = document.getElementById('cname1');
+var ecprof1 = document.getElementById('cprof1');
 
-var    elikenum1 = document.getElementById('likenum1');
+var elikenum1 = document.getElementById('likenum1');
 
 eccode1.textContent = ccode1;
 ecname1.textContent = cname1;

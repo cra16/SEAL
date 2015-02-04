@@ -43,15 +43,15 @@ for(var i =0; i< ccodeheader.length; i++)
 }
 var likenum1 = 120;
    
+
 var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[0];
 var ecprof1 = document.getElementsByName('cprof')[0];
 
 var elikenum1 = document.getElementById('likenum1');
 
- document.getElementsByName('ccode')[0].value="³È³È";
 eccode1.textContent = document.getElementsByName('ccode')[0].value;
-ecname1.textContent = cname[0];
+ecname1.textContent = "ì•„";
 ecprof1.textContent = cprof[0];
 
 elikenum1.textContent = likenum1;

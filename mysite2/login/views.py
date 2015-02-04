@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def Register(request):
 	if request.method=='POST':
 		UserID = request.POST['username']

@@ -53,8 +53,7 @@ ecprof1.textContent = cprof1;
 
 
 elikenum1.textContent = likenum1;
-<<<<<<< HEAD
+
 )};
-=======
-});
->>>>>>> darkzero1
+
+

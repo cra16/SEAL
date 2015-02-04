@@ -151,10 +151,10 @@
               </div>
             </div>
 
-            
+           {% endfor%} 
 
           </div>
-        {% endfor%}
+       
 
 
       <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
@@ -169,10 +169,10 @@
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board.CourseName}}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}" name = "cprof2"></span></a></p>
             </div>
-
-          </div>
 		 {%endfor%}
 	
+          </div>
+		
 		    <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
 		{% for Board in PageBoard%}
               <div class="ui raised segment">
@@ -198,6 +198,7 @@
               </div>
             </div>
 			{%endfor%}
+			
 
           <center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/{{Previous}}">

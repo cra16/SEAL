@@ -1,17 +1,20 @@
 $(function(){
 
 $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
-$.fn.slider.Constructor.prototype.enable = function () {
-  if (this.touchCapable) {
-    // Touch: Bind touch events:
-    this.picker.on({
-      touchstart: $.proxy(this.mousedown, this)
-    });
-  } else {
-    this.picker.on({
-      mousedown: $.proxy(this.mousedown, this)
-    });
-  }
+$.fn.slider.Constructor.prototype.enable = function () 
+	{
+		if (this.touchCapable) 
+		{
+			// Touch: Bind touch events:
+			this.picker.on(
+				{
+					touchstart: $.proxy(this.mousedown, this)
+				});
+		} else {
+		this.picker.on({
+			mousedown: $.proxy(this.mousedown, this)
+						});
+	 }
 }
 
 var sl1 = $('#sl11').slider(),
@@ -50,4 +53,3 @@ ecprof1.textContent = cprof1;
 
 
 elikenum1.textContent = likenum1;
-});

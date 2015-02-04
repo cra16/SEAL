@@ -31,16 +31,11 @@ $('#sl14').slider('setValue', 5);
 
 $("[data-toggle=tooltip]").tooltip();
 
-var ccodeheader = document.getElementsByName('ccode');
-var ccode = new Array();
-var cname = new Array();
-var cprof = new Array();
-for(var i =0; i< ccodeheader.length; i++)
-{
-	ccode[i] = document.getElementsByName('ccode')[i].value;
-    cname[i] = document.getElementsByName('cname')[i].value;
-    cprof[i] = document.getElementsByName('cprof')[i].value;
-}
+
+var	ccode = document.getElementsByName('ccode')
+var cname = document.getElementsByName('cname')
+var cprof = document.getElementsByName('cprof')
+
 var likenum1 = 120;
    
 
@@ -50,8 +45,8 @@ var ecprof1 = document.getElementsByName('cprof')[2];
 
 var elikenum1 = document.getElementById('likenum1');
 
-eccode1.textContent = "냠";
-ecname1.textContent = document.getElementsByName('cname')[1].value;
+eccode1.textContent = ccode[0].value;
+ecname1.textContent = cname[1];
 ecprof1.textContent = "후";
 
 elikenum1.textContent = likenum1;

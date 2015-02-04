@@ -51,7 +51,7 @@ var ecprof1 = document.getElementsByName('cprof')[2];
 var elikenum1 = document.getElementById('likenum1');
 
 eccode1.textContent = "냠";
-ecname1.textContent = document.getElementsByName('cname')[1];;
+ecname1.textContent = document.getElementsByName('cname')[1].value;
 ecprof1.textContent = "후";
 
 elikenum1.textContent = likenum1;

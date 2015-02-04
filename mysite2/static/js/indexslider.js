@@ -49,7 +49,7 @@ var elikenum1 = document.getElementById('likenum1');
 
 eccode1.textContent = document.getElementsByName('ccode')[0].value;
 ecname1.textContent = cname[1];
-ecprof1.textContent = "후";
+ecprof1.textContent = "야";
 
 elikenum1.textContent = likenum1;
 });

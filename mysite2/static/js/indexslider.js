@@ -38,7 +38,7 @@ var cprof = document.getElementsByName('cprof')
 
 var likenum1 = 120;
    
-document.getElementsByName('ccode')[0].innerHTML = "darkzero";
+document.getElementsByName('ccode')[0].innerHTML = "darkzero1234";
 
 var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[1];

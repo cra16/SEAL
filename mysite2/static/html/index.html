@@ -120,10 +120,9 @@
       <div class="ui very relaxed column grid">
         <div class="column">
           
-		  {% for Board in PageBoard%}
+		
 		  <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
-            <div class="ui raised segment">
-             
+            <div class="ui raised segment"> 
 			  <div class="left floated ui compact segment">
                 <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
                 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
@@ -169,8 +168,7 @@
             </div>
 
           </div>
-		{% endfor%}
-
+		
           <center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/{{Previous}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous

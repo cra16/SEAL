@@ -130,9 +130,9 @@
               </div>
                     
               <div id="firstcourse">    
-                [<span id="ccode{{forloop.counter}}" name = "{{Board.Code}}">{{Board.Code}}</span>]
-                <p><a href="course.html"><span class="cname" id="cname{{forloop.counter}}" name = "{{Board.CourseName}}"></span></a></p>
-                <p><a href="#"><span id="cprof1" name = ""></span></a></p>
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value = "{{Board.Code}}">{{Board.Code}}</span>]
+                <p><a href="course.html"><span class="cname" name="cname" value = "{{Board.CourseName}}"></span></a></p>
+                <p><a href="#"><span id="cprof1"></span></a></p>
               </div>
 
               <div id="recommendtop">
@@ -160,11 +160,11 @@
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
                 <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
+                <center><span id="likenum{{forloop.counter}}" value = "1"></span> LIKES</center>
               </div>
                         
-              [<span id="ccode{{forloop.counter}}}" name ="{{Board.Code}}">{{Board.Code}}</span>]
-              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name ="{{Board.CourseName}}">{{Board.CourseName}}</span></a></p>
+              [<span id="ccode{{forloop.counter}}}" name = "ccode2" value ="{{Board.Code}}">{{Board.Code}}</span>]
+              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board.CourseName}}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}"></span></a></p>
             </div>
 

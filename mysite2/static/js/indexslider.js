@@ -31,15 +31,23 @@ $('#sl14').slider('setValue', 5);
 
 $("[data-toggle=tooltip]").tooltip();
 
-var ccode1 = "ECE20018";
-var cname1 = "C 프로그래밍";
-var cprof1 = "최창범 교수님";
-
+var ccodeheader = document.getElementsByName('ccode');
+var cnameheader = document.getElementByName('cname');
+var cprofheader = document.getElementByName('cprof');
+var ccode = new Array();
+var cname = new Array();
+var cporf = new Array();
+for(var i =0; i< ccodeheader.length; i++)
+{
+	ccode[i] = document.getElementsByName('ccode')[i].value;
+    cname[i] = document.getElementsByName('cname')[i].value;
+    cprof[i] = document.getElementsByName('cprof')[i].value;
+}
 var likenum1 = 120;
    
-var eccode1 = document.getElementById('ccode1');
-var ecname1 = document.getElementById('cname1');
-var ecprof1 = document.getElementById('cprof1');
+var eccode1 = document.getElementByName('ccode');
+var ecname1 = document.getElementByName('cname');
+var ecprof1 = document.getElementByName('cprof');
 
 var elikenum1 = document.getElementById('likenum1');
 

@@ -14,22 +14,6 @@ $.fn.slider.Constructor.prototype.enable = function () {
   }
 }
 
-var sl1 = $('#sl11').slider();
-var sl2 = $('#sl12').slider();
-var sl3 = $('#sl13').slider();
-var sl4 = $('#sl14').slider();
-
-$('#sl11').slider('disable');
-$('#sl12').slider('disable');
-$('#sl13').slider('disable');
-$('#sl14').slider('disable');
-
-$('#sl11').slider('setValue', 5);
-$('#sl12').slider('setValue', 5);
-$('#sl13').slider('setValue', 5);
-$('#sl14').slider('setValue', 5);
-
-$("[data-toggle=tooltip]").tooltip();
 
 var ccodeheader = document.getElementsByName('ccode');
 var cnameheader = document.getElementByName('cname');

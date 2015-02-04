@@ -60,7 +60,7 @@ def index(request):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :
-		count=Lectures.objects.count()
+		count=Lecture.objects.count()
 
 		TotalCount = (count/8)+1
 
@@ -70,7 +70,7 @@ def index(request):
 			Next =TotalCount
 		Previous=1
 	
-		PageBoard = Lectures.objects.order_by('-id')[0:7]	
+		PageBoard = Lecture.objects.order_by('-id')[0:7]	
 		return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 

@@ -130,7 +130,7 @@
               </div>
                     
               <div id="firstcourse">    
-                [<span id="ccode{{forloop.counter}}" name ="ccode" value = "{{Board.Code}}">}</span>]
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value = "{{Board.Code}}"></span>]
                 <p><a href="course.html"><span class="cname" name="cname" value = "{{Board.CourseName}}"></span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof"></span></a></p>
               </div>
@@ -169,6 +169,31 @@
             </div>
 
           </div>
+
+		    <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
+
+              <div class="ui raised segment">
+                <div class="left floated ui compact segment">
+                  <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                  <center><span id="likenum6"></span> LIKES</center>
+                </div>
+                          
+                [<span id="ccode6"></span>]
+                <p><a href="#"><span class="cname" id="cname6"></span></a></p>
+                <p><a href="#"><span id="cprof6"></span></a></p>
+              </div>
+
+              <div class="ui raised segment">
+                <div class="left floated ui compact segment">
+                  <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                  <center><span id="likenum7"></span> LIKES</center>
+                </div>
+                          
+                [<span id="ccode7"></span>]
+                <p><a href="#"><span class="cname" id="cname7"></span></a></p>
+                <p><a href="#"><span id="cprof7"></span></a></p>
+              </div>
+            </div>
 		{% endfor%}
 
           <center><div class="ui borderless pagination menu">

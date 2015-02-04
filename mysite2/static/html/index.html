@@ -172,16 +172,14 @@
 		{% endfor%}
 
           <center><div class="ui borderless pagination menu">
-              <a class="item">
+              <a class="item" href = "/mysite2/{{Previous}}>
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-              <a class="item">1</a>
-              <a class="item">2</a>
-              <a class="item">3</a>
-              <a class="item">4</a>
-              <a class="item">5</a>
-              <a class="item">6</a>
-              <a class="item">
+               {% for i in  TotalCount %}
+		
+              <a href = "/mysite2/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+              {% endfor%}
+              <a class="item" href = "/mysite2{{Next}}>
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

@@ -44,13 +44,13 @@ for(var i =0; i< ccodeheader.length; i++)
 var likenum1 = 120;
    
 
-var eccode1 = document.getElementById('ccode1');
-var ecname1 = document.getElementsByName('cname')[0];
+var eccode1 = document.getElementByName('ccode')[0];
+var ecname1 = document.getElementsByName('cname')[1];
 var ecprof1 = document.getElementsByName('cprof')[0];
 
 var elikenum1 = document.getElementById('likenum1');
 
-eccode1.textContent = document.getElementById('ccode1').value;
+eccode1.textContent = "냠";
 ecname1.textContent = "아";
 ecprof1.textContent = cprof[0];
 

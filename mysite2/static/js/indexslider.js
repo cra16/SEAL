@@ -37,7 +37,7 @@ var cprof1 = "최창범 교수님";
 
 var likenum1 = 120;
    
-var eccode1 = document.getElementById('ccode1');
+var eccode1 = document.getElementByName('ccode');
 var ecname1 = document.getElementById('cname1');
 var ecprof1 = document.getElementById('cprof1');
 

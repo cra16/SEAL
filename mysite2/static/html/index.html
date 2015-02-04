@@ -154,7 +154,9 @@
             
 
           </div>
+        {% endfor%}
 
+		{% for Board in PageBoard%}
       <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
 
             <div class="ui raised segment">
@@ -169,7 +171,8 @@
             </div>
 
           </div>
-
+		 {%endfor%}
+			{% for Board in PageBoard%}
 		    <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
 
               <div class="ui raised segment">
@@ -194,7 +197,7 @@
                 <p><a href="#"><span id="cprof7"></span></a></p>
               </div>
             </div>
-		{% endfor%}
+			{%endfor%}
 
           <center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/{{Previous}}">

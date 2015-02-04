@@ -1,7 +1,7 @@
-$(function(){
-
-$.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
-$.fn.slider.Constructor.prototype.enable = function () 
+$(function()
+{
+	$.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
+	$.fn.slider.Constructor.prototype.enable = function () 
 	{
 		if (this.touchCapable) 
 		{
@@ -53,4 +53,8 @@ ecprof1.textContent = cprof1;
 
 
 elikenum1.textContent = likenum1;
+<<<<<<< HEAD
 )};
+=======
+});
+>>>>>>> darkzero1

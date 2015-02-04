@@ -38,7 +38,7 @@ var cprof = document.getElementsByName('cprof')
 
 var likenum1 = 120;
    
-document.getElementsByName('ccode')[0].value = "darkzero";
+document.getElementsByName('ccode')[0].innerHTML = "darkzero";
 
 var eccode1 = document.getElementsByName('ccode')[0];
 var ecname1 = document.getElementsByName('cname')[1];
@@ -47,7 +47,6 @@ var ecprof1 = document.getElementsByName('cprof')[2];
 var elikenum1 = document.getElementById('likenum1');
 
 
-eccode1.textContent = document.getElementsByName('ccode')[0].value;
 ecname1.textContent = cname[1];
 ecprof1.textContent = "야";
 

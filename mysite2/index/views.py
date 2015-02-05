@@ -224,6 +224,19 @@ def Main(request, offset):
 				TotalCount3 =  Lecture.objects.count()
 
 				
+				URL_Path = request.path
+
+				if URL_Path.find("FirstMajorPage") != -1 :
+					PageInformation1[1] = offset
+				else if URL_Path.find("SecondMajorPage") != -1:
+					PageInformation2[1] = offset
+				else
+					PageInformation3[1] = offset
+
+				request.session['PageInformation1'] = PageInformation1
+				request.session['PageInformation2'] = PageInformation2
+				request.session['PageInformation3'] = PageInformation3
+
 				
 				return render_to_response("index.html",
 					  {'user':request.user,

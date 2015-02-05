@@ -206,11 +206,18 @@ def Main(request, offset):
 
 			TotalCount = (count/6)+1
 
-			if TotalCount ==1:
-				Next = 1
+			if offset == 1:
+				if TotalCount ==1:
+					Next = offset
+				else : 
+					Next =offset +1
+				Previous=1
+			elif offset ==TotalCount:
+				Previous=offset-1
+				Next = TotalCount
 			else:
-				Next =TotalCount
-			Previous=1
+				Previous = offset-1
+				Next = offset +1
 
 			PageFirst = (offset-1)*6
 			PageLast = (offset-1)*6 + 6

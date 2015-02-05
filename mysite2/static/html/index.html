@@ -121,7 +121,7 @@
         <div class="column">
           
 		
-		  <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+		  <div class="ui divided very relaxed selection inbox list {{Active}} tab" data-tab="unread">
 		    {% for Board1 in PageBoard1%}
             <div class="ui raised segment grid">
              
@@ -133,7 +133,7 @@
               <div id="firstcourse" class="five wide column">    
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{Board1.Code}}</span>]
                 <p><a href="course.html"><span class="cname" name="cname" value = "">{{Board1.CourseName}}</span></a></p>
-                <p><a href="#"><span id="cprof1" name = "cprof"></span></a></p>
+                <p><a href="#"><span id="cprof1" name = "cprof">{{Board1.Professor}}</span></a></p>
               </div>
 
               <div id="recommendtop" class="seven wide column">
@@ -169,7 +169,7 @@
      
 
 		
-      <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+      <div class="ui divided very relaxed inbox selection list {{Active}} tab" data-tab="saved">
 			{% for Board2 in PageBoard2%}
             <div class="ui raised segment grid">
              

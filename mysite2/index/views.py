@@ -217,15 +217,22 @@ def Main(request, offset):
 				PageInformation1 = request.session['PageInformation1']
 				PageInformation2 = request.session['PageInformation2']
 				PageInformation3 = request.session['PageInformation3']
-	
+				
+				Active = ["","",""]
+
 				URL_Path = request.path
 
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
+					Active[0] = "active"
 				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
+					Active[1] = "active"
 				else:
 					PageInformation3[1] = offset
+					Active[2] = "active"
+
+				if 
 
 					
 
@@ -257,6 +264,7 @@ def Main(request, offset):
 					   'PageInformation2' : PageInformation2,
 					   'PageInformation3' : PageInformation3,
 					   'Path':URL_Path,
+					   'Active':Active,
 					   })
 
 # Create your views here

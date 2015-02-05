@@ -155,9 +155,9 @@
               {% endfor%} 
 			<center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/FirstMajorPage/{{PageInformation1.0}}">
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
+                <i class="glyphicon glyphicon-menu-left"></i> Previous   {{request.Path}}
               </a>
-			  {{request.Path}}
+			
 				{% for i in TotalCount1%}
 				 <a href = "/mysite2/FirstMajorPage/{{i}}" class="item" >{{i}}</a>
 				{%endfor%}

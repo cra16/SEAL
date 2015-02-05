@@ -157,9 +157,9 @@
           </div>
      
 
-		{% for Board2 in PageBoard2%}
+		
       <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
-
+			{% for Board2 in PageBoard2%}
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
                 <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
@@ -169,7 +169,7 @@
               [<span id="ccode{{forloop.counter}}}" name = "ccode2" value ="{{Board.Code}}">{{Board2.Code}}</span>]
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board2.CourseName}}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}" name = "cprof2"></span></a></p>
-            </div>
+       
 			
 			<div id="recommendtop">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
@@ -185,7 +185,7 @@
                   <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}4C"/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
-
+			 </div>
           </div>
 		 {%endfor%}
 			{% for Board3 in PageBoard3%}

@@ -55,15 +55,15 @@ def loginCheck(request):
 				
 				if TotalCount1<11:
 					Next1 = 11
-				else
+				else:
 					Next1 =TotalCount1
 				if TotalCount2<11:
 					Next2 = 11
-				else
+				else:
 					Next2 = TotalCount2
 				if TotalCount3<11:
 					Next3 = 11
-				else
+				else:
 					Next3 = TotalCount3
 				
 				return render_to_response("index.html",

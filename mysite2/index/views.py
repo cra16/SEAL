@@ -233,9 +233,9 @@ def Main(request, offset):
 					   'TotalCount1' : range(PageInformation1[1]-(PageInformation1[1]%10)+1,PageInformation1[1]-(PageInformation1[1]%10)+11),
 					   'TotalCount2' : range(PageInformation2[1]-(PageInformation2[1]%10)+1,PageInformation2[1]-(PageInformation2[1]%10)+11),
 					   'TotalCount3' : range(PageInformation3[1]-(PageInformation3[1]%10)+1,PageInformation3[1]-(PageInformation3[1]%10)+11),
-					   'PageInformation1' : PageInformation1
-					   'PageInformation2' : PageInformation2
-					   'PageInformation3' : PageInformation3
+					   'PageInformation1' : PageInformation1,
+					   'PageInformation2' : PageInformation2,
+					   'PageInformation3' : PageInformation3,
 					   })
 
 # Create your views here

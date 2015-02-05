@@ -12,7 +12,7 @@ $.fn.slider.Constructor.prototype.enable = function () {
       mousedown: $.proxy(this.mousedown, this)
     });
   }
-}
+}	
 
 var sl1 = $('#sl1').slider();
 var sl2 = $('#sl2').slider();

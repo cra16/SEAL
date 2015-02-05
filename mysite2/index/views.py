@@ -211,52 +211,31 @@ def Main(request, offset):
 					raise Http404()
 
 				
-				PageFirst = (offset-1)*6
-				PageLast = (offset-1)*6 + 6
+				PageInformation1 = request.PageInformation1
+				PageInformation2 = request.PageInformation2
+				PageInformation3 = request.PageInformation3
 
-				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[PageFirst:PageLast]
-				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[PageFirst:PageLast]
-				PageBoard3 = Lecture.objects.order_by('-id')[PageFirst:PageLast]
+				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
+				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
+				PageBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
 			
 				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 
-				if offset>=11 :
-					Previous1 = request.Previous1
-					Previous2 = offset-10
-					Previous3 = offset-10
-				else:
-					Previous1 = 1
-					Previous2 = 1
-					Previous3 = 1
-
-				if offset >= TotalCount1 - 10:
-					Next1 = TotalCount1
-				else:
-					Next1 = offset+10
-				if offset >= TotalCount2 - 10:
-					Next2 = TotalCount2
-				else:
-					Next2 = offset+10
-				if offset >= TotalCount3 - 10:
-					Next3 = TotalCount3
-				else:
-					Next3 = offset+10
+				
+				
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard1':PageBoard1,
 					   'PageBoard2':PageBoard2,
 					   'PageBoard3':PageBoard3,
-					   'TotalCount1' : range(offset-(offset%10)+1,offset-(offset%10)+11),
-					   'TotalCount2' : range(offset-(offset%10)+1,offset-(offset%10)+11),
-					   'TotalCount3' : range(offset-(offset%10)+1,offset-(offset%10)+11),
-					   'Previous1' : Previous1, 
-					   'Previous2' : Previous2,
-					   'Previous3' : Previous3,
-					   'Next1':Next1,
-					   'Next2' : Next2,
-					   'Next3' : Next3,
+					   'TotalCount1' : range(PageInformation1[1]-(PageInformation1[1]%10)+1,PageInformation1[1]-(PageInformation1[1]%10)+11),
+					   'TotalCount2' : range(PageInformation2[1]-(PageInformation2[1]%10)+1,PageInformation2[1]-(PageInformation2[1]%10)+11),
+					   'TotalCount3' : range(PageInformation3[1]-(PageInformation3[1]%10)+1,PageInformation3[1]-(PageInformation3[1]%10)+11),
+					   'PageInformation1' : PageInformation1
+					   'PageInformation2' : PageInformation2
+					   'PageInformation3' : PageInformation3
 					   })
 
-# Create your views here.
+# Create your views here

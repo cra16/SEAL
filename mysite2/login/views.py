@@ -47,24 +47,32 @@ def loginCheck(request):
 				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
+				
+				PageInformation1 = [3];
+				PageInformation2 = [3];
+				PageInformation3 = [3];
+				
+				PageInformation1[0] = 1
+				PageInformation2[0] = 1
+				PageInformation3[0] = 1
+				
+				PageInformation[1] = 1
+				PageInformation[1] = 1
+				PageInformation[1] = 1
+		
 
-				
-				Previous1 = 1
-				Previous2 = 1
-				Previous3 = 1
-				
 				if TotalCount1<11:
-					Next1 = 11
+					PageInformation1[2] = 11
 				else:
-					Next1 =TotalCount1
+					PageInformation1[2] =TotalCount1
 				if TotalCount2<11:
-					Next2 = 11
+					PageInformation2[2] = 11
 				else:
-					Next2 = TotalCount2
+					PageInformation2[2] = TotalCount2
 				if TotalCount3<11:
-					Next3 = 11
+					PageInformation3[2] = 11
 				else:
-					Next3 = TotalCount3
+					PageInformation3[2] = TotalCount3
 				
 				return render_to_response("index.html",
 					  {'user':request.user,
@@ -74,12 +82,9 @@ def loginCheck(request):
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
-					   'Previous1' : Previous1, 
-					   'Previous2' : Previous2,
-					   'Previous3' : Previous3,
-					   'Next1':Next1,
-					   'Next2' : Next2,
-					   'Next3' : Next3,
+					   'PageInformation1' : PageInformation1
+					   'PageInformation2' : PageInformation2
+					   'PageInformation3' : PageInformation3
 					   })
 			else:
 				return render_to_response('login.html')
@@ -96,23 +101,31 @@ def loginCheck(request):
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 
+				PageInformation1 = [3];
+				PageInformation2 = [3];
+				PageInformation3 = [3];
 				
-				Previous1 = 1
-				Previous2 = 1
-				Previous3 = 1
+				PageInformation1[0] = 1
+				PageInformation2[0] = 1
+				PageInformation3[0] = 1
 				
+				PageInformation[1] = 1
+				PageInformation[1] = 1
+				PageInformation[1] = 1
+		
+
 				if TotalCount1<11:
-					Next1 = 11
+					PageInformation1[2] = 11
 				else:
-					Next1 =TotalCount1
+					PageInformation1[2] =TotalCount1
 				if TotalCount2<11:
-					Next2 = 11
+					PageInformation2[2] = 11
 				else:
-					Next2 = TotalCount2
+					PageInformation2[2] = TotalCount2
 				if TotalCount3<11:
-					Next3 = 11
+					PageInformation3[2] = 11
 				else:
-					Next3 = TotalCount3
+					PageInformation3[2] = TotalCount3
 				
 				return render_to_response("index.html",
 					  {'user':request.user,
@@ -122,12 +135,9 @@ def loginCheck(request):
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
-					   'Previous1' : Previous1, 
-					   'Previous2' : Previous2,
-					   'Previous3' : Previous3,
-					   'Next1':Next1,
-					   'Next2' : Next2,
-					   'Next3' : Next3,
+					   'PageInformation1' : PageInformation1
+					   'PageInformation2' : PageInformation2
+					   'PageInformation3' : PageInformation3
 					   })
 			
       

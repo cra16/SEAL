@@ -157,6 +157,7 @@
               <a class="item" href = "/mysite2/FirstMajorPage/{{PageInformation1.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
+			  {{request.Path}}
 				{% for i in TotalCount1%}
 				 <a href = "/mysite2/FirstMajorPage/{{i}}" class="item" >{{i}}</a>
 				{%endfor%}

@@ -232,9 +232,7 @@ def Main(request, offset):
 					PageInformation3[1] = offset
 					Active[2] = "active"
 
-				if 
-
-					
+			
 
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]

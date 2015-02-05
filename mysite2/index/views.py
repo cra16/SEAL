@@ -228,7 +228,7 @@ def Main(request, offset):
 
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
-				else if URL_Path.find("SecondMajorPage") != -1:
+				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
 				else:
 					PageInformation3[1] = offset

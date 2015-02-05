@@ -8,6 +8,11 @@
     text-decoration: none;
 }
 
+#likebtn{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
 /* Preloader */
 
 #preloader {

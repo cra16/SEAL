@@ -30,6 +30,7 @@ urlpatterns = patterns('',
 	url(r'^Notice/(\d+)/$',Notice_Read),
 	url(r'^Confirm/$',Confirm),
 	url(r'^Register/$',Register),
+	url(r'^/(\d+)/$',Main),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 	url(r'^update/$','lecture.views.lec_update'),

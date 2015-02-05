@@ -74,6 +74,9 @@ def loginCheck(request):
 				else:
 					PageInformation3[2] = TotalCount3
 				
+
+				requset.PageInformation1 = PageInformation1
+
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard1':PageBoard1,

@@ -209,7 +209,7 @@ def Main(request, offset):
 					offset = int(offset)
 				except ValueError:
 					raise Http404()
-
+		
 				
 				PageInformation11 = request.PageInformation1
 				PageInformation12 = request.PageInformation2

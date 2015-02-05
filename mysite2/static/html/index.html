@@ -122,7 +122,7 @@
           
 		
 		  <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
-		    {% for Board in PageBoard%}
+		    {% for Board1 in PageBoard1%}
             <div class="ui raised segment">
              
 			  <div class="left floated ui compact segment">
@@ -131,8 +131,8 @@
               </div>
                     
               <div id="firstcourse">    
-                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{Board.Code}}</span>]
-                <p><a href="course.html"><span class="cname" name="cname" value = "">{{Board.CourseName}}</span></a></p>
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{Board1.Code}}</span>]
+                <p><a href="course.html"><span class="cname" name="cname" value = "">{{Board1.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof"></span></a></p>
               </div>
 

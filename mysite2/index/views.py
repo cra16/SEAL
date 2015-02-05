@@ -211,9 +211,9 @@ def Main(request, offset):
 					raise Http404()
 		
 				
-				PageInformation11 = request.session['PageInformation1']
-				PageInformation12 = request.PageInformation2
-				PageInformation13 = request.PageInformation3
+				PageInformation1 = request.session['PageInformation1']
+				PageInformation2 = request.session['PageInformation2']
+				PageInformation3 = request.session['PageInformation3']
 
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]

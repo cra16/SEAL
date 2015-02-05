@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
 from index.models import *
+from lecture.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 def MyPage(request):
@@ -221,7 +222,7 @@ def Main(request, offset):
 
 			PageFirst = (offset-1)*6
 			PageLast = (offset-1)*6 + 6
-			PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast]
+			PageBoard = Lecture.objects.order_by('-id')[PageFirst:PageLast]
 			return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 

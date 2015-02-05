@@ -50,7 +50,7 @@ def loginCheck(request):
 				
 				Previous=1
 	
-				PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5}
+				PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 
@@ -79,7 +79,7 @@ def loginCheck(request):
 				Next = 11
 			Previous=1
 	
-			PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5}
+			PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5]
 			PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 			PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 			

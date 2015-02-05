@@ -28,7 +28,7 @@ $('#sl1').slider('setValue', 5);
 $('#sl2').slider('setValue', 5);
 $('#sl3').slider('setValue', 5);
 $('#sl4').slider('setValue', 5);
-
+	
 $("[data-toggle=tooltip]").tooltip();
 
 
@@ -42,9 +42,9 @@ var likenum1 = 120;
 var elikenum1 = document.getElementById('likenum1');
 
 
-for(var i=0 i<ccode.length; i++)
+for(var i=0; i<ccode.length; i++)
 {
-	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML
+	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
 	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }

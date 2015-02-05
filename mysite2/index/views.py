@@ -202,7 +202,7 @@ def Main(request, offset):
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
 	else:
-		count=Lecture.objects.count()
+			count=Lecture.objects.count()
 
 			TotalCount = (count/6)+1
 

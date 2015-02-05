@@ -249,7 +249,7 @@ def Main(request, offset):
 					   'PageInformation1' : PageInformation1,
 					   'PageInformation2' : PageInformation2,
 					   'PageInformation3' : PageInformation3,
-					   'Path':request.path,
+					   'Path':URL_Path,
 					   })
 
 # Create your views here

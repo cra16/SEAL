@@ -33,6 +33,7 @@ urlpatterns = patterns('',
 	url(r'^FirstMajorPage/(\d+)/$',Main),
 	url(r'^SecondMajorPage/(\d+)/$',Main),
 	url(r'^AllPage/(\d+)/$',Main),
+	url(r'^SubScript/$',SubScript),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 	url(r'^update/$','lecture.views.lec_update'),

@@ -265,4 +265,16 @@ def Main(request, offset):
 					   'Active':Active,
 					   })
 
+def SubScript(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("subscribe_improve.html", {'user':request.user})
+
+def SiteMap(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("sitemap.html", {'user':request.user})
+
 # Create your views here

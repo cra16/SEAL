@@ -5,6 +5,7 @@ from index.models import *
 from lecture.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
+from django.db.models import Q
 def MyPage(request):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")

@@ -75,7 +75,7 @@ def loginCheck(request):
 					PageInformation3[2] = TotalCount3
 				
 
-				request.PageInformation1 = PageInformation1
+				request.session['PageInformation1'] = PageInformation1
 
 				return render_to_response("index.html",
 					  {'user':request.user,
@@ -131,7 +131,7 @@ def loginCheck(request):
 					PageInformation3[2] = TotalCount3
 				
 
-				request.PageInformation1 = PageInformation1
+				request.session['PageInformation1'] = PageInformation1
 
 				return render_to_response("index.html",
 					  {'user':request.user,

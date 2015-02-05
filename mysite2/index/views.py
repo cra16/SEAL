@@ -211,7 +211,7 @@ def Main(request, offset):
 					raise Http404()
 		
 				
-				PageInformation11 = request.PageInformation1
+				PageInformation11 = request.session['PageInformation1']
 				PageInformation12 = request.PageInformation2
 				PageInformation13 = request.PageInformation3
 

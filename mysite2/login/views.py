@@ -40,29 +40,46 @@ def loginCheck(request):
 			if user is not None:
 				auth_login(request,user)
 
-				count=Lecture.objects.count()
-				
-				TotalCount = (count/6)+1
-
-				if TotalCount <11:
-					Next = TotalCount
-				else:
-					Next =11
-				
-				Previous=1
-	
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 
+				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
+				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
+				TotalCount3 =  Lecture.objects.count()
+
+				
+				Previous1 = 1
+				Previous2 = 1
+				Previous3 = 1
+				
+				if TotalCount1<11:
+					Next1 = 11
+				else
+					Next1 =TotalCount1
+				if TotalCount2<11:
+					Next2 = 11
+				else
+					Next2 = TotalCount2
+				if TotalCount3<11:
+					Next3 = 11
+				else
+					Next3 = TotalCount3
+				
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard1':PageBoard1,
 					   'PageBoard2':PageBoard2,
 					   'PageBoard3':PageBoard3,
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
+					   'TotalCount1' : range(0,TotalCount1),
+					   'TotalCount2' : range(0,TotalCount2),
+					   'TotalCount3' : range(0,TotalCount3),
+					   'Previous1' : Previous1, 
+					   'Previous2' : Previous2,
+					   'Previous3' : Previous3,
+					   'Next1':Next1,
+					   'Next2' : Next2,
+					   'Next3' : Next3,
 					   })
 			else:
 				return render_to_response('login.html')
@@ -70,28 +87,47 @@ def loginCheck(request):
 		elif request.user.username =="":
 			return render_to_response('login.html')
 		else:
-			count=Lecture.objects.count()
-
-			TotalCount = (count/6)+1
-
-			if TotalCount <11:
-				Next = TotalCount
-			else:
-				Next = 11
-			Previous=1
 	
-			PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-			PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-			PageBoard3 = Lecture.objects.order_by('-id')[0:5]
+				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
+				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 			
-			return render_to_response("index.html",
+				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
+				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
+				TotalCount3 =  Lecture.objects.count()
+
+				
+				Previous1 = 1
+				Previous2 = 1
+				Previous3 = 1
+				
+				if TotalCount1<11:
+					Next1 = 11
+				else:
+					Next1 =TotalCount1
+				if TotalCount2<11:
+					Next2 = 11
+				else:
+					Next2 = TotalCount2
+				if TotalCount3<11:
+					Next3 = 11
+				else:
+					Next3 = TotalCount3
+				
+				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard1':PageBoard1, 
+					   'PageBoard1':PageBoard1,
 					   'PageBoard2':PageBoard2,
 					   'PageBoard3':PageBoard3,
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
+					   'TotalCount1' : range(0,TotalCount1),
+					   'TotalCount2' : range(0,TotalCount2),
+					   'TotalCount3' : range(0,TotalCount3),
+					   'Previous1' : Previous1, 
+					   'Previous2' : Previous2,
+					   'Previous3' : Previous3,
+					   'Next1':Next1,
+					   'Next2' : Next2,
+					   'Next3' : Next3,
 					   })
 			
       

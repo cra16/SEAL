@@ -204,38 +204,58 @@ def Main(request, offset):
 		return HttpResponseRedirect("/mysite2")
 	else:
 
-			try:
-				offset = int(offset)
-			except ValueError:
-				raise Http404()
+				try:
+					offset = int(offset)
+				except ValueError:
+					raise Http404()
 
+				
+				PageFirst = (offset-1)*6
+				PageLast = (offset-1)*6 + 6
 
-			count=Lecture.objects.count()
+				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[PageFirst:PageLast]
+				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[PageFirst:PageLast]
+				PageBoard3 = Lecture.objects.order_by('-id')[PageFirst:PageLast]
+			
+				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
+				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
+				TotalCount3 =  Lecture.objects.count()
 
-			TotalCount = (count/6)+1
+				if offset>=11 :
+					Previous1 = offset -10
+					Previous2 = offset -10
+					Previous3 = offset -10
+				else:
+					Previous1 = 1
+					Previous2 = 1
+					Previous3 = 1
 
-			if offset == 1:
-				if TotalCount ==1:
-					Next = offset
-				else : 
-					Next =offset +1
-				Previous=1
-			elif offset ==TotalCount:
-				Previous=offset-1
-				Next = TotalCount
-			else:
-				Previous = offset-1
-				Next = offset +1
-
-			PageFirst = (offset-1)*6
-			PageLast = (offset-1)*6 + 6
-			PageBoard = Lecture.objects.order_by('-id')[PageFirst:PageLast]
-			return render_to_response("index.html",
+				if offset >= TotalCount1 - 10:
+					Next1 = TotalCount1
+				else:
+					Next1 = offset+10
+				if offset >= TotalCount2 - 10:
+					Next2 = TotalCount2
+				else:
+					Next2 = offset+10
+				if offset >= TotalCount3 - 10:
+					Next3 = TotalCount3
+				else:
+					Next3 = offset+10
+				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
+					   'PageBoard1':PageBoard1,
+					   'PageBoard2':PageBoard2,
+					   'PageBoard3':PageBoard3,
+					   'TotalCount1' : range(0,TotalCount1),
+					   'TotalCount2' : range(0,TotalCount2),
+					   'TotalCount3' : range(0,TotalCount3),
+					   'Previous1' : Previous1, 
+					   'Previous2' : Previous2,
+					   'Previous3' : Previous3,
+					   'Next1':Next1,
+					   'Next2' : Next2,
+					   'Next3' : Next3,
 					   })
 
 # Create your views here.

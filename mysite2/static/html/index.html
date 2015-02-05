@@ -153,12 +153,14 @@
             </div>
 
               {% endfor%} 
-<center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/{{Previous}}">
+			<center><div class="ui borderless pagination menu">
+              <a class="item" href = "/mysite2/{{Previous1}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-				
-              <a class="item" href = "/mysite2/{{Next}}">
+				{% for i in TotalCount1%}
+				 <a href = "/mysite2/FirstMajorPage/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+				{%endfor%}
+              <a class="item" href = "/mysite2/{{Next1}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -199,11 +201,13 @@
 
               {% endfor%} 
 				<center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/{{Previous}}">
+              <a class="item" href = "/mysite2/{{Previous2}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-				
-              <a class="item" href = "/mysite2/{{Next}}">
+				{% for i in TotalCount1%}
+				 <a href = "/mysite2/SecondMajorPage/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+				{%endfor%}
+              <a class="item" href = "/mysite2/{{Next2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -243,11 +247,13 @@
 
               {% endfor%} 
 			  <center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/{{Previous}}">
+              <a class="item" href = "/mysite2/{{Previous3}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-				
-              <a class="item" href = "/mysite2/{{Next}}">
+				{% for i in TotalCount3%}
+				 <a href = "/mysite2/AllPage/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+				{%endfor%}
+              <a class="item" href = "/mysite2/{{Next3}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

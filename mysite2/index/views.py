@@ -203,6 +203,13 @@ def Main(request, offset):
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
 	else:
+
+			try:
+				offset = int(offset)
+			except ValueError:
+				raise Http404()
+
+
 			count=Lecture.objects.count()
 
 			TotalCount = (count/6)+1

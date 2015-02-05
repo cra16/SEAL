@@ -223,9 +223,9 @@ def Main(request, offset):
 				TotalCount3 =  Lecture.objects.count()
 
 				if offset>=11 :
-					Previous1 = offset -10
-					Previous2 = offset -10
-					Previous3 = offset -10
+					Previous1 = request.Previous1
+					Previous2 = request.Previous2
+					Previous3 = request.Previous3
 				else:
 					Previous1 = 1
 					Previous2 = 1
@@ -249,7 +249,7 @@ def Main(request, offset):
 					   'PageBoard2':PageBoard2,
 					   'PageBoard3':PageBoard3,
 					   'TotalCount1' : range(offset-(offset%10)+1,offset-(offset%10)+11),
-					   'TotalCount2' : range(offset-(offset%10)+1,offset-(offset%10)+11),
+					   'TotalCount2' : range(Previous2-(Previous2%10)+1,Previous2-(Previous2%10)+11),
 					   'TotalCount3' : range(offset-(offset%10)+1,offset-(offset%10)+11),
 					   'Previous1' : Previous1, 
 					   'Previous2' : Previous2,

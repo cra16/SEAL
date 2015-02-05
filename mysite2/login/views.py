@@ -135,9 +135,9 @@ def loginCheck(request):
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
-					   'PageInformation1' : PageInformation1
-					   'PageInformation2' : PageInformation2
-					   'PageInformation3' : PageInformation3
+					   'PageInformation1' : PageInformation1,
+					   'PageInformation2' : PageInformation2,
+					   'PageInformation3' : PageInformation3,
 					   })
 			
       

@@ -38,24 +38,27 @@ def loginCheck(request):
 			user = authenticate(username = username, password=userpassword)
 			if user is not None:
 				auth_login(request,user)
+
 				count=Lecture.objects.count()
 				
 				TotalCount = (count/6)+1
 
-				if TotalCount ==1:
-					Next = 1
+				if TotalCount <11:
+					Next = TotalCount
 				else:
-					Next =TotalCount
+					Next =11
+				
 				Previous=1
 	
-				PageBoard = Lecture.objects.order_by('-id')[0:5]
-				
-				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+				PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5}
+			PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+			PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard':PageBoard,
+					   'PageBoard1':PageBoard1,
 					   'PageBoard2':PageBoard2,
+					   'PageBoard3':PageBoard3,
 					   'TotalCount' : range(0,TotalCount), 
 					   'Previous' : Previous, 
 					   'Next' : Next,
@@ -70,19 +73,21 @@ def loginCheck(request):
 
 			TotalCount = (count/6)+1
 
-			if TotalCount ==1:
-				Next = 1
+			if TotalCount <11:
+				Next = TotalCount
 			else:
-				Next =TotalCount
+				Next = 11
 			Previous=1
 	
-			PageBoard = Lecture.objects.order_by('-id')[0:5]
+			PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5}
 			PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-
+			PageBoard3 = Lecture.objects.order_by('-id')[0:5]
+			
 			return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard':PageBoard, 
+					   'PageBoard1':PageBoard1, 
 					   'PageBoard2':PageBoard2,
+					   'PageBoard3':PageBoard3,
 					   'TotalCount' : range(0,TotalCount), 
 					   'Previous' : Previous, 
 					   'Next' : Next,

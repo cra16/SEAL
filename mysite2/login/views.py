@@ -50,7 +50,7 @@ def loginCheck(request):
 	
 				PageBoard = Lecture.objects.order_by('-id')[0:5]
 				
-				PageBoard2 = Lecture.objects.filter(Code__contains = "GEK")[0:5]
+				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 
 				return render_to_response("index.html",
 					  {'user':request.user,

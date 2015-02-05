@@ -207,7 +207,8 @@ def Main(request, offset):
 
 				try:
 					offset = int(offset)
-		
+				except ValueError:
+					raise Http404()
 		
 				
 				PageInformation1 = request.session['PageInformation1']

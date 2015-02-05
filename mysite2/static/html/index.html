@@ -157,7 +157,7 @@
           </div>
      
 
-		{% for Board in PageBoard%}
+		{% for Board2 in PageBoard2%}
       <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
 
             <div class="ui raised segment">
@@ -166,8 +166,8 @@
                 <center><span id="likenum{{forloop.counter}}" value = "1"></span> LIKES</center>
               </div>
                         
-              [<span id="ccode{{forloop.counter}}}" name = "ccode2" value ="{{Board.Code}}">{{Board.Code}}</span>]
-              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board.CourseName}}</span></a></p>
+              [<span id="ccode{{forloop.counter}}}" name = "ccode2" value ="{{Board.Code}}">{{Board2.Code}}</span>]
+              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name = "cname2" value ="{{Board.CourseName}}">{{Board2.CourseName}}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}" name = "cprof2"></span></a></p>
             </div>
 			
@@ -188,7 +188,7 @@
 
           </div>
 		 {%endfor%}
-			{% for Board2 in PageBoard2%}
+			{% for Board3 in PageBoard3%}
 		    <div class="ui divided very relaxed inbox selection list tab" data-tab="all">
 
               <div class="ui raised segment">
@@ -197,8 +197,8 @@
                   <center><span id="likenum6"></span> LIKES</center>
                 </div>
                           
-                [<span id="ccode6">{{Board2.Code}}</span>]
-                <p><a href="#"><span class="cname" id="cname6" name ="cname3">{{Board2.CourseName}}</span></a></p>
+                [<span id="ccode6">{{Board3.Code}}</span>]
+                <p><a href="#"><span class="cname" id="cname6" name ="cname3">{{Board3.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof6" name ="cprof3"></span></a></p>
               </div>
 			</div>

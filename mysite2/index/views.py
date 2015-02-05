@@ -137,7 +137,7 @@ def NoticeMain(request):
 		if TotalCount ==1:
 			Next = 1
 		else:
-			Next =TotalCount
+			Next = 2
 		Previous=1
 	
 		PageBoard = QnA_Board.objects.order_by('-id')[0:7]	

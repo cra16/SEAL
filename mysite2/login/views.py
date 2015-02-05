@@ -69,7 +69,7 @@ def loginCheck(request):
 			if TotalCount ==1:
 				Next = 1
 			else:
-				Next =TotalCount
+				Next =2
 			Previous=1
 	
 			PageBoard = Lecture.objects.order_by('-id')[0:5]	

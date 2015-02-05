@@ -82,7 +82,7 @@ def loginCheck(request):
 			return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 
-					   'PageBoard2:PageBoard2,
+					   'PageBoard2':PageBoard2,
 					   'TotalCount' : range(0,TotalCount), 
 					   'Previous' : Previous, 
 					   'Next' : Next,

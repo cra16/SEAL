@@ -11,6 +11,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 @csrf_exempt
 def Register(request):
@@ -50,7 +51,7 @@ def loginCheck(request):
 				
 				Previous=1
 	
-				#PageBoard1 = Lecture.objects.filter(Code__contains = "ECE" | Code__contains ="ITP")[0:5]
+				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
 

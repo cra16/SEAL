@@ -198,6 +198,29 @@ def Notice_Read(request, offset):
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
-		
+def Main(request, offset):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else
+		count=Lecture.objects.count()
+
+			TotalCount = (count/6)+1
+
+			if TotalCount ==1:
+				Next = 1
+			else:
+				Next =TotalCount
+			Previous=1
+
+			PageFirst = (offset-1)*6
+			PageLast = (offset-1)*6 + 6
+			PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast]
+			return render_to_response("index.html",
+					  {'user':request.user,
+					   'PageBoard':PageBoard, 
+					   'TotalCount' : range(0,TotalCount), 
+					   'Previous' : Previous, 
+					   'Next' : Next,
+					   })
 
 # Create your views here.

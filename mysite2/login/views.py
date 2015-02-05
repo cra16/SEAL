@@ -109,9 +109,9 @@ def loginCheck(request):
 				PageInformation2[0] = 1
 				PageInformation3[0] = 1
 				
-				PageInformation[1] = 1
-				PageInformation[1] = 1
-				PageInformation[1] = 1
+				PageInformation1[1] = 1
+				PageInformation2[1] = 1
+				PageInformation3[1] = 1
 		
 
 				if TotalCount1<11:

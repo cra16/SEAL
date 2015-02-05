@@ -230,7 +230,7 @@ def Main(request, offset):
 					PageInformation1[1] = offset
 				else if URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
-				else
+				else:
 					PageInformation3[1] = offset
 
 				request.session['PageInformation1'] = PageInformation1

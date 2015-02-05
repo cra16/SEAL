@@ -40,7 +40,7 @@ def loginCheck(request):
 				auth_login(request,user)
 				count=Lecture.objects.count()
 
-				TotalCount = (count/8)+1
+				TotalCount = (count/6)+1
 
 				if TotalCount ==1:
 					Next = 1
@@ -48,7 +48,7 @@ def loginCheck(request):
 					Next =TotalCount
 				Previous=1
 	
-				PageBoard = Lecture.objects.order_by('-id')[0:7]	
+				PageBoard = Lecture.objects.order_by('-id')[0:5]	
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 

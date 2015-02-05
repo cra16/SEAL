@@ -131,6 +131,7 @@ def loginCheck(request):
 				else:
 					PageInformation3[2] = TotalCount3
 				
+				
 
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2

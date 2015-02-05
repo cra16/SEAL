@@ -210,10 +210,24 @@ def Main(request, offset):
 				except ValueError:
 					raise Http404()
 		
+
+	
+				
 				
 				PageInformation1 = request.session['PageInformation1']
 				PageInformation2 = request.session['PageInformation2']
 				PageInformation3 = request.session['PageInformation3']
+	
+				URL_Path = request.path
+
+				if URL_Path.find("FirstMajorPage") != -1 :
+					PageInformation1[1] = offset
+				elif URL_Path.find("SecondMajorPage") != -1:
+					PageInformation2[1] = offset
+				else:
+					PageInformation3[1] = offset
+
+					
 
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
@@ -224,14 +238,7 @@ def Main(request, offset):
 				TotalCount3 =  Lecture.objects.count()
 
 				
-				URL_Path = request.path
-
-				if URL_Path.find("FirstMajorPage") != -1 :
-					PageInformation1[1] = offset
-				elif URL_Path.find("SecondMajorPage") != -1:
-					PageInformation2[1] = offset
-				else:
-					PageInformation3[1] = offset
+			
 
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2

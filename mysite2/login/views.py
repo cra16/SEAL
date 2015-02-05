@@ -137,6 +137,7 @@ def loginCheck(request):
 				request.session['PageInformation2'] = PageInformation2
 				request.session['PageInformation3'] = PageInformation3
 			
+				Active = ["active","",""]
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard1':PageBoard1,
@@ -149,6 +150,7 @@ def loginCheck(request):
 					   'PageInformation2' : PageInformation2,
 					   'PageInformation3' : PageInformation3,
 					   'Path':request.path,
+					   'Active':Active,
 					   })
 			
       

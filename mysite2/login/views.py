@@ -39,7 +39,7 @@ def loginCheck(request):
 			if user is not None:
 				auth_login(request,user)
 				count=Lecture.objects.count()
-
+				
 				TotalCount = (count/6)+1
 
 				if TotalCount ==1:
@@ -48,10 +48,14 @@ def loginCheck(request):
 					Next =TotalCount
 				Previous=1
 	
-				PageBoard = Lecture.objects.order_by('-id')[0:5]	
+				PageBoard = Lecture.objects.order_by('-id')[0:5]
+				
+				PageBoard2 = Lecture.objects.filter(CourseName__contain = "GEK")[0:5]
+
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard':PageBoard, 
+					   'PageBoard':PageBoard,
+					   'PageBoard2':PageBoard2,
 					   'TotalCount' : range(0,TotalCount), 
 					   'Previous' : Previous, 
 					   'Next' : Next,

@@ -14,7 +14,7 @@ $.fn.slider.Constructor.prototype.enable = function () {
   }
 }	
 
-varsl11 = $('#sl11').slider(),
+var sl11 = $('#sl11').slider(),
     sl12 = $('#sl12').slider(),
     sl13 = $('#sl13').slider(),
     sl14 = $('#sl14').slider(),

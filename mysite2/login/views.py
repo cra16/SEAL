@@ -48,9 +48,9 @@ def loginCheck(request):
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 				
-				PageInformation1 = [4];
-				PageInformation2 = [4];
-				PageInformation3 = [4];
+				PageInformation1 = [0,0,0];
+				PageInformation2 = [0,0,0];
+				PageInformation3 = [0,0,0];
 				
 				PageInformation1[0] = 1
 				PageInformation2[0] = 1
@@ -101,9 +101,9 @@ def loginCheck(request):
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 
-				PageInformation1 = [3];
-				PageInformation2 = [3];
-				PageInformation3 = [3];
+				PageInformation1 = [0,0,0];
+				PageInformation2 = [0,0,0];
+				PageInformation3 = [0,0,0];
 				
 				PageInformation1[0] = 1
 				PageInformation2[0] = 1

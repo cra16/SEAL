@@ -201,7 +201,7 @@ def Notice_Read(request, offset):
 def Main(request, offset):
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
-	else
+	else:
 		count=Lecture.objects.count()
 
 			TotalCount = (count/6)+1

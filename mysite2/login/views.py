@@ -135,8 +135,7 @@ def loginCheck(request):
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2
 				request.session['PageInformation3'] = PageInformation3
-				request.session['AddPage']
-
+			
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard1':PageBoard1,

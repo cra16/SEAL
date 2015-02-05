@@ -223,7 +223,7 @@ def Main(request, offset):
 				TotalCount3 =  Lecture.objects.count()
 
 				if offset>=11 :
-					Previous1 = offset-10
+					Previous1 = request.Previous1
 					Previous2 = offset-10
 					Previous3 = offset-10
 				else:

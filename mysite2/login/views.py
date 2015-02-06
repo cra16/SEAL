@@ -198,7 +198,7 @@ def HisnetCheck(request):
 			hisnet_pw = request.POST['hisnet_pw']
 			
 			# 히스넷 로그인
-			driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
+			driver = webdriver.PhantomJS()
 			driver.get(hisnet_url)
 			driver.set_window_size(1024,768)
 			hisnet_main_frame = driver.find_element_by_name("MainFrame")

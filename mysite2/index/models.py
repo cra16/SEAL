@@ -16,6 +16,7 @@ class Notice_Board(models.Model):
 	ClickScore = models.PositiveIntegerField(default =0)
 	Text = models.TextField()
 	created = models.DateField(auto_now_add=True, auto_now=True)
+
 	def __unicode__(self):
 		return self.TextName
 	

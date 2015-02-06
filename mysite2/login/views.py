@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 # -*- coding: euc-kr -*-
 
@@ -12,24 +11,10 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
 
-@csrf_exempt
-def Register(request):
-	if request.method=='POST':
-		UserID = request.POST['userID']
-		UserPassword =request.POST['userpassword']
-		UserEmail = request.POST['email']
-		
-		User.object.create_user(username =UserID, password = UserPassword, email=UesrEmail)
-
-		return render_to_response('login.html')
-	else:
-		return render_to_response('login.html')
-
-
-# 히스넷 체크를 위한 크롤링 모듈
-from selenium import webdriver
+from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
+from login.models import Profile	# 회원 추가 정보 model
+from django.contrib.auth.models import User	# user model 등록
 
 @csrf_exempt
 def Register(request):
@@ -37,14 +22,24 @@ def Register(request):
 		user_id = request.POST['user_id']
 		user_pw = request.POST['user_pw']
 		user_email = request.POST['user_email']
-		
-		User.object.create_user(username=user_id, password=user_pw, email=user_email)
+		second_major = request.POST['stu_num']
+		user_name = request.POST['user_name']
+		first_major = request.POST['first_major']
+		second_major = request.POST['second_major']
+
+		try:
+			user = User.object.create_user(username=user_id, password=user_pw, email=user_email)
+			user.save()
+			get_user = User.objects.get(username=user_id)
+			profile = Profile(User=get_user, StuNum=stu_num, FirstMajor=first_major, SecondMajor=second_major)
+			profile.save()
+		except:
+			render_to_response('error.html')
 
 		return render_to_response('login.html')
+		
 	else:
-		return render_to_response('login.html')	
-
-    
+		return render_to_response('login.html')
 
 @csrf_exempt
 def loginCheck(request):
@@ -182,8 +177,6 @@ def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/mysite2')
 
-
-    
 @csrf_exempt
 def Confirm(request):
 	return render_to_response('confirm.html')
@@ -192,7 +185,7 @@ def Confirm(request):
 def HisnetCheck(request):
 	hisnet_url = "http://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
-		#try:
+		try:
 			stu_num = request.POST['stu_num']
 			hisnet_id = request.POST['hisnet_id']
 			hisnet_pw = request.POST['hisnet_pw']
@@ -210,7 +203,7 @@ def HisnetCheck(request):
 			login_button = driver.find_element_by_xpath("//input[@type='image'][@src='/2012_images/intro/btn_login.gif']")
 			login_button.click()
 			# 스크린샷 안찍으면 에러 발생. 이유는 불분명함. 추후 해결 필요.
-			driver.save_screenshot('/opt/bitnami/apps/django/django_projects/darkzero/hisnet_haksa.png')
+			# driver.save_screenshot('/opt/bitnami/apps/django/django_projects/darkzero/hisnet_haksa.png')
 			haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
 			haksa_button.click()
 			# 학사 정보에서 학번 확인하기
@@ -224,19 +217,19 @@ def HisnetCheck(request):
 			first_major = major_info.text.split('.')[0]
 			second_major = major_info.text.split('.')[1]
 
-			ctx = {
-				'stu_num':h_stu_num[1:3],
-				'stu_name':h_stu_name,
-				'first_major':first_major,
-				'second_major':second_major,
-			}
-
 			# 학번 일치하는지 확인
 			if stu_num == h_stu_num:
+				ctx = {
+					'stu_num':h_stu_num[1:3],
+					'stu_name':h_stu_name,
+					'first_major':first_major,
+					'second_major':second_major,
+				}
+
 				return render_to_response('register.html', ctx)
-		#except:
+		except:
 			# 히스넷 체크 안될 시 에러페이지 출력
-			#return render_to_response('error.html')
+			return render_to_response('error.html')
 	else:
 		return render_to_response('login.html')
 

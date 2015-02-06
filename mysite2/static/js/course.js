@@ -162,15 +162,22 @@ $('#sl64').slider('setValue', 5);
 $('#sl65').slider('setValue', 5);
 $('#sl66').slider('setValue', 5);
 
-var ccode = "ECE20018",
-    cname = "C 프로그래밍",
-    cprof = "최창범 교수님";
+var	ccode = document.getElementsByName('ccode')
+var cname = document.getElementsByName('cname')
+var cprof = document.getElementsByName('cprof')
 
-var eccode = document.getElementById('ccode'),
-    ecname = document.getElementById('cname'),
-    ecprof = document.getElementById('cprof');
+var likenum1 = 120;
+   
 
-eccode.textContent = ccode;
-ecname.textContent = cname;
-ecprof.textContent = cprof;
+var elikenum1 = document.getElementById('likenum1');
+
+
+for(var i=0; i<ccode.length; i++)
+{
+	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
+	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
+	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
+}
+
+elikenum1.textContent = likenum1;
 });

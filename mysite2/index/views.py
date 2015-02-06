@@ -30,7 +30,7 @@ def Judgement(request):
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
-def Recommend(request):
+def Recommend(request, offset):
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -48,12 +48,13 @@ def Recommend(request):
 				new_QnA.save()
 		else:
 			  CourseBoard = Lecture.objects.get(id=offset)
-              return render_to_response("course.html",
+              return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount),
 
                                            })
+
 
 
 @csrf_exempt

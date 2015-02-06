@@ -16,7 +16,7 @@ class Notice_Board(models.Model):
 	created = models.DateField(auto_now_add=True, auto_now=True)
 	
 class Course_Evaluation(models.Model):
-	Course = models.ForeignKey('Lecture')
+	Course = models.ForeignKey(Lecture)
 	Speedy = models.PositiveSmallIntegerField(default=5, null=False)
 	Reliance = models.PositiveSmallIntegerField(default=5, null=False)
 	Helper = models.PositiveSmallIntegerField(default=5, null=False)

@@ -122,11 +122,34 @@ def QnARead(request, offset):
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request):
+def Course(request, offset):
+
+	
+
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
-		return render_to_response("course.html", {'user':request.user})
+		try:
+			offset = int(offset)
+		except:
+			raise Http404()
+
+
+		if request.method =="POST":
+				new_Text=request.POST['msg-body-:txtarea']
+				new_TextWriter = request.user.username
+				new_TextName = request.POST['msg-title-input']
+				new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+				new_QnA.save()
+		else:
+			CourseParent = Course_Evaluation.objects.filter(id=offset)
+			CourseBoard = CourseParent.objects.order_by('created')[0:5]
+
+
+			
+			
+
+				
 
 def NoticeMain(request):
 	if request.user.username =="":

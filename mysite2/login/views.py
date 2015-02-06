@@ -192,7 +192,7 @@ def Confirm(request):
 def HisnetCheck(request):
 	hisnet_url = "http://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
-		try:
+		#try:
 			stu_num = request.POST['stu_num']
 			hisnet_id = request.POST['hisnet_id']
 			hisnet_pw = request.POST['hisnet_pw']
@@ -234,9 +234,9 @@ def HisnetCheck(request):
 			# 학번 일치하는지 확인
 			if stu_num == h_stu_num:
 				return render_to_response('register.html', ctx)
-		except:
+		#except:
 			# 히스넷 체크 안될 시 에러페이지 출력
-			return render_to_response('error.html')
+			#return render_to_response('error.html')
 	else:
 		return render_to_response('login.html')
 

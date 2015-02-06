@@ -217,17 +217,22 @@ def Main(request, offset):
 				PageInformation1 = request.session['PageInformation1']
 				PageInformation2 = request.session['PageInformation2']
 				PageInformation3 = request.session['PageInformation3']
-	
+				
+				Active = ["","",""]
+
 				URL_Path = request.path
 
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
+					Active[0] = "active"
 				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
+					Active[1] = "active"
 				else:
 					PageInformation3[1] = offset
+					Active[2] = "active"
 
-					
+			
 
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
@@ -257,6 +262,19 @@ def Main(request, offset):
 					   'PageInformation2' : PageInformation2,
 					   'PageInformation3' : PageInformation3,
 					   'Path':URL_Path,
+					   'Active':Active,
 					   })
+
+def SubScript(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("subscribe_improve.html", {'user':request.user})
+
+def SiteMap(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("sitemap.html", {'user':request.user})
 
 # Create your views here

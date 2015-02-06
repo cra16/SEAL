@@ -6,6 +6,7 @@
 			
 		
 		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+		  <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
                          
 		<style>
       body, input {
@@ -39,21 +40,21 @@
               <i class="dropdown icon"></i>
               <input name="hidden-field" type="hidden">
               <div class="menu">
-                <div class="item" data-value="전체">---전체---</div>
-                <div class="item" data-value="0001">글로벌리더십학부</div>
-                <div class="item" data-value="0009">창의융합교육원</div>
-                <div class="item" data-value="0010">Global Edison Academy</div>
-                <div class="item" data-value="0011">국제어문학부</div>
-                <div class="item" data-value="0012">언론정보문화학부</div>
-                <div class="item" data-value="0021">경영경제학부</div>
-                <div class="item" data-value="0022">법학부</div>
-                <div class="item" data-value="0024">상담심리사회복지학부</div>
-                <div class="item" data-value="0033">생명과학부</div>
-                <div class="item" data-value="0071">전산전자공학부</div>
-                <div class="item" data-value="0074">산업정보디자인학부</div>
-                <div class="item" data-value="0077">기계제어공학부</div>
-                <div class="item" data-value="0078">공간환경시스템공학부</div>
-                <div class="item" data-value="0090">산업교육학부</div>
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">글로벌리더십학부</div>
+                <div class="item" data-value="2">창의융합교육원</div>
+                <div class="item" data-value="3">Global Edison Academy</div>
+                <div class="item" data-value="4">국제어문학부</div>
+                <div class="item" data-value="5">언론정보문화학부</div>
+                <div class="item" data-value="6">경영경제학부</div>
+                <div class="item" data-value="7">법학부</div>
+                <div class="item" data-value="8">상담심리사회복지학부</div>
+                <div class="item" data-value="9">생명과학부</div>
+                <div class="item" data-value="10">전산전자공학부</div>
+                <div class="item" data-value="11">산업정보디자인학부</div>
+                <div class="item" data-value="12">기계제어공학부</div>
+                <div class="item" data-value="13">공간환경시스템공학부</div>
+                <div class="item" data-value="14">산업교육학부</div>
               </div>
             </div> 
           </div>
@@ -64,32 +65,47 @@
               <i class="dropdown icon"></i>
               <input name="hidden-field" type="hidden">
               <div class="menu">
-                <div class="item" data-value="전체">---전체---</div>
-                <div class="item" data-value="W04">신앙1</div>
-                <div class="item" data-value="W05">인성1</div>
-                <div class="item" data-value="W06">인성2</div>
-                <div class="item" data-value="W07">신앙2</div>
-                <div class="item" data-value="W08">세계관1</div>
-                <div class="item" data-value="W09">세계관2</div>
-                <div class="item" data-value="W10">인문</div>
-                <div class="item" data-value="W11">역사</div>
-                <div class="item" data-value="W12">사회</div>
-                <div class="item" data-value="W13">수학</div>
-                <div class="item" data-value="W14">자연</div>
-                <div class="item" data-value="W15">신앙3</div>
-                <div class="item" data-value="W16">리더십</div>
-                <div class="item" data-value="W17">예술</div>
-                <div class="item" data-value="W18">전공기초</div>
-                <div class="item" data-value="W19">외국어</div>
-                <div class="item" data-value="W22">전공탐색</div>
-                <div class="item" data-value="W24">제2외국어</div>
-                <div class="item" data-value="W25">소통및융복합</div>
-                <div class="item" data-value="W26">ICT융합기초</div>
-                <div class="item" data-value="W27">인문학</div>
-                <div class="item" data-value="W28">사회과학</div>
-                <div class="item" data-value="W29">자연과학</div>
-                <div class="item" data-value="W30">리더십및문제해결</div>
-                <div class="item" data-value="W31">스포츠</div>
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">신앙1</div>
+                <div class="item" data-value="2">인성1</div>
+                <div class="item" data-value="3">인성2</div>
+                <div class="item" data-value="4">신앙2</div>
+                <div class="item" data-value="5">세계관1</div>
+                <div class="item" data-value="6">세계관2</div>
+                <div class="item" data-value="7">인문</div>
+                <div class="item" data-value="8">역사</div>
+                <div class="item" data-value="9">사회</div>
+                <div class="item" data-value="10">수학</div>
+                <div class="item" data-value="11">자연</div>
+                <div class="item" data-value="12">신앙3</div>
+                <div class="item" data-value="13">리더십</div>
+                <div class="item" data-value="14">예술</div>
+                <div class="item" data-value="15">전공기초</div>
+                <div class="item" data-value="16">외국어</div>
+                <div class="item" data-value="17">전공탐색</div>
+                <div class="item" data-value="18">제2외국어</div>
+                <div class="item" data-value="19">소통및융복합</div>
+                <div class="item" data-value="20">ICT융합기초</div>
+                <div class="item" data-value="21">인문학</div>
+                <div class="item" data-value="22">사회과학</div>
+                <div class="item" data-value="23">자연과학</div>
+                <div class="item" data-value="24">리더십및문제해결</div>
+                <div class="item" data-value="25">스포츠</div>
+                <div class="item" data-value="W32">영어1</div>
+                <div class="item" data-value="W33">영어2</div>
+                <div class="item" data-value="W34">기독교신앙기초1</div>
+                <div class="item" data-value="W35">기독교신앙기초2</div>
+                <div class="item" data-value="W50">실무영어</div>
+                <div class="item" data-value="W51">실무한문</div>
+                <div class="item" data-value="W52">실무전산</div>
+                <div class="item" data-value="W53">실무한국어</div>
+                <div class="item" data-value="X01">야간-영어</div>
+                <div class="item" data-value="X02">야간-경영학</div>
+                <div class="item" data-value="X03">야간-실무</div>
+                <div class="item" data-value="X04">야간-교양</div>
+                <div class="item" data-value="X06">야간-실무전산</div>
+                <div class="item" data-value="X07">야간-실무영어</div>
+                <div class="item" data-value="X08">야간-실무한문</div>
               </div>
             </div> 
           </div>
@@ -240,244 +256,146 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-            
+            <div style="padding-bottom:30px"></div>
       </div>
 
-      <table class="ui celled table">
-        <thead>
-          <tr>
-            <th class="four wide">Period</th>
-            <th class="two wide"><center>Mon</center></th>
-            <th class="two wide"><center>Tue</center></th>
-            <th class="two wide"><center>Wed</center></th>
-            <th class="two wide"><center>Thu</center></th>
-            <th class="two wide"><center>Fri</center></th>
-            <th class="two wide"><center>Sat</center></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <th>1st (8:30-9:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>2nd (10:00-11:15)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>3rd (11:30-12:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>4th (1:00-2:15)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>5th (2:30-3:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>6th (4:00-5:15)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>7th (5:30-6:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>8th (7:00-8:15)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>9th (8:30-9:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>10th (10:00-11:15)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>11th (11:30-12:45)</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <script>
-      var ccode1 = "ECE20018",
-          cname1 = "C 프로그래밍",
-          cprof1 = "최창범 교수님",
-
-          ccode2 = "ECE20002",
-          cname2 = "자바 프로그래밍",
-          cprof2 = "김인중 교수님",
-
-          ccode3 = "ECE20003",
-          cname3 = "논리설계",
-          cprof3 = "한윤식 교수님",
-
-          ccode4 = "ECE20004",
-          cname4 = "이산수학",
-          cprof4 = "이건 교수님",
-
-          ccode5 = "ECE20005",
-          cname5 = "컴퓨터 구조",
-          cprof5 = "용환기 교수님",
-
-          ccode6 = "ECE20006",
-          cname6 = "Data Structure",
-          cprof6 = "이강 교수님",
-
-          likenum1 = 120,
-          likenum2 = 114,
-          likenum3 = 106,
-          likenum4 = 97,
-          likenum5 = 95,
-          likenum6 = 88,
+     <div class="bootstrap-table">
+         <div class="fixed-table-container">
+             <div class="fixed-table-header" style="height: 40px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221); margin-right:0px;">
                 
-          cperiod1 = "월목 5",
-          cperiod2 = "월목 5",
-          cperiod3 = "목 56",
-          cperiod4 = "월목 5",
-          cperiod5 = "월목 5",
-          cperiod6 = "목 45";
-
+             </div>
+            <div class="fixed-table-body">
                 
-      var eccode1 = document.getElementById('ccode1'),
-          ecname1 = document.getElementById('cname1'),
-          ecprof1 = document.getElementById('cprof1'),
-             
-          eccode2 = document.getElementById('ccode2'),
-          ecname2 = document.getElementById('cname2'),
-          ecprof2 = document.getElementById('cprof2'),
-
-          eccode3 = document.getElementById('ccode3'),
-          ecname3 = document.getElementById('cname3'),
-          ecprof3 = document.getElementById('cprof3'),
-
-          eccode4 = document.getElementById('ccode4'),
-          ecname4 = document.getElementById('cname4'),
-          ecprof4 = document.getElementById('cprof4'),
-
-          eccode5 = document.getElementById('ccode5'),
-          ecname5 = document.getElementById('cname5'),
-          ecprof5 = document.getElementById('cprof5'),
-
-          eccode6 = document.getElementById('ccode6'),
-          ecname6 = document.getElementById('cname6'),
-          ecprof6 = document.getElementById('cprof6'),
-
-          elikenum1 = document.getElementById('likenum1'),
-          elikenum2 = document.getElementById('likenum2'),
-          elikenum3 = document.getElementById('likenum3'),
-          elikenum4 = document.getElementById('likenum4'),
-          elikenum5 = document.getElementById('likenum5'),
-          elikenum6 = document.getElementById('likenum6'),
-
-          ecperiod1 = document.getElementById('cperiod1'),
-          ecperiod2 = document.getElementById('cperiod2'),
-          ecperiod3 = document.getElementById('cperiod3'),
-          ecperiod4 = document.getElementById('cperiod4'),
-          ecperiod5 = document.getElementById('cperiod5'),
-          ecperiod6 = document.getElementById('cperiod6');
-          
-      eccode1.textContent = ccode1;
-      ecname1.textContent = cname1;
-      ecprof1.textContent = cprof1;
-
-      eccode2.textContent = ccode2;
-      ecname2.textContent = cname2;
-      ecprof2.textContent = cprof2;
-
-      eccode3.textContent = ccode3;
-      ecname3.textContent = cname3;
-      ecprof3.textContent = cprof3;
-
-      eccode4.textContent = ccode4;
-      ecname4.textContent = cname4;
-      ecprof4.textContent = cprof4;
-
-      eccode5.textContent = ccode5;
-      ecname5.textContent = cname5;
-      ecprof5.textContent = cprof5;
-
-      eccode6.textContent = ccode6;
-      ecname6.textContent = cname6;
-      ecprof6.textContent = cprof6;
-
-      elikenum1.textContent = likenum1;
-      elikenum2.textContent = likenum2;
-      elikenum3.textContent = likenum3;
-      elikenum4.textContent = likenum4;
-      elikenum5.textContent = likenum5;
-      elikenum6.textContent = likenum6;
-
-      ecperiod1.textContent = cperiod1;
-      ecperiod2.textContent = cperiod2;
-      ecperiod3.textContent = cperiod3;
-      ecperiod4.textContent = cperiod4;
-      ecperiod5.textContent = cperiod5;
-      ecperiod6.textContent = cperiod6;
-          
-          
-      </script>
-
-    
+                <table id="table" class="table table-hover" style="margin-top: -40px;"></div>
+                     <thead>
+                        <tr>
+                        <th class="col-xs-2">
+                            Period
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Monday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Tuesday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Wednesday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Thursday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Friday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Saturday</center>
+                        </th>
+                    </tr>
+                </thead>
+                    <tbody>
+                         <tr data-index="1">
+                             <th style><p>&nbsp;</p>1st (8:30-9:45)</th>
+                             <td id="mon1"></td>
+                             <td id="tue1"></td>
+                             <td id="wed1"></td>
+                             <td id="thu1"></td>
+                             <td id="fri1"></td>
+                             <td id="sat1"></td>
+                         </tr>
+                         <tr data-index="2">
+                             <th style><p>&nbsp;</p>2nd (10:00-11:15)</th>
+                             <td id="mon2"></td>
+                             <td id="tue2"></td>
+                             <td id="wed2"></td>
+                             <td id="thu2"></td>
+                             <td id="fri2"></td>
+                             <td id="sat2"></td>
+                         </tr>
+                         <tr data-index="3">
+                             <th style><p>&nbsp;</p>3rd (11:30-12:45)</th>
+                             <td id="mon3"></td>
+                             <td id="tue3"></td>
+                             <td id="wed3"></td>
+                             <td id="thu3"></td>
+                             <td id="fri3"></td>
+                             <td id="sat3"></td>
+                         </tr>
+                         <tr data-index="4">
+                             <th style><p>&nbsp;</p>4th (1:00-2:15)</th>
+                             <td id="mon4"></td>
+                             <td id="tue4"></td>
+                             <td id="wed4"></td>
+                             <td id="thu4"></td>
+                             <td id="fri4"></td>
+                             <td id="sat4"></td>
+                         </tr>
+                         <tr data-index="5">
+                             <th style><p>&nbsp;</p>5th (2:30-3:45)</th>
+                             <td id="mon5"></td>
+                             <td id="tue5"></td>
+                             <td id="wed5"></td>
+                             <td id="thu5"></td>
+                             <td id="fri5"></td>
+                             <td id="sat5"></td>
+                         </tr>
+                         <tr data-index="6">
+                             <th style><p>&nbsp;</p>6th (4:00-5:15)</th>
+                             <td id="mon6"></td>
+                             <td id="tue6"></td>
+                             <td id="wed6"></td>
+                             <td id="thu6"></td>
+                             <td id="fri6"></td>
+                             <td id="sat6"></td>
+                         </tr>
+                         <tr data-index="7">
+                             <th style><p>&nbsp;</p>7th (5:30-6:45)</th>
+                             <td id="mon7"></td>
+                             <td id="tue7"></td>
+                             <td id="wed7"></td>
+                             <td id="thu7"></td>
+                             <td id="fri7"></td>
+                             <td id="sat7"></td>
+                         </tr>
+                         <tr data-index="8">
+                             <th style><p>&nbsp;</p>8th (7:00-8:15)</th>
+                             <td id="mon8"></td>
+                             <td id="tue8"></td>
+                             <td id="wed8"></td>
+                             <td id="thu8"></td>
+                             <td id="fri8"></td>
+                             <td id="sat8"></td>
+                         </tr>
+                         <tr data-index="9">
+                             <th style><p>&nbsp;</p>9th (8:30-9:45)</th>
+                             <td id="mon9"></td>
+                             <td id="tue9"></td>
+                             <td id="wed9"></td>
+                             <td id="thu9"></td>
+                             <td id="fri9"></td>
+                             <td id="sat9"></td>
+                         </tr>
+                         <tr data-index="10">
+                             <th style><p>&nbsp;</p>10th (10:00-11:15)</th>
+                             <td id="mon10"></td>
+                             <td id="tue10"></td>
+                             <td id="wed10"></td>
+                             <td id="thu10"></td>
+                             <td id="fri10"></td>
+                             <td id="sat10"></td>
+                         </tr>
+                         <tr data-index="11">
+                             <th style><p>&nbsp;</p>11th (11:30-12:45)</th>
+                             <td id="mon11"></td>
+                             <td id="tue11"></td>
+                             <td id="wed11"></td>
+                             <td id="thu11"></td>
+                             <td id="fri11"></td>
+                             <td id="sat11"></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
 	{% endblock%}
 </html>

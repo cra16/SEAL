@@ -1,11 +1,16 @@
 #Swan {
-	font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', cursive;
     color: #87CEFA;
     font-size: 30px;
 }
 
 #recommendtop > a {
     text-decoration: none;
+}
+
+#likebtn{
+    margin-top: 2%;
+    margin-left: 2%;
 }
 
 /* Preloader */
@@ -85,4 +90,3 @@ display: block;
 #recommendtop {
     margin-bottom: 20px;
 }
-

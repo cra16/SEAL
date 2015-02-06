@@ -1,3 +1,4 @@
+
 from django.conf.urls import patterns, include, url
 
 from login.views import *
@@ -28,13 +29,16 @@ urlpatterns = patterns('',
 	url(r'^Notice/$',NoticeMain),
 	url(r'^Notice/Page/(\d+)$',Notice),
 	url(r'^Notice/(\d+)/$',Notice_Read),
-	url(r'^Confirm/$',Confirm),
 	url(r'^Register/$',Register),
 	url(r'^FirstMajorPage/(\d+)/$',Main),
 	url(r'^SecondMajorPage/(\d+)/$',Main),
 	url(r'^AllPage/(\d+)/$',Main),
+	url(r'^SubScript/$',SubScript),
+	url(r'^SiteMap/$',SiteMap),
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 	url(r'^update/$','lecture.views.lec_update'),
+	url(r'^Confirm/$',Confirm),
+	url(r'^HisnetCheck/$',HisnetCheck),
 
 )

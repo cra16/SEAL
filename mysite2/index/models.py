@@ -7,6 +7,8 @@ class QnA_Board(models.Model):
 	ClickScore = models.PositiveIntegerField(default =0)
 	Text = models.TextField()
 	created = models.DateField(auto_now_add=True, auto_now=True)
+	def __unicode__(self):
+		return self.TextName
 
 class Notice_Board(models.Model):
 	TextWriter = models.CharField(max_length =30)
@@ -14,6 +16,8 @@ class Notice_Board(models.Model):
 	ClickScore = models.PositiveIntegerField(default =0)
 	Text = models.TextField()
 	created = models.DateField(auto_now_add=True, auto_now=True)
+	def __unicode__(self):
+		return self.TextName
 	
 class Course_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
@@ -24,7 +28,8 @@ class Course_Evaluation(models.Model):
 	Exam = models.PositiveSmallIntegerField(default=5, null=False)
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 		
-
+	def __unicode__(self):
+        return self.Course
 
 
 

@@ -1,5 +1,5 @@
 #Swan {
-	font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', cursive;
     color: #87CEFA;
     font-size: 30px;
 }
@@ -89,28 +89,4 @@ display: block;
 
 #recommendtop {
     margin-bottom: 20px;
-}
-
-#sl11, #sl12, #sl13, #sl14,
-#sl21, #sl22, #sl23, #sl24,
-#sl31, #sl32, #sl33, #sl34,
-#sl41, #sl42, #sl43, #sl44,
-#sl51, #sl52, #sl53, #sl54,
-#sl61, #sl62, #sl63, #sl64,
-#sl71, #sl72, #sl73, #sl74,
-#sa11, #sa12, #sa13, #sa14,
-#sa21, #sa22, #sa23, #sa24,
-#sa31, #sa32, #sa33, #sa34,
-#sa41, #sa42, #sa43, #sa44,
-#sa51, #sa52, #sa53, #sa54,
-#sa61, #sa62, #sa63, #sa64,
-#sa71, #sa72, #sa73, #sa74,
-#sk11, #sk12, #sk13, #sk14,
-#sk21, #sk22, #sk23, #sk24,
-#sk31, #sk32, #sk33, #sk34,
-#sk41, #sk42, #sk43, #sk44,
-#sk51, #sk52, #sk53, #sk54,
-#sk61, #sk62, #sk63, #sk64,
-#sk71, #sk72, #sk73, #sk74{
-width : 177px;
 }

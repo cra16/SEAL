@@ -17,31 +17,6 @@ from login.models import Profile	# 회원 추가 정보 model
 from django.contrib.auth.models import User	# user model 등록
 
 @csrf_exempt
-def Register(request):
-	if request.method=='POST':
-		user_id = request.POST['user_id']
-		user_pw = request.POST['user_pw']
-		user_email = request.POST['user_email']
-		second_major = request.POST['stu_num']
-		user_name = request.POST['user_name']
-		first_major = request.POST['first_major']
-		second_major = request.POST['second_major']
-
-		try:
-			user = User.object.create_user(username=user_id, password=user_pw, email=user_email)
-			user.save()
-			get_user = User.objects.get(username=user_id)
-			profile = Profile(User=get_user, StuNum=stu_num, FirstMajor=first_major, SecondMajor=second_major)
-			profile.save()
-		except:
-			render_to_response('error.html')
-
-		return render_to_response('login.html')
-		
-	else:
-		return render_to_response('login.html')
-
-@csrf_exempt
 def loginCheck(request):
 		if request.method == 'POST':
 			username = request.POST['UserID']
@@ -167,9 +142,6 @@ def loginCheck(request):
 					   'Active':Active,
 					   })
 			
-      
-	
-
 def login(request):
     return render_to_response('login.html')
     
@@ -190,6 +162,9 @@ def HisnetCheck(request):
 			hisnet_id = request.POST['hisnet_id']
 			hisnet_pw = request.POST['hisnet_pw']
 			
+			if User.objects.filter(username=stu_num):
+				render_to_response('stu_num_duplicate.html')
+
 			# 히스넷 로그인
 			driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
 			driver.get(hisnet_url)
@@ -220,7 +195,7 @@ def HisnetCheck(request):
 			# 학번 일치하는지 확인
 			if stu_num == h_stu_num:
 				ctx = {
-					'stu_num':h_stu_num[1:3],
+					'stu_num':h_stu_num,
 					'stu_name':h_stu_name,
 					'first_major':first_major,
 					'second_major':second_major,
@@ -233,10 +208,34 @@ def HisnetCheck(request):
 	else:
 		return render_to_response('login.html')
 
-# def hinset_login(stu_num, hisnet_id, hisnet_pw):
-# 	info_lst = []
-# 	return info_lst 
+@csrf_exempt
+def Register(request):
+	if request.method=='POST':
+		stu_num = request.POST['stu_num']
+		user_pw = request.POST['user_pw']
+		user_email = request.POST['user_email']
+		user_name = request.POST['user_name']
+		first_major = request.POST['first_major']
+		second_major = request.POST.get('second_major', 'None')
 
+		try:
+			user = User.objects.create_user(username=stu_num, password=user_pw, email=user_email)
+			user.save()
+			get_user = User.objects.get(username=stu_num)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=user_name)
+			profile.save()
+		except:
+			# User를 만들었으나 Profile에서 실패할 경우 User만 등록되는 겨우가 발생함.
+			# 예외처리로 User만 등록되었을 때를 위한 처리
+			e_user = User.objects.filter(username=stu_num)
+			if e_user:
+				e_user.delete()
+			render_to_response('error.html')
+
+		return render_to_response('login.html')
+		
+	else:
+		return render_to_response('login.html')
 
 
 # Create your views here.

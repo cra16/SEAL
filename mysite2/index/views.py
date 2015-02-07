@@ -47,17 +47,16 @@ def Recommend(request, offset):
 				new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 				new_QnA.save()
 		else:
-			  CourseBoard = Lecture.objects.get(id=offset)
-			  request.session['Recommend_ID'] = offset
-              return render_to_response("recommend.html",
+			CourseBoard = Lecture.objects.get(id=offset)
+			request.session['Recommend_ID'] = offset
+			return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
-                                         #  'TotalCount' : range(0,TotalCount),
+                                         #  'TotalCount' : range(0,TotalCount)
+											})
 
-                                           })
-
-def Recommend_Write(request)
-	if request.user.username="":
+def Recommend_Write(request):
+	if request.user.username=="":
 		return HttpResponseRedirect("/mysite2")
 	else:
 

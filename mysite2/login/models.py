@@ -10,7 +10,6 @@ class Profile(models.Model):
     FirstMajor = models.CharField(max_length=30)
     SecondMajor = models.CharField(max_length=30)
     UserName = models.CharField(max_length=30)
-
-
-
+    Point = models.IntegerField(default=0)
+    
 # Create your models here.

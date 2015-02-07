@@ -52,9 +52,9 @@
         <div id="h_sectiondivider" class="ui section divider"></div>
 
         <div id="recommending" class="ui column">
-
+		
           <div id="blankspace" class="ui column"></div>
-
+		<form method = "POST" action = "/mysite2/Course/{{CourseBoard.Code}}">
           <div class="ui grid">
             <div id="firstcolumn" class="left floated center aligned three wide column">진도 속도</div>
             <div class="left floated center aligned two wide column">
@@ -65,7 +65,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>
+              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>	
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -185,6 +185,7 @@
           </div>
 
         </div>
+		</form>
         
 
         <div id="h_sectiondivider" class="ui section divider"></div>

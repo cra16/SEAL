@@ -30,7 +30,7 @@ class Course_Evaluation(models.Model):
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 		
 	def __unicode__(self):
-        return self.Course
+		return self.Course
 
 
 

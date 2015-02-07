@@ -48,6 +48,7 @@ def Recommend(request, offset):
 				new_QnA.save()
 		else:
 			  CourseBoard = Lecture.objects.get(id=offset)
+			  request.session['Recommend_ID'] = offset
               return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
@@ -55,6 +56,31 @@ def Recommend(request, offset):
 
                                            })
 
+def Recommend_Write(request)
+	if request.user.username="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+
+		if request.method =="POST":
+			new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
+			new_Speedy=request.POST['s1']
+			new_Reliance=request.POST['s2']
+			new_Helper=request.POST['s3']
+			new_Question=request.POST['s4']
+			new_Exam=request.POST['s5']
+			new_Homework=request.POST['s6']
+			new_Eval = Course_Evaluation(Course = new_Course, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
+			new_Eval.save()
+			
+			
+			return render_to_response("course.html",
+					  {'user':request.user, 
+					   })
+
+		else:
+			return HttpResponseRedirect("/mysite2")
+
+		
 
 
 @csrf_exempt

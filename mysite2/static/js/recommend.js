@@ -52,15 +52,24 @@ $('#disable4').on('click', function(){$('#sl4').slider('setValue', 5);});
 $('#disable5').on('click', function(){$('#sl5').slider('setValue', 5);});
 $('#disable6').on('click', function(){$('#sl6').slider('setValue', 5);});
 
-var ccode = "ECE20018",
-    cname = "C 프로그래밍",
-    cprof = "최창범 교수님";
 
-var eccode = document.getElementById('ccode'),
-    ecname = document.getElementById('cname'),
-    ecprof = document.getElementById('cprof');
+var	ccode = document.getElementsByName('ccode')
+var cname = document.getElementsByName('cname')
+var cprof = document.getElementsByName('cprof')
 
-eccode.textContent = ccode;
-ecname.textContent = cname;
-ecprof.textContent = cprof;
+var likenum1 = 120;
+   
+
+var elikenum1 = document.getElementById('likenum1');
+
+
+for(var i=0; i<ccode.length; i++)
+{
+	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
+	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
+	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
+}
+
+elikenum1.textContent = likenum1;
+
 });

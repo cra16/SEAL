@@ -199,7 +199,7 @@ def HisnetCheck(request):
 					'stu_num':h_stu_num,
 					'stu_name':h_stu_name,
 					'first_major':first_major,
-					'second_major':second_major,
+						'second_major':second_major,
 				}
 
 				return render_to_response('register.html', ctx)

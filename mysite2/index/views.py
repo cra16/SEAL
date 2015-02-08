@@ -54,7 +54,7 @@ def Recommend(request, offset):
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount)
 											})
-
+@csrf_exempt
 def Recommend_Write(request):
 	if request.user.username=="":
 		return HttpResponseRedirect("/mysite2")
@@ -62,12 +62,12 @@ def Recommend_Write(request):
 
 		if request.method =="POST":
 			new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
-			new_Speedy=request.POST['s1']
-			new_Reliance=request.POST['s2']
-			new_Helper=request.POST['s3']
-			new_Question=request.POST['s4']
-			new_Exam=request.POST['s5']
-			new_Homework=request.POST['s6']
+			new_Speedy=request.POST['sl1']
+			new_Reliance=request.POST['sl2']
+			new_Helper=request.POST['sl3']
+			new_Question=request.POST['sl4']
+			new_Exam=request.POST['sl5']
+			new_Homework=request.POST['sl6']
 			new_Eval = Course_Evaluation(Course = new_Course, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
 			new_Eval.save()
 			
@@ -188,8 +188,8 @@ def Course(request, offset):
 				new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 				new_QnA.save()
 		else:
-			  CourseBoard = Course_Evaluation.objects.get(id=offset)
-              return render_to_response("course.html",
+			CourseBoard = Course_Evaluation.objects.get(id=offset)
+			return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount),

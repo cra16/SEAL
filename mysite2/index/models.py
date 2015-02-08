@@ -1,6 +1,6 @@
 from django.db import models
 from lecture.models import Lecture
-
+from login.models import User
 class QnA_Board(models.Model):
 	TextWriter = models.CharField(max_length =30)
 	TextName = models.CharField(max_length =50)
@@ -22,6 +22,7 @@ class Notice_Board(models.Model):
 	
 class Course_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
+	CreatedID = models.ForeignKey(User)
 	Speedy = models.PositiveSmallIntegerField(default=5, null=False)
 	Reliance = models.PositiveSmallIntegerField(default=5, null=False)
 	Helper = models.PositiveSmallIntegerField(default=5, null=False)
@@ -30,7 +31,7 @@ class Course_Evaluation(models.Model):
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 		
 	def __unicode__(self):
-		return self.Course
+		return self.Course.CourseName
 
 
 

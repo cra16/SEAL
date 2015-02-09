@@ -13,6 +13,11 @@
     margin-left: 2%;
 }
 
+#likebutton{
+    border: none;
+    background-color: white;
+}
+
 /* Preloader */
 
 #preloader {

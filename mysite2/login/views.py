@@ -19,13 +19,16 @@ from django.contrib.auth.models import User	# user model 등록
 
 @csrf_exempt
 def loginCheck(request):
+		##로그인 할때 체킹하는 부분
 		if request.method == 'POST':
 			username = request.POST['UserID']
 			userpassword = request.POST['UserPassword']
 			user = authenticate(username = username, password=userpassword)
+			##로그인 완료시 메인페이지 view
 			if user is not None:
 				auth_login(request,user)
-
+				
+				##메인 페이지 전공과 교양 보여주는 페이지
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
 				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
 				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
@@ -34,6 +37,7 @@ def loginCheck(request):
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 				
+				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
 				PageInformation1 = [0,0,0];
 				PageInformation2 = [0,0,0];
 				PageInformation3 = [0,0,0];
@@ -46,7 +50,7 @@ def loginCheck(request):
 				PageInformation2[1] = 1
 				PageInformation3[1] = 1
 		
-
+				##페이지 넘기는 기능
 				if TotalCount1<11:
 					PageInformation1[2] = 11
 				else:
@@ -60,11 +64,12 @@ def loginCheck(request):
 				else:
 					PageInformation3[2] = TotalCount3
 				
-
+				##독립적 페이지 위치를 다음 페이지 넘기는 것할 때 정보 넘김
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2
 				request.session['PageInformation3'] = PageInformation3
 				
+				##보여주려는 페이지 자바스크립트 active
 				Active = ["active","",""]
 
 				return render_to_response("index.html",
@@ -85,6 +90,7 @@ def loginCheck(request):
          
 		elif request.user.username =="":
 			return render_to_response('login.html')
+		##조만간 패치하겠지만 위와 마찬가지 기능
 		else:
 	
 				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]

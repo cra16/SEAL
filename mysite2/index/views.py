@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
 from index.models import *
 from lecture.models import *
+from login.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
@@ -293,7 +294,7 @@ def Notice_Read(request, offset): #공지사항 읽기 기능
 			raise Http404()
 
 		Current = Notice_Board.objects.filter(id=offset).get()
-	
+		
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 

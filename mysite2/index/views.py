@@ -198,26 +198,29 @@ def Course(request, offset): #해당 과목 전체 강의 추천 평균 및 개인이 한 것을 보
 
 
 
-				#
-                CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+				 CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
                 CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
                 CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
                 CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
                 CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
                 CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-		        CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-				# 여기까지 강의 평균
+                CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 
-                MyCourseBoard = Course_Evaluation.objects.get(CreatedID = request.user.username) #아이디 기준으로 해당 개인이 한 것을 볼 수 있음
-                OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]# 3명정도 다른사람 꺼 보여줌(default는 자신) 
+                MyCourseBoard = Course_Evaluation.objects.get(CreatedID = request.user.username)
+                OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
+                Other_ID_Information = [0,0,0]
+                for i in range(0,3):
+                        Other_ID_Information[i] = Profile.objects.get(User = OtherCourseBoard[i])
                 return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                            'MyCourseBoard':MyCourseBoard,
                                            'OtherCourseBoard':OtherCourseBoard,
+                                           'Other_ID_Information':Other_ID_Information
                                          #  'TotalCount' : range(0,TotalCount),
 
                                            })
+
 
 
 

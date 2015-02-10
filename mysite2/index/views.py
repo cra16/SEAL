@@ -10,32 +10,32 @@ from login.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
-def MyPage(request):	#MyPage ·çÆ®
+def MyPage(request):	#MyPage ê¸°ëŠ¥
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("sealmypage.html", {'user':request.user}) 
 
-def About(request): #About template ·çÆ®
+def About(request): #About template Â·Ã§Ã†Â®
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("about.html",{'user':request.user})
 
-def Schedule(request): #Schedule template ·çÆ®
+def Schedule(request): #Schedule template Â·Ã§Ã†Â®
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("schedule.html",{'user':request.user})
 
-def Judgement(request): # »ç¿ëÀÚ ½Å°í template ·çÆ®
+def Judgement(request): # Â»Ã§Â¿Ã«Ã€Ãš Â½Ã…Â°Ã­ template Â·Ã§Ã†Â®
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
 @csrf_exempt
-def Recommend(request, offset): #ÃßÃµ °­ÀÇ ½ºÅ©·Ñ template º¸¿©ÁÖ´Â ·çÆ®
+def Recommend(request, offset): #ÃƒÃŸÃƒÂµ Â°Â­Ã€Ã‡ Â½ÂºÃ…Â©Â·Ã‘ template ÂºÂ¸Â¿Â©ÃÃ–Â´Ã‚ Â·Ã§Ã†Â®
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -46,15 +46,15 @@ def Recommend(request, offset): #ÃßÃµ °­ÀÇ ½ºÅ©·Ñ template º¸¿©ÁÖ´Â ·çÆ®
 
 
 		
-		CourseBoard = Lecture.objects.get(id=offset) #DB °íÀ¯ ID·Î Á¢±ÙÇØ¼­ °Ë»ö		
-		request.session['Recommend_ID'] = offset #offset ¹Ì¸® ÀúÀå
+		CourseBoard = Lecture.objects.get(id=offset) #DB Â°Ã­Ã€Â¯ IDÂ·Ã ÃÂ¢Â±Ã™Ã‡Ã˜Â¼Â­ Â°Ã‹Â»Ã¶		
+		request.session['Recommend_ID'] = offset #offset Â¹ÃŒÂ¸Â® Ã€ÃºÃ€Ã¥
 		return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount)
 											})
 @csrf_exempt
-def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
+def Recommend_Write(request): #ÃƒÃŸÃƒÂµ Â°Â­Ã€Ã‡ DBÃ€Ã”Â·Ã‚
         if request.user.username=="":
                 return HttpResponseRedirect("/mysite2")
         else:
@@ -72,16 +72,16 @@ def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
                         new_Eval.save()
 
 
-                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#session¿¡ ÀúÀåµÈ ID¸¦ ÅëÇØ °­ÀÇ Á¤º¸ °®°í¿À±â
+                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#sessionÂ¿Â¡ Ã€ÃºÃ€Ã¥ÂµÃˆ IDÂ¸Â¦ Ã…Ã«Ã‡Ã˜ Â°Â­Ã€Ã‡ ÃÂ¤ÂºÂ¸ Â°Â®Â°Ã­Â¿Ã€Â±Ã¢
 
                         try:
-                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#°­ÀÇ Á¤º¸ DB·Î °£Á¢ Á¢±ÙÇØ¼­ Total °ª °Ë»ö
+                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#Â°Â­Ã€Ã‡ ÃÂ¤ÂºÂ¸ DBÂ·Ã Â°Â£ÃÂ¢ ÃÂ¢Â±Ã™Ã‡Ã˜Â¼Â­ Total Â°Âª Â°Ã‹Â»Ã¶
 
                         except:
                                 T_Eval =None 
 
 
-                        if T_Eval is None: #µ¥ÀÌÅÍ ¾øÀ»½Ã Table »ı¼º
+                        if T_Eval is None: #ÂµÂ¥Ã€ÃŒÃ…Ã Â¾Ã¸Ã€Â»Â½Ãƒ Table Â»Ã½Â¼Âº
                                 Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
                                 Total_Eval.save()
                         else: #update
@@ -103,20 +103,20 @@ def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
 
 
 @csrf_exempt
-def QnAMain(request): #Q&A ºÎºĞ Á¶ÀÛ(Á» ¼ÕºÁ¾ßÇÔ)
+def QnAMain(request): #Q&A ÂºÃÂºÃ ÃÂ¶Ã€Ã›(ÃÂ» Â¼Ã•ÂºÃÂ¾ÃŸÃ‡Ã”)
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :
-		#¹ŞÀº Á¤º¸ ÀúÀå(ÀÌ°Íµµ ¿Å±æ ¿¹Á¤ ´Ù³¡³ª¸é..)
+		#Â¹ÃÃ€Âº ÃÂ¤ÂºÂ¸ Ã€ÃºÃ€Ã¥(Ã€ÃŒÂ°ÃÂµÂµ Â¿Ã…Â±Ã¦ Â¿Â¹ÃÂ¤ Â´Ã™Â³Â¡Â³ÂªÂ¸Ã©..)
 		if request.method =="POST":
 			new_Text=request.POST['msg-body-txtarea']		
 			new_TextWriter = request.user.username
 			new_TextName = request.POST['msg-title-input']
 			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 			new_QnA.save()
-		#ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#Ã†Ã¤Ã€ÃŒÃÃ¶ Â³Ã‘Â±Ã¢Â´Ã‚ Â±Ã¢Â´Ã‰
 		count=QnA_Board.objects.count()
-		TotalCount = (count/8)+1 #ÆäÀÌÁö ¼ö
+		TotalCount = (count/8)+1 #Ã†Ã¤Ã€ÃŒÃÃ¶ Â¼Ã¶
 
 		if TotalCount ==1:
 			Next = 1
@@ -133,7 +133,7 @@ def QnAMain(request): #Q&A ºÎºĞ Á¶ÀÛ(Á» ¼ÕºÁ¾ßÇÔ)
 					   'Next' : Next,
 					   })
 
-def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °÷
+def QnA(request,offset): #Ã†Ã¤Ã€ÃŒÃÃ¶ Ã€ÃŒÂµÂ¿Â½Ãƒ ÃÂ¤ÂºÂ¸ ÂºÂ¸Â¿Â©ÃÃ–Â´Ã‚ Â°Ã·
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -141,11 +141,11 @@ def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °÷
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#ÆäÀÌÁö ¼ö Á¤º¸
+		#Ã†Ã¤Ã€ÃŒÃÃ¶ Â¼Ã¶ ÃÂ¤ÂºÂ¸
 		PageFirst = (offset-1)*6 
 		PageLast = (offset-1)*6 + 6
 		PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
-		#######	ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#######	Ã†Ã¤Ã€ÃŒÃÃ¶ Â³Ã‘Â±Ã¢Â´Ã‚ Â±Ã¢Â´Ã‰
 		Page = dict()
 		count = QnA_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -169,13 +169,13 @@ def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °÷
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 	
-def QnAWrite(request): #Q&A Write ±â´É
+def QnAWrite(request): #Q&A Write Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_faq.html",{'user':request.user})
 
-def QnARead(request, offset): #Q&A read ±â´É
+def QnARead(request, offset): #Q&A read Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -184,14 +184,14 @@ def QnARead(request, offset): #Q&A read ±â´É
 		except ValueError:
 			raise Http404()
 
-		Current = QnA_Board.objects.filter(id=offset).get() #id¸¦ ±âÁØÀ¸·Î È£ÃâÇÔ
+		Current = QnA_Board.objects.filter(id=offset).get() #idÂ¸Â¦ Â±Ã¢ÃÃ˜Ã€Â¸Â·Ã ÃˆÂ£ÃƒÃ¢Ã‡Ã”
 	
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï ±â´É
+def Course(request, offset): #Â¼Â±Ã…ÃƒÂµÃˆ Â°Â­Ã€Ã‡ ÃƒÃŸÃƒÂµ Ã€Ã¼ÃƒÂ¼ Â¸Ã±Â·Ã Â±Ã¢Â´Ã‰
 
-	#°­ÀÇ ÃßÃµ½Ã ±ÇÇÑ ¾ÆÁ÷ ¾ÈÁÜ
+	#Â°Â­Ã€Ã‡ ÃƒÃŸÃƒÂµÂ½Ãƒ Â±Ã‡Ã‡Ã‘ Â¾Ã†ÃÃ· Â¾ÃˆÃÃœ
 
 	if request.user.username =="":
                 return  HttpResponseRedirect("/mysite2")
@@ -202,7 +202,7 @@ def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï ±â´É
                         raise Http404()
 
 				
-				#ÇØ´ç °­ÀÇ ÀüÃ¼ ÃßÃµ Æò±Õ ½ºÅ©·Ñ º¸¿©ÁÖ´Â ±â´É
+				#Ã‡Ã˜Â´Ã§ Â°Â­Ã€Ã‡ Ã€Ã¼ÃƒÂ¼ ÃƒÃŸÃƒÂµ Ã†Ã²Â±Ã• Â½ÂºÃ…Â©Â·Ã‘ ÂºÂ¸Â¿Â©ÃÃ–Â´Ã‚ Â±Ã¢Â´Ã‰
 				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
                 CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
                 CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
@@ -211,9 +211,9 @@ def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï ±â´É
                 CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
                 CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 				
-				#·Î±×ÀÎ ´ç»çÀÚ°¡ ÃßÃµ ÇÑ ½ºÅ©·Ñ º¸¿©ÁÖ´Â ±â´É
+				#Â·ÃÂ±Ã—Ã€Ã Â´Ã§Â»Ã§Ã€ÃšÂ°Â¡ ÃƒÃŸÃƒÂµ Ã‡Ã‘ Â½ÂºÃ…Â©Â·Ã‘ ÂºÂ¸Â¿Â©ÃÃ–Â´Ã‚ Â±Ã¢Â´Ã‰
                 MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
-				#´Ù¸¥ »ç¶÷µéÀÌ ÇØ³õÀº °Í ½Ã°£¼øÀ¸·Î º¸¿©ÁØ ±â´É
+				#Â´Ã™Â¸Â¥ Â»Ã§Â¶Ã·ÂµÃ©Ã€ÃŒ Ã‡Ã˜Â³ÃµÃ€Âº Â°Ã Â½ÃƒÂ°Â£Â¼Ã¸Ã€Â¸Â·Ã ÂºÂ¸Â¿Â©ÃÃ˜ Â±Ã¢Â´Ã‰
                 OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
                 Other_ID_Information = [0,0,0]
                 for i in range(0,3):
@@ -241,7 +241,7 @@ def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï ±â´É
 
 				
 
-def NoticeMain(request):#Notice ¸ŞÀÎ ±â´É
+def NoticeMain(request):#Notice Â¸ÃÃ€Ã Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -264,7 +264,7 @@ def NoticeMain(request):#Notice ¸ŞÀÎ ±â´É
 					   'Next' : Next,
 					   })
 
-def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
+def Notice(request,offset): #Notice Page Â³Ã‘Â±Ã¢Â±Ã¢ Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -272,11 +272,11 @@ def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#ÆäÀÌÁö ¼ö Á¤º¸
+		#Ã†Ã¤Ã€ÃŒÃÃ¶ Â¼Ã¶ ÃÂ¤ÂºÂ¸
 		PageFirst = (offset-1)*6
 		PageLast = (offset-1)*6 + 6
 		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
-		#ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#Ã†Ã¤Ã€ÃŒÃÃ¶ Â³Ã‘Â±Ã¢Â´Ã‚ Â±Ã¢Â´Ã‰
 		Page = dict()
 		count = Notice_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -300,7 +300,7 @@ def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 
-def Notice_Read(request, offset): #Notice Read ±â´É
+def Notice_Read(request, offset): #Notice Read Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -314,7 +314,7 @@ def Notice_Read(request, offset): #Notice Read ±â´É
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
-def Main(request, offset): #Main ±â´É
+def Main(request, offset): #Main Â±Ã¢Â´Ã‰
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
 	else:
@@ -332,10 +332,10 @@ def Main(request, offset): #Main ±â´É
 				PageInformation3 = request.session['PageInformation3'] #all Page DB
 				
 
-				#main ÀÚ¹Ù½ºÅ©¸³Æ® Á¶ÀÛ ÇÏ±â À§ÇÑ ±â´É
+				#main Ã€ÃšÂ¹Ã™Â½ÂºÃ…Â©Â¸Â³Ã†Â® ÃÂ¶Ã€Ã› Ã‡ÃÂ±Ã¢ Ã€Â§Ã‡Ã‘ Â±Ã¢Â´Ã‰
 				Active = ["","",""]
 
-				URL_Path = request.path	#ÇöÀç ÆäÀÌÁö URL ±Ü¾î¿À±â
+				URL_Path = request.path	#Ã‡Ã¶Ã€Ã§ Ã†Ã¤Ã€ÃŒÃÃ¶ URL Â±ÃœÂ¾Ã®Â¿Ã€Â±Ã¢
 				
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
@@ -347,9 +347,9 @@ def Main(request, offset): #Main ±â´É
 					PageInformation3[1] = offset
 					Active[2] = "active"
 			
-				##°­ÀÇ DB¿¡ ÀúÀåµÈ ÀÚ·áµéÀ» ÄÚµå·Î ÇÊÅÍ¸¦ ÇØ¼­ Total Page¸¦ ¸¸µê
-				##±×¸®°í ³ª¼­ °­ÀÇÃßÃµµÈ °­ÀÇµé¸¸ µû·Î ¶Ç ÇÊÅÍÇØ¼­ µ¥ÀÌÅÍ ³Ö´Â °úÁ¤ÀÓ
-				##´Ù¸¥ °³¹ßÀÚºĞÀÌ Á» ¾Ë°í¸®Áò ÀßÂ¥¼­ ´õ ÃÖÀûÈ­ÇØÁÖ¼¼¿ä..(¹ßÀûÈ­ÀÓ..))
+				##Â°Â­Ã€Ã‡ DBÂ¿Â¡ Ã€ÃºÃ€Ã¥ÂµÃˆ Ã€ÃšÂ·Ã¡ÂµÃ©Ã€Â» Ã„ÃšÂµÃ¥Â·Ã Ã‡ÃŠÃ…ÃÂ¸Â¦ Ã‡Ã˜Â¼Â­ Total PageÂ¸Â¦ Â¸Â¸ÂµÃª
+				##Â±Ã—Â¸Â®Â°Ã­ Â³ÂªÂ¼Â­ Â°Â­Ã€Ã‡ÃƒÃŸÃƒÂµÂµÃˆ Â°Â­Ã€Ã‡ÂµÃ©Â¸Â¸ ÂµÃ»Â·Ã Â¶Ã‡ Ã‡ÃŠÃ…ÃÃ‡Ã˜Â¼Â­ ÂµÂ¥Ã€ÃŒÃ…Ã Â³Ã–Â´Ã‚ Â°ÃºÃÂ¤Ã€Ã“
+				##Â´Ã™Â¸Â¥ Â°Â³Â¹ÃŸÃ€ÃšÂºÃÃ€ÃŒ ÃÂ» Â¾Ã‹Â°Ã­Â¸Â®ÃÃ² Ã€ÃŸÃ‚Â¥Â¼Â­ Â´Ãµ ÃƒÃ–Ã€Ã»ÃˆÂ­Ã‡Ã˜ÃÃ–Â¼Â¼Â¿Ã¤..(Â¹ÃŸÃ€Ã»ÃˆÂ­Ã€Ã“..))
 				PageBoard1 =[]
 				PageBoard2 =[]
 				

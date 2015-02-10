@@ -1,0 +1,108 @@
+/*----------------best courses--------------------*/
+
+#best {
+    background: #ffffff;
+    border: 3px solid #87cefa; 
+    border-radius: 5px; 
+    margin: 20px; 
+    padding: 10px;
+    height: 370px;
+    width: 210px;
+}
+
+#best > #best-title {
+    font-family: 'Fredoka One', cursive;
+    color: #87cefa;
+    font-size: 25px;
+    padding-left: 10px;
+    border-bottom: 1px solid #87cefa;
+    border-bottom-width: 100%;
+    margin-bottom: -10px;
+}
+
+#best > #best-list > p {
+    text-align: center;
+    margin-left: 16px;
+    margin-top: 5px;
+    padding-top: 20px;
+    color: black;
+}
+
+
+/*--------------------first place--------------------*/
+
+#best > #best-list > h3 > #num1 > a,
+#best > #best-list > h3 > #num1 > a:hover,
+#best > #best-list > h3 > #num1 > a:focus {
+    text-decoration: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 75px;
+    color: #ffd700;
+}
+
+#best > #best-list > #first-place > #coursename1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+#best > #best-list > #first-place > #pname1 {
+    font-size: 15px;
+}
+
+#best > #best-list > #first-place > #rnumall1 > i {
+    font-size: 15px;
+    color: red;
+}
+
+/*------------------second place-----------------------*/
+
+#best > #best-list > h3 > #num2 > a,
+#best > #best-list > h3 > #num2 > a:hover,
+#best > #best-list > h3 > #num2 > a:focus {
+    text-decoration: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 75px;
+    color: #87cefa;
+}
+
+#best > #best-list > #second-place {
+    margin-top: -15px;
+}
+
+#best > #best-list > #second-place > #coursename2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #87cefa;
+}
+
+#best > #best-list > #second-place > #rnumall2 > i {
+    font-size: 15px;
+    color: red;
+}
+
+/*------------------third place---------------------------*/
+
+#best > #best-list > h3 > #num3 > a,
+#best > #best-list > h3 > #num3 > a:hover,
+#best > #best-list > h3 > #num3 > a:focus {
+    text-decoration: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 75px;
+    color: #87cefa;
+}
+
+#best > #best-list > #third-place {
+    margin-top: -15px;
+}
+
+#best > #best-list > #third-place > #coursename3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #87cefa;
+}
+
+#best > #best-list > #third-place > #rnumall3 > i {
+    font-size: 15px;
+    color: red;
+}

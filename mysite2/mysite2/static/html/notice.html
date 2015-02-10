@@ -1,0 +1,87 @@
+{% extends "base.html"%}
+  <head>
+    {% load staticfiles%}
+    {% block head%}
+	 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>▒ SEAL ▒</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{%static "css/qna.css"%}">
+    <script type="text/javascript" src="{% static "js/qna.js"%}"></script>
+    
+    
+   {%endblock%}
+  <body>
+    {%block content%}
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-8 col-sm-10 col-xs-10">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항 </h2>
+
+        
+        <div id="h_sectiondivider" class="ui section divider"></div>
+        
+        <div class="ui column">
+          <div id="qna_board">
+              
+              <table class="ui table">
+                 <thead>
+                  <tr>
+                      <th class="two wide"><center>번호</center></th>
+                      <th class="eight wide"><center>제목</center></th>
+                      <th class="two wide"><center>작성자</center></th>
+                      <th class="two wide"><center>날짜</center></th>
+                      <th class="two wide"><center>조회수</center></th>
+                  </tr>
+                </thead>
+                
+                
+                
+                <tbody class="qna_sub">
+                  {%for Board in PageBoard%}
+				  
+				  <tr id="qna1">
+                    <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
+                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span> <img src="../fonts/latest.gif"></span></td>
+                    <td><center>{{Board.TextWriter}}</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
+                  </tr>
+				  {%endfor%}
+                  
+                </tbody>
+              </table>
+      
+               
+                                          
+              <center><div class="ui borderless pagination menu">
+              <a class="item" href ="/mysite2/Notice/Page/{{Previous}}">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+			   {% for i in  TotalCount %}
+				 <a href = "/mysite2/Notice/Page/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+               {% endfor%}
+              <a class="item" href = "/mysite2/Notice/Page/{{Next}}">
+                Next <i class="glyphicon glyphicon-menu-right" ></i>
+              </a>
+            </div></center>
+              
+          </div>
+        </div>
+
+     {% endblock%}
+  </body>
+</html>

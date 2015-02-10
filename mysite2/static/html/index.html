@@ -111,9 +111,13 @@
 		  <div class="ui divided very relaxed selection inbox list {{Active.0}} tab" data-tab="unread">
 		    {% for Board1 in PageBoard1%}
             <div class="ui raised segment grid">
-             
+              <script>
+				var domain1 = "{{Board1.id}}"
+				
+			  </script>
 			  <div id="likebtn" class="left floated ui compact segment two wide column">
-                <center><a href="/mysite2/Recommend/{{Board1.id}}"><button id="likebutton"><i class="glyphicon glyphicon-heart"></i></button></a></center>
+                 <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+
                 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
               </div>
                     
@@ -159,9 +163,12 @@
       <div class="ui divided very relaxed inbox selection list {{Active.1}} tab" data-tab="saved">
 			{% for Board2 in PageBoard2%}
             <div class="ui raised segment grid">
-             
+             <script>
+				var domain2 = "{{Board1.id}}"
+			</script>
 			  <div id="likebtn" class="left floated ui compact segment two wide column">
-                <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
+                 <center><button id="likebutton2"><i class="glyphicon glyphicon-heart"></i></button></center>
+
                 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
               </div>
                     
@@ -205,9 +212,11 @@
 
              {% for Board3 in PageBoard3%}
              <div class="ui raised segment grid">
-             
+               <script>
+				var domain3 = "{{Board1.id}}"
+			   </script>
 			  <div id="likebtn" class="left floated ui compact segment two wide column">
-                <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><button id="likebutton1"><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
               </div>
                     

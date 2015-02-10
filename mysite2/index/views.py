@@ -57,7 +57,7 @@ def Recommend_Write(request): #강의 추천 DB 입력 기능
 
                 if request.method =="POST":
                         new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
-                        new_CreatedID = request.user.username
+                        new_CreatedID = Profile.objects.get(User= request.user)
                         new_Speedy=request.POST['sl1']
                         new_Reliance=request.POST['sl2']
                         new_Helper=request.POST['sl3']
@@ -78,7 +78,7 @@ def Recommend_Write(request): #강의 추천 DB 입력 기능
 
 
                         if T_Eval is None: #Table에 데이터 없을시 데이터 생성 및 저장
-                                Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam  Total_Homework = new_Homework Total_Count =1)
+                                Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
                                 Total_Eval.save()
                         else: #업데이트
                                 T_Eval.Total_Speedy += int(new_Speedy)
@@ -198,7 +198,7 @@ def Course(request, offset): #해당 과목 전체 강의 추천 평균 및 개인이 한 것을 보
 
 
 
-				 CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
                 CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
                 CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
                 CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count

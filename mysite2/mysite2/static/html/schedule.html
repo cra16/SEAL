@@ -1,0 +1,401 @@
+<!doctype html>
+{% extends "base.html"%}
+         
+	{% block head%}	
+         {%load staticfiles%}
+			
+		
+		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+		  <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
+                         
+		<style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+
+		
+		
+	{% endblock%}
+
+  <body>
+ {% block content%}
+		
+ <div class="containerss"></div>
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-10 col-xs-10">
+
+      <h2 class="ui header"><i class="glyphicon glyphicon-time"></i> My Schedule</h2>
+
+      <div class="ui small form">
+        <div class="four fields">
+          <div class="field">
+            <label>학부 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">글로벌리더십학부</div>
+                <div class="item" data-value="2">창의융합교육원</div>
+                <div class="item" data-value="3">Global Edison Academy</div>
+                <div class="item" data-value="4">국제어문학부</div>
+                <div class="item" data-value="5">언론정보문화학부</div>
+                <div class="item" data-value="6">경영경제학부</div>
+                <div class="item" data-value="7">법학부</div>
+                <div class="item" data-value="8">상담심리사회복지학부</div>
+                <div class="item" data-value="9">생명과학부</div>
+                <div class="item" data-value="10">전산전자공학부</div>
+                <div class="item" data-value="11">산업정보디자인학부</div>
+                <div class="item" data-value="12">기계제어공학부</div>
+                <div class="item" data-value="13">공간환경시스템공학부</div>
+                <div class="item" data-value="14">산업교육학부</div>
+              </div>
+            </div> 
+          </div>
+          <div class="field">
+            <label>교양 실무</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="0">---전체---</div>
+                <div class="item" data-value="1">신앙1</div>
+                <div class="item" data-value="2">인성1</div>
+                <div class="item" data-value="3">인성2</div>
+                <div class="item" data-value="4">신앙2</div>
+                <div class="item" data-value="5">세계관1</div>
+                <div class="item" data-value="6">세계관2</div>
+                <div class="item" data-value="7">인문</div>
+                <div class="item" data-value="8">역사</div>
+                <div class="item" data-value="9">사회</div>
+                <div class="item" data-value="10">수학</div>
+                <div class="item" data-value="11">자연</div>
+                <div class="item" data-value="12">신앙3</div>
+                <div class="item" data-value="13">리더십</div>
+                <div class="item" data-value="14">예술</div>
+                <div class="item" data-value="15">전공기초</div>
+                <div class="item" data-value="16">외국어</div>
+                <div class="item" data-value="17">전공탐색</div>
+                <div class="item" data-value="18">제2외국어</div>
+                <div class="item" data-value="19">소통및융복합</div>
+                <div class="item" data-value="20">ICT융합기초</div>
+                <div class="item" data-value="21">인문학</div>
+                <div class="item" data-value="22">사회과학</div>
+                <div class="item" data-value="23">자연과학</div>
+                <div class="item" data-value="24">리더십및문제해결</div>
+                <div class="item" data-value="25">스포츠</div>
+                <div class="item" data-value="W32">영어1</div>
+                <div class="item" data-value="W33">영어2</div>
+                <div class="item" data-value="W34">기독교신앙기초1</div>
+                <div class="item" data-value="W35">기독교신앙기초2</div>
+                <div class="item" data-value="W50">실무영어</div>
+                <div class="item" data-value="W51">실무한문</div>
+                <div class="item" data-value="W52">실무전산</div>
+                <div class="item" data-value="W53">실무한국어</div>
+                <div class="item" data-value="X01">야간-영어</div>
+                <div class="item" data-value="X02">야간-경영학</div>
+                <div class="item" data-value="X03">야간-실무</div>
+                <div class="item" data-value="X04">야간-교양</div>
+                <div class="item" data-value="X06">야간-실무전산</div>
+                <div class="item" data-value="X07">야간-실무영어</div>
+                <div class="item" data-value="X08">야간-실무한문</div>
+              </div>
+            </div> 
+          </div>
+          <div class="field">
+            <label>검색 입력</label>
+            <div class="ui small icon input">
+              <input type="text" placeholder="Search...">
+              <i class="circular icon"><a id="sch-search" href="#"><i  class="glyphicon glyphicon-search"></i></a></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sch-result" class="wrapper">
+        <div class="ui two column grid">
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum1"></span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode1"></span>]
+              <p><a href="#"><span class="cname" id="cname1"></span></a></p>
+              <p><a href="#"><span id="cprof1"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod1" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+          
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum2"></span> LIKES</center>
+              </div>
+
+              [<span id="ccode2"></span>]
+              <p><a href="#"><span class="cname" id="cname2"></span></a></p>
+              <p><a href="#"><span id="cprof2"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod2" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui two column grid">
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum3"></span> LIKES</center>
+              </div>
+              [<span id="ccode3"></span>]
+              <p><a href="#"><span class="cname" id="cname3"></span></a></p>
+              <p><a href="#"><span id="cprof3"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod3" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum4"></span> LIKES</center>
+              </div>
+
+              [<span id="ccode4"></span>]
+              <p><a href="#"><span class="cname" id="cname4"></span></a></p>
+              <p><a href="#"><span id="cprof4"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod4" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui two column grid">
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum5"></span> LIKES</center>
+              </div>
+
+              [<span id="ccode5"></span>]
+              <p><a href="#"><span class="cname" id="cname5"></span></a></p>
+              <p><a href="#"><span id="cprof5"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod5" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum6"></span> LIKES</center>
+              </div>
+
+              [<span id="ccode6"></span>]
+              <p><a href="#"><span class="cname" id="cname6"></span></a></p>
+              <p><a href="#"><span id="cprof6"></span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod6" class="cperiod">교시</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="ui divider"></div>
+
+        <center><div class="ui borderless pagination menu">
+              <a class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+              <a class="item">1</a>
+              <a class="item">2</a>
+              <a class="item">3</a>
+              <a class="item">4</a>
+              <a class="item">5</a>
+              <a class="item">6</a>
+              <a class="item">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+            <div style="padding-bottom:30px"></div>
+      </div>
+
+     <div class="bootstrap-table">
+         <div class="fixed-table-container">
+             <div class="fixed-table-header" style="height: 40px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221); margin-right:0px;">
+                
+             </div>
+            <div class="fixed-table-body">
+                
+                <table id="table" class="table table-hover" style="margin-top: -40px;"></div>
+                     <thead>
+                        <tr>
+                        <th class="col-xs-2">
+                            Period
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Monday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Tuesday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Wednesday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Thursday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Friday</center>
+                        </th>
+                        <th class="col-xs-1">
+                            <center>Saturday</center>
+                        </th>
+                    </tr>
+                </thead>
+                    <tbody>
+                         <tr data-index="1">
+                             <th style><p>&nbsp;</p>1st (8:30-9:45)</th>
+                             <td id="mon1"></td>
+                             <td id="tue1"></td>
+                             <td id="wed1"></td>
+                             <td id="thu1"></td>
+                             <td id="fri1"></td>
+                             <td id="sat1"></td>
+                         </tr>
+                         <tr data-index="2">
+                             <th style><p>&nbsp;</p>2nd (10:00-11:15)</th>
+                             <td id="mon2"></td>
+                             <td id="tue2"></td>
+                             <td id="wed2"></td>
+                             <td id="thu2"></td>
+                             <td id="fri2"></td>
+                             <td id="sat2"></td>
+                         </tr>
+                         <tr data-index="3">
+                             <th style><p>&nbsp;</p>3rd (11:30-12:45)</th>
+                             <td id="mon3"></td>
+                             <td id="tue3"></td>
+                             <td id="wed3"></td>
+                             <td id="thu3"></td>
+                             <td id="fri3"></td>
+                             <td id="sat3"></td>
+                         </tr>
+                         <tr data-index="4">
+                             <th style><p>&nbsp;</p>4th (1:00-2:15)</th>
+                             <td id="mon4"></td>
+                             <td id="tue4"></td>
+                             <td id="wed4"></td>
+                             <td id="thu4"></td>
+                             <td id="fri4"></td>
+                             <td id="sat4"></td>
+                         </tr>
+                         <tr data-index="5">
+                             <th style><p>&nbsp;</p>5th (2:30-3:45)</th>
+                             <td id="mon5"></td>
+                             <td id="tue5"></td>
+                             <td id="wed5"></td>
+                             <td id="thu5"></td>
+                             <td id="fri5"></td>
+                             <td id="sat5"></td>
+                         </tr>
+                         <tr data-index="6">
+                             <th style><p>&nbsp;</p>6th (4:00-5:15)</th>
+                             <td id="mon6"></td>
+                             <td id="tue6"></td>
+                             <td id="wed6"></td>
+                             <td id="thu6"></td>
+                             <td id="fri6"></td>
+                             <td id="sat6"></td>
+                         </tr>
+                         <tr data-index="7">
+                             <th style><p>&nbsp;</p>7th (5:30-6:45)</th>
+                             <td id="mon7"></td>
+                             <td id="tue7"></td>
+                             <td id="wed7"></td>
+                             <td id="thu7"></td>
+                             <td id="fri7"></td>
+                             <td id="sat7"></td>
+                         </tr>
+                         <tr data-index="8">
+                             <th style><p>&nbsp;</p>8th (7:00-8:15)</th>
+                             <td id="mon8"></td>
+                             <td id="tue8"></td>
+                             <td id="wed8"></td>
+                             <td id="thu8"></td>
+                             <td id="fri8"></td>
+                             <td id="sat8"></td>
+                         </tr>
+                         <tr data-index="9">
+                             <th style><p>&nbsp;</p>9th (8:30-9:45)</th>
+                             <td id="mon9"></td>
+                             <td id="tue9"></td>
+                             <td id="wed9"></td>
+                             <td id="thu9"></td>
+                             <td id="fri9"></td>
+                             <td id="sat9"></td>
+                         </tr>
+                         <tr data-index="10">
+                             <th style><p>&nbsp;</p>10th (10:00-11:15)</th>
+                             <td id="mon10"></td>
+                             <td id="tue10"></td>
+                             <td id="wed10"></td>
+                             <td id="thu10"></td>
+                             <td id="fri10"></td>
+                             <td id="sat10"></td>
+                         </tr>
+                         <tr data-index="11">
+                             <th style><p>&nbsp;</p>11th (11:30-12:45)</th>
+                             <td id="mon11"></td>
+                             <td id="tue11"></td>
+                             <td id="wed11"></td>
+                             <td id="thu11"></td>
+                             <td id="fri11"></td>
+                             <td id="sat11"></td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
+	{% endblock%}
+</html>

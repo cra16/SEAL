@@ -32,11 +32,11 @@
 
       <div class="ui column">
                 
-        <p id="ccode_p">[<span id="ccode">{{CourseBoard.Code}}</span>]<br />
-        <span id="cname">{{CourseBoard.CourseName}}</span> 
+        <p id="ccode_p">[<span id="ccode">{{CourseBoard.CourseName.Code}}</span>]<br />
+        <span id="cname">{{CourseBoard.CourseName.CourseName}}</span> 
         <button class="btn btn-info">듣고싶어!</button> 
         <a href="recommend.html"><button class="btn btn-danger">추천하기!</button></a><br />
-        <span id="cprof">{{CourseBoard.professor}}</span></p>
+        <span id="cprof">{{CourseBoard.CourseName.Professor}}</span></p>
 
       </div>
 
@@ -56,7 +56,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
+              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -73,7 +73,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
@@ -90,7 +90,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
             </div>
             <div class="left floated center aligned six wide column">
-               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
@@ -107,7 +107,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
+              <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -124,7 +124,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
+              <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -141,7 +141,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C"/>
+              <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
@@ -171,7 +171,7 @@
       <div class="ui column">
         <h3><b>개인 : </b></h3>
         <div id="recommending" class="ui column">
-          <h4><b></b></h4>
+          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}/{{user.profile.FirstMajor}}<</b></h4>
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 
@@ -181,7 +181,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl11" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl11C"/>
+                <input type="text" id="sl01" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -198,7 +198,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl12" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl12C"/>
+                <input type="text" id="sl02" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
@@ -215,7 +215,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
               </div>
               <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl13" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl13C"/>
+                 <input type="text" id="sl03" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
@@ -232,7 +232,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl14" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl14C"/>
+                <input type="text" id="sl04" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -249,7 +249,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl15" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl15C"/>
+                <input type="text" id="sl05" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -266,7 +266,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl16" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl16C"/>
+                <input type="text" id="sl06" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl06C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
@@ -276,7 +276,7 @@
 
 
 
-
+		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>
           <h4><b>홍길동/14학번/전산전자공학부</b></h4>
           <div id="recommending" class="ui column">
@@ -288,7 +288,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl21" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl21C"/>
+                <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -305,7 +305,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl22" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl22C"/>
+                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
@@ -322,7 +322,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
               </div>
               <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl23" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl23C"/>
+                 <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
@@ -339,7 +339,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl24" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl24C"/>
+                <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}4C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -356,7 +356,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl25" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl25C"/>
+                <input type="text" id="sl{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}5C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -373,7 +373,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl26" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl26C"/>
+                <input type="text" id="sl{{forloop.counter}}6" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}6C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
@@ -381,437 +381,10 @@
             </div>
           </div>
 
-
-
-
-          <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>홍길동/14학번/전산전자공학부</b></h4>
-          <div id="recommending" class="ui column">
-            <div id="blankspace" class="ui column"></div>
-
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl31" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl31C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="secondcolumn" class="left floated center aligned four wide column">강의 교재</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl32" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl32C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="thirdcolumn" class="left floated center aligned four wide column">실질적 도움</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl33" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl33C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl34" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl34C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fifthcolumn" class="left floated center aligned four wide column">시험 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl35" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl35C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated center aligned four wide column">과제물 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl36" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl36C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
-              </div>
-            </div>
-          </div>
-
-
-
-
-          <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>홍길동/14학번/전산전자공학부</b></h4>
-          <div id="recommending" class="ui column">
-            <div id="blankspace" class="ui column"></div>
-
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl41" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl41C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="secondcolumn" class="left floated center aligned four wide column">강의 교재</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl42" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl42C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="thirdcolumn" class="left floated center aligned four wide column">실질적 도움</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl43" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl43C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl44" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl44C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fifthcolumn" class="left floated center aligned four wide column">시험 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl45" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl45C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated center aligned four wide column">과제물 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl46" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl46C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-          <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>홍길동/14학번/전산전자공학부</b></h4>
-          <div id="recommending" class="ui column">
-            <div id="blankspace" class="ui column"></div>
-
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl51" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl51C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="secondcolumn" class="left floated center aligned four wide column">강의 교재</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl52" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl52C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="thirdcolumn" class="left floated center aligned four wide column">실질적 도움</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl53" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl53C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl54" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl54C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fifthcolumn" class="left floated center aligned four wide column">시험 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl55" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl55C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated center aligned four wide column">과제물 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl56" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl56C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
-              </div>
-            </div>
-          </div>
-
-
-
-
-          <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>홍길동/14학번/전산전자공학부</b></h4>
-          <div id="recommending" class="ui column">
-            <div id="blankspace" class="ui column"></div>
-
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl61" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl61C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="secondcolumn" class="left floated center aligned four wide column">강의 교재</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl62" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl62C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="thirdcolumn" class="left floated center aligned four wide column">실질적 도움</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl63" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl63C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl64" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl64C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="fifthcolumn" class="left floated center aligned four wide column">시험 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl65" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl65C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
-              </div>
-            </div>
-
-
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated center aligned four wide column">과제물 방식</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl66" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl66C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
-              </div>
-            </div>
-          </div>
+        
         </div>
       </div>
-
+		{%endfor%}
       <div class="ui section divider"></div>
 
 

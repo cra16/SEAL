@@ -33,7 +33,7 @@
 
     <div class="col-md-8 col-sm-10 col-xs-10">
 
-      <h2 class="ui header"><i class="glyphicon glyphicon-user"></i> My Page</h2>
+      <h2 class="ui header"><i class="glyphicon glyphicon-user"></i> My Page <button class="btn btn-info">UPDATE</button></h2>
 
       <div id="myprofile" class="ui column">
         
@@ -52,22 +52,19 @@
         <div id="firstmajor" class="ui grid">
           <div class="left floated right aligned three wide column"><span id="firstcolumn">제1전공</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.FirstMajor}}</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">제1전공 변경</button></div>  
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.profile.FirstMajor}}</span></div>
         </div>
 
         <div id="secondmajor" class="ui grid">
           <div class="left floated right aligned three wide column"><span id="firstcolumn">제2전공</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn"></span>{{user.profile.SecondMajor}}</div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">제2전공 변경</button></div>  
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn"></span>{{user.profile.SencondMajor}}</div>
         </div>
 
         <div id="id" class="ui grid">
           <div class="left floated right aligned three wide column"><span id="firstcolumn">아이디</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.username}}</span></div>
-          <div class="right floated three wide column"><button class="btn btn-info btn-block">아이디 변경</button></div>  
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.username}}</span></div>
         </div>
 
         <div id="pw" class="ui grid">

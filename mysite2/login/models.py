@@ -11,5 +11,8 @@ class Profile(models.Model):
     SecondMajor = models.CharField(max_length=30)
     UserName = models.CharField(max_length=30)
     Point = models.IntegerField(default=0)
-    
+	def __unicode__(self):
+        return self.User.username
+		
+
 # Create your models here.

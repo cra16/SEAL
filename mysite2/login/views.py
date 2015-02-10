@@ -115,17 +115,18 @@ def loginCheck(request):
 		
 
 				if TotalCount1<11:
-					PageInformation1[2] = 11
+					PageInformation1[2] = TotalCount1
 				else:
-					PageInformation1[2] =TotalCount1
+					PageInformation1[2] =11
 				if TotalCount2<11:
-					PageInformation2[2] = 11
-				else:
 					PageInformation2[2] = TotalCount2
-				if TotalCount3<11:
-					PageInformation3[2] = 11
 				else:
+					PageInformation2[2] = 11
+				if TotalCount3<11:
 					PageInformation3[2] = TotalCount3
+				else:
+					PageInformation3[2] = 11
+
 				
 				
 

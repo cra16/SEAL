@@ -1,4 +1,4 @@
-x<!doctype html>
+<!doctype html>
 {%extends "base.html"%}
   {%block head%}
    {%load staticfiles%}
@@ -54,12 +54,12 @@ x<!doctype html>
         <div id="recommending" class="ui column">
 		
           <div id="blankspace" class="ui column"></div>
-		<form method = "POST" action = "/mysite2/Course/{{CourseBoard.id}}">{%csrf_token%}
+	   <form action = "/mysite2/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
           <div class="ui grid">
             <div id="firstcolumn" class="left floated center aligned three wide column">진도 속도</div>
             <div class="left floated center aligned two wide column">
               <button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
-              <button type ="button"id="disable1" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
+              <button type ="button" id="disable1" class="circular ui icon button"><i class="glyphicon glyphicon-remove"></i></button>
             </div>
             <div class="left floated right aligned two wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
@@ -128,7 +128,7 @@ x<!doctype html>
               <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl4" name ="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C" data-slider-disabled="false" />
+              <input type="text" id="sl4" name="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -149,7 +149,7 @@ x<!doctype html>
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl5" name ="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C" data-slider-disabled="false" />
+              <input type="text" id="sl5" name="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -170,7 +170,7 @@ x<!doctype html>
               <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl6" name ="sl6	" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C" data-slider-disabled="false" />
+              <input type="text" id="sl6" name="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>

@@ -30,7 +30,7 @@ $(function(){
                   data4 = $('#sl4').data('slider').getValue(),
                   data5 = $('#sl5').data('slider').getValue(),
                   data6 = $('#sl6').data('slider').getValue();
-            });
+            });	
 
 $('#enable1').click(function(){$('#sl1').slider('enable')});
 $('#disable1').click(function(){$('#sl1').slider('disable')});
@@ -53,7 +53,7 @@ $('#disable5').on('click', function(){$('#sl5').slider('setValue', 5);});
 $('#disable6').on('click', function(){$('#sl6').slider('setValue', 5);});
 
 
-var	ccode = document.getElementsByName('ccode')
+var ccode = document.getElementsByName('ccode')
 var cname = document.getElementsByName('cname')
 var cprof = document.getElementsByName('cprof')
 

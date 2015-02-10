@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
+
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
@@ -31,6 +34,7 @@ def Judgement(request): # 신고 template 부르는 기능
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
+@csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 입력 template 보여줌
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
@@ -89,7 +93,7 @@ def Recommend_Write(request): #강의 추천 DB 입력 기능
                                 T_Eval.Total_Homework += int(new_Homework)
                                 T_Eval.Total_Count += int(new_Homework)
                                 T_Eval.save()
-                        return HttpResponseRedirect("/mysite2")
+                        return render_to_response("course.html",{'user':request.user,})
 
                 else:
                         return HttpResponseRedirect("/mysite2")
@@ -188,7 +192,7 @@ def Course(request, offset): #해당 과목 전체 강의 추천 평균 및 개인이 한 것을 보
 		#아직 강의 추천했을 시 볼수 있는 권한 안줌
 
 
-	 if request.user.username =="":
+	if request.user.username =="":
                 return  HttpResponseRedirect("/mysite2")
         else:
                 try:
@@ -198,7 +202,7 @@ def Course(request, offset): #해당 과목 전체 강의 추천 평균 및 개인이 한 것을 보
 
 
 
-				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+		CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
                 CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
                 CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
                 CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count

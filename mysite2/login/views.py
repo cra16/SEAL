@@ -211,7 +211,7 @@ def HisnetCheck(request):
 				return render_to_response('register.html', ctx)
 		except:
 			# 히스넷 체크 안될 시 에러페이지 출력
-			return render_to_response('error.html')
+			return render_to_response('confirm_error.html')
 	else:
 		return render_to_response('login.html')
 

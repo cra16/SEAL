@@ -50,24 +50,35 @@ def lec_update(request):
 				if var[4] == '':
 					var[4] = 0
 				try:
-					new_lec = Lecture(
-						Semester=semester,
-						Category=var[0],
-						Code=var[1],
-						Class=var[2],
-						CourseName=var[3],
-						Credit=var[4],
-						Major=var[5],
-						Period=var[6],
-						ClassRoom=var[7],
-						Fix_num=var[8],
-						Take_num=var[9],
-						EnglishRatio=var[10],
-						CategoryDetail=var[11],
-						CourseName_Eng=var[-2],
-						Professor=var[-1],
-						)
-					new_lec.save()
+					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])
+					if d_lec: # 업데이트 가능한 요소들
+						d_lec.Class =  var[2]
+						d_lec.Credit = var[4]
+						d_lec.Period = var[6]
+						d_lec.ClassRoom = var[7]
+						d_lec.Fix_num = var[8]
+						d_lec.Take_num = var[9]
+						d_lec.EnglishRatio = var[10]
+						d_lec.Professor = var[-1]
+					else:
+						new_lec = Lecture(
+							Semester=semester,
+							Category=var[0],
+							Code=var[1],
+							Class=var[2],
+							CourseName=var[3],
+							Credit=var[4],
+							Major=var[5],
+							Period=var[6],
+							ClassRoom=var[7],
+							Fix_num=var[8],
+							Take_num=var[9],
+							EnglishRatio=var[10],
+							CategoryDetail=var[11],
+							CourseName_Eng=var[-2],
+							Professor=var[-1],
+							)
+						new_lec.save()
 				except:
 					return HttpResponse('데이터 입력 중 오류가 발생했습니다.')
 	return HttpResponse('성공적으로 데이터를 입력했습니다.')

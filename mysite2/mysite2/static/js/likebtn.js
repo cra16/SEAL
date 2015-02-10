@@ -44,4 +44,24 @@ $(function(){
                 );
 });
 
+$(function(){
+                $('#likebutton5').click(function(){
+                        confirm3 = window.confirm("Correct?");
+                        if(confirm3){
+                                window.location.href = "/mysite2/Recommend/" + domain1[4];
+                        }
+
+              }
+                );
+});
+$(function(){
+                $('#likebutton6').click(function(){
+                        confirm3 = window.confirm("Correct?");
+                        if(confirm3){
+                                window.location.href = "/mysite2/Recommend/" + domain1[5];
+                        }
+
+              }
+                );
+});
 

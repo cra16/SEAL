@@ -60,6 +60,7 @@ def lec_update(request):
 						d_lec.Take_num = var[9]
 						d_lec.EnglishRatio = var[10]
 						d_lec.Professor = var[-1]
+						d_lec.save()
 					else:
 						new_lec = Lecture(
 							Semester=semester,

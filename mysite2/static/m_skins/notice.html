@@ -27,7 +27,8 @@
 
       <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
-      <div class="col-md-8 col-sm-10 col-xs-10">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+<div class="col-md-8 col-sm-12 col-xs-12">
 
         <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항 </h2>
 
@@ -37,8 +38,16 @@
         <div class="ui column">
           <div id="qna_board">
               
-              <table class="ui table">                
-                
+              <table class="table">
+                 <thead>
+                  <tr>
+                      <th><center>번호</center></th>
+                      <th><center>제목</center></th>
+                      <th><center>작성자</center></th>
+                      <th><center>날짜</center></th>
+                      <th><center>조회수</center></th>
+                  </tr>
+                </thead>
                 
                 <tbody class="qna_sub">
                   {%for Board in PageBoard%}

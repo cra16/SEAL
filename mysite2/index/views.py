@@ -16,26 +16,26 @@ def MyPage(request):	#MyPage 기능
 	else:
 		return render_to_response("sealmypage.html", {'user':request.user}) 
 
-def About(request): #About template ·çÆ®
+def About(request): #About template 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("about.html",{'user':request.user})
 
-def Schedule(request): #Schedule template ·çÆ®
+def Schedule(request): #Schedule template 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("schedule.html",{'user':request.user})
 
-def Judgement(request): # »ç¿ëÀÚ ½Å°í template ·çÆ®
+def Judgement(request): # 신고 게시판 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
 @csrf_exempt
-def Recommend(request, offset): #ÃßÃµ °­ÀÇ ½ºÅ©·Ñ template º¸¿©ÁÖ´Â ·çÆ®
+def Recommend(request, offset): #강의 추천 스크롤 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -46,19 +46,19 @@ def Recommend(request, offset): #ÃßÃµ °­ÀÇ ½ºÅ©·Ñ template º¸¿�
 
 
 		
-		CourseBoard = Lecture.objects.get(id=offset) #DB °íÀ¯ ID·Î Á¢±ÙÇØ¼­ °Ë»ö		
-		request.session['Recommend_ID'] = offset #offset ¹Ì¸® ÀúÀå
+		CourseBoard = Lecture.objects.get(id=offset) #강의에 내장 되어있는 고유 ID로 DB 불러옴		
+		request.session['Recommend_ID'] = offset #offset 저장
 		return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount)
 											})
 @csrf_exempt
-def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
+def Recommend_Write(request): #강의 추천 쓰기 기능
         if request.user.username=="":
                 return HttpResponseRedirect("/mysite2")
         else:
-
+					#form 가져오기
                 if request.method =="POST":
                         new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
                         new_CreatedID = Profile.objects.get(User= request.user)
@@ -72,16 +72,16 @@ def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
                         new_Eval.save()
 
 
-                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#session¿¡ ÀúÀåµÈ ID¸¦ ÅëÇØ °­ÀÇ Á¤º¸ °®°í¿À±â
+                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
 
                         try:
-                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#°­ÀÇ Á¤º¸ DB·Î °£Á¢ Á¢±ÙÇØ¼­ Total °ª °Ë»ö
+                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
 
                         except:
                                 T_Eval =None 
 
 
-                        if T_Eval is None: #µ¥ÀÌÅÍ ¾øÀ»½Ã Table »ý¼º
+                        if T_Eval is None: #없으면 DB 생성
                                 Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
                                 Total_Eval.save()
                         else: #update
@@ -103,20 +103,20 @@ def Recommend_Write(request): #ÃßÃµ °­ÀÇ DBÀÔ·Â
 
 
 @csrf_exempt
-def QnAMain(request): #Q&A ºÎºÐ Á¶ÀÛ(Á» ¼ÕºÁ¾ßÇÔ)
+def QnAMain(request): #Q&A 메인 
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :
-		#¹ÞÀº Á¤º¸ ÀúÀå(ÀÌ°Íµµ ¿Å±æ ¿¹Á¤ ´Ù³¡³ª¸é..)
+		#작성시 되돌아옴
 		if request.method =="POST":
 			new_Text=request.POST['msg-body-txtarea']		
 			new_TextWriter = request.user.username
 			new_TextName = request.POST['msg-title-input']
 			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 			new_QnA.save()
-		#ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#페이지 넘기는 기능
 		count=QnA_Board.objects.count()
-		TotalCount = (count/8)+1 #ÆäÀÌÁö ¼ö
+		TotalCount = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
 
 		if TotalCount ==1:
 			Next = 1
@@ -133,7 +133,7 @@ def QnAMain(request): #Q&A ºÎºÐ Á¶ÀÛ(Á» ¼ÕºÁ¾ßÇÔ)
 					   'Next' : Next,
 					   })
 
-def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °÷
+def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -141,11 +141,11 @@ def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#ÆäÀÌÁö ¼ö Á¤º¸
+		#페이지 총 수
 		PageFirst = (offset-1)*6 
 		PageLast = (offset-1)*6 + 6
 		PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
-		#######	ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#######	게시판 페이지 넘기는 기능
 		Page = dict()
 		count = QnA_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -169,13 +169,13 @@ def QnA(request,offset): #ÆäÀÌÁö ÀÌµ¿½Ã Á¤º¸ º¸¿©ÁÖ´Â °
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 	
-def QnAWrite(request): #Q&A Write ±â´É
+def QnAWrite(request): #Q&A Write 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_faq.html",{'user':request.user})
 
-def QnARead(request, offset): #Q&A read ±â´É
+def QnARead(request, offset): #Q&A read 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -184,14 +184,14 @@ def QnARead(request, offset): #Q&A read ±â´É
 		except ValueError:
 			raise Http404()
 
-		Current = QnA_Board.objects.filter(id=offset).get() #id¸¦ ±âÁØÀ¸·Î È£ÃâÇÔ
+		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
 	
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï ±â´É
+def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
 
-	#°­ÀÇ ÃßÃµ½Ã ±ÇÇÑ ¾ÆÁ÷ ¾ÈÁÜ
+	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
 
 	if request.user.username =="":
                 return  HttpResponseRedirect("/mysite2")
@@ -201,34 +201,37 @@ def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï �
                 except:
                         raise Http404()
 
-				
-				#ÇØ´ç °­ÀÇ ÀüÃ¼ ÃßÃµ Æò±Õ ½ºÅ©·Ñ º¸¿©ÁÖ´Â ±â´É
-				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-                CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-                CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-                CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-                CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-                CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-                CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-				
-				#·Î±×ÀÎ ´ç»çÀÚ°¡ ÃßÃµ ÇÑ ½ºÅ©·Ñ º¸¿©ÁÖ´Â ±â´É
-                MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
-				#´Ù¸¥ »ç¶÷µéÀÌ ÇØ³õÀº °Í ½Ã°£¼øÀ¸·Î º¸¿©ÁØ ±â´É
-                OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
-                Other_ID_Information = [0,0,0]
-                for i in range(0,3):
-                        try:
-                                Other_ID_Information[i] = Profile.objects.get(User = OtherCourseBoard[i])
-                        except:
-                                break
+				 #해당 강의 전체 추천한 Data DB 불러오기
+				 try:
+                        CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+                        CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+                        CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+                        CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+                        CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+                        CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+                        CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+                except:
+                        CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
+                        CourseBoard.Total_Speedy=5
+                        CourseBoard.Total_Reliance =5
+                        CourseBoard.Total_Question=5
+                        CourseBoard.Total_Helper=5
+                        CourseBoard.Total_Exam =5
+                        CourseBoard.Total_Homework = 5
 
+				
+				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
+                MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
+				#자신 이외 다른사람이 추천한 정보 보여줌
+                OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
+       
                 return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                            'MyCourseBoard':MyCourseBoard,
                                            'OtherCourseBoard':OtherCourseBoard,
                                            'Other_ID_Information':Other_ID_Information
-                                         #  'TotalCount' : range(0,TotalCount),
+                                        
 
                                            })
 
@@ -241,7 +244,7 @@ def Course(request, offset): #¼±ÅÃµÈ °­ÀÇ ÃßÃµ ÀüÃ¼ ¸ñ·Ï �
 
 				
 
-def NoticeMain(request):#Notice ¸ÞÀÎ ±â´É
+def NoticeMain(request):#Notice 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -264,7 +267,7 @@ def NoticeMain(request):#Notice ¸ÞÀÎ ±â´É
 					   'Next' : Next,
 					   })
 
-def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
+def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -272,11 +275,11 @@ def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#ÆäÀÌÁö ¼ö Á¤º¸
+		#페이지 총수
 		PageFirst = (offset-1)*6
 		PageLast = (offset-1)*6 + 6
 		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
-		#ÆäÀÌÁö ³Ñ±â´Â ±â´É
+		#페이지 넘기는기능
 		Page = dict()
 		count = Notice_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -300,7 +303,7 @@ def Notice(request,offset): #Notice Page ³Ñ±â±â ±â´É
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 
-def Notice_Read(request, offset): #Notice Read ±â´É
+def Notice_Read(request, offset): #Notice Read 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -314,7 +317,7 @@ def Notice_Read(request, offset): #Notice Read ±â´É
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
-def Main(request, offset): #Main ±â´É
+def Main(request, offset): #Main 페이지
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
 	else:
@@ -326,82 +329,68 @@ def Main(request, offset): #Main ±â´É
 
 	
 				
-				
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
+                TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
+				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
+
+				T_Count1 = Lecture.objects.filter(Q(Code__contains="ECE") | Q(Code__contains="ITP")).count()
+				T_Count2 = Lecture.objects.filter(Code__contains ="SIE").count()
+				T_Count3=Lecture.objects.count()
+
+
 				PageInformation1 = request.session['PageInformation1'] #First Major Page DB
 				PageInformation2 = request.session['PageInformation2'] #Second Major Page DB
 				PageInformation3 = request.session['PageInformation3'] #all Page DB
-				
 
-				#main ÀÚ¹Ù½ºÅ©¸³Æ® Á¶ÀÛ ÇÏ±â À§ÇÑ ±â´É
+
+				#main 페이지 활성화 기능(1전공, 2전공 all)
 				Active = ["","",""]
 
-				URL_Path = request.path	#ÇöÀç ÆäÀÌÁö URL ±Ü¾î¿À±â
-				
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation1[0] = (offset -(offset%10))-9
+							PageInformation1[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
+
 					Active[0] = "active" #
+
 				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
+
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation2[0] = (offset -(offset%10))-9
+							PageInformation2[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
 					Active[1] = "active"
+	
 				else:
 					PageInformation3[1] = offset
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation3[0] = (offset -(offset%10))-9
+							PageInformation3[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
 					Active[2] = "active"
-			
-				##°­ÀÇ DB¿¡ ÀúÀåµÈ ÀÚ·áµéÀ» ÄÚµå·Î ÇÊÅÍ¸¦ ÇØ¼­ Total Page¸¦ ¸¸µê
-				##±×¸®°í ³ª¼­ °­ÀÇÃßÃµµÈ °­ÀÇµé¸¸ µû·Î ¶Ç ÇÊÅÍÇØ¼­ µ¥ÀÌÅÍ ³Ö´Â °úÁ¤ÀÓ
-				##´Ù¸¥ °³¹ßÀÚºÐÀÌ Á» ¾Ë°í¸®Áò ÀßÂ¥¼­ ´õ ÃÖÀûÈ­ÇØÁÖ¼¼¿ä..(¹ßÀûÈ­ÀÓ..))
-				PageBoard1 =[]
-				PageBoard2 =[]
+
 				
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
-				for Board in TotalBoard1:
-					try:
-						Board1 = Total_Evaluation.objects.get(CourseName=Board)
-					except :
-						Board1 = None
-					if Board1 is not None:
-						Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
-						Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
-						Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
-						Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
-						Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
-						Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
-						PageBoard1.append(Board1)
-					else:
-						Board1 = Total_Evaluation(CourseName=Board)
-						Board1.Total_Speedy =5
-						Board1.Total_Reliance =5
-						Board1.Total_Helper = 5
-						Board1.Total_Question = 5
-						Board1.Total_Exam = 5
-						Board1.Total_Homework = 5
-						Board1.Total_Count =1
-						PageBoard1.append(Board1)
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
-				for Board in TotalBoard2:
-					try:		
-						Board1 = Total_Evaluation.objects.get(CourseName=Board)
-					except :
-						Board1 = None
-					if Board1 is not None:
-						Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
-						Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
-						Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
-						Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
-						Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
-						Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
-						PageBoard1.append(Board1)
-					else:
-						Board1 = Total_Evaluation(CourseName=Board)
-						Board1.Total_Speedy =5
-						Board1.Total_Reliance =5
-						Board1.Total_Helper = 5
-						Board1.Total_Question = 5
-						Board1.Total_Exam = 5
-						Board1.Total_Homework = 5
-						Board1.Total_Count =1
-						PageBoard1.append(Board1)
-                PageBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
 
 				
 				
@@ -438,5 +427,83 @@ def SiteMap(request):
 		return HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("sitemap.html", {'user':request.user})
+
+
+#메인 페이지 view 함수로 옮김
+def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
+	PageBoard = [[],[],[]]
+	for Board in TotalBoard1:
+		try:
+			Board1 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board1 = None
+		if Board1 is not None:
+			Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
+			Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
+			Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
+			Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
+			Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
+			Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
+			PageBoard[0].append(Board1)
+		else:
+			Board1 = Total_Evaluation(CourseName=Board)
+			Board1.Total_Speedy =5
+			Board1.Total_Reliance =5
+			Board1.Total_Helper = 5
+			Board1.Total_Question = 5
+			Board1.Total_Exam = 5
+			Board1.Total_Homework = 5
+			Board1.Total_Count =1
+			PageBoard[0].append(Board1)
+
+	for Board in TotalBoard2:
+		try:
+			Board2 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board2 = None
+		if Board2 is not None:
+			Board2.Total_Speedy = Board2.Total_Speedy/Board2.Total_Count
+			Board2.Total_Reliance = Board2.Total_Reliance/Board2.Total_Count
+			Board2.Total_Helper = Board2.Total_Helper/Board2.Total_Count
+			Board2.Total_Question = Board2.Total_Question/Board2.Total_Count
+			Board2.Total_Exam = Board2.Total_Exam/Board2.Total_Count
+			Board2.Total_Homework = Board2.Total_Homework/Board2.Total_Count
+			PageBoard[1].append(Board2)
+		else:
+			Board2 = Total_Evaluation(CourseName=Board)
+			Board2.Total_Speedy =5
+			Board2.Total_Reliance =5
+			Board2.Total_Helper = 5
+			Board2.Total_Question = 5
+			Board2.Total_Exam = 5
+			Board2.Total_Homework = 5
+			Board2.Total_Count =1
+			PageBoard[1].append(Board2)
+
+	for Board in TotalBoard3:
+		try:
+			Board3 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board3 = None
+		if Board3 is not None:
+			Board3.Total_Speedy = Board3.Total_Speedy/Board3.Total_Count
+			Board3.Total_Reliance = Board3.Total_Reliance/Board3.Total_Count
+			Board3.Total_Helper = Board3.Total_Helper/Board3.Total_Count
+			Board3.Total_Question = Board3.Total_Question/Board3.Total_Count
+			Board3.Total_Exam = Board3.Total_Exam/Board3.Total_Count
+			Board3.Total_Homework = Board3.Total_Homework/Board3.Total_Count
+			PageBoard[2].append(Board3)
+		else:
+			Board3 = Total_Evaluation(CourseName=Board)
+			Board3.Total_Speedy =5
+			Board3.Total_Reliance =5
+			Board3.Total_Helper = 5
+			Board3.Total_Question = 5
+			Board3.Total_Exam = 5
+			Board3.Total_Homework = 5
+			Board3.Total_Count =1
+			PageBoard[2].append(Board3)
+	return PageBoard
+                                                                      
 
 # Create your views here

@@ -10,32 +10,32 @@ from login.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
-def MyPage(request):	#MyPage ∑Á∆Æ
+def MyPage(request):	#MyPage Î£®Ìä∏
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("sealmypage.html", {'user':request.user}) 
 
-def About(request): #About template ∑Á∆Æ
+def About(request): #About template Î£®Ìä∏
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("about.html",{'user':request.user})
 
-def Schedule(request): #Schedule template ∑Á∆Æ
+def Schedule(request): #Schedule template Î£®Ìä∏
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("schedule.html",{'user':request.user})
 
-def Judgement(request): # ªÁøÎ¿⁄ Ω≈∞Ì template ∑Á∆Æ
+def Judgement(request): # ÏÇ¨Ïö©Ïûê Ïã†Í≥† template Î£®Ìä∏
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
 @csrf_exempt
-def Recommend(request, offset): #√ﬂ√µ ∞≠¿« Ω∫≈©∑— template ∫∏ø©¡÷¥¬ ∑Á∆Æ
+def Recommend(request, offset): #Ï∂îÏ≤ú Í∞ïÏùò Ïä§ÌÅ¨Î°§ template Î≥¥Ïó¨Ï£ºÎäî Î£®Ìä∏
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -46,15 +46,15 @@ def Recommend(request, offset): #√ﬂ√µ ∞≠¿« Ω∫≈©∑— template ∫∏ø©¡÷¥¬ ∑Á∆Æ
 
 
 		
-		CourseBoard = Lecture.objects.get(id=offset) #DB ∞Ì¿Ø ID∑Œ ¡¢±Ÿ«ÿº≠ ∞Àªˆ		
-		request.session['Recommend_ID'] = offset #offset πÃ∏Æ ¿˙¿Â
+		CourseBoard = Lecture.objects.get(id=offset) #DB Í≥†Ïú† IDÎ°ú Ï†ëÍ∑ºÌï¥ÏÑú Í≤ÄÏÉâ		
+		request.session['Recommend_ID'] = offset #offset ÎØ∏Î¶¨ Ï†ÄÏû•
 		return render_to_response("recommend.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                          #  'TotalCount' : range(0,TotalCount)
 											})
 @csrf_exempt
-def Recommend_Write(request): #√ﬂ√µ ∞≠¿« DB¿‘∑¬
+def Recommend_Write(request): #Ï∂îÏ≤ú Í∞ïÏùò DBÏûÖÎ†•
         if request.user.username=="":
                 return HttpResponseRedirect("/mysite2")
         else:
@@ -72,16 +72,16 @@ def Recommend_Write(request): #√ﬂ√µ ∞≠¿« DB¿‘∑¬
                         new_Eval.save()
 
 
-                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#sessionø° ¿˙¿Âµ» ID∏¶ ≈Î«ÿ ∞≠¿« ¡§∫∏ ∞Æ∞Ìø¿±‚
+                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#sessionÏóê Ï†ÄÏû•Îêú IDÎ•º ÌÜµÌï¥ Í∞ïÏùò Ï†ïÎ≥¥ Í∞ñÍ≥†Ïò§Í∏∞
 
                         try:
-                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#∞≠¿« ¡§∫∏ DB∑Œ ∞£¡¢ ¡¢±Ÿ«ÿº≠ Total ∞™ ∞Àªˆ
+                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#Í∞ïÏùò Ï†ïÎ≥¥ DBÎ°ú Í∞ÑÏ†ë Ï†ëÍ∑ºÌï¥ÏÑú Total Í∞í Í≤ÄÏÉâ
 
                         except:
                                 T_Eval =None 
 
 
-                        if T_Eval is None: #µ•¿Ã≈Õ æ¯¿ªΩ√ Table ª˝º∫
+                        if T_Eval is None: #Îç∞Ïù¥ÌÑ∞ ÏóÜÏùÑÏãú Table ÏÉùÏÑ±
                                 Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
                                 Total_Eval.save()
                         else: #update
@@ -103,20 +103,20 @@ def Recommend_Write(request): #√ﬂ√µ ∞≠¿« DB¿‘∑¬
 
 
 @csrf_exempt
-def QnAMain(request): #Q&A ∫Œ∫– ¡∂¿€(¡ª º’∫¡æﬂ«‘)
+def QnAMain(request): #Q&A Î∂ÄÎ∂Ñ Ï°∞Ïûë(Ï¢Ä ÏÜêÎ¥êÏïºÌï®)
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :
-		#πﬁ¿∫ ¡§∫∏ ¿˙¿Â(¿Ã∞Õµµ ø≈±Ê øπ¡§ ¥Ÿ≥°≥™∏È..)
+		#Î∞õÏùÄ Ï†ïÎ≥¥ Ï†ÄÏû•(Ïù¥Í≤ÉÎèÑ ÏòÆÍ∏∏ ÏòàÏ†ï Îã§ÎÅùÎÇòÎ©¥..)
 		if request.method =="POST":
 			new_Text=request.POST['msg-body-txtarea']		
 			new_TextWriter = request.user.username
 			new_TextName = request.POST['msg-title-input']
 			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 			new_QnA.save()
-		#∆‰¿Ã¡ˆ ≥—±‚¥¬ ±‚¥…
+		#ÌéòÏù¥ÏßÄ ÎÑòÍ∏∞Îäî Í∏∞Îä•
 		count=QnA_Board.objects.count()
-		TotalCount = (count/8)+1 #∆‰¿Ã¡ˆ ºˆ
+		TotalCount = (count/8)+1 #ÌéòÏù¥ÏßÄ Ïàò
 
 		if TotalCount ==1:
 			Next = 1
@@ -133,7 +133,7 @@ def QnAMain(request): #Q&A ∫Œ∫– ¡∂¿€(¡ª º’∫¡æﬂ«‘)
 					   'Next' : Next,
 					   })
 
-def QnA(request,offset): #∆‰¿Ã¡ˆ ¿ÃµøΩ√ ¡§∫∏ ∫∏ø©¡÷¥¬ ∞˜
+def QnA(request,offset): #ÌéòÏù¥ÏßÄ Ïù¥ÎèôÏãú Ï†ïÎ≥¥ Î≥¥Ïó¨Ï£ºÎäî Í≥≥
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -141,11 +141,11 @@ def QnA(request,offset): #∆‰¿Ã¡ˆ ¿ÃµøΩ√ ¡§∫∏ ∫∏ø©¡÷¥¬ ∞˜
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#∆‰¿Ã¡ˆ ºˆ ¡§∫∏
+		#ÌéòÏù¥ÏßÄ Ïàò Ï†ïÎ≥¥
 		PageFirst = (offset-1)*6 
 		PageLast = (offset-1)*6 + 6
 		PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
-		#######	∆‰¿Ã¡ˆ ≥—±‚¥¬ ±‚¥…
+		#######	ÌéòÏù¥ÏßÄ ÎÑòÍ∏∞Îäî Í∏∞Îä•
 		Page = dict()
 		count = QnA_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -169,13 +169,13 @@ def QnA(request,offset): #∆‰¿Ã¡ˆ ¿ÃµøΩ√ ¡§∫∏ ∫∏ø©¡÷¥¬ ∞˜
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 	
-def QnAWrite(request): #Q&A Write ±‚¥…
+def QnAWrite(request): #Q&A Write Í∏∞Îä•
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_faq.html",{'user':request.user})
 
-def QnARead(request, offset): #Q&A read ±‚¥…
+def QnARead(request, offset): #Q&A read Í∏∞Îä•
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -184,14 +184,14 @@ def QnARead(request, offset): #Q&A read ±‚¥…
 		except ValueError:
 			raise Http404()
 
-		Current = QnA_Board.objects.filter(id=offset).get() #id∏¶ ±‚¡ÿ¿∏∑Œ »£√‚«‘
+		Current = QnA_Board.objects.filter(id=offset).get() #idÎ•º Í∏∞Ï§ÄÏúºÎ°ú Ìò∏Ï∂úÌï®
 	
 	
 		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
 
-def Course(request, offset): #º±≈√µ» ∞≠¿« √ﬂ√µ ¿¸√º ∏Ò∑œ ±‚¥…
+def Course(request, offset): #ÏÑ†ÌÉùÎêú Í∞ïÏùò Ï∂îÏ≤ú Ï†ÑÏ≤¥ Î™©Î°ù Í∏∞Îä•
 
-	#∞≠¿« √ﬂ√µΩ√ ±««— æ∆¡˜ æ»¡‹
+	#Í∞ïÏùò Ï∂îÏ≤úÏãú Í∂åÌïú ÏïÑÏßÅ ÏïàÏ§å
 
 	if request.user.username =="":
                 return  HttpResponseRedirect("/mysite2")
@@ -202,18 +202,18 @@ def Course(request, offset): #º±≈√µ» ∞≠¿« √ﬂ√µ ¿¸√º ∏Ò∑œ ±‚¥…
                         raise Http404()
 
 				
-				#«ÿ¥Á ∞≠¿« ¿¸√º √ﬂ√µ ∆Ú±’ Ω∫≈©∑— ∫∏ø©¡÷¥¬ ±‚¥…
+				#Ìï¥Îãπ Í∞ïÏùò Ï†ÑÏ≤¥ Ï∂îÏ≤ú ÌèâÍ∑† Ïä§ÌÅ¨Î°§ Î≥¥Ïó¨Ï£ºÎäî Í∏∞Îä•
 				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-                CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-                CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-                CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-                CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-                CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-                CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+				CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+				CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+				CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+				CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+				CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+				CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 				
-				#∑Œ±◊¿Œ ¥ÁªÁ¿⁄∞° √ﬂ√µ «— Ω∫≈©∑— ∫∏ø©¡÷¥¬ ±‚¥…
+				#Î°úÍ∑∏Ïù∏ ÎãπÏÇ¨ÏûêÍ∞Ä Ï∂îÏ≤ú Ìïú Ïä§ÌÅ¨Î°§ Î≥¥Ïó¨Ï£ºÎäî Í∏∞Îä•
                 MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
-				#¥Ÿ∏• ªÁ∂˜µÈ¿Ã «ÿ≥ı¿∫ ∞Õ Ω√∞£º¯¿∏∑Œ ∫∏ø©¡ÿ ±‚¥…
+				#Îã§Î•∏ ÏÇ¨ÎûåÎì§Ïù¥ Ìï¥ÎÜìÏùÄ Í≤É ÏãúÍ∞ÑÏàúÏúºÎ°ú Î≥¥Ïó¨Ï§Ä Í∏∞Îä•
                 OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
                 Other_ID_Information = [0,0,0]
                 for i in range(0,3):
@@ -241,11 +241,11 @@ def Course(request, offset): #º±≈√µ» ∞≠¿« √ﬂ√µ ¿¸√º ∏Ò∑œ ±‚¥…
 
 				
 
-def NoticeMain(request):#Notice ∏ﬁ¿Œ ±‚¥…
+def NoticeMain(request):#Notice Î©îÏù∏ Í∏∞Îä•
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
-		count=QnA_Board.objects.count()
+		count=Notice_Board.objects.count()
 
 		TotalCount = (count/8)+1
 
@@ -255,7 +255,7 @@ def NoticeMain(request):#Notice ∏ﬁ¿Œ ±‚¥…
 			Next = 2
 		Previous=1
 	
-		PageBoard = QnA_Board.objects.order_by('-id')[0:7]	
+		PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
 		return render_to_response("notice.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 
@@ -264,7 +264,7 @@ def NoticeMain(request):#Notice ∏ﬁ¿Œ ±‚¥…
 					   'Next' : Next,
 					   })
 
-def Notice(request,offset): #Notice Page ≥—±‚±‚ ±‚¥…
+def Notice(request,offset): #Notice Page ÎÑòÍ∏∞Í∏∞ Í∏∞Îä•
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :	
@@ -272,11 +272,11 @@ def Notice(request,offset): #Notice Page ≥—±‚±‚ ±‚¥…
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
-		#∆‰¿Ã¡ˆ ºˆ ¡§∫∏
+		#ÌéòÏù¥ÏßÄ Ïàò Ï†ïÎ≥¥
 		PageFirst = (offset-1)*6
 		PageLast = (offset-1)*6 + 6
 		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
-		#∆‰¿Ã¡ˆ ≥—±‚¥¬ ±‚¥…
+		#ÌéòÏù¥ÏßÄ ÎÑòÍ∏∞Îäî Í∏∞Îä•
 		Page = dict()
 		count = Notice_Board.objects.count()
 		TotalCount = (count/8)+1
@@ -300,7 +300,7 @@ def Notice(request,offset): #Notice Page ≥—±‚±‚ ±‚¥…
 	       			   'Previous' : Previous, 
 					   'Next' : Next} )
 
-def Notice_Read(request, offset): #Notice Read ±‚¥…
+def Notice_Read(request, offset): #Notice Read Í∏∞Îä•
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else:
@@ -314,7 +314,7 @@ def Notice_Read(request, offset): #Notice Read ±‚¥…
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
-def Main(request, offset): #Main ±‚¥…
+def Main(request, offset): #Main Í∏∞Îä•
 	if request.user.username =="":
 		return HttpResponseRedirect("/mysite2")
 	else:
@@ -323,88 +323,76 @@ def Main(request, offset): #Main ±‚¥…
 					offset = int(offset)
 				except ValueError:
 					raise Http404()
-
-	
-				
-				
+								
 				PageInformation1 = request.session['PageInformation1'] #First Major Page DB
 				PageInformation2 = request.session['PageInformation2'] #Second Major Page DB
 				PageInformation3 = request.session['PageInformation3'] #all Page DB
 				
 
-				#main ¿⁄πŸΩ∫≈©∏≥∆Æ ¡∂¿€ «œ±‚ ¿ß«— ±‚¥…
+				#main ÏûêÎ∞îÏä§ÌÅ¨Î¶ΩÌä∏ Ï°∞Ïûë ÌïòÍ∏∞ ÏúÑÌïú Í∏∞Îä•
 				Active = ["","",""]
 
-				URL_Path = request.path	#«ˆ¿Á ∆‰¿Ã¡ˆ URL ±‹æÓø¿±‚
+				URL_Path = request.path	#ÌòÑÏû¨ ÌéòÏù¥ÏßÄ URL Í∏ÅÏñ¥Ïò§Í∏∞
+			
+			
+				##Í∞ïÏùò DBÏóê Ï†ÄÏû•Îêú ÏûêÎ£åÎì§ÏùÑ ÏΩîÎìúÎ°ú ÌïÑÌÑ∞Î•º Ìï¥ÏÑú Total PageÎ•º ÎßåÎì¶
+				##Í∑∏Î¶¨Í≥† ÎÇòÏÑú Í∞ïÏùòÏ∂îÏ≤úÎêú Í∞ïÏùòÎì§Îßå Îî∞Î°ú Îòê ÌïÑÌÑ∞Ìï¥ÏÑú Îç∞Ïù¥ÌÑ∞ ÎÑ£Îäî Í≥ºÏ†ïÏûÑ
+				##Îã§Î•∏ Í∞úÎ∞úÏûêÎ∂ÑÏù¥ Ï¢Ä ÏïåÍ≥†Î¶¨Ï¶ò ÏûòÏßúÏÑú Îçî ÏµúÏ†ÅÌôîÌï¥Ï£ºÏÑ∏Ïöî..(Î∞úÏ†ÅÌôîÏûÑ..))
+				
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
+				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
+				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
+				
+				T_Count1 = Lecture.objects.filter(Q(Code__contains="ECE") | Q(Code__contains="ITP")).count()
+				T_Count2 = Lecture.objects.filter(Code__contains ="SIE").count()
+				T_Count3=Lecture.objects.count()
+				
+				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
 				
 				if URL_Path.find("FirstMajorPage") != -1 :
 					PageInformation1[1] = offset
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation1[0] = (offset -(offset%10))-9
+							PageInformation1[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
+
 					Active[0] = "active" #
+
 				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
+
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation2[0] = (offset -(offset%10))-9
+							PageInformation2[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
 					Active[1] = "active"
 				else:
 					PageInformation3[1] = offset
+					if T_Count1 >11:
+						if offset>11:
+							PageInformation3[0] = (offset -(offset%10))-9
+							PageInformation3[2] = (offset -(offset%10))+11
+						else:
+							PageInformation1[0] = 1
+							PageInformation1[2] = (offset - (offset%10))+11
+					else:
+						PageInformation[0] = 1
+						PageInformation[2] = T_Count1
 					Active[2] = "active"
-			
-				##∞≠¿« DBø° ¿˙¿Âµ» ¿⁄∑·µÈ¿ª ƒ⁄µÂ∑Œ « ≈Õ∏¶ «ÿº≠ Total Page∏¶ ∏∏µÍ
-				##±◊∏Æ∞Ì ≥™º≠ ∞≠¿«√ﬂ√µµ» ∞≠¿«µÈ∏∏ µ˚∑Œ ∂« « ≈Õ«ÿº≠ µ•¿Ã≈Õ ≥÷¥¬ ∞˙¡§¿”
-				##¥Ÿ∏• ∞≥πﬂ¿⁄∫–¿Ã ¡ª æÀ∞Ì∏Æ¡Ú ¿ﬂ¬•º≠ ¥ı √÷¿˚»≠«ÿ¡÷ººø‰..(πﬂ¿˚»≠¿”..))
-				PageBoard1 =[]
-				PageBoard2 =[]
-				
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
-				for Board in TotalBoard1:
-					try:
-						Board1 = Total_Evaluation.objects.get(CourseName=Board)
-					except :
-						Board1 = None
-					if Board1 is not None:
-						Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
-						Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
-						Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
-						Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
-						Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
-						Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
-						PageBoard1.append(Board1)
-					else:
-						Board1 = Total_Evaluation(CourseName=Board)
-						Board1.Total_Speedy =5
-						Board1.Total_Reliance =5
-						Board1.Total_Helper = 5
-						Board1.Total_Question = 5
-						Board1.Total_Exam = 5
-						Board1.Total_Homework = 5
-						Board1.Total_Count =1
-						PageBoard1.append(Board1)
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
-				for Board in TotalBoard2:
-					try:		
-						Board1 = Total_Evaluation.objects.get(CourseName=Board)
-					except :
-						Board1 = None
-					if Board1 is not None:
-						Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
-						Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
-						Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
-						Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
-						Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
-						Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
-						PageBoard1.append(Board1)
-					else:
-						Board1 = Total_Evaluation(CourseName=Board)
-						Board1.Total_Speedy =5
-						Board1.Total_Reliance =5
-						Board1.Total_Helper = 5
-						Board1.Total_Question = 5
-						Board1.Total_Exam = 5
-						Board1.Total_Homework = 5
-						Board1.Total_Count =1
-						PageBoard1.append(Board1)
-                PageBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
 
-				
-				
+
 			
 				##Session Save
 				request.session['PageInformation1'] = PageInformation1
@@ -414,9 +402,7 @@ def Main(request, offset): #Main ±‚¥…
 				
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard1':PageBoard1,
-					   'PageBoard2':PageBoard2,
-					   'PageBoard3':PageBoard3,
+					   'PageBoard':PageBoard,
 					   'TotalCount1' : range(PageInformation1[1]-(PageInformation1[1]%10)+1,PageInformation1[1]-(PageInformation1[1]%10)+11),
 					   'TotalCount2' : range(PageInformation2[1]-(PageInformation2[1]%10)+1,PageInformation2[1]-(PageInformation2[1]%10)+11),
 					   'TotalCount3' : range(PageInformation3[1]-(PageInformation3[1]%10)+1,PageInformation3[1]-(PageInformation3[1]%10)+11),
@@ -440,3 +426,79 @@ def SiteMap(request):
 		return render_to_response("sitemap.html", {'user':request.user})
 
 # Create your views here
+
+
+def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
+				PageBoard =[[],[],[]]
+				for Board in TotalBoard1:
+					try:
+						Board1 = Total_Evaluation.objects.get(CourseName=Board)
+					except :
+						Board1 = None
+					if Board1 is not None:
+						Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
+						Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
+						Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
+						Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
+						Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
+						Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
+						PageBoard[0].append(Board1)
+					else:
+						Board1 = Total_Evaluation(CourseName=Board)
+						Board1.Total_Speedy =5
+						Board1.Total_Reliance =5
+						Board1.Total_Helper = 5
+						Board1.Total_Question = 5
+						Board1.Total_Exam = 5
+						Board1.Total_Homework = 5
+						Board1.Total_Count =1
+						PageBoard[0].append(Board1)
+				
+				for Board in TotalBoard2:
+					try:		
+						Board2 = Total_Evaluation.objects.get(CourseName=Board)
+					except :
+						Board2 = None
+					if Board2 is not None:
+						Board2.Total_Speedy = Board2.Total_Speedy/Board2.Total_Count
+						Board2.Total_Reliance = Board2.Total_Reliance/Board2.Total_Count
+						Board2.Total_Helper = Board2.Total_Helper/Board2.Total_Count
+						Board2.Total_Question = Board2.Total_Question/Board2.Total_Count
+						Board2.Total_Exam = Board2.Total_Exam/Board2.Total_Count
+						Board2.Total_Homework = Board2.Total_Homework/Board2.Total_Count
+						PageBoard[1].append(Board2)
+					else:
+						Board2 = Total_Evaluation(CourseName=Board)
+						Board2.Total_Speedy =5
+						Board2.Total_Reliance =5
+						Board2.Total_Helper = 5
+						Board2.Total_Question = 5
+						Board2.Total_Exam = 5
+						Board2.Total_Homework = 5
+						Board2.Total_Count =1
+						PageBoard[1].append(Board2)		
+				
+				for Board in TotalBoard3:
+					try:
+						Board3 = Total_Evaluation.objects.get(CourseName=Board)
+					except :
+						Board3 = None
+					if Board3 is not None:
+						Board3.Total_Speedy = Board3.Total_Speedy/Board3.Total_Count
+						Board3.Total_Reliance = Board3.Total_Reliance/Board3.Total_Count
+						Board3.Total_Helper = Board3.Total_Helper/Board3.Total_Count
+						Board3.Total_Question = Board3.Total_Question/Board3.Total_Count
+						Board3.Total_Exam = Board3.Total_Exam/Board3.Total_Count
+						Board3.Total_Homework = Board3.Total_Homework/Board3.Total_Count
+						PageBoard[2].append(Board3)
+					else:
+						Board3 = Total_Evaluation(CourseName=Board)
+						Board3.Total_Speedy =5
+						Board3.Total_Reliance =5
+						Board3.Total_Helper = 5
+						Board3.Total_Question = 5
+						Board3.Total_Exam = 5
+						Board3.Total_Homework = 5
+						Board3.Total_Count =1
+						PageBoard[2].append(Board3)
+				return PageBoard

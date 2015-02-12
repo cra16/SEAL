@@ -42,7 +42,7 @@ display: block;
 }
 
 .cname {
-    font-size: 25px;
+    font-size: 23px;
     font-weight: bold;
 }
 
@@ -86,6 +86,15 @@ display: block;
     margin-bottom: 20px;
 }
 
+
+#sl11, #sl12, #sl13, #sl14, #sl15, #sl16,
+#sl21, #sl22, #sl23, #sl24, #sl25, #sl26,
+#sl31, #sl32, #sl33, #sl34, #sl35, #sl36,
+#sl41, #sl42, #sl43, #sl44, #sl45, #sl46,
+#sl51, #sl52, #sl53, #sl54, #sl55, #sl56,
+#sl61, #sl62, #sl63, #sl64, #sl65, #sl66 {
+    width: 150px;
+}
 
 
 
@@ -291,7 +300,7 @@ display: block;
 #sl141, #sl142, #sl143, #sl144, 
 #sl151, #sl152, #sl153, #sl154, 
 #sl161, #sl162, #sl163, #sl164{
-    width: 177px;
+    width: 150px;
 }
 
 #sl111C .slider-handle{

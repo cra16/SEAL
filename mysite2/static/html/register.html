@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
     
-    <link rel="stylesheet" type="text/css" href="{% static "register.css"%}" />
-    <script type="text/javascript" src="{% static "register.js"%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/register.css"%}" />
+    <script type="text/javascript" src="{% static "js/LoginPage/register.js"%}"></script>
 
     <title>{% block title %}SEAL - Login{% endblock %}</title>
 	{% endblock %}
@@ -41,7 +41,7 @@
 
              <p>&nbsp;</p>
               <label class="control-label" for="user_pw" style="padding-top: 15px;">비밀번호</label>
-              <input type="password" id="user_pw" class="form-control" name="user_pw" placeholder="비밀번호">
+              <input type="password" id="password" class="form-control" name="user_pw" placeholder="비밀번호">
 
               <label class="control-label" for="repassword" style="padding-top: 15px;">비밀번호 재입력</label>
               <input type="password" id="repassword" class="form-control" name="repassword" placeholder="비밀번호">

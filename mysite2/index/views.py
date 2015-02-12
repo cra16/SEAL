@@ -11,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 def MyPage(request):	#MyPage 루트
 
 
@@ -78,11 +82,12 @@ def Main(request, offset): #Main 기능
 				##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
 				##다른 개발자분이 좀 알고리즘 잘짜서 더 최적화해주세요..(발적화임..))
 				
+				CourseCode = MajorSelect(request.user)
 				
 				
-				T_Count1 = Lecture.objects.filter(Q(Code__contains="ECE") | Q(Code__contains="ITP")).count()
-				T_Count2 = Lecture.objects.filter(Code__contains ="SIE").count()
-				T_Count3=Lecture.objects.count()
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
+				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
+				T_Count3 = Lecture.objects.count()
 				
 				
 				
@@ -102,8 +107,8 @@ def Main(request, offset): #Main 기능
 							PageInformation1[0] = 1
 							PageInformation1[2] = (offset - (offset%10))+11
 					else:
-						PageInformation[0] = 1
-						PageInformation[2] = T_Count1
+						PageInformation1[0] = 1
+						PageInformation1[2] = T_Count1
 
 					Active[0] = "active" #
 
@@ -137,8 +142,12 @@ def Main(request, offset): #Main 기능
 					Active[2] = "active"
 
 				#TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-				TotalBoard1 = MajorSelect(request.user)
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				if CourseCode[0] !="ENG":
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0])  | Q(Code__contains= CourseCode[1]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				else:
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
 				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
 
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
@@ -148,6 +157,10 @@ def Main(request, offset): #Main 기능
 				request.session['PageInformation3'] = PageInformation3
 				
 				
+				Data = Profile.objects.get(User = request.user)
+
+				String = Data.FirstMajor
+
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard,
@@ -159,6 +172,7 @@ def Main(request, offset): #Main 기능
 					   'PageInformation3' : PageInformation3,
 					   'Path':URL_Path,
 					   'Active':Active,
+					   'CourseCode' :CourseCode
 					   })
 
 def SubScript(request):
@@ -265,95 +279,102 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			PageBoard[2].append(Board3)
 	return PageBoard
                                                                       
-def MajorSelect(User):
-		CourseCode= [[],[],[],[],[],[]]	
+def MajorSelect(user):
+		try:
+			Student = Profile.objects.get(User =user)
+		except:
+			return None
+		MajorCode= [[],[],[],[],[],[]]	
+		FirstMajor = str(Student.FirstMajor)
+		SecondMajor = str(Student.SecondMajor)
 			#1전공 선택 하는 조건문
-		if user.profile.FirstMajor.find("국제") || user.profile.FirstMajor.find("영어"):
-			CourseCode[0]="ISE"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("경영학전공") || user.profile.FirstMajor.find("경제학전공"):
-			CourseCode[0]="GMP"
-			CourseCode[1]="MEC"
-		elif user.profile.FirstMajor.find("한국법") || user.profile.FirstMajor.find("UIL"):
-			CourseCode[0]="LAW"
-			CourseCode[1]="UIL"
-		elif user.profile.FirstMajor.find("공연영상") || user.profile.FirstMajor.find("언로정보학"):
-			CourseCode[0]="CCC"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("건설공학") || user.profile.FirstMajor.find("도시환경"):
-			CourseCode[0]="CUE"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("기계공학") || user.profile.FirstMajor.find("전자제어") || user.profile.FirstMajor.find("기전공학"):
-			CourseCode[0]="HMM"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("시각디자인") || user.profile.FirstMajor.find("제품디자인"):
-			CourseCode[0]="IID"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("생명과학"):
-			CourseCode[0]="BFT"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("컴퓨터") || user.profile.FirstMajor.find("전자"):
-			CourseCode[0]="ECE"
-			CourseCode[1]="ITP"
-		elif user.profile.FirstMajor.find("상담심리") || user.profile.FirstMajor.find("사회복지"):
-			Coursecode[0]="CSW"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("에디슨"):
-			CourseCode[0]="GEA"
-			CourseCode[1]="None"
-		elif user.profile.FirstMajor.find("영어학과") || user.profile.FirstMajor.find("경영학과") ||user.profile.FirstMajor.find("사회복지학과"):
-			CourseCode[0]="SIE"
-			CourseCode[1]="None"
+		if FirstMajor.find("국제") != -1 or FirstMajor.find("영어") != -1:
+			MajorCode[0]="ISE"
+			MajorCode[1]="ISE"
+		elif FirstMajor.find("경영학전공") != -1 or FirstMajor.find("경제학전공")!= -1:
+			MajorCode[0]="GMP"
+			MajorCode[1]="MEC"
+		elif FirstMajor.find("한국법") != -1 or FirstMajor.find("UIL")!= -1:
+			MajorCode[0]="LAW"
+			MajorCode[1]="UIL"
+		elif FirstMajor.find("공연영상")!= -1 or FirstMajor.find("언로정보학")!= -1:
+			MajorCode[0]="CCC"
+			MajorCode[1]="CCC"
+		elif FirstMajor.find("건설공학") != -1 or FirstMajor.find("도시환경")!= -1:
+			MajorCode[0]="CUE"
+			MajorCode[1]="CUE"
+		elif FirstMajor.find("기계공학")!= -1 or FirstMajor.find("전자제어")!= -1 or FirstMajor.find("기전공학")!=-1:
+			MajorCode[0]="HMM"
+			MajorCode[1]="HMM"
+		elif FirstMajor.find("시각디자인")!= -1 or FirstMajor.find("제품디자인")!= -1:
+			MajorCode[0]="IID"
+			MajorCode[1]="IID"
+		elif FirstMajor.find("생명과학")!= -1:
+			MajorCode[0]="BFT"
+			MajorCode[1]="BFT"
+		elif FirstMajor.find("컴퓨터") != -1 or FirstMajor.find("전자") != -1:
+			MajorCode[0]="ECE"
+			MajorCode[1]="ITP"
+		elif FirstMajor.find("상담심리") != -1 or FirstMajor.find("사회복지")!= -1:
+			MajorCode[0]="CSW"
+			MajorCode[1]="CSW"
+		elif FirstMajor.find("에디슨")!= -1 :
+			MajorCode[0]="GEA"
+			MajorCode[1]="GEA"
+		elif FirstMajor.find("영어학과")!= -1 or FirstMajor.find("경영학과")!= -1 or FirstMajor.find("사회복지학과")!= -1:
+			MajorCode[0]="SIE"
+			MajorCode[1]="SIE"
 		else:
-			CourseCode[0]="ENG"
-			CourseCode[1]="GEK"
-			CourseCode[2]="GCS"
-			CourseCode[3]="PCO"
-			CourseCode[4]="ISL"
-			CourseCode[5]="PST"
+			MajorCode[0]="KKK"
+			MajorCode[1]="GEK"
+			MajorCode[2]="GCS"
+			MajorCode[3]="PCO"
+			MajorCode[4]="ISL"
+			MajorCode[5]="PST"
 
-		if user.profile.SecondMajor.find("국제") || user.profile.SecondMajor.find("영어"):
-			CourseCode[2]="ISE"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("경영학전공") || user.profile.SecondMajor.find("경제학전공"):
-			CourseCode[2]="GMP"
-			CourseCode[3]="MEC"
-		elif user.profile.SecondMajor.find("한국법") || user.profile.SecondMajor.find("UIL"):
-			CourseCode[2]="LAW"
-			CourseCode[3]="UIL"
-		elif user.profile.SecondMajor.find("공연영상") || user.profile.SecondMajor.find("언로정보학"):
-			CourseCode[2]="CCC"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("건설공학") || user.profile.SecondMajor.find("도시환경"):
-			CourseCode[2]="CUE"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("기계공학") || user.profile.SecondMajor.find("전자제어") || user.profile.SecondMajor.find("기전공학"):
-			CourseCode[2]="HMM"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("시각디자인") || user.profile.SecondMajor.find("제품디자인"):
-			CourseCode[2]="IID"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("생명과학"):
-			CourseCode[2]="BFT"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("컴퓨터") || user.profile.SecondMajor.find("전자"):
-			CourseCode[2]="ECE"
-			CourseCode[3]="ITP"
-		elif user.profile.SecondMajor.find("상담심리") || user.profile.SecondMajor.find("사회복지"):
-			Coursecode[2]="CSW"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("에디슨"):
-			CourseCode[2]="GEA"
-			CourseCode[3]="None"
-		elif user.profile.SecondMajor.find("영어학과") || user.profile.SecondMajor.find("경영학과") ||user.profile.SecondMajor.find("사회복지학과"):
-			CourseCode[2]="SIE"
-			CourseCode[3]="None"
+		if SecondMajor.find("국제")!=-1 or SecondMajor.find("영어")!=-1:
+			MajorCode[2]="ISE"
+			MajorCode[3]="ISE"
+		elif SecondMajor.find("경영학전공")!=-1 or SecondMajor.find("경제학전공")!=-1:
+			MajorCode[2]="GMP"
+			MajorCode[3]="MEC"
+		elif SecondMajor.find("한국법")!=-1 or SecondMajor.find("UIL")!=-1:
+			MajorCode[2]="LAW"
+			MajorCode[3]="UIL"
+		elif SecondMajor.find("공연영상") !=-1 or SecondMajor.find("언로정보학")!=-1:
+			MajorCode[2]="CCC"
+			MajorCode[3]="CCC"
+		elif SecondMajor.find("건설공학") !=-1 or SecondMajor.find("도시환경")!=-1:
+			MajorCode[2]="CUE"
+			MajorCode[3]="CUE"
+		elif SecondMajor.find("기계공학")!=-1 or SecondMajor.find("전자제어")!=-1 or SecondMajor.find("기전공학")!=-1:
+			MajorCode[2]="HMM"
+			MajorCode[3]="HMM"
+		elif SecondMajor.find("시각디자인")!=-1 or SecondMajor.find("제품디자인")!=-1:
+			MajorCode[2]="IID"
+			MajorCode[3]="IID"
+		elif SecondMajor.find("생명과학")!=-1:
+			MajorCode[2]="BFT"
+			MajorCode[3]="BFT"
+		elif SecondMajor.find("컴퓨터")!=-1 or SecondMajor.find("전자")!=-1:
+			MajorCode[2]="ECE"
+			MajorCode[3]="ITP"
+		elif SecondMajor.find("상담심리")!=-1 or SecondMajor.find("사회복지")!=-1:
+			MajorCode[2]="CSW"
+			MajorCode[3]="CSW"
+		elif SecondMajor.find("에디슨")!=-1:
+			MajorCode[2]="GEA"
+			MajorCode[3]="GEA"
+		elif SecondMajor.find("영어학과") !=-1 or SecondMajor.find("경영학과") !=-1or SecondMajor.find("사회복지학과")!=-1:
+			MajorCode[2]="SIE"
+			MajorCode[3]="SIE"
 		else:
-			CourseCode[0]="ENG"
-			CourseCode[1]="GEK"
-			CourseCode[2]="GCS"
-			CourseCode[3]="PCO"
-			CourseCode[4]="ISL"
-			CourseCode[5]="PST"
+			MajorCode[2]="GCS"
+			MajorCode[3]="PCO"
+			MajorCode[4]="ISL"
+			MajorCode[5]="PST"
+
+
+		return MajorCode
 
 # Create your views here

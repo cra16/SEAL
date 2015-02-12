@@ -146,7 +146,7 @@ $('#sa41').slider('disable');
 $('#sa42').slider('disable');
 $('#sa43').slider('disable');
 $('#sa44').slider('disable');
-$('#sal51').slider('disable');
+$('#sa51').slider('disable');
 $('#sa52').slider('disable');
 $('#sa53').slider('disable');
 $('#sa54').slider('disable');

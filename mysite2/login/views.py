@@ -257,7 +257,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board1.Total_Question = 5
 			Board1.Total_Exam = 5
 			Board1.Total_Homework = 5
-			Board1.Total_Count =1
+			Board1.Total_Count =0
 			PageBoard[0].append(Board1)
 	for Board in TotalBoard2:
 		try:
@@ -281,7 +281,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board2.Total_Question = 5
 			Board2.Total_Exam = 5
 			Board2.Total_Homework = 5
-			Board2.Total_Count =1
+			Board2.Total_Count =0
 			PageBoard[1].append(Board2)
 	for Board in TotalBoard3:
 		try:
@@ -304,7 +304,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board3.Total_Question = 5
 			Board3.Total_Exam = 5
 			Board3.Total_Homework = 5
-			Board3.Total_Count =1
+			Board3.Total_Count =0
 			PageBoard[2].append(Board3)
 	return PageBoard
 

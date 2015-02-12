@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'index',
     'lecture',
     'schedule',
+    'Course',
+    'Notice',
+    'QnA',
 #    'CustomUser',
 
 )

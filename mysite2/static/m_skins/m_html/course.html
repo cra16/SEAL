@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang='ko'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="../m_js/feed.js"></script>
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.min.js"></script>
+    <title>▒ SEAL ▒</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../m_css/main.css">
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="../m_css/semantic.css">
+    <script type="text/javascript" src="../m_js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../m_js/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="../m_js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../m_css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/slider.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/feed.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/seal_menubar.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/course.css">
+    <script type="text/javascript" src="../m_js/course.js"></script>
+    
+  </head>
+
+  <body>
+    <!-- Preloader -->
+
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="index.html">SEAL</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">MENU
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sealmypage.html">My Page</a></li>
+                <li><a href="schedule.html">My Schedule</a></li>
+                <li><a href="course.html">My Courses</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">HELP
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="notice.html">공지사항</a></li>
+                <li><a href="subscribe_report.html">신고</a></li>
+                <li><a href="subscribe_improve.html">개선요구사항</a></li>
+                <li><a href="sitemap.html">SITEMAP</a></li> 
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="containerss"></div>
+
+    <div>
+
+      <h2 class="ui header"><i class="glyphicon glyphicon-book"></i> Courses</h2>
+
+      <div class="ui section divider"></div>
+
+      <div class="ui column">
+                
+        <p id="ccode_p">
+          [<span id="ccode"></span>]<br />
+          <span id="cname"></span><br />
+          <span id="cprof"></span><br />
+          <button class="btn btn-info">듣고싶어!</button> 
+          <a href="recommend.html"><button class="btn btn-danger">추천하기!</button></a>
+        </p>
+
+      </div>
+
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+      <div class="ui column">
+
+        <h3><b>전체 평균 : </b></h3>
+
+        <div id="recommending" class="ui column">
+
+          <div id="blankspace" class="ui column"></div>
+
+          <div>
+            <div id="firstcolumn" class="fourteen wide column">진도 속도</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
+            &nbsp;&nbsp;&nbsp;
+            <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div>
+            <div id="secondcolumn" class="fourteen wide column">강의 교재</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+            <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+            <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div>
+            <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+            <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+            <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div>
+            <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
+            &nbsp;&nbsp;&nbsp;
+            <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div>
+            <div id="fifthcolumn" class="fourteen wide column">시험 방식</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+            <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
+            <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div>
+            <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div><br />
+            <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+            <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C"/>
+            <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+      <div class="ui column">
+        <h3><b>교수님 COMMENT : </b></h3>
+        <div id="recommending" class="ui column"></div>
+      </div>
+
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+      <div class="ui column">
+        <h3><b>TA COMMENT : </b></h3>
+        <div id="recommending" class="ui column"></div>
+      </div>
+
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+      <div class="ui column">
+        <h3><b>개인 : </b></h3>
+        
+        <div id="recommending" class="ui column">
+
+          <div class="ui column">
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl11" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl11C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl12" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl12C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                 <input type="text" id="sl13" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl13C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl14" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl14C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl15" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl15C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl16" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl16C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+
+
+
+
+            <div id="h_outersectiondivider" class="ui section divider"></div>
+
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+            <div class="ui column">
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl21" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl21C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl22" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl22C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                <input type="text" id="sl23" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl23C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl24" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl24C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl25" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl25C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl26" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl26C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+            </div>
+
+
+
+
+            <div id="h_outersectiondivider" class="ui section divider"></div>
+
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+            <div class="ui column">
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl31" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl31C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl32" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl32C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                <input type="text" id="sl33" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl33C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl34" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl34C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl35" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl35C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl36" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl36C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+            </div>
+
+
+
+
+            <div id="h_outersectiondivider" class="ui section divider"></div>
+
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+            <div class="ui column">
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl41" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl41C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl42" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl42C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                <input type="text" id="sl43" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl43C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl44" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl44C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl45" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl45C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl46" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl46C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+            </div>
+
+
+
+
+
+            <div id="h_outersectiondivider" class="ui section divider"></div>
+
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+            <div class="ui column">
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl51" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl51C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl52" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl52C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                <input type="text" id="sl53" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl53C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl54" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl54C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl55" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl55C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl56" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl56C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+            </div>
+
+
+
+
+            <div id="h_outersectiondivider" class="ui section divider"></div>
+
+            <h4><b>홍길동/14학번/전산전자공학부</b></h4>
+            <div class="ui column">
+              <div id="blankspace" class="ui column"></div>
+
+              <div>
+                <div id="firstcolumn" class="fourteen wide column">진도 속도</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl61" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl61C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="secondcolumn" class="fourteen wide column">강의 교재</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                <input type="text" id="sl62" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl62C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="thirdcolumn" class="fourteen wide column">실질적 도움</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                <input type="text" id="sl63" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl63C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fourthcolumn" class="fourteen wide column">질문에 대한 대답</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="sl64" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl64C"/>
+                &nbsp;&nbsp;&nbsp;
+                <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="fifthcolumn" class="fourteen wide column">시험 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 주관식 위주로 에세이 형식으로 나타난다">주관 위주</a>
+                <input type="text" id="sl65" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl65C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="주로 객관식 위주로 선택지 형식으로 나타난다">객관 위주</a>
+              </div>
+
+
+              <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+              <div>
+                <div id="sixthcolumn" class="fourteen wide column">과제물 방식</div>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="조별 위주로 조별로 나뉘어서 하는 과제가 많다">조별 위주</a>
+                <input type="text" id="sl66" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl66C"/>
+                <a id="tooltips" href="#" data-toggle="tooltip" title="개인 위주로 개인별로 나뉘어서 하는 과제가 많다">개인 위주</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui section divider"></div>
+
+
+      <div class="ui vertical feature segment">
+        <div class="ui very relaxed column grid">   
+          <div class="wide column">
+            <div class="ui four column center aligned stackable divided grid">
+
+              <div class="column">
+                <div id="book" class="ui icon header">
+                  <i class="glyphicon glyphicon-book"></i><br />STRONG Students
+                </div>
+                <p>We are here to help students take the right courses to improve themseleves!</p>
+                <a class="ui button" href="http://sugang.handong.edu/">Register Courses NOW</a>
+              </div>
+
+              <div class="column">
+                <div id="pencil" class="ui icon header">
+                  <i class="glyphicon glyphicon-pencil"></i><br />Wanted Features
+                </div>
+                <p>We provide valid information about powerful courses that suits just for you.</p>
+                <a class="ui button" href="file:///C:/workspace/html%20project%20practice/index.html">www.SEAL.com</a>
+              </div>
+                          
+              <div class="column">
+                <div id="heart" class="ui icon header">
+                  <i class="glyphicon glyphicon-heart"></i><br />Agreeable Contents
+                </div>
+                <p>Check out the reliable comments from your professor!</p>
+                <p><a class="ui button" href="#">Check it out</a></p>
+              </div>
+
+              <div class="column">
+                <div id="eye" class="ui icon header">
+                  <i class="glyphicon glyphicon-eye-open"></i><br />Need your attention
+                </div>
+                <p>Why not change the world? We respect the Honor Code.</p>
+                <a class="ui button" href="#">Honor Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bottom" class="ui footer vertical segment">
+      <div class="ui page grid">
+        <div class="center aligned column">
+          <span id="bottomtxt">Powered by CRA</span>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="../m_js/semantic.js"></script>
+
+    <!-- Preloader -->
+    <script type="text/javascript">
+      //<![CDATA[
+      $(window).load(function() { // makes sure the whole site is loaded
+        $('#status').fadeIn(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({'overflow':'visible'});
+      });
+      //]]>
+    </script>
+
+    <script type="text/javascript" src="../m_js/best.js"></script>
+    <script type="text/javascript" src="../m_js/profile.js"></script>
+
+  </body>
+</html>

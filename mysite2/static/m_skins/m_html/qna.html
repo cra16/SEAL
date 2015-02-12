@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang='ko'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="../m_js/feed.js"></script>
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.min.js"></script>
+    <title>▒ SEAL ▒</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../m_css/main.css">
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <script type="text/javascript" src="../m_js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../m_css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/semantic.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/qna.css">
+    <script type="text/javascript" src="../m_js/qna.js"></script>
+    <script type="text/javascript" src="../m_js/index.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="../m_css/seal_menubar.css">
+    
+  </head>
+
+  <body>
+    <!-- Preloader -->
+
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="index.html">SEAL</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">MENU
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sealmypage.html">My Page</a></li>
+                <li><a href="schedule.html">My Schedule</a></li>
+                <li><a href="course.html">My Courses</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">HELP
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="notice.html">공지사항</a></li>
+                <li><a href="subscribe_report.html">신고</a></li>
+                <li><a href="subscribe_improve.html">개선요구사항</a></li>
+                <li><a href="sitemap.html">SITEMAP</a></li> 
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+      <div class="containerss"></div>
+
+      <div>
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A) <a href="subscribe_qna.html"> <div style="margin-top:20px" class="ui right floated tiny blue button">
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a></h2>
+        
+        <div id="h_sectiondivider" class="ui section divider" style="margin-top:60px"></div>
+        
+        <div class="ui column">
+          <div id="qna_board">
+              
+              <table class="table">
+                 <thead>
+                  <tr>
+                      <th class="col-xs-1"><center>No.</center></th>
+                      <th class="col-xs-7"><center>제목</center></th>
+                      <th class="col-xs-3"><center>작성자</center></th>
+                      <th class="col-xs-1"><center>날짜</center></th>
+                  </tr>
+                </thead>
+                
+                
+                <tbody class="qna_sub">
+                   <tr id="qna1">
+                    <td><center><span id="qna_num7">7</span></center></td>
+                    <td class="qna_title"><a href="qna-contents.html">추천이 어려워요 ㅠㅠ</a><span> <img src="../fonts/latest.gif"></span></td>
+                    <td><center>정시은</center></td>
+                    <td><center>01.22</center></td>
+                    <td><center><span id="qna_click1"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans1">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"><a href="qna-contents.html"> 추천은 설명을 읽어보시고...</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.22</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna2">
+                    <td><center><span id="qna_num6">6</span></center></td>
+                    <td class="qna_title"><a href="#">댓글은 못 쓰나요???</a><span> <img src="../fonts/latest.gif"></span></td>
+                    <td><center>김수환</center></td>
+                    <td><center>01.22</center></td>
+                    <td><center><span id="qna_click2"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans2">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">댓글은 쓸 수 없습니다.</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.22</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna3">
+                    <td><center><span id="qna_num5">5</span></center></td>
+                    <td class="qna_title"><a href="#">어떻게 추천하는건가요?</a></td>
+                    <td><center>이지현</center></td>
+                    <td><center>01.20</center></td>
+                    <td><center><span id="qna_click3"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans3">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">메인 페이지에서 하트를 누르거나 과목명을 누르고 들어가서 추천하실 수 있습니다. 검색해서 추천하시는 것도 가능해요! ^^</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.21</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna4">
+                    <td><center><span id="qna_num4">4</span></center></td>
+                    <td class="qna_title"><a href="#">저도 TA를 했는데, TA코멘트는 어떻게 쓸 수 있나요?</a></td>
+                    <td><center>고형수</center></td>
+                    <td><center>01.18</center></td>
+                    <td><center><span id="qna_click4"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans4">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">TA분은 Contact Us로 연락을 주시거나 관리자에게 쪽지를 보내주시면 해당 과목에 대한 코멘트를 받겠습니다.</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.20</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna5">
+                    <td><center><span id="qna_num3">3</span></center></td>
+                    <td class="qna_title"><a href="#">새내기인데요, 제 메인화면에 2전공 탭이 왜 있는 건가요?</a></td>
+                    <td><center>신지윤</center></td>
+                    <td><center>01.18</center></td>
+                    <td><center><span id="qna_click5"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans5">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">새내기는 전공이 정해지면 1전공 2전공 탭이 활성화 됩니다.</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.20</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna6">
+                    <td><center><span id="qna_num2">2</span></center></td>
+                    <td class="qna_title"><a href="#">왜 이름이 SEAL인가요?</a></td>
+                    <td><center>이동혁</center></td>
+                    <td><center>01.17</center></td>
+                    <td><center><span id="qna_click6"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans6">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">"Students' Excellent Achievement in Learning"의 약자로서, 한동대 학생들의 배움의 성취와 실력 향상을 목적으로 한 강의추천 웹사이트의 타이틀입니다.</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.19</center></td>
+                      <td></td>
+                  </tr>
+                  <tr id="qna7">
+                    <td><center><span id="qna_num1">1</span></center></td>
+                    <td class="qna_title"><a href="#">전공을 변경했는데 메인화면에 바로 적용이 안 돼요.</a></td>
+                    <td><center>성수빈</center></td>
+                    <td><center>01.15</center></td>
+                    <td><center><span id="qna_click7"></span></center></td>
+                  </tr>
+                  <tr class="ans" id="ans7">
+                      <td></td>
+                      <td><img src="../fonts/reply.gif"> <a href="#">전공 변경 시, 로그아웃 후 다시 로그인 하시면 적용됩니다.</a></td>
+                      <td><center>관리자</center></td>
+                      <td><center>01.22</center></td>
+                      <td></td>
+                  </tr>
+                </tbody>
+              </table>
+      
+     <script>
+         
+        var qna_num1 = 1,
+            qna_num2 = 2,
+            qna_num3 = 3,
+            qna_num4 = 4,
+            qna_num5 = 5,
+            qna_num6 = 6,
+            qna_num7 = 7;
+
+        var eqna_num1 = document.getElementById('qna_num1'),
+            eqna_num2 = document.getElementById('qna_num2'),
+            eqna_num3 = document.getElementById('qna_num3'),
+            eqna_num4 = document.getElementById('qna_num4'),
+            eqna_num5 = document.getElementById('qna_num5'),
+            eqna_num6 = document.getElementById('qna_num6'),
+            eqna_num7 = document.getElementById('qna_num7');
+
+        eqna_num1.textContent = qna_num1;
+        eqna_num2.textContent = qna_num2;
+        eqna_num3.textContent = qna_num3;
+        eqna_num4.textContent = qna_num4;
+        eqna_num5.textContent = qna_num5;
+        eqna_num6.textContent = qna_num6;
+        eqna_num7.textContent = qna_num7; 
+
+      </script>
+                                                 
+                                          
+              <center><div class="ui borderless pagination menu">
+              <a class="item">
+                <i class="glyphicon glyphicon-menu-left"></i>
+              </a>
+              <a class="item">1</a>
+              <a class="item">2</a>
+              <a class="item">3</a>
+              <a class="item">4</a>
+              <a class="item">5</a>
+              <a class="item">
+              <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+              
+          </div>
+        </div>
+
+        <div class="ui vertical feature segment">
+          <div class="ui very relaxed column grid">   
+            <div class="wide column">
+              <div class="ui four column center aligned stackable divided grid">
+
+                <div class="column">
+                  <div id="book" class="ui icon header">
+                    <i class="glyphicon glyphicon-book"></i><br />STRONG Students
+                  </div>
+                  <p>We are here to help students take the right courses to improve themseleves!</p>
+                  <a class="ui button" href="http://sugang.handong.edu/">Register Courses NOW</a>
+                </div>
+
+                <div class="column">
+                  <div id="pencil" class="ui icon header">
+                    <i class="glyphicon glyphicon-pencil"></i><br />Wanted Features
+                  </div>
+                  <p>We provide valid information about powerful courses that suits just for you.</p>
+                  <a class="ui button" href="file:///C:/workspace/html%20project%20practice/index.html">www.SEAL.com</a>
+                </div>
+                        
+                <div class="column">
+                  <div id="heart" class="ui icon header">
+                    <i class="glyphicon glyphicon-heart"></i><br />Agreeable Contents
+                  </div>
+                  <p>Check out the reliable comments from your professor!</p>
+                  <p><a class="ui button" href="#">Check it out</a></p>
+                </div>
+
+                <div class="column">
+                  <div id="eye" class="ui icon header">
+                    <i class="glyphicon glyphicon-eye-open"></i><br />Need your attention
+                  </div>
+                  <p>Why not change the world? We respect the Honor Code.</p>
+                  <a class="ui button" href="#">Honor Code</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="bottom" class="ui footer vertical segment">
+      <div class="ui page grid">
+        <div class="center aligned column">
+          <span id="bottomtxt">Powered by CRA</span>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="../m_js/semantic.js"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+
+    <!-- Preloader -->
+    <script type="text/javascript">
+      //<![CDATA[
+      $(window).load(function() { // makes sure the whole site is loaded
+        $('#status').fadeIn(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({'overflow':'visible'});
+      });
+      //]]>
+    </script>
+
+  </body>
+</html>

@@ -2,28 +2,25 @@
 {% extends "base.html"%}
          
 	{% block head%}	
-         {%load staticfiles%}
-			
+        {%load staticfiles%}
 		
 		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-		  <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
-                         
+        <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
+        <script type="text/javascript" src="{% static "js/schedule.js" %}"></script>
+
 		<style>
-      body, input {
-        font-family: Helvetica, sans-serif;
-        font-size: 12px;
-      }
-    </style>
-
-
-		
+            body, input {
+            font-family: Helvetica, sans-serif;
+            font-size: 12px;
+            }
+        </style>
 		
 	{% endblock%}
 
-  <body>
- {% block content%}
+<body>
+{% block content%}
 		
- <div class="containerss"></div>
+    <div class="containerss"></div>
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
@@ -119,126 +116,34 @@
         </div>
       </div>
 
+
       <div id="sch-result" class="wrapper">
+      {% for lec in lec_lst %}
+      {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui two column grid">
+      {% endif %}
           <div class="column">
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
                 <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum1"></span> LIKES</center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">5</span> LIKES</center>
               </div>
                         
-              [<span id="ccode1"></span>]
-              <p><a href="#"><span class="cname" id="cname1"></span></a></p>
-              <p><a href="#"><span id="cprof1"></span></a></p>
+              [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Code }}</span>]
+              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.CourseName }}</span></a></p>
+              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Professor }}</span></a></p>
               <span>
                 <h3>
-                  <span id="cperiod1" class="cperiod">교시</span>
+                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Period }}</span>
                   <a href="#" class="ui right floated tiny blue button">선택</a>
                 </h3>
               </span>
             </div>
           </div>
-          
-          <div class="column">
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum2"></span> LIKES</center>
-              </div>
-
-              [<span id="ccode2"></span>]
-              <p><a href="#"><span class="cname" id="cname2"></span></a></p>
-              <p><a href="#"><span id="cprof2"></span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod2" class="cperiod">교시</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
-                </h3>
-              </span>
-            </div>
-          </div>
+      {% if not forloop.counter0|divisibleby:"2" %}
         </div>
-
-        <div class="ui two column grid">
-          <div class="column">
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum3"></span> LIKES</center>
-              </div>
-              [<span id="ccode3"></span>]
-              <p><a href="#"><span class="cname" id="cname3"></span></a></p>
-              <p><a href="#"><span id="cprof3"></span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod3" class="cperiod">교시</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
-                </h3>
-              </span>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum4"></span> LIKES</center>
-              </div>
-
-              [<span id="ccode4"></span>]
-              <p><a href="#"><span class="cname" id="cname4"></span></a></p>
-              <p><a href="#"><span id="cprof4"></span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod4" class="cperiod">교시</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
-                </h3>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui two column grid">
-          <div class="column">
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum5"></span> LIKES</center>
-              </div>
-
-              [<span id="ccode5"></span>]
-              <p><a href="#"><span class="cname" id="cname5"></span></a></p>
-              <p><a href="#"><span id="cprof5"></span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod5" class="cperiod">교시</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
-                </h3>
-              </span>
-            </div>
-          </div>
-
-          <div class="column">
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum6"></span> LIKES</center>
-              </div>
-
-              [<span id="ccode6"></span>]
-              <p><a href="#"><span class="cname" id="cname6"></span></a></p>
-              <p><a href="#"><span id="cprof6"></span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod6" class="cperiod">교시</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
-                </h3>
-              </span>
-            </div>
-          </div>
-        </div>
-
+      {% endif %}
+      {% endfor %}
 
         <div class="ui divider"></div>
 
@@ -397,5 +302,5 @@
              </div>
          </div>
      </div>
-	{% endblock%}
+	{% endblock %}
 </html>

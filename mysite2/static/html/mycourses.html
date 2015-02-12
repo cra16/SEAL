@@ -1,5 +1,6 @@
 <!doctype html>
 {% extends "base.html"%}
+{% load staticfiles%}
 <html lang='ko'>
   <head>
   {% block head%}
@@ -92,183 +93,39 @@
         <a class="item" data-tab="saved">듣고 싶은 강의</a>
       </div>
 
-      <div class="ui very relaxed column grid">
+       <div class="ui very relaxed column grid">
         <div class="column">
           <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+                {%for PageBoard in RecommendPage%}
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
-                <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><a href="/mysite2/Recommend/{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
                 <center><span id="likenum1"></span> LIKES</center>
               </div>
-                    
-              <div id="firstcourse">    
+
+              <div id="firstcourse">
                 [<span id="ccode1"></span>]
-                <p><a href="course.html"><span class="cname" id="cname1"></span></a></p>
+                <p><a href="/mysite2/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname1"></span></a></p>
                 <p><a href="#"><span id="cprof1"></span></a></p>
               </div>
 
               <div id="recommendtop">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl11" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl11C"/>
+                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}1C" data-slider-value = {{PageBoard.Speedy}}/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl12" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl12C"/>
+                  <input type="text" id="sl{{forllop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}2C" data-slider-value ={{PageBoard.Question}}/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
                   <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl13" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl13C"/>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}3C" data-slider-value = {{PageBoard.Reliance}}/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
                   <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl14" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl14C"/>
+                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}4C" data-slider-value = {{PageBoard.Helper}}/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
             </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum2"></span> LIKES</center>
-              </div>
-                    
-              <div id="secondcourse">
-                [<span id="ccode2"></span>]
-                <p><a href="#"><span class="cname" id="cname2"></span></a></p>
-                <p><a href="#"><span id="cprof2"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl21" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl21C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl22" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl22C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl23" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl23C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl24" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl24C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum3"></span> LIKES</center>
-              </div>
-                    
-              <div id="thirdcourse">
-                [<span id="ccode3"></span>]
-                <p><a href="#"><span class="cname" id="cname3"></span></a></p>
-                <p><a href="#"><span id="cprof3"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl31" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl31C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl32" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl32C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl33" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl33C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl34" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl34C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum4"></span> LIKES</center>
-              </div>
-                    
-              <div id="fourthcourse">
-                [<span id="ccode4"></span>]
-                <p><a href="#"><span class="cname" id="cname4"></span></a></p>
-                <p><a href="#"><span id="cprof4"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl41" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl41C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl42" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl42C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl43" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl43C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl44" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl44C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum5"></span> LIKES</center>
-              </div>
-                    
-              <div id="fifthcourse">
-                [<span id="ccode5"></span>]
-                <p><a href="#"><span class="cname" id="cname5"></span></a></p>
-                <p><a href="#"><span id="cprof5"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl51" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl51C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl52" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl52C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl53" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl53C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl54" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl54C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-          
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum6"></span> LIKES</center>
-              </div>
-                    
-              <div id="sixthcourse">
-                [<span id="ccode6"></span>]
-                <p><a href="#"><span class="cname" id="cname6"></span></a></p>
-                <p><a href="#"><span id="cprof6"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl61" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl61C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl62" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl62C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl63" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl63C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl64" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl64C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
+        {% endfor%}
           </div>
-
-
-
-
-
-
 
 
 
@@ -303,146 +160,7 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
             </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum12"></span> LIKES</center>
-              </div>
-                    
-              <div id="secondcourse">
-                [<span id="ccode12"></span>]
-                <p><a href="#"><span class="cname" id="cname12"></span></a></p>
-                <p><a href="#"><span id="cprof12"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl121" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl121C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl122" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl122C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl123" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl123C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl124" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl124C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum13"></span> LIKES</center>
-              </div>
-                    
-              <div id="thirdcourse">
-                [<span id="ccode13"></span>]
-                <p><a href="#"><span class="cname" id="cname13"></span></a></p>
-                <p><a href="#"><span id="cprof13"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl131" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl131C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl132" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl132C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl133" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl133C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl134" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl134C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum14"></span> LIKES</center>
-              </div>
-                    
-              <div id="fourthcourse">
-                [<span id="ccode14"></span>]
-                <p><a href="#"><span class="cname" id="cname14"></span></a></p>
-                <p><a href="#"><span id="cprof14"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl141" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl141C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl142" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl142C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl143" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl143C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl144" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl144C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum15"></span> LIKES</center>
-              </div>
-                    
-              <div id="fifthcourse">
-                [<span id="ccode15"></span>]
-                <p><a href="#"><span class="cname" id="cname15"></span></a></p>
-                <p><a href="#"><span id="cprof15"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl151" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl151C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl152" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl152C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl153" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl153C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl154" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl154C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
-          
-            <div class="ui raised segment">
-              <div class="left floated ui compact segment">
-                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum16"></span> LIKES</center>
-              </div>
-                    
-              <div id="sixthcourse">
-                [<span id="ccode16"></span>]
-                <p><a href="#"><span class="cname" id="cname16"></span></a></p>
-                <p><a href="#"><span id="cprof16"></span></a></p>
-              </div>
-
-              <div id="recommendtop">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
-                  <input type="text" id="sl161" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl161C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
-                  <input type="text" id="sl162" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl162C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
-                  <input type="text" id="sl163" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl163C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
-                  <input type="text" id="sl164" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl164C"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
-            </div>
+			{%endfor%}
           </div>
 
           <center><div class="ui borderless pagination menu">

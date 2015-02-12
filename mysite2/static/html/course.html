@@ -35,7 +35,7 @@
         <p id="ccode_p">[<span id="ccode">{{CourseBoard.CourseName.Code}}</span>]<br />
         <span id="cname">{{CourseBoard.CourseName.CourseName}}</span> 
         <button class="btn btn-info">듣고싶어!</button> 
-        <a href="recommend.html"><button class="btn btn-danger">추천하기!</button></a><br />
+        <a href="/mysite2/Recommend/{{CourseBoard.CourseName.id}}"><button class="btn btn-danger">추천하기!</button></a><br />
         <span id="cprof">{{CourseBoard.CourseName.Professor}}</span></p>
 
       </div>
@@ -56,7 +56,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
+              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -73,7 +73,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
@@ -90,7 +90,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
             </div>
             <div class="left floated center aligned six wide column">
-               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
@@ -107,7 +107,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
+              <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -124,7 +124,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
+              <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -141,7 +141,7 @@
               <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C"/>
+              <input type="text" id="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
@@ -172,7 +172,7 @@
         <h3><b>개인 : </b></h3>
          {%if  MyCourseBoard != None%}
 		<div id="recommending" class="ui column">
-          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}/{{user.profile.FirstMajor}}<</b></h4>
+          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}/{{user.profile.FirstMajor}}</b></h4>
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 
@@ -182,7 +182,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl01" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
+                <input type="text" id="sl01" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
@@ -199,7 +199,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl02" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
+                <input type="text" id="sl02" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
@@ -216,7 +216,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
               </div>
               <div class="left floated center aligned six wide column">
-                 <input type="text" id="sl03" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
+                 <input type="text" id="sl03" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
@@ -233,7 +233,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl04" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
+                <input type="text" id="sl04" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
@@ -250,7 +250,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl05" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
+                <input type="text" id="sl05" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
@@ -267,7 +267,7 @@
                 <a id="tooltips" href="#" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl06" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl06C"/>
+                <input type="text" id="sl06" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl06C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" href="#" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
@@ -275,7 +275,7 @@
             </div>
           </div>
 		{% endif %}	
-
+		</div>
 
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>

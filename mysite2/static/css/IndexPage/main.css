@@ -8,15 +8,151 @@
     text-decoration: none;
 }
 
-#likebtn{
+#likebtn1{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn2{
     margin-top: 2%;
     margin-left: 2%;
 }
 
-#likebutton{
+#likebtn3{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn4{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn5{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn11{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn12{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn13{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn14{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn15{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn21{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn22{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn23{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn24{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn25{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebutton1
+{
     border: none;
     background-color: white;
 }
+#likebutton2
+{
+    border: none;
+    background-color: white;
+}
+#likebutton3
+{
+    border: none;
+    background-color: white;
+}
+#likebutton4
+{
+    border: none;
+    background-color: white;
+}
+#likebutton5
+{
+    border: none;
+    background-color: white;
+}
+
+#likebutton11
+{
+    border: none;
+    background-color: white;
+}
+#likebutton12
+{
+    border: none;
+    background-color: white;
+}
+#likebutton13
+{
+    border: none;
+    background-color: white;
+}
+#likebutton14
+{
+    border: none;
+    background-color: white;
+}
+#likebutton15
+{
+    border: none;
+    background-color: white;
+}
+
+#likebutton21
+{
+    border: none;
+    background-color: white;
+}
+#likebutton22
+{
+    border: none;
+    background-color: white;
+}
+#likebutton23
+{
+    border: none;
+    background-color: white;
+}
+#likebutton24
+{
+    border: none;
+    background-color: white;
+}
+#likebutton25
+{
+    border: none;
+    background-color: white;
+}
+
+
 
 /* Preloader */
 

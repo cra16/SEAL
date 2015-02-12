@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
+from index.models import *
 
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -29,9 +30,9 @@ def loginCheck(request):
 				auth_login(request,user)
 				
 				##메인 페이지 전공과 교양 보여주는 페이지
-				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
+				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[0:5]
 
 				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
@@ -40,18 +41,10 @@ def loginCheck(request):
 				PageBoard=PageView(TotalBoard1,TotalBoard2,TotalBoard3)
 
 				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
-				PageInformation1 = [0,0,0];
-				PageInformation2 = [0,0,0];
-				PageInformation3 = [0,0,0];
-				
-				PageInformation1[0] = 1
-				PageInformation2[0] = 1
-				PageInformation3[0] = 1
-				
-				PageInformation1[1] = 1
-				PageInformation2[1] = 1
-				PageInformation3[1] = 1
-		
+				PageInformation1 = [1,1,1];
+				PageInformation2 = [1,1,1];
+				PageInformation3 = [1,1,1];
+						
 				##페이지 넘기는 기능
 				if TotalCount1<11:
 					PageInformation1[2] = 11
@@ -76,7 +69,7 @@ def loginCheck(request):
 
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard':PageBoard
+					   'PageBoard':PageBoard,
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
@@ -102,18 +95,10 @@ def loginCheck(request):
 				TotalCount3 =  Lecture.objects.count()
 
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
-				PageInformation1 = [0,0,0];
-				PageInformation2 = [0,0,0];
-				PageInformation3 = [0,0,0];
-				
-				PageInformation1[0] = 1
-				PageInformation2[0] = 1
-				PageInformation3[0] = 1
-				
-				PageInformation1[1] = 1
-				PageInformation2[1] = 1
-				PageInformation3[1] = 1
-		
+				PageInformation1 = [1,1,1];
+				PageInformation2 = [1,1,1];
+				PageInformation3 = [1,1,1];
+			
 
 				if TotalCount1<11:
 					PageInformation1[2] = TotalCount1
@@ -275,10 +260,10 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board1.Total_Count =1
 			PageBoard[0].append(Board1)
 	for Board in TotalBoard2:
-			try:
-				Board2 = Total_Evaluation.objects.get(CourseName=Board)
-			except :
-				Board2 = None
+		try:
+			Board2 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board2 = None
 
 		if Board2 is not None:
 			Board2.Total_Speedy = Board2.Total_Speedy/Board2.Total_Count

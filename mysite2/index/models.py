@@ -34,16 +34,16 @@ class Course_Evaluation(models.Model):
 		return self.Course.CourseName
 
 class Total_Evaluation(models.Model):
-        CourseName = models.ForeignKey(Lecture)
-        Total_Speedy = models.IntegerField(default=0)
-        Total_Reliance = models.IntegerField(default=0)
-        Total_Helper = models.IntegerField(default=0)
-        Total_Question = models.IntegerField(default=0)
-        Total_Exam = models.IntegerField(default=0)
-        Total_Homework=models.IntegerField(default=0)
+		CourseName = models.ForeignKey(Lecture)
+		Total_Speedy = models.IntegerField(default=0)
+		Total_Reliance = models.IntegerField(default=0)
+		Total_Helper = models.IntegerField(default=0)
+		Total_Question = models.IntegerField(default=0)
+		Total_Exam = models.IntegerField(default=0)
+		Total_Homework=models.IntegerField(default=0)
 		Total_Count =models.IntegerField(default=0)
-        def __unicode__(self):
-                return self.CourseName.Code
+		def __unicode__(self):
+			return self.CourseName.Code
 
 
 

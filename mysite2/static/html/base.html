@@ -28,6 +28,12 @@
     <script type="text/javascript" src="{% static "js/IndexPage/main.js"%}"></script>
     <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>
    
+   <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
     
     {% block head %}
      아아아   
@@ -143,9 +149,9 @@
                     
       <h3><a href="/mysite2/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
-      <p><span id="label"><a href="mycourses.html">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
+      <p><span id="label"><a href="/mysite2/MyCourse">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
 
-      <p id="last"><span id="label"><a href="mycourses.html">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
+      <p id="last"><span id="label"><a href="/mysite2/MyCourse">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
 
       <a href="/mysite2/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
 

@@ -44,7 +44,6 @@ def Judgement(request): # 신고 게시판 기능
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
 @csrf_exempt
-
 def Recommend(request, offset): #강의 추천 스크롤 기능
 
 	if request.user.username =="":
@@ -67,7 +66,6 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
                                          #  'TotalCount' : range(0,TotalCount)
 											})
 @csrf_exempt
-
 def Recommend_Write(request): #추천 강의 DB입력
 
         if request.user.username=="":
@@ -111,6 +109,8 @@ def Recommend_Write(request): #추천 강의 DB입력
                                 T_Eval.Total_Homework += int(new_Homework)
                                 T_Eval.Total_Count += int(new_Homework)
                                 T_Eval.save()
+						
+						URL = "/mysite2/Course/"+str(request.session['Recommend_ID'])
                         return render_to_response("course.html",{'user':request.user,})
 
                 else:
@@ -121,7 +121,6 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 
 @csrf_exempt
-
 def QnAMain(request): #Q&A 메인 
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
@@ -220,14 +219,14 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 	if request.user.username =="":
                 return  HttpResponseRedirect("/mysite2")
-        else:
+	else:
                 try:
                         offset = int(offset)
                 except:
                         raise Http404()
 
 				 #해당 강의 전체 추천한 Data DB 불러오기
-				 try:
+				try:
                         CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
                         CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
                         CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
@@ -246,28 +245,25 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 				
 
-				#해당 강의 전체 추천 평균 스크롤 보여주는 기능
-				CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-				CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-				CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-				CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-				CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-				CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-				CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+				
 				
 
 				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
-                MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
-				#자신 이외 다른사람이 추천한 정보 보여줌
+				try:
+                        MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
+                                #자신 이외 다른사람이 추천한 정보 보여줌
+                except:
+                        MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=request.user))
 
-                OtherCourseBoard = Course_Evaluation.objects.order_by('-id')[0:3]
-       
-                return render_to_response("course.html",
+
+				OtherCourseBoard = Course_Evaluation.objects.filter(CourseName = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
+
+				return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                            'MyCourseBoard':MyCourseBoard,
                                            'OtherCourseBoard':OtherCourseBoard,
-                                           'Other_ID_Information':Other_ID_Information
+                                          
                                         
 
                                            })
@@ -388,15 +384,13 @@ def Main(request, offset): #Main 기능
 				##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
 				##다른 개발자분이 좀 알고리즘 잘짜서 더 최적화해주세요..(발적화임..))
 				
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*6:(PageInformation1[1]-1)*6+6]
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*6:(PageInformation2[1]-1)*6+6]
-				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*6:(PageInformation3[1]-1)*6+6]
+				
 				
 				T_Count1 = Lecture.objects.filter(Q(Code__contains="ECE") | Q(Code__contains="ITP")).count()
 				T_Count2 = Lecture.objects.filter(Code__contains ="SIE").count()
 				T_Count3=Lecture.objects.count()
 				
-				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+				
 				
 
 
@@ -427,11 +421,11 @@ def Main(request, offset): #Main 기능
 							PageInformation2[0] = (offset -(offset%10))-9
 							PageInformation2[2] = (offset -(offset%10))+11
 						else:
-							PageInformation1[0] = 1
-							PageInformation1[2] = (offset - (offset%10))+11
+							PageInformation2[0] = 1
+							PageInformation2[2] = (offset - (offset%10))+11
 					else:
-						PageInformation[0] = 1
-						PageInformation[2] = T_Count1
+						PageInformation2[0] = 1
+						PageInformation2[2] = T_Count1
 					Active[1] = "active"
 	
 				else:
@@ -441,14 +435,18 @@ def Main(request, offset): #Main 기능
 							PageInformation3[0] = (offset -(offset%10))-9
 							PageInformation3[2] = (offset -(offset%10))+11
 						else:
-							PageInformation1[0] = 1
-							PageInformation1[2] = (offset - (offset%10))+11
+							PageInformation3[0] = 1
+							PageInformation3[2] = (offset - (offset%10))+11
 					else:
-						PageInformation[0] = 1
-						PageInformation[2] = T_Count1
+						PageInformation3[0] = 1
+						PageInformation3[2] = T_Count1
 					Active[2] = "active"
 
-			
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
+
+				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
 				##Session Save
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2
@@ -480,12 +478,27 @@ def SiteMap(request):
 	else:
 		return render_to_response("sitemap.html", {'user':request.user})
 
+def MyCourse(request):
+        if request.user.username =="":
+                return HttpResponseRedirect("/mysite2")
+        else:
+			MyProfile = Profile.objects.get(User=request.user)
+			RecommendPage=[]
+			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)[0:MyProfile.RecommendCount]
+			for Board1 in UserBoard:
+				RecommendPage.append(Total_Evaluation.objects.get(CourseName = UserBoard[i].Course))
+
+
+		return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
+
+
 
 #메인 페이지 view 함수로 옮김
 def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 	PageBoard = [[],[],[]]
 	for Board in TotalBoard1:
 		try:
+			#총 강의 추천된 DB 강의 명으로 호출
 			Board1 = Total_Evaluation.objects.get(CourseName=Board)
 		except :
 			Board1 = None

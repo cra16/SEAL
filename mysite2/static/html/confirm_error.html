@@ -35,9 +35,10 @@
           <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
 
             <div class="form-group" method="post" action="/mysite2/Register">
-            <h2 style="color:red"> 학번, 히스넷 아이디, <br/>
-             혹은 히스넷 비밀번호가 <br/>
-             일치하지 않습니다. </h2>
+            <h2>입력값이 올바르지 않습니다.</h2>
+            <h3> 1. 학번이 올바른지 확인하세요. <br/>
+             2. 히즈넷 아이디를 확인하세요. <br/>
+             3. 히즈넷 비밀번호를 확인하세요. </h3>
           
              <p>&nbsp;</p>
               <a href = "/mysite2/Confirm"><input type="button" id="return" value="돌아가기" class="btn btn-info"></a>

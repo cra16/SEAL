@@ -1,0 +1,29 @@
+.qna_sub a {
+    color: black;
+}
+
+.ans, .ans a {
+    font-size: 13px;
+    color: darkblue;
+}
+
+.qna_content {
+    padding-top: 15px;
+}
+
+.reply {
+    text-align: right;
+    padding-top: 15px;
+}
+
+#qna_border_q {
+    border: 3px solid #84BDE0;
+}
+
+#qna_border_a {
+    border: 3px solid #EBA2AE;
+}
+
+.qna_div {
+    margin-top: 30px;
+}

@@ -2,8 +2,10 @@
 {% extends "base.html"%}
          
 	{% block head%}	
-        {%load staticfiles%}
-		
+
+         {%load staticfiles%}
+			
+		<title>{%block title%}▒ SEAL ▒{%endblock%}</title>
 		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
         <script type="text/javascript" src="{% static "js/schedule.js" %}"></script>
@@ -38,20 +40,20 @@
               <input name="hidden-field" type="hidden">
               <div class="menu">
                 <div class="item" data-value="0">---전체---</div>
-                <div class="item" data-value="1">글로벌리더십학부</div>
-                <div class="item" data-value="2">창의융합교육원</div>
-                <div class="item" data-value="3">Global Edison Academy</div>
-                <div class="item" data-value="4">국제어문학부</div>
-                <div class="item" data-value="5">언론정보문화학부</div>
-                <div class="item" data-value="6">경영경제학부</div>
-                <div class="item" data-value="7">법학부</div>
-                <div class="item" data-value="8">상담심리사회복지학부</div>
-                <div class="item" data-value="9">생명과학부</div>
-                <div class="item" data-value="10">전산전자공학부</div>
-                <div class="item" data-value="11">산업정보디자인학부</div>
-                <div class="item" data-value="12">기계제어공학부</div>
-                <div class="item" data-value="13">공간환경시스템공학부</div>
-                <div class="item" data-value="14">산업교육학부</div>
+                <div class="item" data-value="0001">글로벌리더십학부</div>
+                <div class="item" data-value="0009">창의융합교육원</div>
+                <div class="item" data-value="0010">Global Edison Academy</div>
+                <div class="item" data-value="0011">국제어문학부</div>
+                <div class="item" data-value="0012">언론정보문화학부</div>
+                <div class="item" data-value="0021">경영경제학부</div>
+                <div class="item" data-value="0022">법학부</div>
+                <div class="item" data-value="0024">상담심리사회복지학부</div>
+                <div class="item" data-value="0033">생명과학부</div>
+                <div class="item" data-value="0071">전산전자공학부</div>
+                <div class="item" data-value="0074">산업정보디자인학부</div>
+                <div class="item" data-value="0077">기계제어공학부</div>
+                <div class="item" data-value="0078">공간환경시스템공학부</div>
+                <div class="item" data-value="0090">산업교육학부</div>
               </div>
             </div> 
           </div>
@@ -63,31 +65,31 @@
               <input name="hidden-field" type="hidden">
               <div class="menu">
                 <div class="item" data-value="0">---전체---</div>
-                <div class="item" data-value="1">신앙1</div>
-                <div class="item" data-value="2">인성1</div>
-                <div class="item" data-value="3">인성2</div>
-                <div class="item" data-value="4">신앙2</div>
-                <div class="item" data-value="5">세계관1</div>
-                <div class="item" data-value="6">세계관2</div>
-                <div class="item" data-value="7">인문</div>
-                <div class="item" data-value="8">역사</div>
-                <div class="item" data-value="9">사회</div>
-                <div class="item" data-value="10">수학</div>
-                <div class="item" data-value="11">자연</div>
-                <div class="item" data-value="12">신앙3</div>
-                <div class="item" data-value="13">리더십</div>
-                <div class="item" data-value="14">예술</div>
-                <div class="item" data-value="15">전공기초</div>
-                <div class="item" data-value="16">외국어</div>
-                <div class="item" data-value="17">전공탐색</div>
-                <div class="item" data-value="18">제2외국어</div>
-                <div class="item" data-value="19">소통및융복합</div>
-                <div class="item" data-value="20">ICT융합기초</div>
-                <div class="item" data-value="21">인문학</div>
-                <div class="item" data-value="22">사회과학</div>
-                <div class="item" data-value="23">자연과학</div>
-                <div class="item" data-value="24">리더십및문제해결</div>
-                <div class="item" data-value="25">스포츠</div>
+                <div class="item" data-value="W04">신앙1</div>
+                <div class="item" data-value="W05">인성1</div>
+                <div class="item" data-value="W06">인성2</div>
+                <div class="item" data-value="W07">신앙2</div>
+                <div class="item" data-value="W08">세계관1</div>
+                <div class="item" data-value="W09">세계관2</div>
+                <div class="item" data-value="W10">인문</div>
+                <div class="item" data-value="W11">역사</div>
+                <div class="item" data-value="W12">사회</div>
+                <div class="item" data-value="W13">수학</div>
+                <div class="item" data-value="W14">자연</div>
+                <div class="item" data-value="W15">신앙3</div>
+                <div class="item" data-value="W16">리더십</div>
+                <div class="item" data-value="W17">예술</div>
+                <div class="item" data-value="W18">전공기초</div>
+                <div class="item" data-value="W19">외국어</div>
+                <div class="item" data-value="W22">전공탐색</div>
+                <div class="item" data-value="W24">제2외국어</div>
+                <div class="item" data-value="W25">소통및융복합</div>
+                <div class="item" data-value="W26">ICT융합기초</div>
+                <div class="item" data-value="W27">인문학</div>
+                <div class="item" data-value="W28">사회과학</div>
+                <div class="item" data-value="W29">자연과학</div>
+                <div class="item" data-value="W30">리더십및문제해결</div>
+                <div class="item" data-value="W31">스포츠</div>
                 <div class="item" data-value="W32">영어1</div>
                 <div class="item" data-value="W33">영어2</div>
                 <div class="item" data-value="W34">기독교신앙기초1</div>

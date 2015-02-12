@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang='ko'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.js"></script>
+    <script type="text/javascript" src="../m_js/feed.js"></script>
+    <script type="text/javascript" src="../m_js/jquery-2.1.3.min.js"></script>
+    <title>▒ SEAL ▒</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../m_css/main.css">
+   
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+    
+    <script type="text/javascript" src="../m_js/qna.js"></script>
+    <script type="text/javascript" src="../m_js/index.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../m_css/semantic.css">
+    <script type="text/javascript" src="../m_js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../m_css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/feed.css">
+    <link rel="stylesheet" type="text/css" href="../m_css/seal_menubar.css">
+    
+  </head>
+
+  <body>
+    <!-- Preloader -->
+
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="index.html">SEAL</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+          <ul class="nav navbar-nav navbar-left">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">MENU
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="sealmypage.html">My Page</a></li>
+                <li><a href="schedule.html">My Schedule</a></li>
+                <li><a href="mycourses.html">My Courses</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">HELP
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="qna.html">Q&A</a></li>
+                <li><a href="notice.html">공지사항</a></li>
+                <li><a href="subscribe_report.html">신고</a></li>
+                <li><a href="subscribe_improve.html">개선요구사항</a></li>
+                <li><a href="sitemap.html">SITEMAP</a></li> 
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="containerss"></div>
+
+    <div>
+
+      <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> Q&A</h2>
+
+      <div id="subscribe" class="ui column">
+        
+      	<form class="ui form" action="post">
+          <h4 class="ui dividing header">글쓰기</h4>
+          <div class="field">
+          	<label for="msg-title-label">제목 : </label>
+          	<input type="text" name="msg-title-input" placeholder="Title">
+          </div>
+          <div class="field">
+          	<label for="msg-body-label">본문 : </label>
+          	<textarea name="msg-body-txtarea" id="msg-body-txtarea" cols="30" rows="10" placeholder="Body" maxlength="500"></textarea>
+          </div>
+          <a href="qna.html" class="ui right floated red button" style="margin-left:8px">취소</a>
+          <a href="qna.html" id="submit_qna" class="ui right floated blue button">등록</a>
+        </form>
+
+      </div>
+
+      <div style="padding-bottom:50px"></div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+      <div class="ui vertical feature segment">
+        <div class="ui very relaxed column grid">   
+          <div class="wide column">
+            <div class="ui four column center aligned stackable divided grid">
+
+              <div class="column">
+                <div id="book" class="ui icon header">
+                  <i class="glyphicon glyphicon-book"></i><br />STRONG Students
+                </div>
+                <p>We are here to help students take the right courses to improve themseleves!</p>
+                <a class="ui button" href="http://sugang.handong.edu/">Register Courses NOW</a>
+              </div>
+
+              <div class="column">
+                <div id="pencil" class="ui icon header">
+                  <i class="glyphicon glyphicon-pencil"></i><br />Wanted Features
+                </div>
+                <p>We provide valid information about powerful courses that suits just for you.</p>
+                <a class="ui button" href="file:///C:/workspace/html%20project%20practice/index.html">www.SEAL.com</a>
+              </div>
+                          
+              <div class="column">
+                <div id="heart" class="ui icon header">
+                  <i class="glyphicon glyphicon-heart"></i><br />Agreeable Contents
+                </div>
+                <p>Check out the reliable comments from your professor!</p>
+                <p><a class="ui button" href="#">Check it out</a></p>
+              </div>
+
+              <div class="column">
+                <div id="eye" class="ui icon header">
+                  <i class="glyphicon glyphicon-eye-open"></i><br />Need your attention
+                </div>
+                <p>Why not change the world? We respect the Honor Code.</p>
+                <a class="ui button" href="#">Honor Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="bottom" class="ui footer vertical segment">
+      <div class="ui page grid">
+        <div class="center aligned column">
+          <span id="bottomtxt">Powered by CRA</span>
+        </div>
+      </div>
+    </div>
+
+    
+    <script type="text/javascript" src="../m_js/semantic.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <!-- Preloader -->
+    <script type="text/javascript">
+      //<![CDATA[
+      $(window).load(function() { // makes sure the whole site is loaded
+        $('#status').fadeIn(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({'overflow':'visible'});
+      });
+      //]]>
+    </script>
+
+  </body>
+</html>

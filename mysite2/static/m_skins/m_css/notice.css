@@ -1,0 +1,11 @@
+#notice_border {
+    border: 3px dotted #000;
+}
+
+#qna_border_a {
+    border: 3px solid #EBA2AE;
+}
+
+.qna_div {
+    margin-top: 30px;
+}

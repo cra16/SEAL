@@ -1,0 +1,21 @@
+#about_detail {
+	padding: 20px;
+}
+
+#section {
+	padding: 20px;
+	border: 1px solid #87cefa;
+	border-radius: 10px;
+	background-color: #b0e0e6;
+	box-shadow: 3px 3px 1px #888888;
+	margin: 20px;
+}
+
+#sealcap {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#h_sectiondivider {
+	border: none;
+}

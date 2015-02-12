@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
+from index.models import *
 
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -29,27 +30,21 @@ def loginCheck(request):
 				auth_login(request,user)
 				
 				##메인 페이지 전공과 교양 보여주는 페이지
-				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
+				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[0:5]
 
 				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 				
+				PageBoard=PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+
 				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
-				PageInformation1 = [0,0,0];
-				PageInformation2 = [0,0,0];
-				PageInformation3 = [0,0,0];
-				
-				PageInformation1[0] = 1
-				PageInformation2[0] = 1
-				PageInformation3[0] = 1
-				
-				PageInformation1[1] = 1
-				PageInformation2[1] = 1
-				PageInformation3[1] = 1
-		
+				PageInformation1 = [1,1,1];
+				PageInformation2 = [1,1,1];
+				PageInformation3 = [1,1,1];
+						
 				##페이지 넘기는 기능
 				if TotalCount1<11:
 					PageInformation1[2] = 11
@@ -74,9 +69,7 @@ def loginCheck(request):
 
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard1':PageBoard1,
-					   'PageBoard2':PageBoard2,
-					   'PageBoard3':PageBoard3,
+					   'PageBoard':PageBoard,
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
@@ -93,26 +86,19 @@ def loginCheck(request):
 		##조만간 패치하겠지만 위와 마찬가지 기능
 		else:
 	
-				PageBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-				PageBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-				PageBoard3 = Lecture.objects.order_by('-id')[0:5]
+				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
+				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[0:5]
 			
 				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
 				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
 				TotalCount3 =  Lecture.objects.count()
 
-				PageInformation1 = [0,0,0];
-				PageInformation2 = [0,0,0];
-				PageInformation3 = [0,0,0];
-				
-				PageInformation1[0] = 1
-				PageInformation2[0] = 1
-				PageInformation3[0] = 1
-				
-				PageInformation1[1] = 1
-				PageInformation2[1] = 1
-				PageInformation3[1] = 1
-		
+				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+				PageInformation1 = [1,1,1];
+				PageInformation2 = [1,1,1];
+				PageInformation3 = [1,1,1];
+			
 
 				if TotalCount1<11:
 					PageInformation1[2] = TotalCount1
@@ -137,9 +123,7 @@ def loginCheck(request):
 				Active = ["active","",""]
 				return render_to_response("index.html",
 					  {'user':request.user,
-					   'PageBoard1':PageBoard1,
-					   'PageBoard2':PageBoard2,
-					   'PageBoard3':PageBoard3,
+					   'PageBoard':PageBoard,
 					   'TotalCount1' : range(1,11),
 					   'TotalCount2' : range(1,11),
 					   'TotalCount3' : range(1,11),
@@ -246,4 +230,82 @@ def Register(request):
 		return render_to_response('login.html')
 
 
-# Create your views here.
+
+##main 페이지 강의 보여주는 기능(로그인에 쓰는거)
+def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
+	PageBoard=[[],[],[]]
+
+
+	for Board in TotalBoard1:
+		try:
+			Board1 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board1 = None
+		if Board1 is not None:
+			Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
+			Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
+			Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
+			Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
+			Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
+			Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
+			PageBoard[0].append(Board1)
+		else:
+			Board1 = Total_Evaluation(CourseName=Board)
+			Board1.Total_Speedy =5
+			Board1.Total_Reliance =5
+			Board1.Total_Helper = 5
+			Board1.Total_Question = 5
+			Board1.Total_Exam = 5
+			Board1.Total_Homework = 5
+			Board1.Total_Count =1
+			PageBoard[0].append(Board1)
+	for Board in TotalBoard2:
+		try:
+			Board2 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board2 = None
+
+		if Board2 is not None:
+			Board2.Total_Speedy = Board2.Total_Speedy/Board2.Total_Count
+			Board2.Total_Reliance = Board2.Total_Reliance/Board2.Total_Count
+			Board2.Total_Helper = Board2.Total_Helper/Board2.Total_Count
+			Board2.Total_Question = Board2.Total_Question/Board2.Total_Count
+			Board2.Total_Exam = Board2.Total_Exam/Board2.Total_Count
+			Board2.Total_Homework = Board2.Total_Homework/Board2.Total_Count
+			PageBoard[1].append(Board2)
+		else:
+			Board2 = Total_Evaluation(CourseName=Board)
+			Board2.Total_Speedy =5
+			Board2.Total_Reliance =5
+			Board2.Total_Helper = 5
+			Board2.Total_Question = 5
+			Board2.Total_Exam = 5
+			Board2.Total_Homework = 5
+			Board2.Total_Count =1
+			PageBoard[1].append(Board2)
+	for Board in TotalBoard3:
+		try:
+			Board3 = Total_Evaluation.objects.get(CourseName=Board)
+		except :
+			Board3 = None
+		if Board3 is not None:
+			Board3.Total_Speedy = Board3.Total_Speedy/Board3.Total_Count
+			Board3.Total_Reliance = Board3.Total_Reliance/Board3.Total_Count
+			Board3.Total_Helper = Board3.Total_Helper/Board3.Total_Count
+			Board3.Total_Question = Board3.Total_Question/Board3.Total_Count
+			Board3.Total_Exam = Board3.Total_Exam/Board3.Total_Count
+			Board3.Total_Homework = Board3.Total_Homework/Board3.Total_Count
+			PageBoard[2].append(Board3)
+		else:
+			Board3 = Total_Evaluation(CourseName=Board)
+			Board3.Total_Speedy =5
+			Board3.Total_Reliance =5
+			Board3.Total_Helper = 5
+			Board3.Total_Question = 5
+			Board3.Total_Exam = 5
+			Board3.Total_Homework = 5
+			Board3.Total_Count =1
+			PageBoard[2].append(Board3)
+	return PageBoard
+
+	# Create your views here.

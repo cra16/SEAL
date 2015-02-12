@@ -1,0 +1,116 @@
+#Swan {
+	font-family: 'Fredoka One', cursive;
+    color: #87CEFA;
+    font-size: 30px;
+}
+
+.containerss {
+    height: 100px;
+}
+
+#recommendtop > a {
+    text-decoration: none;
+}
+
+#likebtn{
+    margin-top: 2%;
+    margin-left: 2%;
+    height: 100px;
+}
+
+#likebutton{
+    border: none;
+    background-color: white;
+}
+
+#likebutton > i {
+    font-size: 30px;
+    margin: -30px;
+}
+
+/* Preloader */
+
+#preloader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff; /* change if the mask should have another color then white */
+    z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%; /* centers the loading animation horizontally one the screen */
+    top:50%; /* centers the loading animation vertically one the screen */
+    background-image:url(loader.gif); /* path to your loading animation */
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+#contents {
+    padding-top: 60px;
+    padding-bottom: 200px;
+}
+
+div {
+display: block;
+}
+
+.cname {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.glyphicon.glyphicon-heart {
+    font-size: 40px;
+    color: red;
+}
+
+#book > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#pencil > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#heart > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#eye > i{
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#logout {
+    font-size: 12px;
+    font-weight: normal;
+    color: red;
+}
+
+#firstcourse, #secondcourse, #thirdcourse, #fourthcourse, #fifthcourse, #sixthcourse, #seventhcourse {
+    float: left;
+    margin-right: 20px;
+}
+
+#recommendtop {
+    margin-bottom: 20px;
+}
+
+#bottom {
+    background-color: #87cefa;
+    width: 100%;
+}
+
+#bottomtxt {
+    color: #ffffff;
+}

@@ -193,22 +193,8 @@ $('#sk74').slider('disable');
 $("[data-toggle=tooltip]").tooltip();
 
 
-var	ccode = document.getElementsByName('ccode')
-var cname = document.getElementsByName('cname')
-var cprof = document.getElementsByName('cprof')
-
-var likenum1 = 120;
-   
-
-var elikenum1 = document.getElementById('likenum1');
 
 
-for(var i=0; i<ccode.length; i++)
-{
-	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
-	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
-	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
-}
 
-elikenum1.textContent = likenum1;
+
 });

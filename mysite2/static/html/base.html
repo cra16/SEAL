@@ -33,6 +33,16 @@
         font-family: Helvetica, sans-serif;
         font-size: 12px;
       }
+      #bottom {
+        margin-top: 10px;
+        background-color: #ffffff;
+        width: 100%;
+      }
+
+      #bottomtxt {
+        font-weight: bold;
+        color: #87cefa;
+      }
     </style>
     
     {% block head %}
@@ -40,7 +50,7 @@
     {% endblock%}
 
     <title> {% block title %} SWAN - Login {% endblock %}</title>
-	
+  
 
 
   </head>
@@ -48,10 +58,11 @@
    
    {% if not user == None%}
     <!-- Preloader -->
-  	
+    
     <div id="preloader">
       <div id="status">&nbsp;</div>
     </div>
+
 
     <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
@@ -191,6 +202,17 @@
     </best>
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+
+  <div class="col-sm-12">
+    <div id="bottom" class="ui footer vertical segment">
+      <div class="ui grid">
+        <div class="center aligned column">
+          <span id="bottomtxt">Powered by CRA</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

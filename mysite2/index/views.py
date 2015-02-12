@@ -72,49 +72,49 @@ def Recommend_Write(request): #추천 강의 DB입력
                 return HttpResponseRedirect("/mysite2")
         else:
 					#form 가져오기
-                if request.method =="POST":
-                        new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
-                        new_CreatedID = Profile.objects.get(User= request.user)
-                        new_Speedy=request.POST['sl1']
-                        new_Reliance=request.POST['sl2']
-                        new_Helper=request.POST['sl3']
-                        new_Question=request.POST['sl4']
-                        new_Exam=request.POST['sl5']
-                        new_Homework=request.POST['sl6']
-                        new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
-                        new_Eval.save()
+					if request.method =="POST":
+						new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
+						new_CreatedID = Profile.objects.get(User= request.user)
+						new_Speedy=request.POST['sl1']
+						new_Reliance=request.POST['sl2']
+						new_Helper=request.POST['sl3']
+						new_Question=request.POST['sl4']
+						new_Exam=request.POST['sl5']
+						new_Homework=request.POST['sl6']
+						new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
+						new_Eval.save()
 
 
 
-                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
+						L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
 
-                        try:
-                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
+						try:
+								T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
 
-                        except:
-                                T_Eval =None 
+						except:
+								T_Eval =None 
 
 
 
-                        if T_Eval is None: #데이터 없을시 Table 생성
+						if T_Eval is None: #데이터 없을시 Table 생성
 
-                                Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
-                                Total_Eval.save()
-                        else: #update
-                                T_Eval.Total_Speedy += int(new_Speedy)
-                                T_Eval.Total_Reliance += int(new_Reliance)
-                                T_Eval.Total_Helper += int(new_Helper)
-                                T_Eval.Total_Question += int(new_Question)
-                                T_Eval.Total_Exam += int(new_Question)
-                                T_Eval.Total_Homework += int(new_Homework)
-                                T_Eval.Total_Count += int(new_Homework)
-                                T_Eval.save()
+								Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
+								Total_Eval.save()
+						else: #update
+								T_Eval.Total_Speedy += int(new_Speedy)
+								T_Eval.Total_Reliance += int(new_Reliance)
+								T_Eval.Total_Helper += int(new_Helper)
+								T_Eval.Total_Question += int(new_Question)
+								T_Eval.Total_Exam += int(new_Question)
+								T_Eval.Total_Homework += int(new_Homework)
+								T_Eval.Total_Count += int(new_Homework)
+								T_Eval.save()
 						
 						URL = "/mysite2/Course/"+str(request.session['Recommend_ID'])
-                        return render_to_response("course.html",{'user':request.user,})
+						return render_to_response("course.html",{'user':request.user,})
 
-                else:
-                        return HttpResponseRedirect("/mysite2")
+					else:
+						return HttpResponseRedirect("/mysite2")
 
 
 		
@@ -217,31 +217,31 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
 
-	if request.user.username =="":
-                return  HttpResponseRedirect("/mysite2")
-	else:
-                try:
-                        offset = int(offset)
-                except:
-                        raise Http404()
+		if request.user.username =="":
+				return  HttpResponseRedirect("/mysite2")
+		else:
+				try:
+						offset = int(offset)
+				except:
+						raise Http404()
 
 				 #해당 강의 전체 추천한 Data DB 불러오기
 				try:
-                        CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-                        CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-                        CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-                        CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-                        CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-                        CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-                        CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-                except:
-                        CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
-                        CourseBoard.Total_Speedy=5
-                        CourseBoard.Total_Reliance =5
-                        CourseBoard.Total_Question=5
-                        CourseBoard.Total_Helper=5
-                        CourseBoard.Total_Exam =5
-                        CourseBoard.Total_Homework = 5
+						CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+						CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+						CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+						CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+						CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+						CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+						CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+				except:
+						CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
+						CourseBoard.Total_Speedy=5
+						CourseBoard.Total_Reliance =5
+						CourseBoard.Total_Question=5
+						CourseBoard.Total_Helper=5
+						CourseBoard.Total_Exam =5
+						CourseBoard.Total_Homework = 5
 
 				
 
@@ -250,13 +250,13 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
 				try:
-                        MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
+						MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
                                 #자신 이외 다른사람이 추천한 정보 보여줌
-                except:
-                        MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=request.user))
+				except:
+						MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=request.user))
 
 
-				OtherCourseBoard = Course_Evaluation.objects.filter(CourseName = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
+				OtherCourseBoard = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
 
 				return render_to_response("course.html",
                                           {'user':request.user,
@@ -484,12 +484,12 @@ def MyCourse(request):
         else:
 			MyProfile = Profile.objects.get(User=request.user)
 			RecommendPage=[]
-			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)[0:MyProfile.RecommendCount]
+			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)[0:MyProfile.RecommendCount+1]
 			for Board1 in UserBoard:
-				RecommendPage.append(Total_Evaluation.objects.get(CourseName = UserBoard[i].Course))
+				RecommendPage.append(Total_Evaluation.objects.get(CourseName = Board1.Course))
 
 
-		return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
+			return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
 
 
 

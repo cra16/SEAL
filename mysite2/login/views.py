@@ -13,6 +13,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from index.models import *
+from index.views import *
 
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -30,15 +31,14 @@ def loginCheck(request):
 				auth_login(request,user)
 				
 				##메인 페이지 전공과 교양 보여주는 페이지
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-				TotalBoard3 = Lecture.objects.order_by('-id')[0:5]
-
-				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
-				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
-				TotalCount3 =  Lecture.objects.count()
+				CourseCode = MajorSelect(request.user)
 				
-				PageBoard=PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+				
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
+				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
+				T_Count3 = Lecture.objects.count()
+
+		
 
 				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
 				PageInformation1 = [1,1,1];
@@ -46,19 +46,30 @@ def loginCheck(request):
 				PageInformation3 = [1,1,1];
 						
 				##페이지 넘기는 기능
-				if TotalCount1<11:
+				if T_Count1<11:
 					PageInformation1[2] = 11
 				else:
-					PageInformation1[2] =TotalCount1
-				if TotalCount2<11:
+					PageInformation1[2] =T_Count1
+				if T_Count2<11:
 					PageInformation2[2] = 11
 				else:
-					PageInformation2[2] = TotalCount2
-				if TotalCount3<11:
+					PageInformation2[2] = T_Count2
+				if T_Count3<11:
 					PageInformation3[2] = 11
 				else:
-					PageInformation3[2] = TotalCount3
+					PageInformation3[2] = T_Count3
+
+
+				if CourseCode[0] !="ENG":
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				else:
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5] 
 				
+				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+
 				##독립적 페이지 위치를 다음 페이지 넘기는 것할 때 정보 넘김
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2
@@ -85,36 +96,42 @@ def loginCheck(request):
 			return render_to_response('login.html')
 		##조만간 패치하겠지만 위와 마찬가지 기능
 		else:
-	
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[0:5]
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[0:5]
-				TotalBoard3 = Lecture.objects.order_by('-id')[0:5]
-			
-				TotalCount1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP")).count()
-				TotalCount2 =  Lecture.objects.filter(Code__contains = "SIE").count()
-				TotalCount3 =  Lecture.objects.count()
+				CourseCode = MajorSelect(request.user)
+				
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
+				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
+				T_Count3 = Lecture.objects.count()
 
-				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+
+				
 				PageInformation1 = [1,1,1];
 				PageInformation2 = [1,1,1];
 				PageInformation3 = [1,1,1];
 			
 
-				if TotalCount1<11:
-					PageInformation1[2] = TotalCount1
+				if T_Count1<11:
+					PageInformation1[2] = T_Count1
 				else:
 					PageInformation1[2] =11
-				if TotalCount2<11:
-					PageInformation2[2] = TotalCount2
+				if T_Count2<11:
+					PageInformation2[2] = T_Count2
 				else:
 					PageInformation2[2] = 11
-				if TotalCount3<11:
-					PageInformation3[2] = TotalCount3
+				if T_Count3<11:
+					PageInformation3[2] = T_Count3
 				else:
 					PageInformation3[2] = 11
 
+				if CourseCode[0] !="ENG":
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1]))[0:5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[0:5]
+				else:
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
 				
-				
+				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
+			
 
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2

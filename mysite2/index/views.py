@@ -11,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 def MyPage(request):	#MyPage 루트
 
 
@@ -43,317 +47,11 @@ def Judgement(request): # 신고 게시판 기능
 	else:
 		return render_to_response("subscribe_report.html",{'user':request.user})
 
-@csrf_exempt
-def Recommend(request, offset): #강의 추천 스크롤 기능
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		try:
-			offset = int(offset)
-		except:
-			raise Http404()
-
-
-		
-
-		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
-		request.session['Recommend_ID'] = offset #offset 미리 저장
-
-		return render_to_response("recommend.html",
-                                          {'user':request.user,
-                                           'CourseBoard':CourseBoard,
-                                         #  'TotalCount' : range(0,TotalCount)
-											})
-@csrf_exempt
-def Recommend_Write(request): #추천 강의 DB입력
-
-        if request.user.username=="":
-                return HttpResponseRedirect("/mysite2")
-        else:
-					#form 가져오기
-                if request.method =="POST":
-                        new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
-                        new_CreatedID = Profile.objects.get(User= request.user)
-                        new_Speedy=request.POST['sl1']
-                        new_Reliance=request.POST['sl2']
-                        new_Helper=request.POST['sl3']
-                        new_Question=request.POST['sl4']
-                        new_Exam=request.POST['sl5']
-                        new_Homework=request.POST['sl6']
-                        new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
-                        new_Eval.save()
-
-
-
-                        L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
-
-                        try:
-                                T_Eval=Total_Evaluation.objects.get(CourseName=L_Eval)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
-
-                        except:
-                                T_Eval =None 
-
-
-
-                        if T_Eval is None: #데이터 없을시 Table 생성
-
-                                Total_Eval = Total_Evaluation(CourseName = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
-                                Total_Eval.save()
-                        else: #update
-                                T_Eval.Total_Speedy += int(new_Speedy)
-                                T_Eval.Total_Reliance += int(new_Reliance)
-                                T_Eval.Total_Helper += int(new_Helper)
-                                T_Eval.Total_Question += int(new_Question)
-                                T_Eval.Total_Exam += int(new_Question)
-                                T_Eval.Total_Homework += int(new_Homework)
-                                T_Eval.Total_Count += int(new_Homework)
-                                T_Eval.save()
-						
-						URL = "/mysite2/Course/"+str(request.session['Recommend_ID'])
-                        return render_to_response("course.html",{'user':request.user,})
-
-                else:
-                        return HttpResponseRedirect("/mysite2")
 
 
 		
 
 
-@csrf_exempt
-def QnAMain(request): #Q&A 메인 
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else :
-		if request.method =="POST":
-			new_Text=request.POST['msg-body-txtarea']		
-			new_TextWriter = request.user.username
-			new_TextName = request.POST['msg-title-input']
-			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
-			new_QnA.save()
-		#페이지 넘기는 기능
-		count=QnA_Board.objects.count()
-
-		TotalCount = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
-
-		if TotalCount ==1:
-			Next = 1
-		else:
-			Next =TotalCount
-		Previous=1
-		
-		PageBoard = QnA_Board.objects.order_by('-id')[0:7]
-		return render_to_response("QnA.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
-					   })
-
-
-def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else :	
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
-
-		#페이지 총 수
-		PageFirst = (offset-1)*6 
-		PageLast = (offset-1)*6 + 6
-		PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
-		#######	게시판 페이지 넘기는 기능
-
-		Page = dict()
-		count = QnA_Board.objects.count()
-		TotalCount = (count/8)+1
-		if offset == 1:
-			if TotalCount ==1:
-				Next = offset
-			else : 
-				Next =offset +1
-			Previous=1
-		elif offset ==TotalCount:
-			Previous=offset-1
-			Next = TotalCount
-		else:
-			Previous = offset-1
-			Next = offset +1
-        
-		return render_to_response("QnA.html",
-					  {'user':request.user, 
-					   'PageBoard':PageBoard, 	
-					   'TotalCount' : range(0,TotalCount), 
-	       			   'Previous' : Previous, 
-					   'Next' : Next} )
-	
-def QnAWrite(request): #Q&A Write 기능
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("subscribe_faq.html",{'user':request.user})
-
-def QnARead(request, offset): #Q&A read 기능
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
-
-
-		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
-
-	
-		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
-
-
-def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
-
-	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
-
-	if request.user.username =="":
-                return  HttpResponseRedirect("/mysite2")
-	else:
-                try:
-                        offset = int(offset)
-                except:
-                        raise Http404()
-
-				 #해당 강의 전체 추천한 Data DB 불러오기
-				try:
-                        CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-                        CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-                        CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-                        CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-                        CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-                        CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-                        CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-                except:
-                        CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
-                        CourseBoard.Total_Speedy=5
-                        CourseBoard.Total_Reliance =5
-                        CourseBoard.Total_Question=5
-                        CourseBoard.Total_Helper=5
-                        CourseBoard.Total_Exam =5
-                        CourseBoard.Total_Homework = 5
-
-				
-
-				
-				
-
-				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
-				try:
-                        MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
-                                #자신 이외 다른사람이 추천한 정보 보여줌
-                except:
-                        MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=request.user))
-
-
-				OtherCourseBoard = Course_Evaluation.objects.filter(CourseName = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
-
-				return render_to_response("course.html",
-                                          {'user':request.user,
-                                           'CourseBoard':CourseBoard,
-                                           'MyCourseBoard':MyCourseBoard,
-                                           'OtherCourseBoard':OtherCourseBoard,
-                                          
-                                        
-
-                                           })
-
-
-
-
-
-			
-			
-
-				
-
-
-def NoticeMain(request):#Notice 기능
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		count=Notice_Board.objects.count()
-
-		TotalCount = (count/8)+1
-
-		if TotalCount ==1:
-			Next = 1
-		else:
-			Next = 2
-		Previous=1
-	
-		PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
-		return render_to_response("notice.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
-					   })
-
-def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else :	
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
-
-		#페이지 수 정보
-		PageFirst = (offset-1)*6
-		PageLast = (offset-1)*6 + 6
-		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
-		#페이지 넘기는 기능
-
-		Page = dict()
-		count = Notice_Board.objects.count()
-		TotalCount = (count/8)+1
-		if offset == 1:
-			if TotalCount ==1:
-				Next = offset
-			else : 
-				Next =offset +1
-			Previous=1
-		elif offset ==TotalCount:
-			Previous=offset-1
-			Next = TotalCount
-		else:
-			Previous = offset-1
-			Next = offset +1 
-       
-		return render_to_response("notice.html",
-					  {'user':request.user, 
-					   'PageBoard':PageBoard,
-					   'TotalCount' : range(0,TotalCount), 
-	       			   'Previous' : Previous, 
-					   'Next' : Next} )
-
-def Notice_Read(request, offset): #Notice Read 기능
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
-
-		Current = Notice_Board.objects.filter(id=offset).get()
-		
-	
-		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
 
 def Main(request, offset): #Main 기능
@@ -384,11 +82,12 @@ def Main(request, offset): #Main 기능
 				##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
 				##다른 개발자분이 좀 알고리즘 잘짜서 더 최적화해주세요..(발적화임..))
 				
+				CourseCode = MajorSelect(request.user)
 				
 				
-				T_Count1 = Lecture.objects.filter(Q(Code__contains="ECE") | Q(Code__contains="ITP")).count()
-				T_Count2 = Lecture.objects.filter(Code__contains ="SIE").count()
-				T_Count3=Lecture.objects.count()
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
+				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
+				T_Count3 = Lecture.objects.count()
 				
 				
 				
@@ -408,8 +107,8 @@ def Main(request, offset): #Main 기능
 							PageInformation1[0] = 1
 							PageInformation1[2] = (offset - (offset%10))+11
 					else:
-						PageInformation[0] = 1
-						PageInformation[2] = T_Count1
+						PageInformation1[0] = 1
+						PageInformation1[2] = T_Count1
 
 					Active[0] = "active" #
 
@@ -442,8 +141,13 @@ def Main(request, offset): #Main 기능
 						PageInformation3[2] = T_Count1
 					Active[2] = "active"
 
-				TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-				TotalBoard2 = Lecture.objects.filter(Code__contains = "SIE")[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				#TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+				if CourseCode[0] !="ENG":
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0])  | Q(Code__contains= CourseCode[1]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+				else:
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
 				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
 
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
@@ -453,6 +157,10 @@ def Main(request, offset): #Main 기능
 				request.session['PageInformation3'] = PageInformation3
 				
 				
+				Data = Profile.objects.get(User = request.user)
+
+				String = Data.FirstMajor
+
 				return render_to_response("index.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard,
@@ -464,6 +172,7 @@ def Main(request, offset): #Main 기능
 					   'PageInformation3' : PageInformation3,
 					   'Path':URL_Path,
 					   'Active':Active,
+					   'CourseCode' :CourseCode
 					   })
 
 def SubScript(request):
@@ -484,12 +193,12 @@ def MyCourse(request):
         else:
 			MyProfile = Profile.objects.get(User=request.user)
 			RecommendPage=[]
-			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)[0:MyProfile.RecommendCount]
+			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)
 			for Board1 in UserBoard:
-				RecommendPage.append(Total_Evaluation.objects.get(CourseName = UserBoard[i].Course))
+				RecommendPage.append(Total_Evaluation.objects.get(CourseName = Board1.Course))
 
 
-		return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
+			return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
 
 
 
@@ -498,7 +207,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 	PageBoard = [[],[],[]]
 	for Board in TotalBoard1:
 		try:
-			#총 강의 추천된 DB 강의 명으로 호출
+			# 총 강의 추천된 DB 강의 명으로 호출
 			Board1 = Total_Evaluation.objects.get(CourseName=Board)
 		except :
 			Board1 = None
@@ -518,7 +227,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board1.Total_Question = 5
 			Board1.Total_Exam = 5
 			Board1.Total_Homework = 5
-			Board1.Total_Count =1
+			Board1.Total_Count =0
 			PageBoard[0].append(Board1)
 
 	for Board in TotalBoard2:
@@ -542,7 +251,7 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board2.Total_Question = 5
 			Board2.Total_Exam = 5
 			Board2.Total_Homework = 5
-			Board2.Total_Count =1
+			Board2.Total_Count =0
 			PageBoard[1].append(Board2)
 
 	for Board in TotalBoard3:
@@ -566,9 +275,106 @@ def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
 			Board3.Total_Question = 5
 			Board3.Total_Exam = 5
 			Board3.Total_Homework = 5
-			Board3.Total_Count =1
+			Board3.Total_Count =0
 			PageBoard[2].append(Board3)
 	return PageBoard
                                                                       
+def MajorSelect(user):
+		try:
+			Student = Profile.objects.get(User =user)
+		except:
+			return None
+		MajorCode= [[],[],[],[],[],[]]	
+		FirstMajor = str(Student.FirstMajor)
+		SecondMajor = str(Student.SecondMajor)
+			#1전공 선택 하는 조건문
+		if FirstMajor.find("국제") != -1 or FirstMajor.find("영어") != -1:
+			MajorCode[0]="ISE"
+			MajorCode[1]="ISE"
+		elif FirstMajor.find("경영학전공") != -1 or FirstMajor.find("경제학전공")!= -1:
+			MajorCode[0]="GMP"
+			MajorCode[1]="MEC"
+		elif FirstMajor.find("한국법") != -1 or FirstMajor.find("UIL")!= -1:
+			MajorCode[0]="LAW"
+			MajorCode[1]="UIL"
+		elif FirstMajor.find("공연영상")!= -1 or FirstMajor.find("언로정보학")!= -1:
+			MajorCode[0]="CCC"
+			MajorCode[1]="CCC"
+		elif FirstMajor.find("건설공학") != -1 or FirstMajor.find("도시환경")!= -1:
+			MajorCode[0]="CUE"
+			MajorCode[1]="CUE"
+		elif FirstMajor.find("기계공학")!= -1 or FirstMajor.find("전자제어")!= -1 or FirstMajor.find("기전공학")!=-1:
+			MajorCode[0]="HMM"
+			MajorCode[1]="HMM"
+		elif FirstMajor.find("시각디자인")!= -1 or FirstMajor.find("제품디자인")!= -1:
+			MajorCode[0]="IID"
+			MajorCode[1]="IID"
+		elif FirstMajor.find("생명과학")!= -1:
+			MajorCode[0]="BFT"
+			MajorCode[1]="BFT"
+		elif FirstMajor.find("컴퓨터") != -1 or FirstMajor.find("전자") != -1:
+			MajorCode[0]="ECE"
+			MajorCode[1]="ITP"
+		elif FirstMajor.find("상담심리") != -1 or FirstMajor.find("사회복지")!= -1:
+			MajorCode[0]="CSW"
+			MajorCode[1]="CSW"
+		elif FirstMajor.find("에디슨")!= -1 :
+			MajorCode[0]="GEA"
+			MajorCode[1]="GEA"
+		elif FirstMajor.find("영어학과")!= -1 or FirstMajor.find("경영학과")!= -1 or FirstMajor.find("사회복지학과")!= -1:
+			MajorCode[0]="SIE"
+			MajorCode[1]="SIE"
+		else:
+			MajorCode[0]="KKK"
+			MajorCode[1]="GEK"
+			MajorCode[2]="GCS"
+			MajorCode[3]="PCO"
+			MajorCode[4]="ISL"
+			MajorCode[5]="PST"
+
+		if SecondMajor.find("국제")!=-1 or SecondMajor.find("영어")!=-1:
+			MajorCode[2]="ISE"
+			MajorCode[3]="ISE"
+		elif SecondMajor.find("경영학전공")!=-1 or SecondMajor.find("경제학전공")!=-1:
+			MajorCode[2]="GMP"
+			MajorCode[3]="MEC"
+		elif SecondMajor.find("한국법")!=-1 or SecondMajor.find("UIL")!=-1:
+			MajorCode[2]="LAW"
+			MajorCode[3]="UIL"
+		elif SecondMajor.find("공연영상") !=-1 or SecondMajor.find("언로정보학")!=-1:
+			MajorCode[2]="CCC"
+			MajorCode[3]="CCC"
+		elif SecondMajor.find("건설공학") !=-1 or SecondMajor.find("도시환경")!=-1:
+			MajorCode[2]="CUE"
+			MajorCode[3]="CUE"
+		elif SecondMajor.find("기계공학")!=-1 or SecondMajor.find("전자제어")!=-1 or SecondMajor.find("기전공학")!=-1:
+			MajorCode[2]="HMM"
+			MajorCode[3]="HMM"
+		elif SecondMajor.find("시각디자인")!=-1 or SecondMajor.find("제품디자인")!=-1:
+			MajorCode[2]="IID"
+			MajorCode[3]="IID"
+		elif SecondMajor.find("생명과학")!=-1:
+			MajorCode[2]="BFT"
+			MajorCode[3]="BFT"
+		elif SecondMajor.find("컴퓨터")!=-1 or SecondMajor.find("전자")!=-1:
+			MajorCode[2]="ECE"
+			MajorCode[3]="ITP"
+		elif SecondMajor.find("상담심리")!=-1 or SecondMajor.find("사회복지")!=-1:
+			MajorCode[2]="CSW"
+			MajorCode[3]="CSW"
+		elif SecondMajor.find("에디슨")!=-1:
+			MajorCode[2]="GEA"
+			MajorCode[3]="GEA"
+		elif SecondMajor.find("영어학과") !=-1 or SecondMajor.find("경영학과") !=-1or SecondMajor.find("사회복지학과")!=-1:
+			MajorCode[2]="SIE"
+			MajorCode[3]="SIE"
+		else:
+			MajorCode[2]="GCS"
+			MajorCode[3]="PCO"
+			MajorCode[4]="ISL"
+			MajorCode[5]="PST"
+
+
+		return MajorCode
 
 # Create your views here

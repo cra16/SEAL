@@ -50,7 +50,7 @@
     {% endblock%}
 
     <title> {% block title %} SWAN - Login {% endblock %}</title>
-	
+  
 
 
   </head>
@@ -58,7 +58,7 @@
    
    {% if not user == None%}
     <!-- Preloader -->
-  	
+    
     <div id="preloader">
       <div id="status">&nbsp;</div>
     </div>
@@ -160,9 +160,9 @@
                     
       <h3><a href="/mysite2/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
-      <p><span id="label"><a href="/mysite2/MyCourse">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
+      <p><span id="label"><a href="/mysite2/MyCourse">내가 추천한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
 
-      <p id="last"><span id="label"><a href="/mysite2/MyCourse">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
+      <p id="last"><span id="label"><a href="/mysite2/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
 
       <a href="/mysite2/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
 

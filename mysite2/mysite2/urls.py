@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from login.views import *
 from index.views import *
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -19,16 +20,16 @@ urlpatterns = patterns('',
     url(r'^About/$',About),
     url(r'^Schedule/$',Schedule),
     url(r'^Judgement/$',Judgement),
-	url(r'^Recommend/(\d+)$',Recommend),
-	url(r'^Recommend/Recommend_Write$',Recommend_Write),
-	url(r'^QnA/page/(\d+)$',QnA),
-	url(r'^QnA/$',QnAMain),
-	url(r'^QnA/Write/$',QnAWrite),
-	url(r'^Course/(\d+)$',Course),
-	url(r'^QnA/(\d+)/$',QnARead),
-	url(r'^Notice/$',NoticeMain),
-	url(r'^Notice/Page/(\d+)$',Notice),
-	url(r'^Notice/(\d+)/$',Notice_Read),
+	url(r'^Recommend/(\d+)$','Recommend.views.Recommend'),
+	url(r'^Recommend/Recommend_Write$','Recommend.views.Recommend_Write'),
+	url(r'^QnA/page/(\d+)$','QnA.views.QnA'),
+	url(r'^QnA/$','QnA.views.QnAMain'),
+	url(r'^QnA/Write/$','QnA.views.QnAWrite'),
+	url(r'^Course/(\d+)$','Course.views.Course'),
+	url(r'^QnA/(\d+)/$','QnA.views.QnARead'),
+	url(r'^Notice/$','Notice.views.NoticeMain'),
+	url(r'^Notice/Page/(\d+)$','Notice.views.Notice'),
+	url(r'^Notice/(\d+)/$','Notice.views.Notice_Read'),
 	url(r'^FirstMajorPage/(\d+)/$',Main),
 	url(r'^SecondMajorPage/(\d+)/$',Main),
 	url(r'^AllPage/(\d+)/$',Main),
@@ -42,5 +43,4 @@ urlpatterns = patterns('',
 	url(r'^HisnetCheck/$',HisnetCheck),
 	url(r'^Register/$',Register),
 	url(r'^sel_period/(\w+)$', 'schedule.views.SelectPeriod'),
-
 )

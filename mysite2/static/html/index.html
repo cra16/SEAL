@@ -113,16 +113,16 @@
 			var domain2=new Array();
 			var domain3=new Array();
 		</script>
-		   <div class="ui divided very relaxed selection inbox list {{Active.0}} tab" data-tab="unread">
+		    <div class="ui divided very relaxed selection inbox list {{Active.0}} tab" data-tab="unread">
                  {% for PBoard1 in PageBoard.0%}
                         <script>
                                 domain1[{{forloop.counter0}}] ="{{PBoard1.CourseName.id}}"
 
                         </script>
             <div class="ui raised segment grid">
-               <div id="likebtn" class="left floated ui compact segment two wide column">
-				 <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
-				 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
+               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
+			           	 <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+				            <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
                </div>
 
                <div id="firstcourse" class="five wide column">
@@ -146,8 +146,9 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
                </div>
             </div>
-            {%endfor%}
 			
+            {%endfor%}
+        			
 			<center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/FirstMajorPage/{{PageInformation1.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous 
@@ -161,7 +162,7 @@
               </a>
             </div></center>
           </div>
-     
+               
 
 		
       <div class="ui divided very relaxed inbox selection list {{Active.1}} tab" data-tab="saved">
@@ -172,9 +173,9 @@
                         </script>
             <div class="ui raised segment grid">
 
-                 <div id="likebtn1{{forloop.counter}}" class="left floated ui compact segment two wide column">
-				 <center><button id="likebutton1{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
-				 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
+               <div id="likebtn1{{forloop.counter}}" class="left floated ui compact segment two wide column">
+				            <center><button id="likebutton1{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+			           	 <center><span id="likenum{{forloop.counter}}"></span> LIKES</center>
                </div>
 
               <div id="firstcourse" class="five wide column">
@@ -198,7 +199,9 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
             </div>
+		
 			{%endfor%}
+			
 				<center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/SecondMajorPage/{{PageInformation2.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous  
@@ -212,7 +215,7 @@
               </a>
             </div></center>
           </div>
-		
+         
 		    <div class="ui divided very relaxed inbox selection list {{Active.2}} tab" data-tab="all">
 
              {% for PBoard3 in PageBoard.2%}
@@ -253,6 +256,7 @@
               </div>
             </div>
               {% endfor%} 
+			 
 			  <center><div class="ui borderless pagination menu">
               <a class="item" href = "/mysite2/AllPage/{{PageInformation3.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous   

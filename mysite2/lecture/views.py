@@ -52,15 +52,16 @@ def lec_update(request):
 				try:
 					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])
 					if d_lec: # 업데이트 가능한 요소들
-						d_lec.Class =  var[2]
-						d_lec.Credit = var[4]
-						d_lec.Period = var[6]
-						d_lec.ClassRoom = var[7]
-						d_lec.Fix_num = var[8]
-						d_lec.Take_num = var[9]
-						d_lec.EnglishRatio = var[10]
-						d_lec.Professor = var[-1]
-						d_lec.save()
+						d_lec.update(
+							Class=var[2],
+							Credit=var[4],
+							Period=var[6],
+							ClassRoom = var[7],
+							Fix_num = var[8],
+							Take_num = var[9],
+							EnglishRatio = var[10],
+							Professor = var[-1]
+							)
 					else:
 						new_lec = Lecture(
 							Semester=semester,

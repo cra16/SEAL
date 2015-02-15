@@ -81,7 +81,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 								T_Eval.save()
 						
 						URL = "/mysite2/Course/"+str(request.session['Recommend_ID'])
-						return render_to_response("course.html",{'user':request.user,})
+						return HttpResponseRedirect(URL)
 
 					else:
 						return HttpResponseRedirect("/mysite2")

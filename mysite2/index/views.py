@@ -85,7 +85,7 @@ def Main(request, offset): #Main 기능
 				CourseCode = MajorSelect(request.user)
 				
 				
-				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()
 				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
 				T_Count3 = Lecture.objects.count()
 				
@@ -115,7 +115,7 @@ def Main(request, offset): #Main 기능
 				elif URL_Path.find("SecondMajorPage") != -1:
 					PageInformation2[1] = offset
 
-					if T_Count1 >11:
+					if T_Count2 >11:
 						if offset>11:
 							PageInformation2[0] = (offset -(offset%10))-9
 							PageInformation2[2] = (offset -(offset%10))+11
@@ -124,12 +124,12 @@ def Main(request, offset): #Main 기능
 							PageInformation2[2] = (offset - (offset%10))+11
 					else:
 						PageInformation2[0] = 1
-						PageInformation2[2] = T_Count1
+						PageInformation2[2] = T_Count2
 					Active[1] = "active"
 	
 				else:
 					PageInformation3[1] = offset
-					if T_Count1 >11:
+					if T_Count3 >11:
 						if offset>11:
 							PageInformation3[0] = (offset -(offset%10))-9
 							PageInformation3[2] = (offset -(offset%10))+11
@@ -138,16 +138,15 @@ def Main(request, offset): #Main 기능
 							PageInformation3[2] = (offset - (offset%10))+11
 					else:
 						PageInformation3[0] = 1
-						PageInformation3[2] = T_Count1
+						PageInformation3[2] = T_Count3
 					Active[2] = "active"
 
-				#TotalBoard1 = Lecture.objects.filter(Q(Code__contains = "ECE") | Q(Code__contains ="ITP"))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
 				if CourseCode[0] !="ENG":
 					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1]))[0:5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[0:5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
 				else:
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[0:5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[0:5]
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
 				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
 
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
@@ -155,11 +154,8 @@ def Main(request, offset): #Main 기능
 				request.session['PageInformation1'] = PageInformation1
 				request.session['PageInformation2'] = PageInformation2
 				request.session['PageInformation3'] = PageInformation3
+			
 				
-				
-				Data = Profile.objects.get(User = request.user)
-
-				String = Data.FirstMajor
 
 				return render_to_response("index.html",
 					  {'user':request.user,
@@ -172,7 +168,6 @@ def Main(request, offset): #Main 기능
 					   'PageInformation3' : PageInformation3,
 					   'Path':URL_Path,
 					   'Active':Active,
-					   'CourseCode' :CourseCode
 					   })
 
 def SubScript(request):
@@ -291,7 +286,7 @@ def MajorSelect(user):
 		if FirstMajor.find("국제") != -1 or FirstMajor.find("영어") != -1:
 			MajorCode[0]="ISE"
 			MajorCode[1]="None"
-		elif FirstMajor.find("경영학전공") != -1 or FirstMajor.find("경제학전공")!= -1:
+		elif FirstMajor.find("경영학") != -1 or FirstMajor.find("경제학")!= -1:
 			MajorCode[0]="GMP"
 			MajorCode[1]="MEC"
 		elif FirstMajor.find("한국법") != -1 or FirstMajor.find("UIL")!= -1:
@@ -324,8 +319,13 @@ def MajorSelect(user):
 		elif FirstMajor.find("영어학과")!= -1 or FirstMajor.find("경영학과")!= -1 or FirstMajor.find("사회복지학과")!= -1:
 			MajorCode[0]="SIE"
 			MajorCode[1]="None"
+		elif FirstMajor.find("None") != -1:
+			MajorCode[2]="None"
+			MajorCode[3]="None"
+			MajorCode[4]="None"
+			MajorCode[5]="None"
 		else:
-			MajorCode[0]="KKK"
+			MajorCode[0]="ENG"
 			MajorCode[1]="GEK"
 			MajorCode[2]="GCS"
 			MajorCode[3]="PCO"
@@ -335,7 +335,7 @@ def MajorSelect(user):
 		if SecondMajor.find("국제")!=-1 or SecondMajor.find("영어")!=-1:
 			MajorCode[2]="ISE"
 			MajorCode[3]="None"
-		elif SecondMajor.find("경영학전공")!=-1 or SecondMajor.find("경제학전공")!=-1:
+		elif SecondMajor.find("경영학")!=-1 or SecondMajor.find("경제학")!=-1:
 			MajorCode[2]="GMP"
 			MajorCode[3]="MEC"
 		elif SecondMajor.find("한국법")!=-1 or SecondMajor.find("UIL")!=-1:

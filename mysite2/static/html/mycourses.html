@@ -98,18 +98,18 @@
           <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
                 {%for PageBoard in RecommendPage%}
             <div class="ui raised segment">
-              <div class="left floated ui compact segment">
+              <div class="left floated ui compact segment two wide column">
                 <center><a href="/mysite2/Recommend/{{PageBoard.CourseName.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
                 <center><span id="likenum1"></span> LIKES</center>
               </div>
 
-              <div id="firstcourse">
+              <div id="firstcourse" class="five wide column">
                 [<span id="ccode1">{{PageBoard.CourseName.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PageBoard.CourseName.id}}"><span class="cname" id="cname1"></span>{{PageBoard.CourseName.CourseName}}</a></p>
                 <p><a href="#"><span id="cprof1">{{PageBoard.CourseName.Professor}} 교수님</span></a></p>
               </div>
 
-              <div id="recommendtop">
+              <div id="recommendtop" class="seven wide column">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}1C" data-slider-value = "{{PageBoard.Total_Speedy}}"/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
@@ -134,18 +134,18 @@
           <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
 
             <div class="ui raised segment">
-              <div class="left floated ui compact segment">
+              <div class="left floated ui compact segment two wide column">
                 <center><a href="recommend.html"><i class="glyphicon glyphicon-heart"></i></a></center>
                 <center><span id="likenum11"></span> LIKES</center>
               </div>
                     
-              <div id="firstcourse">    
+              <div id="firstcourse" class="five wide column">    
                 [<span id="ccode11"></span>]
                 <p><a href="course.html"><span class="cname" id="cname11"></span></a></p>
                 <p><a href="#"><span id="cprof11"></span></a></p>
               </div>
 
-              <div id="recommendtop">
+              <div id="recommendtop" class="seven wide column">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
                   <input type="text" id="sl111" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl111C"/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />

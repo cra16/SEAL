@@ -87,4 +87,3 @@ def Recommend_Write(request): #추천 강의 DB입력
 						return HttpResponseRedirect("/mysite2")
 
 
-# Create your views here.

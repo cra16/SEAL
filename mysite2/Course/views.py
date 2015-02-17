@@ -53,14 +53,21 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
 				try:
-						MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=request.user))
+						UserProfile=Profile.objects.get(User=request.user)
+						MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=UserProfile))
                                 #자신 이외 다른사람이 추천한 정보 보여줌
 				except:
-						MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=request.user))
+						MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=UserProfile))
 
 
-				OtherCourseBoard = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
-
+				OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
+				OtherCourseBoard = []
+				#접속한 아이디와 중복되는 경우 제거
+				for Board in OtherCourse:
+					if Board.CreatedID == UserProfile:
+							pass
+					else:
+						OtherCourseBoard.append(Board)
 				return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,

@@ -5,6 +5,7 @@
   {% load staticfiles%}
   {% block head%}
 
+  <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
     <style>
       body, input {
         font-family: Helvetica, sans-serif;
@@ -34,7 +35,10 @@
                 
         <p id="ccode_p">[<span id="ccode">{{CourseBoard.CourseName.Code}}</span>]<br />
         <span id="cname">{{CourseBoard.CourseName.CourseName}}</span> 
-        <button class="btn btn-info">듣고싶어!</button> 
+        <form action="/mysite2/Like/" method = "POST">
+        <input type="hidden" name = "CourseData" value ="{{CourseBoard}}">  
+        <button class="btn btn-info">듣고싶어!</button>
+        </form> 
         <a href="/mysite2/Recommend/{{CourseBoard.CourseName.id}}"><button class="btn btn-danger">추천하기!</button></a><br />
         <span id="cprof">{{CourseBoard.CourseName.Professor}}</span></p>
 

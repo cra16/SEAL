@@ -2,18 +2,18 @@
 # -*- coding: euc-kr -*-
 
 from login.forms import *
-from lecture.models import *
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from lecture.models import *#강의 목록
+from django.contrib.auth.decorators import login_required#로그인 허용기능
+from django.contrib.auth import logout #로그아웃 기능
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
-from index.models import *
-from index.views import *
+from django.db.models import Q #데이터 베이스 OR 기능 구현
+from index.models import * #아직 시험중
+from index.views import * #아직 시험중
 
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -33,12 +33,9 @@ def loginCheck(request):
 				##메인 페이지 전공과 교양 보여주는 페이지
 				CourseCode = MajorSelect(request.user)
 				
-				
 				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
 				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
 				T_Count3 = Lecture.objects.count()
-
-		
 
 				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
 				PageInformation1 = [1,1,1];
@@ -59,13 +56,13 @@ def loginCheck(request):
 				else:
 					PageInformation3[2] = T_Count3
 
-
+				#글로벌 리더십일 경우랑 그이외의 경우로 분류해서 출력(글로벌 리더십때문에 좀 꼬여서..)
 				if CourseCode[0] !="ENG":
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
 				else:
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation2[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation1[1]-1)*5+5]
 				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5] 
 				
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
@@ -94,13 +91,12 @@ def loginCheck(request):
          
 		elif request.user.username =="":
 			return render_to_response('login.html')
-		##조만간 패치하겠지만 위와 마찬가지 기능
+		#위와 마찬가지 기능
 		else:
-				CourseCode = MajorSelect(request.user)
-				
-				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
-				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
-				T_Count3 = Lecture.objects.count()
+				CourseCode = MajorSelect(request.user)	
+				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()/5+1
+				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/5+1
+				T_Count3 = Lecture.objects.count()/5+1
 
 
 				
@@ -123,11 +119,11 @@ def loginCheck(request):
 					PageInformation3[2] = 11
 
 				if CourseCode[0] !="ENG":
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
 				else:
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
+					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
+					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
 				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
 				
 				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)

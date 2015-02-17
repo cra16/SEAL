@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {% load staticfiles %} 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
- 
+       <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/semantic.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css"%}">
@@ -70,11 +70,12 @@
         <div class="col-md-10 col-sm-12">
           <div class="navbar-header">
             <a class="navbar-brand" href="/mysite2">SEAL</a>
-            <form class="navbar-form navbar-left col-xs-5 form-inline" role="search">
+            <form class="navbar-form navbar-left col-xs-5 form-inline" role="search" method = "POST" action="/mysite2/Search/" >{%csrf_token%}
+
               <div class="form-group">
-                <input type="text" id="search" class="form-control" placeholder="Search">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Search">
               </div>
-              <button type="button" class="btn btn-info">Search <i class="glyphicon glyphicon-search"></i></button>
+              <button type="submit" class="btn btn-info">Search <i class="glyphicon glyphicon-search"></i></button>
             </form>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
               <span class="sr-only">Toggle navigation</span>

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from index.models import *
 from lecture.models import *
 from login.models import *
+from Notice.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q

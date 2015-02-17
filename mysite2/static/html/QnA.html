@@ -57,16 +57,18 @@
 		  {% for Board in PageBoard%} 
 		  <tr id="qna{Board.id}">
                     <td><center><span id="qna_num{Board.id}">{{Board.id}}</span></center></td>
-                    <td class="qna_title"><a href="qna-contents.html">{{Board.TextName}}</a><span> <img src="../fonts/latest.gif"></span></td>
+                   
+                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created == Today%}<img src="{% static "fonts/latest.gif"%}"> {% endif%}</span></td>
+                   
                     <td><center>{{Board.TextWriter}}</center></td>
-                    <td><center>2015.01.22</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
                     <td><center><span id="qna_click1"></span></center></td>
                   </tr>
                   <tr class="ans" id="ans{{Board.id}}">
                       <td></td>
-                      <td><img src="../fonts/reply.gif"><a href="qna-contents.html"> 추천은 설명을 읽어보시고...</a></td>
+                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/mysite2/Notice/{{Board.id}}"> 추천은 설명을 읽어보시고...</a></td>
                       <td><center>관리자</center></td>
-                      <td><center>2015.01.22</center></td>
+                      <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
                       <td></td>
 		  </tr>
 		 {%endfor%}

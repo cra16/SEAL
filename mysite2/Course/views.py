@@ -28,30 +28,10 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				except:
 						raise Http404()
 
-				 #해당 강의 전체 추천한 Data DB 불러오기
-				try:
-						CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
-						CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-						CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-						CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-						CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-						CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-						CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-				except:
-						CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
-						CourseBoard.Total_Speedy=5
-						CourseBoard.Total_Reliance =5
-						CourseBoard.Total_Question=5
-						CourseBoard.Total_Helper=5
-						CourseBoard.Total_Exam =5
-						CourseBoard.Total_Homework = 5
-
 				
-
-				
-				
-
-				#현재 접속한 사람이 추천한 자료 보여주는 기능(하지 않았을 시 default 5로 함)
+				CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
+				O_Count = Course_Evaluation.objects.filter(Course=Lecture.objects.get(id=offset)).count()/3+1
+	
 				try:
 						UserProfile=Profile.objects.get(User=request.user)
 						MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=UserProfile))
@@ -68,14 +48,121 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 							pass
 					else:
 						OtherCourseBoard.append(Board)
+
+				PageInformation=[1,1,1]
+				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+				if O_Count<11:
+					PageInformation[0] = 1
+					PageInformation[2] = O_Count
+				else:
+					PageInformation[0] =1
+					PageInformation[2] =11
+
+				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+				if (PageInformation[1]/10) >= O_Count/10:
+						OtherCount = range(PageInformation[1]-(PageInformation[1]%10)+1,O_Count+1)
+				else:
+						OtherCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
+				
 				return render_to_response("course.html",
                                           {'user':request.user,
                                            'CourseBoard':CourseBoard,
                                            'MyCourseBoard':MyCourseBoard,
                                            'OtherCourseBoard':OtherCourseBoard,
-                                          
+                                           'OtherCount':OtherCount,
+                                           'PageInformation':PageInformation,
                                         
 
                                            })
+#페이지 넘겼을 때 작동되는 함수
+def CoursePage(request, offset, offset2):
+	if request.user.username == "":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		try:
+			offset = int(offset)
+			offset2 = int(offset2)
+		except:
+			raise Http404()
+
+		CourseBoard = TotalCourse(offset)
+		O_Count = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).count()/3+1
+		PageInformation=[1,1,1]
+
+
+
+		try:
+			#자신이 추천한 강의 추천 데이터 정보 불러옴
+			UserProfile=Profile.objects.get(User=request.user)
+			MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=UserProfile))
+        
+		except:
+			#없을 경우 default 시킴
+			MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=UserProfile))
+		#이전페이지 다음페이지 기능 구현
+		PageInformation[1]=offset2
+		if O_Count >11:
+			if offset>11:
+				PageInformation[0] = (offset2 -(offset2%10))-9
+				PageInformation[2] = (offset2 -(offset2%10))+11
+			elif (offset2+10)>O_Count:
+				PageInformation[0] = (offset2 -(offset2%10))-9
+				PageInformation[2] = O_Count           
+			else:
+				PageInformation[0] = 1
+				PageInformation[2] = (offset2 - (offset2%10))+11
+		else:
+			PageInformation[0] = 1
+			PageInformation[2] = O_Count
+		
+		#해당 페이지에 출력할 데이터들 갯수 정하는 기능
+		PageFirst = (offset2-1)*2
+		PageLast = (offset2-1)*2+2
+		OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[PageFirst:PageLast]
+		
+		OtherCourseBoard = []
+		#접속한 아이디와 중복되는 경우 제거
+		for Board in OtherCourse:
+			if Board.CreatedID == UserProfile:
+					pass
+			else:
+				OtherCourseBoard.append(Board)
+
+
+		if (PageInformation[1]/10) >= O_Count/10:
+			OtherCount = range(PageInformation[1]-(PageInformation[1]%10)+1,O_Count+1)
+		else:
+			OtherCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
+
+		return render_to_response("course.html",
+                                          {'user':request.user,
+                                           'CourseBoard':CourseBoard,
+                                           'MyCourseBoard':MyCourseBoard,
+                                           'OtherCourseBoard':OtherCourseBoard,
+                                           'PageInformation':PageInformation,
+                                           'OtherCount':OtherCount
+                                           })
 
 # Create your views here.
+
+#해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
+def TotalCourse(offset):
+
+	try:
+		CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+	except:
+		CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
+		CourseBoard.Total_Speedy=5
+		CourseBoard.Total_Reliance =5
+		CourseBoard.Total_Question=5
+		CourseBoard.Total_Helper=5
+		CourseBoard.Total_Exam =5
+		CourseBoard.Total_Homework = 5
+
+	return CourseBoard

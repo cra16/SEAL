@@ -387,11 +387,23 @@
           </div>
 
         {%endfor%}
-      
+        
+           
         
       </div>
-		<div class="ui section divider"></div>
 
+		<div class="ui section divider"></div>
+      <center><div class="ui borderless pagination menu">
+              <a class="item" href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{PageInformation.0}}">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+              {%for i in OtherCount%}
+              <a href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{i}}" class="item" >{{i}}</a>
+              {%endfor%}
+              <a class="item" href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{PageInformation.2}}">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
 
       {%endblock%}
 

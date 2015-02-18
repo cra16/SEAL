@@ -41,10 +41,11 @@ INSTALLED_APPS = (
     'index',
     'lecture',
     'schedule',
-    'Course',
-    'Notice',
-    'QnA',
-#    'CustomUser',
+    'course',
+    'notice',
+    'qna',
+    'mycourse'
+
 
 )
 #AUTH_USER_MODEL = 'CustomUser.User'

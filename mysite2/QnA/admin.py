@@ -1,5 +1,5 @@
 from django.contrib import admin
-from QnA.models import *
+from qna.models import *
 
 admin.site.register(QnA_Board)
 # Register your models here.

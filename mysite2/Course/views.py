@@ -17,7 +17,6 @@ from django.db.models import Q
 
 
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
-
 	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
 
 		if request.user.username =="":
@@ -147,7 +146,6 @@ def CoursePage(request, offset, offset2):
 
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
-
 	try:
 		CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count

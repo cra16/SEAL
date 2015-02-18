@@ -29,5 +29,4 @@ class Total_Evaluation(models.Model):
 
 
 
-
 # Create your models here.

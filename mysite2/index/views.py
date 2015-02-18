@@ -199,6 +199,21 @@ def SiteMap(request):
 	else:
 		return render_to_response("sitemap.html", {'user':request.user})
 
+def MyCourse(request):
+        if request.user.username =="":
+                return HttpResponseRedirect("/mysite2")
+        else:
+			MyProfile = Profile.objects.get(User=request.user)
+			RecommendPage=[]
+			LikePage=[]
+			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)
+			for Board1 in UserBoard:
+				RecommendPage.append(Total_Evaluation.objects.get(CourseName = Board1.Course))
+			for Board2 in UserBoard:
+				LikePage.append(Total_Evaluation.objects.get(CourseName = Board2.Course))
+
+
+			return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
 
 # def Search(request): #전체 검색 기능
 # 	if request.user.username =="":

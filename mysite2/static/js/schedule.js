@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('.table td').click(function(event) {
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
-          location.href = '/mysite2/sel_period/'+(arr[$(this).index()-1])+($(this).parent().index()+1)
+          location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1) + '/' + 1
         };
     });
     

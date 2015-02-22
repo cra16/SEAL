@@ -37,7 +37,7 @@ urlpatterns = patterns('',
 	url(r'^SubScript/$',SubScript),
 	url(r'^SiteMap/$',SiteMap),
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
-	#url(r'^Like/$',Like),
+	url(r'^Like/(\d+)$','recommend.views.Like'),
 
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)

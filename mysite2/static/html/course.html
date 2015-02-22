@@ -35,8 +35,8 @@
                 
         <p id="ccode_p">[<span id="ccode">{{CourseBoard.CourseName.Code}}</span>]<br />
         <span id="cname">{{CourseBoard.CourseName.CourseName}}</span> 
-        <form action="/mysite2/Like/" method = "POST">
-        <input type="hidden" name = "CourseData" value ="{{CourseBoard}}">  
+        <form action="/mysite2/Like/{{CourseBoard.CourseName.id}}" method = "POST">{% csrf_token%}
+        <input type="hidden" name = "CourseData" value ="{{CourseBoard.CourseName.id}}">  
         <button class="btn btn-info">듣고싶어!</button>
         </form> 
         <a href="/mysite2/Recommend/{{CourseBoard.CourseName.id}}"><button class="btn btn-danger">추천하기!</button></a><br />

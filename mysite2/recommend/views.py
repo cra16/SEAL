@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from index.models import *
 from lecture.models import *
 from login.models import *
+from mycourse.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
@@ -85,5 +86,24 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 					else:
 						return HttpResponseRedirect("/mysite2")
-
-
+@csrf_exempt
+def Like(request, offset):
+	if request.user.username=="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		if request.method =="POST":
+			LectureID= request.POST['CourseData']
+			LectureID = int(LectureID)
+			CourseLecture = Lecture.objects.get(id = LectureID)
+			new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))
+			new_Like.save()
+			UserData = Profile.objects.get(User = request.user)
+			UserData.LikeCount +=1
+			UserData.save()
+			
+		else:
+			return HttpResponseRedirect("/mysite2")
+		
+		URL = "/mysite2/Course/"+str(LectureID)
+		return HttpResponseRedirect(URL)
+		

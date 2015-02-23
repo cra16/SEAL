@@ -18,27 +18,31 @@ from django.db.models import Q
 
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
 	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
-
+		try:
+			UserData = Profile.objects.get(User = request.user)
+		except :
+			UserData =None
 		if request.user.username =="":
 				return  HttpResponseRedirect("/mysite2")
+		elif UserData.RecommendCount <=2:
+			return render_to_response("Course_error.html")
 		else:
 				try:
-						offset = int(offset)
+					offset = int(offset)
 				except:
-						raise Http404()
+					raise Http404()
 
-				
+				PageInformation=[1,1,1]
 				CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
 				O_Count = Course_Evaluation.objects.filter(Course=Lecture.objects.get(id=offset)).count()/3+1
-	
+				UserProfile=Profile.objects.get(User=request.user)
 				try:
-						UserProfile=Profile.objects.get(User=request.user)
-						MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=UserProfile))
+					MyCourseBoard = Course_Evaluation.objects.get(CreatedID = UserProfile)
                                 #자신 이외 다른사람이 추천한 정보 보여줌
 				except:
-						MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=UserProfile))
-
-
+					MyCourseBoard = None
+				if MyCourseBoard is None:
+					MyCourseBoard = Course_Evaluation(Course = Lecture.objects.get(id=offset), CreatedID = UserProfile)
 				OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
@@ -48,7 +52,6 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 					else:
 						OtherCourseBoard.append(Board)
 
-				PageInformation=[1,1,1]
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				if O_Count<11:
 					PageInformation[0] = 1
@@ -70,8 +73,6 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
                                            'OtherCourseBoard':OtherCourseBoard,
                                            'OtherCount':OtherCount,
                                            'PageInformation':PageInformation,
-                                        
-
                                            })
 #페이지 넘겼을 때 작동되는 함수
 def CoursePage(request, offset, offset2):
@@ -84,20 +85,17 @@ def CoursePage(request, offset, offset2):
 		except:
 			raise Http404()
 
+		PageInformation=[1,1,1]
 		CourseBoard = TotalCourse(offset)
 		O_Count = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).count()/3+1
-		PageInformation=[1,1,1]
-
-
-
+		UserProfile=Profile.objects.get(User=request.user)
 		try:
-			#자신이 추천한 강의 추천 데이터 정보 불러옴
-			UserProfile=Profile.objects.get(User=request.user)
-			MyCourseBoard = Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User=UserProfile))
-        
+			MyCourseBoard = Course_Evaluation.objects.get(CreatedID = UserProfile)
+                                #자신 이외 다른사람이 추천한 정보 보여줌
 		except:
-			#없을 경우 default 시킴
-			MyCourseBoard = Course_Evaluation(CreatedID = Profile.objects.get(User=UserProfile))
+			MyCourseBoard = None
+		if MyCourseBoard is None:
+			MyCourseBoard = Course_Evaluation(Course = Lecture.objects.get(id=offset), CreatedID = UserProfile)
 		#이전페이지 다음페이지 기능 구현
 		PageInformation[1]=offset2
 		if O_Count >11:
@@ -147,7 +145,7 @@ def CoursePage(request, offset, offset2):
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	try:
-		CourseBoard = Total_Evaluation.objects.get(CourseName = Lecture.objects.get(id = offset))
+		CourseBoard = Total_Evaluation.objects.get(Course = Lecture.objects.get(id = offset))
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
 		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
@@ -155,7 +153,7 @@ def TotalCourse(offset):
 		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
 		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 	except:
-		CourseBoard = Total_Evaluation(CourseName =Lecture.objects.get(id=offset))
+		CourseBoard = Total_Evaluation(Course =Lecture.objects.get(id=offset))
 		CourseBoard.Total_Speedy=5
 		CourseBoard.Total_Reliance =5
 		CourseBoard.Total_Question=5

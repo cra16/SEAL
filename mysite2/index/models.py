@@ -16,7 +16,7 @@ class Course_Evaluation(models.Model):
 		return self.Course.CourseName
 
 class Total_Evaluation(models.Model):
-		CourseName = models.ForeignKey(Lecture)
+		Course = models.ForeignKey(Lecture)
 		Total_Speedy = models.IntegerField(default=0)
 		Total_Reliance = models.IntegerField(default=0)
 		Total_Helper = models.IntegerField(default=0)

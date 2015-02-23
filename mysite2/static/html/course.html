@@ -33,14 +33,14 @@
 
       <div class="ui column">
                 
-        <p id="ccode_p">[<span id="ccode">{{CourseBoard.CourseName.Code}}</span>]<br />
-        <span id="cname">{{CourseBoard.CourseName.CourseName}}</span> 
-        <form action="/mysite2/Like/{{CourseBoard.CourseName.id}}" method = "POST">{% csrf_token%}
-        <input type="hidden" name = "CourseData" value ="{{CourseBoard.CourseName.id}}">  
+        <p id="ccode_p">[<span id="ccode">{{CourseBoard.Course.Code}}</span>]<br />
+        <span id="cname">{{CourseBoard.Course.CourseName}}</span> 
+        <form action="/mysite2/Like/{{CourseBoard.Course.id}}" method = "POST">{% csrf_token%}
+        <input type="hidden" name = "CourseData" value ="{{CourseBoard.Course.id}}">  
         <button class="btn btn-info">듣고싶어!</button>
         </form> 
-        <a href="/mysite2/Recommend/{{CourseBoard.CourseName.id}}"><button class="btn btn-danger">추천하기!</button></a><br />
-        <span id="cprof">{{CourseBoard.CourseName.Professor}}</span></p>
+        <a href="/mysite2/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">추천하기!</button></a><br />
+        <span id="cprof">{{CourseBoard.Course.Professor}}</span></p>
 
       </div>
 
@@ -394,13 +394,13 @@
 
 		<div class="ui section divider"></div>
       <center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{PageInformation.0}}">
+              <a class="item" href = "/mysite2/Course/{{CourseBoard.Course.id}}/Page/{{PageInformation.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {%for i in OtherCount%}
-              <a href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{i}}" class="item" >{{i}}</a>
+              <a href = "/mysite2/Course/{{CourseBoard.Course.id}}/Page/{{i}}" class="item" >{{i}}</a>
               {%endfor%}
-              <a class="item" href = "/mysite2/Course/{{CourseBoard.CourseName.id}}/Page/{{PageInformation.2}}">
+              <a class="item" href = "/mysite2/Course/{{CourseBoard.Course.id}}/Page/{{PageInformation.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

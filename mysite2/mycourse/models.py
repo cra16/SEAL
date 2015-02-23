@@ -1,9 +1,10 @@
 from django.db import models
 from lecture.models import Lecture
 from login.models import Profile
+from index.models import Course_Evaluation
 
 class Recommend_Course(models.Model):
-	Course = models.ForeignKey(Lecture)
+	Course = models.ForeignKey(Course_Evaluation)
 	CreatedID = models.ForeignKey(Profile)
 
 	def __unicode__(self):

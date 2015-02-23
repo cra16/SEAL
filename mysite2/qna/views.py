@@ -27,23 +27,25 @@ def QnAMain(request): #Q&A 메인
 		#페이지 넘기는 기능
 		count=QnA_Board.objects.count()
 
-		TotalCount = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
-
-		if TotalCount ==1:
-			Next = 1
+		T_Count = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
+		PageInformation = [1,1,1]
+		
+		if T_Count>11:
+			PageInformation[2] = 11
 		else:
-			Next =TotalCount
-		Previous=1
+			PageInformation[2] =T_Count	
+
+		TotalCount=[range(PageInformation[0],PageInformation[2])]
+
 		
 		Today = date.today()
 
-		PageBoard = QnA_Board.objects.order_by('-id')[0:7]
+		PageBoard = QnA_Board.objects.order_by('-id')[0:6]
 		return render_to_response("QnA.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
+					   'TotalCount' : TotalCount, 
+					   'PageInformation' : PageInformation,
 					   'Today' : Today,
 					   })
 
@@ -64,29 +66,42 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 		PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
 		#######	게시판 페이지 넘기는 기능
 
-		Page = dict()
 		count = QnA_Board.objects.count()
 		TotalCount = (count/8)+1
-		if offset == 1:
-			if TotalCount ==1:
-				Next = offset
-			else : 
-				Next =offset +1
-			Previous=1
-		elif offset ==TotalCount:
-			Previous=offset-1
-			Next = TotalCount
-		else:
-			Previous = offset-1
-			Next = offset +1
+		PageInformation = [1,1,1]
         
+		if TotalCount >11:
+			#현재 페이지가 11이상일 경우
+			if offset>11:
+				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
+				#되도록 표현 
+				if (offset+10)>T_Count[i]:
+					PageInformation[0] = (offset -(offset%10))-9
+					PageInformation[2] = TotalCount
+				#아니면 그냥 원래대로 표현
+				else:
+					PageInformation[0] = (offset -(offset%10))-9
+					PageInformation[2] = (offset -(offset%10))+11
+			#현재 페이지가 11이하일경우 
+			else:
+				PageInformation[0] = 1
+				PageInformation[2] = (offset - (offset%10))+11
+		#총 페이지가 11이하일 경우 
+		else:
+			PageInformation[0] = 1	
+			PageInformation[2] = TotalCount
+
+		if (PageInformation[1]/10) >= TotalCount/10:
+			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,TotalCount+1)
+		else:
+			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
+
 		Today =date.today()
 		return render_to_response("QnA.html",
 					  {'user':request.user, 
 					   'PageBoard':PageBoard, 	
-					   'TotalCount' : range(0,TotalCount), 
-	       			   'Previous' : Previous, 
-					   'Next' : Next,
+					   'TotalCount' : TotalCount, 
+	       			   'PageInformation' : PageInformation,
 						'Today' : Today,
 					   } )
 	

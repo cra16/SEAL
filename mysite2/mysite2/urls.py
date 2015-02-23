@@ -39,6 +39,7 @@ urlpatterns = patterns('',
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^Like/(\d+)$','recommend.views.Like'),
 
+
 #	url(r'^loginCheck/$', ),
 #	url(r'^home/$', loginCheck)
 	url(r'^update/$','lecture.views.lec_update'),

@@ -160,7 +160,7 @@ def Confirm(request):
 
 @csrf_exempt
 def HisnetCheck(request):
-	hisnet_url = "http://hisnet.handong.edu/login/login.php"
+	hisnet_url = "https://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
 		try:
 			stu_num = request.POST['stu_num']
@@ -174,17 +174,19 @@ def HisnetCheck(request):
 			driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
 			driver.get(hisnet_url)
 			driver.set_window_size(1024,768)
-			hisnet_main_frame = driver.find_element_by_name("MainFrame")
-			driver.switch_to_frame(hisnet_main_frame)
 			idinput = driver.find_element_by_name("id")
 			idinput.send_keys(hisnet_id)
 			pwinput = driver.find_element_by_name("password")
 			pwinput.send_keys(hisnet_pw)
 			login_button = driver.find_element_by_xpath("//input[@type='image'][@src='/2012_images/intro/btn_login.gif']")
 			login_button.click()
-			# 스크린샷 안찍으면 에러 발생. 이유는 불분명함. 추후 해결 필요.
-			# driver.save_screenshot('/opt/bitnami/apps/django/django_projects/darkzero/hisnet_haksa.png')
-			haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
+			# 로그인 이후 지연시간 발생 예외처리
+			while True:
+				try:
+					haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
+					break
+				except:
+					continue
 			haksa_button.click()
 			# 학사 정보에서 학번 확인하기
 			grade_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[2]/td[2]")
@@ -203,10 +205,42 @@ def HisnetCheck(request):
 					'stu_num':h_stu_num,
 					'stu_name':h_stu_name,
 					'first_major':first_major,
-						'second_major':second_major,
+					'second_major':second_major,
 				}
+			else:
+				raise NotFoundStudentException
 
-				return render_to_response('register.html', ctx)
+			# 수강정보 들어가기 *에러발생 시 반복수행
+			sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")
+			sugang_button.click()
+
+			# 시간표 읽어들이기
+			lecture_lst = []
+			for period in range(2,12):
+				for day in range(2,8):
+					detail = {}	# 딕셔너리 초기화
+					try:
+					# xpath 각각의 딕셔너리 사용 방법
+					# detail['name'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[1]" % (period, day)).text
+					# detail['prof'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[2]" % (period, day)).text
+					# detail['room'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[3]" % (period, day)).text
+
+						# 텍스트로 분류 방법
+						t_text = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]" % (period, day)).text
+						t_lst = t_text.split('\n')
+						detail['name'] = t_lst[0]
+						detail['prof'] = t_lst[1]
+						detail['room'] = t_lst[2]
+
+						# 시간표 찾기 위한 장치
+						detail['period'] = period
+						detail['day'] = day
+
+						lecture_lst.append(detail)
+					except:
+						continue
+			ctx['lecture_lst'] = lecture_lst
+			return render_to_response('register.html', ctx)
 		except:
 			# 히스넷 체크 안될 시 에러페이지 출력
 			return render_to_response('confirm_error.html')

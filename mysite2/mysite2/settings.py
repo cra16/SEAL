@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'course',
     'notice',
     'qna',
-    'mycourse'
+    'mycourse',
 
 
 )

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # -*- coding: euc-kr -*-
 
-from login.forms import *
+# login app 정리 부분적으로 완료(2/22)
+
 from lecture.models import *#강의 목록
 from django.contrib.auth.decorators import login_required#로그인 허용기능
 from django.contrib.auth import logout #로그아웃 기능
@@ -13,7 +14,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q #데이터 베이스 OR 기능 구현
 from index.models import * #아직 시험중
-from index.views import * #아직 시험중
+from index.views import MajorSelect, PageView#전공 선택 및 페이지 메인 페이지 보여주는 함수를 불러옴
 
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -29,127 +30,23 @@ def loginCheck(request):
 			##로그인 완료시 메인페이지 view
 			if user is not None:
 				auth_login(request,user)
-				
-				##메인 페이지 전공과 교양 보여주는 페이지
-				CourseCode = MajorSelect(request.user)
-				
-				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()
-				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
-				T_Count3 = Lecture.objects.count()
+				#메인페이지 보여줄 함수 호출
+				UserData = MainView(request)
 
-				##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
-				PageInformation1 = [1,1,1];
-				PageInformation2 = [1,1,1];
-				PageInformation3 = [1,1,1];
-						
-				##페이지 넘기는 기능
-				if T_Count1<11:
-					PageInformation1[2] = 11
-				else:
-					PageInformation1[2] =T_Count1
-				if T_Count2<11:
-					PageInformation2[2] = 11
-				else:
-					PageInformation2[2] = T_Count2
-				if T_Count3<11:
-					PageInformation3[2] = 11
-				else:
-					PageInformation3[2] = T_Count3
-
-				#글로벌 리더십일 경우랑 그이외의 경우로 분류해서 출력(글로벌 리더십때문에 좀 꼬여서..)
-				if CourseCode[0] !="ENG":
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
-				else:
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation1[1]-1)*5+5]
-				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5] 
-				
-				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
-
-				##독립적 페이지 위치를 다음 페이지 넘기는 것할 때 정보 넘김
-				request.session['PageInformation1'] = PageInformation1
-				request.session['PageInformation2'] = PageInformation2
-				request.session['PageInformation3'] = PageInformation3
-				
-				##보여주려는 페이지 자바스크립트 active
-				Active = ["active","",""]
-
-				return render_to_response("index.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard,
-					   'TotalCount1' : range(1,11),
-					   'TotalCount2' : range(1,11),
-					   'TotalCount3' : range(1,11),
-					   'PageInformation1' : PageInformation1,
-					   'PageInformation2' : PageInformation2,
-					   'PageInformation3' : PageInformation3,
-					   'Active' : Active,
-					   })
+				return render_to_response("index.html",UserData)
 			else:
-				return render_to_response('login.html')
-         
+				return render_to_response('login_error.html')
+        #로그인 되지 않았을 경우 다시 로그인페이지로
 		elif request.user.username =="":
 			return render_to_response('login.html')
-		#위와 마찬가지 기능
+		#이미 로그인 되어있으면 
 		else:
-				CourseCode = MajorSelect(request.user)	
-				T_Count1 = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()/5+1
-				T_Count2 = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/5+1
-				T_Count3 = Lecture.objects.count()/5+1
-
-
-				
-				PageInformation1 = [1,1,1];
-				PageInformation2 = [1,1,1];
-				PageInformation3 = [1,1,1];
-			
-
-				if T_Count1<11:
-					PageInformation1[2] = T_Count1
-				else:
-					PageInformation1[2] =11
-				if T_Count2<11:
-					PageInformation2[2] = T_Count2
-				else:
-					PageInformation2[2] = 11
-				if T_Count3<11:
-					PageInformation3[2] = T_Count3
-				else:
-					PageInformation3[2] = 11
-
-				if CourseCode[0] !="ENG":
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
-				else:
-					TotalBoard1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation1[1]-1)*5:(PageInformation1[1]-1)*5+5]
-					TotalBoard2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation2[1]-1)*5:(PageInformation2[1]-1)*5+5]
-				TotalBoard3 = Lecture.objects.order_by('-id')[(PageInformation3[1]-1)*5:(PageInformation3[1]-1)*5+5]
-				
-				PageBoard = PageView(TotalBoard1,TotalBoard2,TotalBoard3)
-			
-
-				request.session['PageInformation1'] = PageInformation1
-				request.session['PageInformation2'] = PageInformation2
-				request.session['PageInformation3'] = PageInformation3
-			
-				Active = ["active","",""]
-				return render_to_response("index.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard,
-					   'TotalCount1' : range(1,11),
-					   'TotalCount2' : range(1,11),
-					   'TotalCount3' : range(1,11),
-					   'PageInformation1' : PageInformation1,
-					   'PageInformation2' : PageInformation2,
-					   'PageInformation3' : PageInformation3,
-					   'Path':request.path,
-					   'Active':Active,
-					   })
-			
+			UserData = MainView(request)
+			return render_to_response("index.html", UserData)
+#로그인 페이지	
 def login(request):
     return render_to_response('login.html')
-    
+#로그아웃
 def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/mysite2')
@@ -277,82 +174,53 @@ def Register(request):
 		return render_to_response('login.html')
 
 
+#로그인 후 보여줄 메인페이지 함수
+def MainView(request):
+	CourseCode = MajorSelect(request.user) 
+	
+	#1전공, 2전공 전체 강의 페이지 갯수를 불러옴
+	T_Count=[ [],[] ,[] ]
+	T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()/6+1
+	T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/6+1
+	T_Count[2] = Lecture.objects.count()/6+1
 
-##main 페이지 강의 보여주는 기능(로그인에 쓰는거)
-def PageView(TotalBoard1,TotalBoard2,TotalBoard3):
-	PageBoard=[[],[],[]]
-
-
-	for Board in TotalBoard1:
-		try:
-			Board1 = Total_Evaluation.objects.get(CourseName=Board)
-		except :
-			Board1 = None
-		if Board1 is not None:
-			Board1.Total_Speedy = Board1.Total_Speedy/Board1.Total_Count
-			Board1.Total_Reliance = Board1.Total_Reliance/Board1.Total_Count
-			Board1.Total_Helper = Board1.Total_Helper/Board1.Total_Count
-			Board1.Total_Question = Board1.Total_Question/Board1.Total_Count
-			Board1.Total_Exam = Board1.Total_Exam/Board1.Total_Count
-			Board1.Total_Homework = Board1.Total_Homework/Board1.Total_Count
-			PageBoard[0].append(Board1)
+	##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
+	PageInformation = [[1,1,1],[1,1,1],[1,1,1]]
+			
+	#페이지 넘기는 기능
+	#각 전공을 표현하는데 11페이지가 넘어갈 경우 11로 고정시키고 그렇지 않을 경우 T_Count를 기준으로 한다.
+	for i in range(0,3): 
+		if T_Count[i]>11:
+			PageInformation[i][2] = 11
 		else:
-			Board1 = Total_Evaluation(CourseName=Board)
-			Board1.Total_Speedy =5
-			Board1.Total_Reliance =5
-			Board1.Total_Helper = 5
-			Board1.Total_Question = 5
-			Board1.Total_Exam = 5
-			Board1.Total_Homework = 5
-			Board1.Total_Count =0
-			PageBoard[0].append(Board1)
-	for Board in TotalBoard2:
-		try:
-			Board2 = Total_Evaluation.objects.get(CourseName=Board)
-		except :
-			Board2 = None
+			PageInformation[i][2] =T_Count[i]	
+	#글로벌 리더십일 경우랑 그이외의 경우로 분류해서 출력(글로벌 리더십때문에 좀 꼬여서..)
+	TotalBoard = [[],[],[]]
+	if CourseCode[0] !="ENG":
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	else:
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5] 
+	
+	#페이지 보여주는 정보 함수 불러움 index참고
+	PageBoard =  PageView(TotalBoard)
 
-		if Board2 is not None:
-			Board2.Total_Speedy = Board2.Total_Speedy/Board2.Total_Count
-			Board2.Total_Reliance = Board2.Total_Reliance/Board2.Total_Count
-			Board2.Total_Helper = Board2.Total_Helper/Board2.Total_Count
-			Board2.Total_Question = Board2.Total_Question/Board2.Total_Count
-			Board2.Total_Exam = Board2.Total_Exam/Board2.Total_Count
-			Board2.Total_Homework = Board2.Total_Homework/Board2.Total_Count
-			PageBoard[1].append(Board2)
-		else:
-			Board2 = Total_Evaluation(CourseName=Board)
-			Board2.Total_Speedy =5
-			Board2.Total_Reliance =5
-			Board2.Total_Helper = 5
-			Board2.Total_Question = 5
-			Board2.Total_Exam = 5
-			Board2.Total_Homework = 5
-			Board2.Total_Count =0
-			PageBoard[1].append(Board2)
-	for Board in TotalBoard3:
-		try:
-			Board3 = Total_Evaluation.objects.get(CourseName=Board)
-		except :
-			Board3 = None
-		if Board3 is not None:
-			Board3.Total_Speedy = Board3.Total_Speedy/Board3.Total_Count
-			Board3.Total_Reliance = Board3.Total_Reliance/Board3.Total_Count
-			Board3.Total_Helper = Board3.Total_Helper/Board3.Total_Count
-			Board3.Total_Question = Board3.Total_Question/Board3.Total_Count
-			Board3.Total_Exam = Board3.Total_Exam/Board3.Total_Count
-			Board3.Total_Homework = Board3.Total_Homework/Board3.Total_Count
-			PageBoard[2].append(Board3)
-		else:
-			Board3 = Total_Evaluation(CourseName=Board)
-			Board3.Total_Speedy =5
-			Board3.Total_Reliance =5
-			Board3.Total_Helper = 5
-			Board3.Total_Question = 5
-			Board3.Total_Exam = 5
-			Board3.Total_Homework = 5
-			Board3.Total_Count =0
-			PageBoard[2].append(Board3)
-	return PageBoard
+	##독립적 페이지 위치를 다음 페이지 넘기는 것할 때 정보 넘김
+	request.session['PageInformation'] = PageInformation
+	
+	TotalCount=[range(1,PageInformation[0][2]),range(1,PageInformation[1][2]),range(1,PageInformation[2][2])]
+	##보여주려는 페이지 자바스크립트 active(index.html {{Active}}참고)
+	Active = ["active","",""]
 
+	Temp = dict()
+	Temp ={	'user': request.user,
+			'PageBoard': PageBoard,
+			'TotalCount' : TotalCount,
+			'PageInformation' : PageInformation,
+			'Path':request.path,
+			'Active':Active,
+			}
 	# Create your views here.
+	return Temp

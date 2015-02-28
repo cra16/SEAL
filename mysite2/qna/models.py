@@ -1,11 +1,12 @@
 from django.db import models
-
+from login.models import Profile
 class QnA_Board(models.Model):
-	TextWriter = models.CharField(max_length =30)
+	TextWriter = models.ForeignKey(Profile)
 	TextName = models.CharField(max_length =50)
 	ClickScore = models.PositiveIntegerField(default =0)
 	Text = models.TextField()
-	created = models.DateField(auto_now_add=True, auto_now=True)
+	created = models.DateTimeField(auto_now_add=True)
+
 	def __unicode__(self):
 		return self.TextName
 

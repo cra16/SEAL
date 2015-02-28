@@ -2,10 +2,11 @@
 
 $(function(){	
 		$('#likebutton1').click(function(){
-			confirm = window.confirm("Correct?");	
+			confirm = window.confirm("이 강의를 추천하시겠습니까?");
 			if(confirm){
 				window.location.href = "/mysite2/Recommend/" + domain1[0];
 			}
+           
 		
 	      }
 		);

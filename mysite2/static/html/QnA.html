@@ -58,9 +58,10 @@
 		  <tr id="qna{Board.id}">
                     <td><center><span id="qna_num{Board.id}">{{Board.id}}</span></center></td>
                    
-                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created == Today%}<img src="{% static "fonts/latest.gif"%}"> {% endif%}</span></td>
+                    <td class="qna_title"><a href="/mysite2/QnA/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
+                    <img src="{% static "fonts/latest.gif"%}"> {% endif%}</span></td>
                    
-                    <td><center>{{Board.TextWriter}}</center></td>
+                    <td><center>{{Board.TextWriter.UserName}}</center></td>
                     <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
                     <td><center><span id="qna_click1"></span></center></td>
                   </tr>
@@ -78,7 +79,7 @@
                                                  
                                           
               <center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/QnA/page/{{forloop.counter}}">
+              <a class="item" href = "/mysite2/QnA/page/{{PageInformation.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 	      
@@ -87,7 +88,7 @@
               <a href = "/mysite2/QnA/page/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
               {% endfor%}
          
-              <a class="item">  Next <i class="glyphicon glyphicon-menu-right"></i>
+              <a class="item" href = "/mysite2/QnA/page/{{PageInformation.2}}">  Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
               

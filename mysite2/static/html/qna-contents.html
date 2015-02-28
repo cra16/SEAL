@@ -30,10 +30,10 @@
         <div id="h_sectiondivider" class="ui section divider"></div>
 
             <div id="qna_border_q" class="ui raised segment">
-              <div class="ui large blue ribbon label">추천이 어려워요ㅠㅠ</div>
+              <div class="ui large blue ribbon label">{{Current.TextName}}</div>
               <p></p>
-              <div class="ui tiny black ribbon label">김시은　2015.01.22 19:24</div>
-              <p class="qna_content">어려워요 어려워요 어려우어요어오엉 ㅜㅠㅜㅠㅠ!!</p>
+              <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
+              <p class="qna_content">{{Current.Text}}</p>
             </div>  
             
             <div id="qna_border_a" class="ui raised segment">

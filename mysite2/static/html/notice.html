@@ -55,7 +55,10 @@
 				  
 				  <tr id="qna1">
                     <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
-                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span> <img src="../fonts/latest.gif"></span></td>
+                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
+                    {% if Board.created == Today%} 
+                    <img src="{% static "fonts/latest.gif"%}"></span></td>
+                    {%endif%}
                     <td><center>{{Board.TextWriter}}</center></td>
                     <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
                     <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>

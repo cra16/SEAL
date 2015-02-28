@@ -9,21 +9,14 @@ from lecture.models import *
 from login.models import *
 from qna.models import *	
 from django.views.decorators.csrf import csrf_exempt
-from datetime import date
+import datetime
 from django.db.models import Q
 
-@csrf_exempt
+
 def QnAMain(request): #Q&A 메인 
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
 	else :
-		if request.method =="POST":
-			new_Text=request.POST['msg-body-txtarea']		
-			new_TextWriter = request.user.username
-			new_TextName = request.POST['msg-title-input']
-			created = date
-			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
-			new_QnA.save()
 		#페이지 넘기는 기능
 		count=QnA_Board.objects.count()
 
@@ -38,7 +31,7 @@ def QnAMain(request): #Q&A 메인
 		TotalCount=[range(PageInformation[0],PageInformation[2])]
 
 		
-		Today = date.today()
+		Today = datetime.datetime.today()
 
 		PageBoard = QnA_Board.objects.order_by('-id')[0:6]
 		return render_to_response("QnA.html",
@@ -96,7 +89,7 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 		else:
 			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
 
-		Today =date.today()
+		Today =datetime.date.today()
 		return render_to_response("QnA.html",
 					  {'user':request.user, 
 					   'PageBoard':PageBoard, 	
@@ -110,7 +103,19 @@ def QnAWrite(request): #Q&A Write 기능
 		return  HttpResponseRedirect("/mysite2")
 	else:
 		return render_to_response("subscribe_faq.html",{'user':request.user})
-
+@csrf_exempt
+def QnA_Writing(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		if request.method =="POST":
+			new_Text=request.POST['msg-body-txtarea']		
+			new_TextWriter = Profile.objects.get(User=request.user)
+			new_TextName = request.POST['msg-title-input']
+			created = datetime.datetime.now()
+			new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+			new_QnA.save()
+		return HttpResponseRedirect("/mysite2/QnA")
 def QnARead(request, offset): #Q&A read 기능
 	if request.user.username =="":
 		return  HttpResponseRedirect("/mysite2")
@@ -122,8 +127,10 @@ def QnARead(request, offset): #Q&A read 기능
 
 
 		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
+		Current.ClickScore +=1
+		Current.save()
 
 	
-		return render_to_response("qna-contents.html", {'user':request.user, 'Board':Current})
+		return render_to_response("qna-contents.html", {'user':request.user, 'Current':Current})
 
 # Create your views here.

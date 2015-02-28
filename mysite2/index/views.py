@@ -171,14 +171,23 @@ def MyCourse(request):
 
 
 			return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
-
-# def Search(request): #전체 검색 기능
-# 	if request.user.username =="":
-# 		return HttpResponseRedirect("/mysite2")
-# 	else:
-# 		if request.method =="POST"
-# 			SearchData = request.POST['search']
-
+@csrf_exempt
+def Search(request): #전체 검색 기능
+ 	if request.user.username =="":
+ 		return HttpResponseRedirect("/mysite2")
+ 	else:
+ 		if request.method =="POST":
+ 			SearchData = request.POST['search']
+ 			#여기 문제
+ 			LectureData = [[]]
+ 			LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
+ 			L_Data=PageView(LectureData)
+ 			return render_to_response('index.html', {
+ 												'user':request.user,
+ 												'Search' : L_Data,
+												})
+ 		else:
+ 			return HttpResponseRedirect("/mysite2")
 
 
 #메인 페이지 view 함수로 옮김

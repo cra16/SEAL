@@ -14,7 +14,7 @@ from django.db.models import Q
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
 	try:
-		RecommendData=Course_Evaluation.objects.get(CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Course_Evaluation.objects.get(Course = Lecture.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
 	except:
 		RecommendData=None
 		
@@ -90,8 +90,15 @@ def Recommend_Write(request): #추천 강의 DB입력
 			return HttpResponseRedirect("/mysite2")
 @csrf_exempt
 def Like(request, offset):
+	try :
+		UserData=Like_Course(CreatedID = Profile.objects.get(User = request.user))
+	except:
+		UserData=None
+
 	if request.user.username=="":
 		return HttpResponseRedirect("/mysite2")
+	elif UserData is not None:
+		return render_to_response("Like_error.html")
 	else:
 		if request.method =="POST":
 			LectureID= request.POST['CourseData']

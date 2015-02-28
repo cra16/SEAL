@@ -9,7 +9,7 @@ from lecture.models import *
 from login.models import *
 from notice.models import *
 from django.views.decorators.csrf import csrf_exempt
-import datetime
+from datetime import date #오늘날짜 불러오기 위한 import
 from django.db.models import Q
 
 
@@ -28,14 +28,14 @@ def NoticeMain(request):#Notice 기능
 			PageInformation[2] = 11
 		else:
 			PageInformation[2] =T_Count
-	
+		
 		PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
+		Today = date.today()
 		return render_to_response("notice.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,TotalCount), 
-					   'Previous' : Previous, 
-					   'Next' : Next,
+					   'TotalCount' : range(0,PageInformation[2]),
+					   'Today':Today 
 					   })
 
 def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
@@ -85,12 +85,14 @@ def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
 		else:
 			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
        
+
+		Today = date.today()       
 		return render_to_response("notice.html",
 					  {'user':request.user, 
 					   'PageBoard':PageBoard,
-					   'TotalCount' : TotalCount, 
-	       			   'Previous' : Previous, 
-					   'Next' : Next} )
+					   'TotalCount' : TotalCount,
+					   'Today' :Today,
+	       			  })
 
 def Notice_Read(request, offset): #Notice Read 기능
 	if request.user.username =="":
@@ -102,6 +104,8 @@ def Notice_Read(request, offset): #Notice Read 기능
 			raise Http404()
 
 		Current = Notice_Board.objects.filter(id=offset).get()
+		Current.ClickScore +=1
+		Current.save()
 		
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})

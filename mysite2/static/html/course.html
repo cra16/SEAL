@@ -4,7 +4,7 @@
   <head>
   {% load staticfiles%}
   {% block head%}
-
+    <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
   <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
     <style>
       body, input {
@@ -40,7 +40,7 @@
         <button class="btn btn-info">듣고싶어!</button>
         </form> 
         <a href="/mysite2/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">추천하기!</button></a><br />
-        <span id="cprof">{{CourseBoard.Course.Professor}}</span></p>
+        <span id="cprof">{{CourseBoard.Course.Professor}} 교수님</span></p>
 
       </div>
 
@@ -176,7 +176,7 @@
         <h3><b>개인 : </b></h3>
          {%if  MyCourseBoard != None%}
 		<div id="recommending" class="ui column">
-          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}/{{user.profile.FirstMajor}}</b></h4>
+          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 

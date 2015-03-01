@@ -10,4 +10,16 @@ class QnA_Board(models.Model):
 	def __unicode__(self):
 		return self.TextName
 
+class Reply(models.Model):
+	TextWriter = models.ForeignKey(Profile)
+	TextName = models.CharField(max_length = 50)
+	ClickScroe = models.PositiveIntegerField(default = 0)
+	Text = models.TextField()
+	created = models.DateTimeField(auto_now_add=True)
+	QuestionID = models.PositiveIntegerField(max_length = 50)
+
+	def __unicode__(self):
+		return self.TextName
+
+
 # Create your models here.

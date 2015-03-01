@@ -9,7 +9,7 @@ from lecture.models import *
 from login.models import *
 from notice.models import *
 from django.views.decorators.csrf import csrf_exempt
-from datetime import date #오늘날짜 불러오기 위한 import
+import datetime  #오늘날짜 불러오기 위한 import
 from django.db.models import Q
 
 
@@ -30,7 +30,7 @@ def NoticeMain(request):#Notice 기능
 			PageInformation[2] =T_Count
 		
 		PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
-		Today = date.today()
+		Today = datetime.datetime.now()
 		return render_to_response("notice.html",
 					  {'user':request.user,
 					   'PageBoard':PageBoard, 
@@ -110,4 +110,23 @@ def Notice_Read(request, offset): #Notice Read 기능
 	
 		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
 
+
+def Notice_Write(request): #Q&A Write 기능
+	if request.user.username =="":
+		return  HttpResponseRedirect("/mysite2")
+	else:
+		return render_to_response("subscribe_notice.html",{'user':request.user})
+@csrf_exempt
+def Notice_Writing(request):
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		if request.method =="POST":
+			new_Text=request.POST['msg-body-txtarea']		
+			new_TextWriter = Profile.objects.get(User=request.user)
+			new_TextName = request.POST['msg-title-input']
+			created = datetime.datetime.now()
+			new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+			new_Notice.save()
+		return HttpResponseRedirect("/mysite2/Notice")
 # Create your views here.

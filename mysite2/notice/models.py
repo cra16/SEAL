@@ -5,7 +5,7 @@ class Notice_Board(models.Model):
 	TextName = models.CharField(max_length =50)
 	ClickScore = models.PositiveIntegerField(default =0)
 	Text = models.TextField()
-	created = models.DateField(auto_now_add=True, auto_now=True)
+	created = models.DateField(auto_now_add=True)
 
 	def __unicode__(self):
 		return self.TextName

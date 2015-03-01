@@ -65,13 +65,27 @@
                     <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
                     <td><center><span id="qna_click1"></span></center></td>
                   </tr>
+                  {% if not ReplyBoard == None%}
+                     {% for ReplyData in ReplyBoard%}
+                        {%for Reply in ReplyData%}
+                          {% if Reply.QuestionID == Board.id%}
+                         
+                      
                   <tr class="ans" id="ans{{Board.id}}">
+                      
                       <td></td>
-                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/mysite2/Notice/{{Board.id}}"> 추천은 설명을 읽어보시고...</a></td>
-                      <td><center>관리자</center></td>
-                      <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/mysite2/QnA/{{Board.id}}">{{Reply.TextName}}</a></td>
+                      <td><center>{{Reply.TextWriter.UserName}}</center></td>
+                      <td><center>{{Reply.created|date:"Y-m-d"}}</center></td>
+                  
                       <td></td>
-		  </tr>
+                      
+		              </tr>
+                           {%endif%}
+                        {%endfor%}
+                      {%endfor%}
+                 {%endif%}
+                      
 		 {%endfor%}
 		</tbody>
               </table>

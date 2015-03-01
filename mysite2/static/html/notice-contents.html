@@ -40,11 +40,12 @@
             
         <div class="qna_div">                          
             <div id="notice_border" class="ui raised segment">
-              <div class="ui large blue ribbon label" style="font-size:1.1rem">어서오세요! SEAL입니다!</div>
+
+              <div class="ui large blue ribbon label" style="font-size:1.1rem">{{Board.TextName}}</div>
               <p></p>
-              <div class="ui small purple ribbon label">관리자　2015.01.22 19:24</div>
+              <div class="ui small purple ribbon label">{{Board.TextWriter.UserName}}　{{Board.created|date:"Y.m.d"}} {{Board.created|time:"H:i"}}</div>
               <div></div>
-              <div class="ui floated raised segment">한동대학생들의 실력 향상과 배움에 있어 끝없는 도전정신을 위해 탄생한 SEAL입니다! 여러분, 배움에 열정을 가집시다! :)</div>
+              <div class="ui floated raised segment">{{Board.Text}}</div>
             </div>  
                                                       
               <center>

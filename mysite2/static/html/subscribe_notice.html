@@ -24,7 +24,8 @@
 
       <div id="subscribe" class="ui column">
         
-      	<form class="ui form" action="post">
+      	<form class="ui form" action="/mysite2/Notice/Writing" method="POST">
+        {%csrf_token%}
           <h4 class="ui dividing header">글쓰기</h4>
           <div class="field">
           	<label for="msg-title-label">제목 : </label>
@@ -34,7 +35,10 @@
           	<label for="msg-body-label">본문 : </label>
           	<textarea name="msg-body-txtarea" id="msg-body-txtarea" cols="30" rows="10" placeholder="Body" maxlength="500"></textarea>
           </div>
+           <a href="/mysite2/QnA" class="ui right floated red button" style="margin-left:8px">취소</a>
+       <input type="submit" id="submit_qna" value="등록"  class="ui right floated blue button">
         </form>
+           <div style="padding-bottom:50px"></div>
 
       </div>
 

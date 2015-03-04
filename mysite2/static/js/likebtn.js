@@ -6,7 +6,10 @@ $(function(){
 			if(confirm){
 				window.location.href = "/mysite2/Recommend/" + domain1[0];
 			}
-           
+            else
+            {
+                
+            }
 		
 	      }
 		);

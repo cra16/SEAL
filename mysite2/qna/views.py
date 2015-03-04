@@ -148,12 +148,28 @@ def QnARead(request, offset): #Q&A read 기능
 		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
 		Current.ClickScore +=1
 		Current.save()
+
+		QnACount = QnA_Board.objects.count()
+		if offset ==1:
+			Previous = 1
+		else:
+			Previous = offset-1
+		if offset == QnACount:
+			Next = QnACount
+		else:
+			Next = offset+1
+
 		try:
 			QnA_Reply = Reply.objects.filter(QuestionID = Current.id)
 		except:
 			QnA_Reply =None
 	
-		return render_to_response("qna-contents.html", {'user':request.user, 'Current':Current, 'QnA_Reply' : QnA_Reply})
+		return render_to_response("qna-contents.html", 
+			{'user':request.user, 
+			'Current':Current, 
+			'QnA_Reply' : QnA_Reply,
+			'Previous' : Previous,
+			'Next':Next})
 
 def QnA_Reply(request, offset): 
 	if request.user.username =="":

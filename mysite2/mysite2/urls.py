@@ -26,7 +26,7 @@ urlpatterns += patterns('login.views',
 
 urlpatterns += patterns('index.views',
 	url(r'^Search/$', 'Search'),
-
+	url(r'^Search/(\d+)$','SearchPage'),
 	url(r'^MyPage/$', 'MyPage'), 
 	url(r'^About/$','About'),
 	url(r'^Schedule/$','Schedule'),
@@ -66,4 +66,5 @@ urlpatterns += patterns('notice.views',
 	url(r'^Notice/(\d+)/$','Notice_Read'),
 	url(r'^Notice/Write$', 'Notice_Write'),
 	url(r'^Notice/Writing$', 'Notice_Writing'),
+
 )

@@ -106,9 +106,24 @@ def Notice_Read(request, offset): #Notice Read 기능
 		Current = Notice_Board.objects.filter(id=offset).get()
 		Current.ClickScore +=1
 		Current.save()
+
+		NoticeCount = Notice_Board.objects.count()
+
+		if offset ==1:
+			Previous = 1
+		else:
+			Previous = offset-1
+		if offset == NoticeCount:
+			Next = NoticeCount
+		else:
+			Next = offset+1
 		
 	
-		return render_to_response("notice-contents.html", {'user':request.user, 'Board':Current})
+		return render_to_response("notice-contents.html", 
+			{'user':request.user,
+			'Previous' :Previous,
+			'Next' :Next,
+			'Board':Current})
 
 
 def Notice_Write(request): #Q&A Write 기능

@@ -303,22 +303,26 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
                </div>
 
-               <center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/{{Previous}}">
+              
+            </div>
+          
+              {%endfor%}
+         
+             <center><div class="ui borderless pagination menu">
+              <a class="item" href = "/mysite2/Search/{{PageInformation.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
+              {% for i in T_Count %}
+                 <a href = "/mysite2/Search/{{i}}" class="item" >{{i}}</a>
+              {%endfor%}
         
-              <a class="item" href = "/mysite2/{{Next}}">
+              <a class="item" href = "/mysite2/Search/{{PageInformation.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-            </div>
-      
-            {%endfor%}
+
             {%endif%}
-		
-         
-            
+    
         <div class="ui divider"></div>
 
                               

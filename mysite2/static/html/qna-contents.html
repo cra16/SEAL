@@ -24,7 +24,13 @@
 
       <div class="col-md-8 col-sm-10 col-xs-10">
 
-        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)<a href="qna.html"> <div style="margin-top:20px" class="ui right floated tiny teal button">
+        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)
+        {% if user.profile.UserName == "관리자"%}
+        <a href="/mysite2/QnA/Reply/{{Current.id}}"> <div style="margin-top:20px" class="ui right floated tiny blue button">
+          
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
+          {% endif %}
+        <a href="/mysite2/QnA"> <div style="margin-top:20px" class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
 
         <div id="h_sectiondivider" class="ui section divider"></div>
@@ -35,21 +41,22 @@
               <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
               <p class="qna_content">{{Current.Text}}</p>
             </div>  
-            
+            {%for QnA in QnA_Reply%}
             <div id="qna_border_a" class="ui raised segment">
-              <div class="ui large red right ribbon label">추천은 설명을 읽어보시고...</div>
+              <div class="ui large red right ribbon label">{{QnA.TextName}}</div>
               <p></p>
-              <div class="ui tiny black right ribbon label">관리자　2015.01.22 23:16</div>
-              <p class="reply">추천은 설명을 잘 읽어보시고 편안한 마음으로 슬라이더 바만 움직여주시면 됩니다 :)</p>
+              <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}  </div>
+              <p class="reply">{{QnA.Text}}</p>
             </div>       
+            {%endfor%}
                                           
               <center>
               <div class="ui buttons">
-              <a class="ui red inverted button">
+              <a class="ui red inverted button" href = "/mysite2/QnA/{{Previous}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
                 <div class="or"></div>
-              <a class="ui blue inverted button">
+              <a class="ui blue inverted button" href = "/mysite2/QnA/{{Next}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

@@ -51,7 +51,7 @@ def logout_page(request):
     logout(request)
     return HttpResponseRedirect('/mysite2')
 
-@csrf_exempt
+
 def Confirm(request):
 	return render_to_response('confirm.html')
 

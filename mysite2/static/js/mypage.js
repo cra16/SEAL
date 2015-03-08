@@ -1,16 +1,24 @@
 $(function(){
 
   $('#btnnum4').click(function(){
-      var txtbox1 = $('<input id="idtxtbox4" type="text">'),
-          btn1 = $('<button id="changebtn4" class="btn btn-info">').text('Change'),
-          btn2 = $('<button id="cancelbtn4" class="btn btn-info">').text('Cancel');
+      var PassWordText = $('<span id = "firstcolumn"> 비밀번호 :</span> '),
+          RePassWordText =('<span id = "secondcolumn"> 비밀번호 확인 :</span> '),
+          txtbox1 = $('<input type="password" id="PasswordBox">'),
+          txtbox2 = $('<input type="password" id="RePasswordBox">'),
+          btn1 = $('<button id="changebtn4" type = "button" class="btn btn-info">').text('Change'),
+          btn2 = $('<button id="cancelbtn4" type = "button" class="btn btn-info">').text('Cancel');
 
-      $('#spannum4').hide();
-      $('#spannum4').before(txtbox1);
-      $('#idtxtbox4').val($('#spannum4').text());
+      
+
       $('#btnnum4').hide();
       $('#btnnum4').before(btn1);
       $('#btnnum4').after(btn2);
+      $('#spannum4').hide();
+      $('#PasswordData').before(PassWordText);
+      $('#PasswordData').after(txtbox1);
+      $('#PasswordBox').after(txtbox2); 
+      $('#PasswordBox').after(RePassWordText);
+ 
 
   });
 
@@ -18,12 +26,17 @@ $(function(){
       $('#idtxtbox4').remove();
       $('#changebtn4').remove();
       $('#cancelbtn4').remove();
+      $('#PasswordBox').remove();
+      $('#RePasswordBox').remove();
+      $('#firstcolumn').hide();
+      $('#second  column').hide();
+      
       $('#spannum4').show();
       $('#btnnum4').show();
   });
 
   $('div').on('click', '#changebtn4', function(){
-      var newpw = $('#idtxtbox4').val();
+      var newpw = $('#PasswordBox').val();
 
       if(newpw.length >= 6 && newpw.length <= 20){
         if( newpw.indexOf(" ") !== -1 ){
@@ -39,7 +52,17 @@ $(function(){
             for(var i = 0; i < newpw.length; i++){
               newpwhide += "*";
             };
-            alert('Successfully changed!');
+           
+            $.ajax(
+            { url : "/mysite2/MyPage/PasswordChange",
+              data : {'PasswordBox' : $('#PasswordBox').val()},
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  } 
+            }
+              );
+            
             $('#spannum4').text(newpwhide);
             $('#idtxtbox4').remove();
             $('#changebtn4').remove();

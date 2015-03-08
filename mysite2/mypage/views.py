@@ -18,9 +18,12 @@ def MyPagePassWordChange(request):
 			ChangePassword = request.POST['PasswordBox']
 			ProfileData = Profile.objects.get(User = request.user)
 			
-			#외래키는 저장이안되서 직접 해야 되네요. (솔직히 그냥 불러도되긴한데...)
+			#외래키는 저장이안되서 직접 해야 되네요. (솔직히 그냥 불러도되긴한데...)		
 			UserData = ProfileData.User
 			UserData.set_password(ChangePassword)
 			UserData.save()
 
-			return HttpResponseRedirect("/mysite2")
+			return render_to_response("mysealpage.html", {
+				
+
+				})

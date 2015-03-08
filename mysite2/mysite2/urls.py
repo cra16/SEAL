@@ -38,6 +38,11 @@ urlpatterns += patterns('index.views',
 	url(r'^SiteMap/$','SiteMap'),
 )
 
+urlpatterns += patterns('mypage.views',
+	url(r'^MyPage/PasswordChange$', 'MyPagePassWordChange'),
+
+	)
+
 urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),

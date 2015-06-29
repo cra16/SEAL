@@ -10,7 +10,7 @@ from login.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
-
+from functionhelper.views import *
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -19,225 +19,166 @@ sys.setdefaultencoding("utf-8")
 	
 
 def MyPage(request):	#MyPage 루트
-
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("sealmypage.html", {'user':request.user}) 
-
+	CheckingLogin(request.user.username)
+	return render_to_response("sealmypage.html", {'user':request.user}) 
 
 def About(request): #About template 루트
-
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("about.html",{'user':request.user})
-
+	CheckingLogin(request.user.username)
+	return render_to_response("about.html",{'user':request.user})
 
 def Schedule(request): #Schedule template 기능
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("schedule.html",{'user':request.user})
+	CheckingLogin(request.user.username)
+	return render_to_response("schedule.html",{'user':request.user})
 
 def Judgement(request): # 신고 게시판 기능
-
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("subscribe_report.html",{'user':request.user})
+	CheckingLogin(request.user.username)
+	return render_to_response("subscribe_report.html",{'user':request.user})
 
 
 def Main(request, offset): #Main 기능
+	CheckingLogin(request.user.username)	
 
-	if request.user.username =="":
-		return HttpResponseRedirect("/mysite2")
-	else:
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
+	try:
+		offset = int(offset)
+	except ValueError:
+		raise Http404() 
 
-		PageInformation = request.session['PageInformation'] #Page DB
-		
-		#main 자바스크립트 조작 하기 위한 기능
-		Active = ["","",""]
-		URL_Path = request.path	#현재 페이지 URL 긁어오기
+	PageInformation=request.session['PageInformation']
+	#main 자바스크립트 조작 하기 위한 기능
+	Active = ["","",""]
+	URL_Path = request.path	#현재 페이지 URL 긁어오기
+
+
+	##강의 DB에 저장된 자료들을 코드로 필터를 해서 Total Page를 만듦
+	##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
+	##후배여러분이 좀 알고리즘 잘짜서 더 최적화해주세요..(최대한 했지만..발적화임..))
 	
+	CourseCode = MajorSelect(request.user)
 	
-		##강의 DB에 저장된 자료들을 코드로 필터를 해서 Total Page를 만듦
-		##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
-		##후배여러분이 좀 알고리즘 잘짜서 더 최적화해주세요..(최대한 했지만..발적화임..))
-		
-		CourseCode = MajorSelect(request.user)
-		
-		#2차원 list로 각 전공당 총 페이지 수 저장
-		T_Count=[[] ,[] ,[]]
-		T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()/5+1
-		T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/5+1
-		T_Count[2] = Lecture.objects.count()/5+1
-		
-		#main 페이지 활성화 기능(1전공, 2전공 all)
-		Active = ["","",""]
-		#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
-		PageData= ["FirstMajorPage","SecondMajorPage","AllPage"]
-		for i in range(0,3):
-			if URL_Path.find(PageData[i]) != -1:
-				PageInformation[i][1] = offset
-				#페이지 갯수가 11개 이상일 경우
-				if T_Count[i] >11:
-					#현재 페이지가 11이상일 경우
-					if offset>11:
-						#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
-						#되도록 표현 
-						if (offset+10)>T_Count[i]:
-							PageInformation[i][0] = (offset -(offset%10))-9
-							PageInformation[i][2] = T_Count[i]
-						#아니면 그냥 원래대로 표현
-						else:
-							PageInformation[i][0] = (offset -(offset%10))-9
-							PageInformation[i][2] = (offset -(offset%10))+11
-					#현재 페이지가 11이하일경우 
-					else:
-						PageInformation[i][0] = 1
-						PageInformation[i][2] = (offset - (offset%10))+11
-				#총 페이지가 11이하일 경우 
-				else:
-					PageInformation[i][0] = 1
-					PageInformation[i][2] = T_Count[i]
-
-				Active[i] = "active" # main 페이지
-			else:
-				pass 
-		#각 강의 전공에 해당하는 DB 정보 저장 함 
-		TotalBoard = [[],[],[]]
-		if CourseCode[0] !="ENG":
-			TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-			TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	#2차원 list로 각 전공당 총 페이지 수 저장
+	T_Count=[[] ,[] ,[]]
+	T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()/5+1
+	T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/5+1
+	T_Count[2] = Lecture.objects.count()/5+1
+	
+	#main 페이지 활성화 기능(1전공, 2전공 all)
+	Active = ["","",""]
+	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
+	PageData= ["FirstMajorPage","SecondMajorPage","AllPage"]
+	for i in range(0,len(T_Count)):
+		if URL_Path.find(PageData[i]) != -1:
+			#페이지 갯수가 11개 이상일 경우
+			PageInformation[i]=CurrentPageView(T_Count,offset,i)
+			PageInformation[i][1] = offset
+			Active[i] = "active" # main 페이지
 		else:
-			TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-			TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-		TotalBoard[2] = Lecture.objects.order_by('Code')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+			pass 
+	#각 강의 전공에 해당하는 DB 정보 저장 함 
+	TotalBoard = [[],[],[]]
+	if CourseCode[0] !="ENG":
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	else:
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.order_by('Code')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 
-		PageBoard = PageView(TotalBoard)
-		##Session Save
-		request.session['PageInformation'] = PageInformation
+	PageBoard = PageView(TotalBoard)
+	##Session Save
+	request.session['PageInformation'] = PageInformation
 
-		# 페이지 총 수(페이지 넘길 때)
-		TotalCount = [[],[],[]]
-		
-		for i in range(0,3):
-			if (PageInformation[i][1]/10) >= T_Count[i]/10:
-				TotalCount[i] = range(PageInformation[i][1]-(PageInformation[i][1]%10)+1,T_Count[i]+1)
-			else:
-				TotalCount[i] = range(PageInformation[i][1]-(PageInformation[i][1]%10)+1,PageInformation[i][1]-(PageInformation[i][1]%10)+11)
-		
-		return render_to_response("index.html",
-			  {'user':request.user,
-			   'PageBoard':PageBoard,
-			   'TotalCount' : TotalCount,
-			   'PageInformation' : PageInformation,
-			   'Path':URL_Path,
-			   'Active':Active,
-			   })
+	# 페이지 총 수(페이지 넘길 때)
+	TotalCount=list()
+	for i in range(0,len(T_Count)):
+		TotalCount.append(PageTotalCount(i,T_Count,PageInformation[i]))
+	return render_to_response("index.html",
+		  {'user':request.user,
+		   'PageBoard':PageBoard,
+		   'TotalCount' : TotalCount,
+		   'PageInformation' : PageInformation,
+		   'Path':URL_Path,
+		   'Active':Active,
+		   })
 
 def SubScript(request):
-	if request.user.username =="":
-		return HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("subscribe_improve.html", {'user':request.user})
+	CheckingLogin(request.user.username)
+	return render_to_response("subscribe_improve.html", {'user':request.user})
 
 def SiteMap(request):
-	if request.user.username =="":
-		return HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("sitemap.html", {'user':request.user})
+	CheckingLogin(request.user.username)
+	return render_to_response("sitemap.html", {'user':request.user})
 
 def MyCourse(request):
-        if request.user.username =="":
-                return HttpResponseRedirect("/mysite2")
-        else:
-			MyProfile = Profile.objects.get(User=request.user)
-			RecommendPage=[]
-			LikePage=[]
-			UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)
-			for BoardData in UserBoard:
-				RecommendPage.append(Total_Evaluation.objects.get(CourseName = BoardData.Course))
-			for Board2 in UserBoard:
-				LikePage.append(Total_Evaluation.objects.get(CourseName = Board2.Course))
+		CheckingLogin(request.user.username)
+		MyProfile = Profile.objects.get(User=request.user)
+		RecommendPage=[]
+		LikePage=[]
+		UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)
+		for BoardData in UserBoard:
+			RecommendPage.append(Total_Evaluation.objects.get(CourseName = BoardData.Course))
+		for Board2 in UserBoard:
+			LikePage.append(Total_Evaluation.objects.get(CourseName = Board2.Course))
 
 
-			return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
+		return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
 @csrf_exempt
 def Search(request): #전체 검색 기능
- 	if request.user.username =="":
- 		return HttpResponseRedirect("/mysite2")
- 	else:
- 		if request.method =="POST":
- 			SearchData = request.POST['search']
- 			#여기 문제
- 			LectureData = [[]]
- 			LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
- 			SearchCount = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
- 			L_Data=PageView(LectureData)
- 			PageInformation =[1,1,1]
+	CheckingLogin(request.user.username)
 
- 			if SearchCount >10:
- 				PageInformation[0] = 1
- 				PageInformation[2] = 11
- 			else :
- 				PageInformation[0] = 1
- 				PageInformation[2] = SearchCount
+	if request.method =="POST":
+		SearchData = request.POST['search']
+		#여기 문제
+		LectureData = [[]]
+		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
+		SearchCount = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
+		L_Data=PageView(LectureData)
+		PageInformation =[1,1,1]
 
- 			T_Count = range(1,PageInformation[2])
-		
- 			request.session['SearchPageInformation'] = PageInformation
- 			request.session['SearchValue'] = SearchData
- 			return render_to_response('index.html', {
- 												'user':request.user,
- 												'Search' : L_Data,
- 												'PageInformation' : PageInformation,
-												'T_Count':T_Count,
-												})
- 		else:
- 			return HttpResponseRedirect("/mysite2")
+		FirstPageView(0,SearchCount)
+
+		T_Count = range(1,PageInformation[2])
+
+		request.session['SearchPageInformation'] = PageInformation
+		request.session['SearchValue'] = SearchData
+		return render_to_response('index.html', {
+											'user':request.user,
+											'Search' : L_Data,
+											'PageInformation' : PageInformation,
+											'T_Count':T_Count,
+										})
+	else:
+		return HttpResponseRedirect("/mysite2")
 
 def SearchPage(request, offset):
-	if request.user.username =="":
- 		return HttpResponseRedirect("/mysite2")
- 	else:
- 			try:
-					offset = int(offset)
-			except ValueError:
-					raise Http404()
- 			SearchData = request.session['SearchValue']
- 			
+	CheckingLogin(request.user.username)
 
- 			PageInformation = request.session['SearchPageInformation']
- 			PageInformation[1] = offset
- 			LectureData = [[]]
- 			LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
- 			SearchCount = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
- 			L_Data=PageView(LectureData)
+	try:
+			offset = int(offset)
+	except ValueError:
+			raise Http404()
+	SearchData = request.session['SearchValue']
+	
+	PageInformation = request.session['SearchPageInformation']
+	PageInformation[1] = offset
+	LectureData = [[]]
+	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	SearchCount=[0]
+	SearchCount[0] = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
+	L_Data=PageView(LectureData)
+	
+	T_Count=PageTotalCount(0,SearchCount)
+	
 
- 			if (PageInformation[1]/10) >= SearchCount/10:
-				T_Count = range(PageInformation[1]-(PageInformation[1]%10)+1,SearchCount+1)
-			else:
-				T_Count = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
-
- 			request.session['SearchPageInformation'] = PageInformation
- 			return render_to_response('index.html', {
- 												'user':request.user,
- 												'Search' : L_Data,
- 												'PageInformation' : PageInformation,
- 												'T_Count' : T_Count,
-												})
+	request.session['SearchPageInformation'] = PageInformation
+	return render_to_response('index.html', {
+										'user':request.user,
+										'Search' : L_Data,
+										'PageInformation' : PageInformation,
+									'T_Count' : T_Count,
+									})
 #메인 페이지 view 함수로 옮김
 def PageView(TotalBoard):
-	PageBoard = [[],[],[]]
+	PageBoard=list()
 	count =0
 	for DBBoard in TotalBoard:
 		for Board in DBBoard:
@@ -254,7 +195,7 @@ def PageView(TotalBoard):
 				BoardData.Total_Question = BoardData.Total_Question/BoardData.Total_Count
 				BoardData.Total_Exam = BoardData.Total_Exam/BoardData.Total_Count
 				BoardData.Total_Homework = BoardData.Total_Homework/BoardData.Total_Count
-				PageBoard[count].append(BoardData)
+				PageBoard.append(BoardData)
 			else:
 				BoardData = Total_Evaluation(Course=Board)
 				BoardData.Total_Speedy =5
@@ -264,8 +205,7 @@ def PageView(TotalBoard):
 				BoardData.Total_Exam = 5
 				BoardData.Total_Homework = 5
 				BoardData.Total_Count =0
-				PageBoard[count].append(BoardData)
-		count=count+1
+				PageBoard.append(BoardData)
 	return PageBoard
 
                                                                   

@@ -8,9 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'mysite2.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 	url(r'^admin/', include(admin.site.urls)), 
-	
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
-
 	url(r'^update/$','lecture.views.lec_update'),
 	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'schedule.views.SelectPeriod'),
 )
@@ -21,8 +19,7 @@ urlpatterns += patterns('login.views',
 	url(r'^Register/$','Register'),
 	url(r'^$', 'loginCheck'),
 	url(r'^Logout/$', 'logout_page'),
-	
-	)
+	)#login view
 
 urlpatterns += patterns('index.views',
 	url(r'^Search/$', 'Search'),
@@ -36,19 +33,17 @@ urlpatterns += patterns('index.views',
 	url(r'^AllPage/(\d+)/$','Main'),
 	url(r'^SubScript/$','SubScript'),
 	url(r'^SiteMap/$','SiteMap'),
-)
+)#mainPage view
 
 urlpatterns += patterns('mypage.views',
 	url(r'^MyPage/PasswordChange$', 'MyPagePassWordChange'),
-
-	)
+)#mypage view
 
 urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
 	url(r'^Like/(\d+)$','Like'),
-
-)
+)#recommend view
 
 urlpatterns += patterns('qna.views',
 	url(r'^QnA/page/(\d+)$','QnA'),
@@ -63,7 +58,7 @@ urlpatterns += patterns('qna.views',
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
 	url(r'^Course/(\d+)/Page/(\d+)$','CoursePage'),
-)
+) # course view
 
 urlpatterns += patterns('notice.views',
 	url(r'^Notice/$','NoticeMain'),
@@ -72,4 +67,4 @@ urlpatterns += patterns('notice.views',
 	url(r'^Notice/Write$', 'Notice_Write'),
 	url(r'^Notice/Writing$', 'Notice_Writing'),
 
-)
+)#Notice view

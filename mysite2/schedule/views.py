@@ -52,37 +52,59 @@ def SearchSubject(request):
 		category = request.POST['category']
 		major = request.POST['major']
 		SearchName = request.POST['SearchName']
-
+		if request.POST['Page'] !="":
+			cur_page = int(request.POST['Page'])
+			New=False
+		else:
+			cur_page = 1
+			New = True
 		#cur_page = int(offset)
 
-		start = 6 *(1-1)
-		end = 6 * 1
+		start = 6 *(cur_page-1)
+		end = 6 * (cur_page)
 
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
+
+		SubjectCount=[0]
 		
-		if SearchName == None:
+		if SearchName == "":
 			if SelectMajor != "전체" and SelectCategory !="전체":
-					SubjectCount = Lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory).count()
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
+					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor, Category__contains=SelectCategory).count()
+					Subject = Lecture.objects.filter(Major__contains=SelectMajor, Category__contains=SelectCategory)[start:end]
 			elif SelectMajor != "전체" and SelectCategory =="전체":
-					SubjectCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
+					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor).count()
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
 			elif SelectMajor =="전체" and SelectCategory !="전체":
-					SubjectCount = Lecture.objects.filter(Category=SelectCategory).count()
-					Subject = Lecture.objects.filter(Category=SelectCategory)[start:end]
+					SubjectCount[0] = Lecture.objects.filter(Category__contains=SelectCategory).count()
+					Subject = Lecture.objects.filter(Category__contains=SelectCategory)[start:end]
+			else:
+					SubjectCount[0] = Lecture.objects.count()/6+1
+					Subject = Lecture.objects.order_by('Code')[start:end]
+			SelectMajor="GG"
+
 
 
 		else:
-			SubjectCount = Lecture.objects.filter( CourseName__contains=SearchName)
+			SubjectCount[0] = Lecture.objects.filter(CourseName__contains=SearchName)
 			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
-		
 
+		if New ==True:
+			PageInformation = FirstPageView(0,SubjectCount)
+			TotalCount=range(PageInformation[0],PageInformation[2])
+		else :
+			PageInformation = CurrentPageView(SubjectCount,cur_page,0)
+			TotalCount = PageTotalCount(0,SubjectCount,PageInformation)
 		Dic = {
 				'user':request.user,
 				'Subject':Subject,
+				'SelectMajor' : SelectMajor,
 				'SubjectCount':SubjectCount,
+				'SearchName':SearchName,
+				'PageInformation':PageInformation,
+				'TotalCount':TotalCount,
+				'cur_page':cur_page,
 				'Data' :1,
 		}
 

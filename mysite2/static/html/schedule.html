@@ -150,6 +150,14 @@
         </div>
          <div class="ui divider"></div>
 
+        
+      {% endif %}
+      {% endfor %}
+       </div>
+      <div id="sch-search-result" class="wrapper">
+         
+
+         {% if lec_lst != None %}
         <center><div class="ui borderless pagination menu">
               <a class="item">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
@@ -162,30 +170,12 @@
               </a>
             </div></center>
             <div style="padding-bottom:30px"></div>
+         {%endif%}
       </div>
-      {% endif %}
-      {% endfor %}
-
-      <div id="sch-search-result" class="wrapper">
      
 
 
-
-        <div class="ui divider"></div>
-
-        <center><div class="ui borderless pagination menu">
-              <a class="item">
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
-              </a>
-              {% for i in total_page %}
-              <a href="/mysite2/sel_period/{{period}}/{{i}}" class="item">{{i}}</a>
-              {% endfor %}
-              <a class="item">
-                Next <i class="glyphicon glyphicon-menu-right"></i>
-              </a>
-            </div></center>
-            <div style="padding-bottom:30px"></div>
-      </div>
+    
 
      <div class="bootstrap-table">
          <div class="fixed-table-container">

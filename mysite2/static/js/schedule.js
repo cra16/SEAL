@@ -40,7 +40,8 @@ $(document).ready(function () {
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
-                      'SearchName': $('#SearchName').val()
+                      'SearchName': $('#SearchName').val(),
+                      'Page': ""
                     },
               type : "POST",
               success:function(resp){  
@@ -56,6 +57,97 @@ $(document).ready(function () {
                   } 
             
           });
+        $("#sch-result").hide();
+
+    });
+
+    $('*').keypress(function(e){
+
+      if(e.keyCode==13)
+        return false;
+    });
+
+    /*$('#Previous').click(function(){
+
+        $.ajax(
+            { url : "/mysite2/Schedule/",
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val(),
+                      'Page': $('#Previous').val()
+                    },
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  $('#sch-search-result').html(resp);
+
+                      
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    $('#Previous').click(function(){
+
+        $.ajax(
+            { url : "/mysite2/Schedule/",
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val(),
+                      'Page': $('#Previous').val()
+                    },
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  $('#sch-search-result').html(resp);
+
+                      
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+*/
+    $("a[name=pag]").click(function(){ 
+
+        $.ajax(
+            { url : "/mysite2/Schedule/",
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val(),
+                      'Page': $('#'+$(this).attr('id')).val()
+                    },
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  $('#sch-search-result').html(resp);
+
+                      
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
 
     });
 });

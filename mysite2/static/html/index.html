@@ -97,13 +97,13 @@
           </div>
         </div>
       </div>
-
+      {%if not Active == None%}
       <div class="ui small tabular filter menu">
         <a class="{{Active.0}} item" data-tab="unread">1전공</a>
         <a class="{{Active.1}} item" data-tab="saved">2전공</a>
         <a class="{{Active.2}} item" data-tab="all">All</a>
       </div>
-      
+      {%endif%}
       
       <div class="ui very relaxed column grid">
         <div class="column">
@@ -203,14 +203,14 @@
 			{%endfor%}
 			
 				<center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/SecondMajorPage/{{PageInformation.0.0}}">
+              <a class="item" href = "/mysite2/SecondMajorPage/{{PageInformation.1.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous  
               </a>
 			
 				{% for i in TotalCount.1%}
 				 <a href = "/mysite2/SecondMajorPage/{{i}}" class="item" >{{i}}</a>
 				{%endfor%}
-              <a class="item" href = "/mysite2/SecondMajorPage/{{PageInformation.0.2}}">
+              <a class="item" href = "/mysite2/SecondMajorPage/{{PageInformation.1.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -258,19 +258,20 @@
               {% endfor%} 
 			 
 			  <center><div class="ui borderless pagination menu">
-              <a class="item" href = "/mysite2/AllPage/{{PageInformation.0.0}}">
+              <a class="item" href = "/mysite2/AllPage/{{PageInformation.2.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous   
               </a>
 			
 				{% for i in TotalCount.2%}
 				 <a href = "/mysite2/AllPage/{{i}}" class="item" >{{i}}</a>
 				{%endfor%}
-              <a class="item" href = "/mysite2/AllPage/{{PageInformation.0.2}}">
+              <a class="item" href = "/mysite2/AllPage/{{PageInformation.2.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
       </div>
 
+          {%if Active == None%}
           {% if not Search == None %}
           {% for SBoard in Search.0%}
                         <script>
@@ -322,7 +323,7 @@
             </div></center>
 
             {%endif%}
-    
+        {%endif%}
         <div class="ui divider"></div>
 
                               

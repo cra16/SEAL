@@ -67,13 +67,14 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 	#######	게시판 페이지 넘기는 기능
 
 	count = QnA_Board.objects.count()
-	TotalCount = (count/8)+1
-	PageInformation = list()
+	T_Count =[0]
+	T_Count[0]=((count/8)+1)
+	#PageInformation = list()
     
-	PageInformation.append(CurrentPageView(T_Count,offset,0))
+	PageInformation=CurrentPageView(T_Count,offset,0)
 
 
-	TotalCount=PageTotalCount(0,TotalCount,PageInformation)
+	TotalCount=PageTotalCount(0,T_Count,PageInformation)
 
 	Today =datetime.date.today()
 

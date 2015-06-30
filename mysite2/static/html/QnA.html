@@ -63,7 +63,7 @@
                    
                     <td><center>{{Board.TextWriter.UserName}}</center></td>
                     <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
-                    <td><center><span id="qna_click1"></span></center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
                   </tr>
                   {% if not ReplyBoard == None%}
                      {% for ReplyData in ReplyBoard%}

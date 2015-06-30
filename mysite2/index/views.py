@@ -63,6 +63,7 @@ def Main(request, offset): #Main 기능
 	
 	#main 페이지 활성화 기능(1전공, 2전공 all)
 	Active = ["","",""]
+	ActivieCount=0
 	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
 	PageData= ["FirstMajorPage","SecondMajorPage","AllPage"]
 	for i in range(0,len(T_Count)):
@@ -71,8 +72,11 @@ def Main(request, offset): #Main 기능
 			PageInformation[i]=CurrentPageView(T_Count,offset,i)
 			PageInformation[i][1] = offset
 			Active[i] = "active" # main 페이지
+			ActivieCount+=1
 		else:
-			pass 
+			pass
+	if ActiveCount ==0:
+		Activie=None
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
@@ -130,13 +134,14 @@ def Search(request): #전체 검색 기능
 		#여기 문제
 		LectureData = [[]]
 		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
-		SearchCount = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
+		SearchCount =list()
+		SearchCount.append(Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1)
 		L_Data=PageView(LectureData)
 		PageInformation =[1,1,1]
 
-		FirstPageView(0,SearchCount)
+		PageInformation=FirstPageView(0,SearchCount)
 
-		T_Count = range(1,PageInformation[2])
+		T_Count = PageTotalCount(0,SearchCount,PageInformation)
 
 		request.session['SearchPageInformation'] = PageInformation
 		request.session['SearchValue'] = SearchData
@@ -162,11 +167,13 @@ def SearchPage(request, offset):
 	PageInformation[1] = offset
 	LectureData = [[]]
 	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
-	SearchCount=[0]
-	SearchCount[0] = Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1
+	SearchCount =list()
+	SearchCount.append(Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1)
+
 	L_Data=PageView(LectureData)
 	
-	T_Count=PageTotalCount(0,SearchCount)
+	PageInformation = CurrentPageView(SearchCount,offset,0)
+	T_Count=PageTotalCount(0,SearchCount,PageInformation)
 	
 
 	request.session['SearchPageInformation'] = PageInformation
@@ -174,11 +181,11 @@ def SearchPage(request, offset):
 										'user':request.user,
 										'Search' : L_Data,
 										'PageInformation' : PageInformation,
-									'T_Count' : T_Count,
+											'T_Count' : T_Count,
 									})
 #메인 페이지 view 함수로 옮김
 def PageView(TotalBoard):
-	PageBoard=list()
+	PageBoard=[[],[],[]]
 	count =0
 	for DBBoard in TotalBoard:
 		for Board in DBBoard:
@@ -195,7 +202,7 @@ def PageView(TotalBoard):
 				BoardData.Total_Question = BoardData.Total_Question/BoardData.Total_Count
 				BoardData.Total_Exam = BoardData.Total_Exam/BoardData.Total_Count
 				BoardData.Total_Homework = BoardData.Total_Homework/BoardData.Total_Count
-				PageBoard.append(BoardData)
+				PageBoard[count].append(BoardData)
 			else:
 				BoardData = Total_Evaluation(Course=Board)
 				BoardData.Total_Speedy =5
@@ -205,7 +212,8 @@ def PageView(TotalBoard):
 				BoardData.Total_Exam = 5
 				BoardData.Total_Homework = 5
 				BoardData.Total_Count =0
-				PageBoard.append(BoardData)
+				PageBoard[count].append(BoardData)
+		count=count+1
 	return PageBoard
 
                                                                   

@@ -2,7 +2,7 @@
 # -*- coding: euc-kr -*-
 
 from django.shortcuts import render
-
+from django.http import HttpResponseRedirect, Http404
 # Create your views here.
 
 #세션 유지된 아이디 확인

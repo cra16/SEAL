@@ -1,4 +1,5 @@
 *.bak
+*.json
 
 # django
 *.swp

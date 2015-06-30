@@ -12,7 +12,7 @@ from functionhelper.views import CheckingLogin
 
 @csrf_exempt
 def MyPagePassWordChange(request):
-		CheckingLogin(request)
+		CheckingLogin(request.user.username)
 
 		if request.method =="POST":
 			ChangePassword = request.POST['PasswordBox']
@@ -23,7 +23,7 @@ def MyPagePassWordChange(request):
 			UserData.set_password(ChangePassword)
 			UserData.save()
 
-			return render_to_response("mysealpage.html", {
-				
+			return render_to_response("sealmypage.html", {'data':1})
 
-				})
+		else:
+			return render_to_response("sealmypage.html", {'data':0})

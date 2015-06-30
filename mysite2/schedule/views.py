@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
 from lecture.models import *
 from functionhelper.views import *
+from django.views.decorators.csrf import csrf_exempt
 
 
 # 시간표 선택시 검색 기능
@@ -42,38 +43,52 @@ def SelectPeriod(request, period, page):
 
 		return render_to_response('schedule.html', ctx)
 
-
-def SearchSubject(request,offset):
+@csrf_exempt
+def SearchSubject(request):
 	CheckingLogin(request.user.username)
 
-	if request.method =="POST":
-		major = request.POST['major']
+ 	if request.method =="POST":
+ 		
 		category = request.POST['category']
-		SearchName = request.Post['SearchName']
+		major = request.POST['major']
+		SearchName = request.POST['SearchName']
 
-		cur_page = int(offset)
+		#cur_page = int(offset)
 
-		start = 6 *(cur_page-1)
-		end = 6 * cur_page
+		start = 6 *(1-1)
+		end = 6 * 1
 
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
-		if SearchName == None
-			SubjectCount = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory).count()
-			Subject = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
+		
+		if SearchName == None:
+			if SelectMajor != "전체" and SelectCategory !="전체":
+					SubjectCount = Lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory).count()
+					Subject = Lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
+			elif SelectMajor != "전체" and SelectCategory =="전체":
+					SubjectCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
+					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
+			elif SelectMajor =="전체" and SelectCategory !="전체":
+					SubjectCount = Lecture.objects.filter(Category=SelectCategory).count()
+					Subject = Lecture.objects.filter(Category=SelectCategory)[start:end]
+
+
 		else:
-			SubjectCount = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory, CourseName__contains=SearchName)
-			Subject = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
+			SubjectCount = Lecture.objects.filter( CourseName__contains=SearchName)
+			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
+		
+
 		Dic = {
 				'user':request.user,
-				'Subject':Subject
-				'SubjectCount':SubjectCount
+				'Subject':Subject,
+				'SubjectCount':SubjectCount,
+				'Data' :1,
 		}
 
-		return render_to_response('schedule.html', Dic)
+		return render_to_response('scheduleTemplate.html', Dic)
 	else:
-		return HttpResponseRedirect("/mysite2")
+		return render_to_response("schedule.html",{'user':request.user,'Data' :0})
 
 def Major(major):
 	if major == "0001":
@@ -95,12 +110,12 @@ def Major(major):
 	elif major =="0033":
 		major = "생명과학"
 	elif major == "0071":
-		major "전산전자"
+		major = "전산전자"
 	elif major == "0074":
 		major = "산업디자인"
 	elif major == "0077":
 		major = "기계제어"
-	elif major == "0078"
+	elif major == "0078":
 		major = "공간환경"
 	else:
 		major = "전체"

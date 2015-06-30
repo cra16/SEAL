@@ -10,8 +10,14 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)), 
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^update/$','lecture.views.lec_update'),
-	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'schedule.views.SelectPeriod'),
+	
 )
+
+urlpatterns += patterns('schedule.views',
+	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'SelectPeriod'),
+	#url(r'^Schedule/Search/$','SearchSubject'),
+	url(r'^Schedule/$','SearchSubject'),
+	)#schedule view
 
 urlpatterns += patterns('login.views',
 	url(r'^Confirm/$','Confirm'),
@@ -26,7 +32,7 @@ urlpatterns += patterns('index.views',
 	url(r'^Search/(\d+)$','SearchPage'),
 	url(r'^MyPage/$', 'MyPage'), 
 	url(r'^About/$','About'),
-	url(r'^Schedule/$','Schedule'),
+	
 	url(r'^Judgement/$','Judgement'),
 	url(r'^FirstMajorPage/(\d+)/$','Main'),
 	url(r'^SecondMajorPage/(\d+)/$','Main'),

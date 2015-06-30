@@ -33,5 +33,29 @@ $(document).ready(function () {
     $('#sch-result .button').click(function(event) {
         $('#sch-result').fadeOut(100);
     });
-		    
+		
+    $('#sch-search').click(function(){
+
+        $.ajax(
+            { url : "/mysite2/Schedule/",
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val()
+                    },
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  $('#sch-search-result').html(resp);
+
+                      
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+    });
 });

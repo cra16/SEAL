@@ -19,6 +19,7 @@ from index.views import MajorSelect, PageView#전공 선택 및 페이지 메인
 from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
 from django.contrib.auth.models import User	# user model 등록
+from functionhelper.views import *
 
 @csrf_exempt
 def loginCheck(request):
@@ -187,15 +188,18 @@ def MainView(request):
 	T_Count[2] = Lecture.objects.count()/6+1
 
 	##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
-	PageInformation = [[1,1,1],[1,1,1],[1,1,1]]
-			
+	PageInformation = list()
+
 	#페이지 넘기는 기능
 	#각 전공을 표현하는데 11페이지가 넘어갈 경우 11로 고정시키고 그렇지 않을 경우 T_Count를 기준으로 한다.
-	for i in range(0,3): 
-		if T_Count[i]>11:
-			PageInformation[i][2] = 11
-		else:
-			PageInformation[i][2] =T_Count[i]	
+	# for i in range(0,3): 
+	# 	if T_Count[i]>11:
+	# 		PageInformation[i][2] = 11
+	# 	else:
+	# 		PageInformation[i][2] =T_Count[i]
+	for i in range (0,len(T_Count))	:
+		PageInformation.append(FirstPageView(i,T_Count))
+
 	#글로벌 리더십일 경우랑 그이외의 경우로 분류해서 출력(글로벌 리더십때문에 좀 꼬여서..)
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":

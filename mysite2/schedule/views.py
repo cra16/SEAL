@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
 from lecture.models import *
 
+
 # 시간표 선택시 검색 기능
 def SelectPeriod(request, period, page):
 	"""

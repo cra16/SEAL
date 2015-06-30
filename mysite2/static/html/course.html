@@ -173,7 +173,7 @@
       <div id="h_sectiondivider" class="ui section divider"></div>
 
       <div class="ui column">
-        <h3><b>개인 : </b></h3>
+        <h3><b>개인 : {{MyCourseBoard.Reliance}}</b></h3>
          {%if  MyCourseBoard != None%}
 		<div id="recommending" class="ui column">
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>
@@ -278,8 +278,9 @@
               </div>
             </div>
           </div>
-		{% endif %}	
+	
 		</div>
+      {% endif %} 
 
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>

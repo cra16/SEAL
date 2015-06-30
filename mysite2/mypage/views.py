@@ -6,14 +6,14 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from login.models import Profile
+from functionhelper.views import CheckingLogin
 
 # Create your views here.
 
 @csrf_exempt
 def MyPagePassWordChange(request):
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
+		CheckingLogin(request)
+
 		if request.method =="POST":
 			ChangePassword = request.POST['PasswordBox']
 			ProfileData = Profile.objects.get(User = request.user)

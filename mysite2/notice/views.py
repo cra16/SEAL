@@ -11,137 +11,103 @@ from notice.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime  #오늘날짜 불러오기 위한 import
 from django.db.models import Q
-
+from functionhelper.views import CheckingLogin, FirstPageView, CurrentPageView
 
 
 def NoticeMain(request):#Notice 기능
 
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		count=Notice_Board.objects.count()
-
-		T_Count = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
-		PageInformation = [1,1,1]
-		
-		if T_Count>11:
-			PageInformation[2] = 11
-		else:
-			PageInformation[2] =T_Count
-		
-		PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
-		Today = datetime.datetime.now()
-		return render_to_response("notice.html",
-					  {'user':request.user,
-					   'PageBoard':PageBoard, 
-					   'TotalCount' : range(0,PageInformation[2]),
-					   'Today':Today 
-					   })
+	CheckingLogin(request.user.username)
+	
+	count=Notice_Board.objects.count()
+	T_Count=[1]
+	T_Count[0] = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
+	
+	PageInformation=(FirstPageView(0,T_Count))
+	PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
+	Today = datetime.datetime.now()
+	return render_to_response("notice.html",
+				  {'user':request.user,
+				   'PageBoard':PageBoard, 
+				   'TotalCount' : range(0,PageInformation[2]),
+				   'Today':Today 
+				   })
 
 def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
 
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else :	
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
+	CheckingLogin(request.user.username)
+	try:
+		offset = int(offset)
+	except ValueError:
+		raise Http404()
 
-		#페이지 수 정보
-		PageFirst = (offset-1)*6
-		PageLast = (offset-1)*6 + 6
-		PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
-		#페이지 넘기는 기능
+	#페이지 수 정보
+	PageFirst = (offset-1)*6
+	PageLast = (offset-1)*6 + 6
+	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
+	#페이지 넘기는 기능
+
+	count = Notice_Board.objects.count()
+	T_Count=list()
+	T_Count.append((count/8)+1)
+	PageInformation = list()
+
+	PageInformation.append(CurrentPageView(T_Count,offset,0))
 
 
-		count = Notice_Board.objects.count()
-		TotalCount = (count/8)+1
-		PageInformation = [1,1,1]
-        
-		if TotalCount >11:
-			#현재 페이지가 11이상일 경우
-			if offset>11:
-				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
-				#되도록 표현 
-				if (offset+10)>T_Count[i]:
-					PageInformation[0] = (offset -(offset%10))-9
-					PageInformation[2] = TotalCount
-				#아니면 그냥 원래대로 표현
-				else:
-					PageInformation[0] = (offset -(offset%10))-9
-					PageInformation[2] = (offset -(offset%10))+11
-			#현재 페이지가 11이하일경우 
-			else:
-				PageInformation[0] = 1
-				PageInformation[2] = (offset - (offset%10))+11
-		#총 페이지가 11이하일 경우 
-		else:
-			PageInformation[0] = 1	
-			PageInformation[2] = TotalCount
+	TotalCount = PageTotalCount(0,T_Count,PageInformation)
 
-		if (PageInformation[1]/10) >= TotalCount/10:
-			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,TotalCount+1)
-		else:
-			TotalCount = range(PageInformation[1]-(PageInformation[1]%10)+1,PageInformation[1]-(PageInformation[1]%10)+11)
-       
+	
 
-		Today = date.today()       
-		return render_to_response("notice.html",
-					  {'user':request.user, 
-					   'PageBoard':PageBoard,
-					   'TotalCount' : TotalCount,
-					   'Today' :Today,
-	       			  })
+	Today = date.today()       
+	return render_to_response("notice.html",
+				  {'user':request.user, 
+				   'PageBoard':PageBoard,
+				   'TotalCount' : TotalCount,
+				   'Today' :Today,
+       			  })
 
 def Notice_Read(request, offset): #Notice Read 기능
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
+	CheckingLogin(request.user.username)
+	try:
+		offset = int(offset)
+	except ValueError:
+		raise Http404()
+
+	Current = Notice_Board.objects.filter(id=offset).get()
+	Current.ClickScore +=1
+	Current.save()
+
+	NoticeCount = Notice_Board.objects.count()
+
+	if offset ==1:
+		Previous = 1
 	else:
-		try:
-			offset = int(offset)
-		except ValueError:
-			raise Http404()
-
-		Current = Notice_Board.objects.filter(id=offset).get()
-		Current.ClickScore +=1
-		Current.save()
-
-		NoticeCount = Notice_Board.objects.count()
-
-		if offset ==1:
-			Previous = 1
-		else:
-			Previous = offset-1
-		if offset == NoticeCount:
-			Next = NoticeCount
-		else:
-			Next = offset+1
-		
+		Previous = offset-1
+	if offset == NoticeCount:
+		Next = NoticeCount
+	else:
+		Next = offset+1
 	
-		return render_to_response("notice-contents.html", 
-			{'user':request.user,
-			'Previous' :Previous,
-			'Next' :Next,
-			'Board':Current})
+
+	return render_to_response("notice-contents.html", 
+		{'user':request.user,
+		'Previous' :Previous,
+		'Next' :Next,
+		'Board':Current})
 
 
 def Notice_Write(request): #Q&A Write 기능
-	if request.user.username =="":
-		return  HttpResponseRedirect("/mysite2")
-	else:
-		return render_to_response("subscribe_notice.html",{'user':request.user})
+	CheckingLogin(request.user.username)
+	return render_to_response("subscribe_notice.html",{'user':request.user})
 @csrf_exempt
 def Notice_Writing(request):
-	if request.user.username =="":
-		return HttpResponseRedirect("/mysite2")
-	else:
-		if request.method =="POST":
-			new_Text=request.POST['msg-body-txtarea']		
-			new_TextWriter = Profile.objects.get(User=request.user)
-			new_TextName = request.POST['msg-title-input']
-			created = datetime.datetime.now()
-			new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
-			new_Notice.save()
-		return HttpResponseRedirect("/mysite2/Notice")
+	CheckingLogin(request.user.username)
+	if request.method =="POST":
+		new_Text=request.POST['msg-body-txtarea']		
+		new_TextWriter = Profile.objects.get(User=request.user)
+		new_TextName = request.POST['msg-title-input']
+		created = datetime.datetime.now()
+		new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+		new_Notice.save()
+	return HttpResponseRedirect("/mysite2/Notice")
 # Create your views here.

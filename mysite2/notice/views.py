@@ -11,7 +11,7 @@ from notice.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime  #오늘날짜 불러오기 위한 import
 from django.db.models import Q
-from functionhelper.views import CheckingLogin, FirstPageView, CurrentPageView
+from functionhelper.views import *
 
 
 def NoticeMain(request):#Notice 기능
@@ -28,6 +28,7 @@ def NoticeMain(request):#Notice 기능
 	return render_to_response("notice.html",
 				  {'user':request.user,
 				   'PageBoard':PageBoard, 
+				   'PageInformation':PageInformation,
 				   'TotalCount' : range(0,PageInformation[2]),
 				   'Today':Today 
 				   })
@@ -49,21 +50,20 @@ def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
 	count = Notice_Board.objects.count()
 	T_Count=list()
 	T_Count.append((count/8)+1)
-	PageInformation = list()
+	
 
-	PageInformation.append(CurrentPageView(T_Count,offset,0))
+	PageInformation=CurrentPageView(T_Count,offset,0)
 
 
 	TotalCount = PageTotalCount(0,T_Count,PageInformation)
 
-	
-
-	Today = date.today()       
+	Today =datetime.date.today()    
 	return render_to_response("notice.html",
 				  {'user':request.user, 
 				   'PageBoard':PageBoard,
 				   'TotalCount' : TotalCount,
 				   'Today' :Today,
+				   'PageInformation':PageInformation
        			  })
 
 def Notice_Read(request, offset): #Notice Read 기능

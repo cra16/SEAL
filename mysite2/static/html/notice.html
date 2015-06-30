@@ -77,13 +77,13 @@
                
                                           
               <center><div class="ui borderless pagination menu">
-              <a class="item" href ="/mysite2/Notice/Page/{{Previous}}">
+              <a class="item" href ="/mysite2/Notice/Page/{{PageInformation.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 			   {% for i in  TotalCount %}
-				 <a href = "/mysite2/Notice/Page/{{forloop.counter}}" class="item" >{{forloop.counter}}</a>
+				 <a href = "/mysite2/Notice/Page/{{PageInformation.1}}" class="item" >{{forloop.counter}}</a>
                {% endfor%}
-              <a class="item" href = "/mysite2/Notice/Page/{{Next}}">
+              <a class="item" href = "/mysite2/Notice/Page/{{PageInformation.2}}">
                 Next <i class="glyphicon glyphicon-menu-right" ></i>
               </a>
             </div></center>

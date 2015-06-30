@@ -70,13 +70,14 @@
         <div class="col-md-10 col-sm-12">
           <div class="navbar-header">
             <a class="navbar-brand" href="/mysite2">SEAL</a>
-            <form class="navbar-form navbar-left col-xs-5 form-inline" role="search" method = "POST" action="/mysite2/Search/" >{%csrf_token%}
-
-              <div class="form-group">
+            <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/mysite2/Search/" method = "POST" >{%csrf_token%}
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                <button type="submit" id ="SearchButton" class="btn btn-info"  onclick="">Search <i class="glyphicon glyphicon-search"></i></button>
+      
+              <div class="form-group">
+
               </div>
-              <button type="submit" class="btn btn-info">Search <i class="glyphicon glyphicon-search"></i></button>
-            </form>
+             </form>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>

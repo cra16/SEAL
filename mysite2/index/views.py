@@ -75,7 +75,7 @@ def Main(request, offset): #Main 기능
 			ActivieCount+=1
 		else:
 			pass
-	if ActiveCount ==0 
+	if ActiveCount ==0:
 		Activie=None
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]

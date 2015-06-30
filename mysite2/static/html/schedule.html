@@ -29,7 +29,8 @@
     <div class="col-md-8 col-sm-10 col-xs-10">
 
       <h2 class="ui header"><i class="glyphicon glyphicon-time"></i> My Schedule</h2>
-
+    <form id = "search_subject" action = "/mysite2/Schedule/Search/" mehtod ="POST">
+    {%csrf_token%}
       <div class="ui small form">
         <div class="four fields">
           <div class="field">
@@ -37,7 +38,7 @@
             <div class="ui selection dropdown">
               <div class="default text">---전체---</div>
               <i class="dropdown icon"></i>
-              <input name="hidden-field" type="hidden">
+              <input name="major" type="hidden">
               <div class="menu">
                 <div class="item" data-value="0">---전체---</div>
                 <div class="item" data-value="0001">글로벌리더십학부</div>
@@ -62,7 +63,7 @@
             <div class="ui selection dropdown">
               <div class="default text">---전체---</div>
               <i class="dropdown icon"></i>
-              <input name="hidden-field" type="hidden">
+              <input name="category" type="hidden">
               <div class="menu">
                 <div class="item" data-value="0">---전체---</div>
                 <div class="item" data-value="W04">신앙1</div>
@@ -111,12 +112,13 @@
           <div class="field">
             <label>검색 입력</label>
             <div class="ui small icon input">
-              <input type="text" placeholder="Search...">
-              <i class="circular icon"><a id="sch-search" href="#"><i  class="glyphicon glyphicon-search"></i></a></i>
+              <input id ="SearchName" type="text" placeholder="Search...">
+              <i class="circular icon"><a id="sch-search"  onclick="alert()"><i  class="glyphicon glyphicon-search"></i></a></i>
             </div>
           </div>
         </div>
       </div>
+      </form>
 
 
       <div id="sch-result" class="wrapper">
@@ -148,6 +150,38 @@
         </div>
       {% endif %}
       {% endfor %}
+
+      <div id="sch-search-result" class="wrapper">
+      {% for lec in Subject %}
+      <!-- 시작하는 행에서 div를 열어준다. -->
+      {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui two column grid">
+      {% endif %}
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                <center><a href="#"><i class="glyphicon glyphicon-heart"></i></a></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">5</span> LIKES</center>
+              </div>
+                        
+              [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Code }}</span>]
+              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.CourseName }}</span></a></p>
+              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Professor }}</span></a></p>
+              <span>
+                <h3>
+                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Period }}</span>
+                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+          <!-- 짝수번째이거나 마지막이면 닫아준다. 0부터 시작하는 것 주의 실제로는 반대이다. -->
+      {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+      {% endif %}
+      {% endfor %}
+
+
 
         <div class="ui divider"></div>
 

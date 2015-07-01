@@ -41,14 +41,12 @@ $(document).ready(function () {
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
-                      'Page': ""
+                      'Page': "0"
                     },
               type : "POST",
               success:function(resp){  
-                  alert('Successfully changed!');
                   $('#sch-search-result').html(resp);
-
-                      
+    
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -67,20 +65,45 @@ $(document).ready(function () {
         return false;
     });
 
-    /*$('#Previous').click(function(){
+    $('div').on('click','#Previous',function(){
+        $.ajax(
+            { url : "/mysite2/Schedule/",
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val(),
+                      'Page': $('#Previous').attr('name')
+                    },
+              type : "POST",
+              success:function(resp){         
+                  $('#sch-search-result').html(resp);
+                     
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    $('div').on('click','#Next',function(){
 
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
-                      'Page': $('#Previous').val()
+                      'Page': $('#Next').attr('name')
                     },
               type : "POST",
               success:function(resp){  
-                  alert('Successfully changed!');
+       
                   $('#sch-search-result').html(resp);
-
+                   
                       
                 },
                 error: function(xhr, option, error){
@@ -95,49 +118,19 @@ $(document).ready(function () {
 
     });
 
-    $('#Previous').click(function(){
+    $('div').on('click','#Page',function(){ 
 
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
-                      'Page': $('#Previous').val()
+                      'Page': $(this).attr('name')
                     },
               type : "POST",
-              success:function(resp){  
-                  alert('Successfully changed!');
+              success:function(resp){                  
                   $('#sch-search-result').html(resp);
-
-                      
-                },
-                error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
-                  alert(error); //오류내용
-
-                  } 
-            
-          });
-
-
-
-    });
-*/
-    $("a[name=pag]").click(function(){ 
-
-        $.ajax(
-            { url : "/mysite2/Schedule/",
-              data : {'major' : $('#major').val(),
-                      'category': $('#category').val(),
-                      'SearchName': $('#SearchName').val(),
-                      'Page': $('#'+$(this).attr('id')).val()
-                    },
-              type : "POST",
-              success:function(resp){  
-                  alert('Successfully changed!');
-                  $('#sch-search-result').html(resp);
-
-                      
+               
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

@@ -57,13 +57,18 @@ def Main(request, offset): #Main 기능
 	
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[]]
-	T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()/5+1
-	T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/5+1
+	if CourseCode[0] !="ENG":
+			T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()/6+1
+			T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/6+1
+	else:
+			T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/6+1
+			T_Count[1] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/6+1
+
 	T_Count[2] = Lecture.objects.count()/5+1
 	
 	#main 페이지 활성화 기능(1전공, 2전공 all)
 	Active = ["","",""]
-	ActivieCount=0
+	ActiveCount=0
 	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
 	PageData= ["FirstMajorPage","SecondMajorPage","AllPage"]
 	for i in range(0,len(T_Count)):
@@ -72,11 +77,11 @@ def Main(request, offset): #Main 기능
 			PageInformation[i]=CurrentPageView(T_Count,offset,i)
 			PageInformation[i][1] = offset
 			Active[i] = "active" # main 페이지
-			ActivieCount+=1
+			ActiveCount+=1
 		else:
 			pass
 	if ActiveCount ==0:
-		Activie=None
+		Active=None
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
@@ -102,6 +107,7 @@ def Main(request, offset): #Main 기능
 		   'PageInformation' : PageInformation,
 		   'Path':URL_Path,
 		   'Active':Active,
+		   'T_Count':T_Count
 		   })
 
 def SubScript(request):

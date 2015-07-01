@@ -8,7 +8,9 @@
 		<title>{%block title%}▒ SEAL ▒{%endblock%}</title>
 		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
-        <script type="text/javascript" src="{% static "js/schedule.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/schedule.js" %}">
+                var number=0
+        </script>
 
 		<style>
             body, input {
@@ -31,6 +33,7 @@
       <h2 class="ui header"><i class="glyphicon glyphicon-time"></i> My Schedule</h2>
     <form id = "search_subject" action = "/mysite2/Schedule/" mehtod ="POST">
     {%csrf_token%}
+    {{cur_page}} 
       <div class="ui small form">
         <div class="four fields">
           <div class="field">

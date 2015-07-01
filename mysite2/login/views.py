@@ -73,6 +73,7 @@ def HisnetCheck(request):
 			driver.get(hisnet_url)
 			driver.set_window_size(1024,768)
 			main_login_frame = driver.find_element_by_name("MainFrame")
+			driver.switch_to_frame(main_login_frame)
 			idinput = driver.find_element_by_name("id")
 			idinput.send_keys(hisnet_id)
 			pwinput = driver.find_element_by_name("password")

@@ -59,7 +59,7 @@ def SearchSubject(request,offset):
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
-		if SearchName == None
+		if SearchName == "":
 			SubjectCount = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory).count()
 			Subject = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
 		else:
@@ -67,8 +67,8 @@ def SearchSubject(request,offset):
 			Subject = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
 		Dic = {
 				'user':request.user,
-				'Subject':Subject
-				'SubjectCount':SubjectCount
+				'Subject':Subject,
+				'SubjectCount':SubjectCount,
 		}
 
 		return render_to_response('schedule.html', Dic)
@@ -95,12 +95,12 @@ def Major(major):
 	elif major =="0033":
 		major = "생명과학"
 	elif major == "0071":
-		major "전산전자"
+		major = "전산전자"
 	elif major == "0074":
 		major = "산업디자인"
 	elif major == "0077":
 		major = "기계제어"
-	elif major == "0078"
+	elif major == "0078":
 		major = "공간환경"
 	else:
 		major = "전체"

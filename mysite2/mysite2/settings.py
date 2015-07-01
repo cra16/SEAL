@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'notice',
     'qna',
     'mycourse',
-
+    'functionhelper',
+    'databasehelper',
 
 )
 AUTH_USER_MODEL = 'auth.User'
@@ -113,4 +114,6 @@ STATICFILES_DIRS = (
 )
 
 
-TEMPLATE_DIRS = ('/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/html')
+TEMPLATE_DIRS = (
+    ('/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/html'),
+)

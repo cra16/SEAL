@@ -67,11 +67,6 @@ def SearchSubject(request):
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
-<<<<<<< HEAD
-		if SearchName == "":
-			SubjectCount = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory).count()
-			Subject = lecture.objects.filter(Major__contains=SelectMajor, Category=SelectCategory)[start:end]
-=======
 
 		SubjectCount=[0]
 		
@@ -89,8 +84,6 @@ def SearchSubject(request):
 					SubjectCount[0] = Lecture.objects.count()/7+1
 					Subject = Lecture.objects.order_by('Code')[start:end]
 			
-
->>>>>>> 44ab237dda59b6e066bfc7d23865dae5273ec6a2
 		else:
 			SubjectCount[0] = Lecture.objects.filter(CourseName__contains=SearchName)
 			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
@@ -105,9 +98,6 @@ def SearchSubject(request):
 		Dic = {
 				'user':request.user,
 				'Subject':Subject,
-<<<<<<< HEAD
-				'SubjectCount':SubjectCount,
-=======
 				'SelectMajor' : SelectMajor,
 				'SubjectCount':SubjectCount,
 				'SearchName':SearchName,
@@ -115,7 +105,6 @@ def SearchSubject(request):
 				'TotalCount':TotalCount,
 				'cur_page':cur_page,
 				'Data' :Page,
->>>>>>> 44ab237dda59b6e066bfc7d23865dae5273ec6a2
 		}
 
 		return render_to_response('scheduleTemplate.html', Dic)

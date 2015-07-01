@@ -16,9 +16,11 @@ def FirstPageView(i,Count):
 	PageInformation =[1,1,1]
 	if Count[i]>11:
 		PageInformation[0] = 1
+		PageInformation[1] = 1
 		PageInformation[2] = 11
 	else :
 		PageInformation[0] = 1
+		PageInformation[1] = 1
 		PageInformation[2] = Count[i]
 	return PageInformation
 #처음을 제외한 정보의 페이지 번호 보여줌

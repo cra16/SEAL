@@ -58,12 +58,19 @@ def Main(request, offset): #Main 기능
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[]]
 	if CourseCode[0] !="ENG":
-			T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()/6+1
-			T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/6+1
+			DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()
+			DBCount2=Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
+			Condition1= (DBCount1%5!=0) and 1 or 0
+			Condition2= (DBCount2%5!=0) and 1 or 0
+			T_Count[0] = DBCount/5+Condition1
+			T_Count[1] = DBCount/5+Condition2
 	else:
-			T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/6+1
-			T_Count[1] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/6+1
-
+			DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/5+1
+			DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()/5+1
+			Condition1= (DBCount1%5!=0) and 1 or 0
+			Condition2= (DBCount2%5!=0) and 1 or 0
+			T_Count[0] = DBCount1/5+Condition1
+			T_Count[1] = DBCount2/5+Condition2
 	T_Count[2] = Lecture.objects.count()/5+1
 	
 	#main 페이지 활성화 기능(1전공, 2전공 all)
@@ -141,7 +148,12 @@ def Search(request): #전체 검색 기능
 		LectureData = [[]]
 		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
 		SearchCount =list()
-		SearchCount.append(Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1)
+
+		DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
+		Condition = (DBCount%5!=0) and 1 and 0
+		SearchCount.append(DBCount/5+Condition)
+
+
 		L_Data=PageView(LectureData)
 		PageInformation =[1,1,1]
 
@@ -173,8 +185,12 @@ def SearchPage(request, offset):
 	PageInformation[1] = offset
 	LectureData = [[]]
 	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	
 	SearchCount =list()
-	SearchCount.append(Lecture.objects.filter(CourseName__contains=SearchData).count()/5+1)
+	
+	DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
+	Condition = (DBCount%5!=0) and 1 and 0
+	SearchCount.append(DBCount/5+Condition)
 
 	L_Data=PageView(LectureData)
 	

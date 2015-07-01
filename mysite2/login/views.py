@@ -58,9 +58,9 @@ def Confirm(request):
 
 @csrf_exempt
 def HisnetCheck(request):
-	hisnet_url = "https://hisnet.handong.edu/login/login.php"
+	hisnet_url = "http://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
-		try:
+		#try:
 			stu_num = request.POST['stu_num']
 			hisnet_id = request.POST['hisnet_id']
 			hisnet_pw = request.POST['hisnet_pw']
@@ -72,6 +72,7 @@ def HisnetCheck(request):
 			driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
 			driver.get(hisnet_url)
 			driver.set_window_size(1024,768)
+			main_login_frame = driver.find_element_by_name("MainFrame")
 			idinput = driver.find_element_by_name("id")
 			idinput.send_keys(hisnet_id)
 			pwinput = driver.find_element_by_name("password")
@@ -81,6 +82,7 @@ def HisnetCheck(request):
 			# 로그인 이후 지연시간 발생 예외처리
 			while True:
 				try:
+					driver.get("https://hisnet.handong.edu/for_student/main.php")
 					haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
 					break
 				except:
@@ -139,7 +141,7 @@ def HisnetCheck(request):
 						continue
 			ctx['lecture_lst'] = lecture_lst
 			return render_to_response('register.html', ctx)
-		except:
+		#except:
 			# 히스넷 체크 안될 시 에러페이지 출력
 			return render_to_response('confirm_error.html')
 	else:

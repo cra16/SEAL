@@ -20,19 +20,24 @@ $('form').on('click', '#changebtn4',function(){
             }
            
             $.ajax(
-            { url : "/mysite2/MyPage/PasswordChange",
+            { url : "/mysite2/MyPage/PasswordChange/",
               data : {'PasswordBox' : $('#PasswordBox').val()},
               type : "POST",
               success:function(resp){  
                   alert('Successfully changed!');
-                  } 
+                  } ,
+              error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
             }
-              );
+              });
             
             $('#spannum4').text(newpwhide);
             $('#idtxtbox4').remove();
             $('#changebtn4').remove();
             $('#cancelbtn4').remove();
+
+      $('#PasswordD').remove();
             $('#spannum4').show();
             $('#btnnum4').show();
           }
@@ -52,7 +57,7 @@ $('form').on('click', '#changebtn4',function(){
       $('#btnnum4').before(btn1);
       $('#btnnum4').after(btn2);
       $('#spannum4').hide();
-    
+        
       $('#PasswordChange').prepend(PasswordDiv);
     //  $('#PasswordD').show();
      

@@ -36,10 +36,10 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				O_Count=[1]
 				O_Count[0] = Course_Evaluation.objects.filter(Course=Lecture.objects.get(id=offset)).count()/3+1
 				
-				if UserData !=None:
+				try:
 					MyCourseBoard = Course_Evaluation.objects.get(Course = Lecture.objects.get(id=offset), CreatedID = UserData)
 				            #자신 이외 다른사람이 추천한 정보 보여줌
-				else:
+				except:
 					MyCourseBoard = None
 				OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
 				OtherCourseBoard = []
@@ -76,7 +76,11 @@ def CoursePage(request, offset, offset2):
 	PageInformation=[1,1,1]
 	CourseBoard = TotalCourse(offset)
 	O_Count=[1]
-	O_Count[0] = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).count()/3+1
+
+	DBCount = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).count()
+	Condition = (DBCount%3!=0)  and 1 or 0
+
+	O_Count[0] = DBCount/3+Condition
 	
 	if UserData !=None:
 		MyCourseBoard = Course_Evaluation.objects.get(Course = Lecture.objects.get(id=offset), CreatedID = UserData)

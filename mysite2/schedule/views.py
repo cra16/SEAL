@@ -72,16 +72,22 @@ def SearchSubject(request):
 		
 		if SearchName == "":
 			if SelectMajor != "전체" and SelectCategory !="전체":
-					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()/7+1
+					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()
+					Condition = (DBCount%6!=0)  and 1 or 0
+					SubjectCount[0]=DBCount/6+Condition
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
 			elif SelectMajor != "전체" and SelectCategory =="전체":
-					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor).count()/7+1
+					DBCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
+					Condition = (DBCount%6!=0)  and 1 or 0
+					SubjectCount[0]=DBCount/6+Condition
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
 			elif SelectMajor =="전체" and SelectCategory !="전체":
-					SubjectCount[0] = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()/7+1
+					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()
+					Condition = (DBCount%6!=0)  and 1 or 0
+					SubjectCount[0]=DBCount/6+Condition
 					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
 			else:
-					SubjectCount[0] = Lecture.objects.count()/7+1
+					SubjectCount[0] = Lecture.objects.count()/6+1
 					Subject = Lecture.objects.order_by('Code')[start:end]
 			
 		else:
@@ -90,7 +96,7 @@ def SearchSubject(request):
 
 		if New == 1:
 			PageInformation = FirstPageView(0,SubjectCount)
-			TotalCount=range(PageInformation[0],PageInformation[2])
+			TotalCount=PageTotalCount(0,SubjectCount,PageInformation)
 		else :
 			PageInformation = CurrentPageView(SubjectCount,cur_page,0)
 			PageInformation[1]=cur_page

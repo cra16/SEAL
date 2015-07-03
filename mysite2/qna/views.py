@@ -26,7 +26,7 @@ def QnAMain(request): #Q&A 메인
 	PageInformation=(FirstPageView(0,T_Count))
 
 
-	TotalCount=[range(PageInformation[0],PageInformation[2])]
+	TotalCount=PageTotalCount(0,T_Count,PageInformation)
 
 	
 	Today = datetime.datetime.today()

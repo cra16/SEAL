@@ -34,11 +34,12 @@ urlpatterns += patterns('index.views',
 	url(r'^About/$','About'),
 	
 	url(r'^Judgement/$','Judgement'),
-	url(r'^FirstMajorPage/(\d+)/$','Main'),
-	url(r'^SecondMajorPage/(\d+)/$','Main'),
-	url(r'^AllPage/(\d+)/$','Main'),
+	url(r'^Page/$','Page'),
 	url(r'^SubScript/$','SubScript'),
 	url(r'^SiteMap/$','SiteMap'),
+	url(r'^FirstPage/$','FirstPage'),
+	url(r'^SecondPage/$','SecondPage'),
+	url(r'^ThirdPage/$','ThirdPage')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

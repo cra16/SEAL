@@ -29,7 +29,7 @@ urlpatterns += patterns('login.views',
 
 urlpatterns += patterns('index.views',
 	url(r'^Search/$', 'Search'),
-	url(r'^SearchPage/$','SearchPage'),
+	url(r'^Search/(\d+)$','SearchPage'),
 	url(r'^MyPage/$', 'MyPage'), 
 	url(r'^About/$','About'),
 	

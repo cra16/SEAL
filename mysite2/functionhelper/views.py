@@ -13,34 +13,31 @@ def CheckingLogin(userID):
 		return  HttpResponseRedirect("/mysite2");
 	else:
 		return True
-#처음 페이지에 접근했을 때 그 페이지에 대한 정보를 보내주는 기능
-def FirstPageView(Count):
+#처음 그 페이지에 갔을 때 정보의 페이지 번호 보여줌
+def FirstPageView(i,Count):
 	PageInformation =[1,1,1]
-	if Count>11:
+	if Count[i]>11:
 		PageInformation[0] = 1
 		PageInformation[1] = 1
 		PageInformation[2] = 11
 	else :
 		PageInformation[0] = 1
 		PageInformation[1] = 1
-		PageInformation[2] = Count
+		PageInformation[2] = Count[i]
 	return PageInformation
-#처음을 제외한 모든 경우를 페이지 보여주는 기능(즉 페이지 넘길때나 새로고침했을 때 보여주는 정보)
-def CurrentPageView(T_Count,offset):
+#처음을 제외한 정보의 페이지 번호 보여줌
+def CurrentPageView(T_Count,offset,i):
 	PageInformation =[1,1,1]
-
-	#페이지 넘길때 필요한 조건(첫페이지로 끝날때나 마지막페이지가 정확히 떨어지는 경우에 필요해서 넣음)
 	Condition =((offset%10) !=0 )and offset%10 or 10
 	
-	#페이지 넘길때 필요한 페이지가 11개 넘을 경우
-	if T_Count >=11:
-		#현재 페이지가 11이상일 경우
+	if T_Count[i] >=11:
+	#현재 페이지가 11이상일 경우
 			if offset>=11:
-				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가
+				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
 				#되도록 표현 
-				if (offset+10)>=T_Count:
+				if (offset+10)>=T_Count[i]:
 					PageInformation[0] = (offset -Condition)-9
-					PageInformation[2] = T_Count
+					PageInformation[2] = T_Count[i]
 				#아니면 그냥 원래대로 표현
 				else:
 					PageInformation[0] = (offset -Condition)-9
@@ -49,21 +46,16 @@ def CurrentPageView(T_Count,offset):
 			else:
 				PageInformation[0] = 1
 				PageInformation[2] = (offset - Condition)+11
-		#페이지 넘기는 경우가 11이하일 경우 
+		#총 페이지가 11이하일 경우 
 	else:
 			PageInformation[0] = 1
-			PageInformation[2] = T_Count
+			PageInformation[2] = T_Count[i]
 	return PageInformation
-#페이지 넘길때 나오는 번호를 표기하기 위한 기능(ex Privious 1 2 3 4 5... Next 여기에 사용)
-def PageTotalCount(T_Count,PageInformation):
-	#주석으로 설명하긴 힘든데...
-	#페이지 표기하는 곳에 누른 버튼 숫자가 기존에 있던 페이지 나타내는 것보다 큰경우에 10페이지씩 넘기는것
-	#아니면 원래 페이지에 유지 이런식으로 되는데, 나중에 더적어놓겠음..
-
+#총 페이지 카운트
+def PageTotalCount(i,T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
-
-	if (PageInformation[1]/10) >= T_Count/10:
-			TotalCount = range(PageInformation[1]- Codition+1,T_Count+1)
+	if (PageInformation[1]/10) >= T_Count[i]/10:
+			TotalCount = range(PageInformation[1]- Codition+1,T_Count[i]+1)
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)
 	
@@ -73,18 +65,15 @@ def PageTotalCount(T_Count,PageInformation):
 
 def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 
-	#다른 함수들을 불러오기 위한 필요한 변수
-	if pageinformation !=None :
-			User = user
-			PageInformation=pageinformation
-	else:
-		User =user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
-		PageNumber =1
-		MajorNumber=0
+	User = user
+	PageInformation=pageinformation
+	#main 자바스크립트 조작 하기 위한 기능
 	
 
-	#현재 유저의 전공 코드 가져옴
+	##강의 DB에 저장된 자료들을 코드로 필터를 해서 Total Page를 만듦
+	##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
+	##후배여러분이 좀 알고리즘 잘짜서 더 최적화해주세요..(최대한 했지만..발적화임..))
+	
 	CourseCode = MajorSelect(User)
 	
 	#2차원 list로 각 전공당 총 페이지 수 저장
@@ -92,20 +81,24 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	if CourseCode[0] !="ENG":
 		DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1])).count()
 		DBCount2=Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
+		Condition1= (DBCount1%5!=0) and 1 or 0
+		Condition2= (DBCount2%5!=0) and 1 or 0
+		T_Count[0] = DBCount1/5+Condition1
+		T_Count[1] = DBCount2/5+Condition2
 	else:
 		DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
 		DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
-	DBCount3 = Lecture.objects.count()
-	T_Count[2] = DataCount(5,DBCount3)
+		Condition1= (DBCount1%5!=0) and 1 or 0
+		Condition2= (DBCount2%5!=0) and 1 or 0
+		T_Count[0] = DBCount1/5+Condition1
+		T_Count[1] = DBCount2/5+Condition2
+	T_Count[2] = Lecture.objects.count()/5+1
 	
 	#main 페이지 활성화 기능(1전공, 2전공 all)
 
-	#현재 페이지를 나타냄
-	PageInformation[MajorNumber]=CurrentPageView(T_Count,PageNumber)
+	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
+	#페이지 갯수가 11개 이상일 경우
+	PageInformation[MajorNumber]=CurrentPageView(T_Count,PageNumber,0)
 	PageInformation[MajorNumber][1] = PageNumber
 	
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
@@ -124,8 +117,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
-	for i in range(0,3):
-		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	for i in range(0,len(T_Count)):
+		TotalCount.append(PageTotalCount(i,T_Count,PageInformation[i]))
 	
 	
 	dic = {'user':User,
@@ -137,7 +130,6 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		   }
 
 	return dic
-#ajax로 구현된 메인페이지에 template 결정하는 곳
 def TargetTemplate(Current):
 	target = ["",""]
 	if Current =="FirstPageNation":
@@ -150,7 +142,7 @@ def TargetTemplate(Current):
 		target[0] = "AllPage.html"
 		target[1] = "2"
 	return target
-#전공 코드 구분하게 하는 기능
+
 def MajorSelect(user):
 		try:
 			Student = Profile.objects.get(User =user)
@@ -258,6 +250,61 @@ def MajorSelect(user):
 		return MajorCode
 
 
+def MainView(request):
+	CourseCode = MajorSelect(request.user) 
+	
+	#1전공, 2전공 전체 강의 페이지 갯수를 불러옴
+	T_Count=[ [],[] ,[] ]
+	T_Count[0] = Lecture.objects.filter(Q(Code__contains=CourseCode[0]) |Q(Code__contains= CourseCode[1])).count()/6+1
+	T_Count[1] = Lecture.objects.filter(Q(Code__contains= CourseCode[2]) | Q(Code__contains=CourseCode[3])).count()/6+1
+	T_Count[2] = Lecture.objects.count()/6+1
+
+	##메인페이지 전공 교양 페이지 넘기는 것을 독립적으로 돌리는 기능
+	PageInformation = list()
+
+	#페이지 넘기는 기능
+	#각 전공을 표현하는데 11페이지가 넘어갈 경우 11로 고정시키고 그렇지 않을 경우 T_Count를 기준으로 한다.
+	# for i in range(0,3): 
+	# 	if T_Count[i]>11:
+	# 		PageInformation[i][2] = 11
+	# 	else:
+	# 		PageInformation[i][2] =T_Count[i]
+	for i in range (0,len(T_Count))	:
+		PageInformation.append(FirstPageView(i,T_Count))
+
+	#글로벌 리더십일 경우랑 그이외의 경우로 분류해서 출력(글로벌 리더십때문에 좀 꼬여서..)
+	TotalBoard = [[],[],[]]
+	if CourseCode[0] !="ENG":
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	else:
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5] 
+	
+	#페이지 보여주는 정보 함수 불러움 index참고
+	PageBoard =  PageView(TotalBoard)
+
+	##독립적 페이지 위치를 다음 페이지 넘기는 것할 때 정보 넘김
+	request.session['PageInformation'] = PageInformation
+	
+	TotalCount=[range(1,PageInformation[0][2]),range(1,PageInformation[1][2]),range(1,PageInformation[2][2])]
+	##보여주려는 페이지 자바스크립트 active(index.html {{Active}}참고)
+	Active = ["active","",""]
+
+	Temp = dict()
+	Temp ={	'user': request.user,
+			'PageBoard': PageBoard,
+			'TotalCount' : TotalCount,
+			'PageInformation' : PageInformation,
+			'Path':request.path,
+			'Active':Active,
+			'Page':1
+			}
+	# Create your views here.
+	return Temp
+
+
 #메인 페이지 view 함수로 옮김
 def PageView(TotalBoard):
 	PageBoard=[[],[],[]]
@@ -290,12 +337,3 @@ def PageView(TotalBoard):
 				PageBoard[count].append(BoardData)
 		count=count+1
 	return PageBoard
-
-
-def DataCount(divide, DataBaseCount):
-
-
-	DBCount = DataBaseCount
-	Condition = (DBCount%divide!=0) and 1 or 0
-	Count=DBCount/divide+Condition
-	return Count

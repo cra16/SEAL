@@ -1,7 +1,3 @@
-
-
-{% load staticfiles %}
-
 {% for PBoard2 in PageBoard.1%}
                         <script>
                                 domain2[{{forloop.counter0}}] ="{{PBoard2.Course.id}}";
@@ -50,6 +46,3 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-
-
-<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

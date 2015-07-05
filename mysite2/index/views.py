@@ -138,19 +138,19 @@ def Search(request): #전체 검색 기능
 		#여기 문제
 		LectureData = [[]]
 		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
-		
+		SearchCount =list()
 
 		DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
-		Condition = (DBCount%5!=0) and 1 or 0
-		SearchCount=DBCount/5+Condition
+		Condition = (DBCount%5!=0) and 1 and 0
+		SearchCount.append(DBCount/5+Condition)
 
 
 		L_Data=PageView(LectureData)
 		PageInformation =[1,1,1]
 
-		PageInformation=FirstPageView(SearchCount)
+		PageInformation=FirstPageView(0,SearchCount)
 
-		T_Count = PageTotalCount(SearchCount,PageInformation)
+		T_Count = PageTotalCount(0,SearchCount,PageInformation)
 
 		request.session['SearchPageInformation'] = PageInformation
 		request.session['SearchValue'] = SearchData
@@ -159,45 +159,42 @@ def Search(request): #전체 검색 기능
 											'Search' : L_Data,
 											'PageInformation' : PageInformation,
 											'T_Count':T_Count,
-											'DBCount':DBCount,
-											'Condition':Condition
 										})
 	else:
 		return HttpResponseRedirect("/mysite2")
-@csrf_exempt
-def SearchPage(request):
+
+def SearchPage(request, offset):
 	CheckingLogin(request.user.username)
 
-	if request.POST['Page'] !="0":
-		cur_page = int(request.POST['Page'])
-	else:
-		cur_page = 1
-		Current = request.POST['Current']
+	try:
+			offset = int(offset)
+	except ValueError:
+			raise Http404()
 	SearchData = request.session['SearchValue']
 	
 	PageInformation = request.session['SearchPageInformation']
-	PageInformation[1] = cur_page
+	PageInformation[1] = offset
 	LectureData = [[]]
 	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	
-	
+	SearchCount =list()
 	
 	DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
 	Condition = (DBCount%5!=0) and 1 and 0
-	SearchCount=DBCount/5+Condition
+	SearchCount.append(DBCount/5+Condition)
 
 	L_Data=PageView(LectureData)
 	
-	PageInformation = CurrentPageView(SearchCount,cur_page)
-	T_Count=PageTotalCount(SearchCount,PageInformation)
+	PageInformation = CurrentPageView(SearchCount,offset,0)
+	T_Count=PageTotalCount(0,SearchCount,PageInformation)
 	
 
 	request.session['SearchPageInformation'] = PageInformation
-	return render_to_response('SearchPage.html', {
+	return render_to_response('index.html', {
 										'user':request.user,
 										'Search' : L_Data,
 										'PageInformation' : PageInformation,
-										'T_Count' : T_Count,
+											'T_Count' : T_Count,
 									})
 
 

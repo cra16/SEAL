@@ -37,16 +37,75 @@
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
 
-      
+      <div class="ui small form">
+        <div class="four fields">
+          <div class="field">
+            <label>학기 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="전체">---전체---</div>
+                <div class="item" data-value="2015-1">2015 / Winter</div>
+                <div class="item" data-value="2014-4">2014 / 2</div>
+                <div class="item" data-value="2014-3">2014 / Summer</div>
+                <div class="item" data-value="2014-2">2014 / 1</div>
+                <div class="item" data-value="2014-1">2014 / Winter</div>
+                <div class="item" data-value="2013-4">2013 / 2</div>
+                <div class="item" data-value="2013-3">2013 / Summer</div>
+                <div class="item" data-value="2013-2">2013 / 1</div>
+                <div class="item" data-value="2013-1">2013 / Winter</div>
+                <div class="item" data-value="2012-4">2012 / 2</div>
+                <div class="item" data-value="2012-3">2012 / Summer</div>
+                <div class="item" data-value="2012-2">2012 / 1</div>
+                <div class="item" data-value="2012-1">2012 / Winter</div>
+                <div class="item" data-value="2011-4">2011 / 2</div>
+                <div class="item" data-value="2011-3">2011 / Summer</div>
+                <div class="item" data-value="2011-2">2011 / 1</div>
+                <div class="item" data-value="2011-1">2011 / Winter</div>
+              </div>
+            </div> 
+          </div>
+   <div class="field">
+            <label>학부 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="전체">---전체---</div>
+                <div class="item" data-value="0001">글로벌리더십학부</div>
+                <div class="item" data-value="0009">창의융합교육원</div>
+                <div class="item" data-value="0010">Global Edison Academy</div>
+                <div class="item" data-value="0011">국제어문학부</div>
+                <div class="item" data-value="0012">언론정보문화학부</div>
+                <div class="item" data-value="0021">경영경제학부</div>
+                <div class="item" data-value="0022">법학부</div>
+                <div class="item" data-value="0024">상담심리사회복지학부</div>
+                <div class="item" data-value="0033">생명과학부</div>
+                <div class="item" data-value="0071">전산전자공학부</div>
+                <div class="item" data-value="0074">산업정보디자인학부</div>
+                <div class="item" data-value="0077">기계제어공학부</div>
+                <div class="item" data-value="0078">공간환경시스템공학부</div>
+                <div class="item" data-value="0090">산업교육학부</div>
+              </div>
+            </div> 
+          </div>
+          <div class="field">
+          <p style="padding-top:12px;"></p>
+          <a href="#" class="btn btn-info">검색</a>
+          </div>
+        </div>
+      </div>
   
-      {%if Search == None%}
+      {%if not Active == None%}
       <div class="ui small tabular filter menu">
         <a id="FirstMajor" class="active item" data-tab="unread">1전공</a>
         <a id="SecondMajor" class="item" data-tab="saved">2전공</a>
         <a id="All" class="item" data-tab="all">All</a>
       </div>
       {%endif%}
-
      
       <div class="ui very relaxed column grid">
         <div class="column">
@@ -220,7 +279,7 @@
       </div>
       {%endif%}
 
-          <div id = "SearchPageNation">
+          {%if Active == None%}
           {% if not Search == None %}
           {% for SBoard in Search.0%}
                         <script>
@@ -259,21 +318,20 @@
               {%endfor%}
          
              <center><div class="ui borderless pagination menu">
-              <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" >
+              <a class="item" href = "/mysite2/Search/{{PageInformation.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-
               {% for i in T_Count %}
-                 <a id ="SearchPage" name = "{{i}}" class="item" >{{i}}</a>
+                 <a href = "/mysite2/Search/{{i}}" class="item" >{{i}}</a>
               {%endfor%}
         
-              <a id="SearchNext" class="item" name="{{PageInformation.2}}">
+              <a class="item" href = "/mysite2/Search/{{PageInformation.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
 
             {%endif%}
-      </div>
+        {%endif%}
         <div class="ui divider"></div>
 
                               

@@ -22,18 +22,14 @@ def QnAMain(request): #Q&A 메인
 	T_Count =[0]
 	T_Count[0] = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
 	
-	
 	PageInformation=(FirstPageView(0,T_Count))
-
 
 	TotalCount=PageTotalCount(0,T_Count,PageInformation)
 
-	
 	Today = datetime.datetime.today()
 	
 	PageBoard=(QnA_Board.objects.order_by('-id')[0:6])
 	
-
 	Reply_Board=[]#reply DB 저장할 공간
 
 	for Board in PageBoard:
@@ -51,12 +47,12 @@ def QnAMain(request): #Q&A 메인
 				   'Count' : count,
 				   })
 
-
-def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
+@csrf_exempt		
+def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	CheckingLogin(request.user.username)
 	try:
-		offset = int(offset)
+		offset = int(request.POST['Page'])
 	except ValueError:
 		raise Http404()
 
@@ -84,7 +80,7 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
 			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
 
-	return render_to_response("QnA.html",
+	return render_to_response("QnAList.html",
 				  {'user':request.user, 
 				   'PageBoard':PageBoard, 	
 				   'TotalCount' : TotalCount, 

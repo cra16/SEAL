@@ -54,6 +54,7 @@ def MyCoursePage(request):
 
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 
+						'BestBoard':BestBoardView(),
 						'RecommendPage':RecommendPage,
 						'LikePage':Like,
 						'PageInformation' : PageInformation,

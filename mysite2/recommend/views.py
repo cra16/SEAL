@@ -35,6 +35,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 
 		return render_to_response("recommend.html",
                                           {'user':request.user,
+                                          'BestBoard':BestBoardView(),
                                            'CourseBoard':CourseBoard,
 											})
 def Recommend_NotEmpty(request):

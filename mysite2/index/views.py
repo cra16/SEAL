@@ -20,19 +20,19 @@ sys.setdefaultencoding("utf-8")
 
 def MyPage(request):	#MyPage 루트
 	CheckingLogin(request.user.username)
-	return render_to_response("sealmypage.html", {'user':request.user}) 
+	return render_to_response("sealmypage.html", {'user':request.user,'BestBoard':BestBoardView()}) 
 
 def About(request): #About template 루트
 	CheckingLogin(request.user.username)
-	return render_to_response("about.html",{'user':request.user})
+	return render_to_response("about.html",{'user':request.user, 'BestBoard':BestBoardView()})
 
 def Schedule(request): #Schedule template 기능
 	CheckingLogin(request.user.username)
-	return render_to_response("schedule.html",{'user':request.user})
+	return render_to_response("schedule.html",{'user':request.user,'BestBoard':BestBoardView()})
 
 def Judgement(request): # 신고 게시판 기능
 	CheckingLogin(request.user.username)
-	return render_to_response("subscribe_report.html",{'user':request.user})
+	return render_to_response("subscribe_report.html",{'user':request.user,'BestBoard':BestBoardView()})
 
 @csrf_exempt
 def Page(request): #Main 기능
@@ -128,7 +128,9 @@ def MyCourse(request):
 			LikePage.append(Total_Evaluation.objects.get(CourseName = Board2.Course))
 
 
-		return render_to_response("mycourses.html", {'user':request.user, 'RecommendPage':RecommendPage,})
+		return render_to_response("mycourses.html", {'user':request.user, 
+								  					'RecommendPage':RecommendPage,
+								  					'BestBoard':BestBoardView()})
 @csrf_exempt
 def Search(request): #전체 검색 기능
 	CheckingLogin(request.user.username)
@@ -156,6 +158,7 @@ def Search(request): #전체 검색 기능
 		request.session['SearchValue'] = SearchData
 		return render_to_response('index.html', {
 											'user':request.user,
+											'BestBoard':BestBoardView(),
 											'Search' : L_Data,
 											'PageInformation' : PageInformation,
 											'T_Count':T_Count,
@@ -180,21 +183,21 @@ def SearchPage(request, offset):
 	SearchCount =list()
 	
 	DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
-	Condition = (DBCount%5!=0) and 1 and 0
-	SearchCount.append(DBCount/5+Condition)
+	SearchCount = DataCount(5,DBCount)
 
 	L_Data=PageView(LectureData)
 	
-	PageInformation = CurrentPageView(SearchCount,offset,0)
-	T_Count=PageTotalCount(0,SearchCount,PageInformation)
+	PageInformation = CurrentPageView(SearchCount,offset)
+	T_Count=PageTotalCount(SearchCount,PageInformation)
 	
 
 	request.session['SearchPageInformation'] = PageInformation
 	return render_to_response('index.html', {
 										'user':request.user,
+										'BestBoard':BestBoardView(),
 										'Search' : L_Data,
 										'PageInformation' : PageInformation,
-											'T_Count' : T_Count,
+										'T_Count' : T_Count,
 									})
 
 

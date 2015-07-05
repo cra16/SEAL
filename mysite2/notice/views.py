@@ -60,6 +60,7 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 	Today =datetime.date.today()    
 	return render_to_response("NoticeList.html",
 				  {'user':request.user, 
+				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
 				   'TotalCount' : TotalCount,
 				   'Today' :Today,
@@ -91,6 +92,7 @@ def Notice_Read(request, offset): #Notice Read 기능
 
 	return render_to_response("notice-contents.html", 
 		{'user':request.user,
+		'BestBoard':BestBoardView(),
 		'Previous' :Previous,
 		'Next' :Next,
 		'Board':Current})

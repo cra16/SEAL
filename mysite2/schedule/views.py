@@ -33,6 +33,7 @@ def SelectPeriod(request, period, page):
 		is_odd = lec_cnt % 2
 		ctx = {
 			'user':request.user,
+			'BestBoard':BestBoardView(),
 			'period':period,
 			'total_page': range(1, total_page+1),
 			'lec_lst':lec_lst,
@@ -102,6 +103,7 @@ def SearchSubject(request):
 		TotalBoard = PageView(Subject)
 		Dic = {
 				'user':request.user,
+				'BestBoard':BestBoardView(),
 				'Subject':Subject,
 				'SelectMajor' : SelectMajor,
 				'SubjectCount':SubjectCount,

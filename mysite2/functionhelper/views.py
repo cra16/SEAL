@@ -14,30 +14,30 @@ def CheckingLogin(userID):
 	else:
 		return True
 #처음 그 페이지에 갔을 때 정보의 페이지 번호 보여줌
-def FirstPageView(i,Count):
+def FirstPageView(Count):
 	PageInformation =[1,1,1]
-	if Count[i]>11:
+	if Count>11:
 		PageInformation[0] = 1
 		PageInformation[1] = 1
 		PageInformation[2] = 11
 	else :
 		PageInformation[0] = 1
 		PageInformation[1] = 1
-		PageInformation[2] = Count[i]
+		PageInformation[2] = Count
 	return PageInformation
 #처음을 제외한 정보의 페이지 번호 보여줌
-def CurrentPageView(T_Count,offset,i):
+def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
 	Condition =((offset%10) !=0 )and offset%10 or 10
 	
-	if T_Count[i] >=11:
+	if T_Count >=11:
 	#현재 페이지가 11이상일 경우
 			if offset>=11:
 				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
 				#되도록 표현 
-				if (offset+10)>=T_Count[i]:
+				if (offset+10)>=T_Count:
 					PageInformation[0] = (offset -Condition)-9
-					PageInformation[2] = T_Count[i]
+					PageInformation[2] = T_Count
 				#아니면 그냥 원래대로 표현
 				else:
 					PageInformation[0] = (offset -Condition)-9
@@ -49,13 +49,13 @@ def CurrentPageView(T_Count,offset,i):
 		#총 페이지가 11이하일 경우 
 	else:
 			PageInformation[0] = 1
-			PageInformation[2] = T_Count[i]
+			PageInformation[2] = T_Count
 	return PageInformation
 #총 페이지 카운트
-def PageTotalCount(i,T_Count,PageInformation):
+def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
-	if (PageInformation[1]/10) >= T_Count[i]/10:
-			TotalCount = range(PageInformation[1]- Codition+1,T_Count[i]+1)
+	if (PageInformation[1]/10) >= T_Count/10:
+			TotalCount = range(PageInformation[1]- Codition+1,T_Count+1)
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)
 	
@@ -65,8 +65,14 @@ def PageTotalCount(i,T_Count,PageInformation):
 
 def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 
-	User = user
-	PageInformation=pageinformation
+	if pageinformation !=None:
+			User = user
+			PageInformation=pageinformation
+	else:
+		User= user
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageNumber=1
+		MajorNumber=0
 	#main 자바스크립트 조작 하기 위한 기능
 	
 
@@ -98,7 +104,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 
 	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
 	#페이지 갯수가 11개 이상일 경우
-	PageInformation[MajorNumber]=CurrentPageView(T_Count,PageNumber,0)
+	PageInformation[MajorNumber]=CurrentPageView(T_Count,PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
 	
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
@@ -118,7 +124,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
 	for i in range(0,len(T_Count)):
-		TotalCount.append(PageTotalCount(i,T_Count,PageInformation[i]))
+		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
 	
 	
 	dic = {'user':User,
@@ -337,3 +343,10 @@ def PageView(TotalBoard):
 				PageBoard[count].append(BoardData)
 		count=count+1
 	return PageBoard
+def DataCount(divide, DataBaseCount):
+
+
+        DBCount = DataBaseCount
+        Condition = (DBCount%divide!=0) and 1 or 0
+        Count=DBCount/divide+Condition
+        return Count

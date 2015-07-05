@@ -50,7 +50,7 @@ def MyCoursePage(request):
 	Count[1]=Like_Course.objects.filter(CreatedID = MyProfile).count()/6+1
 	
 	for i in range(0,2):
-		FirstPageView(i, Count)												
+		FirstPageView(Count)												
 
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 

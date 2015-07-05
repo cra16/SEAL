@@ -33,8 +33,8 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 				PageInformation=[1,1,1]
 				CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
-				O_Count=[1]
-				O_Count[0] = Course_Evaluation.objects.filter(Course=Lecture.objects.get(id=offset)).count()/3+1
+				
+				O_Count= Course_Evaluation.objects.filter(Course=Lecture.objects.get(id=offset)).count()/3+1
 				
 				try:
 					MyCourseBoard = Course_Evaluation.objects.get(Course = Lecture.objects.get(id=offset), CreatedID = UserData)
@@ -51,9 +51,9 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 						OtherCourseBoard.append(Board)
 
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				PageInformation=FirstPageView(0,O_Count)
+				PageInformation=FirstPageView(O_Count)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				OtherCount=PageTotalCount(0,O_Count,PageInformation)
+				OtherCount=PageTotalCount(O_Count,PageInformation)
 				return render_to_response("course.html",
                                   {'user':request.user,
                                    'CourseBoard':CourseBoard,
@@ -75,12 +75,11 @@ def CoursePage(request, offset, offset2):
 
 	PageInformation=[1,1,1]
 	CourseBoard = TotalCourse(offset)
-	O_Count=[1]
-
+	
 	DBCount = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).count()
 	Condition = (DBCount%3!=0)  and 1 or 0
 
-	O_Count[0] = DBCount/3+Condition
+	O_Count = DBCount/3+Condition
 	
 	if UserData !=None:
 		MyCourseBoard = Course_Evaluation.objects.get(Course = Lecture.objects.get(id=offset), CreatedID = UserData)
@@ -89,9 +88,9 @@ def CoursePage(request, offset, offset2):
 		MyCourseBoard = None
 	#이전페이지 다음페이지 기능 구현
 	PageInformation=list()
-	PageInformation=CurrentPageView(O_Count,offset2,0)
+	PageInformation=CurrentPageView(O_Count,offset2)
 	
-	OtherCount=PageTotalCount(0,O_Count,PageInformation)
+	OtherCount=PageTotalCount(O_Count,PageInformation)
 
 	PageInformation[1]=offset2
 	#해당 페이지에 출력할 데이터들 갯수 정하는 기능

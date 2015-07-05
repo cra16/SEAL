@@ -6,10 +6,7 @@ $(function(){
 			if(confirm){
 				window.location.href = "/mysite2/Recommend/" + domain1[0];
 			}
-            else
-            {
-                
-            }
+         
 		
 	      }
 		);
@@ -17,7 +14,7 @@ $(function(){
 
 $(function(){
                 $('#likebutton2').click(function(){
-                        confirm1 = window.confirm("Correct?");
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
                         if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[1];
                         }

@@ -32,7 +32,7 @@ def loginCheck(request):
 			if user is not None:
 				auth_login(request,user)
 				#메인페이지 보여줄 함수 호출
-				UserData = MainView(request)
+				UserData = MainPageView(request.user,None,None,None)
 
 				return render_to_response("index.html",UserData)
 			else:
@@ -42,7 +42,7 @@ def loginCheck(request):
 			return render_to_response('login.html')
 		#이미 로그인 되어있으면 
 		else:
-			UserData = MainView(request)
+			UserData = MainPageView(request.user,None,None,None)
 			return render_to_response("index.html", UserData)
 #로그인 페이지	
 def login(request):

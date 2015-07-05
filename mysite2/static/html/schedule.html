@@ -122,10 +122,15 @@
         </div>
       </div>
       </form>
-        
+        <script>
+            var domain1=new Array();
+            var domain2=new Array();
+            var domain3=new Array();
+            var Page=0;
+        </script>
 
       <div id="sch-result" class="wrapper">
-      {% for lec in lec_lst %}
+      {% for lec in TotalBoard %}
       <!-- 시작하는 행에서 div를 열어준다. -->
       {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui two column grid">

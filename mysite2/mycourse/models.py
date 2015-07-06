@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
+
+
 from django.db import models
 from lecture.models import Lecture
 from login.models import Profile

@@ -95,14 +95,14 @@
         <a class="item" data-tab="saved">듣고 싶은 강의</a>
       </div>
 
-       <div class="ui very relaxed column grid">
+       <div  class="ui very relaxed column grid">
         <div class="column">
-          <div class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+          <div id ="RecommendPageMain" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
                 {%for PageBoard in RecommendPage%}
             <div class="ui raised segment">
               <div class="left floated ui compact segment two wide column">
                 <center><a href="/mysite2/Recommend/{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum1"></span> LIKES</center>
+                <center><span id="likenum1">{{PageBoard.Total_Count}}</span> LIKES</center>
               </div>
 
               <div id="firstcourse" class="five wide column">
@@ -128,14 +128,14 @@
               </div>
             </div>
         {% endfor%}
-        <center><div class="ui borderless pagination menu">
-              <a class="item">
+         <center><div id ="RecommendPageNation" class="ui borderless pagination menu">
+              <a id ="RecommendPrevious" name = "{{PageInformation.0.0}}" class="item">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in TotalCount.0%}
-              <a class="item">{{i}}</a>
+              <a id = "RecommendPage" name = "{{i}}" class="item">{{i}}</a>
               {%endfor%}
-              <a class="item">
+              <a id = "RecommendNext" name = "{{PageInformation.0.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -146,12 +146,12 @@
 
 
 
-          <div class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+          <div id = "LikePageMain" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
           {% for PageBoard2 in LikePage%}
             <div class="ui raised segment">
               <div class="left floated ui compact segment two wide column">
                 <center><a href="/mysite2/Recommend/{{PageBoard2.Course.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
-                <center><span id="likenum11"></span> LIKES</center>
+                <center><span id="likenum11">{{PageBoard2.Total_Count}}</span> LIKES</center>
               </div>
                     
               <div id="firstcourse" class="five wide column">    
@@ -179,14 +179,14 @@
 		        {%endfor%}
 
 
-            <center><div class="ui borderless pagination menu">
-              <a class="item">
+           <center><div id ="LikePageNation" class="ui borderless pagination menu">
+              <a id = "LikePrevious" name ="{{PageInformation.1.0}}" class="item">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in TotalCount.1%}
-              <a class="item">{{i}}</a>
+              <a id ="LikePage" name="{{i}}" class="item">{{i}}</a>
               {%endfor%}
-              <a class="item">
+              <a id = "LikeNext" name = "{{PageInformation.1.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

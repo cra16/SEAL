@@ -118,4 +118,191 @@ $('#sl164').slider('disable');
 $("[data-toggle=tooltip]").tooltip();
 
 
+
+ $('div').on('click',"#LikePage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                        $('#LikePageMain').html(resp);
+                 },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#LikeNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                    $('#LikePageMain').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+   $('div').on('click','#LikePrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+              $('#LikePageMain').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+
+
+
+
+
+ $('div').on('click',"#RecommendPage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                        'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  $('#RecommendPageMain').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#RecommendNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#RecommendPageMain').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    $('div').on('click','#RecommendPrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/MyCoursePage/",
+              data : {'Page': $(this).attr("name"),
+                    'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#RecommendPageMain').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
 });

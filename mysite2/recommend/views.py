@@ -11,11 +11,11 @@ from mycourse.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
-from functionhelper.views import CheckingLogin
+from functionhelper.views import *
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
 	try:
-		RecommendData=Recommend_Course.objects.get(Course = Lecture.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
 	except:
 		RecommendData=None
 		

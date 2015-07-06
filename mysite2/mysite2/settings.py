@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'mycourse',
     'functionhelper',
     'databasehelper',
+    
 
 )
 AUTH_USER_MODEL = 'auth.User'

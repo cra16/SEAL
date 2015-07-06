@@ -34,6 +34,7 @@ def Judgement(request): # 신고 게시판 기능
 	CheckingLogin(request.user.username)
 	return render_to_response("subscribe_report.html",{'user':request.user,'BestBoard':BestBoardView()})
 
+#메인페이지 ajax 구현해서 만든 함수 PAge는 다 똑같아서 하나로 줄일까 생각중
 @csrf_exempt
 def Page(request): #Main 기능
 	CheckingLogin(request.user.username)	
@@ -52,6 +53,8 @@ def Page(request): #Main 기능
 	request.session['PageInformation'] = template['PageInformation']
 	
 	return render_to_response(target[0],template)
+
+
 @csrf_exempt
 def FirstPage(request):
 	CheckingLogin(request.user.username)	

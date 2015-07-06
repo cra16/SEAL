@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)), 
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^update/$','lecture.views.lec_update'),
+		url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation')
 	
 )
 
@@ -50,6 +51,7 @@ urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
 	url(r'^Like/(\d+)$','Like'),
+
 )#recommend view
 
 urlpatterns += patterns('qna.views',

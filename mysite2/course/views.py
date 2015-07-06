@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 from functionhelper.views import *
-
+ 
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
 	#아직 3번 입력해야 들어갈 수 있는 기능 안만듬.(뭐 이건 금방하니까..)
 		try:

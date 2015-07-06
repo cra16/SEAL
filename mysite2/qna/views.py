@@ -19,21 +19,17 @@ def QnAMain(request): #Q&A 메인
 	#페이지 넘기는 기능
 	count=QnA_Board.objects.count()
 
-	T_Count =[0]
-	T_Count[0] = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
 	
+	T_Count = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
 	
-	PageInformation=(FirstPageView(0,T_Count))
+	PageInformation=(FirstPageView(T_Count))
 
+	TotalCount=PageTotalCount(T_Count,PageInformation)
 
-	TotalCount=PageTotalCount(0,T_Count,PageInformation)
-
-	
 	Today = datetime.datetime.today()
 	
 	PageBoard=(QnA_Board.objects.order_by('-id')[0:6])
 	
-
 	Reply_Board=[]#reply DB 저장할 공간
 
 	for Board in PageBoard:
@@ -43,6 +39,7 @@ def QnAMain(request): #Q&A 메인
 		#Reply_Board=None
 	return render_to_response("QnA.html",
 				  {'user':request.user,
+				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
 				   'ReplyBoard':Reply_Board,
 				   'TotalCount' : TotalCount, 
@@ -51,12 +48,12 @@ def QnAMain(request): #Q&A 메인
 				   'Count' : count,
 				   })
 
-
-def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
+@csrf_exempt		
+def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	CheckingLogin(request.user.username)
 	try:
-		offset = int(offset)
+		offset = int(request.POST['Page'])
 	except ValueError:
 		raise Http404()
 
@@ -67,14 +64,14 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 	#######	게시판 페이지 넘기는 기능
 
 	count = QnA_Board.objects.count()
-	T_Count =[0]
-	T_Count[0]=((count/8)+1)
+	
+	T_Count=((count/8)+1)
 	#PageInformation = list()
     
-	PageInformation=CurrentPageView(T_Count,offset,0)
+	PageInformation=CurrentPageView(T_Count,offset)
 
 
-	TotalCount=PageTotalCount(0,T_Count,PageInformation)
+	TotalCount=PageTotalCount(T_Count,PageInformation)
 
 	Today =datetime.date.today()
 
@@ -84,8 +81,9 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
 			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
 
-	return render_to_response("QnA.html",
+	return render_to_response("QnAList.html",
 				  {'user':request.user, 
+				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard, 	
 				   'TotalCount' : TotalCount, 
        			   'PageInformation' : PageInformation,
@@ -95,7 +93,7 @@ def QnA(request,offset): #Q&A 페이지로 넘겼을때 나오는 기능
 	
 def QnAWrite(request): #Q&A Write 기능
 	CheckingLogin(request.user.username)
-	return render_to_response("subscribe_faq.html",{'user':request.user})
+	return render_to_response("subscribe_faq.html",{'user':request.user, 'BestBoard':BestBoardView()})
 @csrf_exempt
 def QnA_Writing(request):
 	CheckingLogin(request.user.username)

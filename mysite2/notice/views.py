@@ -29,15 +29,15 @@ def NoticeMain(request):#Notice 기능
 				  {'user':request.user,
 				   'PageBoard':PageBoard, 
 				   'PageInformation':PageInformation,
-				   'TotalCount' : range(0,PageInformation[2]),
+				   'TotalCount' : range(1,PageInformation[2]+1),
 				   'Today':Today 
 				   })
-
-def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
+@csrf_exempt
+def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 
 	CheckingLogin(request.user.username)
 	try:
-		offset = int(offset)
+		offset = int(request.POST['Page'])
 	except ValueError:
 		raise Http404()
 
@@ -58,8 +58,9 @@ def Notice(request,offset): #Notice Page 넘겨졌을때 나오는 페이지
 	TotalCount = PageTotalCount(0,T_Count,PageInformation)
 
 	Today =datetime.date.today()    
-	return render_to_response("notice.html",
+	return render_to_response("NoticeList.html",
 				  {'user':request.user, 
+				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
 				   'TotalCount' : TotalCount,
 				   'Today' :Today,
@@ -91,6 +92,7 @@ def Notice_Read(request, offset): #Notice Read 기능
 
 	return render_to_response("notice-contents.html", 
 		{'user':request.user,
+		'BestBoard':BestBoardView(),
 		'Previous' :Previous,
 		'Next' :Next,
 		'Board':Current})

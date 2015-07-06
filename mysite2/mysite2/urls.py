@@ -53,7 +53,7 @@ urlpatterns += patterns('recommend.views',
 )#recommend view
 
 urlpatterns += patterns('qna.views',
-	url(r'^QnA/page/(\d+)$','QnA'),
+	url(r'^QnA/Page/','QnA'),
 	url(r'^QnA/$','QnAMain'),
 	url(r'^QnA/Write$','QnAWrite'),
 	url(r'^QnA/Writing$','QnA_Writing'),
@@ -69,7 +69,7 @@ urlpatterns += patterns('course.views',
 
 urlpatterns += patterns('notice.views',
 	url(r'^Notice/$','NoticeMain'),
-	url(r'^Notice/Page/(\d+)$','Notice'),
+	url(r'^Notice/Page/','Notice'),
 	url(r'^Notice/(\d+)/$','Notice_Read'),
 	url(r'^Notice/Write$', 'Notice_Write'),
 	url(r'^Notice/Writing$', 'Notice_Writing'),

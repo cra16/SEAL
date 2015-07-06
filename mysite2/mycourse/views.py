@@ -8,7 +8,7 @@ from index.models import *
 from lecture.models import *
 from mycourse.models import *
 from django.views.decorators.csrf import csrf_exempt
-from functionhelper.views import CheckingLogin, FirstPageView
+from functionhelper.views import *
 import datetime
 def MyCourse(request):
         
@@ -18,7 +18,7 @@ def MyCourse(request):
 
 def MyCoursePage(request):
 	MyProfile = Profile.objects.get(User=request.user)
-	PageInformation = [[1,1,1],[1,1,1]]
+	
 	RecommendPage=[]
 	LikePage=[]
 	
@@ -46,19 +46,24 @@ def MyCoursePage(request):
 					LikeData.Total_Homework = 5
 			LikePage.append(LikeData)
 	Count = [[],[]]
-	Count[0] = Course_Evaluation.objects.filter(CreatedID = MyProfile).count()/6+1
-	Count[1]=Like_Course.objects.filter(CreatedID = MyProfile).count()/6+1
+	DBCount=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
+	Count[0] = DataCount(6,DBCount)
+	DBCount=Like_Course.objects.filter(CreatedID = MyProfile).count()
+	Count[1]=DataCount(6,DBCount)
 	
+	PageInformation=list()
+	TotalCount=list()
 	for i in range(0,2):
-		FirstPageView(i, Count)												
+		PageInformation.append(FirstPageView(Count[i]))									
+		TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
 
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 
+						'BestBoard':BestBoardView(),
 						'RecommendPage':RecommendPage,
 						'LikePage':Like,
 						'PageInformation' : PageInformation,
-						'R_Count' : range(1,Count[0]+1),
-						'L_Count' : range(1,Count[1]+1),
+						'TotalCount':TotalCount
 						}
 	return MyCoursePageData
 			

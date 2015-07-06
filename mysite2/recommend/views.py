@@ -15,7 +15,7 @@ from functionhelper.views import CheckingLogin
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
 	try:
-		RecommendData=Course_Evaluation.objects.get(Course = Lecture.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Recommend_Course.objects.get(Course = Lecture.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
 	except:
 		RecommendData=None
 		
@@ -35,6 +35,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 
 		return render_to_response("recommend.html",
                                           {'user':request.user,
+                                          'BestBoard':BestBoardView(),
                                            'CourseBoard':CourseBoard,
 											})
 def Recommend_NotEmpty(request):
@@ -91,12 +92,17 @@ def Recommend_Write(request): #추천 강의 DB입력
 @csrf_exempt
 def Like(request, offset):
 	try :
-		UserData=Like_Course(CreatedID = Profile.objects.get(User = request.user))
+		UserData=Profile.objects.get(User=request.user)
 	except:
-		UserData=None
+		pass
 
 	CheckingLogin(request.user.username)
-	if UserData is not None:
+	try:
+		LikeData=Like_Course.objects.get(CreatedID = Profile.objects.get(User = UserData), Course = Lecture.objects.get(id=offset))
+	except:
+		LikeData=None
+
+	if LikeData != None:
 		return render_to_response("Like_error.html")
 	else:
 		if request.method =="POST":

@@ -29,6 +29,10 @@
     margin-top: 2%;
     margin-left: 2%;
 }
+#likebtn6{
+    margin-top: 2%;
+    margin-left: 2%;
+}
 
 #likebtn11{
     margin-top: 2%;
@@ -95,6 +99,11 @@
     background-color: white;
 }
 #likebutton5
+{
+    border: none;
+    background-color: white;
+}
+#likebutton6
 {
     border: none;
     background-color: white;

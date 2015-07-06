@@ -33,6 +33,7 @@ def SelectPeriod(request, period, page):
 		is_odd = lec_cnt % 2
 		ctx = {
 			'user':request.user,
+			'BestBoard':BestBoardView(),
 			'period':period,
 			'total_page': range(1, total_page+1),
 			'lec_lst':lec_lst,
@@ -68,41 +69,40 @@ def SearchSubject(request):
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
 
-		SubjectCount=[0]
-		
+		Subject=[0]
 		if SearchName == "":
 			if SelectMajor != "전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()
-					Condition = (DBCount%6!=0)  and 1 or 0
-					SubjectCount[0]=DBCount/6+Condition
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
+					SubjectCount=DataCount(6,DBCount)
+					Subject[0] = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
 			elif SelectMajor != "전체" and SelectCategory =="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
-					Condition = (DBCount%6!=0)  and 1 or 0
-					SubjectCount[0]=DBCount/6+Condition
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
+					SubjectCount=DataCount(6,DBCount)
+					Subject[0] = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
 			elif SelectMajor =="전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()
-					Condition = (DBCount%6!=0)  and 1 or 0
-					SubjectCount[0]=DBCount/6+Condition
-					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
+					SubjectCount=Condition = (DBCount%6!=0)  and 1 or 0
+					Subject[0] = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
 			else:
-					SubjectCount[0] = Lecture.objects.count()/6+1
-					Subject = Lecture.objects.order_by('Code')[start:end]
+					DBCount= Lecture.objects.count()
+					SubjectCount=DataCount(6,DBCount)
+					Subject[0] = Lecture.objects.order_by('Code')[start:end]
 			
 		else:
-			SubjectCount[0] = Lecture.objects.filter(CourseName__contains=SearchName)
-			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
+			SubjectCount = Lecture.objects.filter(CourseName__contains=SearchName).count()
+			Subject[0] = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
 
 		if New == 1:
-			PageInformation = FirstPageView(0,SubjectCount)
-			TotalCount=PageTotalCount(0,SubjectCount,PageInformation)
+			PageInformation = FirstPageView(SubjectCount)
+			TotalCount=PageTotalCount(SubjectCount,PageInformation)
 		else :
-			PageInformation = CurrentPageView(SubjectCount,cur_page,0)
+			PageInformation = CurrentPageView(SubjectCount,cur_page)
 			PageInformation[1]=cur_page
-			TotalCount = PageTotalCount(0,SubjectCount,PageInformation)
+			TotalCount = PageTotalCount(SubjectCount,PageInformation)
+		TotalBoard = PageView(Subject)
 		Dic = {
 				'user':request.user,
+				'BestBoard':BestBoardView(),
 				'Subject':Subject,
 				'SelectMajor' : SelectMajor,
 				'SubjectCount':SubjectCount,
@@ -110,7 +110,8 @@ def SearchSubject(request):
 				'PageInformation':PageInformation,
 				'TotalCount':TotalCount,
 				'cur_page':cur_page,
-				'Data' :Page,
+				'Page' :Page,
+				'TotalBoard':TotalBoard
 		}
 
 		return render_to_response('scheduleTemplate.html', Dic)

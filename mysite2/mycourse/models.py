@@ -3,6 +3,10 @@ from lecture.models import Lecture
 from login.models import Profile
 from index.models import Course_Evaluation
 
+
+
+#두개다 one to many 관계라서 뭘고쳐야할지 모르겠넴
+
 class Recommend_Course(models.Model):
 	Course = models.ForeignKey(Course_Evaluation)
 	CreatedID = models.ForeignKey(Profile)

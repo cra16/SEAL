@@ -25,7 +25,6 @@
     <script type="text/javascript" src="{% static "js/bootstrap-slider.js" %}"></script>
     <script type="text/javascript" src="{% static "js/feed.js" %}"></script>
     <script type="text/javascript" src="{% static "js/semantic.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/IndexPage/main.js"%}"></script>
     <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>
    
    <style>
@@ -176,27 +175,27 @@
 
       <span id="best-list">   
         <h3 class="col-md-1 col-sm-1 col-xs-1">
-          <span id="num1"><a href="#">1</a></span>
-          <span id="num2"><a href="#">2</a></span>
-          <span id="num3"><a href="#">3</a></span>
+          <span id="num1"><a href="/mysite2/Course/{{BestBoard.0.Course.id}}">1</a></span>
+          <span id="num2"><a href="/mysite2/Course/{{BestBoard.1.Course.id}}">2</a></span>
+          <span id="num3"><a href="/mysite2/Course/{{BestBoard.2.Course.id}}">3</a></span>
         </h3>
 
         <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename1">강의명</span><br />
-          <span id="pname1">교수명</span><br />
-          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">추천개수</span> Likes</span>
+          <span id="coursename1">{{BestBoard.0.Course.CourseName}}</span><br />
+          <span id="pname1">{{BestBoard.0.Course.Professor}} 교수님</span><br />
+          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">추천개수</span>{{BestBoard.0.Total_Count}} Likes</span>
         </p>
 
         <p id="second-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename2">강의명</span><br />
-          <span id="pname2">교수명</span><br />
-          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">추천개수</span> Likes</span>
+          <span id="coursename2">{{BestBoard.1.Course.CourseName}}</span><br />
+          <span id="pname2">{{BestBoard.1.Course.Professor}} 교수님</span><br />
+          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">추천개수</span>{{BestBoard.1.Total_Count}} Likes</span>
         </p>
 
         <p id="third-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename3">강의명</span><br />
-          <span id="pname3">교수명</span><br />
-          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">추천개수</span> Likes</span>
+          <span id="coursename3">{{BestBoard.2.Course.CourseName}}</span><br />
+          <span id="pname3">{{BestBoard.2.Course.Professor}} 교수님</span><br />
+          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">추천개수</span>{{BestBoard.2.Total_Count}}  Likes</span>
         </p>
                     
       </span>

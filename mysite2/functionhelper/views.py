@@ -7,13 +7,18 @@ from django.db.models import Q #데이터 베이스 OR 기능 구현
 from index.models import * #아직 시험중		
 # Create your views here.
 
+"""
+전반적으로 해당 view에서 보이지 않는 모든 함수를 여기에 한곳에 모음
+현재는 기능과 DB와 관련된 모든 함수가 섞여있는데 나중에 분류할 예정 7/6일 자
+"""
+
 #세션 유지된 아이디 확인
 def CheckingLogin(userID):
 	if userID=="":
 		return  HttpResponseRedirect("/mysite2");
 	else:
 		return True
-#처음 그 페이지에 갔을 때 정보의 페이지 번호 보여줌
+#최초로 페이지에 도달했을때 1전공 2전공 all의 페이지 위치 정보를 알려주는 기능
 def FirstPageView(Count):
 	PageInformation =[1,1,1]
 	if Count>11:
@@ -25,11 +30,14 @@ def FirstPageView(Count):
 		PageInformation[1] = 1
 		PageInformation[2] = Count
 	return PageInformation
-#처음을 제외한 정보의 페이지 번호 보여줌
+#최초로 페이지 도달한 것을 제외한 모든 상황에서 1전공 2전공 all의 페이지 위치 정보 알려주는 기능
 def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
+	#페이지가 0으로 떨어질때 필요한 조건
+	
 	Condition =((offset%10) !=0 )and offset%10 or 10
 	
+	#Pagenation 하는 부분의 수가 11개 이상일 경우(즉 1,2,3,4,5,6.... 11일 경우 11,12,13...20으로 맞추기 위해 필요한 조건)
 	if T_Count >=11:
 	#현재 페이지가 11이상일 경우
 			if offset>=11:
@@ -51,7 +59,7 @@ def CurrentPageView(T_Count,offset):
 			PageInformation[0] = 1
 			PageInformation[2] = T_Count
 	return PageInformation
-#총 페이지 카운트
+#PageNation하는 부분 표시하기 위한 기능
 def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
 	if (PageInformation[1]/10) >= T_Count/10:
@@ -61,9 +69,10 @@ def PageTotalCount(T_Count,PageInformation):
 	return TotalCount
 
 
-
+#Main Page 강의 추천하는 곳을 보여주는 기능
 def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 
+	#login view에서 사용하는 MainPageView와 로그인 되었을때 mainPageView가 조금씩 달라서 설정
 	if pageinformation !=None:
 			User = user
 			PageInformation=pageinformation
@@ -72,13 +81,9 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=0
-	#main 자바스크립트 조작 하기 위한 기능
-	
 
-	##강의 DB에 저장된 자료들을 코드로 필터를 해서 Total Page를 만듦
-	##그리고 나서 강의추천된 강의들만 따로 또 필터해서 데이터 넣는 과정임
-	##후배여러분이 좀 알고리즘 잘짜서 더 최적화해주세요..(최대한 했지만..발적화임..))
-	
+
+	#user의 전공에 따른 전공 코드를 뿌려줌
 	CourseCode = MajorSelect(User)
 	
 	#2차원 list로 각 전공당 총 페이지 수 저장
@@ -96,10 +101,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	DBCount3=Lecture.objects.count()
 	T_Count[2] = DataCount(5,DBCount3)
 	
-	#main 페이지 활성화 기능(1전공, 2전공 all)
-
-	#URL을 통해 무슨 전공 페이지에 있는지 확인해서 그 정보 긁어옴
-	#페이지 갯수가 11개 이상일 경우
+	#현재 페이지 위치정보
 	PageInformation[MajorNumber] = CurrentPageView(T_Count,PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
 	
@@ -113,6 +115,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	TotalBoard[2] = Lecture.objects.order_by('Code')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 
+	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
 	PageBoard = PageView(TotalBoard)
 	##Session Save
 	
@@ -121,6 +124,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	TotalCount=list()
 	for i in range(0,len(T_Count)):
 		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	#추천많이받은 순으로 보여주는 Board
 	BestBoard = BestBoardView()
 
 	dic = {'user':User,
@@ -133,6 +137,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		   }
 
 	return dic
+#MainPage Template설정
 def TargetTemplate(Current):
 	target = ["",""]
 	if Current =="FirstPageNation":
@@ -146,6 +151,7 @@ def TargetTemplate(Current):
 		target[1] = "2"
 	return target
 
+#전공 코드 쏘는 기능
 def MajorSelect(user):
 		try:
 			Student = Profile.objects.get(User =user)
@@ -254,7 +260,7 @@ def MajorSelect(user):
 
 
 
-#메인 페이지 view 함수로 옮김
+#강의 추천 평균 계산
 def PageView(TotalBoard):
 	PageBoard=[[],[],[]]
 	count =0
@@ -286,6 +292,8 @@ def PageView(TotalBoard):
 				PageBoard[count].append(BoardData)
 		count=count+1
 	return PageBoard
+
+#DB에서 호출 된 모든 정보에 대한 페이지 총 개수를 계산하는 기능
 def DataCount(divide, DataBaseCount):
 
 
@@ -293,7 +301,7 @@ def DataCount(divide, DataBaseCount):
         Condition = (DBCount%divide!=0) and 1 or 0
         Count=DBCount/divide+Condition
         return Count
-
+#가장 추천많이 받은 강의 보여주는 기능
 def BestBoardView():
 	TotalBoard = Total_Evaluation.objects.all()
 	MaxCount = 0  

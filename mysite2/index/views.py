@@ -140,19 +140,18 @@ def Search(request): #전체 검색 기능
 		#여기 문제
 		LectureData = [[]]
 		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
-		SearchCount =list()
+		
 
 		DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
-		Condition = (DBCount%5!=0) and 1 and 0
-		SearchCount.append(DBCount/5+Condition)
+		SearchCount=DataCount(5,DBCount)
 
 
 		L_Data=PageView(LectureData)
 		PageInformation =[1,1,1]
 
-		PageInformation=FirstPageView(0,SearchCount)
+		PageInformation=FirstPageView(SearchCount)
 
-		T_Count = PageTotalCount(0,SearchCount,PageInformation)
+		T_Count = PageTotalCount(SearchCount,PageInformation)
 
 		request.session['SearchPageInformation'] = PageInformation
 		request.session['SearchValue'] = SearchData
@@ -180,7 +179,6 @@ def SearchPage(request, offset):
 	LectureData = [[]]
 	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	
-	SearchCount =list()
 	
 	DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
 	SearchCount = DataCount(5,DBCount)

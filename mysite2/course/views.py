@@ -31,6 +31,9 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				except:
 					raise Http404()
 
+				PageFirst = 3*(offset-1)
+				PageLast = 3*(offset-1)+3
+
 				PageInformation=[1,1,1]
 				CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
 				
@@ -42,7 +45,7 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				            #자신 이외 다른사람이 추천한 정보 보여줌
 				except:
 					MyCourseBoard = None
-				OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[0:3]
+				OtherCourse = Course_Evaluation.objects.filter(Course = Lecture.objects.get(id = offset)).order_by('-id')[PageFirst:PageLast]
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
 				for Board in OtherCourse:

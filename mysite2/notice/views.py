@@ -19,17 +19,22 @@ def NoticeMain(request):#Notice 기능
 	CheckingLogin(request.user.username)
 	
 	count=Notice_Board.objects.count()
-	T_Count=[1]
-	T_Count[0] = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
 	
-	PageInformation=(FirstPageView(0,T_Count))
-	PageBoard = Notice_Board.objects.order_by('-id')[0:7]	
+	PageFirst = (offset-1)*6
+	PageLast = (offset-1)*6 + 6
+	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
+	
+	T_Count = DataCount(6,count) #총 페이지수(아마 고쳐야할듯)
+	
+	PageInformation=(FirstPageView(T_Count))
+	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast]	
 	Today = datetime.datetime.now()
 	return render_to_response("notice.html",
 				  {'user':request.user,
+				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard, 
 				   'PageInformation':PageInformation,
-				   'TotalCount' : range(1,PageInformation[2]+1),
+				   'TotalCount' : PageTotalCount(T_Count,PageInformation),
 				   'Today':Today 
 				   })
 @csrf_exempt
@@ -48,14 +53,13 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 	#페이지 넘기는 기능
 
 	count = Notice_Board.objects.count()
-	T_Count=list()
-	T_Count.append((count/8)+1)
-	
 
-	PageInformation=CurrentPageView(T_Count,offset,0)
+	T_Count=DataCount(6,count)
+
+	PageInformation=CurrentPageView(T_Count,offset)
 
 
-	TotalCount = PageTotalCount(0,T_Count,PageInformation)
+	TotalCount = PageTotalCount(T_Count,PageInformation)
 
 	Today =datetime.date.today()    
 	return render_to_response("NoticeList.html",

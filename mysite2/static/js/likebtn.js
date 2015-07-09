@@ -2,8 +2,8 @@
 
 $(function(){	
 		$('#likebutton1').click(function(){
-			confirm = window.confirm("이 강의를 추천하시겠습니까?");
-			if(confirm){
+			confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+			if(confirm1){
 				window.location.href = "/mysite2/Recommend/" + domain1[0];
 			}
        
@@ -13,8 +13,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton2').click(function(){
-                        confirm1 = window.confirm("Correct?");
-                        if(confirm1){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[1];
                         }
 
@@ -24,8 +24,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton3').click(function(){
-                        confirm2 = window.confirm("Correct?");
-                        if(confirm2){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[2];
                         }
 
@@ -35,8 +35,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton4').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[3];
                         }
 
@@ -46,8 +46,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton5').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                       confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[4];
                         }
 
@@ -56,8 +56,8 @@ $(function(){
 });
 $(function(){
                 $('#likebutton6').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain1[5];
                         }
 
@@ -79,8 +79,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton12').click(function(){
-                        confirm1 = window.confirm("Correct?");
-                        if(confirm1){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain2[1];
                         }
 
@@ -90,8 +90,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton13').click(function(){
-                        confirm2 = window.confirm("Correct?");
-                        if(confirm2){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain2[2];
                         }
 
@@ -101,8 +101,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton14').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                       confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain2[3];
                         }
 
@@ -112,8 +112,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton15').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain2[4];
                         }
 
@@ -122,8 +122,8 @@ $(function(){
 });
 $(function(){
                 $('#likebutton16').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain2[5];
                         }
 
@@ -133,8 +133,8 @@ $(function(){
 
 $(function(){	
 		$('#likebutton21').click(function(){
-			confirm = window.confirm("Correct?");	
-			if(confirm){
+			confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
 				window.location.href = "/mysite2/Recommend/" + domain3[0];
 			}
 		
@@ -144,8 +144,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton22').click(function(){
-                        confirm1 = window.confirm("Correct?");
-                        if(confirm1){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain3[1];
                         }
 
@@ -155,8 +155,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton23').click(function(){
-                        confirm2 = window.confirm("Correct?");
-                        if(confirm2){
+                       confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain3[2];
                         }
 
@@ -166,8 +166,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton24').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                       confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain3[3];
                         }
 
@@ -177,8 +177,8 @@ $(function(){
 
 $(function(){
                 $('#likebutton25').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain3[4];
                         }
 
@@ -187,8 +187,8 @@ $(function(){
 });
 $(function(){
                 $('#likebutton26').click(function(){
-                        confirm3 = window.confirm("Correct?");
-                        if(confirm3){
+                        confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
                                 window.location.href = "/mysite2/Recommend/" + domain3[5];
                         }
 

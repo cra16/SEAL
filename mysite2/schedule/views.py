@@ -116,7 +116,7 @@ def SearchSubject(request):
 
 		return render_to_response('scheduleTemplate.html', Dic)
 	else:
-		return render_to_response("schedule.html",{'user':request.user,'Data' :0})
+		return render_to_response("schedule.html",{'user':request.user,'BestBoard':BestBoardView(),})
 
 def Major(major):
 	if major == "0001":

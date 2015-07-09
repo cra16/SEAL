@@ -14,21 +14,22 @@ from django.db.models import Q
 from functionhelper.views import *
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
+			
+	CheckingLogin(request.user.username)
 	try:
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(id=int(offset)),CreatedID = Profile.objects.get(User = request.user)) 
+			offset = int(offset)
+	except:
+			raise Http404()
+
+	try:
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
 	except:
 		RecommendData=None
-		
-	CheckingLogin(request.user.username)
 
-
-	if RecommendData is not None:
+	if RecommendData != None:
 		return  render_to_response("Not_Empty_Recommend.html")
 	else:
-		try:
-			offset = int(offset)
-		except:
-			raise Http404()
+		
 
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
@@ -68,11 +69,11 @@ def Recommend_Write(request): #추천 강의 DB입력
 		except:
 			T_Eval =None 
 
+		UserData = Profile.objects.get(User = request.user)
+		UserData.RecommendCount+=1
+		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework, Total_Count =1)
-			UserData = Profile.objects.get(User = request.user)
-			UserData.RecommendCount+=1
-			UserData.save()
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)

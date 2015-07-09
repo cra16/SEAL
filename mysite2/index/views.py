@@ -167,18 +167,20 @@ def Search(request): #전체 검색 기능
 										})
 	else:
 		return HttpResponseRedirect("/mysite2")
-
-def SearchPage(request, offset):
+@csrf_exempt
+def SearchPage(request):
 	CheckingLogin(request.user.username)
 
-	try:
-			offset = int(offset)
-	except ValueError:
-			raise Http404()
+	if request.POST['Page'] !="0":
+		cur_page = int(request.POST['Page'])
+	else:
+		cur_page = 1
+		Current = request.POST['Current']
+
 	SearchData = request.session['SearchValue']
 	
 	PageInformation = request.session['SearchPageInformation']
-	PageInformation[1] = offset
+	PageInformation[1] = cur_page
 	LectureData = [[]]
 	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	
@@ -188,12 +190,12 @@ def SearchPage(request, offset):
 
 	L_Data=PageView(LectureData)
 	
-	PageInformation = CurrentPageView(SearchCount,offset)
+	PageInformation = CurrentPageView(SearchCount,cur_page)
 	T_Count=PageTotalCount(SearchCount,PageInformation)
 	
 
 	request.session['SearchPageInformation'] = PageInformation
-	return render_to_response('index.html', {
+	return render_to_response('SearchPage.html', {
 										'user':request.user,
 										'BestBoard':BestBoardView(),
 										'Search' : L_Data,

@@ -2,6 +2,7 @@
 {% load staticfiles%}
 {% for lec in TotalBoard.0%}
 <script>
+                                var domain1=new Array();
                                 domain1[{{forloop.counter0}}] ="{{lec.Course.id}}";
                                    Page={{Page}};
                         </script>

@@ -38,10 +38,8 @@
        
      
         <span id="cprof">{{CourseBoard.Course.Professor}} 교수님</span></p>
-         <form action="/mysite2/Like/{{CourseBoard.Course.id}}" method = "POST">{% csrf_token%}
-        <input type="hidden" name = "CourseData" value ="{{CourseBoard.Course.id}}">  
-         <a href="/mysite2/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">추천하기!</button></a>
-        <button class="btn btn-info">듣고싶어!</button>  
+        <a href="/mysite2/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">추천하기!</button></a>
+       <a href="/mysite2/Like/{{CourseBoard.Course.id}}"><button class="btn btn-info">듣고싶어!</button></a>
         </form> 
 
       </div>

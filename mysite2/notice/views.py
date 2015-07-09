@@ -15,13 +15,13 @@ from functionhelper.views import *
 
 
 def NoticeMain(request):#Notice 기능
-
+		
 	CheckingLogin(request.user.username)
-	
+
 	count=Notice_Board.objects.count()
 	
-	PageFirst = (offset-1)*6
-	PageLast = (offset-1)*6 + 6
+	PageFirst = (1-1)*6
+	PageLast = (1-1)*6 + 6
 	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
 	
 	T_Count = DataCount(6,count) #총 페이지수(아마 고쳐야할듯)

@@ -111,15 +111,15 @@ def ThirdPage(request):
 	
 	return render_to_response(target[0],template)
 
-def SubScript(request):
+def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	CheckingLogin(request.user.username)
 	return render_to_response("subscribe_improve.html", {'user':request.user})
 
-def SiteMap(request):
+def SiteMap(request): #사이트 맵
 	CheckingLogin(request.user.username)
 	return render_to_response("sitemap.html", {'user':request.user})
 
-def MyCourse(request):
+def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		CheckingLogin(request.user.username)
 		MyProfile = Profile.objects.get(User=request.user)
 		RecommendPage=[]
@@ -135,7 +135,7 @@ def MyCourse(request):
 								  					'RecommendPage':RecommendPage,
 								  					'BestBoard':BestBoardView()})
 @csrf_exempt
-def Search(request): #전체 검색 기능
+def Search(request): #과목 검색 기능
 	CheckingLogin(request.user.username)
 
 	if request.method =="POST":
@@ -173,7 +173,7 @@ def Search(request): #전체 검색 기능
 	else:
 		return HttpResponseRedirect("/mysite2")
 @csrf_exempt
-def SearchPage(request):
+def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	CheckingLogin(request.user.username)
 
 	if request.POST['Page'] !="0":

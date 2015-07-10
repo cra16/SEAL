@@ -19,8 +19,9 @@ def QnAMain(request): #Q&A 메인
 	#페이지 넘기는 기능
 	count=QnA_Board.objects.count()
 
+
 	
-	T_Count = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
+	T_Count = DataCount(8,count)#총 페이지수(아마 고쳐야할듯)
 	
 	PageInformation=(FirstPageView(T_Count))
 
@@ -28,7 +29,7 @@ def QnAMain(request): #Q&A 메인
 
 	Today = datetime.datetime.today()
 	
-	PageBoard=(QnA_Board.objects.order_by('-id')[0:6])
+	PageBoard=(QnA_Board.objects.order_by('-id')[0:8])
 	
 	Reply_Board=[]#reply DB 저장할 공간
 
@@ -58,14 +59,14 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 		raise Http404()
 
 	#페이지 총 수
-	PageFirst = (offset-1)*6 
-	PageLast = (offset-1)*6 + 6
+	PageFirst = (offset-1)*8
+	PageLast = (offset-1)*8 + 8
 	PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
 	#######	게시판 페이지 넘기는 기능
 
 	count = QnA_Board.objects.count()
 	
-	T_Count=((count/8)+1)
+	T_Count=DataCount(8,count)
 	#PageInformation = list()
     
 	PageInformation=CurrentPageView(T_Count,offset)

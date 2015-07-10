@@ -1,3 +1,5 @@
+{%load staticfiles%}
+
 {% for PBoard2 in PageBoard.1%}
                         <script>
                                 domain2[{{forloop.counter0}}] ="{{PBoard2.Course.id}}";
@@ -14,6 +16,7 @@
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></a></p>
+                <p><a href="#"><span id="csem1" name = "cprof">{{PBoard2.Course.Semester}} 학기</span></a></p>
               </div>
   
               <div id="recommendtop" class="seven wide column">
@@ -46,3 +49,5 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

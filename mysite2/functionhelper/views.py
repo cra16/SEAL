@@ -95,15 +95,16 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		T_Count[1] = DataCount(5,DBCount2)
 	else:
 		DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
+		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
 		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
+		T_Count[1] = DataCount(5,DBCount1)
 	DBCount3=Lecture.objects.count()
 	T_Count[2] = DataCount(5,DBCount3)
 	
 	#현재 페이지 위치정보
 	PageInformation[MajorNumber] = CurrentPageView(T_Count,PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
+
 	
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
@@ -112,7 +113,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	else:
 		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('-Semester')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	TotalBoard[2] = Lecture.objects.order_by('-Semester')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산

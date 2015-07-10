@@ -224,8 +224,9 @@
       {%endif%}
 
           <div id = "SearchPageNation">
-          {% if not Search == None %}
-          {% for SBoard in Search.0%}
+          {% if not Search == None  %}
+            {% if Search.0 != None%}
+            {% for SBoard in Search.0%}
                         <script>
                                 domain1[{{forloop.counter0}}] ="{{SBoard.Course.id}}"
                         </script>
@@ -275,7 +276,9 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-
+            {%else%}
+                  데이터가 없습니다.
+            {%endif%}
             {%endif%}
       </div>
         <div class="ui divider"></div>

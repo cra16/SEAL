@@ -140,16 +140,21 @@ def Search(request): #전체 검색 기능
 
 	if request.method =="POST":
 		SearchData = request.POST['search']
+		SearchData.upper()
 		#여기 문제
 		LectureData = [[]]
-		LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[0:5]
-		
+		try:
+			LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+		except:
+			LectureData[0]=None
 
-		DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
+		DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
 		SearchCount=DataCount(5,DBCount)
-
-
-		L_Data=PageView(LectureData)
+		if DBCount != 0 : 
+			L_Data=PageView(LectureData)
+		else:
+			L_Data=[[]]
+			L_Data[0]=None
 		PageInformation =[1,1,1]
 
 		PageInformation=FirstPageView(SearchCount)
@@ -182,10 +187,10 @@ def SearchPage(request):
 	PageInformation = request.session['SearchPageInformation']
 	PageInformation[1] = cur_page
 	LectureData = [[]]
-	LectureData[0]=Lecture.objects.filter(CourseName__contains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	
 	
-	DBCount = Lecture.objects.filter(CourseName__contains=SearchData).count()
+	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
 	SearchCount = DataCount(5,DBCount)
 
 	L_Data=PageView(LectureData)

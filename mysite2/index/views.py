@@ -187,7 +187,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	PageInformation = request.session['SearchPageInformation']
 	PageInformation[1] = cur_page
 	LectureData = [[]]
-	LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('Code')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	
 	
 	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()

@@ -14,8 +14,6 @@
      
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
-    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     
 
     {% endblock%}
@@ -50,24 +48,14 @@
      
       <div class="ui very relaxed column grid">
         <div class="column">
-          	
-		<script>
-			var domain1=new Array();
-			var domain2=new Array();
-			var domain3=new Array();
-      var Page=0;
-		</script>
+
     {%if Search == None%}
 		    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
 
                  {% for PBoard1 in PageBoard.0%}
-                        <script>
-                                domain1[{{forloop.counter0}}] ="{{PBoard1.Course.id}}"
-                                Page={{Page}}
-                        </script>
-            <div class="ui raised segment grid">
+                          <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                   <center><button id="likebutton" name ="{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
                </div>
 
@@ -114,14 +102,11 @@
 		
       <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
 			       {% for PBoard2 in PageBoard.1%}
-                        <script>
-                                domain2[{{forloop.counter0}}] ="{{PBoard2.Course.id}}"
-                                   Page={{Page}}
-                        </script>
+              
             <div class="ui raised segment grid">
 
                <div id="likebtn1{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                    <center><button id="likebutton1{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                    <center><button id="likebutton" name = "{{PBoard2.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
                    <center><span id="likenum{{forloop.counter}}"></span>{{PBoard2.Total_Count}} LIKES</center>
                </div>
 
@@ -169,16 +154,10 @@
 
 
 
-
-                        <script>
-                                domain3[{{forloop.counter0}}] ="{{PBoard3.Course.id}}"
-                                   Page={{Page}}
-
-                        </script>
             <div class="ui raised segment grid">
 
                           <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                <center><button id="likebutton2{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><button id="likebutton" name = "{{PBoarde3.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}"></span>{{PBoard3.Total_Count}} LIKES</center>
               </div>
 
@@ -227,12 +206,10 @@
           {% if not Search == None  %}
             {% if Search.0 != None%}
             {% for SBoard in Search.0%}
-                        <script>
-                                domain1[{{forloop.counter0}}] ="{{SBoard.Course.id}}"
-                        </script>
+               
             <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                   <center><button id="likebutton" name = "{{SBoard.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{SBoard.Total_Count}} LIKES</center>
                </div>
 
@@ -289,7 +266,10 @@
 
 
 
-
+   <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     {%endblock%}
   </body>
+
+    
 </html>

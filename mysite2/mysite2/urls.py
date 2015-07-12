@@ -18,6 +18,7 @@ urlpatterns += patterns('schedule.views',
 	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'SelectPeriod'),
 	#url(r'^Schedule/Search/$','SearchSubject'),
 	url(r'^Schedule/$','SearchSubject'),
+	url(r'^Sel_lecture/$','SelectLecture'),
 	)#schedule view
 
 urlpatterns += patterns('login.views',
@@ -30,7 +31,7 @@ urlpatterns += patterns('login.views',
 
 urlpatterns += patterns('index.views',
 	url(r'^Search/$', 'Search'),
-	url(r'^SearchPage/$','SearchPage'),
+	url(r'^Search/(\d+)$','SearchPage'),
 	url(r'^MyPage/$', 'MyPage'), 
 	url(r'^About/$','About'),
 	
@@ -66,7 +67,7 @@ urlpatterns += patterns('qna.views',
 
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
-	url(r'^Course/(\d+)/Page/(\d+)$','CoursePage'),
+	url(r'^CoursePageNation/(\d+)$','CoursePage'),
 ) # course view
 
 urlpatterns += patterns('notice.views',

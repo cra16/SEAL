@@ -47,8 +47,8 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 					MyCourseBoard = None
 				
 				#한 페이지에 뿌리는 기능
-				PageFirst = 3*(offset-1)
-				PageLast = 3*(offset-1)+3
+				PageFirst = 3*(1-1)
+				PageLast = 3*(1-1)+3
 				OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
 				
 				OtherCourseBoard = []
@@ -79,11 +79,13 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
   
                                    })
 #페이지 넘겼을 때 작동되는 함수
-def CoursePage(request, offset, offset2):
+@csrf_exempt
+def CoursePage(request, offset):
 	CheckingLogin(request.user)
 	try:
 		offset = int(offset)
-		offset2 = int(offset2)
+		if request.method=="POST":
+			offset2 =int(request.POST["Page"]) 
 		UserData=Profile.objects.get(User=request.user)
 	except:
 		raise Http404()
@@ -123,7 +125,7 @@ def CoursePage(request, offset, offset2):
 		else:
 			OtherCourseBoard.append(Board)
 
-	return render_to_response("course.html",
+	return render_to_response("coursepage.html",
                                       {'user':request.user,
                                       'BestBoard':BestBoardView(),
                                        'CourseBoard':CourseBoard,

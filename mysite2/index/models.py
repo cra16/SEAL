@@ -25,7 +25,7 @@ class Total_Evaluation(models.Model):
 		Total_Homework=models.IntegerField(default=0)
 		Total_Count =models.IntegerField(default=0)
 		def __unicode__(self):
-			return self.CourseName.Code
+			return self.Course.Code
 
 
 

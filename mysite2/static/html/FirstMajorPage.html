@@ -2,13 +2,10 @@
 {% load staticfiles %}
 
 {% for PBoard1 in PageBoard.0%}
-                        <script>
-                                domain1[{{forloop.counter0}}] ="{{PBoard1.Course.id}}";
-                                   Page={{Page}};
-                        </script>
+                      
             <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-			           	 <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+			           	 <center><button id="likebutton"><i class="glyphicon glyphicon-heart"></i></button></center>
 				            <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
                </div>
 

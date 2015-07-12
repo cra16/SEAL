@@ -9,7 +9,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{% static "css/schedule.css" %}">
         <script type="text/javascript" src="{% static "js/schedule.js" %}">
-                
+                var number=0
         </script>
 
 		<style>
@@ -137,25 +137,28 @@
                 <center><span id="likenum{{forloop.counter}}" name="likenum">5</span> LIKES</center>
               </div>
                         
-              [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Code }}</span>]
-              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.CourseName }}</span></a></p>
-              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Professor }}</span></a></p>
+              [<span id="ccode{{forloop.counter}}" name="ccode" value="{{ lec.Code }}">{{ lec.Code }}</span>]
+              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.CourseName }}">{{ lec.CourseName }}</span></a></p>
+              <p><a href="#"><span id="cprof{{forloop.counter}}" value="{{ lec.Professor }}">{{ lec.Professor }}</span></a></p>
               <span>
                 <h3>
-                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Period }}</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod" value="{{ lec.Period }}">{{ lec.Period }}</span>
+                  <a href="" class="ui right floated tiny blue button" id="sch-select{{forloop.counter}}">선택</a>
+                  <input type="hidden" value=""/>
                 </h3>
               </span>
             </div>
           </div>
-          <!-- 짝수번째이거나 마지막이면 닫아준다. 0부터 시작하는 것 주의 실제로는 반대이다. -->
+          <!-- 짝수번째이거나 마지막이면 닫아준다. 0부터 시작하는 것 주의(즉, 짝수부터 시작함) -->
       {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
-        </div>
+        </div>0
          <div class="ui divider"></div>
 
       {% endif %}
       {% endfor %}
        </div>
+       <span id="stu_num" name="stu_num"
+       ></span>
       <div id="sch-search-result" class="wrapper">
          
 
@@ -176,10 +179,7 @@
       </div>
      
 
-
-    
-
-     <div class="bootstrap-table">
+     <div id="rt_table" class="bootstrap-table">
          <div class="fixed-table-container">
              <div class="fixed-table-header" style="height: 40px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221); margin-right:0px;">
                 
@@ -213,105 +213,45 @@
                     </tr>
                 </thead>
                     <tbody>
-                         <tr data-index="1">
+
+                        {% for period in my_lec_table %}
+                         <tr data-index="{{forloop.counter}}">
+                             {% if forloop.counter == 1 %}
                              <th style><p>&nbsp;</p>1st (8:30-9:45)</th>
-                             <td id="mon1"></td>
-                             <td id="tue1"></td>
-                             <td id="wed1"></td>
-                             <td id="thu1"></td>
-                             <td id="fri1"></td>
-                             <td id="sat1"></td>
-                         </tr>
-                         <tr data-index="2">
+                             {% elif forloop.counter == 2 %}
                              <th style><p>&nbsp;</p>2nd (10:00-11:15)</th>
-                             <td id="mon2"></td>
-                             <td id="tue2"></td>
-                             <td id="wed2"></td>
-                             <td id="thu2"></td>
-                             <td id="fri2"></td>
-                             <td id="sat2"></td>
-                         </tr>
-                         <tr data-index="3">
+                             {% elif forloop.counter == 3 %}
                              <th style><p>&nbsp;</p>3rd (11:30-12:45)</th>
-                             <td id="mon3"></td>
-                             <td id="tue3"></td>
-                             <td id="wed3"></td>
-                             <td id="thu3"></td>
-                             <td id="fri3"></td>
-                             <td id="sat3"></td>
-                         </tr>
-                         <tr data-index="4">
+                             {% elif forloop.counter == 4 %}
                              <th style><p>&nbsp;</p>4th (1:00-2:15)</th>
-                             <td id="mon4"></td>
-                             <td id="tue4"></td>
-                             <td id="wed4"></td>
-                             <td id="thu4"></td>
-                             <td id="fri4"></td>
-                             <td id="sat4"></td>
-                         </tr>
-                         <tr data-index="5">
+                             {% elif forloop.counter == 5 %}
                              <th style><p>&nbsp;</p>5th (2:30-3:45)</th>
-                             <td id="mon5"></td>
-                             <td id="tue5"></td>
-                             <td id="wed5"></td>
-                             <td id="thu5"></td>
-                             <td id="fri5"></td>
-                             <td id="sat5"></td>
-                         </tr>
-                         <tr data-index="6">
+                             {% elif forloop.counter == 6 %}
                              <th style><p>&nbsp;</p>6th (4:00-5:15)</th>
-                             <td id="mon6"></td>
-                             <td id="tue6"></td>
-                             <td id="wed6"></td>
-                             <td id="thu6"></td>
-                             <td id="fri6"></td>
-                             <td id="sat6"></td>
-                         </tr>
-                         <tr data-index="7">
+                             {% elif forloop.counter == 7 %}
                              <th style><p>&nbsp;</p>7th (5:30-6:45)</th>
-                             <td id="mon7"></td>
-                             <td id="tue7"></td>
-                             <td id="wed7"></td>
-                             <td id="thu7"></td>
-                             <td id="fri7"></td>
-                             <td id="sat7"></td>
-                         </tr>
-                         <tr data-index="8">
+                             {% elif forloop.counter == 8 %}
                              <th style><p>&nbsp;</p>8th (7:00-8:15)</th>
-                             <td id="mon8"></td>
-                             <td id="tue8"></td>
-                             <td id="wed8"></td>
-                             <td id="thu8"></td>
-                             <td id="fri8"></td>
-                             <td id="sat8"></td>
-                         </tr>
-                         <tr data-index="9">
+                             {% elif forloop.counter == 9 %}
                              <th style><p>&nbsp;</p>9th (8:30-9:45)</th>
-                             <td id="mon9"></td>
-                             <td id="tue9"></td>
-                             <td id="wed9"></td>
-                             <td id="thu9"></td>
-                             <td id="fri9"></td>
-                             <td id="sat9"></td>
-                         </tr>
-                         <tr data-index="10">
+                             {% elif forloop.counter == 10 %}
                              <th style><p>&nbsp;</p>10th (10:00-11:15)</th>
-                             <td id="mon10"></td>
-                             <td id="tue10"></td>
-                             <td id="wed10"></td>
-                             <td id="thu10"></td>
-                             <td id="fri10"></td>
-                             <td id="sat10"></td>
-                         </tr>
-                         <tr data-index="11">
+                             {% elif forloop.counter == 11 %}
                              <th style><p>&nbsp;</p>11th (11:30-12:45)</th>
-                             <td id="mon11"></td>
-                             <td id="tue11"></td>
-                             <td id="wed11"></td>
-                             <td id="thu11"></td>
-                             <td id="fri11"></td>
-                             <td id="sat11"></td>
+                             {% endif %}
+
+                             {% for lec in period %}
+                             {% if lec %}
+                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}">
+                              {{lec.Code}}<br/>{{ lec.CourseName }}({{ lec.Class }})<br/>{{ lec.Professor }}<br/>
+                              <button type="button" id="del_my_lec" class="close" aria-label="Close">&times;</button>
+                             </td>
+                             {% else %}
+                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}"></td>
+                             {% endif %}
+                             {% endfor %}
                          </tr>
+                         {% endfor %}
                      </tbody>
                  </table>
              </div>

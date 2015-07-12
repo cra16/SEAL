@@ -18,7 +18,6 @@ urlpatterns += patterns('schedule.views',
 	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'SelectPeriod'),
 	#url(r'^Schedule/Search/$','SearchSubject'),
 	url(r'^Schedule/$','SearchSubject'),
-	url(r'^Sel_lecture/$','SelectLecture'),
 	)#schedule view
 
 urlpatterns += patterns('login.views',

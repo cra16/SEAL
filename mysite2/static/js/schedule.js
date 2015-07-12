@@ -25,27 +25,6 @@ $(document).ready(function () {
           location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1) + '/' + 1
         };
     });
-
-    $("#sch-select1").click(function(){
-      $.ajax(
-        { url : "/mysite2/Sel_lecture/",
-          data : {"ccode" : $("#ccode1").text(),
-                  "cname" : $("#cname1").text(),
-                  "cprof" : $("#cprof1").text(),
-                  "cperiod" : $("#cperiod1").text()
-                },
-          type : "POST",
-          success:function(resp){
-            $('#rt_table').html(resp);
-          },
-          error:function(xhr, option, error){
-            alert(xhr.status);
-            alert(error);
-          }
-
-        });
-        
-    });
     
     $('#sch-search').click(function(event) {
         $('#sch-result').fadeIn();

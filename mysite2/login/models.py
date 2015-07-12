@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.conf import settings
-from lecture.models import Lecture
 
 class Profile(models.Model):
 	class Meta:
@@ -14,8 +13,6 @@ class Profile(models.Model):
 	Point = models.IntegerField(default=0)
 	RecommendCount = models.IntegerField(default=0)
 	LikeCount=models.IntegerField(default=0)
-	MyLecture = models.ManyToManyField(Lecture)
-	
 	def __unicode__(self):
 		return self.User.username
 

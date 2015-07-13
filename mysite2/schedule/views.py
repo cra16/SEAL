@@ -27,23 +27,25 @@ def SelectPeriod(request, period, page):
 		end = 6 * cur_page
 		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			lec_cnt = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			lec_cnt = DataCount(6,DBCount)
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
 		else:
-			lec_cnt = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			lec_cnt = DataCount(6,DBCount)
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
 		total = [lec_lst]
 		TotalBoard = PageView(total)
-
+		PageInformation = FirstPageView(lec_cnt)
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		ctx = {
 			'user':request.user,
-			'period':period[:-1],
-			'total_page': range(1, total_page+1),
+			'period':period,
+			'total_page': PageTotalCount(lec_cnt,PageInformation),
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
 			'cur_page':cur_page,
@@ -105,8 +107,8 @@ def SelectLecture(request):
 				is_duplicated = True	# 나의 강의목록 시간 중에 중복되는 시간 있을 시 True.
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
 			return render_to_response('scheduleTable.html')
-
-		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+		
+		my_lec = Lecture.objects.filter(Code__contains=ccode, Professor__contains=cprof, Period__contains=cperiod)[0]
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)

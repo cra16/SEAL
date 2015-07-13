@@ -139,12 +139,12 @@
 
               [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Course.Code }}</span>]
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.Course.CourseName }}</span></a></p>
-              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Course.Professor }} 교수님</span></a></p>
-              <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}} 학기</span></a></p>
+              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Course.Professor }} </span>교수님</a></p>
+              <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}} </span></a>학기</p>
               <span>
                 <h3>
                   <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
-                  <a href="#" class="ui right floated tiny blue button">선택</a>
+                  <a id ="sch-select1" href="#" class="ui right floated tiny blue button">선택</a>
                   <input type="hidden" value=""/>
 
                 </h3>

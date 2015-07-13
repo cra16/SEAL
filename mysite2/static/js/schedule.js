@@ -36,6 +36,7 @@ $(document).ready(function () {
                 },
           type : "POST",
           success:function(resp){
+            alert("GGG");
             $('#rt_table').html(resp);
           },
           error:function(xhr, option, error){

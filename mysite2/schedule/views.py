@@ -34,14 +34,12 @@ def SelectPeriod(request, period, page):
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
-<<<<<<< HEAD
+
 		total = [lec_lst]
 		TotalBoard = PageView(total)
-=======
 
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
->>>>>>> master
 		ctx = {
 			'user':request.user,
 			'period':period[:-1],
@@ -49,12 +47,9 @@ def SelectPeriod(request, period, page):
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
 			'cur_page':cur_page,
-<<<<<<< HEAD
 			'TotalBoard':TotalBoard
-=======
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
->>>>>>> master
 		}
 
 		# request.session['cur_page'] = cur_page + 1
@@ -194,9 +189,6 @@ def SearchSubject(request):
 
 		return render_to_response('scheduleTemplate.html', Dic)
 	else:
-<<<<<<< HEAD
-		return render_to_response("schedule.html",{'user':request.user,'BestBoard':BestBoardView(),})
-=======
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		Dic = {
@@ -204,9 +196,9 @@ def SearchSubject(request):
 				'Data': 0,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
+				'BestBoard':BestBoardView()
 		}
 		return render_to_response("schedule.html", Dic)
->>>>>>> master
 
 def Major(major):
 	if major == "0001":

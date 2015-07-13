@@ -136,8 +136,7 @@
                 <center><button id="likebutton" name = "{{lec.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{lec.Total_Count}}</span> LIKES</center>
               </div>
-                        
-<<<<<<< HEAD
+
               [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Course.Code }}</span>]
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.Course.CourseName }}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Course.Professor }} 교수님</span></a></p>
@@ -146,16 +145,8 @@
                 <h3>
                   <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
                   <a href="#" class="ui right floated tiny blue button">선택</a>
-=======
-              [<span id="ccode{{forloop.counter}}" name="ccode" value="{{ lec.Code }}">{{ lec.Code }}</span>]
-              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.CourseName }}">{{ lec.CourseName }}</span></a></p>
-              <p><a href="#"><span id="cprof{{forloop.counter}}" value="{{ lec.Professor }}">{{ lec.Professor }}</span></a></p>
-              <span>
-                <h3>
-                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod" value="{{ lec.Period }}">{{ lec.Period }}</span>
-                  <a href="" class="ui right floated tiny blue button" id="sch-select{{forloop.counter}}">선택</a>
                   <input type="hidden" value=""/>
->>>>>>> master
+
                 </h3>
               </span>
             </div>

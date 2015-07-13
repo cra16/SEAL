@@ -31,6 +31,8 @@ def SelectPeriod(request, period, page):
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period)[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
+		total = [lec_lst]
+		TotalBoard = PageView(total)
 		ctx = {
 			'user':request.user,
 			'BestBoard':BestBoardView(),
@@ -38,7 +40,8 @@ def SelectPeriod(request, period, page):
 			'total_page': range(1, total_page+1),
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
-			'cur_page':cur_page
+			'cur_page':cur_page,
+			'TotalBoard':TotalBoard
 		}
 		# request.session['cur_page'] = cur_page + 1
 

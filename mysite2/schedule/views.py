@@ -108,7 +108,7 @@ def SelectLecture(request):
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
 			return render_to_response('scheduleTable.html')
 		
-		my_lec = Lecture.objects.filter(Code__contains=ccode, Professor__contains=cprof, Period__contains=cperiod)[0]
+		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)

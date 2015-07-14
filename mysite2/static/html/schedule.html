@@ -153,12 +153,12 @@
           </div>
           <!-- 짝수번째이거나 마지막이면 닫아준다. 0부터 시작하는 것 주의(즉, 짝수부터 시작함) -->
       {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
-        </div>0
+        </div>
          <div class="ui divider"></div>
 
       {% endif %}
       {% endfor %}
-       </div>
+       
        <span id="stu_num" name="stu_num"
        ></span>
       <div id="sch-search-result" class="wrapper">
@@ -166,20 +166,22 @@
 
          {% if lec_lst != None %}
         <center><div class="ui borderless pagination menu">
-              <a class="item">
+              <a id="LecPrevious" name = "{{PageInformation.0}}" class="item">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in total_page %}
-              <a href="/mysite2/sel_period/{{period}}/{{i}}" class="item">{{i}}</a>
+              <a id="LecPage" name = "{{i}}" class="item">{{i}}</a>
               {% endfor %}
-              <a class="item">
+              <a id="LecNext" name = "{{PageInformation.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
             <div style="padding-bottom:30px"></div>
+          
+        
          {%endif%}
       </div>
-     
+     </div>
 
      <div id="rt_table" class="bootstrap-table">
          <div class="fixed-table-container">

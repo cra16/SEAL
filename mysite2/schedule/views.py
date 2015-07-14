@@ -40,6 +40,7 @@ def SelectPeriod(request, period, page):
 		total = [lec_lst]
 		TotalBoard = PageView(total)
 		PageInformation = FirstPageView(lec_cnt)
+		PageInformation[1]=cur_page
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		ctx = {
@@ -52,11 +53,65 @@ def SelectPeriod(request, period, page):
 			'TotalBoard':TotalBoard,
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
+			"PageInformation":PageInformation
 		}
 
 		# request.session['cur_page'] = cur_page + 1
 
 		return render_to_response('schedule.html', ctx)
+
+@csrf_exempt
+def SearchSelectPeriod(request):
+	"""
+	period -> 테이블에서 선택한 강의시간
+	page -> pagination에서 선택한 page
+	"""
+	if request.user.username =="":
+		return HttpResponseRedirect("/mysite2")
+	else:
+		if request.method=="POST":
+			period = request.POST['Period']
+			cur_page = int(request.POST['Page'])
+		# cur_page = request.session['cur_page']
+
+		start = 6 * (cur_page-1)
+		end = 6 * cur_page
+		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
+		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			lec_cnt = DataCount(6,DBCount)
+			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+		else:
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			lec_cnt = DataCount(6,DBCount)
+			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
+		total_page = ( (lec_cnt - 1) / 6 ) + 1
+		is_odd = lec_cnt % 2
+
+		total = [lec_lst]
+		TotalBoard = PageView(total)
+		PageInformation = CurrentPageView(lec_cnt,cur_page)
+		PageInformation[1]=cur_page
+		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
+		my_lec_table = MakeTable(request, my_profile)
+
+		ctx = {
+			'user':request.user,
+			'period':period,
+			'total_page': PageTotalCount(lec_cnt,PageInformation),
+			'lec_lst':lec_lst,
+			'is_odd':is_odd,
+			'cur_page':cur_page,
+			'TotalBoard':TotalBoard,
+			"my_lec_table": my_lec_table,
+			"my_profile": my_profile,
+			"PageInformation" : PageInformation
+
+		}
+
+		# request.session['cur_page'] = cur_page + 1
+
+		return render_to_response('scheduleSearch.html', ctx)
 
 def MakeTable(request, my_profile):
 	## 나의 강의목록 불러오기

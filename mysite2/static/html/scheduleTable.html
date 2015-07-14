@@ -63,7 +63,7 @@
                              {% if lec %}
                              <td id="day{{forloop.parentloop}}-{{forloop.counter}}">
                               {{ lec.Code }}<br/>{{ lec.CourseName }}({{ lec.Class }})<br/>{{ lec.Professor }}<br/>
-                              <button type="button" id="del_my_lec" class="close" aria-label="Close">&times;</button>
+                              <button type="button" id="del_my_lec" class="close" aria-label="Close"onclick="alert()">&times;</button>
                              </td>
                              {% else %}
                              <td id="day{{forloop.parentloop}}-{{forloop.counter}}"></td>

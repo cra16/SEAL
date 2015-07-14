@@ -165,4 +165,104 @@ $(document).ready(function () {
 
 
     });
+
+
+        $('div').on('click','#LecPrevious',function(){ 
+
+         event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    var url = location.href;
+    var Firstindex = url.indexOf('/',3);
+    var Lastindex = url.indexOf('/',4);
+    
+    var period = url.substring(Firstindex,Lastindex);
+
+    $('div').on('click','#LecPage',function(){ 
+
+           event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+    });
+
+    $('div').on('click','#LecNext',function(){ 
+
+           event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
 });

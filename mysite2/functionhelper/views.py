@@ -300,8 +300,11 @@ def DataCount(divide, DataBaseCount):
 
 
         DBCount = DataBaseCount
-        Condition = (DBCount%divide!=0) and 1 or 0
-        Count=DBCount/divide+Condition
+        if(DBCount !=0):
+        		Condition = (DBCount%divide!=0) and 1 or 0
+        		Count=DBCount/divide+Condition
+        else:
+        	Count=1
         return Count
 #가장 추천많이 받은 강의 보여주는 기능
 def BestBoardView():

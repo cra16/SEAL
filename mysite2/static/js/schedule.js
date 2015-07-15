@@ -34,8 +34,7 @@ $(document).ready(function () {
       var name = parent.find("[id=cname]").text();
       var prof = parent.find("[id=cprof]").text();
       var period = $(this).parent().find("[id=cperiod]").text();
-      alert(Code);
-      alert(period);
+ 
       $.ajax(
         { url : "/mysite2/Sel_lecture/",
           data : {"ccode" : Code,
@@ -65,7 +64,7 @@ $(document).ready(function () {
     });
 		
     $("div").on("click",'#sch-search',function(){
-        
+        event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -84,7 +83,7 @@ $(document).ready(function () {
 
                   } 
          
-          });
+          });  $('#sch-result').fadeIn();
      
 
     });
@@ -96,6 +95,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Previous',function(){
+       event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -121,7 +121,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Next',function(){
-
+         event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -149,7 +149,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Page',function(){ 
-
+         event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),

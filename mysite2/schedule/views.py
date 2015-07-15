@@ -161,7 +161,13 @@ def SelectLecture(request):
 			if p in my_lec_period_lst:
 				is_duplicated = True	# 나의 강의목록 시간 중에 중복되는 시간 있을 시 True.
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
-			return render_to_response('scheduleTable.html')
+			my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+			my_lec_table = MakeTable(request, my_profile)
+
+			Dic = {
+			"my_lec_table": my_lec_table,
+			}
+			return render_to_response('scheduleTable.html',Dic)
 		
 		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
 		my_profile.MyLecture.add(my_lec)
@@ -220,9 +226,22 @@ def SearchSubject(request):
 					Subject = Lecture.objects.order_by('Code')[start:end]
 			
 		else:
-			DBCount = Lecture.objects.filter(CourseName__contains=SearchName).count()
-			SubjectCount=DataCount(7,DBCount)
-			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
+			if SelectMajor != "전체" and SelectCategory !="전체":
+					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
+					SubjectCount = DataCount(7,DBCount)
+					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
+			elif SelectMajor != "전체" and SelectCategory =="전체":
+					DBCount = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName).count()
+					SubjectCount = DataCount(7,DBCount)
+					Subject = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName)[start:end]
+			elif SelectMajor =="전체" and SelectCategory !="전체":
+					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
+					SubjectCount = DataCount(7,DBCount)
+					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
+			else:
+					DBCount = Lecture.objects.filter(CourseName__contains=SearchName).count()
+					SubjectCount=DataCount(7,DBCount)
+					Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
 
 		if New == 1:
 			PageInformation = FirstPageView(SubjectCount)
@@ -261,7 +280,23 @@ def SearchSubject(request):
 				'BestBoard':BestBoardView()
 		}
 		return render_to_response("schedule.html", Dic)
+@csrf_exempt
+def DeleteMylecture(request):
+	CheckingLogin(request.user.username)
 
+	if request.method =="POST":
+		code = request.POST['ccode']
+		course = request.POST['cname']
+		prof = request.POST['cprof']
+
+	UserData =Profile.objects.get(User=request.user)
+	UserData.MyLecture.get(Code=code, Professor=prof, CourseName=course).delete()
+	UserData.save()
+	my_lec_table = MakeTable(request, UserData)
+
+	return render_to_response('scheduleTable.html',{"my_lec_table": my_lec_table,
+													
+														},)
 def Major(major):
 	if major == "0001":
 		major = "글로벌"

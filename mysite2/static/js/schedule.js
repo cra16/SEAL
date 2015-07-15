@@ -19,24 +19,26 @@ $(document).ready(function () {
     
     var arr=['월', '화', '수', '목', '금', '토'];
     
-    $('.table td').click(function(event) {
+    $("div").on("click",'.table td',function(event) {
+      event.stopPropagation();
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
           location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1) + '/' + 1
         };
     });
 
-    $("#sch-select1").click(function(){
+    $("div").on("click","#sch-select",function(event){
+      event.stopPropagation();
+  
       $.ajax(
         { url : "/mysite2/Sel_lecture/",
-          data : {"ccode" : $("#ccode1").text(),
-                  "cname" : $("#cname1").text(),
-                  "cprof" : $("#cprof1").text(),
-                  "cperiod" : $("#cperiod1").text()
+          data : {"ccode" : $("#ccode").text(),
+                  "cname" : $("#cname").text(),
+                  "cprof" : $("#cprof").text(),
+                  "cperiod" : $("#cperiod").text()
                 },
           type : "POST",
           success:function(resp){
-            alert("GGG");
             $('#rt_table').html(resp);
           },
           error:function(xhr, option, error){
@@ -47,17 +49,17 @@ $(document).ready(function () {
         });
         
     });
-    
+    /*
     $('#sch-search').click(function(event) {
-        $('#sch-result').fadeIn();
+       
     });
-    
+    */
     $('#sch-result .button').click(function(event) {
         $('#sch-result').fadeOut(100);
     });
 		
-    $('#sch-search').click(function(){
-
+    $("div").on("click",'#sch-search',function(){
+        
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -75,9 +77,10 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
+         
           });
-        $("#sch-result").hide();
+         $('#sch-result').fadeIn();
+         $('#sch-search').blur();
 
     });
 
@@ -97,7 +100,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){         
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                      
                 },
                 error: function(xhr, option, error){
@@ -124,7 +127,7 @@ $(document).ready(function () {
               type : "POST",
               success:function(resp){  
        
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                    
                       
                 },
@@ -151,7 +154,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){                  
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                
                 },
                 error: function(xhr, option, error){
@@ -167,7 +170,7 @@ $(document).ready(function () {
     });
 
 
-        $('div').on('click','#LecPrevious',function(){ 
+        $('div').on('click','#LecPrevious',function(event){ 
 
          event.stopPropagation();
           $(this).unbind("click");
@@ -204,7 +207,7 @@ $(document).ready(function () {
     
     var period = url.substring(Firstindex,Lastindex);
 
-    $('div').on('click','#LecPage',function(){ 
+    $('div').on('click','#LecPage',function(event){ 
 
            event.stopPropagation();
           $(this).unbind("click");
@@ -234,7 +237,7 @@ $(document).ready(function () {
 
     });
 
-    $('div').on('click','#LecNext',function(){ 
+    $('div').on('click','#LecNext',function(event){ 
 
            event.stopPropagation();
           $(this).unbind("click");
@@ -263,6 +266,46 @@ $(document).ready(function () {
 
 
 
+    });
+
+    $("td").on('click',"#del_my_lec",function(event){
+         event.stopPropagation();
+
+       var Data=$(this).parent().text();
+        
+
+        var Firstindex =Data.indexOf('.')
+        
+        var Secondindex =Data.indexOf('.',Firstindex+1)
+        
+        var CodeFirst = Data.substring(0,Data.indexOf('.'));
+        
+        var Code = CodeFirst.substring(CodeFirst.lastIndexOf(' ')+1);
+        var Course = Data.substring(Firstindex+1,Data.indexOf('(',Firstindex+1));
+        var profFirst = Data.substring(Secondindex+1);
+        var prof = profFirst.substring(0, profFirst.indexOf("  ")-1);
+        
+          $.ajax(
+            { url : "/mysite2/Sel_periodDelete/",
+              data : {"ccode" : Code,
+                      "cname" : Course,
+                      "cprof" : prof,
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#rt_table').html(resp);
+                alert("삭제가 완료되었습니다.")
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
     });
 
 });

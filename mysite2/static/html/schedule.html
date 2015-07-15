@@ -137,14 +137,14 @@
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{lec.Total_Count}}</span> LIKES</center>
               </div>
 
-              [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Course.Code }}</span>]
-              <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname">{{ lec.Course.CourseName }}</span></a></p>
-              <p><a href="#"><span id="cprof{{forloop.counter}}">{{ lec.Course.Professor }} </span></a>교수님</p>
+              [<span id="ccode" name="ccode">{{ lec.Course.Code }}</span>]
+              <p><a href="#"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
+              <p><a href="#"><span id="cprof">{{ lec.Course.Professor }} </span></a>교수님</p>
               <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}} </span></a>학기</p>
               <span>
                 <h3>
-                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
-                  <a id ="sch-select1" href="#" class="ui right floated tiny blue button">선택</a>
+                  <span id="cperiod" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
+                  <a id ="sch-select" href="#" class="ui right floated tiny blue button">선택</a>
                   <input type="hidden" value=""/>
 
                 </h3>
@@ -247,7 +247,7 @@
                              {% for lec in period %}
                              {% if lec %}
                              <td id="day{{forloop.parentloop}}-{{forloop.counter}}">
-                              {{lec.Code}}<br/>{{ lec.CourseName }}({{ lec.Class }})<br/>{{ lec.Professor }}<br/>
+                              {{lec.Code}}.<br/>{{ lec.CourseName }}({{ lec.Class }}).<br/>{{ lec.Professor }}<br/>
                               <button type="button" id="del_my_lec" class="close" aria-label="Close">&times;</button>
                              </td>
                              {% else %}

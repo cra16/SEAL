@@ -29,13 +29,19 @@ $(document).ready(function () {
 
     $("div").on("click","#sch-select",function(event){
       event.stopPropagation();
-  
+      var parent=$(this).parent().parent().parent();
+      var Code = parent.find("[id=ccode]").text();
+      var name = parent.find("[id=cname]").text();
+      var prof = parent.find("[id=cprof]").text();
+      var period = $(this).parent().find("[id=cperiod]").text();
+      alert(Code);
+      alert(period);
       $.ajax(
         { url : "/mysite2/Sel_lecture/",
-          data : {"ccode" : $("#ccode").text(),
-                  "cname" : $("#cname").text(),
-                  "cprof" : $("#cprof").text(),
-                  "cperiod" : $("#cperiod").text()
+          data : {"ccode" : Code,
+                  "cname" : name,
+                  "cprof" : prof,
+                  "cperiod" : period
                 },
           type : "POST",
           success:function(resp){
@@ -69,7 +75,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){  
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
     
                 },
                 error: function(xhr, option, error){
@@ -79,8 +85,7 @@ $(document).ready(function () {
                   } 
          
           });
-         $('#sch-result').fadeIn();
-         $('#sch-search').blur();
+     
 
     });
 

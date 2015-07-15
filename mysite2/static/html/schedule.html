@@ -131,7 +131,7 @@
         <div class="ui two column grid">
       {% endif %}
           <div class="column">
-            <div class="ui raised segment">
+            <div id = "GG" class="ui raised segment">
               <div class="left floated ui compact segment">
                 <center><button id="likebutton" name = "{{lec.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{lec.Total_Count}}</span> LIKES</center>
@@ -139,8 +139,8 @@
 
               [<span id="ccode" name="ccode">{{ lec.Course.Code }}</span>]
               <p><a href="#"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
-              <p><a href="#"><span id="cprof">{{ lec.Course.Professor }} </span></a>교수님</p>
-              <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}} </span></a>학기</p>
+              <p><a href="#"><span id="cprof">{{ lec.Course.Professor }}</span></a>교수님</p>
+              <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}}</span></a>학기</p>
               <span>
                 <h3>
                   <span id="cperiod" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>

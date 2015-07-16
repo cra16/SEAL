@@ -30,6 +30,7 @@ $(document).ready(function () {
     $("div").on("click","#sch-select",function(event){
       event.stopPropagation();
       var parent=$(this).parent().parent().parent();
+    
       var Code = parent.find("[id=ccode]").text();
       var name = parent.find("[id=cname]").text();
       var prof = parent.find("[id=cprof]").text();
@@ -65,6 +66,9 @@ $(document).ready(function () {
 		
     $("div").on("click",'#sch-search',function(){
         event.stopPropagation();
+        $(this).unbind("click");
+       $('#sch-result').fadeOut(100);
+ 
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -289,7 +293,7 @@ $(document).ready(function () {
         var Course = Data.substring(Firstindex+1,Data.indexOf('(',Firstindex+1));
         var profFirst = Data.substring(Secondindex+1);
         var prof = profFirst.substring(0, profFirst.indexOf("  ")-1);
-        
+         
           $.ajax(
             { url : "/mysite2/Sel_periodDelete/",
               data : {"ccode" : Code,

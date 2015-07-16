@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'mycourse',
     'functionhelper',
     'databasehelper',
+    'dbbackup', # django-dbbackup
     
 
 )
@@ -77,13 +78,16 @@ DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CustomDB',
-        'HOST': '/opt/bitnami/mysql/tmp/mysql.sock',                                                 
+        'HOST': '',                                                 
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'bitnami'
+      
       }
 }
-
+DATABASE_OPTIONS={
+    'unix_socket' : '/tmp/mysql.sock',
+}
 TIME_ZONE = 'Asia/Seoul'
 LANGUAGE_CODE = 'ko-kr'
 

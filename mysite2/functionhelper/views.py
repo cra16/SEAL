@@ -62,7 +62,7 @@ def CurrentPageView(T_Count,offset):
 #PageNation하는 부분 표시하기 위한 기능
 def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
-	if (PageInformation[1]/10) >= T_Count/10:
+	if (PageInformation[1]/10) >= T_Count/10 and PageInformation[1]%10 != 0:
 			TotalCount = range(PageInformation[1]- Codition+1,T_Count+1)
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)

@@ -176,6 +176,7 @@ def SelectLecture(request):
 
 		Dic = {
 			"my_lec_table": my_lec_table,
+
 		}
 
 		return render_to_response('scheduleTable.html', Dic)
@@ -210,42 +211,42 @@ def SearchSubject(request):
 		if SearchName == "":
 			if SelectMajor != "전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
 			elif SelectMajor != "전체" and SelectCategory =="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
 			elif SelectMajor =="전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
 			else:
 					DBCount = Lecture.objects.count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.order_by('Code')[start:end]
 			
 		else:
 			if SelectMajor != "전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
 			elif SelectMajor != "전체" and SelectCategory =="전체":
 					DBCount = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName)[start:end]
 			elif SelectMajor =="전체" and SelectCategory !="전체":
 					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(7,DBCount)
+					SubjectCount = DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
 			else:
 					DBCount = Lecture.objects.filter(CourseName__contains=SearchName).count()
-					SubjectCount=DataCount(7,DBCount)
+					SubjectCount=DataCount(6,DBCount)
 					Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
 
 		if New == 1:
 			PageInformation = FirstPageView(SubjectCount)
-			TotalCount=range(PageInformation[0],PageInformation[2])
+			TotalCount=PageTotalCount(SubjectCount,PageInformation)
 		else :
 			PageInformation = CurrentPageView(SubjectCount,cur_page)
 			PageInformation[1]=cur_page
@@ -265,7 +266,9 @@ def SearchSubject(request):
 				'Data' :Page,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
-				"TotalBoard": TotalBoard
+				"TotalBoard": TotalBoard,
+				'BestBoard':BestBoardView()
+		
 		}
 
 		return render_to_response('scheduleTemplate.html', Dic)
@@ -288,9 +291,8 @@ def DeleteMylecture(request):
 		code = request.POST['ccode']
 		course = request.POST['cname']
 		prof = request.POST['cprof']
-
 	UserData =Profile.objects.get(User=request.user)
-	UserData.MyLecture.get(Code=code, Professor=prof, CourseName=course).delete()
+	UserData.MyLecture.filter(Code=code, Professor=prof, CourseName=course)[0].delete()
 	UserData.save()
 	my_lec_table = MakeTable(request, UserData)
 

@@ -10,18 +10,24 @@ from mycourse.models import *
 from django.views.decorators.csrf import csrf_exempt
 from functionhelper.views import *
 import datetime
+
+#현재 내가 추천한 강의 보여주는 함수
 def MyCourse(request):
         
 		CheckingLogin(request.user.username)
 		Data=MyCoursePage(request,1)
 		return render_to_response("mycourses.html", Data)
-
+#위의 함수 세부함수
 def MyCoursePage(request,Page):
 	CheckingLogin(request.user.username)
+	try:
+			PageFirst=5*(int(Page)-1)
+			PageLast =5*(int(Page)-1)+5
+	except:
+		raise Http404()
+	
 	MyProfile = Profile.objects.get(User=request.user)
 	
-	PageFirst=5*(int(Page)-1)
-	PageLast =5*(int(Page)-1)+5
 
 	RecommendPage=[]
 	LikePage=[]
@@ -71,6 +77,7 @@ def MyCoursePage(request,Page):
 						'TotalCount':TotalCount
 						}
 	return MyCoursePageData
+#MyCourse쪽 비동기식 구현
 @csrf_exempt
 def MyCoursePageNation(request):
 	CheckingLogin(request.user.username)

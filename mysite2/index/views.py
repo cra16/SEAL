@@ -34,9 +34,9 @@ def Judgement(request): # 신고 게시판 기능
 	CheckingLogin(request.user.username)
 	return render_to_response("subscribe_report.html",{'user':request.user,'BestBoard':BestBoardView()})
 
-#메인페이지 ajax 구현해서 만든 함수 PAge는 다 똑같아서 하나로 줄일까 생각중
+
 @csrf_exempt
-def Page(request): #Main 기능
+def Page(request): #Main Page를 보여주는 함수 
 	CheckingLogin(request.user.username)	
 
 	try:
@@ -47,14 +47,18 @@ def Page(request): #Main 기능
 			Current = request.POST['Current']
 	except ValueError:
 			raise Http404() 
-
+	
+	#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
 	target = TargetTemplate(Current)
+	#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
 	template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
+	
+	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']
 	
 	return render_to_response(target[0],template)
 
-
+#밑에 Page는 모두 위와 함수 동작이 똑같음.
 @csrf_exempt
 def FirstPage(request):
 	CheckingLogin(request.user.username)	

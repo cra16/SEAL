@@ -9,7 +9,7 @@ from login.models import Profile
 from functionhelper.views import CheckingLogin
 
 # Create your views here.
-
+#암호 바꾸기
 @csrf_exempt
 def MyPagePassWordChange(request):
 		CheckingLogin(request.user.username)

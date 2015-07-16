@@ -7,7 +7,8 @@
 
     <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-
+    <link rel="stylesheet" type="text/css" href="{%static "css/qna.css"%}">
+    
     <style>
       body, input {
         font-family: Helvetica, sans-serif;
@@ -15,8 +16,6 @@
       }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="{%static "css/qna.css"%}">
-    <script type="text/javascript" src="{%static "js/qna.js"%}"></script>
     
     {% endblock%}
   </head>
@@ -108,5 +107,7 @@
           </div>
         
         </div>
-	{%endblock%}
+	  <script type="text/javascript" src="{%static "js/qna.js"%}"></script>
+
+  {%endblock%}
 </html>

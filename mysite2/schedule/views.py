@@ -84,8 +84,9 @@ def SelectLecture(request):
 		cname = request.POST['cname']
 		cprof = request.POST['cprof']
 		cperiod = request.POST['cperiod']
+		
+		## period 없는 경우 예외처리(ex. 사회봉사 등)
 
-		# my_user = User.objects.filter(id=request.user.id)[0]
 		## 나의 강의목록 추가하기
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		is_duplicated = False
@@ -102,7 +103,7 @@ def SelectLecture(request):
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
 			return render_to_response('scheduleTable.html')
 
-		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0] # Unique한 value를 위한 Key = (Code, Class, Semester)
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)
@@ -112,7 +113,30 @@ def SelectLecture(request):
 		}
 
 		return render_to_response('scheduleTable.html', Dic)
-		
+
+@csrf_exempt
+def RemoveLecture(request):
+	CheckingLogin(request.user.username)
+
+	if request.method == "POST":
+		ccode = request.POST['ccode']
+		cclass = request.POST['cclass'][1:-1]
+		## period 없는 경우 예외 처리(ex. 사회봉사 등)
+
+		## 나의 강의목록 제거하기
+		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
+
+		my_lec = Lecture.objects.filter(Code=ccode, Class=cclass, Semester="14-2")[0]
+		my_profile.MyLecture.remove(my_lec)
+		my_profile.save()
+		my_lec_table = MakeTable(request, my_profile)
+
+		Dic = {
+			"my_lec_table": my_lec_table,
+		}
+
+		return render_to_response('scheduleTable.html', Dic)
+
 
 @csrf_exempt
 def SearchSubject(request):

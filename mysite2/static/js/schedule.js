@@ -3,7 +3,7 @@ $(document).ready(function () {
 /*  var ccode = document.getElementsByName('ccode')
   var cname = document.getElementsByName('cname')
   var cprof = document.getElementsByName('cprof')
-  var likenum1 = 5;
+  var likenum1 = 5; 
   var elikenum1 = document.getElementById('likenum1');
 
 
@@ -26,25 +26,48 @@ $(document).ready(function () {
         };
     });
 
-    $("#sch-select1").click(function(){
-      $.ajax(
-        { url : "/mysite2/Sel_lecture/",
-          data : {"ccode" : $("#ccode1").text(),
-                  "cname" : $("#cname1").text(),
-                  "cprof" : $("#cprof1").text(),
-                  "cperiod" : $("#cperiod1").text()
-                },
-          type : "POST",
-          success:function(resp){
-            $('#rt_table').html(resp);
-          },
-          error:function(xhr, option, error){
-            alert(xhr.status);
-            alert(error);
-          }
+    $("#sch-result").find(".for-select-child").each(function(i, e){
+      $("#sch-select" + (i+1)).click(function(){
+        $.ajax(
+          { url : "/mysite2/Sel_lecture/",
+            data : {"ccode" : $("#ccode" + (i+1)).text(),
+                    "cname" : $("#cname" + (i+1)).text(),
+                    "cprof" : $("#cprof" + (i+1)).text(),
+                    "cperiod" : $("#cperiod" + (i+1)).text()
+                  },
+            type : "POST",
+            success:function(resp){
+              $('#rt_table').html(resp);
+            },
+            error:function(xhr, option, error){
+              alert(xhr.status);
+              alert(error);
+            }
 
-        });
-        
+          });
+          
+      });    
+    });
+    
+    $("#table").find("td").each(function(i, e){
+      $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(){
+        $.ajax(
+          { url : "/mysite2/Remove_lecture/",
+            data : {"ccode" : $("#table-ccode" + parseInt(i / 6) + "-" + (i % 6 + 1)).text(),
+                    "cclass" : $("#table-cclass" + parseInt(i / 6) + "-" + (i % 6 + 1)).text()
+                  },
+            type : "POST",
+            success:function(resp){
+              $('#rt_table').html(resp);
+            },
+            error:function(xhr, option, error){
+              alert(xhr.status);
+              alert(error);
+            }
+
+          });
+          
+      });    
     });
     
     $('#sch-search').click(function(event) {

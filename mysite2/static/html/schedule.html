@@ -140,7 +140,7 @@
               [<span id="ccode{{forloop.counter}}" name="ccode" value="{{ lec.Code }}">{{ lec.Code }}</span>]
               <p><a href="#"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.CourseName }}">{{ lec.CourseName }}</span></a></p>
               <p><a href="#"><span id="cprof{{forloop.counter}}" value="{{ lec.Professor }}">{{ lec.Professor }}</span></a></p>
-              <span>
+              <span id = "sch-select-p" class="for-select-child">
                 <h3>
                   <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod" value="{{ lec.Period }}">{{ lec.Period }}</span>
                   <a href="" class="ui right floated tiny blue button" id="sch-select{{forloop.counter}}">선택</a>
@@ -156,7 +156,7 @@
 
       {% endif %}
       {% endfor %}
-       </div>
+      </div>
        <span id="stu_num" name="stu_num"
        ></span>
       <div id="sch-search-result" class="wrapper">
@@ -242,12 +242,15 @@
 
                              {% for lec in period %}
                              {% if lec %}
-                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}">
-                              {{lec.Code}}<br/>{{ lec.CourseName }}({{ lec.Class }})<br/>{{ lec.Professor }}<br/>
-                              <button type="button" id="del_my_lec" class="close" aria-label="Close">&times;</button>
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                              <span id="table-ccode{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-ccode">{{ lec.Code }}</span><br/>
+                              {{ lec.CourseName }}
+                              <span id="table-cclass{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-cclass">({{ lec.Class }})</span><br/>
+                              {{ lec.Professor }}<br/>
+                              <button type="button" id="del-my-lec{{forloop.parentloop.counter}}-{{forloop.counter}}" class="close" aria-label="Close">&times;</button>
                              </td>
                              {% else %}
-                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}"></td>
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}"></td>
                              {% endif %}
                              {% endfor %}
                          </tr>

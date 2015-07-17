@@ -12,7 +12,8 @@ from functionhelper.views import CheckingLogin
 #암호 바꾸기
 @csrf_exempt
 def MyPagePassWordChange(request):
-		CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 		if request.method =="POST":
 			ChangePassword = request.POST['PasswordBox']

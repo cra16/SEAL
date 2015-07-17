@@ -17,9 +17,9 @@ from django.db.models import Q
 from functionhelper.views import *
  
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
-		
-		CheckingLogin(request.user.username)
-		
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/mysite2")
+
 		#현재 접속한 아이디 정보 받아옴
 		try:
 			UserData = Profile.objects.get(User = request.user)
@@ -81,7 +81,8 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 #페이지 넘겼을 때 작동되는 함수
 @csrf_exempt
 def CoursePage(request, offset):
-	CheckingLogin(request.user)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(offset)
 		if request.method=="POST":

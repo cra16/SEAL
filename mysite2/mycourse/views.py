@@ -19,7 +19,8 @@ def MyCourse(request):
 		return render_to_response("mycourses.html", Data)
 #위의 함수 세부함수
 def MyCoursePage(request,Page):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 			PageFirst=5*(int(Page)-1)
 			PageLast =5*(int(Page)-1)+5
@@ -80,7 +81,8 @@ def MyCoursePage(request,Page):
 #MyCourse쪽 비동기식 구현
 @csrf_exempt
 def MyCoursePageNation(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 
 	if request.method =="POST":

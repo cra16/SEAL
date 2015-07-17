@@ -19,15 +19,18 @@ sys.setdefaultencoding("utf-8")
 	
 
 def MyPage(request):	#MyPage 루트
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("sealmypage.html", {'user':request.user,'BestBoard':BestBoardView()}) 
 
 def About(request): #About template 루트
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("about.html",{'user':request.user, 'BestBoard':BestBoardView()})
 
 def Schedule(request): #Schedule template 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("schedule.html",{'user':request.user,'BestBoard':BestBoardView()})
 
 def Judgement(request): # 신고 게시판 기능
@@ -37,8 +40,8 @@ def Judgement(request): # 신고 게시판 기능
 
 @csrf_exempt
 def Page(request): #Main Page를 보여주는 함수 
-	CheckingLogin(request.user.username)	
-
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 			if request.POST['Page'] !="0":
 					cur_page = int(request.POST['Page'])
@@ -59,15 +62,18 @@ def Page(request): #Main Page를 보여주는 함수
 	return render_to_response(target[0],template)
 
 def SubScript(request): #아직 뭐하는 기능인지 모르겠음
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("subscribe_improve.html", {'user':request.user})
 
 def SiteMap(request): #사이트 맵
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("sitemap.html", {'user':request.user})
 
 def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
-		CheckingLogin(request.user.username)
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/mysite2")
 		MyProfile = Profile.objects.get(User=request.user)
 		
 		LikePage=LikePage_Course.objects.filter(CreatedID= MyProfile)
@@ -80,7 +86,8 @@ def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 								  					'BestBoard':BestBoardView()})
 @csrf_exempt
 def Search(request): #과목 검색 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	if request.method =="POST":
 		SearchData = request.POST['search']
@@ -118,7 +125,8 @@ def Search(request): #과목 검색 기능
 		return HttpResponseRedirect("/mysite2")
 @csrf_exempt
 def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	if request.POST['Page'] !="0":
 		cur_page = int(request.POST['Page'])

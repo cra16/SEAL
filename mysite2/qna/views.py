@@ -15,8 +15,8 @@ from functionhelper.views import *
 
 
 def QnAMain(request): #Q&A 메인 
-	CheckingLogin(request.user.username)
-	#페이지 넘기는 기능
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	count=QnA_Board.objects.count()
 
 	PageFirst=0
@@ -52,7 +52,8 @@ def QnAMain(request): #Q&A 메인
 @csrf_exempt		
 def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(request.POST['Page'])
 	except ValueError:
@@ -91,11 +92,13 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 				   } )
 	
 def QnAWrite(request): #Q&A Write 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("subscribe_faq.html",{'user':request.user, 'BestBoard':BestBoardView()})
 @csrf_exempt
 def QnA_Writing(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	if request.method =="POST":
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)
@@ -105,7 +108,8 @@ def QnA_Writing(request):
 		new_QnA.save()
 	return HttpResponseRedirect("/mysite2/QnA")
 def QnARead(request, offset): #Q&A read 기능
-		CheckingLogin(request.user.username)
+		if CheckingLogin(request.user.username):
+				return HttpResponseRedirect("/mysite2")
 		try:
 			offset = int(offset)
 		except ValueError:
@@ -139,7 +143,8 @@ def QnARead(request, offset): #Q&A read 기능
 			'Next':Next})
 
 def QnA_Reply(request, offset): 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(offset)
 	except ValueError:
@@ -147,7 +152,8 @@ def QnA_Reply(request, offset):
 	return render_to_response("subscribe_reply.html",{'user':request.user, 'ID':offset})
 @csrf_exempt
 def QnA_Replying(request,offset):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	if request.method =="POST":
 		try:
 			offset = int(offset)

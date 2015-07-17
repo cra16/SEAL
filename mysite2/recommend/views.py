@@ -15,7 +15,8 @@ from functionhelper.views import *
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
 			
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 			offset = int(offset)
 	except:
@@ -42,7 +43,8 @@ def Recommend_NotEmpty(request):
 @csrf_exempt
 def Recommend_Write(request): #추천 강의 DB입력
 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	#form 가져오기
 	if request.method =="POST":
@@ -90,12 +92,15 @@ def Recommend_Write(request): #추천 강의 DB입력
 		return HttpResponseRedirect("/mysite2")
 @csrf_exempt
 def Like(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
+
+
 	if request.method=="POST":
 		page = int(request.POST['Page'])
 		LectureID= page
 		LectureID = int(LectureID)
 		
-	CheckingLogin(request.user.username)
 	
 	try :
 		UserData=Profile.objects.get(User=request.user)

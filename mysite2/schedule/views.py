@@ -17,8 +17,9 @@ def SelectPeriod(request, period, page):
 	period -> 테이블에서 선택한 강의시간
 	page -> pagination에서 선택한 page
 	"""
-	if request.user.username =="":
+	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
+
 	else:
 		cur_page = int(page)
 		# cur_page = request.session['cur_page']
@@ -66,7 +67,7 @@ def SearchSelectPeriod(request):
 	period -> 테이블에서 선택한 강의시간
 	page -> pagination에서 선택한 page
 	"""
-	if request.user.username =="":
+	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
 	else:
 		if request.method=="POST":
@@ -138,7 +139,8 @@ def MakeTable(request, my_profile):
 
 @csrf_exempt
 def SelectLecture(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	if request.method == "POST":
 		ccode = request.POST['ccode']
@@ -184,7 +186,8 @@ def SelectLecture(request):
 
 @csrf_exempt
 def SearchSubject(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
  	if request.method =="POST":
  		
@@ -256,7 +259,8 @@ def SearchSubject(request):
 		return render_to_response("schedule.html", Dic)
 @csrf_exempt
 def DeleteMylecture(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	if request.method =="POST":
 		code = request.POST['ccode']

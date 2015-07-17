@@ -58,63 +58,6 @@ def Page(request): #Main Page를 보여주는 함수
 	
 	return render_to_response(target[0],template)
 
-#밑에 Page는 모두 위와 함수 동작이 똑같음.
-@csrf_exempt
-def FirstPage(request):
-	CheckingLogin(request.user.username)	
-
-	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
-			else:
-					cur_page = 1
-			Current = request.POST['Current']
-	except ValueError:
-			raise Http404() 
-
-	target = TargetTemplate(Current)
-	template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
-	request.session['PageInformation'] = template['PageInformation']
-	
-	return render_to_response(target[0],template)
-@csrf_exempt
-def SecondPage(request):
-	CheckingLogin(request.user.username)	
-
-	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
-			else:
-					cur_page = 1
-			Current = request.POST['Current']
-	except ValueError:
-			raise Http404() 
-
-	target = TargetTemplate(Current)
-	template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
-	request.session['PageInformation'] = template['PageInformation']
-	
-	return render_to_response(target[0],template)
-
-@csrf_exempt
-def ThirdPage(request):
-	CheckingLogin(request.user.username)	
-
-	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
-			else:
-					cur_page = 1
-			Current = request.POST['Current']
-	except ValueError:
-			raise Http404() 
-
-	target = TargetTemplate(Current)
-	template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
-	request.session['PageInformation'] = template['PageInformation']
-	
-	return render_to_response(target[0],template)
-
 def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	CheckingLogin(request.user.username)
 	return render_to_response("subscribe_improve.html", {'user':request.user})
@@ -126,17 +69,14 @@ def SiteMap(request): #사이트 맵
 def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		CheckingLogin(request.user.username)
 		MyProfile = Profile.objects.get(User=request.user)
-		RecommendPage=[]
-		LikePage=[]
-		UserBoard = Course_Evaluation.objects.filter(CreatedID = MyProfile)
-		for BoardData in UserBoard:
-			RecommendPage.append(Total_Evaluation.objects.get(CourseName = BoardData.Course))
-		for Board2 in UserBoard:
-			LikePage.append(Total_Evaluation.objects.get(CourseName = Board2.Course))
-
+		
+		LikePage=LikePage_Course.objects.filter(CreatedID= MyProfile)
+		RecommendPage= Recommend_Course.objects.filter(CreatedID = MyProfile)
+		
 
 		return render_to_response("mycourses.html", {'user':request.user, 
 								  					'RecommendPage':RecommendPage,
+								  					'LikePage':LikePage,
 								  					'BestBoard':BestBoardView()})
 @csrf_exempt
 def Search(request): #과목 검색 기능

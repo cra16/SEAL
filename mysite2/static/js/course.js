@@ -192,4 +192,29 @@ for(var i=0; i<ccode.length; i++)
 
 });
 
+          $('div').on('click',"#listenButton",function(event){
+             event.stopPropagation();
+             $(this).unbind("click");
+              var CurrentPage=$(this).attr("name")
+
+              $.ajax(
+                  { url : "/mysite2/Like/",
+                    data : {'Page': CurrentPage,
+                          },
+                    
+                    datatype:"json",
+                    type : "POST",
+                    success:function(resp){     
+                        alert("좋아하는 강의로 등록 되었습니다.")
+                      },
+                      error: function(xhr, option, error){
+                        alert(xhr.status); //오류코드
+                        alert(error); //오류내용
+
+                        } 
+                  
+                
+                });
+
 });
+        });

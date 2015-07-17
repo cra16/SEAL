@@ -41,9 +41,9 @@ urlpatterns += patterns('index.views',
 	url(r'^Page/$','Page'),
 	url(r'^SubScript/$','SubScript'),
 	url(r'^SiteMap/$','SiteMap'),
-	url(r'^FirstPage/$','FirstPage'),
-	url(r'^SecondPage/$','SecondPage'),
-	url(r'^ThirdPage/$','ThirdPage')
+	url(r'^FirstPage/$','Page'),
+	url(r'^SecondPage/$','Page'),
+	url(r'^ThirdPage/$','Page')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',
@@ -53,7 +53,7 @@ urlpatterns += patterns('mypage.views',
 urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
-	url(r'^Like/(\d+)$','Like'),
+	url(r'^Like/$','Like'),
 
 )#recommend view
 

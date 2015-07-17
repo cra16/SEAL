@@ -206,43 +206,15 @@ def SearchSubject(request):
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
+		if SelectMajor == "전체" :
+			SelectMajor=""
+		if SelectCategory=="전체":
+			SelectCategory= ""
 
 
-		if SearchName == "":
-			if SelectMajor != "전체" and SelectCategory !="전체":
-					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
-			elif SelectMajor != "전체" and SelectCategory =="전체":
-					DBCount = Lecture.objects.filter(Major__contains=SelectMajor).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
-			elif SelectMajor =="전체" and SelectCategory !="전체":
-					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
-			else:
-					DBCount = Lecture.objects.count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.order_by('Code')[start:end]
-			
-		else:
-			if SelectMajor != "전체" and SelectCategory !="전체":
-					DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
-			elif SelectMajor != "전체" and SelectCategory =="전체":
-					DBCount = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor,CourseName__contains=SearchName)[start:end]
-			elif SelectMajor =="전체" and SelectCategory !="전체":
-					DBCount = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
-					SubjectCount = DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
-			else:
-					DBCount = Lecture.objects.filter(CourseName__contains=SearchName).count()
-					SubjectCount=DataCount(6,DBCount)
-					Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
+		DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
+		SubjectCount = DataCount(6,DBCount)
+		Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
 
 		if New == 1:
 			PageInformation = FirstPageView(SubjectCount)
@@ -263,7 +235,6 @@ def SearchSubject(request):
 				'PageInformation':PageInformation,
 				'TotalCount':TotalCount,
 				'cur_page':cur_page,
-				'Data' :Page,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
 				"TotalBoard": TotalBoard,

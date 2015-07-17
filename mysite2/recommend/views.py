@@ -29,8 +29,6 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	if RecommendData != None:
 		return  render_to_response("Not_Empty_Recommend.html")
 	else:
-		
-
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
 
@@ -91,34 +89,35 @@ def Recommend_Write(request): #추천 강의 DB입력
 	else:
 		return HttpResponseRedirect("/mysite2")
 @csrf_exempt
-def Like(request, offset):
+def Like(request):
+	if request.method=="POST":
+		page = int(request.POST['Page'])
+		LectureID= page
+		LectureID = int(LectureID)
+		
+	CheckingLogin(request.user.username)
+	
 	try :
 		UserData=Profile.objects.get(User=request.user)
 	except:
 		pass
 
-	CheckingLogin(request.user.username)
 	try:
-		LikeData=Like_Course.objects.get(CreatedID = Profile.objects.get(User = UserData), Course = Lecture.objects.get(id=offset))
+		LikeData=Like_Course.objects.get(CreatedID = Profile.objects.get(User = UserData), Course = Lecture.objects.get(id=page))
 	except:
 		LikeData=None
 
 	if LikeData != None:
 		return render_to_response("Like_error.html")
 	else:
-		if request.method =="POST":
-			LectureID= request.POST['CourseData']
-			LectureID = int(LectureID)
-			CourseLecture = Lecture.objects.get(id = LectureID)
-			new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))
-			new_Like.save()
-			UserData = Profile.objects.get(User = request.user)
-			UserData.LikeCount +=1
-			UserData.save()
-			
+		CourseLecture = Lecture.objects.get(id = LectureID)
+		new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))
+		new_Like.save()
+		UserData = Profile.objects.get(User = request.user)
+		UserData.LikeCount +=1
+		UserData.save()
+		
 
-		else:
-			return HttpResponseRedirect("/mysite2")
 		
 		URL = "/mysite2/Course/"+str(LectureID)
 		return HttpResponseRedirect(URL)

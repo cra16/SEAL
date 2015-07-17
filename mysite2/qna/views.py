@@ -19,7 +19,8 @@ def QnAMain(request): #Q&A 메인
 	#페이지 넘기는 기능
 	count=QnA_Board.objects.count()
 
-
+	PageFirst=0
+	PageLast =8
 	
 	T_Count = DataCount(8,count)#총 페이지수(아마 고쳐야할듯)
 	
@@ -29,7 +30,7 @@ def QnAMain(request): #Q&A 메인
 
 	Today = datetime.datetime.today()
 	
-	PageBoard=(QnA_Board.objects.order_by('-id')[0:8])
+	PageBoard=(QnA_Board.objects.order_by('-id')[PageFirst:PageLast])
 	
 	Reply_Board=[]#reply DB 저장할 공간
 
@@ -46,7 +47,6 @@ def QnAMain(request): #Q&A 메인
 				   'TotalCount' : TotalCount, 
 				   'PageInformation' : PageInformation,
 				   'Today' : Today,
-				   'Count' : count,
 				   })
 
 @csrf_exempt		
@@ -76,11 +76,9 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	Today =datetime.date.today()
 
-	Reply_Board=[]#reply DB 저장할 공간
-
 	for Board in PageBoard:
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
-			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
+			Reply_Board=Reply.objects.filter(QuestionID = int(Board.id))
 
 	return render_to_response("QnAList.html",
 				  {'user':request.user, 
@@ -114,7 +112,7 @@ def QnARead(request, offset): #Q&A read 기능
 			raise Http404()
 
 
-		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
+		Current = QnA_Board.objects.filter().get(id=offset) #고유 id로 글 정렬
 		Current.ClickScore +=1
 		Current.save()
 

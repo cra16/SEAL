@@ -12,5 +12,5 @@ DB 백업 하는 방법
 3-2. 그리고 나서 mysql에서 unix socket을 현 localhost위치로 바꾼다.(바꾸는 방법은 인터넷 참조)
 3-3. 3에서와 같이 하면 db backup이 된다.
 4. 그리고 db를 restore하고싶으면 그냥 python manage.py dbrestore 치면 그 폴더상에 db backup파일이 있으면 알아서 찾아서 한다.
--끝-
+-끝-  
 """

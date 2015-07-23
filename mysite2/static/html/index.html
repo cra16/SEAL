@@ -90,7 +90,12 @@
               </a>
       
         {% for i in TotalCount.0%}
+{%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
          <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
         {%endfor%}
               <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
@@ -141,8 +146,13 @@
               </a>
       
         {% for i in TotalCount.1%}
-         <a id="Page" name ="{{i}}" class="item" >{{i}}</a>
-        {%endfor%}
+      {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
+  {%endfor%}
               <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
@@ -191,8 +201,13 @@
               </a>
       
         {% for i in TotalCount.2%}
+       {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
          <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
-        {%endfor%}
+        {%endif%}        
+ {%endfor%}
               <a id = "Next" name = "{{PageInformation.2.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>

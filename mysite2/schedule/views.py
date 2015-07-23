@@ -132,6 +132,8 @@ def MakeTable(request, my_profile):
 		# lec_info_lst = (lec.CourseName, lec.Class, lec.Professor, lec.ClassRoom,)
 		p_lst = lec.Period.split(",")
 		for period in p_lst:
+			if period == "":
+				break;
 			day = days_dic[period[0]]	# 0번째 값은 요일, ex) "월" -> 0
 			my_lec_table[int(period[1:])-1][day] = lec	# -1(index계산), 나머지는 교시, 10교시 이상 있을 수 있음 주의.
 

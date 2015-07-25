@@ -61,12 +61,15 @@
 
                              {% for lec in period %}
                              {% if lec %}
-                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}">
-                              {{ lec.Code }}.<br/>{{ lec.CourseName }}({{ lec.Class }}).<br/>{{ lec.Professor }}<br/>
-                              <button type="button" id="del_my_lec" class="close" aria-label="Close">&times;</button>
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                              <span id="table-ccode{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-ccode">{{ lec.Code }}</span><br/>
+                              {{ lec.CourseName }}
+                              <span id="table-cclass{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-cclass">({{ lec.Class }})</span><br/>
+                              {{ lec.Professor }}<br/>
+                              <button type="button" id="del-my-lec{{forloop.parentloop.counter}}-{{forloop.counter}}" class="close" aria-label="Close">&times;</button>
                              </td>
                              {% else %}
-                             <td id="day{{forloop.parentloop}}-{{forloop.counter}}"></td>
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}"></td>
                              {% endif %}
                              {% endfor %}
                          </tr>

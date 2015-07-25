@@ -39,7 +39,7 @@ def QnAMain(request): #Q&A 메인
 			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
 		#except:
 		#Reply_Board=None
-	return render_to_response("QnA.html",
+	return render_to_response("html/QnA.html",
 				  {'user':request.user,
 				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,

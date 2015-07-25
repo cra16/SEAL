@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'functionhelper',
     'databasehelper',
     'dbbackup', # django-dbbackup
+    'django_mobile'
     
 
 )
@@ -64,6 +65,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
+
 )
 
 ROOT_URLCONF = 'mysite2.urls'
@@ -116,9 +120,29 @@ STATICFILES_DIRS = (
 ('css', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/css'),
 ('js', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/js'),
 ('img', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/img'),
+('html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/html'),
+('m_html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_html'),
+('m_css','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_css'),
+('m_js','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_js')
 )
 
 
 TEMPLATE_DIRS = (
-    ('/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/html'),
+    ('/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static'),
 )
+
+TEMPLATE_LOADERS = (
+    "django_mobile.loader.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader")
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+"django.contrib.auth.context_processors.auth",
+"django.template.context_processors.debug",
+"django.template.context_processors.i18n",
+"django.template.context_processors.media",
+"django.template.context_processors.static",
+"django.template.context_processors.tz",
+"django.contrib.messages.context_processors.messages",
+"django_mobile.context_processors.flavour")
+ 

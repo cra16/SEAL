@@ -1,0 +1,54 @@
+{%load staticfiles%}
+
+{% for PBoard2 in PageBoard.1%}
+                 
+            <div class="ui raised segment grid">
+
+               <div id="likebtn1{{forloop.counter}}" class="left floated ui compact segment two wide column">
+                    <center><button id="likebutton"><i class="glyphicon glyphicon-heart"></i></button></center>
+                   <center><span id="likenum{{forloop.counter}}"></span>{{PBoard2.Total_Count}} LIKES</center>
+               </div>
+
+              <div id="firstcourse" class="five wide column">
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
+                <p><a href="/mysite2/Course/{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
+                <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></a></p>
+                <p><a href="#"><span id="csem1" name = "cprof">{{PBoard2.Course.Semester}} 학기</span></a></p>
+              </div>
+  
+              <div id="recommendtop" class="seven wide column">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  <input type="text" id="sk{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Speedy}}" data-slider-id="sk{{forloop.counter}}1C"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <input type="text" id="sk{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Question}}" data-slider-id="sk{{forloop.counter}}2C"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <input type="text" id="sk{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Reliance}}" data-slider-id="sk{{forloop.counter}}3C"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <input type="text" id="sk{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Helper}}" data-slider-id="sk{{forloop.counter}}4C"/>
+                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+              </div>
+            </div>
+    
+      {%endfor%}
+      
+        <center><div id = "SecondPageNation" class="ui borderless pagination menu">
+              <a id ="Previous" name ="{{PageInformation.1.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous  
+              </a>
+      
+        {% for i in TotalCount.1%}
+    {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}    {%endfor%}
+              <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

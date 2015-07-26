@@ -30,14 +30,18 @@ def NoticeMain(request):#Notice 기능
 	PageInformation=(FirstPageView(T_Count))
 		
 	Today = datetime.datetime.now()
-	return render_to_response("notice.html",
-				  {'user':request.user,
+	
+	dic =  {'user':request.user,
 				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard, 
 				   'PageInformation':PageInformation,
 				   'TotalCount' : PageTotalCount(T_Count,PageInformation),
 				   'Today':Today 
-				   })
+			}
+	if request.flavour =='full':
+			return render_to_response('html/notice.html',dic)
+	else:
+			return render_to_response("m_skins/m_html/notice.html",dic)
 @csrf_exempt
 def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 
@@ -64,14 +68,18 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 	TotalCount = PageTotalCount(T_Count,PageInformation)
 
 	Today =datetime.date.today()    
-	return render_to_response("NoticeList.html",
-				  {'user':request.user, 
+	
+	dic={'user':request.user, 
 				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
 				   'TotalCount' : TotalCount,
 				   'Today' :Today,
 				   'PageInformation':PageInformation
-       			  })
+       			  }
+	if request.flavour =='full':
+			return render_to_response('html/NoticeList.html',dic)
+	else:
+			return render_to_response("m_skins/m_html/NoticeList.html",dic)
 
 def Notice_Read(request, offset): #Notice Read 기능
 	if CheckingLogin(request.user.username):
@@ -96,19 +104,26 @@ def Notice_Read(request, offset): #Notice Read 기능
 	else:
 		Next = offset+1
 	
-
-	return render_to_response("notice-contents.html", 
-		{'user':request.user,
+	dic ={'user':request.user,
 		'BestBoard':BestBoardView(),
 		'Previous' :Previous,
 		'Next' :Next,
-		'Board':Current})
+		'Board':Current}
+	if request.flavour =='full':
+			return render_to_response('html/notice-contents.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/notice-contents.html", dic)
 
 
 def Notice_Write(request): #Q&A Write 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("subscribe_notice.html",{'user':request.user})
+
+	dic = {'user':request.user}
+	if request.flavour =='full':
+		return render_to_response('html/subscribe_notice.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/subscribe_notice.html",dic)
 @csrf_exempt
 def Notice_Writing(request):
 	if CheckingLogin(request.user.username):

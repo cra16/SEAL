@@ -58,8 +58,10 @@ def SelectPeriod(request, period, page):
 		}
 
 		# request.session['cur_page'] = cur_page + 1
-
-		return render_to_response('schedule.html', ctx)
+		if request.flavour =='full':
+			return render_to_response('html/schedule.html',ctx)
+		else:
+			return render_to_response('m_skins/m_html/schedule.html', ctx)
 
 @csrf_exempt
 def SearchSelectPeriod(request):
@@ -111,8 +113,10 @@ def SearchSelectPeriod(request):
 		}
 
 		# request.session['cur_page'] = cur_page + 1
-
-		return render_to_response('scheduleSearch.html', ctx)
+		if request.flavour =='full':
+			return render_to_response('html/scheduleSearch.html',ctx)
+		else:
+			return render_to_response('m_skins/m_html/scheduleSearch.html', ctx)
 
 def MakeTable(request, my_profile):
 	## 나의 강의목록 불러오기
@@ -172,9 +176,12 @@ def SelectLecture(request):
 			Dic = {
 			"my_lec_table": my_lec_table,
 			}
-			return render_to_response('scheduleTable.html',Dic)
+			if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+			else:
+				return render_to_response('m_skins/m_html/scheduleTable.html',Dic)
 		
-		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0] # Unique한 value를 위한 Key = (Code, Class, Semester)
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)
@@ -183,8 +190,10 @@ def SelectLecture(request):
 			"my_lec_table": my_lec_table,
 
 		}
-
-		return render_to_response('scheduleTable.html', Dic)
+		if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+		else:
+				return render_to_response('m_skins/m_html/scheduleTable.html', Dic)
 
 @csrf_exempt
 def RemoveLecture(request):
@@ -206,8 +215,10 @@ def RemoveLecture(request):
 		Dic = {
 			"my_lec_table": my_lec_table,
 		}
-
-		return render_to_response('scheduleTable.html', Dic)
+		if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/scheduleTable.html', Dic)
 
 
 @csrf_exempt
@@ -270,8 +281,10 @@ def SearchSubject(request):
 				'BestBoard':BestBoardView()
 		
 		}
-
-		return render_to_response('scheduleTemplate.html', Dic)
+		if request.flavour =='full':
+			return render_to_response('html/scheduleTemplate.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/scheduleTemplate.html', Dic)
 	else:
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
@@ -282,7 +295,10 @@ def SearchSubject(request):
 				"my_profile": my_profile,
 				'BestBoard':BestBoardView()
 		}
-		return render_to_response("schedule.html", Dic)
+		if request.flavour =='full':
+			return render_to_response('html/schedule.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/schedule.html', Dic)
 @csrf_exempt
 def DeleteMylecture(request):
 	if CheckingLogin(request.user.username):
@@ -296,10 +312,10 @@ def DeleteMylecture(request):
 	UserData.MyLecture.filter(Code=code, Professor=prof, CourseName=course)[0].delete()
 	UserData.save()
 	my_lec_table = MakeTable(request, UserData)
-
-	return render_to_response('scheduleTable.html',{"my_lec_table": my_lec_table,
-													
-														},)
+	if request.flavour =='full':
+			return render_to_response('html/scheduleTable.html',{"my_lec_table": my_lec_table})
+	else:
+			return render_to_response('m_skins/m_html/scheduleTable.html',{"my_lec_table": my_lec_table})
 def Major(major):
 	if major == "0001":
 		major = "글로벌"

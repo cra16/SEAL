@@ -68,16 +68,18 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				PageInformation=FirstPageView(O_Count)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
 				OtherCount=PageTotalCount(O_Count,PageInformation)
-				return render_to_response("course.html",
-                                  {'user':request.user,
-                                  'BestBoard':BestBoardView(),
-                                   'CourseBoard':CourseBoard,
-                                   'MyCourseBoard':MyCourseBoard,
-                                   'OtherCourseBoard':OtherCourseBoard,
-                                   'OtherCount':OtherCount,
-                                   'PageInformation':PageInformation,
-  
-                                   })
+				dic ={'user':request.user,
+					'BestBoard':BestBoardView(),
+					'CourseBoard':CourseBoard,
+					'MyCourseBoard':MyCourseBoard,
+					'OtherCourseBoard':OtherCourseBoard,
+					'OtherCount':OtherCount,
+					'PageInformation':PageInformation
+					}
+				if request.flavour =='full':
+					return render_to_response('html/course.html',dic)
+				else:
+					return render_to_response("m_skins/m_html/course.html",dic)
 #페이지 넘겼을 때 작동되는 함수
 @csrf_exempt
 def CoursePage(request, offset):
@@ -126,15 +128,18 @@ def CoursePage(request, offset):
 		else:
 			OtherCourseBoard.append(Board)
 
-	return render_to_response("coursepage.html",
-                                      {'user':request.user,
-                                      'BestBoard':BestBoardView(),
-                                       'CourseBoard':CourseBoard,
-                                       'MyCourseBoard':MyCourseBoard,
-                                       'OtherCourseBoard':OtherCourseBoard,
-                                       'PageInformation':PageInformation,
-                                       'OtherCount':OtherCount
-                                       })
+	dic ={'user':request.user,
+			'BestBoard':BestBoardView(),
+			'CourseBoard':CourseBoard,
+			'MyCourseBoard':MyCourseBoard,
+			'OtherCourseBoard':OtherCourseBoard,
+			'PageInformation':PageInformation,
+			'OtherCount':OtherCount
+			}
+	if request.flavour =='full':
+		return render_to_response('html/coursepage.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/coursepage.html",dic )
 
 # Create your views here.
 

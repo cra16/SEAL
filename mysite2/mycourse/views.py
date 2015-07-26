@@ -16,7 +16,10 @@ def MyCourse(request):
         
 		CheckingLogin(request.user.username)
 		Data=MyCoursePage(request,1)
-		return render_to_response("mycourses.html", Data)
+		if request.flavour =='full':
+			return render_to_response('html/mycourses.html',Data)
+		else:
+			return render_to_response("m_skins/m_html/mycourses.html", Data)
 #위의 함수 세부함수
 def MyCoursePage(request,Page):
 	if CheckingLogin(request.user.username):
@@ -94,7 +97,10 @@ def MyCoursePageNation(request):
 		template="RecommendPage.html"
 	else:
 		template ="LikePage.html"
-	return render_to_response(template, Data)
+	if request.flavour =='full':
+			return render_to_response('html/'+template,Data)
+	else:
+			return render_to_response('m_skins/m_html/'+template, Data)
 
 
 

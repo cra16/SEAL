@@ -1,0 +1,54 @@
+
+{% load staticfiles%}
+{% for lec in TotalBoard.0%}
+
+      <!-- 시작하는 행에서 div를 열어준다. -->
+      {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui two column grid">
+      {% endif %}
+          <div class="column">
+            <div class="ui raised segment">
+              <div class="left floated ui compact segment">
+                
+                <center><button id="likebutton" name ="{{lec.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                    <center><span id="likenum{{forloop.counter}}"></span>{{lec.Total_Count}} LIKES</center>
+              </div>
+                        
+              [<span id="ccode" name="ccode">{{ lec.Course.Code }}</span>]
+              <p><a href="/mysite2/Course/{{lec.Course.id}}"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
+              <p><a href="#"><span id="cprof">{{ lec.Course.Professor }}</span>교수님</a></p>
+              <p><a href="#"><span id="csem1" name = "cprof">{{lec.Course.Semester}} </span>학기</a></p>
+              <span>
+                <h3>
+                  <span id="cperiod" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
+                  <a id ="sch-select" href="#" class="ui right floated tiny blue button">선택</a>
+                </h3>
+              </span>
+            </div>
+          </div>
+          <!-- 짝수번째이거나 마지막이면 닫아준다. 0부터 시작하는 것 주의 실제로는 반대이다. -->
+      {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+        
+     
+      {% endif %}
+      {% endfor %}
+       <div class="ui divider"></div>
+
+        <center><div class="ui borderless pagination menu">
+              <a id="Previous" name="{{PageInformation.0}}" class="item"  >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+              {% for i in TotalCount%}
+              <script>
+                  number = {{i}};
+              </script>
+              <a id="Page" name="{{i}}" class="item">{{i}}</a>
+              {% endfor %}
+              <a id="Next" name ="{{PageInformation.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+            <div style="padding-bottom:30px"></div>
+
+  <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>

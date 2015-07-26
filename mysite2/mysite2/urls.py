@@ -20,7 +20,8 @@ urlpatterns += patterns('schedule.views',
 	url(r'^Schedule/$','SearchSubject'),
 	url(r'^Sel_lecture/$','SelectLecture'),
 	url(r'^Sel_periodLecture/$','SearchSelectPeriod'),
-	url(r'^Remove_lecture/$','RemoveLecture')
+	url(r'^Remove_lecture/$','RemoveLecture'),
+	url(r'^Sel_periodDelete/$', 'DeleteLecture')
 	)#schedule view
 
 urlpatterns += patterns('login.views',

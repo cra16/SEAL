@@ -23,8 +23,13 @@ def MyPagePassWordChange(request):
 			UserData = ProfileData.User
 			UserData.set_password(ChangePassword)
 			UserData.save()
-
-			return render_to_response("sealmypage.html", {'data':1})
+			if request.flavour =='full':
+				return render_to_response('html/sealmypage.html')
+			else:	
+				return render_to_response("m_skins/m_html/sealmypage.html")
 
 		else:
-			return render_to_response("sealmypage.html", {'data':0})
+			if request.flavour =='full':
+				return render_to_response('html/sealmypage.html')
+			else:
+				return render_to_response("m_skins/m_html/sealmypage.html")

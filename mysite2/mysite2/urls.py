@@ -19,6 +19,7 @@ urlpatterns += patterns('schedule.views',
 	#url(r'^Schedule/Search/$','SearchSubject'),
 	url(r'^Schedule/$','SearchSubject'),
 	url(r'^Sel_lecture/$','SelectLecture'),
+	url(r'^Sel_periodLecture/$','SearchSelectPeriod'),
 	url(r'^Remove_lecture/$','RemoveLecture')
 	)#schedule view
 
@@ -32,7 +33,7 @@ urlpatterns += patterns('login.views',
 
 urlpatterns += patterns('index.views',
 	url(r'^Search/$', 'Search'),
-	url(r'^Search/(\d+)$','SearchPage'),
+	url(r'^SearchPage/$','SearchPage'),
 	url(r'^MyPage/$', 'MyPage'), 
 	url(r'^About/$','About'),
 	
@@ -40,9 +41,9 @@ urlpatterns += patterns('index.views',
 	url(r'^Page/$','Page'),
 	url(r'^SubScript/$','SubScript'),
 	url(r'^SiteMap/$','SiteMap'),
-	url(r'^FirstPage/$','FirstPage'),
-	url(r'^SecondPage/$','SecondPage'),
-	url(r'^ThirdPage/$','ThirdPage')
+	url(r'^FirstPage/$','Page'),
+	url(r'^SecondPage/$','Page'),
+	url(r'^ThirdPage/$','Page')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',
@@ -52,7 +53,7 @@ urlpatterns += patterns('mypage.views',
 urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
-	url(r'^Like/(\d+)$','Like'),
+	url(r'^Like/$','Like'),
 
 )#recommend view
 
@@ -68,7 +69,7 @@ urlpatterns += patterns('qna.views',
 
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
-	url(r'^Course/(\d+)/Page/(\d+)$','CoursePage'),
+	url(r'^CoursePageNation/(\d+)$','CoursePage'),
 ) # course view
 
 urlpatterns += patterns('notice.views',

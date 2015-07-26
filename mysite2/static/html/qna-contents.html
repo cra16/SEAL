@@ -1,4 +1,6 @@
-{% extends "base.html"%}
+{% extends "html/base.html" %}
+
+   
 
   {% block head%}
   {% load staticfiles%}  
@@ -60,5 +62,25 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+                        
+            <p>&nbsp;</p>
+      <div id="subscribe" class="ui column">
+        
+      	<form class="ui form" action="post">
+          <h4 class="ui dividing header">글쓰기</h4>
+          <div class="field">
+          	<label for="msg-title-label">제목 : </label>
+          	<input type="text" name="msg-title-input" placeholder="Title">
+          </div>
+          <div class="field">
+          	<label for="msg-body-label">본문 : </label>
+          	<textarea name="msg-body-txtarea" id="msg-body-txtarea" cols="30" rows="10" placeholder="Body" maxlength="500"></textarea>
+          </div>
+          <a href="qna.html" id="submit_qna" class="ui floated blue button" style="margin-left:10px">등록</a>
+          <a href="qna.html" class="ui right floated red button">취소</a>
+        </form>
+
+      </div>
+      
      {% endblock%}       
 </html>

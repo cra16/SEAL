@@ -195,6 +195,98 @@ $(document).ready(function() {
 
     });
 
+         $('div').on('click',"#SearchPage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/SearchPage/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                       $('#SearchPageNation').html(resp);
+                 },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
+                  alert(error); //ì˜¤ë¥˜ë‚´ìš©
+
+                  } 
+            
+          
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#SearchNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/SearchPage/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                      
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  $('#SearchPageNation').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
+                  alert(error); //ì˜¤ë¥˜ë‚´ìš©
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    $('div').on('click','#SearchPrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/SearchPage/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  $('#SearchPageNation').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
+                  alert(error); //ì˜¤ë¥˜ë‚´ìš©
+
+                  } 
+            
+          });
+
+
+
+    });
+
+
 });
 
 

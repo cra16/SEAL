@@ -1,17 +1,13 @@
+
+{%load staticfiles%}
 {% for PBoard3 in PageBoard.2%}
 
 
 
-
-                        <script>
-                                domain3[{{forloop.counter0}}] ="{{PBoard3.Course.id}}"
-                                   Page={{Page}};
-
-                        </script>
             <div class="ui raised segment grid">
 
                           <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                <center><button id="likebutton2{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><button id="likebutton"><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}"></span>{{PBoard3.Total_Count}} LIKES</center>
               </div>
 
@@ -19,6 +15,7 @@
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard3.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></a></p>
+                <p><a href="#"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></a></p>
               </div>
 
               <div id="recommendtop" class="seven wide column">
@@ -44,9 +41,14 @@
               </a>
 			
 				{% for i in TotalCount.2%}
-				 <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
-				{%endfor%}
+				{%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}{%endfor%}
               <a id = "Next" name = "{{PageInformation.2.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

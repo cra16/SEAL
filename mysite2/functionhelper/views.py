@@ -15,9 +15,9 @@ from index.models import * #아직 시험중
 #세션 유지된 아이디 확인
 def CheckingLogin(userID):
 	if userID=="":
-		return  HttpResponseRedirect("/mysite2");
+		return  True;
 	else:
-		return True
+		return False
 #최초로 페이지에 도달했을때 1전공 2전공 all의 페이지 위치 정보를 알려주는 기능
 def FirstPageView(Count):
 	PageInformation =[1,1,1]
@@ -62,7 +62,7 @@ def CurrentPageView(T_Count,offset):
 #PageNation하는 부분 표시하기 위한 기능
 def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
-	if (PageInformation[1]/10) >= T_Count/10:
+	if (PageInformation[1]/10) >= T_Count/10 and PageInformation[1]%10 != 0:
 			TotalCount = range(PageInformation[1]- Codition+1,T_Count+1)
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)
@@ -95,25 +95,26 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		T_Count[1] = DataCount(5,DBCount2)
 	else:
 		DBCount1=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
+		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
 		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
+		T_Count[1] = DataCount(5,DBCount1)
 	DBCount3=Lecture.objects.count()
 	T_Count[2] = DataCount(5,DBCount3)
 	
 	#현재 페이지 위치정보
 	PageInformation[MajorNumber] = CurrentPageView(T_Count,PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
+
 	
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
-		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('-Semester')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	else:
-		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('Code')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	TotalBoard[2] = Lecture.objects.order_by('Code')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+		TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('-Semester')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.order_by('-Semester')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
 	PageBoard = PageView(TotalBoard)
@@ -264,6 +265,7 @@ def MajorSelect(user):
 def PageView(TotalBoard):
 	PageBoard=[[],[],[]]
 	count =0
+	
 	for DBBoard in TotalBoard:
 		for Board in DBBoard:
 			try:
@@ -298,8 +300,11 @@ def DataCount(divide, DataBaseCount):
 
 
         DBCount = DataBaseCount
-        Condition = (DBCount%divide!=0) and 1 or 0
-        Count=DBCount/divide+Condition
+        if(DBCount !=0):
+        		Condition = (DBCount%divide!=0) and 1 or 0
+        		Count=DBCount/divide+Condition
+        else:
+        	Count=1
         return Count
 #가장 추천많이 받은 강의 보여주는 기능
 def BestBoardView():

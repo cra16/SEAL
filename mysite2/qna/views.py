@@ -15,12 +15,14 @@ from functionhelper.views import *
 
 
 def QnAMain(request): #Q&A 메인 
-	CheckingLogin(request.user.username)
-	#페이지 넘기는 기능
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	count=QnA_Board.objects.count()
 
+	PageFirst=0
+	PageLast =8
 	
-	T_Count = (count/8)+1 #총 페이지수(아마 고쳐야할듯)
+	T_Count = DataCount(8,count)#총 페이지수(아마 고쳐야할듯)
 	
 	PageInformation=(FirstPageView(T_Count))
 
@@ -28,7 +30,7 @@ def QnAMain(request): #Q&A 메인
 
 	Today = datetime.datetime.today()
 	
-	PageBoard=(QnA_Board.objects.order_by('-id')[0:6])
+	PageBoard=(QnA_Board.objects.order_by('-id')[PageFirst:PageLast])
 	
 	Reply_Board=[]#reply DB 저장할 공간
 
@@ -37,7 +39,7 @@ def QnAMain(request): #Q&A 메인
 			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
 		#except:
 		#Reply_Board=None
-	return render_to_response("QnA.html",
+	return render_to_response("html/QnA.html",
 				  {'user':request.user,
 				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
@@ -45,27 +47,27 @@ def QnAMain(request): #Q&A 메인
 				   'TotalCount' : TotalCount, 
 				   'PageInformation' : PageInformation,
 				   'Today' : Today,
-				   'Count' : count,
 				   })
 
 @csrf_exempt		
 def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(request.POST['Page'])
 	except ValueError:
 		raise Http404()
 
 	#페이지 총 수
-	PageFirst = (offset-1)*6 
-	PageLast = (offset-1)*6 + 6
+	PageFirst = (offset-1)*8
+	PageLast = (offset-1)*8 + 8
 	PageBoard = QnA_Board.objects.order_by('-id')[PageFirst:PageLast]
 	#######	게시판 페이지 넘기는 기능
 
 	count = QnA_Board.objects.count()
 	
-	T_Count=((count/8)+1)
+	T_Count=DataCount(8,count)
 	#PageInformation = list()
     
 	PageInformation=CurrentPageView(T_Count,offset)
@@ -75,11 +77,9 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	Today =datetime.date.today()
 
-	Reply_Board=[]#reply DB 저장할 공간
-
 	for Board in PageBoard:
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
-			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
+			Reply_Board=Reply.objects.filter(QuestionID = int(Board.id))
 
 	return render_to_response("QnAList.html",
 				  {'user':request.user, 
@@ -92,11 +92,13 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 				   } )
 	
 def QnAWrite(request): #Q&A Write 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("subscribe_faq.html",{'user':request.user, 'BestBoard':BestBoardView()})
 @csrf_exempt
 def QnA_Writing(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	if request.method =="POST":
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)
@@ -106,14 +108,15 @@ def QnA_Writing(request):
 		new_QnA.save()
 	return HttpResponseRedirect("/mysite2/QnA")
 def QnARead(request, offset): #Q&A read 기능
-		CheckingLogin(request.user.username)
+		if CheckingLogin(request.user.username):
+				return HttpResponseRedirect("/mysite2")
 		try:
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
 
 
-		Current = QnA_Board.objects.filter(id=offset).get() #고유 id로 글 정렬
+		Current = QnA_Board.objects.filter().get(id=offset) #고유 id로 글 정렬
 		Current.ClickScore +=1
 		Current.save()
 
@@ -140,7 +143,8 @@ def QnARead(request, offset): #Q&A read 기능
 			'Next':Next})
 
 def QnA_Reply(request, offset): 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(offset)
 	except ValueError:
@@ -148,7 +152,8 @@ def QnA_Reply(request, offset):
 	return render_to_response("subscribe_reply.html",{'user':request.user, 'ID':offset})
 @csrf_exempt
 def QnA_Replying(request,offset):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	if request.method =="POST":
 		try:
 			offset = int(offset)

@@ -15,19 +15,20 @@ from functionhelper.views import *
 
 
 def NoticeMain(request):#Notice 기능
+		
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
-	CheckingLogin(request.user.username)
-	
 	count=Notice_Board.objects.count()
 	
-	PageFirst = (offset-1)*6
-	PageLast = (offset-1)*6 + 6
+	PageFirst = (1-1)*8
+	PageLast = (1-1)*8 + 8
 	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
 	
-	T_Count = DataCount(6,count) #총 페이지수(아마 고쳐야할듯)
+	T_Count = DataCount(8,count) #총 페이지수(아마 고쳐야할듯)
 	
 	PageInformation=(FirstPageView(T_Count))
-	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast]	
+		
 	Today = datetime.datetime.now()
 	return render_to_response("notice.html",
 				  {'user':request.user,
@@ -40,21 +41,22 @@ def NoticeMain(request):#Notice 기능
 @csrf_exempt
 def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(request.POST['Page'])
 	except ValueError:
 		raise Http404()
 
 	#페이지 수 정보
-	PageFirst = (offset-1)*6
-	PageLast = (offset-1)*6 + 6
+	PageFirst = (offset-1)*8
+	PageLast = (offset-1)*8 + 8
 	PageBoard = Notice_Board.objects.order_by('-id')[PageFirst:PageLast] 
 	#페이지 넘기는 기능
 
 	count = Notice_Board.objects.count()
 
-	T_Count=DataCount(6,count)
+	T_Count=DataCount(8,count)
 
 	PageInformation=CurrentPageView(T_Count,offset)
 
@@ -72,7 +74,8 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
        			  })
 
 def Notice_Read(request, offset): #Notice Read 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	try:
 		offset = int(offset)
 	except ValueError:
@@ -103,11 +106,13 @@ def Notice_Read(request, offset): #Notice Read 기능
 
 
 def Notice_Write(request): #Q&A Write 기능
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	return render_to_response("subscribe_notice.html",{'user':request.user})
 @csrf_exempt
 def Notice_Writing(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 	if request.method =="POST":
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)

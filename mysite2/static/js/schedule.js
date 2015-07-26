@@ -15,11 +15,13 @@ $(document).ready(function () {
   }*/
     
     
+    
     $('.table td').css( 'cursor', 'pointer' );
     
     var arr=['월', '화', '수', '목', '금', '토'];
     
-    $('.table td').click(function(event) {
+    $("div").on("click",'.table td',function(event) {
+      event.stopPropagation();
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
           location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_"+ '/' + 1
@@ -69,12 +71,13 @@ $(document).ready(function () {
           
       });    
     });
-    
-    $('#sch-search').click(function(event) {
-        $('#sch-result').fadeIn();
+    $('#sch-result .button').click(function(event) {
+        $('#sch-result').fadeOut(100);
     });
-		
-    $('#sch-search').click(function(){
+    
+    $("div").on("click",'#sch-search',function(){
+        event.stopPropagation();
+        $(this).unbind("click");
 
         $.ajax(
             { url : "/mysite2/Schedule/",
@@ -85,7 +88,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){  
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
     
                 },
                 error: function(xhr, option, error){
@@ -93,9 +96,8 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
-          });
-        $("#sch-result").hide();
+         
+          }); 
 
     });
 
@@ -106,6 +108,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Previous',function(){
+       event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -115,7 +118,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){         
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                      
                 },
                 error: function(xhr, option, error){
@@ -131,7 +134,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Next',function(){
-
+         event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -142,7 +145,7 @@ $(document).ready(function () {
               type : "POST",
               success:function(resp){  
        
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                    
                       
                 },
@@ -159,7 +162,7 @@ $(document).ready(function () {
     });
 
     $('div').on('click','#Page',function(){ 
-
+         event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -169,7 +172,7 @@ $(document).ready(function () {
                     },
               type : "POST",
               success:function(resp){                  
-                  $('#sch-search-result').html(resp);
+                  $('#sch-result').html(resp);
                
                 },
                 error: function(xhr, option, error){
@@ -183,4 +186,105 @@ $(document).ready(function () {
 
 
     });
+
+
+        $('div').on('click','#LecPrevious',function(event){ 
+
+         event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    var url = location.href;
+    var Firstindex = url.indexOf('/',3);
+    var Lastindex = url.indexOf('/',4);
+    
+    var period = url.substring(Firstindex,Lastindex);
+
+    $('div').on('click','#LecPage',function(event){ 
+
+           event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+    });
+
+    $('div').on('click','#LecNext',function(event){ 
+
+           event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+         $.ajax(
+            { url : "/mysite2/Sel_periodLecture/",
+              data : {'Page': $(this).attr("name"),
+                    'Period':period
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#sch-result').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    
 });

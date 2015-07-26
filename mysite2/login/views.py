@@ -34,20 +34,35 @@ def loginCheck(request):
 				#메인페이지 보여줄 함수 호출
 				UserData = MainPageView(request.user,None,None,None)
 				request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
-				return render_to_response("index.html",UserData)
+				if request.flavour =='full':
+					return render_to_response('html/index.html',UserData)
+				else:
+					return render_to_response("m_skins/m_html/index.html",UserData)
 			else:
-				return render_to_response('login_error.html')
+				if request.flavour =='full':
+					return render_to_response('html/login_error.html')
+				else:
+					return render_to_response("m_skins/m_html/index.html")
         #로그인 되지 않았을 경우 다시 로그인페이지로
 		elif request.user.username =="":
-			return render_to_response('login.html')
+			if request.flavour =='full':
+				return render_to_response('html/login.html')
+			else:
+				return render_to_response('m_skins/m_html/login.html')
 		#이미 로그인 되어있으면 
 		else:
 			UserData = MainPageView(request.user,None,None,None)
 			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
-			return render_to_response("index.html", UserData)
+			if request.flavour =='full':
+				return render_to_response('html/index.html',UserData)
+			else:
+				return render_to_response("m_skins/m_html/index.html", UserData)
 #로그인 페이지	
 def login(request):
-    return render_to_response('login.html')
+	if request.flavour =='full':
+		return render_to_response('html/login.html')
+	else:
+		return render_to_response('m_skins/m_html/login.html')
 #로그아웃
 def logout_page(request):
     logout(request)
@@ -55,7 +70,10 @@ def logout_page(request):
 
 
 def Confirm(request):
-	return render_to_response('confirm.html')
+	if request.flavour =='full':
+		return render_to_response('html/confirm.html')
+	else:
+		return render_to_response('m_skins/m_html/confirm.html')
 
 @csrf_exempt
 def HisnetCheck(request):
@@ -142,12 +160,21 @@ def HisnetCheck(request):
 					except:
 						continue
 			ctx['lecture_lst'] = lecture_lst
-			return render_to_response('register.html', ctx)
+			if request.flavour =='full':
+				return render_to_response('html/register.html', ctx)
+			else:
+				return render_to_response('m_skins/m_html/register.html', ctx)
 		#except:
 			# 히스넷 체크 안될 시 에러페이지 출력
-			return render_to_response('confirm_error.html')
+			if request.flavour =='full':
+				return render_to_response('html/confirm_error.html')
+			else:
+				return render_to_response('m_skins/m_html/confirm_error.html')
 	else:
-		return render_to_response('login.html')
+		if request.flavour =='full':
+			return render_to_response('html/login.html')
+		else:
+			return render_to_response('m_skins/m_html/login.html')
 
 @csrf_exempt
 def Register(request):
@@ -171,12 +198,20 @@ def Register(request):
 			e_user = User.objects.filter(username=stu_num)
 			if e_user:
 				e_user.delete()
-			render_to_response('error.html')
-
-		return render_to_response('login.html')
+			if request.flavour =='full':
+				render_to_response('html/error.html')
+			else:
+				render_to_response('m_skins/m_html/error.html')
+		if request.flavour =='full':
+			return render_to_response('html/login.html')
+		else:
+			return render_to_response('m_skins/m_html/login.html')
 		
 	else:
-		return render_to_response('login.html')
+		if request.flavour =='full':
+			return render_to_response('html/login.html')
+		else:
+			return render_to_response('m_skins/m_html/login.html')
 
 
 #로그인 후 보여줄 메인페이지 함수

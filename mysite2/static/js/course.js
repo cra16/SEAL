@@ -105,5 +105,116 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
-elikenum1.textContent = likenum1;
+          var CurrentPage=$(this).parent().attr("id")
+          var url = location.href;
+          var lastIndex = url.lastIndexOf('/');
+          var cURL = url.substring(lastIndex);
+        $('div').on('click',"#CoursePrevious",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          
+
+
+        $.ajax(
+            { url : "/mysite2/CoursePageNation"+cURL,
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  $('#CoursePage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          
+          });});  
+
+
+        $('div').on('click',"#CoursePageNumber",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/CoursePageNation"+cURL,
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                 $('#CoursePage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          
+          });
 });
+
+        $('div').on('click',"#CourseNext",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+
+        $.ajax(
+            { url : "/mysite2/CoursePageNation"+cURL,
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  $('#CoursePage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          
+          });
+
+});
+
+          $('div').on('click',"#listenButton",function(event){
+             event.stopPropagation();
+             $(this).unbind("click");
+              var CurrentPage=$(this).attr("name")
+
+              $.ajax(
+                  { url : "/mysite2/Like/",
+                    data : {'Page': CurrentPage,
+                          },
+                    
+                    datatype:"json",
+                    type : "POST",
+                    success:function(resp){     
+                        alert("좋아하는 강의로 등록 되었습니다.")
+                      },
+                      error: function(xhr, option, error){
+                        alert(xhr.status); //오류코드
+                        alert(error); //오류내용
+
+                        } 
+                  
+                
+                });
+
+});
+        });

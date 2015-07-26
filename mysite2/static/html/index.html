@@ -1,5 +1,5 @@
 <!doctype html>
-{% extends "base.html" %}
+{% extends "html/base.html" %}
 
    
    
@@ -14,8 +14,6 @@
      
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
-    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     
 
     {% endblock%}
@@ -50,24 +48,14 @@
      
       <div class="ui very relaxed column grid">
         <div class="column">
-          	
-		<script>
-			var domain1=new Array();
-			var domain2=new Array();
-			var domain3=new Array();
-      var Page=0;
-		</script>
+
     {%if Search == None%}
 		    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
 
                  {% for PBoard1 in PageBoard.0%}
-                        <script>
-                                domain1[{{forloop.counter0}}] ="{{PBoard1.Course.id}}"
-                                Page={{Page}}
-                        </script>
-            <div class="ui raised segment grid">
+                          <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                   <center><button id="likebutton" name ="{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
                </div>
 
@@ -75,6 +63,7 @@
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                  <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                  <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>
+                 <p><a href="#"><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></a></p>
                </div>
 
                <div id="recommendtop" class="seven wide column">
@@ -101,7 +90,12 @@
               </a>
       
         {% for i in TotalCount.0%}
+{%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
          <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
         {%endfor%}
               <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
@@ -113,14 +107,11 @@
 		
       <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
 			       {% for PBoard2 in PageBoard.1%}
-                        <script>
-                                domain2[{{forloop.counter0}}] ="{{PBoard2.Course.id}}"
-                                   Page={{Page}}
-                        </script>
+              
             <div class="ui raised segment grid">
 
                <div id="likebtn1{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                    <center><button id="likebutton1{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                    <center><button id="likebutton" name = "{{PBoard2.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
                    <center><span id="likenum{{forloop.counter}}"></span>{{PBoard2.Total_Count}} LIKES</center>
                </div>
 
@@ -128,6 +119,7 @@
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></a></p>
+                <p><a href="#"><span id="csem1" name = "cprof">{{PBoard2.Course.Semester}} 학기</span></a></p>
               </div>
   
               <div id="recommendtop" class="seven wide column">
@@ -154,8 +146,13 @@
               </a>
       
         {% for i in TotalCount.1%}
-         <a id="Page" name ="{{i}}" class="item" >{{i}}</a>
-        {%endfor%}
+      {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
+  {%endfor%}
               <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
@@ -167,16 +164,10 @@
 
 
 
-
-                        <script>
-                                domain3[{{forloop.counter0}}] ="{{PBoard3.Course.id}}"
-                                   Page={{Page}}
-
-                        </script>
             <div class="ui raised segment grid">
 
                           <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                <center><button id="likebutton2{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><button id="likebutton" name = "{{PBoarde3.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}"></span>{{PBoard3.Total_Count}} LIKES</center>
               </div>
 
@@ -184,6 +175,7 @@
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard3.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
                 <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></a></p>
+                <p><a href="#"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></a></p>
               </div>
 
               <div id="recommendtop" class="seven wide column">
@@ -209,8 +201,13 @@
               </a>
       
         {% for i in TotalCount.2%}
+       {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
          <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
-        {%endfor%}
+        {%endif%}        
+ {%endfor%}
               <a id = "Next" name = "{{PageInformation.2.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
@@ -221,14 +218,13 @@
       {%endif%}
 
           <div id = "SearchPageNation">
-          {% if not Search == None %}
-          {% for SBoard in Search.0%}
-                        <script>
-                                domain1[{{forloop.counter0}}] ="{{SBoard.Course.id}}"
-                        </script>
+          {% if not Search == None  %}
+            {% if Search.0 != None%}
+            {% for SBoard in Search.0%}
+               
             <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button id="likebutton{{forloop.counter}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                   <center><button id="likebutton" name = "{{SBoard.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{SBoard.Total_Count}} LIKES</center>
                </div>
 
@@ -236,6 +232,7 @@
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p><a href="/mysite2/Course/{{SBoard.Course.id}}"><span class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
                  <p><a href="#"><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></a></p>
+                 <p><a href="#"><span id="csem1" name = "cprof">{{SBoard.Course.Semester}} 학기</span></a></p>
                </div>
 
                <div id="recommendtop" class="seven wide column">
@@ -271,7 +268,9 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-
+            {%else%}
+                  데이터가 없습니다.
+            {%endif%}
             {%endif%}
       </div>
         <div class="ui divider"></div>
@@ -282,7 +281,10 @@
 
 
 
-
+   <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     {%endblock%}
   </body>
+
+    
 </html>

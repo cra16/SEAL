@@ -53,9 +53,9 @@ $(document).ready(function () {
     });
     
     $("#table").find("td").each(function(i, e){
-       event.stopPropagation();
           $(this).unbind("click");
-      $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(){
+      $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(event){
+        event.stopPropagation();
         $.ajax(
           { url : "/mysite2/Remove_lecture/",
             data : {"ccode" : $("#table-ccode" + parseInt(i / 6) + "-" + (i % 6 + 1)).text(),
@@ -71,14 +71,14 @@ $(document).ready(function () {
             }
 
           });
-          
-      });    
+      });
     });
+
     $('#sch-result .button').click(function(event) {
         $('#sch-result').fadeOut(100);
     });
     
-    $("div").on("click",'#sch-search',function(){
+    $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");
 
@@ -99,9 +99,7 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-         
           }); 
-
     });
 
     $('*').keypress(function(e){
@@ -110,7 +108,7 @@ $(document).ready(function () {
         return false;
     });
 
-    $('div').on('click','#Previous',function(){
+    $('div').on('click','#Previous',function(event){
        event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
@@ -129,14 +127,10 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
-
     });
 
-    $('div').on('click','#Next',function(){
+    $('div').on('click','#Next',function(event){
          event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
@@ -157,14 +151,10 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
-
     });
 
-    $('div').on('click','#Page',function(){ 
+    $('div').on('click','#Page',function(event){ 
          event.stopPropagation();
         $.ajax(
             { url : "/mysite2/Schedule/",
@@ -183,11 +173,7 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
-
     });
 
 
@@ -215,11 +201,7 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
-
     });
 
     var url = location.href;
@@ -252,10 +234,7 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
     });
 
     $('div').on('click','#LecNext',function(event){ 
@@ -282,11 +261,7 @@ $(document).ready(function () {
                   alert(error); //오류내용
 
                   } 
-            
           });
-
-
-
     });
 
     

@@ -15,7 +15,7 @@ from index.models import * #아직 시험중
 #세션 유지된 아이디 확인
 def CheckingLogin(userID):
 	if userID=="":
-		return  True;
+		return True
 	else:
 		return False
 #최초로 페이지에 도달했을때 1전공 2전공 all의 페이지 위치 정보를 알려주는 기능

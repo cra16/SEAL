@@ -29,7 +29,6 @@ $(document).ready(function () {
     });
 
     $("#sch-result").find(".for-select-child").each(function(i, e){
-       event.stopPropagation();
           $(this).unbind("click");
       $("#sch-select" + (i+1)).click(function(){
         $.ajax(

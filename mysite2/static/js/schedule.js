@@ -14,20 +14,6 @@ $(document).ready(function () {
     cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
   }*/
     
-    
-    
-    $('.table td').css( 'cursor', 'pointer' );
-    
-    var arr=['월', '화', '수', '목', '금', '토'];
-    
-    $("div").on("click",'.table td',function(event) {
-      event.stopPropagation();
-      if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
-          // $('#sch-result').fadeIn();
-          location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_"+ '/' + 1
-        };
-    });
-
     $("#sch-result").find(".for-select-child").each(function(i, e){
           $(this).unbind("click");
       $("#sch-select" + (i+1)).click(function(){
@@ -50,28 +36,6 @@ $(document).ready(function () {
           });
           
       });    
-    });
-    
-    $("#table").find("td").each(function(i, e){
-          $(this).unbind("click");
-      $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(event){
-        event.stopPropagation();
-        $.ajax(
-          { url : "/mysite2/Remove_lecture/",
-            data : {"ccode" : $("#table-ccode" + parseInt(i / 6) + "-" + (i % 6 + 1)).text(),
-                    "cclass" : $("#table-cclass" + parseInt(i / 6) + "-" + (i % 6 + 1)).text()
-                  },
-            type : "POST",
-            success:function(resp){
-              $('#rt_table').html(resp);
-            },
-            error:function(xhr, option, error){
-              alert(xhr.status);
-              alert(error);
-            }
-
-          });
-      });
     });
 
     $('#sch-result .button').click(function(event) {

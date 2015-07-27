@@ -21,7 +21,7 @@
               <span>
                 <h3>
                   <span id="cperiod" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
-                  <a id ="sch-select" href="#" class="ui right floated tiny blue button">선택</a>
+                  <a id ="sch-select{{forloop.counter}}" href="#" class="ui right floated tiny blue button">선택</a>
                 </h3>
               </span>
             </div>
@@ -36,19 +36,20 @@
        <div class="ui divider"></div>
 
         <center><div class="ui borderless pagination menu">
-              <a id="Previous" name="{{PageInformation.0}}" class="item"  >
+              <a id="LecPrevious" name="{{PageInformation.0}}" class="item"  >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
-              {% for i in TotalCount%}
+              {% for i in total_page%}
               <script>
                   number = {{i}};
               </script>
-              <a id="Page" name="{{i}}" class="item">{{i}}</a>
+              <a id="LecPage" name="{{i}}" class="item">{{i}}</a>
               {% endfor %}
-              <a id="Next" name ="{{PageInformation.2}}" class="item" >
+              <a id="LecNext" name ="{{PageInformation.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+            <input type ='hidden' id = 'Period' name = "{{period}}">
             <div style="padding-bottom:30px"></div>
 
   <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>

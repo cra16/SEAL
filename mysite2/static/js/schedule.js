@@ -186,7 +186,7 @@ $(document).ready(function () {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period':period
+                    'Period': $('#Period').attr("name")
                     },
               
               datatype:"json",
@@ -219,7 +219,7 @@ $(document).ready(function () {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period':period
+                    'Period': $('#Period').attr("name")
                     },
               
               datatype:"json",
@@ -246,7 +246,7 @@ $(document).ready(function () {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period':period
+                    'Period': $('#Period').attr("name")
                     },
               
               datatype:"json",

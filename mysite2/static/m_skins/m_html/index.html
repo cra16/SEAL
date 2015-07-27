@@ -1,7 +1,5 @@
 <!doctype html>
-<html lang='ko'>
-  <head>
-    {% extends "m_skins/m_html/base.html" %}
+{% extends "html/base.html" %}
 
    
    
@@ -9,54 +7,66 @@
   
    {% block head %}    
      <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
-    {%endblock%}
+    
    
    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
 
-    <link rel="stylesheet" type="text/css" href="{% static "m_css/IndexPage/main.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "m_css/indexslider.css" %}">
-  </head>
+     
+    <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
+    
 
+    {% endblock%}
+    
+ 
   <body>
-    <!-- Preloader -->
-
-     {% block content %}  
+    {% block content %}  
+    
+    
 
     <div class="containerss"></div>
 
-    <div>
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-10 col-xs-10">
+
 
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
 
+      
+  
       {%if Search == None%}
-
       <div class="ui small tabular filter menu">
-        <a class="active item" data-tab="unread">1전공</a>
-        <a class="item" data-tab="saved">2전공</a>
-        <a class="item" data-tab="all">All</a>
+        <a id="FirstMajor" class="active item" data-tab="unread">1전공</a>
+        <a id="SecondMajor" class="item" data-tab="saved">2전공</a>
+        <a id="All" class="item" data-tab="all">All</a>
       </div>
       {%endif%}
 
+     
       <div class="ui very relaxed column grid">
         <div class="column">
-          <div  id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
-          {% for PBoard1 in PageBoard.0%}
-            <div class="ui raised segment grid">
-              <div id="likebtn" class="left floated ui compact segment four wide column">
-                <<center><button id="likebutton" name ="{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
+
+    {%if Search == None%}
+		    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+
+                 {% for PBoard1 in PageBoard.0%}
+                          <div class="ui raised segment grid">
+               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
+                   <center><button id="likebutton" name ="{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
-              </div>
-                    
-              <div id="firstcourse" class="nine wide column">    
-                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
+               </div>
+
+               <div id="firstcourse" class="five wide column">
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                  <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                  <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>
                  <p><a href="#"><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></a></p>
-              </div>
+               </div>
 
-              <div id="recommendtop" class="sixteen wide column">
+               <div id="recommendtop" class="seven wide column">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
@@ -69,31 +79,34 @@
                   <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
                   <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
                   <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-              </div>
+               </div>
             </div>
- {%endfor%}
-            
-
-          <center><div id ="FirstPageNation" class="ui borderless pagination menu">
+      
+            {%endfor%}
+              
+      <center><div id ="FirstPageNation" class="ui borderless pagination menu">
               <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
-                {% for i in TotalCount.0%}
-                    {%if i == Page %}
-                        <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        {% for i in TotalCount.0%}
+{%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
         
-                   {%else%}
-                         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
-                   {%endif%}        
-                 {%endfor%}
-                 <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
-                       Next <i class="glyphicon glyphicon-menu-right"></i>
-                  </a>
-                </div></center>
-            </div>
-            <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
-             {% for PBoard2 in PageBoard.1%}
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
+        {%endfor%}
+              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+        </div>
+               
+
+		
+      <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+			       {% for PBoard2 in PageBoard.1%}
               
             <div class="ui raised segment grid">
 
@@ -146,7 +159,7 @@
             </div></center>
           </div>
          
-        <div id ="ThirdPage" class="ui divided very relaxed inbox selection list tab" data-tab="all">
+		    <div id ="ThirdPage" class="ui divided very relaxed inbox selection list tab" data-tab="all">
         {% for PBoard3 in PageBoard.2%}
 
 
@@ -202,7 +215,8 @@
 
              
       </div>
-      
+      {%endif%}
+
           <div id = "SearchPageNation">
           {% if not Search == None  %}
             {% if Search.0 != None%}
@@ -265,10 +279,12 @@
         </div>
       </div>
 
-    
-      <script type="text/javascript" src="{% static "m_js/IndexPage/main.js" %}"></script>
-    <script type="text/javascript" src="{% static "m_js/indexslider.js" %}"></script>
-    {%endblock%}
 
+
+   <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+    {%endblock%}
   </body>
+
+    
 </html>

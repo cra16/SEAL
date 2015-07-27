@@ -29,6 +29,8 @@ $(document).ready(function () {
     });
 
     $("#sch-result").find(".for-select-child").each(function(i, e){
+       event.stopPropagation();
+          $(this).unbind("click");
       $("#sch-select" + (i+1)).click(function(){
         $.ajax(
           { url : "/mysite2/Sel_lecture/",
@@ -52,6 +54,8 @@ $(document).ready(function () {
     });
     
     $("#table").find("td").each(function(i, e){
+       event.stopPropagation();
+          $(this).unbind("click");
       $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(){
         $.ajax(
           { url : "/mysite2/Remove_lecture/",

@@ -28,16 +28,21 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		RecommendData=None
 
 	if RecommendData != None:
-		return  render_to_response("Not_Empty_Recommend.html")
+		if request.flavour =='full':
+			return render_to_response('html/Not_Empty_Recommend.html')
+		else:
+			return  render_to_response("m_skins/m_html/Not_Empty_Recommend.html")
 	else:
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
-
-		return render_to_response("recommend.html",
-                                          {'user':request.user,
-                                          'BestBoard':BestBoardView(),
-                                           'CourseBoard':CourseBoard,
-											})
+		dic = {'user':request.user,
+              'BestBoard':BestBoardView(),
+               'CourseBoard':CourseBoard,
+				}
+		if request.flavour =='full':
+			return render_to_response('html/recommend.html',dic)
+		else:
+			return render_to_response("m_skins/m_html/recommend.html",dic)
 def Recommend_NotEmpty(request):
 	return HttpResponseRedirect("/mysite2")
 @csrf_exempt
@@ -113,7 +118,10 @@ def Like(request):
 		LikeData=None
 
 	if LikeData != None:
-		return render_to_response("Like_error.html")
+		if request.flavour =='full':
+			return render_to_response('m_skins/m_html/Like_error.html')
+		else:
+			return render_to_response("m_skins/m_html/Like_error.html")
 	else:
 		CourseLecture = Lecture.objects.get(id = LectureID)
 		new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))

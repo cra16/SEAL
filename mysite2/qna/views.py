@@ -39,15 +39,18 @@ def QnAMain(request): #Q&A 메인
 			Reply_Board.append(Reply.objects.filter(QuestionID = int(Board.id)))
 		#except:
 		#Reply_Board=None
-	return render_to_response("html/QnA.html",
-				  {'user':request.user,
-				  'BestBoard':BestBoardView(),
-				   'PageBoard':PageBoard,
-				   'ReplyBoard':Reply_Board,
-				   'TotalCount' : TotalCount, 
-				   'PageInformation' : PageInformation,
-				   'Today' : Today,
-				   })
+	dic = {'user':request.user,
+		  'BestBoard':BestBoardView(),
+		   'PageBoard':PageBoard,
+		   'ReplyBoard':Reply_Board,
+		   'TotalCount' : TotalCount, 
+		   'PageInformation' : PageInformation,
+		   'Today' : Today,
+		   }
+	if request.flavour =='full':
+		return render_to_response('html/QnA.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/QnA.html",dic)
 
 @csrf_exempt		
 def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
@@ -77,24 +80,33 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	Today =datetime.date.today()
 
+
+
 	for Board in PageBoard:
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
 			Reply_Board=Reply.objects.filter(QuestionID = int(Board.id))
+	dic =  {'user':request.user, 
+		  'BestBoard':BestBoardView(),
+		   'PageBoard':PageBoard, 	
+		   'TotalCount' : TotalCount, 
+			   'PageInformation' : PageInformation,
+			'Today' : Today,
+			'ReplyBoard':Reply_Board,
+		   }
 
-	return render_to_response("QnAList.html",
-				  {'user':request.user, 
-				  'BestBoard':BestBoardView(),
-				   'PageBoard':PageBoard, 	
-				   'TotalCount' : TotalCount, 
-       			   'PageInformation' : PageInformation,
-					'Today' : Today,
-					'ReplyBoard':Reply_Board,
-				   } )
+	if request.flavour =='full':
+		return render_to_response('html/QnAList.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/QnAList.html",dic)
 	
 def QnAWrite(request): #Q&A Write 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("subscribe_faq.html",{'user':request.user, 'BestBoard':BestBoardView()})
+	dic = {'user':request.user, 'BestBoard':BestBoardView()}
+	if request.flavour =='full':
+		return render_to_response('html/subscribe_faq.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/subscribe_faq.html", dic)
 @csrf_exempt
 def QnA_Writing(request):
 	if CheckingLogin(request.user.username):
@@ -134,13 +146,17 @@ def QnARead(request, offset): #Q&A read 기능
 			QnA_Reply = Reply.objects.filter(QuestionID = Current.id)
 		except:
 			QnA_Reply =None
-	
-		return render_to_response("qna-contents.html", 
-			{'user':request.user, 
+		
+		dic = 	{'user':request.user, 
 			'Current':Current, 
 			'QnA_Reply' : QnA_Reply,
 			'Previous' : Previous,
-			'Next':Next})
+			'Next':Next}
+
+		if request.flavour =='full':
+			return render_to_response('html/qna-contents.html',dic)
+		else:
+			return render_to_response("m_skins/m_html/qna-contents.html", dic)
 
 def QnA_Reply(request, offset): 
 	if CheckingLogin(request.user.username):
@@ -149,7 +165,11 @@ def QnA_Reply(request, offset):
 		offset = int(offset)
 	except ValueError:
 		raise Http404()
-	return render_to_response("subscribe_reply.html",{'user':request.user, 'ID':offset})
+	dic ={'user':request.user, 'ID':offset}	
+	if request.flavour =='full':
+			return render_to_response('html/subscribe_reply.html',dic)
+	else:
+			return render_to_response("m_skins/m_html/subscribe_reply.html",dic)
 @csrf_exempt
 def QnA_Replying(request,offset):
 	if CheckingLogin(request.user.username):

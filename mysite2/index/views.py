@@ -21,21 +21,44 @@ sys.setdefaultencoding("utf-8")
 def MyPage(request):	#MyPage 루트
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("sealmypage.html", {'user':request.user,'BestBoard':BestBoardView()}) 
+	dic = {'user':request.user,'BestBoard':BestBoardView()}
+		
+	if request.flavour =='full':
+			return render_to_response('html/sealmypage.html.html',dic)
+	else:	
+			return render_to_response("m_skins/m_html/sealmypage.html", dic) 
 
 def About(request): #About template 루트
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("about.html",{'user':request.user, 'BestBoard':BestBoardView()})
+
+	dic = {'user':request.user, 'BestBoard':BestBoardView()}
+	
+	if request.flavour =='full':
+			return render_to_response('html/about.html',dic)
+	else:	
+			return render_to_response("m_skins/m_html/about.html",dic)
 
 def Schedule(request): #Schedule template 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("schedule.html",{'user':request.user,'BestBoard':BestBoardView()})
+	
+	dic={'user':request.user,'BestBoard':BestBoardView()}
+
+	if request.flavour =='full':
+		return render_to_response('html/schedule.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/schedule.html", dic)
 
 def Judgement(request): # 신고 게시판 기능
-	CheckingLogin(request.user.username)
-	return render_to_response("subscribe_report.html",{'user':request.user,'BestBoard':BestBoardView()})
+
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
+	dic = {'user':request.user,'BestBoard':BestBoardView()}
+	if request.flavour =='full':
+		return render_to_response('html/subscribe_report.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/subscribe_report.html",dic)
 
 
 @csrf_exempt
@@ -58,18 +81,31 @@ def Page(request): #Main Page를 보여주는 함수
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']
-	
-	return render_to_response(target[0],template)
+	if request.flavour =='full':
+		return render_to_response('html/'+target[0],template)
+	else:
+		return render_to_response('m_skins/m_html/'+target[0],template)
 
 def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("subscribe_improve.html", {'user':request.user})
+
+	dic = {'user':request.user}
+
+	if request.flavour =='full':
+		return render_to_response('html/subscribe_improve.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/subscribe_improve.html",dic)
 
 def SiteMap(request): #사이트 맵
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	return render_to_response("sitemap.html", {'user':request.user})
+	dic = {'user':request.user}
+
+	if request.flavour =='full':
+		return render_to_response('html/sitemap.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/sitemap.html",dic )
 
 def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		if CheckingLogin(request.user.username):
@@ -79,11 +115,14 @@ def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		LikePage=LikePage_Course.objects.filter(CreatedID= MyProfile)
 		RecommendPage= Recommend_Course.objects.filter(CreatedID = MyProfile)
 		
-
-		return render_to_response("mycourses.html", {'user':request.user, 
-								  					'RecommendPage':RecommendPage,
-								  					'LikePage':LikePage,
-								  					'BestBoard':BestBoardView()})
+		dic = {'user':request.user, 
+				'RecommendPage':RecommendPage,
+				'LikePage':LikePage,
+				'BestBoard':BestBoardView()}
+		if request.flavour =='full':
+			return render_to_response('html/mycourses.html',dic)
+		else:
+			return render_to_response("m_skins/m_html/mycourses.html", dic)
 @csrf_exempt
 def Search(request): #과목 검색 기능
 	if CheckingLogin(request.user.username):
@@ -114,13 +153,18 @@ def Search(request): #과목 검색 기능
 
 		request.session['SearchPageInformation'] = PageInformation
 		request.session['SearchValue'] = SearchData
-		return render_to_response('index.html', {
-											'user':request.user,
-											'BestBoard':BestBoardView(),
-											'Search' : L_Data,
-											'PageInformation' : PageInformation,
-											'T_Count':T_Count,
-										})
+
+		dic = {
+				'user':request.user,
+				'BestBoard':BestBoardView(),
+				'Search' : L_Data,
+				'PageInformation' : PageInformation,
+				'T_Count':T_Count,
+			}
+		if request.flavour =='full':
+			return render_to_response('html/index.html',dic)
+		else:
+			return render_to_response('m_skins/m_html/index.html', dic)
 	else:
 		return HttpResponseRedirect("/mysite2")
 @csrf_exempt
@@ -152,13 +196,18 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	
 
 	request.session['SearchPageInformation'] = PageInformation
-	return render_to_response('SearchPage.html', {
-										'user':request.user,
-										'BestBoard':BestBoardView(),
-										'Search' : L_Data,
-										'PageInformation' : PageInformation,
-										'T_Count' : T_Count,
-									})
+	
+	dic = {
+				'user':request.user,
+				'BestBoard':BestBoardView(),
+				'Search' : L_Data,
+				'PageInformation' : PageInformation,
+				'T_Count' : T_Count,
+			}
+	if request.flavour =='full':
+			return render_to_response('html/SearchPage.html',dic)
+	else:
+			return render_to_response('m_skins/m_html/SearchPage.html',dic )
 
 
                                                                   

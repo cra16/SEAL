@@ -1,50 +1,6 @@
-{% extends "html/base.html" %}
+   {% load staticfiles%}
 
-   
-  <head>
-    {% load staticfiles%}
-    {% block head%}
-	 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
-    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{%static "js/notice.js"%}"></script>
-    
-    <style>
-      body, input {
-        font-family: Helvetica, sans-serif;
-        font-size: 12px;
-      }
-    </style>
-
-    <link rel="stylesheet" type="text/css" href="{%static "css/qna.css"%}">
-    <script type="text/javascript" src="{% static "js/qna.js"%}"></script>
-    
-    
-   {%endblock%}
-  <body>
-    {%block content%}
-      <div class="containerss"></div>
-
-      <div class="col-md-1 col-sm-0 col-xs-0"></div>
-
-      <div class="col-md-8 col-sm-10 col-xs-10">
-
-        <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항
-           {% if user.profile.UserName == "관리자"%}
-        <a href="/mysite2/Notice/Write"> <div style="margin-top:20px" class="ui right floated tiny blue button">
-          
-          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
-          {% endif %}
-         </h2>
-
-
-        <div id="h_sectiondivider" class="ui section divider"></div>
-        
-        <div id="Notice_List" class="ui column">
-          <div id="qna_board">
+ <div id="qna_board">
               
               <table class="ui table">
                  <thead>
@@ -95,7 +51,3 @@
               
           </div>
         </div>
-
-     {% endblock%}
-  </body>
-</html>

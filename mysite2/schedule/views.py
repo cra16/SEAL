@@ -17,8 +17,9 @@ def SelectPeriod(request, period, page):
 	period -> 테이블에서 선택한 강의시간
 	page -> pagination에서 선택한 page
 	"""
-	if request.user.username =="":
+	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
+
 	else:
 		cur_page = int(page)
 		# cur_page = request.session['cur_page']
@@ -27,30 +28,95 @@ def SelectPeriod(request, period, page):
 		end = 6 * cur_page
 		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			lec_cnt = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			lec_cnt = DataCount(6,DBCount)
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
 		else:
-			lec_cnt = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			lec_cnt = DataCount(6,DBCount)
 			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
+		total = [lec_lst]
+		TotalBoard = PageView(total)
+		PageInformation = FirstPageView(lec_cnt)
+		PageInformation[1]=cur_page
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		ctx = {
 			'user':request.user,
-			'period':period[:-1],
-			'total_page': range(1, total_page+1),
+			'period':period,
+			'total_page': PageTotalCount(lec_cnt,PageInformation),
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
 			'cur_page':cur_page,
+			'TotalBoard':TotalBoard,
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
+			"PageInformation":PageInformation
 		}
 
 		# request.session['cur_page'] = cur_page + 1
+		if request.flavour =='full':
+			return render_to_response('html/schedule.html',ctx)
+		else:
+			return render_to_response('m_skins/m_html/schedule.html', ctx)
 
-		return render_to_response('schedule.html', ctx)
+@csrf_exempt
+def SearchSelectPeriod(request):
+	"""
+	period -> 테이블에서 선택한 강의시간
+	page -> pagination에서 선택한 page
+	"""
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
+	else:
+		if request.method=="POST":
+			period = request.POST['Period']
+			cur_page = int(request.POST['Page'])
+		# cur_page = request.session['cur_page']
+
+		start = 6 * (cur_page-1)
+		end = 6 * cur_page
+		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
+		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			lec_cnt = DataCount(6,DBCount)
+			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+		else:
+			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			lec_cnt = DataCount(6,DBCount)
+			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
+		total_page = ( (lec_cnt - 1) / 6 ) + 1
+		is_odd = lec_cnt % 2
+
+		total = [lec_lst]
+		TotalBoard = PageView(total)
+		PageInformation = CurrentPageView(lec_cnt,cur_page)
+		PageInformation[1]=cur_page
+		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
+		my_lec_table = MakeTable(request, my_profile)
+
+		ctx = {
+			'user':request.user,
+			'period':period,
+			'total_page': PageTotalCount(lec_cnt,PageInformation),
+			'lec_lst':lec_lst,
+			'is_odd':is_odd,
+			'cur_page':cur_page,
+			'TotalBoard':TotalBoard,
+			"my_lec_table": my_lec_table,
+			"my_profile": my_profile,
+			"PageInformation" : PageInformation
+
+		}
+
+		# request.session['cur_page'] = cur_page + 1
+		if request.flavour =='full':
+			return render_to_response('html/scheduleSearch.html',ctx)
+		else:
+			return render_to_response('m_skins/m_html/scheduleSearch.html', ctx)
 
 def MakeTable(request, my_profile):
 	## 나의 강의목록 불러오기
@@ -70,15 +136,17 @@ def MakeTable(request, my_profile):
 		# lec_info_lst = (lec.CourseName, lec.Class, lec.Professor, lec.ClassRoom,)
 		p_lst = lec.Period.split(",")
 		for period in p_lst:
-			if period:	# 사회봉사 처럼 period null인 경우.
-				day = days_dic[period[0]]	# 0번째 값은 요일, ex) "월" -> 0
-				my_lec_table[int(period[1:])-1][day] = lec	# -1(index계산), 나머지는 교시, 10교시 이상 있을 수 있음 주의.
+			if period == "":
+				break;
+			day = days_dic[period[0]]	# 0번째 값은 요일, ex) "월" -> 0
+			my_lec_table[int(period[1:])-1][day] = lec	# -1(index계산), 나머지는 교시, 10교시 이상 있을 수 있음 주의.
 
 	return my_lec_table
 
 @csrf_exempt
 def SelectLecture(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
 	if request.method == "POST":
 		ccode = request.POST['ccode']
@@ -102,8 +170,17 @@ def SelectLecture(request):
 			if p in my_lec_period_lst:
 				is_duplicated = True	# 나의 강의목록 시간 중에 중복되는 시간 있을 시 True.
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
-			return render_to_response('scheduleTable.html')
+			my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+			my_lec_table = MakeTable(request, my_profile)
 
+			Dic = {
+			"my_lec_table": my_lec_table,
+			}
+			if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+			else:
+				return render_to_response('m_skins/m_html/scheduleTable.html',Dic)
+		
 		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0] # Unique한 value를 위한 Key = (Code, Class, Semester)
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
@@ -112,8 +189,10 @@ def SelectLecture(request):
 		Dic = {
 			"my_lec_table": my_lec_table,
 		}
-
-		return render_to_response('scheduleTable.html', Dic)
+		if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+		else:
+				return render_to_response('m_skins/m_html/scheduleTable.html', Dic)
 
 @csrf_exempt
 def RemoveLecture(request):
@@ -135,13 +214,16 @@ def RemoveLecture(request):
 		Dic = {
 			"my_lec_table": my_lec_table,
 		}
-
-		return render_to_response('scheduleTable.html', Dic)
+		if request.flavour =='full':
+				return render_to_response('html/scheduleTable.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/scheduleTable.html', Dic)
 
 
 @csrf_exempt
 def SearchSubject(request):
-	CheckingLogin(request.user.username)
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
  	if request.method =="POST":
  		
@@ -163,35 +245,24 @@ def SearchSubject(request):
 
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
+		if SelectMajor == "전체" :
+			SelectMajor=""
+		if SelectCategory=="전체":
+			SelectCategory= ""
 
-		SubjectCount=[0]
-		
-		if SearchName == "":
-			if SelectMajor != "전체" and SelectCategory !="전체":
-					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory).count()/7+1
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory)[start:end]
-			elif SelectMajor != "전체" and SelectCategory =="전체":
-					SubjectCount[0] = Lecture.objects.filter(Major__contains=SelectMajor).count()/7+1
-					Subject = Lecture.objects.filter(Major__contains=SelectMajor)[start:end]
-			elif SelectMajor =="전체" and SelectCategory !="전체":
-					SubjectCount[0] = Lecture.objects.filter(CategoryDetail__contains=SelectCategory).count()/7+1
-					Subject = Lecture.objects.filter(CategoryDetail__contains=SelectCategory)[start:end]
-			else:
-					SubjectCount[0] = Lecture.objects.count()/7+1
-					Subject = Lecture.objects.order_by('Code')[start:end]
-			
-		else:
-			SubjectCount[0] = Lecture.objects.filter(CourseName__contains=SearchName)
-			Subject = Lecture.objects.filter(CourseName__contains=SearchName)[start:end]
+
+		DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
+		SubjectCount = DataCount(6,DBCount)
+		Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
 
 		if New == 1:
-			PageInformation = FirstPageView(0,SubjectCount)
-			TotalCount=range(PageInformation[0],PageInformation[2])
+			PageInformation = FirstPageView(SubjectCount)
+			TotalCount=PageTotalCount(SubjectCount,PageInformation)
 		else :
-			PageInformation = CurrentPageView(SubjectCount,cur_page,0)
+			PageInformation = CurrentPageView(SubjectCount,cur_page)
 			PageInformation[1]=cur_page
-			TotalCount = PageTotalCount(0,SubjectCount,PageInformation)
-
+			TotalCount = PageTotalCount(SubjectCount,PageInformation)
+		TotalBoard = PageView([Subject])
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		Dic = {
@@ -203,12 +274,16 @@ def SearchSubject(request):
 				'PageInformation':PageInformation,
 				'TotalCount':TotalCount,
 				'cur_page':cur_page,
-				'Data' :Page,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
+				"TotalBoard": TotalBoard,
+				'BestBoard':BestBoardView()
+		
 		}
-
-		return render_to_response('scheduleTemplate.html', Dic)
+		if request.flavour =='full':
+			return render_to_response('html/scheduleTemplate.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/scheduleTemplate.html', Dic)
 	else:
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
@@ -217,9 +292,29 @@ def SearchSubject(request):
 				'Data': 0,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
+				'BestBoard':BestBoardView()
 		}
-		return render_to_response("schedule.html", Dic)
+		if request.flavour =='full':
+			return render_to_response('html/schedule.html',Dic)
+		else:
+			return render_to_response('m_skins/m_html/schedule.html', Dic)
+@csrf_exempt
+def DeleteMylecture(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/mysite2")
 
+	if request.method =="POST":
+		code = request.POST['ccode']
+		course = request.POST['cname']
+		prof = request.POST['cprof']
+	UserData =Profile.objects.get(User=request.user)
+	UserData.MyLecture.filter(Code=code, Professor=prof, CourseName=course)[0].delete()
+	UserData.save()
+	my_lec_table = MakeTable(request, UserData)
+	if request.flavour =='full':
+			return render_to_response('html/scheduleTable.html',{"my_lec_table": my_lec_table})
+	else:
+			return render_to_response('m_skins/m_html/scheduleTable.html',{"my_lec_table": my_lec_table})
 def Major(major):
 	if major == "0001":
 		major = "글로벌"

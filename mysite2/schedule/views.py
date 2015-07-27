@@ -188,7 +188,6 @@ def SelectLecture(request):
 
 		Dic = {
 			"my_lec_table": my_lec_table,
-
 		}
 		if request.flavour =='full':
 				return render_to_response('html/scheduleTable.html',Dic)

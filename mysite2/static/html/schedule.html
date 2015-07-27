@@ -141,8 +141,8 @@
               <p><a href="#"><span id="cprof{{forloop.counter}}" value="{{ lec.Professor }}">{{ lec.Course.Professor }}</span></a></p>
               <span id = "sch-select-p" class="for-select-child">
                 <h3>
-                  <span id="cperiod" name="cperiod" class="cperiod">{{ lec.Course.Period }}</span>
-                  <a id ="sch-select" href="#" class="ui right floated tiny blue button">선택</a>
+                  <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod" value="{{ lec.Period }}">{{ lec.Period }}</span>
+                  <a class="ui right floated tiny blue button" id="sch-select{{forloop.counter}}">선택</a>
                   <input type="hidden" value=""/>
 
                 </h3>

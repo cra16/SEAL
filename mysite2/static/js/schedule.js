@@ -15,8 +15,9 @@ $(document).ready(function () {
   }*/
     
     $("#sch-result").find(".for-select-child").each(function(i, e){
+         event.stopPropagation();
           $(this).unbind("click");
-      $("#sch-select" + (i+1)).click(function(){
+      $("#sch-result").on("click","#sch-select" + (i+1),function(){
         $.ajax(
           { url : "/mysite2/Sel_lecture/",
             data : {"ccode" : $("#ccode" + (i+1)).text(),
@@ -37,15 +38,18 @@ $(document).ready(function () {
           
       });    
     });
-
-    $('#sch-result .button').click(function(event) {
+    
+$('#sch-result .button').click(function(event) {
+        event.stopPropagation();
         $('#sch-result').fadeOut(100);
     });
-    
+    $('#sch-search-result .button').click(function(event) {
+       event.stopPropagation();
+        $('#sch-search-result').fadeOut(100);
+    });
     $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");
-
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -53,19 +57,22 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': "0"
                     },
+              sync : true,
               type : "POST",
               success:function(resp){  
-                  $('#sch-result').html(resp);
+                  $('#sch-search-result').html(resp);
     
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
-                  alert(error); //오류내용
+                  alert(error); //오류내용                  
+                } 
 
-                  } 
-          }); 
+          });
+        $('#sch-search-result').fadeIn();
+          $('#sch-result').fadeOut(100);
+
     });
-
     $('*').keypress(function(e){
 
       if(e.keyCode==13)
@@ -74,6 +81,7 @@ $(document).ready(function () {
 
     $('div').on('click','#Previous',function(event){
        event.stopPropagation();
+       $(this).unbind("click");
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -92,10 +100,13 @@ $(document).ready(function () {
 
                   } 
           });
+           $('#sch-search-result').fadeOut(100);
+    
     });
 
     $('div').on('click','#Next',function(event){
          event.stopPropagation();
+        $(this).unbind("click");
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -116,10 +127,13 @@ $(document).ready(function () {
 
                   } 
           });
+           $('#sch-search-result').fadeOut(100);
+    
     });
 
     $('div').on('click','#Page',function(event){ 
          event.stopPropagation();
+         $(this).unbind("click");
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -138,6 +152,8 @@ $(document).ready(function () {
 
                   } 
           });
+           $('#sch-search-result').fadeOut(100);
+    
     });
 
 
@@ -157,7 +173,7 @@ $(document).ready(function () {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-result').html(resp);
+               $('#sch-search-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){
@@ -166,14 +182,11 @@ $(document).ready(function () {
 
                   } 
           });
+         $('#sch-result').fadeOut(100);
     });
 
-    var url = location.href;
-    var Firstindex = url.indexOf('/',3);
-    var Lastindex = url.indexOf('/',4);
     
-    var period = url.substring(Firstindex,Lastindex);
-
+    
     $('div').on('click','#LecPage',function(event){ 
 
            event.stopPropagation();
@@ -190,7 +203,7 @@ $(document).ready(function () {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-result').html(resp);
+               $('#sch-search-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){
@@ -199,6 +212,7 @@ $(document).ready(function () {
 
                   } 
           });
+         $('#sch-result').fadeOut(100);
     });
 
     $('div').on('click','#LecNext',function(event){ 
@@ -217,7 +231,7 @@ $(document).ready(function () {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-result').html(resp);
+               $('#sch-search-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){
@@ -226,6 +240,7 @@ $(document).ready(function () {
 
                   } 
           });
+         $('#sch-result').fadeOut(100);
     });
 
     

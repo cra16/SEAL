@@ -54,7 +54,9 @@ def SelectPeriod(request, period, page):
 			'TotalBoard':TotalBoard,
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
-			"PageInformation":PageInformation
+			"PageInformation":PageInformation,
+			'BestBoard':BestBoardView()
+		
 		}
 
 		# request.session['cur_page'] = cur_page + 1
@@ -108,7 +110,9 @@ def SearchSelectPeriod(request):
 			'TotalBoard':TotalBoard,
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
-			"PageInformation" : PageInformation
+			"PageInformation" : PageInformation,
+			'BestBoard':BestBoardView()
+		
 
 		}
 
@@ -175,6 +179,8 @@ def SelectLecture(request):
 
 			Dic = {
 			"my_lec_table": my_lec_table,
+			'BestBoard':BestBoardView()
+		
 			}
 			if request.flavour =='full':
 				return render_to_response('html/scheduleTable.html',Dic)
@@ -188,6 +194,8 @@ def SelectLecture(request):
 
 		Dic = {
 			"my_lec_table": my_lec_table,
+			'BestBoard':BestBoardView()
+		
 		}
 		if request.flavour =='full':
 				return render_to_response('html/scheduleTable.html',Dic)
@@ -226,8 +234,7 @@ def SearchSubject(request):
 		return HttpResponseRedirect("/mysite2")
 
  	if request.method =="POST":
- 		
-		category = request.POST['category']
+ 		category = request.POST['category']
 		major = request.POST['major']
 		SearchName = request.POST['SearchName']
 		Page = request.POST['Page']
@@ -272,7 +279,7 @@ def SearchSubject(request):
 				'SubjectCount':SubjectCount,
 				'SearchName':SearchName,
 				'PageInformation':PageInformation,
-				'TotalCount':TotalCount,
+				'total_page':TotalCount,
 				'cur_page':cur_page,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
@@ -289,7 +296,6 @@ def SearchSubject(request):
 		my_lec_table = MakeTable(request, my_profile)
 		Dic = {
 				'user': request.user,
-				'Data': 0,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
 				'BestBoard':BestBoardView()

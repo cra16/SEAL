@@ -130,36 +130,37 @@ def HisnetCheck(request):
 			else:
 				raise NotFoundStudentException
 
-			# 수강정보 들어가기 *에러발생 시 반복수행
-			sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")
-			sugang_button.click()
+			# # 수강정보 들어가기 *에러발생 시 반복수행
+			# sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")
+			# sugang_button.click()
 
-			# 시간표 읽어들이기
-			lecture_lst = []
-			for period in range(2,12):
-				for day in range(2,8):
-					detail = {}	# 딕셔너리 초기화
-					try:
-					# xpath 각각의 딕셔너리 사용 방법
-					# detail['name'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[1]" % (period, day)).text
-					# detail['prof'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[2]" % (period, day)).text
-					# detail['room'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[3]" % (period, day)).text
+			# # 시간표 읽어들이기
+			# lecture_lst = []
+			# for period in range(2,12):
+			# 	for day in range(2,8):
+			# 		detail = {}	# 딕셔너리 초기화
+			# 		try:
+			# 		# xpath 각각의 딕셔너리 사용 방법
+			# 		# detail['name'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[1]" % (period, day)).text
+			# 		# detail['prof'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[2]" % (period, day)).text
+			# 		# detail['room'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[3]" % (period, day)).text
 
-						# 텍스트로 분류 방법
-						t_text = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]" % (period, day)).text
-						t_lst = t_text.split('\n')
-						detail['name'] = t_lst[0]
-						detail['prof'] = t_lst[1]
-						detail['room'] = t_lst[2]
+			# 			# 텍스트로 분류 방법
+			# 			t_text = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]" % (period, day)).text
+			# 			t_lst = t_text.split('\n')
+			# 			detail['name'] = t_lst[0]
+			# 			detail['prof'] = t_lst[1]
+			# 			detail['room'] = t_lst[2]
 
-						# 시간표 찾기 위한 장치
-						detail['period'] = period
-						detail['day'] = day
+			# 			# 시간표 찾기 위한 장치
+			# 			detail['period'] = period
+			# 			detail['day'] = day
 
-						lecture_lst.append(detail)
-					except:
-						continue
-			ctx['lecture_lst'] = lecture_lst
+			# 			lecture_lst.append(detail)
+			# 		except:
+			# 			continue
+			# ctx['lecture_lst'] = lecture_lst
+			
 			if request.flavour =='full':
 				return render_to_response('html/register.html', ctx)
 			else:

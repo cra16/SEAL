@@ -126,21 +126,26 @@ def QnARead(request, offset): #Q&A read 기능
 			offset = int(offset)
 		except ValueError:
 			raise Http404()
+		QnABoard = QnA_Board.objects.filter().order_by('-id')
+		QnACount = QnABoard.count()
+		CurrentIndex = 0
 
-
-		Current = QnA_Board.objects.filter().get(id=offset) #고유 id로 글 정렬
+		for Board in QnABoard: 
+			if Board.id ==offset:
+				Current = Board
+				break
+			CurrentIndex+=1
 		Current.ClickScore +=1
 		Current.save()
 
-		QnACount = QnA_Board.objects.count()
-		if offset ==1:
-			Previous = 1
+		if CurrentIndex==0:
+			Previous = QnABoard[CurrentIndex].id
 		else:
-			Previous = offset-1
-		if offset == QnACount:
-			Next = QnACount
+			Previous = QnABoard[CurrentIndex-1].id
+		if QnACount<=  CurrentIndex+1:
+			Next = QnABoard[CurrentIndex].id
 		else:
-			Next = offset+1
+			Next = QnABoard[CurrentIndex+1].id
 
 		try:
 			QnA_Reply = Reply.objects.filter(QuestionID = Current.id)

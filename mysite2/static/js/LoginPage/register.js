@@ -60,7 +60,7 @@ $(document).ready(function(){
 				}
 				else{
 					alert(data);
-					window.location.href = "loginpractice.html"
+					window.location.href = "../Confirm"
 					return true;
 				}
 			});
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	});
 
 	$("#cancel").click(function(){
-		window.location.href = "loginpractice.html";
+		window.location.href = "../Confirm";
 	});
 
 });

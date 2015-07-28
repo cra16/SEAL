@@ -21,7 +21,6 @@ urlpatterns += patterns('schedule.views',
 	url(r'^Sel_lecture/$','SelectLecture'),
 	url(r'^Sel_periodLecture/$','SearchSelectPeriod'),
 	url(r'^Remove_lecture/$','RemoveLecture'),
-	url(r'^Sel_periodDelete/$', 'DeleteLecture')
 	)#schedule view
 
 urlpatterns += patterns('login.views',
@@ -55,7 +54,7 @@ urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
 	url(r'^Like/$','Like'),
-
+	url(r'^NotEmptyRecommend/$','Recommend_NotEmpty')
 )#recommend view
 
 urlpatterns += patterns('qna.views',
@@ -66,6 +65,7 @@ urlpatterns += patterns('qna.views',
 	url(r'^QnA/(\d+)/$','QnARead'),
 	url(r'^QnA/Reply/(\d+)$','QnA_Reply'),
 	url(r'^QnA/Replying/(\d+)$','QnA_Replying'),
+
 )
 
 urlpatterns += patterns('course.views',

@@ -22,16 +22,18 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	except:
 			raise Http404()
 
+	UserProfile=Profile.objects.get(User = request.user)
 	try:
-		RecommendData=Recommend_Course.objects.filter(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset),CreatedID = UserProfile),CreatedID =UserProfile) 
+		return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
 	except:
 		RecommendData=None
 
 	if RecommendData != None:
 		if request.flavour =='full':
-			return render_to_response('html/Not_Empty_Recommend.html')
+			return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
 		else:
-			return  render_to_response("m_skins/m_html/Not_Empty_Recommend.html")
+			return  HttpResponseRedirect("/mysite2/NotEmptyRecommend")
 	else:
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
@@ -45,24 +47,23 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		else:
 			return render_to_response("m_skins/m_html/recommend.html",dic)
 def Recommend_NotEmpty(request):
-	return HttpResponseRedirect("/mysite2")
+	if request.flavour =='full':
+			return render_to_response('html/Not_Empty_Recommend.html')
+	else:
+			return render_to_response("m_skins/m_html/Not_Empty_Recommend.html")
 @csrf_exempt
 def Recommend_Write(request): #추천 강의 DB입력
 
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	
+	ID=request.session['Recommend_ID']
+	UserProfile=Profile.objects.get(User = request.user)
 	try:
-		RecommendData=Recommend_Course.objects.filter(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=ID),CreatedID = UserProfile),CreatedID =UserProfile) 
+		return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
 	except:
 		RecommendData=None
 
-	if RecommendData != None:
-		if request.flavour =='full':
-			return render_to_response('html/Not_Empty_Recommend.html')
-		else:
-			return  render_to_response("m_skins/m_html/Not_Empty_Recommend.html")
-	
 	#form 가져오기
 	if request.method =="POST":
 		new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])

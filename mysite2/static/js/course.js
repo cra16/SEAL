@@ -217,8 +217,5 @@ for(var i=0; i<ccode.length; i++)
                 });
 
 });
-          history.pushState(null, null, location.href);
-window.onpopstate = function(event) {
-  history.go(1);
-};
+          
         });

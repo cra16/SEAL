@@ -28,7 +28,10 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 		
 		#강의 추천 3번이상 안했을 시 정보 안 보여줌
 		if UserData.RecommendCount <=2:
-			return render_to_response("Course_error.html")
+			if request.flavour =='full':
+					return render_to_response("html/Course_error.html")
+			else:
+				return render_to_response("m_skins/m_html/Course_error.html")
 		else:
 				try:
 					offset = int(offset)

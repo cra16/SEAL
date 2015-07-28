@@ -22,24 +22,6 @@ var sl1 = $('#sl1').slider(),
 
 $("[data-toggle=tooltip]").tooltip();
 
-$('#recommendbtn_d').on('click', function(){
-  var data1 = $('#sl1').data('slider').getValue(),
-      data2 = $('#sl2').data('slider').getValue(),
-      data3 = $('#sl3').data('slider').getValue(),
-      data4 = $('#sl4').data('slider').getValue(),
-      data5 = $('#sl5').data('slider').getValue(),
-      data6 = $('#sl6').data('slider').getValue();
-
-  $.post("../recommend.php", {data1: data1, data2: data2, data3: data3, data4: data4, data5: data5, data6: data6}, function(data){
-    if(data == 0){
-      alert("Touroku failed");
-    }
-    else{
-      alert(data);
-      window.location.href = "../html/index.html"
-    }
-  });
-});
 
 var checked = ['True', 'True', 'True', 'True', 'True', 'True'];
 
@@ -145,6 +127,6 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
-elikenum1.textContent = likenum1;
+
 
 });

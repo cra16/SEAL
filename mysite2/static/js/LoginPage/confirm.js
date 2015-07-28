@@ -10,7 +10,7 @@ $(document).ready(function(){
 			alert("Please fill in the fields.");
 		}
 		else{
-			$.post("confirm.php", {username1: username, password1: password, year1: year}, function(data){
+			/*$.post("confirm.php", {username1: username, password1: password, year1: year}, function(data){
 				if(data == 0){
 					$('input[type="text"], input[type="password"]').css({"border": "2px solid red", "box-shadow":"0 0 3px red"});
 					alert('Username or Password is wrong!');
@@ -21,11 +21,11 @@ $(document).ready(function(){
 				else{
 					alert(data);
 				}
-			});
+			});*/
 		}
 	});
 
 	$('#cancel').click(function(){
-		window.location.href = "loginpractice.html";
+		window.location.href = "../";
 	});
 });

@@ -24,7 +24,7 @@ def MyPage(request):	#MyPage 루트
 	dic = {'user':request.user,'BestBoard':BestBoardView()}
 		
 	if request.flavour =='full':
-			return render_to_response('html/sealmypage.html.html',dic)
+			return render_to_response('html/sealmypage.html',dic)
 	else:	
 			return render_to_response("m_skins/m_html/sealmypage.html", dic) 
 

@@ -23,7 +23,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 			raise Http404()
 
 	try:
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
+		RecommendData=Recommend_Course.objects.filter(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
 	except:
 		RecommendData=None
 
@@ -38,6 +38,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		dic = {'user':request.user,
               'BestBoard':BestBoardView(),
                'CourseBoard':CourseBoard,
+               'Recommend':RecommendData
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)
@@ -50,17 +51,37 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
+	
+	try:
+		RecommendData=Recommend_Course.objects.filter(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset)),CreatedID = Profile.objects.get(User = request.user)) 
+	except:
+		RecommendData=None
 
+	if RecommendData != None:
+		if request.flavour =='full':
+			return render_to_response('html/Not_Empty_Recommend.html')
+		else:
+			return  render_to_response("m_skins/m_html/Not_Empty_Recommend.html")
+	
 	#form 가져오기
 	if request.method =="POST":
 		new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
 		new_CreatedID = Profile.objects.get(User= request.user)
-		new_Speedy=request.POST['sl1']
-		new_Reliance=request.POST['sl2']
-		new_Helper=request.POST['sl3']
-		new_Question=request.POST['sl4']
-		new_Exam=request.POST['sl5']
-		new_Homework=request.POST['sl6']
+		
+		try:
+			new_Speedy=int(request.POST['sl1'])
+			new_Reliance=int(request.POST['sl2'])
+			new_Helper=int(request.POST['sl3'])
+			new_Question=int(request.POST['sl4'])
+			new_Exam=int(request.POST['sl5'])
+			new_Homework=int(request.POST['sl6'])
+		except:
+			new_Speedy=5
+			new_Reliance=5
+			new_Helper=5
+			new_Question=5
+			new_Exam=5
+			new_Homework=5
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)

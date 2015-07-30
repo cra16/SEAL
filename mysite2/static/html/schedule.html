@@ -136,8 +136,8 @@
               </div>
               [<span id="ccode{{forloop.counter}}" name="ccode" value="{{ lec.Course.Code }}">{{ lec.Course.Code }}</span>]
               <p><a href="/mysite2/Course/{{lec.Course.id}}"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.Course.CourseName }}">{{ lec.Course.CourseName }}</span></a></p>
-              <p><a href="#"><span id="csem{{forloop.counter}}" name = "cprof">{{lec.Course.Semester}} </span>학기</a></p>
-              <p><a href="#"><span id="cprof{{forloop.counter}}" value="{{ lec.Course.Professor }}">{{ lec.Course.Professor }}</span></a></p>
+              <p><a><span id="csem{{forloop.counter}}" name = "cprof">{{lec.Course.Semester}} </span>학기</a></p>
+              <p><a><span id="cprof{{forloop.counter}}" value="{{ lec.Course.Professor }}">{{ lec.Course.Professor }}</span></a></p>
               <span id = "sch-select-p" class="for-select-child">
                 <h3>
                   <span id="cperiod{{forloop.counter}}" name="cperiod" class="cperiod" value="{{ lec.Course.Period }}">{{ lec.Course.Period }}</span>

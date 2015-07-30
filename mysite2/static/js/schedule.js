@@ -69,7 +69,7 @@ $('#sch-result .button').click(function(event) {
                 } 
 
           });
-        $('#sch-search-result').fadeIn();
+         $('#sch-search-result').fadeIn();
           $('#sch-result').fadeOut(100);
 
     });

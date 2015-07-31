@@ -22,10 +22,10 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
         $(this).unbind("click");
         CurrentPage=$(this).parent().parent().parent().parent().parent().attr("id");
-        alert(CurrentPage);
+        
         $.ajax(
             { url : "/mysite2/Select_Course/",
-              data : {'Course' : $(this).val(),
+              data : {'Course' : $(this).text(),
                       'Page': "0",
                       'Current':CurrentPage
                     },

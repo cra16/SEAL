@@ -8,7 +8,26 @@ $(document).ready(function() {
       event.stopPropagation();
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
-          location.href = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_"+ '/' + 1
+          var link_page = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_/" + 1 + "/";
+          $.ajax(
+            { url : link_page,
+              data : {'major' : $('#major').val(),
+                      'category': $('#category').val(),
+                      'SearchName': $('#SearchName').val(),
+                      'Page': "0"
+                    },
+              sync : true,
+              type : "POST",
+              success:function(resp){  
+                  $('#sch-result').html(resp);
+    
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용                  
+                } 
+
+          });
         };
     });
 

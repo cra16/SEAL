@@ -196,7 +196,10 @@ $('#sch-result .button').click(function(event) {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period': $('#Period').attr("name")
+                    'Period': $('#Period').attr("name"),
+                    'SelectMajor': $('#SelectMajor').attr("name"),
+                    'SelectCategory': $('#SelectCategory').attr("name"),
+                    'SearchName': $('#SearchName').val() + ""
                     },
               
               datatype:"json",

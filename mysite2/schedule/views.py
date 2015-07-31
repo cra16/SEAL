@@ -12,6 +12,7 @@ from django.contrib.auth.models import User	# user model 등록
 
 
 # 시간표 선택시 검색 기능
+@csrf_exempt
 def SelectPeriod(request, period, page):
 	"""
 	period -> 테이블에서 선택한 강의시간
@@ -20,7 +21,19 @@ def SelectPeriod(request, period, page):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
 
-	else:
+	elif request.method =="POST":
+ 		category = request.POST['category']
+		major = request.POST['major']
+		SearchName = request.POST['SearchName']
+		Page = request.POST['Page']
+
+		SelectMajor=Major(major)
+		SelectCategory=Category(category)
+		if SelectMajor == "전체" :
+			SelectMajor=""
+		if SelectCategory=="전체":
+			SelectCategory= ""
+
 		cur_page = int(page)
 		# cur_page = request.session['cur_page']
 
@@ -28,13 +41,13 @@ def SelectPeriod(request, period, page):
 		end = 6 * cur_page
 		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
 			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
 		else:
-			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
 			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
+			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
@@ -55,15 +68,18 @@ def SelectPeriod(request, period, page):
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
 			"PageInformation":PageInformation,
-			'BestBoard':BestBoardView()
+			'BestBoard':BestBoardView(),
+			'SelectMajor':major,
+			'SelectCategory':category,
+			'SearchName':SearchName
 		
 		}
 
 		# request.session['cur_page'] = cur_page + 1
 		if request.flavour =='full':
-			return render_to_response('html/schedule.html',ctx)
+			return render_to_response('html/scheduleSearch.html',ctx)
 		else:
-			return render_to_response('m_skins/m_html/schedule.html', ctx)
+			return render_to_response('m_skins/m_html/scheduleSearch.html', ctx)
 
 @csrf_exempt
 def SearchSelectPeriod(request):
@@ -73,23 +89,32 @@ def SearchSelectPeriod(request):
 	"""
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
-	else:
-		if request.method=="POST":
-			period = request.POST['Period']
-			cur_page = int(request.POST['Page'])
+	elif request.method=="POST":
+		period = request.POST['Period']
+		cur_page = int(request.POST['Page'])
+		major = request.POST['SelectMajor']
+		category = request.POST['SelectCategory']
+		SearchName = request.POST['SearchName']
 		# cur_page = request.session['cur_page']
+
+		SelectMajor=Major(major)
+		SelectCategory=Category(category)
+		if SelectMajor == "전체" :
+			SelectMajor=""
+		if SelectCategory=="전체":
+			SelectCategory= ""
 
 		start = 6 * (cur_page-1)
 		end = 6 * cur_page
 		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
 			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
 		else:
-			DBCount = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1]).count()
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
 			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Semester=cur_semester, Period__contains=period[:-1])[start:end]
+			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
@@ -111,9 +136,10 @@ def SearchSelectPeriod(request):
 			"my_lec_table": my_lec_table,
 			"my_profile": my_profile,
 			"PageInformation" : PageInformation,
-			'BestBoard':BestBoardView()
-		
-
+			'BestBoard':BestBoardView(),
+			'SelectMajor':major,
+			'SelectCategory':category,
+			'SearchName':SearchName
 		}
 
 		# request.session['cur_page'] = cur_page + 1

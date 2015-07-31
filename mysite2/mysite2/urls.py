@@ -43,7 +43,8 @@ urlpatterns += patterns('index.views',
 	url(r'^SiteMap/$','SiteMap'),
 	url(r'^FirstPage/$','Page'),
 	url(r'^SecondPage/$','Page'),
-	url(r'^ThirdPage/$','Page')
+	url(r'^ThirdPage/$','Page'),
+	url(r'^Select_Course/$','CoursePage'),
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

@@ -100,7 +100,6 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-           $('#sch-search-result').fadeOut(100);
     
     });
 
@@ -127,7 +126,6 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-           $('#sch-search-result').fadeOut(100);
     
     });
 
@@ -152,8 +150,7 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-           $('#sch-search-result').fadeOut(100);
-    
+       
     });
 
 
@@ -182,7 +179,6 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-         $('#sch-result').fadeOut(100);
     });
 
     
@@ -212,7 +208,6 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-         $('#sch-result').fadeOut(100);
     });
 
     $('div').on('click','#LecNext',function(event){ 
@@ -240,7 +235,6 @@ $('#sch-result .button').click(function(event) {
 
                   } 
           });
-         $('#sch-result').fadeOut(100);
     });
 
     

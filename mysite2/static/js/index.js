@@ -18,6 +18,40 @@ $(document).ready(function() {
   });
     
     $('.fullscreen.modal').modal('show');
+$("div").on('click',"#cname",function(event){
+        event.stopPropagation();
+        $(this).unbind("click");
+        CurrentPage=$(this).parent().parent().parent().parent().parent().attr("id");
+        alert(CurrentPage);
+        $.ajax(
+            { url : "/mysite2/Select_Course/",
+              data : {'Course' : $(this).val(),
+                      'Page': "0",
+                      'Current':CurrentPage
+                    },
+              sync : true,
+              type : "POST",
+              success:function(resp){  
+                  
+                  if(CurrentPage=="FirstPage")
+                    $('#FirstPage').html(resp);
+                  else if(CurrentPage=="SecondPage")
+                    $('#SecondPage').html(resp);
+                  else if(CurrentPage=="AllPage")
+                    $('#AllPage').html(resp);
+                  else if(CurrentPage=="SearchPage")
+                    $('#SearchPage').html(resp);
+    
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용                  
+                } 
+
+          });
+         
+    });
     
 });
+
 

@@ -133,12 +133,17 @@ def Search(request): #과목 검색 기능
 		SearchData.upper()
 		#여기 문제
 		LectureData = [[]]
+		
 		try:
-			LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+			for lec in temp:
+				if lec['CourseName'] not in LectureData[0]:		
+					LectureData[0].append(Lecture.objects.filter(CourseName=lec['CourseName'])[0])
+	
 		except:
 			LectureData[0]=None
 
-		DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
+		DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
 		SearchCount=DataCount(5,DBCount)
 		if DBCount != 0 : 
 			L_Data=PageView(LectureData)
@@ -183,8 +188,10 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	PageInformation = request.session['SearchPageInformation']
 	PageInformation[1] = cur_page
 	LectureData = [[]]
-	LectureData[0]=Lecture.objects.filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
-	
+	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	for lec in temp:
+				if lec['CourseName'] not in LectureData[0]:		
+					LectureData[0].append(Lecture.objects.filter(CourseName=lec['CourseName'])[0])
 	
 	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
 	SearchCount = DataCount(5,DBCount)
@@ -209,8 +216,34 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	else:
 			return render_to_response('m_skins/m_html/SearchPage.html',dic )
 
-
-                                                                  
-
+@csrf_exempt
+def CoursePage(request):
+	try:
+			if request.POST['Page'] !="0":
+					cur_page = int(request.POST['Page'])
+			else:
+					cur_page = 1
+			Current = request.POST['Current']
+			CourseName = request.POST['Course']
+			if Current =="FirstPage":
+				Page = "0"
+			elif Current =="SecondPage":
+				Page ="1"
+			elif Current =="AllPage":
+				Page="2"
+	except ValueError:
+			raise Http404() 
+	
+	#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
+	
+	#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
+	template = SelectPageView(request.user, request.session['PageInformation'],cur_page,int(Page),CourseName)
+	
+	#왜 했는지 기억안남...
+	request.session['PageInformation'] = template['PageInformation']
+	if request.flavour =='full':
+		return render_to_response('html/SelectCourse.html',template)
+#	else:
+#		return render_to_response('m_skins/m_html/'+target[0],template)
 
 # Create your views here

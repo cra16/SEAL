@@ -62,7 +62,6 @@
               [<span id="ccode{{forloop.counter}}" name="ccode">{{ lec.Course.Code }}</span>]
               <p><a href="/mysite2/Course/{{lec.Course.id}}"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
                <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>               
-            {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
                 </div>
             {%endfor%}    
               

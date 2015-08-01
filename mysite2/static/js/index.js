@@ -18,6 +18,7 @@ $(document).ready(function() {
   });
     
     $('.fullscreen.modal').modal('show');
+
 $("div").on('click',"#cname",function(event){
         event.stopPropagation();
         $(this).unbind("click");
@@ -51,7 +52,117 @@ $("div").on('click',"#cname",function(event){
           });
          
     });
-    
+ 
+
+    $('div').on('click',"#CoursePage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+       
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':$('#cname').text()
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#CourseNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':$('#cname').text()
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+    $('div').on('click','#CoursePrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':$('#cname').text()
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+         
 });
 
 

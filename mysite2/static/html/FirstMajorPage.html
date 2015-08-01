@@ -11,7 +11,7 @@
 
                <div id="firstcourse" class="five wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
-                 <p id = "cname"><a><span id = "cname" class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                 <p id = "cname"><a href="/mysite2/Course/{{PBoard1.Course.id}}"<span id = "cname" class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                  <p><a><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>
                  <p><a><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></a></p>
                </div>
@@ -33,7 +33,7 @@
             </div>
 			
             {%endfor%}
-        			
+    {%if CourseName == None%}              			
 			<center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
               <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
@@ -52,6 +52,25 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-
-
+      {% else %}
+      <center><div id ="CoursePageNation" name="FirstPageNation" class="ui borderless pagination menu">
+              <a id ="CoursePrevious" name="{{PageInformation.0.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+      
+        {% for i in TotalCount.0%}
+         
+        {%if i == Page %}
+         <a id ="CoursePage" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="CoursePage" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
+{%endfor%}
+              <a id ="CourseNext" name = "{{PageInformation.0.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+        {%endif%}
+        {{Page}}
 <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

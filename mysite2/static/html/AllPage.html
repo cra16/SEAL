@@ -34,7 +34,7 @@
               </div>
             </div>
               {% endfor%} 
-			 
+			 {% if CourseName == None%}
 			  <center><div id ="ThirdPageNation" class="ui borderless pagination menu">
               <a id ="Previous" class="item" name="{{PageInformation.2.0}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous   
@@ -51,4 +51,25 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+            
+        {% else %}
+      <center><div id ="CoursePageNation" name="AllPageNation" class="ui borderless pagination menu">
+              <a id ="CoursePrevious" name="{{PageInformation.0.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+      
+        {% for i in TotalCount.0%}
+         
+        {%if i == Page %}
+         <a id ="CoursePage" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="CoursePage" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
+{%endfor%}
+              <a id ="CourseNext" name = "{{PageInformation.0.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+        {%endif%}
 <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

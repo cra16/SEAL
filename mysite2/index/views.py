@@ -71,13 +71,30 @@ def Page(request): #Main Page를 보여주는 함수
 			else:
 					cur_page = 1
 			Current = request.POST['Current']
+			if request.POST['Course'] !="null":
+				CourseName = request.POST['Course']
+			else:
+				CourseName = None
+
 	except ValueError:
 			raise Http404() 
+	if Current =="FirstPage" or Current =="FirstPageNation":
+		Page = "0"
+	elif Current =="SecondPage" or Current =="SecondPageNation":
+		Page ="1"
+	elif Current =="AllPage" or Current =="AllPageNation":
+		Page="2"
+
 	
-	#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
-	target = TargetTemplate(Current)
-	#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-	template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
+	if CourseName == None:
+		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
+		target = TargetTemplate(Current)
+		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
+		template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
+	else:
+		target = TargetTemplate(Current)
+
+		template = SelectPageView(request.user, request.session['PageInformation'],cur_page,int(Page),CourseName)
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']
@@ -216,34 +233,5 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	else:
 			return render_to_response('m_skins/m_html/SearchPage.html',dic )
 
-@csrf_exempt
-def CoursePage(request):
-	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
-			else:
-					cur_page = 1
-			Current = request.POST['Current']
-			CourseName = request.POST['Course']
-			if Current =="FirstPage":
-				Page = "0"
-			elif Current =="SecondPage":
-				Page ="1"
-			elif Current =="AllPage":
-				Page="2"
-	except ValueError:
-			raise Http404() 
-	
-	#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
-	
-	#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-	template = SelectPageView(request.user, request.session['PageInformation'],cur_page,int(Page),CourseName)
-	
-	#왜 했는지 기억안남...
-	request.session['PageInformation'] = template['PageInformation']
-	if request.flavour =='full':
-		return render_to_response('html/SelectCourse.html',template)
-#	else:
-#		return render_to_response('m_skins/m_html/'+target[0],template)
 
 # Create your views here

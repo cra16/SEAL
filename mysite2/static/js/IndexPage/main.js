@@ -98,7 +98,8 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':"null"
                     },
               
               datatype:"json",
@@ -135,7 +136,8 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':"null"
                     },
               
               datatype:"json",
@@ -169,7 +171,8 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':"null"
                     },
               
               datatype:"json",

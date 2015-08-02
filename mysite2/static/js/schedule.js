@@ -43,13 +43,11 @@ $('#sch-result .button').click(function(event) {
         event.stopPropagation();
         $('#sch-result').fadeOut(100);
     });
-    $('#sch-search-result .button').click(function(event) {
-       event.stopPropagation();
-        $('#sch-search-result').fadeOut(100);
-    });
     $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");
+         
+ 
         $.ajax(
             { url : "/mysite2/Schedule/",
               data : {'major' : $('#major').val(),
@@ -60,8 +58,8 @@ $('#sch-result .button').click(function(event) {
               sync : true,
               type : "POST",
               success:function(resp){  
-                  $('#sch-search-result').html(resp);
-    
+                  $('#sch-result').html(resp);
+                   
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -69,9 +67,9 @@ $('#sch-result .button').click(function(event) {
                 } 
 
           });
-         $('#sch-search-result').fadeIn();
-          $('#sch-result').fadeOut(100);
-
+                            $('#sch-result').fadeIn();
+  
+        $("div").off("click","#sch-search");  
     });
     $('*').keypress(function(e){
 
@@ -170,7 +168,7 @@ $('#sch-result .button').click(function(event) {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-search-result').html(resp);
+               $('#sch-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){
@@ -199,7 +197,7 @@ $('#sch-result .button').click(function(event) {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-search-result').html(resp);
+               $('#sch-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){
@@ -226,7 +224,7 @@ $('#sch-result .button').click(function(event) {
               type : "POST",
               async:true,
               success:function(resp){     
-               $('#sch-search-result').html(resp);
+               $('#sch-result').html(resp);
                 
                 },
                 error: function(xhr, option, error){

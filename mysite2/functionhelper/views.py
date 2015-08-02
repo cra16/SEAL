@@ -153,22 +153,24 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		   'PageInformation' : PageInformation,
 		   'T_Count':T_Count,
 		   'Page':PageNumber,
-		   'BestBoard':BestBoard
+		   'BestBoard':BestBoard,
+		   'CourseName':None
 		   }
 
 	return dic
 #MainPage Template설정
 def TargetTemplate(Current):
 	target = ["",""]
-	if Current =="FirstPageNation":
+	if Current =="FirstPageNation" or Current =="FirstPage":
 		target[0] = "FirstMajorPage.html"
 		target[1] = "0"
-	elif Current =="SecondPageNation":
+	elif Current =="SecondPageNation" or Current =="SecondPage":
 		target[0] = "SecondPage.html"
 		target[1] ="1"
-	else:
+	elif Current =="AllPageNation" or Current =="AllPage":
 		target[0] = "AllPage.html"
 		target[1] = "2"
+
 	return target
 
 #전공 코드 쏘는 기능
@@ -344,3 +346,75 @@ def BestBoardView():
 			BestBoard[2] = Board
 
 	return BestBoard
+
+def SelectPageView(user, pageinformation,PageNumber,MajorNumber,CourseName):
+	#login view에서 사용하는 MainPageView와 로그인 되었을때 mainPageView가 조금씩 달라서 설정
+	if pageinformation !=None:
+			User = user
+			PageInformation=pageinformation
+	else:
+		User= user
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageNumber=1
+		MajorNumber=0
+
+
+	#user의 전공에 따른 전공 코드를 뿌려줌
+	CourseCode = MajorSelect(User)
+	
+	#2차원 list로 각 전공당 총 페이지 수 저장
+	T_Count=[[] ,[] ,[]]
+	if CourseCode[0] !="ENG":
+		DBCount1=Lecture.objects.filter(CourseName__contains = CourseName).count()
+		DBCount2=Lecture.objects.filter(CourseName__contains = CourseName).count()
+		T_Count[0] = DataCount(5,DBCount1)
+		T_Count[1] = DataCount(5,DBCount2)
+	else:
+		DBCount1=Lecture.objects.filter(CourseName__contains = CourseName).count()
+		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
+		T_Count[0] = DataCount(5,DBCount1)
+		T_Count[1] = DataCount(5,DBCount1)
+	DBCount3=Lecture.objects.count()
+	T_Count[2] = DataCount(5,DBCount3)
+	
+	#현재 페이지 위치정보
+	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+	PageInformation[MajorNumber][1] = PageNumber
+
+	temp=[]
+	#각 강의 전공에 해당하는 DB 정보 저장 함 
+	TotalBoard = [[],[],[]]
+	if CourseCode[0] !="ENG":
+		TotalBoard[0]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	else:		
+		TotalBoard[0]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	
+		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+			
+	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
+	PageBoard = PageView(TotalBoard)
+	##Session Save
+	
+
+	# 페이지 총 수(페이지 넘길 때)
+	TotalCount=list()
+	for i in range(0,len(T_Count)):
+		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	#추천많이받은 순으로 보여주는 Board
+	BestBoard = BestBoardView()
+
+	dic = {'user':User,
+		   'PageBoard':PageBoard,
+		   'TotalCount' : TotalCount,
+		   'PageInformation' : PageInformation,
+		   'T_Count':T_Count,
+		   'Page':PageNumber,
+		   'BestBoard':BestBoard,
+		   'CourseName':CourseName
+		   }
+
+	return dic

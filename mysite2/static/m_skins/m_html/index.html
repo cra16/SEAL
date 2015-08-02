@@ -1,5 +1,5 @@
 <!doctype html>
-{% extends "html/base.html" %}
+{% extends "m_skins/m_html/base.html" %}
 
    
    
@@ -61,7 +61,7 @@
 
                <div id="firstcourse" class="nine wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
-                 <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                 <p><a><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                  <p><a href="#"><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>
                  <p><a href="#"><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></a></p>
                </div>

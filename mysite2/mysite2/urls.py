@@ -43,7 +43,8 @@ urlpatterns += patterns('index.views',
 	url(r'^SiteMap/$','SiteMap'),
 	url(r'^FirstPage/$','Page'),
 	url(r'^SecondPage/$','Page'),
-	url(r'^ThirdPage/$','Page')
+	url(r'^ThirdPage/$','Page'),
+	url(r'^Select_Course/$','Page'),
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',
@@ -70,7 +71,7 @@ urlpatterns += patterns('qna.views',
 
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
-	url(r'^CoursePageNation/(\d+)$','CoursePage'),
+	url(r'^CoursePageNation/(\d+)$','Page'),
 ) # course view
 
 urlpatterns += patterns('notice.views',

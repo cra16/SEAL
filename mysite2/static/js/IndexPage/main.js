@@ -132,7 +132,6 @@ $(document).ready(function() {
      
 
 
-
     });
 
     $('div').on('click','#Next',function(){
@@ -181,7 +180,7 @@ $(document).ready(function() {
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-            var Course = "null";
+          var Course = "null";
 
           if(CurrentPage=="SearchPageNation")
             Course = $('#CourseName').val();

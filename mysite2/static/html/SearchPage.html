@@ -83,7 +83,7 @@
               {%endfor%}
                      
              <center><div id = "SearchPageNation" class="ui borderless pagination menu">
-              <a id="Previous" name ="{{PageInformation.0.0}" class="item" >
+              <a id="Previous" name ="{{PageInformation.0.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 
@@ -95,6 +95,7 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
+            <input type ="hidden" id = "CourseName" value ="{{PageBoard.0.0.Course.CourseName}}">
 
             {%endif%}
 

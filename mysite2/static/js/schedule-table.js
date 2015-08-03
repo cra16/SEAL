@@ -20,13 +20,12 @@ $(document).ready(function() {
               type : "POST",
               success:function(resp){  
                   $('#sch-result').html(resp);
-    
+                  $('#sch-result').fadeIn();
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
                   alert(error); //오류내용                  
                 } 
-
           });
         };
     });

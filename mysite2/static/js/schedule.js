@@ -33,12 +33,11 @@ $(document).ready(function () {
               alert(xhr.status);
               alert(error);
             }
-
           });
-          $('#sch-result').fadeOut(100);
-      });    
+        $("#sch-result").fadeOut(100);
+      });
     });
-    
+
     $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");

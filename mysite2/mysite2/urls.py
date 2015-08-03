@@ -10,8 +10,9 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)), 
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^update/$','lecture.views.lec_update'),
-		url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation')
-	
+	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
+	url(r'^CoursePageNation/(\d+)$','index.views.Page'),
+
 )
 
 urlpatterns += patterns('schedule.views',
@@ -71,7 +72,6 @@ urlpatterns += patterns('qna.views',
 
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
-	url(r'^CoursePageNation/(\d+)$','Page'),
 ) # course view
 
 urlpatterns += patterns('notice.views',

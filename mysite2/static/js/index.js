@@ -40,8 +40,8 @@ $("div").on('click',"#cname",function(event){
                     $('#SecondPage').html(resp);
                   else if(CurrentPage=="AllPage")
                     $('#AllPage').html(resp);
-                  else if(CurrentPage=="SearchPage")
-                    $('#SearchPage').html(resp);
+                  else if(CurrentPage=="Search_Page")
+                    $('#Search_Page').html(resp);
     
                 },
                 error: function(xhr, option, error){

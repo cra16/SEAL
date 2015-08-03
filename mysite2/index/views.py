@@ -228,7 +228,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'BestBoard':BestBoardView(),
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
-				'T_Count' : T_Count,
+				'TotalCount' : T_Count,
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)

@@ -368,12 +368,12 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,CourseName):
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[]]
 	if CourseCode[0] !="ENG":
-		DBCount1=Lecture.objects.filter(CourseName__contains = CourseName).count()
-		DBCount2=Lecture.objects.filter(CourseName__contains = CourseName).count()
+		DBCount1=Lecture.objects.filter(CourseName = CourseName).count()
+		DBCount2=Lecture.objects.filter(CourseName = CourseName).count()
 		T_Count[0] = DataCount(5,DBCount1)
 		T_Count[1] = DataCount(5,DBCount2)
 	else:
-		DBCount1=Lecture.objects.filter(CourseName__contains = CourseName).count()
+		DBCount1=Lecture.objects.filter(CourseName = CourseName).count()
 		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
 		T_Count[0] = DataCount(5,DBCount1)
 		T_Count[1] = DataCount(5,DBCount1)
@@ -388,15 +388,15 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,CourseName):
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
-		TotalBoard[0]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		TotalBoard[1]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[0]=Lecture.objects.filter(CourseName = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1]=Lecture.objects.filter(CourseName = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	else:		
-		TotalBoard[0]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		TotalBoard[1]=Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[0]=Lecture.objects.filter(CourseName = CourseName)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1]=Lecture.objects.filter(CourseName = CourseName)[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	TotalBoard[2] = Lecture.objects.filter(CourseName__contains = CourseName)[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+	TotalBoard[2] = Lecture.objects.filter(CourseName = CourseName)[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 			
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
 	PageBoard = PageView(TotalBoard)

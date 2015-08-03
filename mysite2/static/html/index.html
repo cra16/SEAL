@@ -191,7 +191,7 @@
       </div>
       {%endif%}
 
-          <div id = "SearchPageNation">
+          <div id = "Search_Page">
           {% if not Search == None  %}
             {% if Search.0 != None%}
             {% for SBoard in Search.0%}
@@ -227,7 +227,7 @@
           
               {%endfor%}
          
-             <center><div class="ui borderless pagination menu">
+             <center><div id = "SearchPageNation" class="ui borderless pagination menu">
               <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>

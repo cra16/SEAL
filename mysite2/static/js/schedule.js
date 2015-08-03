@@ -35,18 +35,13 @@ $(document).ready(function () {
             }
 
           });
-          
+          $('#sch-result').fadeOut(100);
       });    
     });
     
-$('#sch-result .button').click(function(event) {
-        event.stopPropagation();
-        $('#sch-result').fadeOut(100);
-    });
     $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");
-         
  
         $.ajax(
             { url : "/mysite2/Schedule/",
@@ -67,10 +62,10 @@ $('#sch-result .button').click(function(event) {
                 } 
 
           });
-                            $('#sch-result').fadeIn();
-  
+        $('#sch-result').fadeIn();
         $("div").off("click","#sch-search");  
     });
+
     $('*').keypress(function(e){
 
       if(e.keyCode==13)
@@ -113,10 +108,7 @@ $('#sch-result .button').click(function(event) {
                     },
               type : "POST",
               success:function(resp){  
-       
                   $('#sch-result').html(resp);
-                   
-                      
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

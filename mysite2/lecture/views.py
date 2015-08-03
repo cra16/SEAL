@@ -6,7 +6,15 @@ import xlrd
 # Create your views here.
 
 def lec_update(request):
-	semester_lst = ['11-1', '11-2', '11-Summer', '11-Winter', '12-1', '12-2', '12-Summer', '12-Winter', '13-1', '13-2', '13-Summer', '13-Winter', '14-1', '14-2', '14-Summer', '14-Winter']
+	semester_lst = [
+	'11-1', '11-2', '11-Summer', '11-Winter', 
+	'12-1', '12-2', '12-Summer', '12-Winter', 
+	'13-1', '13-2', '13-Summer', '13-Winter', 
+	'14-1', '14-2', '14-Summer', '14-Winter',
+	'15-1', '15-2', '15-Summer'
+	]
+	semester_lst.sort(reverse=True)
+	
 	file_location = "/opt/bitnami/apps/django/django_projects/darkzero/mysite2/gasul_table/"
 	# 학부별 정리
 	for semester in semester_lst:

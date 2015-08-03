@@ -183,8 +183,10 @@ $(document).ready(function() {
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPageNation")
                         $('#SecondPage').html(resp);
-                  else
+                  else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else
+                        $('#SearchPageNation').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -289,7 +291,7 @@ $(document).ready(function() {
 
     });
 
-
+      
 });
 
 

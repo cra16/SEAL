@@ -1,15 +1,51 @@
 
 {% load staticfiles %}
-
-{% for PBoard1 in PageBoard.0%}
+    {%if CourseName == None%}              			
+      {% for PBoard1 in PageBoard.0%}
                       
             <div class="ui raised segment grid">
-               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide computer column">
-			           	 <center><button id="likebutton" name = "{{PBoard1.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
-				            <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
+               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
+                   <center><button id="likebutton" name = "{{PBoard1.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                    <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
                </div>
 
-               <div id="firstcourse" class="five wide computer column">
+               <div id="firstcourse" class="five wide column">
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
+                 <p id = "cname"><a href="/mysite2/Course/{{PBoard1.Course.id}}"<span id = "cname" class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+               </div>
+
+            </div>
+      
+            {%endfor%}
+
+			<center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+			
+				{% for i in TotalCount.0%}
+        				 
+        {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
+{%endfor%}
+              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+      {% else %}
+      {% for PBoard1 in PageBoard.0%}
+                      
+            <div class="ui raised segment grid">
+               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
+                   <center><button id="likebutton" name = "{{PBoard1.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
+                    <center><span id="likenum{{forloop.counter}}"></span>{{PBoard1.Total_Count}} LIKES</center>
+               </div>
+
+               <div id="firstcourse" class="five wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                  <p id = "cname"><a href="/mysite2/Course/{{PBoard1.Course.id}}"<span id = "cname" class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                  <p><a><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>
@@ -29,31 +65,11 @@
                   <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
                   <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
                   <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
-
                </div>
             </div>
-			
+      
             {%endfor%}
-    {%if CourseName == None%}              			
-			<center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
-              </a>
-			
-				{% for i in TotalCount.0%}
-				 
-        {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
-        
-        {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
-        {%endif%}
-{%endfor%}
-              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
-                Next <i class="glyphicon glyphicon-menu-right"></i>
-              </a>
-            </div></center>
-      {% else %}
+
       <center><div id ="CoursePageNation" name="FirstPageNation" class="ui borderless pagination menu">
               <a id ="CoursePrevious" name="{{PageInformation.0.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous

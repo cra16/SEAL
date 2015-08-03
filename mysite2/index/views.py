@@ -82,8 +82,10 @@ def Page(request): #Main Page를 보여주는 함수
 		Page = "0"
 	elif Current =="SecondPage" or Current =="SecondPageNation":
 		Page ="1"
-	elif Current =="AllPage" or Current =="AllPageNation":
+	elif Current =="ThirdPage" or Current =="ThirdPageNation":
 		Page="2"
+	else:
+		Page ="0"
 
 	
 	if CourseName == None:

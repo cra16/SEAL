@@ -167,9 +167,12 @@ def TargetTemplate(Current):
 	elif Current =="SecondPageNation" or Current =="SecondPage":
 		target[0] = "SecondPage.html"
 		target[1] ="1"
-	elif Current =="AllPageNation" or Current =="AllPage":
+	elif Current =="ThirdPageNation" or Current =="ThirdPage":
 		target[0] = "AllPage.html"
 		target[1] = "2"
+	else:
+		target[0] = "SearchPage.html"
+		target[1] = "0"
 
 	return target
 

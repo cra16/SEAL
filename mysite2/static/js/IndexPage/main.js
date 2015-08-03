@@ -90,16 +90,21 @@ $(document).ready(function() {
         });
 */
 
+
+
         $('div').on('click',"#Page",function(event){
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
+          var Course = "null";
 
+          if(CurrentPage=="SearchPageNation")
+            Course = $('#CourseName').val();
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':"null"
+                      'Course':Course
                     },
               
               datatype:"json",
@@ -110,8 +115,10 @@ $(document).ready(function() {
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPageNation")
                         $('#SecondPage').html(resp);
-                  else
+                  else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else
+                      $('#Search_Page').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -132,12 +139,17 @@ $(document).ready(function() {
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
+          var Course = "null";
 
+          if(CurrentPage=="SearchPageNation")
+            Course = $('#CourseName').val();
+        
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':"null"
+                      'Course':Course
+                      
                     },
               
               datatype:"json",
@@ -148,8 +160,10 @@ $(document).ready(function() {
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPageNation")
                         $('#SecondPage').html(resp);
-                  else
+                  else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else
+                      $('#Search_Page').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -167,12 +181,16 @@ $(document).ready(function() {
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
+            var Course = "null";
 
+          if(CurrentPage=="SearchPageNation")
+            Course = $('#CourseName').val();
+        
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':"null"
+                      'Course':Course
                     },
               
               datatype:"json",
@@ -186,7 +204,7 @@ $(document).ready(function() {
                   else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
                   else
-                        $('#SearchPageNation').html(resp);
+                        $('#Search_Page').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -208,14 +226,15 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/SearchPage/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':$("#cname").text()
                     },
               
               datatype:"json",
               type : "POST",
               async:true,
               success:function(resp){     
-                       $('#SearchPageNation').html(resp);
+                       $('#Search_Page').html(resp);
                  },
                 error: function(xhr, option, error){
                   alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
@@ -240,7 +259,8 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/SearchPage/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':$("#cname").text()
                       
                     },
               
@@ -248,7 +268,7 @@ $(document).ready(function() {
               type : "POST",
               async:true,
               success:function(resp){     
-                  $('#SearchPageNation').html(resp);
+                  $('#Search_Page').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
@@ -270,14 +290,15 @@ $(document).ready(function() {
         $.ajax(
             { url : "/mysite2/SearchPage/",
               data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Course':$("#cname").text()
                     },
               
               datatype:"json",
               type : "POST",
               async:true,
               success:function(resp){     
-                  $('#SearchPageNation').html(resp);
+                  $('#Search_Page').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //ì˜¤ë¥˜ì½”ë“œ
@@ -288,9 +309,9 @@ $(document).ready(function() {
           });
 
 
+    alert($("#cname").text());
 
     });
-
       
 });
 

@@ -10,9 +10,10 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)), 
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^update/$','lecture.views.lec_update'),
+	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
+	url(r'^CurUpdate/$','lecture.views.auto_lec_update'),
 	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
 	url(r'^CoursePageNation/(\d+)$','index.views.Page'),
-
 )
 
 urlpatterns += patterns('schedule.views',

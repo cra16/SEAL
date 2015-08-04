@@ -1,19 +1,5 @@
 $(document).ready(function () {
 
-/*  var ccode = document.getElementsByName('ccode')
-  var cname = document.getElementsByName('cname')
-  var cprof = document.getElementsByName('cprof')
-  var likenum1 = 5; 
-  var elikenum1 = document.getElementById('likenum1');
-
-
-  for(var i=0; i<ccode.length; i++)
-  {
-    ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
-    cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
-    cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
-  }*/
-    
     $("#sch-result").find(".for-select-child").each(function(i, e){
          event.stopPropagation();
           $(this).unbind("click");
@@ -26,6 +12,7 @@ $(document).ready(function () {
                     "cperiod" : $("#cperiod" + (i+1)).text()
                   },
             type : "POST",
+            async : false,
             success:function(resp){
               $('#rt_table').html(resp);
             },
@@ -157,7 +144,7 @@ $(document).ready(function () {
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async:false,
               success:function(resp){     
                $('#sch-result').html(resp);
                 
@@ -189,7 +176,7 @@ $(document).ready(function () {
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async:false,
               success:function(resp){     
                $('#sch-result').html(resp);
                 
@@ -216,7 +203,7 @@ $(document).ready(function () {
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async:false,
               success:function(resp){     
                $('#sch-result').html(resp);
                 

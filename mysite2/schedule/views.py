@@ -10,6 +10,7 @@ from functionhelper.views import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User	# user model 등록
 
+cur_semester = '15-2'
 
 # 시간표 선택시 검색 기능
 @csrf_exempt
@@ -39,7 +40,7 @@ def SelectPeriod(request, period, page):
 
 		start = 6 * (cur_page-1)
 		end = 6 * cur_page
-		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
+		# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
 			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
 			lec_cnt = DataCount(6,DBCount)
@@ -106,7 +107,7 @@ def SearchSelectPeriod(request):
 
 		start = 6 * (cur_page-1)
 		end = 6 * cur_page
-		cur_semester = '14-2'	# 데이터가 많으므로 현재 학기만 가져오도록 한다.
+		# 데이터가 많으므로 현재 학기만 가져오도록 한다.
 		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
 			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
 			lec_cnt = DataCount(6,DBCount)
@@ -240,7 +241,7 @@ def RemoveLecture(request):
 		## 나의 강의목록 제거하기
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 
-		my_lec = Lecture.objects.filter(Code=ccode, Class=cclass, Semester="14-2")[0]
+		my_lec = Lecture.objects.filter(Code=ccode, Class=cclass, Semester=cur_semester)[0]
 		my_profile.MyLecture.remove(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)

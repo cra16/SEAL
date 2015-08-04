@@ -152,12 +152,22 @@ def Search(request): #과목 검색 기능
 		SearchData.upper()
 		#여기 문제
 		LectureData = [[]]
-		
+		TotalAdd=[]
+		j=0
 		try:
 			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
 			for lec in temp:
-				if lec['CourseName'] not in LectureData[0]:		
+
+					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
 					LectureData[0].append(Lecture.objects.filter(CourseName=lec['CourseName'])[0])
+					total=0
+					for tolec in A:
+						try:
+								Eval=Total_Evaluation.objects.get(Course=tolec)
+								total += Eval.Total_Count
+						except:
+							continue
+					TotalAdd.append(total)
 	
 		except:
 			LectureData[0]=None
@@ -184,6 +194,7 @@ def Search(request): #과목 검색 기능
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
 				'T_Count':T_Count,
+				'TotalAdd':TotalAdd
 			}
 		if request.flavour =='full':
 			return render_to_response('html/index.html',dic)
@@ -207,11 +218,21 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	PageInformation = request.session['SearchPageInformation']
 	PageInformation[1] = cur_page
 	LectureData = [[]]
+	TotalAdd=[]
+	j=0
 	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	for lec in temp:
 				if lec['CourseName'] not in LectureData[0]:		
+					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
 					LectureData[0].append(Lecture.objects.filter(CourseName=lec['CourseName'])[0])
-	
+					total=0
+					for tolec in A:
+						try:
+							Eval=Total_Evaluation.objects.get(Course=tolec)
+							total += Eval.Total_Count  
+						except:
+							continue
+					TotalAdd.append(total)
 	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
 	SearchCount = DataCount(5,DBCount)
 
@@ -229,6 +250,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
+				'TotalAdd':TotalAdd
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)

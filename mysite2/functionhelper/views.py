@@ -116,7 +116,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('CourseName')[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
 		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('CourseName')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
 		i=0
-		j=0
+		
 		for t in temp:
 			for lec in t:
 				A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -128,15 +128,15 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 							total += Eval.Total_Count  
 					except:
 						continue
-					TotalAdd[i].append(total)		
-			j+=1
+				TotalAdd[i].append(total)		
+			
 		i+=1	
 	else:
 		
 		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
 		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
 		i=0
-		j=0;
+		
 		for t in temp:
 			for lec in t:
 				if lec['CourseName'] not in TotalBoard[i]:

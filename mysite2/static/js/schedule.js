@@ -26,6 +26,7 @@ $(document).ready(function () {
                     "cperiod" : $("#cperiod" + (i+1)).text()
                   },
             type : "POST",
+            async : false,
             success:function(resp){
               $('#rt_table').html(resp);
             },
@@ -49,7 +50,7 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': "0"
                     },
-              sync : true,
+              async : false,
               type : "POST",
               success:function(resp){  
                   $('#sch-result').html(resp);

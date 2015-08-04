@@ -36,7 +36,7 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': "0"
                     },
-              sync : true,
+              async : false,
               type : "POST",
               success:function(resp){  
                   $('#sch-result').html(resp);

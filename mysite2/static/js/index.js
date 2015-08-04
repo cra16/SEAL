@@ -38,8 +38,8 @@ $("div").on('click',"#cname",function(event){
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")
                     $('#SecondPage').html(resp);
-                  else if(CurrentPage=="AllPage")
-                    $('#AllPage').html(resp);
+                  else if(CurrentPage=="ThirdPage")
+                    $('#ThirdPage').html(resp);
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
     

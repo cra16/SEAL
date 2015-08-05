@@ -25,14 +25,17 @@
         <div class="box" id="mycontent-left">
             <h class="title1 hidden-xs">SEAL</h>
             <p class="title2 visible-xs">SEAL</p>
-               <p class="detail">Students' Excellent Achievement in Learning</p>
-            <p class="detail2">설명1</p>
-            <p class="detail2">설명2</p>
+               <p class="detail">Students' Excellent Achievement</p>
+               <p class="detail"> in Learning</p>
+               <br></br>
+            <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+            <p class="detail2">강의추천 및 강의정보 열람서비스입니다.</p>
+            <br></br>
+            <p>Powered by CRA</p>
         </div>
          
 
         <div class="box" id="mycontent-right">
-
 
           <form action = "/mysite2" method ="POST">{%csrf_token%}
 
@@ -43,9 +46,13 @@
               <input type="password" id="UserPassword" name ="UserPassword" class="form-control" placeholder="비밀번호">
             </div>
 
-            <div class="form-group" method="post">
-              <input type="submit" id="login" value="Login" class="btn btn-info">
-			        <input type="button" id="register" value="Register" class="btn btn-info">
+              <p></p>
+            <div class="form-group" method="post">            
+              <div class="ui medium buttons">
+                <input type="submit" id="login" value="Login" class="ui blue button">
+                <div class="or"></div>
+                <input type="button" id="register" value="Register" class="ui blue button">
+              </div>
             </div>
 
           </form>

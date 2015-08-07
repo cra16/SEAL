@@ -137,6 +137,11 @@ $("div").on('click',"#cname",function(event){
 
     });
 
+    $('.ui.sticky').sticky({
+      context: '#sticky',
+      pushing: true
+    });
+
     $('div').on('click','#CoursePrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");

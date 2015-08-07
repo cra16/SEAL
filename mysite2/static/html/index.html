@@ -30,13 +30,10 @@
 
     <div class="col-md-8 col-sm-10 col-xs-10">
 
-
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
-
-      
-  
+        
       {%if Search == None%}
       <div class="ui small tabular filter menu">
         <a id="FirstMajor" class="active item" data-tab="unread">1전공</a>
@@ -47,7 +44,7 @@
 
      
       <div class="ui very relaxed column grid">
-        <div class="column">
+        <div class="column" id="sticky">
 
           <div class="right ui rail" style="min-height: 263px;">
             <div class="ui sticky" style="left: 1000px; width: 272ps; height: 263px;">
@@ -100,11 +97,13 @@
             </div>
           </div>
 
+
     {%if Search == None%}
     <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
      {% for PBoard1 in PageBoard.0%}
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
+
           {% endif %}
             <div class="column">
              <div class="ui raised segment">
@@ -286,12 +285,13 @@
                   데이터가 없습니다.
             {%endif%}
             {%endif%}
-      </div>
+        </div>
+
         <div class="ui divider"></div>
 
                               
-        </div>
-      </div>
+      </div>        
+    </div>
 
 
 

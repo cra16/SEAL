@@ -3,11 +3,11 @@ $(document).ready(function () {
       $("#sch-result").on("click","#sch-select",function(){
           event.stopPropagation();
           $(this).unbind("click");
-                 var parent=$(this).parent().parent().parent();
-                 var Code = parent.find("[id=ccode]").text();
-                  var name = parent.find("[id=cname]").text();
-                  var prof = parent.find("[id=cprof]").text();
-                  var period = $(this).parent().find("[id=cperiod]").text();
+          var parent=$(this).parent().parent().parent();
+          var Code = parent.find("[id=ccode]").text();
+          var name = parent.find("[id=cname]").text();
+          var prof = parent.find("[id=cprof]").text();
+          var period = $(this).parent().find("[id=cperiod]").text();
              
         $.ajax(
           { url : "/mysite2/Sel_lecture/",

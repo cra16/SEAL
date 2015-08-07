@@ -54,7 +54,9 @@
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.0|lookup:forloop.counter0}}</span> LIKES</center>
               </div>             
                  
+
               <div id="firstcourse" class="five wide column">
+
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                 <p><a><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></a></p>

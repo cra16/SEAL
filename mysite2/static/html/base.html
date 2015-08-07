@@ -157,63 +157,21 @@
 
     </div>
 
-    <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
-                    
-      <h3><a href="/mysite2/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
-
-      <p><span id="label"><a href="/mysite2/MyCourse">내가 추천한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
-
-      <p id="last"><span id="label"><a href="/mysite2/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
-
-      <a href="/mysite2/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
-
-    </profile>
-
-    <best id="best" class="col-md-2 col-sm-2 col-xs-2">
-                    
-      <h3 id="best-title">BEST COURSES</h3>
-
-      <span id="best-list">   
-        <h3 class="col-md-1 col-sm-1 col-xs-1">
-          <span id="num1"><a href="/mysite2/Course/{{BestBoard.0.Course.id}}">1</a></span>
-          <span id="num2"><a href="/mysite2/Course/{{BestBoard.1.Course.id}}">2</a></span>
-          <span id="num3"><a href="/mysite2/Course/{{BestBoard.2.Course.id}}">3</a></span>
-        </h3>
-
-        <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename1">{{BestBoard.0.Course.CourseName|truncatechars:10}}</span><br />
-          <span id="pname1">{{BestBoard.0.Course.Professor}} 교수님</span><br />
-          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">{{BestBoard.0.Total_Count}} </span>Likes</span>
-        </p>
-
-        <p id="second-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename2">{{BestBoard.1.Course.CourseName|truncatechars:10}}</span><br />
-          <span id="pname2">{{BestBoard.1.Course.Professor}} 교수님</span><br />
-          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">{{BestBoard.1.Total_Count}}</span> Likes</span>
-        </p>
-
-        <p id="third-place" class="col-md-9 col-sm-9 col-xs-9">
-          <span id="coursename3">{{BestBoard.2.Course.CourseName|truncatechars:10}}</span><br />
-          <span id="pname3">{{BestBoard.2.Course.Professor}} 교수님</span><br />
-          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">{{BestBoard.2.Total_Count}}</span>Likes</span>
-        </p>
-                    
-      </span>
-
-    </best>
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
 
-  <div class="col-sm-12">
+  <div>
     
-  <div class="ui footer vertical segment">
+  <div class="ui footer">
       <div class="container">
           <div class="ui stackable inverted divided relaxed grid">
           </div>
       </div>
   </div>
     
+  <br></br>
+
     <div class="ui blue inverted alternate stripe vertical segment">
         <div class="ui stackable center aligned page grid">
             <div class="fourteen wide column">

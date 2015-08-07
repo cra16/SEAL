@@ -95,8 +95,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	TotalBoard = [[],[],[]]
 	TotalAdd =[[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('CourseName'))
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('CourseName'))
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[0]) | Q(Code__contains=CourseCode[1])).order_by('CourseName'))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains = CourseCode[2]) | Q(Code__contains=CourseCode[3])).order_by('CourseName'))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
 		i=0
 		
 		for t in temp:
@@ -115,7 +115,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			
 			i+=1	
 	else:
-		Select_Lec=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))
+		Select_Lec=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
 		temp.append(Select_Lec)
 		temp.append(Select_Lec)
 		i=0

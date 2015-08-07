@@ -157,7 +157,7 @@ def Search(request): #과목 검색 기능
 		TotalAdd=[]
 		j=0
 		try:
-			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
 			for lec in temp:
 
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -222,7 +222,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	LectureData = [[]]
 	TotalAdd=[]
 	j=0
-	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
 	for lec in temp:
 				if lec['CourseName'] not in LectureData[0]:		
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -236,7 +236,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 							continue
 					TotalAdd.append(total)
 	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
-	SearchCount = DataCount(5,DBCount)
+	SearchCount = DataCount(10,DBCount)
 
 	L_Data=PageView(LectureData)
 	

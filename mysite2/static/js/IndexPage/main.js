@@ -96,15 +96,14 @@ $(document).ready(function() {
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-          var Course = "null";
-
+    
           if(CurrentPage=="SearchPageNation")
             Course = $('#CourseName').val();
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':Course
+ 
                     },
               
               datatype:"json",
@@ -147,7 +146,7 @@ $(document).ready(function() {
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':Course
+
                       
                     },
               
@@ -180,7 +179,7 @@ $(document).ready(function() {
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-          var Course = "null";
+   
 
           if(CurrentPage=="SearchPageNation")
             Course = $('#CourseName').val();
@@ -189,7 +188,7 @@ $(document).ready(function() {
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':Course
+
                     },
               
               datatype:"json",

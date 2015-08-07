@@ -1,15 +1,20 @@
 $(document).ready(function () {
 
-    $("#sch-result").find(".for-select-child").each(function(i, e){
-         event.stopPropagation();
+      $("#sch-result").on("click","#sch-select",function(){
+          event.stopPropagation();
           $(this).unbind("click");
-      $("#sch-result").on("click","#sch-select" + (i+1),function(){
+          var parent=$(this).parent().parent().parent();
+          var Code = parent.find("[id=ccode]").text();
+          var name = parent.find("[id=cname]").text();
+          var prof = parent.find("[id=cprof]").text();
+          var period = $(this).parent().find("[id=cperiod]").text();
+             
         $.ajax(
           { url : "/mysite2/Sel_lecture/",
-            data : {"ccode" : $("#ccode" + (i+1)).text(),
-                    "cname" : $("#cname" + (i+1)).text(),
-                    "cprof" : $("#cprof" + (i+1)).text(),
-                    "cperiod" : $("#cperiod" + (i+1)).text()
+            data : {"ccode" : Code,
+                    "cname" : name,
+                    "cprof" : prof,
+                    "cperiod" : period
                   },
             type : "POST",
             async : false,
@@ -23,8 +28,7 @@ $(document).ready(function () {
           });
         $("#sch-result").fadeOut(100);
       });
-    });
-
+    
     $("div").on("click",'#sch-search',function(event){
         event.stopPropagation();
         $(this).unbind("click");
@@ -39,6 +43,7 @@ $(document).ready(function () {
               async : false,
               type : "POST",
               success:function(resp){  
+                $("#sch-result").off("click","#sch-select");
                   $('#sch-result').html(resp);
                    
                 },
@@ -68,8 +73,11 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': $('#Previous').attr('name')
                     },
+              async : false,
+
               type : "POST",
-              success:function(resp){         
+              success:function(resp){       
+                $("#sch-result").off("click","#sch-select");  
                   $('#sch-result').html(resp);
                      
                 },
@@ -92,8 +100,11 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': $('#Next').attr('name')
                     },
+              async : false,
+
               type : "POST",
               success:function(resp){  
+                $("#sch-result").off("click","#sch-select");
                   $('#sch-result').html(resp);
                 },
                 error: function(xhr, option, error){
@@ -115,8 +126,11 @@ $(document).ready(function () {
                       'SearchName': $('#SearchName').val(),
                       'Page': $(this).attr('name')
                     },
+              async : false,
+
               type : "POST",
-              success:function(resp){                  
+              success:function(resp){               
+              $("#sch-result").off("click","#sch-select");   
                   $('#sch-result').html(resp);
                
                 },
@@ -139,13 +153,19 @@ $(document).ready(function () {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period': $('#Period').attr("name")
+                    'Period': $('#Period').attr("name"),
+                    'SelectMajor': $('#SelectMajor').attr("name"),
+                    'SelectCategory': $('#SelectCategory').attr("name"),
+                    'SearchName': $('#SearchName').val() + ""
+
+                    
                     },
               
               datatype:"json",
               type : "POST",
               async:false,
               success:function(resp){     
+                $("#sch-result").off("click","#sch-select");
                $('#sch-result').html(resp);
                 
                 },
@@ -178,6 +198,8 @@ $(document).ready(function () {
               type : "POST",
               async:false,
               success:function(resp){     
+                 $("#sch-result").off("click","#sch-select");
+  
                $('#sch-result').html(resp);
                 
                 },
@@ -198,13 +220,18 @@ $(document).ready(function () {
          $.ajax(
             { url : "/mysite2/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
-                    'Period': $('#Period').attr("name")
+                    'Period': $('#Period').attr("name"),
+                    'SelectMajor': $('#SelectMajor').attr("name"),
+                    'SelectCategory': $('#SelectCategory').attr("name"),
+                    'SearchName': $('#SearchName').val() + ""
+
                     },
               
               datatype:"json",
               type : "POST",
               async:false,
               success:function(resp){     
+                $("#sch-result").off("click","#sch-select");
                $('#sch-result').html(resp);
                 
                 },

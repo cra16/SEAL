@@ -66,37 +66,39 @@ def Page(request): #Main Page를 보여주는 함수
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
 	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
+		if request.method =="POST":
+			PostDic = dict()
+			for key in request.POST.keys():
+				Data=request.POST[key]	
+				PostDic[key] =request.POST[key]
+			
+			if 'Course' in request.POST.keys():
+				if 'Code' not in request.POST.keys():
+					A=Lecture.objects.filter(CourseName =PostDic['Course'])[0]
+					PostDic['Code']= A.Code
 			else:
-					cur_page = 1
-			Current = request.POST['Current']
-			if request.POST['Course'] !="null":
-				CourseName = request.POST['Course']
-			else:
-				CourseName = None
-
+				PostDic['Course']= ""
 	except ValueError:
 			raise Http404() 
-	if Current =="FirstPage" or Current =="FirstPageNation":
+	if PostDic['Current'] =="FirstPage" or PostDic['Current'] =="FirstPageNation":
 		Page = "0"
-	elif Current =="SecondPage" or Current =="SecondPageNation":
+	elif PostDic['Current'] =="SecondPage" or PostDic['Current'] =="SecondPageNation":
 		Page ="1"
-	elif Current =="ThirdPage" or Current =="ThirdPageNation":
+	elif PostDic['Current'] =="ThirdPage" or PostDic['Current'] =="ThirdPageNation":
 		Page="2"
 	else:
 		Page ="0"
 
+	PostDic['Page']= PostDic['Page'] !="0" and PostDic['Page'] or "1"
 	
-	if CourseName == None:
+	if PostDic['Course'] == "":
 		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
-		target = TargetTemplate(Current)
+		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-		template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
+		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(target[1]))
 	else:
-		target = TargetTemplate(Current)
-
-		template = SelectPageView(request.user, request.session['PageInformation'],cur_page,int(Page),CourseName)
+		target = TargetTemplate(PostDic['Current'])
+		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']

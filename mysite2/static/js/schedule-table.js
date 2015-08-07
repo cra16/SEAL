@@ -19,6 +19,7 @@ $(document).ready(function() {
               async : false,
               type : "POST",
               success:function(resp){  
+                  $("#sch-result").off("click","#sch-select");
                   $('#sch-result').html(resp);
                   $('#sch-result').fadeIn();
                 },
@@ -41,6 +42,7 @@ $(document).ready(function() {
                   },
             type : "POST",
             success:function(resp){
+                $("#sch-result").off("click","#sch-select");
               $('#rt_table').html(resp);
             },
             error:function(xhr, option, error){

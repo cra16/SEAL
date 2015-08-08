@@ -95,7 +95,7 @@ def Page(request): #Main Page를 보여주는 함수
 		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
 		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(target[1]))
+		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page))
 	else:
 		target = TargetTemplate(PostDic['Current'])
 		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)

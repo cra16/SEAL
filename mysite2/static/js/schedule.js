@@ -173,7 +173,7 @@ $(document).ready(function () {
               async:false,
               success:function(resp){     
                 $("#sch-result").off("click","#sch-select");
-                $("div").off("click","#sch-search");
+                $("div").off("click","#sch-search");   
                $('#sch-result').html(resp);
                 
                 },
@@ -207,7 +207,7 @@ $(document).ready(function () {
               async:false,
               success:function(resp){     
                  $("#sch-result").off("click","#sch-select");
-                 $("div").off("click","#sch-search");
+                  $("div").off("click","#sch-search");   
                $('#sch-result').html(resp);
                 
                 },

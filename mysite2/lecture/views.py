@@ -14,8 +14,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-def func_strip(string):
-	return string.strip()
+def func_strip(arg):
+	if type(arg) == str:
+		return arg.strip()
+	return arg
 
 def UpdateLogin(request):
 	return render_to_response('html/DBUpdate.html')
@@ -32,13 +34,13 @@ def auto_lec_update(request):
 		hak_year = "2015"
 		hak_term = "2"
 		cur_semester = "15-2"
-		hakbu = "0090"
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',
 			'0033', '0071', '0074', '0077',
 			'0078', '0090'
 		]	# 학부 코드 list
+		# hakbu_lst = ['0071']	# Debug list
 
 		# 히스넷 로그인
 		driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
@@ -73,7 +75,6 @@ def auto_lec_update(request):
 				pass
 			
 			last_num = int(driver.find_element_by_class_name("orangebold").text)	# 마지막 페이지 number
-			print("last page is %d" % (last_num))
 
 			hakbu_info_lst = []
 			for page in range(1, last_num+1):	# from 1 to last_num
@@ -176,6 +177,7 @@ def lec_update(request):
 	'14-1', '14-2', '14-Summer', '14-Winter',
 	'15-1', '15-2', '15-Summer'
 	]
+	# semester_lst = ['15-2']
 	semester_lst.sort(reverse=True)
 	
 	file_location = "/opt/bitnami/apps/django/django_projects/darkzero/mysite2/gasul_table/"
@@ -214,11 +216,13 @@ def lec_update(request):
 				lec_info.append(sheet.cell_value(row+1,5))	# 교수님 성함
 				lec_lst.append(lec_info)
 			for var in lec_lst:
-				var = list(map(func_strip, var))
-				if not var[11]:
-					var[11] = var[5]	# 전공일 경우에는 전공명으로
 				if var[9] == '':
 					var[9] = 0
+				else:
+					var[9] = int(var[9])
+				var[4] = int(var[4])
+				var[8] = int(var[8])
+				var = list(map(func_strip, var))
 				try:
 					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])
 					if d_lec: # 업데이트 가능한 요소들

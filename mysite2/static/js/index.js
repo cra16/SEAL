@@ -22,13 +22,22 @@ $(document).ready(function() {
 $("div").on('click',"#cname",function(event){
         event.stopPropagation();
         $(this).unbind("click");
-        CurrentPage=$(this).parent().parent().parent().parent().parent().attr("id");
-        
+        CurrentPage=$(this).parent().parent().parent().parent().parent().parent().attr("id");
+        var Parent=$(this).parent().parent().parent();
+        var Code = Parent.find("[id=ccode]").text();
+        var prof = Parent.find("[id=professor]").val();
+        var period = Parent.find("[id=period]").val();
+        var semester = Parent.find("[id=semester]").val();
         $.ajax(
             { url : "/mysite2/Select_Course/",
               data : {'Course' : $(this).text(),
                       'Page': "0",
-                      'Current':CurrentPage
+                      'Current':CurrentPage,
+                      'Code':Code,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester
+
                     },
               sync : true,
               type : "POST",
@@ -47,9 +56,10 @@ $("div").on('click',"#cname",function(event){
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
                   alert(error); //오류내용                  
-                } 
+                 } 
 
           });
+
          
     });
  
@@ -64,7 +74,7 @@ $("div").on('click',"#cname",function(event){
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$('#cname').text()
+                      'Course':$("#CourseHidden").val()
                     },
               
               datatype:"json",
@@ -101,7 +111,7 @@ $("div").on('click',"#cname",function(event){
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$('#cname').text()
+                      'Course':$("#CourseHidden").val()
                     },
               
               datatype:"json",
@@ -127,6 +137,11 @@ $("div").on('click',"#cname",function(event){
 
     });
 
+    $('.ui.sticky').sticky({
+      context: '#sticky',
+      pushing: true
+    });
+
     $('div').on('click','#CoursePrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
@@ -136,7 +151,7 @@ $("div").on('click',"#cname",function(event){
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$('#cname').text()
+                      'Course':$("#CourseHidden").val()
                     },
               
               datatype:"json",

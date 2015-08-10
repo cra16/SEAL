@@ -204,7 +204,7 @@ def Register(request):
 			else:
 				render_to_response('m_skins/m_html/error.html')
 		if request.flavour =='full':
-			return render_to_response('html/login.html')
+			return HttpResponseRedirect('/mysite2')
 		else:
 			return render_to_response('m_skins/m_html/login.html')
 		

@@ -66,37 +66,39 @@ def Page(request): #Main Page를 보여주는 함수
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/mysite2")
 	try:
-			if request.POST['Page'] !="0":
-					cur_page = int(request.POST['Page'])
+		if request.method =="POST":
+			PostDic = dict()
+			for key in request.POST.keys():
+				Data=request.POST[key]	
+				PostDic[key] =request.POST[key]
+			if 'Course' in request.POST.keys():
+				if request.POST['Course']!="":
+					if 'Code' not in request.POST.keys():
+						A=Lecture.objects.filter(CourseName =PostDic['Course'])[0]
+						PostDic['Code']= A.Code
 			else:
-					cur_page = 1
-			Current = request.POST['Current']
-			if request.POST['Course'] !="null":
-				CourseName = request.POST['Course']
-			else:
-				CourseName = None
-
+				PostDic['Course']= ""
 	except ValueError:
 			raise Http404() 
-	if Current =="FirstPage" or Current =="FirstPageNation":
+	if PostDic['Current'] =="FirstPage" or PostDic['Current'] =="FirstPageNation":
 		Page = "0"
-	elif Current =="SecondPage" or Current =="SecondPageNation":
+	elif PostDic['Current'] =="SecondPage" or PostDic['Current'] =="SecondPageNation":
 		Page ="1"
-	elif Current =="ThirdPage" or Current =="ThirdPageNation":
+	elif PostDic['Current'] =="ThirdPage" or PostDic['Current'] =="ThirdPageNation":
 		Page="2"
 	else:
 		Page ="0"
 
+	PostDic['Page']= PostDic['Page'] !="0" and PostDic['Page'] or "1"
 	
-	if CourseName == None:
+	if PostDic['Course'] == "":
 		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
-		target = TargetTemplate(Current)
+		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-		template = MainPageView(request.user, request.session['PageInformation'],cur_page,int(target[1]))
+		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page))
 	else:
-		target = TargetTemplate(Current)
-
-		template = SelectPageView(request.user, request.session['PageInformation'],cur_page,int(Page),CourseName)
+		target = TargetTemplate(PostDic['Current'])
+		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']
@@ -155,7 +157,7 @@ def Search(request): #과목 검색 기능
 		TotalAdd=[]
 		j=0
 		try:
-			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
 			for lec in temp:
 
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -173,7 +175,7 @@ def Search(request): #과목 검색 기능
 			LectureData[0]=None
 
 		DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
-		SearchCount=DataCount(5,DBCount)
+		SearchCount=DataCount(10,DBCount)
 		if DBCount != 0 : 
 			L_Data=PageView(LectureData)
 		else:
@@ -193,7 +195,7 @@ def Search(request): #과목 검색 기능
 				'BestBoard':BestBoardView(),
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
-				'T_Count':T_Count,
+				'TotalCount':T_Count,
 				'TotalAdd':TotalAdd
 			}
 		if request.flavour =='full':
@@ -216,11 +218,10 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	SearchData = request.session['SearchValue']
 	
 	PageInformation = request.session['SearchPageInformation']
-	PageInformation[1] = cur_page
 	LectureData = [[]]
 	TotalAdd=[]
 	j=0
-	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
 	for lec in temp:
 				if lec['CourseName'] not in LectureData[0]:		
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -233,14 +234,15 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 						except:
 							continue
 					TotalAdd.append(total)
-	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
-	SearchCount = DataCount(5,DBCount)
+	DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
+	SearchCount = DataCount(10,DBCount)
 
 	L_Data=PageView(LectureData)
 	
 	PageInformation = CurrentPageView(SearchCount,cur_page)
+	PageInformation[1]=cur_page
 	T_Count=PageTotalCount(SearchCount,PageInformation)
-	
+		
 
 	request.session['SearchPageInformation'] = PageInformation
 	
@@ -250,7 +252,8 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
-				'TotalAdd':TotalAdd
+				'TotalAdd':TotalAdd,
+				
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)

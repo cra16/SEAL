@@ -71,11 +71,11 @@ def Page(request): #Main Page를 보여주는 함수
 			for key in request.POST.keys():
 				Data=request.POST[key]	
 				PostDic[key] =request.POST[key]
-			
 			if 'Course' in request.POST.keys():
-				if 'Code' not in request.POST.keys():
-					A=Lecture.objects.filter(CourseName =PostDic['Course'])[0]
-					PostDic['Code']= A.Code
+				if request.POST['Course']!="":
+					if 'Code' not in request.POST.keys():
+						A=Lecture.objects.filter(CourseName =PostDic['Course'])[0]
+						PostDic['Code']= A.Code
 			else:
 				PostDic['Course']= ""
 	except ValueError:
@@ -175,7 +175,7 @@ def Search(request): #과목 검색 기능
 			LectureData[0]=None
 
 		DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
-		SearchCount=DataCount(5,DBCount)
+		SearchCount=DataCount(10,DBCount)
 		if DBCount != 0 : 
 			L_Data=PageView(LectureData)
 		else:
@@ -195,7 +195,7 @@ def Search(request): #과목 검색 기능
 				'BestBoard':BestBoardView(),
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
-				'T_Count':T_Count,
+				'TotalCount':T_Count,
 				'TotalAdd':TotalAdd
 			}
 		if request.flavour =='full':
@@ -218,7 +218,6 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	SearchData = request.session['SearchValue']
 	
 	PageInformation = request.session['SearchPageInformation']
-	PageInformation[1] = cur_page
 	LectureData = [[]]
 	TotalAdd=[]
 	j=0
@@ -235,14 +234,15 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 						except:
 							continue
 					TotalAdd.append(total)
-	DBCount = Lecture.objects.filter(CourseName__icontains=SearchData).count()
+	DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
 	SearchCount = DataCount(10,DBCount)
 
 	L_Data=PageView(LectureData)
 	
 	PageInformation = CurrentPageView(SearchCount,cur_page)
+	PageInformation[1]=cur_page
 	T_Count=PageTotalCount(SearchCount,PageInformation)
-	
+		
 
 	request.session['SearchPageInformation'] = PageInformation
 	
@@ -252,7 +252,8 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'Search' : L_Data,
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
-				'TotalAdd':TotalAdd
+				'TotalAdd':TotalAdd,
+				
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)

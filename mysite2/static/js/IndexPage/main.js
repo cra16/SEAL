@@ -96,14 +96,16 @@
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-    
+          
           if(CurrentPage=="SearchPageNation")
-            Course = $('#CourseName').val();
+              Course = $('#CourseName').val();
+          else
+              Course = "";
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
- 
+                      'Course':Course 
                     },
               
               datatype:"json",
@@ -137,16 +139,16 @@
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-          var Course = "null";
-
+          
           if(CurrentPage=="SearchPageNation")
-            Course = $('#CourseName').val();
-        
+              Course = $('#CourseName').val();
+          else
+              Course = "";
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-
+                      'Course':Course
                       
                     },
               
@@ -180,19 +182,19 @@
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
    
-
           if(CurrentPage=="SearchPageNation")
-            Course = $('#CourseName').val();
-        
+              Course = $('#CourseName').val();
+          else
+              Course = "";
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-
+                      'Course':Course
                     },
               
               datatype:"json",
-              type : "POST",
+                type : "POST",
               async:true,
               success:function(resp){     
                   if(CurrentPage =="FirstPageNation")
@@ -307,10 +309,90 @@
           });
 
 
-    alert($("#cname").text());
+    });
+
+    $('div').on('click','#FirstMajor',function(){
+       event.stopPropagation();
+          
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': "0",
+                      'Current':"FirstPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                       $('#FirstPage').html(resp);
+                 },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
 
     });
-      
+
+     $('div').on('click','#SecondMajor',function(){
+       event.stopPropagation();
+       
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': "0",
+                      'Current':"SecondPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                       $('#SecondPage').html(resp);
+                 },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+     $('div').on('click','#All',function(){
+       event.stopPropagation();
+        
+        $.ajax(
+            { url : "/mysite2/Page/",
+              data : {'Page': "0",
+                      'Current':"ThirdPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                        $('#ThirdPage').html(resp);
+                   },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
 });
 
 

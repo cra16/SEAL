@@ -81,15 +81,18 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 	Today =datetime.date.today()
 
 
-
+	Reply_Board=None
 	for Board in PageBoard:
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
+			
 			Reply_Board=Reply.objects.filter(QuestionID = int(Board.id))
+
+
 	dic =  {'user':request.user, 
 		  'BestBoard':BestBoardView(),
 		   'PageBoard':PageBoard, 	
 		   'TotalCount' : TotalCount, 
-			   'PageInformation' : PageInformation,
+			'PageInformation' : PageInformation,
 			'Today' : Today,
 			'ReplyBoard':Reply_Board,
 		   }

@@ -83,6 +83,13 @@
     border: none;
     background-color: white;
 }
+
+button.likebutton
+{
+    border: none;
+    background-color: white;
+}
+
 #likebutton2
 {
     border: none;

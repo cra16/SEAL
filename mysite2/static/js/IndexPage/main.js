@@ -1,4 +1,4 @@
-$(document).ready(function() {
+ $(document).ready(function() {
 
     $('.message .glyphicon').css('cursor','pointer');
     

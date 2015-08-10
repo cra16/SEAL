@@ -89,14 +89,32 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	#user의 전공에 따른 전공 코드를 뿌려줌
 	CourseCode = MajorSelect(User)
 	
+	T_Count=[[] ,[] ,[]]
+	if CourseCode[0] !="ENG":
+		DBCount1 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).count()
+		DBCount2 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).count()
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount2)
+	else:
+		DBCount1=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).count()
+		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount1)
+	DBCount3= Lecture.objects.values('CourseName').annotate(Count('CourseName')).count()
+	T_Count[2] = DataCount(10,DBCount3)
+	
+	#현재 페이지 위치정보
+	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+	PageInformation[MajorNumber][1] = PageNumber
+
 
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	TotalAdd =[[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])))
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])))
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
 		i=0
 		
 		for t in temp:
@@ -115,9 +133,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			
 			i+=1	
 	else:
-		Select_Lec=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))
-		temp.append(Select_Lec)
-		temp.append(Select_Lec)
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
 		i=0
 		
 		for t in temp:
@@ -154,28 +171,9 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 				TotalAdd[2].append(total)
 
 	#2차원 list로 각 전공당 총 페이지 수 저장
-	T_Count=[[] ,[] ,[]]
-	if CourseCode[0] !="ENG":
-		DBCount1 = len(TotalBoard[0])
-		DBCount2 = len(TotalBoard[1])
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount2)
-	else:
-		DBCount1=len(TotalBoard[0])
-		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount1)
-	DBCount3=len(TotalBoard[2])
-	T_Count[2] = DataCount(10,DBCount3)
 	
-	#현재 페이지 위치정보
-	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-	PageInformation[MajorNumber][1] = PageNumber
 
 	
-	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
-	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
-	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
 	#PageBoard = PageView(TotalBoard)
 	##Session Save
@@ -197,9 +195,10 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		   'T_Count':T_Count,
 		   'Page':PageNumber,
 		   'BestBoard':BestBoard,
-		   'Page':PageNumber,
+		   'MajorNumber':MajorNumber,
 		   'TotalAdd':TotalAdd,
-		   'CourseName':None}
+		   'CourseName':None
+		  }
 
 	return dic
 #MainPage Template설정

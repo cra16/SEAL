@@ -44,9 +44,12 @@
 
      
       <div class="ui very relaxed column grid">
-        <div class="column" id="sticky">
+        <div class="column">
 
-          <div class="right ui rail" style="min-height: 263px;">
+    {%if Search == None%}
+    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+
+          <div id="sticky" class="right ui rail" style="min-height: 263px;">
             <div class="ui sticky" style="left: 1000px; width: 272ps; height: 263px;">
 
               <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
@@ -98,8 +101,6 @@
           </div>
 
 
-    {%if Search == None%}
-    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
      {% for PBoard1 in PageBoard.0%}
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">

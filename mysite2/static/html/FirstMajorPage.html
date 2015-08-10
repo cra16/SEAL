@@ -47,7 +47,8 @@
             </div></center>
       {% else %}
       {% for PBoard1 in PageBoard.0%}
-                      
+                    
+          <div class="column">
             <div class="ui raised segment grid">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
                 <center><button id="likebutton" name = "{{PBoard1.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
@@ -79,6 +80,7 @@
                   <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
                </div>
             </div>
+          </div>
       
             {%endfor%}
 

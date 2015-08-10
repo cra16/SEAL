@@ -44,6 +44,7 @@ $(document).ready(function () {
               type : "POST",
               success:function(resp){  
                 $("#sch-result").off("click","#sch-select");
+                $("div").off("click","#sch-search");
                   $('#sch-result').html(resp);
                    
                 },
@@ -54,7 +55,8 @@ $(document).ready(function () {
 
           });
         $('#sch-result').fadeIn();
-        $("div").off("click","#sch-search");  
+        
+
     });
 
     $('*').keypress(function(e){
@@ -77,7 +79,8 @@ $(document).ready(function () {
 
               type : "POST",
               success:function(resp){       
-                $("#sch-result").off("click","#sch-select");  
+                $("#sch-result").off("click","#sch-select");
+                  $("div").off("click","#sch-search");
                   $('#sch-result').html(resp);
                      
                 },
@@ -105,6 +108,7 @@ $(document).ready(function () {
               type : "POST",
               success:function(resp){  
                 $("#sch-result").off("click","#sch-select");
+                  $("div").off("click","#sch-search");
                   $('#sch-result').html(resp);
                 },
                 error: function(xhr, option, error){
@@ -113,6 +117,7 @@ $(document).ready(function () {
 
                   } 
           });
+   
     
     });
 
@@ -130,7 +135,8 @@ $(document).ready(function () {
 
               type : "POST",
               success:function(resp){               
-              $("#sch-result").off("click","#sch-select");   
+              $("#sch-result").off("click","#sch-select");  
+                 $("div").off("click","#sch-search");   
                   $('#sch-result').html(resp);
                
                 },
@@ -140,8 +146,9 @@ $(document).ready(function () {
 
                   } 
           });
-       
+ 
     });
+
 
 
         $('div').on('click','#LecPrevious',function(event){ 
@@ -166,6 +173,7 @@ $(document).ready(function () {
               async:false,
               success:function(resp){     
                 $("#sch-result").off("click","#sch-select");
+                $("div").off("click","#sch-search");   
                $('#sch-result').html(resp);
                 
                 },
@@ -199,7 +207,7 @@ $(document).ready(function () {
               async:false,
               success:function(resp){     
                  $("#sch-result").off("click","#sch-select");
-  
+                  $("div").off("click","#sch-search");   
                $('#sch-result').html(resp);
                 
                 },
@@ -209,6 +217,7 @@ $(document).ready(function () {
 
                   } 
           });
+        
     });
 
     $('div').on('click','#LecNext',function(event){ 
@@ -232,6 +241,7 @@ $(document).ready(function () {
               async:false,
               success:function(resp){     
                 $("#sch-result").off("click","#sch-select");
+                $("div").off("click","#sch-search");
                $('#sch-result').html(resp);
                 
                 },
@@ -241,7 +251,9 @@ $(document).ready(function () {
 
                   } 
           });
+        
     });
+
 
     
 });

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
 	url(r'^CurUpdate/$','lecture.views.auto_lec_update'),
 	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
-	url(r'^CoursePageNation/(\d+)$','index.views.Page'),
+	
 )
 
 urlpatterns += patterns('schedule.views',
@@ -73,6 +73,7 @@ urlpatterns += patterns('qna.views',
 
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
+	url(r'^CoursePageNation/(\d+)$','CoursePage')
 ) # course view
 
 urlpatterns += patterns('notice.views',

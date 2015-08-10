@@ -122,7 +122,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 				if lec['CourseName'] not in TotalBoard[i]:
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])
 					TotalBoard[i].append(A[0])
-					total=0
+					total=0	
 					
 					try:
 							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])

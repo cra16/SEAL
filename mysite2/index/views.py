@@ -218,6 +218,14 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	SearchData = request.session['SearchValue']
 	
 	PageInformation = request.session['SearchPageInformation']
+
+
+	DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
+	SearchCount = DataCount(10,DBCount)
+	PageInformation = CurrentPageView(SearchCount,cur_page)
+	PageInformation[1]=cur_page
+
+	
 	LectureData = [[]]
 	TotalAdd=[]
 	j=0
@@ -234,13 +242,11 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 						except:
 							continue
 					TotalAdd.append(total)
-	DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
-	SearchCount = DataCount(10,DBCount)
+	
 
 	L_Data=PageView(LectureData)
 	
-	PageInformation = CurrentPageView(SearchCount,cur_page)
-	PageInformation[1]=cur_page
+	
 	T_Count=PageTotalCount(SearchCount,PageInformation)
 		
 

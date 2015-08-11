@@ -42,8 +42,12 @@
         
         {% for i in  TotalCount %}
     
+            {%if PageInformation.1 == i%}
+
+              <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+             {%else%}
               <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
-              {% endfor%}
+            {%endif%}
          
               <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>

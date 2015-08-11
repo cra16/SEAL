@@ -36,7 +36,12 @@
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in TotalCount.1%}
-              <a id ="LikePage" name="{{i}}" class="item">{{i}}</a>
+              {%if PageInformation.1.1 == i%}
+
+              <a id ="LikePage" name="{{i}}" class="active item" >{{i}}</a>
+               {%else%}
+               <a id ="LikePage" name="{{i}}" class="item" >{{i}}</a>
+               {%endif%}
               {%endfor%}
               <a id = "LikeNext" name = "{{PageInformation.1.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>

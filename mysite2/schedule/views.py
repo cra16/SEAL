@@ -261,40 +261,39 @@ def SearchSubject(request):
 		return HttpResponseRedirect("/mysite2")
 
  	if request.method =="POST":
- 		category = request.POST['category']
-		major = request.POST['major']
-		SearchName = request.POST['SearchName']
-		Page = request.POST['Page']
-		if Page !="0":
-			cur_page = int(Page) 		
+ 		PostDic=dict()
+ 		for key in request.POST.keys():
+	 		PostDic[key] = request.POST[key]
+		if PostDic['Page'] !="0":
+			PostDic['Page'] = int(PostDic['Page']) 		
 			New=0
 		else:
-			cur_page = 1
+			PostDic['Page'] = 1
 			New =1
 		#cur_page = int(offset)
 
-		start = 6 *(cur_page-1)
-		end = 6 * (cur_page)
+		start = 6 *(PostDic['Page']-1)
+		end = 6 * (PostDic['Page'])
 
 
-		SelectMajor=Major(major)
-		SelectCategory=Category(category)
+		SelectMajor=Major(PostDic['major'])
+		SelectCategory=Category(PostDic['category'])
 		if SelectMajor == "전체" :
 			SelectMajor=""
 		if SelectCategory=="전체":
 			SelectCategory= ""
 
 
-		DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName).count()
+		DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=PostDic['SearchName']).count()
 		SubjectCount = DataCount(6,DBCount)
-		Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=SearchName)[start:end]
+		Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=PostDic['SearchName'])[start:end]
 
 		if New == 1:
 			PageInformation = FirstPageView(SubjectCount)
 			TotalCount=PageTotalCount(SubjectCount,PageInformation)
 		else :
-			PageInformation = CurrentPageView(SubjectCount,cur_page)
-			PageInformation[1]=cur_page
+			PageInformation = CurrentPageView(SubjectCount,PostDic['Page'])
+			PageInformation[1]=PostDic['Page']
 			TotalCount = PageTotalCount(SubjectCount,PageInformation)
 		TotalBoard = PageView([Subject])
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
@@ -304,10 +303,10 @@ def SearchSubject(request):
 				'Subject':Subject,
 				'SelectMajor' : SelectMajor,
 				'SubjectCount':SubjectCount,
-				'SearchName':SearchName,
+				'SearchName':PostDic['SearchName'],
 				'PageInformation':PageInformation,
 				'total_page':TotalCount,
-				'cur_page':cur_page,
+				'cur_page':PostDic['Page'],
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
 				"TotalBoard": TotalBoard,

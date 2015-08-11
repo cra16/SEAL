@@ -101,14 +101,18 @@ def CoursePage(request, offset):
 
 
 	CourseBoard = TotalCourse(offset)
-
-	DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
-	O_Count = DataCount(3,DBCount)
-
+	try:
+			DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
+			O_Count = DataCount(3,DBCount)
+	except:
+			DBCount = 0
 
 	if UserData !=None:
-		MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
-				            #자신 이외 다른사람이 추천한 정보 보여줌
+		try:
+				MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+		except:
+				MyCourseBoard=None
+		            #자신 이외 다른사람이 추천한 정보 보여줌
 	else:
 		MyCourseBoard = None
 	#이전페이지 다음페이지 기능 구현
@@ -121,8 +125,10 @@ def CoursePage(request, offset):
 	#해당 페이지에 출력할 데이터들 갯수 정하는 기능
 	PageFirst = (offset2-1)*3
 	PageLast = (offset2-1)*3+3
-	OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
-	
+	try:
+			OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
+	except:
+		OtherCourse=None
 	OtherCourseBoard = []
 	#접속한 아이디와 중복되는 경우 제거
 	for Board in OtherCourse:

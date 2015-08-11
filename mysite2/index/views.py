@@ -254,6 +254,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'TotalCount' : T_Count,
 				'TotalAdd':TotalAdd,
 				
+				
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)

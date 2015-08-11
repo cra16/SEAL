@@ -83,7 +83,7 @@
                       
                   </tr>
                            {%endif%}
-                        {%endfor%}
+                            {%endfor%}
                       {%endfor%}
                  {%endif%}
                       
@@ -99,8 +99,12 @@
               </a>
         
         {% for i in  TotalCount %}
-    
-              <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
+        {%if PageInformation.1 == i%}
+
+              <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+        {%else%}
+        <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
               {% endfor%}
          
               <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>

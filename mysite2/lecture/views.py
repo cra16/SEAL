@@ -220,8 +220,10 @@ def lec_update(request):
 					var[9] = 0
 				else:
 					var[9] = int(var[9])
-				var[4] = int(var[4])
-				var[8] = int(var[8])
+				if not (var[4] == ''):
+					var[4] = int(var[4])
+				if not (var[8] == ''):
+					var[8] = int(var[8])
 				var = list(map(func_strip, var))
 				try:
 					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])

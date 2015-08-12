@@ -74,6 +74,29 @@
 	color: white;
 }
 
+#enbutton {
+	margin-top:-12px;
+	margin-bottom:-12px;
+}
+
+#lchoice {
+	margin-left: -5px;
+	margin-top: -8px;
+	margin-bottom: -8px;
+}
+
+#rchoice {
+	margin-right: -5px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+#sldbr {
+	margin-left: 79px;
+	margin-top: -45px;
+	margin-bottom: -45px;
+}
+
 #firstcolumn{
 	color: #ff7f50;
 }

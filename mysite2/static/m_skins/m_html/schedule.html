@@ -26,7 +26,7 @@
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
-    <div class="col-md-8 col-sm-10 col-xs-10">
+    <div class="col-md-12 col-sm-12 col-xs-12">
 
       <h2 class="ui header"><i class="glyphicon glyphicon-time"></i> My Schedule</h2>
       
@@ -216,27 +216,27 @@
                         {% for period in my_lec_table %}
                          <tr data-index="{{forloop.counter}}">
                              {% if forloop.counter == 1 %}
-                             <th style><p>&nbsp;</p>1교시 (8:30~9:45)</th>
+                             <th style><p>&nbsp;</p>1st</th>
                              {% elif forloop.counter == 2 %}
-                             <th style><p>&nbsp;</p>2교시 (10:00~11:15)</th>
+                             <th style><p>&nbsp;</p>2nd</th>
                              {% elif forloop.counter == 3 %}
-                             <th style><p>&nbsp;</p>3교시 (11:30~12:45)</th>
+                             <th style><p>&nbsp;</p>3rd</th>
                              {% elif forloop.counter == 4 %}
-                             <th style><p>&nbsp;</p>4교시 (1:00~2:15)</th>
+                             <th style><p>&nbsp;</p>4th</th>
                              {% elif forloop.counter == 5 %}
-                             <th style><p>&nbsp;</p>5교시 (2:30~3:45)</th>
+                             <th style><p>&nbsp;</p>5th</th>
                              {% elif forloop.counter == 6 %}
-                             <th style><p>&nbsp;</p>6교시 (4:00~5:15)</th>
+                             <th style><p>&nbsp;</p>6th</th>
                              {% elif forloop.counter == 7 %}
-                             <th style><p>&nbsp;</p>7교시 (5:30~6:45)</th>
+                             <th style><p>&nbsp;</p>7th</th>
                              {% elif forloop.counter == 8 %}
-                             <th style><p>&nbsp;</p>8교시 (7:00~8:15)</th>
+                             <th style><p>&nbsp;</p>8th</th>
                              {% elif forloop.counter == 9 %}
-                             <th style><p>&nbsp;</p>9교시 (8:30~9:45)</th>
+                             <th style><p>&nbsp;</p>9th</th>
                              {% elif forloop.counter == 10 %}
-                             <th style><p>&nbsp;</p>10교시 (10:00~11:15)</th>
+                             <th style><p>&nbsp;</p>10th</th>
                              {% elif forloop.counter == 11 %}
-                             <th style><p>&nbsp;</p>11교시 (11:30~12:45)</th>
+                             <th style><p>&nbsp;</p>11th</th>
                              {% endif %}
 
                              {% for lec in period %}

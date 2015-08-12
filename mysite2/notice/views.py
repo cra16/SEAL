@@ -32,11 +32,11 @@ def NoticeMain(request):#Notice 기능
 	Today = datetime.datetime.now()
 	
 	dic =  {'user':request.user,
-				  'BestBoard':BestBoardView(),
-				   'PageBoard':PageBoard, 
-				   'PageInformation':PageInformation,
-				   'TotalCount' : PageTotalCount(T_Count,PageInformation),
-				   'Today':Today 
+		   'BestBoard':BestBoardView(),
+		   'PageBoard':PageBoard, 
+		   'PageInformation':PageInformation,
+		   'TotalCount' : PageTotalCount(T_Count,PageInformation),
+		   'Today':Today 
 			}
 	if request.flavour =='full':
 			return render_to_response('html/notice.html',dic)

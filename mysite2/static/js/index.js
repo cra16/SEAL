@@ -42,7 +42,7 @@ $("div").on('click',"#cname",function(event){
               sync : true,
               type : "POST",
               success:function(resp){  
-                  
+
                   if(CurrentPage=="FirstPage")
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")
@@ -51,7 +51,8 @@ $("div").on('click',"#cname",function(event){
                     $('#ThirdPage').html(resp);
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
-    
+                 
+                  });
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

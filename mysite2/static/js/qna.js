@@ -24,7 +24,7 @@ $(document).ready(function(event) {
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
-                  alert(error); //오류내용
+                  alert(error); //오류내용0
 
                   } 
             

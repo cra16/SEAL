@@ -1,8 +1,12 @@
+$(document).ready(function() {
 
-
-$(function(){	
-	$('#likebutton1').click(function(){
-		window.location.href = "recommend.html";
-	
+$('div').on('click','#likebutton',function(event){ 
+	event.stopPropagation();
+	$(this).unbind("click");
+    confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
+            if(confirm1){
+                window.location.href = "/mysite2/Recommend/" + $(this).attr('name');
+            }
     });
+
 });

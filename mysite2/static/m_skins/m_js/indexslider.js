@@ -12,37 +12,94 @@ $.fn.slider.Constructor.prototype.enable = function () {
       mousedown: $.proxy(this.mousedown, this)
     });
   }
-}
+}	
 
+var sl11 = $('#sl11').slider(),
+    sl12 = $('#sl12').slider(),
+    sl13 = $('#sl13').slider(),
+    sl14 = $('#sl14').slider(),
+    sl21 = $('#sl21').slider(),
+    sl22 = $('#sl22').slider(),
+    sl23 = $('#sl23').slider(),
+    sl24 = $('#sl24').slider(),
+    sl31 = $('#sl31').slider(),
+    sl32 = $('#sl32').slider(),
+    sl33 = $('#sl33').slider(),
+    sl34 = $('#sl34').slider(),
+    sl41 = $('#sl41').slider(),
+    sl42 = $('#sl42').slider(),
+    sl43 = $('#sl43').slider(),
+    sl44 = $('#sl44').slider(),
+    sl51 = $('#sl51').slider(),
+    sl52 = $('#sl52').slider(),
+    sl53 = $('#sl53').slider(),
+    sl54 = $('#sl54').slider(),
+    sl61 = $('#sl61').slider(),
+    sl62 = $('#sl62').slider(),
+    sl63 = $('#sl63').slider(),
+    sl64 = $('#sl64').slider(),
+    sl71 = $('#sl71').slider(),
+    sl72 = $('#sl72').slider(),
+    sl73 = $('#sl73').slider(),
+    sl74 = $('#sl74').slider();
 
-var sl1 = $('#sl11').slider(),
-    sl2 = $('#sl12').slider(),
-    sl3 = $('#sl13').slider(),
-    sl4 = $('#sl14').slider(),
-    sl5 = $('#sl21').slider(),
-    sl6 = $('#sl22').slider(),
-    sl7 = $('#sl23').slider(),
-    sl8 = $('#sl24').slider(),
-    sl9 = $('#sl31').slider(),
-    sl10 = $('#sl32').slider(),
-    sl11 = $('#sl33').slider(),
-    sl12 = $('#sl34').slider(),
-    sl13 = $('#sl41').slider(),
-    sl14 = $('#sl42').slider(),
-    sl15 = $('#sl43').slider(),
-    sl16 = $('#sl44').slider(),
-    sl17 = $('#sl51').slider(),
-    sl18 = $('#sl52').slider(),
-    sl19 = $('#sl53').slider(),
-    sl20 = $('#sl54').slider(),
-    sl21 = $('#sl61').slider(),
-    sl22 = $('#sl62').slider(),
-    sl23 = $('#sl63').slider(),
-    sl24 = $('#sl64').slider(),
-    sl25 = $('#sl71').slider(),
-    sl26 = $('#sl72').slider(),
-    sl27 = $('#sl73').slider(),
-    sl28 = $('#sl74').slider();
+var sa11 = $('#sa11').slider(),
+    sa12 = $('#sa12').slider(),
+    sa13 = $('#sa13').slider(),
+    sa14 = $('#sa14').slider(),
+    sa21 = $('#sa21').slider(),
+    sa22 = $('#sa22').slider(),
+    sa23 = $('#sa23').slider(),
+    sa24 = $('#sa24').slider(),
+    sa31 = $('#sa31').slider(),
+    sa32 = $('#sa32').slider(),
+    sa33 = $('#sa33').slider(),
+    sa34 = $('#sa34').slider(),
+    sa41 = $('#sa41').slider(),
+    sa42 = $('#sa42').slider(),
+    sa43 = $('#sa43').slider(),
+    sa44 = $('#sa44').slider(),
+    sa51 = $('#sa51').slider(),
+    sa52 = $('#sa52').slider(),
+    sa53 = $('#sa53').slider(),
+    sa54 = $('#sa54').slider(),
+    sa61 = $('#sa61').slider(),
+    sa62 = $('#sa62').slider(),
+    sa63 = $('#sa63').slider(),
+    sa64 = $('#sa64').slider(),
+    sa71 = $('#sa71').slider(),
+    sa72 = $('#sa72').slider(),
+    sa73 = $('#sa73').slider(),
+    sa74 = $('#sa74').slider();
+
+var sk11 = $('#sk11').slider(),
+    sk12 = $('#sk12').slider(),
+    sk13 = $('#sk13').slider(),
+    sk14 = $('#sk14').slider(),
+    sk21 = $('#sk21').slider(),
+    sk22 = $('#sk22').slider(),
+    sk23 = $('#sk23').slider(),
+    sk24 = $('#sk24').slider(),
+    sk31 = $('#sk31').slider(),
+    sk32 = $('#sk32').slider(),
+    sk33 = $('#sk33').slider(),
+    sk34 = $('#sk34').slider(),
+    sk41 = $('#sk41').slider(),
+    sk42 = $('#sk42').slider(),
+    sk43 = $('#sk43').slider(),
+    sk44 = $('#sk44').slider(),
+    sk51 = $('#sk51').slider(),
+    sk52 = $('#sk52').slider(),
+    sk53 = $('#sk53').slider(),
+    sk54 = $('#sk54').slider(),
+    sk61 = $('#sk61').slider(),
+    sk62 = $('#sk62').slider(),
+    sk63 = $('#sk63').slider(),
+    sk64 = $('#sk64').slider(),
+    sk71 = $('#sk71').slider(),
+    sk72 = $('#sk72').slider(),
+    sk73 = $('#sk73').slider(),
+    sk74 = $('#sk74').slider();
 
 $('#sl11').slider('disable');
 $('#sl12').slider('disable');
@@ -73,147 +130,71 @@ $('#sl72').slider('disable');
 $('#sl73').slider('disable');
 $('#sl74').slider('disable');
 
-$.get("../index.php", function(data){
-    var datavalue = data.split(",");
-    $('#sl11').slider('setValue', datavalue[0]);
-    $('#sl12').slider('setValue', datavalue[1]);
-    $('#sl13').slider('setValue', datavalue[2]);
-    $('#sl14').slider('setValue', datavalue[3]);
-});
+$('#sa11').slider('disable');
+$('#sa12').slider('disable');
+$('#sa13').slider('disable');
+$('#sa14').slider('disable');
+$('#sa21').slider('disable');
+$('#sa22').slider('disable');
+$('#sa23').slider('disable');
+$('#sa24').slider('disable');
+$('#sa31').slider('disable');
+$('#sa32').slider('disable');
+$('#sa33').slider('disable');
+$('#sa34').slider('disable');
+$('#sa41').slider('disable');
+$('#sa42').slider('disable');
+$('#sa43').slider('disable');
+$('#sa44').slider('disable');
+$('#sa51').slider('disable');
+$('#sa52').slider('disable');
+$('#sa53').slider('disable');
+$('#sa54').slider('disable');
+$('#sa61').slider('disable');
+$('#sa62').slider('disable');
+$('#sa63').slider('disable');
+$('#sa64').slider('disable');
+$('#sa71').slider('disable');
+$('#sa72').slider('disable');
+$('#sa73').slider('disable');
+$('#sa74').slider('disable');
+
+$('#sk11').slider('disable');
+$('#sk12').slider('disable');
+$('#sk13').slider('disable');
+$('#sk14').slider('disable');
+$('#sk21').slider('disable');
+$('#sk22').slider('disable');
+$('#sk23').slider('disable');
+$('#sk24').slider('disable');
+$('#sk31').slider('disable');
+$('#sk32').slider('disable');
+$('#sk33').slider('disable');
+$('#sk34').slider('disable');
+$('#sk41').slider('disable');
+$('#sk42').slider('disable');
+$('#sk43').slider('disable');
+$('#sk44').slider('disable');
+$('#sk51').slider('disable');
+$('#sk52').slider('disable');
+$('#sk53').slider('disable');
+$('#sk54').slider('disable');
+$('#sk61').slider('disable');
+$('#sk62').slider('disable');
+$('#sk63').slider('disable');
+$('#sk64').slider('disable');
+$('#sk71').slider('disable');
+$('#sk72').slider('disable');
+$('#sk73').slider('disable');
+$('#sk74').slider('disable');
 
 
-$('#sl21').slider('setValue', 5);
-$('#sl22').slider('setValue', 5);
-$('#sl23').slider('setValue', 5);
-$('#sl24').slider('setValue', 5);
-$('#sl31').slider('setValue', 5);
-$('#sl32').slider('setValue', 5);
-$('#sl33').slider('setValue', 5);
-$('#sl34').slider('setValue', 5);
-$('#sl41').slider('setValue', 5);
-$('#sl42').slider('setValue', 5);
-$('#sl43').slider('setValue', 5);
-$('#sl44').slider('setValue', 5);
-$('#sl51').slider('setValue', 5);
-$('#sl52').slider('setValue', 5);
-$('#sl53').slider('setValue', 5);
-$('#sl54').slider('setValue', 5);
-$('#sl61').slider('setValue', 5);
-$('#sl62').slider('setValue', 5);
-$('#sl63').slider('setValue', 5);
-$('#sl64').slider('setValue', 5);
-$('#sl71').slider('setValue', 5);
-$('#sl72').slider('setValue', 5);
-$('#sl73').slider('setValue', 5);
-$('#sl74').slider('setValue', 5);
 
 $("[data-toggle=tooltip]").tooltip();
 
-var ccode1 = "ECE20018",
-    cname1 = "C 프로그래밍",
-    cprof1 = "최창범 교수님",
 
-    ccode2 = "ECE20002",
-    cname2 = "자바 프로그래밍 프로그래밍 프로그",
-    cprof2 = "김인중 교수님",
 
-    ccode3 = "ECE20003",
-    cname3 = "논리설계",
-    cprof3 = "한윤식 교수님",
 
-    ccode4 = "ECE20004",
-    cname4 = "이산수학",
-    cprof4 = "이건 교수님",
 
-    ccode5 = "ECE20005",
-    cname5 = "컴퓨터 구조",
-    cprof5 = "용환기 교수님",
 
-    ccode6 = "ECE20006",
-    cname6 = "Data Structure",
-    cprof6 = "이강 교수님",
-
-    ccode7 = "ECE20007",
-    cname7 = "공학설계입문",
-    cprof7 = "한윤식 교수님",
-
-    likenum1 = 120,
-    likenum2 = 114,
-    likenum3 = 106,
-    likenum4 = 97,
-    likenum5 = 95,
-    likenum6 = 88,
-    likenum7 = 82;
-
-var eccode1 = document.getElementById('ccode1'),
-    ecname1 = document.getElementById('cname1'),
-    ecprof1 = document.getElementById('cprof1'),
-             
-    eccode2 = document.getElementById('ccode2'),
-    ecname2 = document.getElementById('cname2'),
-    ecprof2 = document.getElementById('cprof2'),
-
-    eccode3 = document.getElementById('ccode3'),
-    ecname3 = document.getElementById('cname3'),
-    ecprof3 = document.getElementById('cprof3'),
-
-    eccode4 = document.getElementById('ccode4'),
-    ecname4 = document.getElementById('cname4'),
-    ecprof4 = document.getElementById('cprof4'),
-
-    eccode5 = document.getElementById('ccode5'),
-    ecname5 = document.getElementById('cname5'),
-    ecprof5 = document.getElementById('cprof5'),
-
-    eccode6 = document.getElementById('ccode6'),
-    ecname6 = document.getElementById('cname6'),
-    ecprof6 = document.getElementById('cprof6'),
-
-    eccode7 = document.getElementById('ccode7'),
-    ecname7 = document.getElementById('cname7'),
-    ecprof7 = document.getElementById('cprof7'),
-
-    elikenum1 = document.getElementById('likenum1'),
-    elikenum2 = document.getElementById('likenum2'),
-    elikenum3 = document.getElementById('likenum3'),
-    elikenum4 = document.getElementById('likenum4'),
-    elikenum5 = document.getElementById('likenum5'),
-    elikenum6 = document.getElementById('likenum6'),
-    elikenum7 = document.getElementById('likenum7');
-
-eccode1.textContent = ccode1;
-ecname1.textContent = cname1;
-ecprof1.textContent = cprof1;
-
-eccode2.textContent = ccode2;
-ecname2.textContent = cname2;
-ecprof2.textContent = cprof2;
-
-eccode3.textContent = ccode3;
-ecname3.textContent = cname3;
-ecprof3.textContent = cprof3;
-
-eccode4.textContent = ccode4;
-ecname4.textContent = cname4;
-ecprof4.textContent = cprof4;
-
-eccode5.textContent = ccode5;
-ecname5.textContent = cname5;
-ecprof5.textContent = cprof5;
-
-eccode6.textContent = ccode6;
-ecname6.textContent = cname6;
-ecprof6.textContent = cprof6;
-
-eccode7.textContent = ccode7;
-ecname7.textContent = cname7;
-ecprof7.textContent = cprof7;
-
-elikenum1.textContent = likenum1;
-elikenum2.textContent = likenum2;
-elikenum3.textContent = likenum3;
-elikenum4.textContent = likenum4;
-elikenum5.textContent = likenum5;
-elikenum6.textContent = likenum6;
-elikenum7.textContent = likenum7;
 });

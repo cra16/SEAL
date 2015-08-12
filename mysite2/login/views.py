@@ -42,7 +42,7 @@ def loginCheck(request):
 				if request.flavour =='full':
 					return render_to_response('html/login_error.html')
 				else:
-					return render_to_response("m_skins/m_html/index.html")
+					return render_to_response("m_skins/m_html/login_error.html")
         #로그인 되지 않았을 경우 다시 로그인페이지로
 		elif request.user.username =="":
 			if request.flavour =='full':

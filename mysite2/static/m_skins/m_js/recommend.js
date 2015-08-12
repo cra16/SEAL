@@ -22,24 +22,6 @@ var sl1 = $('#sl1').slider(),
 
 $("[data-toggle=tooltip]").tooltip();
 
-$('#recommendbtn_d').on('click', function(){
-  var data1 = $('#sl1').data('slider').getValue(),
-      data2 = $('#sl2').data('slider').getValue(),
-      data3 = $('#sl3').data('slider').getValue(),
-      data4 = $('#sl4').data('slider').getValue(),
-      data5 = $('#sl5').data('slider').getValue(),
-      data6 = $('#sl6').data('slider').getValue();
-
-  $.post("../recommend.php", {data1: data1, data2: data2, data3: data3, data4: data4, data5: data5, data6: data6}, function(data){
-    if(data == 0){
-      alert("Touroku failed");
-    }
-    else{
-      alert(data);
-      window.location.href = "../html/index.html"
-    }
-  });
-});
 
 var checked = ['True', 'True', 'True', 'True', 'True', 'True'];
 
@@ -128,16 +110,23 @@ $('#enable6').on('click', function(){
 });
 
 
+var ccode = document.getElementsByName('ccode')
+var cname = document.getElementsByName('cname')
+var cprof = document.getElementsByName('cprof')
 
-var ccode = "ECE20018",
-    cname = "C 프로그래밍",
-    cprof = "최창범 교수님";
+var likenum1 = 120;
+   
 
-var eccode = document.getElementById('ccode'),
-    ecname = document.getElementById('cname'),
-    ecprof = document.getElementById('cprof');
+var elikenum1 = document.getElementById('likenum1');
 
-eccode.textContent = ccode;
-ecname.textContent = cname;
-ecprof.textContent = cprof;
+
+for(var i=0; i<ccode.length; i++)
+{
+	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
+	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
+	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
+}
+
+
+
 });

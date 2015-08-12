@@ -41,6 +41,7 @@
 	border: 1px solid #87cefa;
 	border-radius: 10px;
 	box-shadow: 3px 3px 1px #888888;
+	font-weight: bold;
 	color: black;
 }
 
@@ -74,32 +75,22 @@
 }
 
 #firstcolumn{
-	font-weight: bold;
 	color: #ff7f50;
 }
 #secondcolumn{
-	font-weight: bold;
 	color: #9370db;
 }
 #thirdcolumn{
-	font-weight: bold;
 	color: #2e8b57;
 }
 #fourthcolumn{
-	font-weight: bold;
 	color: #008b8b;
 }
 #fifthcolumn{
-	font-weight: bold;
 	color: #808000;
 }
 #sixthcolumn{
-	font-weight: bold;
 	color: #ba55d3;
-}
-
-#sl1, #sl2, #sl3, #sl4, #sl5, #sl6 {
-	width: 130px;
 }
 
 

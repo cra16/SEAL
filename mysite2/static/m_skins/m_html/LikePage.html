@@ -1,3 +1,4 @@
+{%load staticfiles%}
   {% for PageBoard2 in LikePage%}
             <div class="ui raised segment">
               <div class="left floated ui compact segment two wide column">
@@ -9,22 +10,22 @@
                 [<span id="ccode11">{{PageBoard2.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PageBoard2.Course.id}}"><span class="cname" id="cname11">{{PageBoard2.Course.CourseName}}</span></a></p>
 
-                <p><a href="#"><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></a></p>
+                <p><a><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></a></p>
               </div>
 
               <div id="recommendtop" class="seven wide column">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
                   <input type="text" id="sl1{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}1C" data-slider-value ="{{PageBoard2.Total_Speedy}}"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" href="#" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
                   <input type="text" id="sl1{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}2C" data-slider-value ="{{PageBoard2.Total_Question}}"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
                   <input type="text" id="sl1{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}3C" data-slider-value ="{{PageBoard2.Total_Reliance}}"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
                   <input type="text" id="sl1{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}4C" data-slider-value ="{{PageBoard2.Total_Helper}}"/>
-                  <a id="tooltips" href="#" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
               </div>
             </div>
 		        {%endfor%}
@@ -35,7 +36,12 @@
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in TotalCount.1%}
-              <a id ="LikePage" name="{{i}}" class="item">{{i}}</a>
+              {%if PageInformation.1.1 == i%}
+
+              <a id ="LikePage" name="{{i}}" class="active item" >{{i}}</a>
+               {%else%}
+               <a id ="LikePage" name="{{i}}" class="item" >{{i}}</a>
+               {%endif%}
               {%endfor%}
               <a id = "LikeNext" name = "{{PageInformation.1.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>

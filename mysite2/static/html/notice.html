@@ -10,7 +10,8 @@
 
     <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{%static "js/notice.js"%}"></script>
+    <link rel="stylesheet" type="text/css" href="{%static "css/notice.css"%}">
+    <script type="text/javascript" src="{% static "js/notice.js"%}"></script>
     
     <style>
       body, input {
@@ -19,8 +20,7 @@
       }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="{%static "css/qna.css"%}">
-    <script type="text/javascript" src="{% static "js/qna.js"%}"></script>
+    
     
     
    {%endblock%}
@@ -84,7 +84,7 @@
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
         
-        {% for i in  TotalCount %}
+        {% for i in TotalCount %}
     
              {%if PageInformation.1 == i%}
 
@@ -92,7 +92,7 @@
             {%else%}
              <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
              {%endif%}
-              {% endfor%}
+              {%endfor%}
          
               <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>

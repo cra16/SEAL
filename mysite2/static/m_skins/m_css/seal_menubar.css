@@ -1,55 +1,55 @@
 /*------------------Menu navbar's css----------------------*/
 
+
 #menu.navbar-default .navbar-brand {
-    font-size: 30px;
-    font-family: 'Fredoka One', cursive;
     color: #ffffff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 40px;
 }
+
+#menu.navbar-default .navbar-form {
+    border: 0;
+    padding: 0 15px;
+    box-shadow: none;
+}
+
 #menu.navbar-default {
     font-size: 14px;
     background-color: #87cefa;
-    border-bottom-width: 1px;
+    border-width: 0px;
 }
+
 #menu.navbar-default .navbar-nav>li>a {
     color: #ffffff;
     background-color: #87cefa;
 }
+
 #menu.navbar-default .navbar-nav>li>a:hover,
 #menu.navbar-default .navbar-nav>li>a:focus {
-    color: #ffffff;
-    background-color: #3faff5;
+    color: #000;
+    background-color: #f8f8f8;
 }
+
 #menu.navbar-default .navbar-nav>.active>a,
 #menu.navbar-default .navbar-nav>.active>a:hover,
 #menu.navbar-default .navbar-nav>.active>a:focus {
-    color: #000000;
-    background-color: #ffffff;
-}
-#menu.navbar-default .navbar-nav>li>ul>li>a {
-    color: #ffffff;
-    background-color: #87cefa;
-}
-#menu.navbar-default .navbar-nav>li>ul>li>a:hover,
-#menu.navbar-default .navbar-nav>li>ul>li>a:focus {
     color: #ffffff;
     background-color: #3faff5;
 }
-#menu.navbar-default .navbar-nav>.active>ul>li>a,
-#menu.navbar-default .navbar-nav>.active>ul>li>a:hover,
-#menu.navbar-default .navbar-nav>.active>ul>li>a:focus {
-    color: #000000;
-    background-color: #ffffff;
-}
+
 #menu.navbar-default .navbar-toggle {
-    border-color: #ffffff;
+    border-color: #3faff5;
 }
+
 #menu.navbar-default .navbar-toggle:hover,
 #menu.navbar-default .navbar-toggle:focus {
-    background-color: #ffffff;
+    background-color: #3faff5;
 }
+
 #menu.navbar-default .navbar-toggle .icon-bar {
-    background-color: #ffffff;
+    background-color: #3faff5;
 }
+
 #menu.navbar-default .navbar-toggle:hover .icon-bar,
 #menu.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #87cefa;

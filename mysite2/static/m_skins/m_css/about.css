@@ -2,11 +2,11 @@
 	padding: 20px;
 }
 
-#section {
+#about_sub > #section {
 	padding: 20px;
 	border: 1px solid #87cefa;
 	border-radius: 10px;
-	background-color: #b0e0e6;
+	background-color: #c0d6e4;
 	box-shadow: 3px 3px 1px #888888;
 	margin: 20px;
 }

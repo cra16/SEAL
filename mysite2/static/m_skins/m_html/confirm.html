@@ -1,4 +1,4 @@
-{% extends "html/base.html" %}
+{% extends "m_skins/m_html/base.html" %}
 
    
  <head>
@@ -18,7 +18,7 @@
   <body>
   {% block content%}
 
-    <div class="container" style="padding:100px 0">
+    <div id="registerCon" class="container" style="padding:100px 0">
       <div class="col-sm-2"></div>
 
       <div class="col-sm-8" id="confirmcontainer">
@@ -27,15 +27,17 @@
             <h class="title1 hidden-xs">SEAL</h>
             <p class="title2 visible-xs">SEAL</p>
             <p class="detail">Students' Excellent Achievement in Learning</p>
-            <p class="detail2">설명1</p>
-            <p class="detail2">설명2</p>
+            <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+            <p class="detail2">강의추천 및 강의정보 열람서비스입니다.</p>
+            <br></br>
+            <p>Powered by CRA</p>
         </div>
          
 
         <div class="box" id="mycontent-right">
 
 
-          <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
+          <form id="confirmForm" method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
 
             <div class="form-group" method="post" action="/mysite2/Register">
               <label class="control-label" for="stu_num">학번</label>
@@ -47,8 +49,14 @@
               <label class="control-label" for="hisnet_pw" style="padding-top: 15px;">히스넷 비밀번호</label>
               <input type="password" id="hisnet_pw" name="hisnet_pw" class="form-control" placeholder="히스넷 비밀번호">
               <p>&nbsp;</p>
-			<a> <input type="submit" id="check" value="확인" class="btn btn-info"></a>
-              <a href = "/mysite2"><input type="button" id="cancel" value="Cancel" class="btn btn-info"></a>
+			         
+               <div class="form-group" method="post">            
+                <div class="ui medium buttons">
+                  <input type="submit" id="check" value="확인" class="ui blue button">
+                  <div class="or"></div>
+                  <a href = "/mysite2"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
+                </div>
+               </div>
             </div>
 
           </form>
@@ -56,10 +64,12 @@
         </div>
       </div>
 
-      <div class="col-sm-2"></div>      
+      <div class="col-sm-2"></div>         
     </div>
 
   {%endblock%}
   </body>
+
+
 
 </html>

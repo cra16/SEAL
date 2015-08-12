@@ -1,30 +1,30 @@
 $(document).ready(function(){
-	$("#check").click(function(){
-		var username = $("#username").val(),
-		 	password = $("#password").val(),
-		 	year = $("#year").val();
+	$("#confirmForm").submit(function(){
+		var stu_num = $("#stu_num").val(),
+		 	his_id = $("#hisnet_id").val(),
+		 	his_pw = $("#hisnet_pw").val();
 		//check if there is blank fields
-		if(username == "" || password == "" || year == ""){
+		if(stu_num== "" || his_id == "" || his_pw == ""){
 			$('input[type="text"], input[type="password"]').css("border", "2px solid red");
 			$('input[type="text"], input[type="password"]').css("box-shadow", "0 0 3px red");
 			alert("Please fill in the fields.");
+			return false;
 		}
 		else{
-			/*$.post("confirm.php", {username1: username, password1: password, year1: year}, function(data){
-				if(data == 0){
-					$('input[type="text"], input[type="password"]').css({"border": "2px solid red", "box-shadow":"0 0 3px red"});
-					alert('Username or Password is wrong!');
-				}
-				else if(data == 1){
-					window.location.href = "register.html";
-				}
-				else{
-					alert(data);
-				}
-			});*/
-		}
-	});
+			$('#registerCon').fadeIn();
+			$('#preloader').fadeIn();
+        	$('#status').fadeIn(); // will first fade out the loading animation
+        	setTimeout(function()
+     		{
+     			alert('서버가 느리네요...');
+     		},30000)
+}
 
+        	$('#preloader').delay(30000).fadeOut('slow'); // will fade out the white DIV that covers the website3
+        	$('body').delay(300).css({'overflow':'visible'});
+
+     		
+});
 	$('#cancel').click(function(){
 		window.location.href = "../";
 	});

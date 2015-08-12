@@ -18,7 +18,7 @@
   <body>
   {% block content%}
 
-    <div class="container" style="padding:100px 0">
+    <div id="registerCon" class="container" style="padding:100px 0">
       <div class="col-sm-2"></div>
 
       <div class="col-sm-8" id="confirmcontainer">
@@ -37,7 +37,7 @@
         <div class="box" id="mycontent-right">
 
 
-          <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
+          <form id="confirmForm" method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
 
             <div class="form-group" method="post" action="/mysite2/Register">
               <label class="control-label" for="stu_num">학번</label>
@@ -69,5 +69,7 @@
 
   {%endblock%}
   </body>
+
+
 
 </html>

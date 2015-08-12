@@ -1,5 +1,5 @@
 <!doctype html>
-{% extends "html/base.html" %}
+{% extends "m_skins/m_html/base.html" %}
 
    
 {% load app_filter %}
@@ -28,14 +28,14 @@
 
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
-    <div class="col-md-8 col-sm-10 col-xs-10">
+    <div class="col-md-11 col-sm-11 col-xs-11">
 
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
         
       {%if Search == None%}
-      <div class="ui small tabular filter menu">
+      <div class="ui small tabular filter menu" style ="margin-right:-2rem">
         <a id="FirstMajor" class="active item" data-tab="unread">1전공</a>
         <a id="SecondMajor" class="item" data-tab="saved">2전공</a>
         <a id="All" class="item" data-tab="all">All</a>
@@ -44,7 +44,7 @@
 
      
       <div class="ui very relaxed column grid">
-        <div class="column">
+        <div class="column" style="padding-right:0rem">
 
     {%if Search == None%}
     <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">

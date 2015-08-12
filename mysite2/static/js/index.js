@@ -52,7 +52,7 @@ $("div").on('click',"#cname",function(event){
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
                  
-                  });
+               
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

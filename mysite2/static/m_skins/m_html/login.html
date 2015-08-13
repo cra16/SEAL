@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% extends "html/base.html" %}
+{% extends "m_skins/m_html/base.html" %}
 
    
   {% load staticfiles %}
@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/login.css" %}" />
-    <script type="text/javascript" src="{% static "js/LoginPage/login.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/LoginPage/login.css" %}" />
+    <script type="text/javascript" src="{% static "m_skins/m_js/LoginPage/login.js" %}"></script>
 
     <title>SEAL - Login</title>
    {% endblock%}
@@ -25,27 +25,34 @@
         <div class="box" id="mycontent-left">
             <h class="title1 hidden-xs">SEAL</h>
             <p class="title2 visible-xs">SEAL</p>
-               <p class="detail">Students' Excellent Achievement in Learning</p>
-            <p class="detail2">설명1</p>
-            <p class="detail2">설명2</p>
+               <p class="detail">Students' Excellent Achievement</p>
+               <p class="detail"> in Learning</p>
+               <br></br>
+            <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+            <p class="detail2">강의추천 및 강의정보 열람서비스입니다.</p>
+            <br></br>
+            <p>Powered by CRA</p>
         </div>
          
 
         <div class="box" id="mycontent-right">
 
+          <form id="loginForm" action = "/mysite2" method ="POST">{%csrf_token%}
 
-          <form action = "/mysite2" method ="POST">{%csrf_token%}
-
-            <div class="form-group" method="post" action="#">
+            <div class="form-group" method="post">
               <label class="control-label" for="username">아이디(학번)</label>
               <input type="text" id="UserID" name ="UserID" class="form-control" placeholder="아이디(학번)">
               <label class="control-label" for="password" style="padding-top: 15px;">비밀번호</label>
               <input type="password" id="UserPassword" name ="UserPassword" class="form-control" placeholder="비밀번호">
             </div>
 
-            <div class="form-group" method="post" action="#">
-              <input type="submit" id="login" value="Login" class="btn btn-info">
-			        <input type="button" id="register" value="Register" class="btn btn-info">
+              <p></p>
+            <div class="form-group" method="post">            
+              <div class="ui medium buttons">
+                <input type="submit" id="login" value="Login" class="ui blue button">
+                <div class="or"></div>
+                <input type="button" id="register" value="Register" class="ui blue button">
+              </div>
             </div>
 
           </form>

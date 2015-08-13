@@ -41,6 +41,7 @@
 	border: 1px solid #87cefa;
 	border-radius: 10px;
 	box-shadow: 3px 3px 1px #888888;
+	font-weight: bold;
 	color: black;
 }
 
@@ -73,33 +74,46 @@
 	color: white;
 }
 
+#enbutton {
+	margin-top:-12px;
+	margin-bottom:-12px;
+}
+
+#lchoice {
+	margin-left: -5px;
+	margin-top: -8px;
+	margin-bottom: -8px;
+}
+
+#rchoice {
+	margin-right: -5px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+#sldbr {
+	margin-left: 79px;
+	margin-top: -45px;
+	margin-bottom: -45px;
+}
+
 #firstcolumn{
-	font-weight: bold;
 	color: #ff7f50;
 }
 #secondcolumn{
-	font-weight: bold;
 	color: #9370db;
 }
 #thirdcolumn{
-	font-weight: bold;
 	color: #2e8b57;
 }
 #fourthcolumn{
-	font-weight: bold;
 	color: #008b8b;
 }
 #fifthcolumn{
-	font-weight: bold;
 	color: #808000;
 }
 #sixthcolumn{
-	font-weight: bold;
 	color: #ba55d3;
-}
-
-#sl1, #sl2, #sl3, #sl4, #sl5, #sl6 {
-	width: 130px;
 }
 
 

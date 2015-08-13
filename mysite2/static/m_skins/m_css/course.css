@@ -26,11 +26,43 @@
 }
 
 #recommending {
-	padding: 10px;
+	
+	padding: 20px;
 	border: 1px solid #87cefa;
 	border-radius: 10px;
 	box-shadow: 3px 3px 1px #888888;
+	font-weight: bold;
 	color: black;
+}
+
+#lchoice {
+	margin-left: -5px;
+	margin-top: -8px;
+	margin-bottom: -8px;
+}
+
+#rchoice {
+	margin-right: -5px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+#sldbr {
+	margin-left: 68px;
+	margin-top: -45px;
+	margin-bottom: -45px;
+}
+
+#avgsldbr {
+	margin-left: 80px;
+	margin-top: -45px;
+	margin-bottom: -45px;
+}
+
+#mysldbr {
+	margin-left: 58px;
+	margin-top: -45px;
+	margin-bottom: -45px;
 }
 
 #tooltips{
@@ -39,39 +71,24 @@
 }
 
 #firstcolumn{
-	font-weight: bold;
 	color: #ff7f50;
 }
 #secondcolumn{
-	font-weight: bold;
 	color: #9370db;
 }
 #thirdcolumn{
-	font-weight: bold;
 	color: #2e8b57;
 }
 #fourthcolumn{
-	font-weight: bold;
 	color: #008b8b;
 }
 #fifthcolumn{
-	font-weight: bold;
 	color: #808000;
 }
 #sixthcolumn{
-	font-weight: bold;
 	color: #ba55d3;
 }
 
-#sl1, #sl2, #sl3, #sl4, #sl5, #sl6,
-#sl11, #sl12, #sl13, #sl14, #sl15, #sl16,
-#sl21, #sl22, #sl23, #sl24, #sl25, #sl26,
-#sl31, #sl32, #sl33, #sl34, #sl35, #sl36,
-#sl41, #sl42, #sl43, #sl44, #sl45, #sl46,
-#sl51, #sl52, #sl53, #sl54, #sl55, #sl56,
-#sl61, #sl62, #sl63, #sl64, #sl65, #sl66 {
-	width: 150px;
-}
 
 #sl1C .slider-handle{
 	background: #ff7f50;
@@ -304,45 +321,45 @@
 
 
 
-#sl51C .slider-handle{
+#sl01C .slider-handle{
 	background: #ff7f50;
 }
-#sl51C .slider-selection{
+#sl01C .slider-selection{
 	background: #ff7f50;
 }
 
-#sl52C .slider-handle{
+#sl02C .slider-handle{
 	background: #9370db;
 }
-#sl52C .slider-selection{
+#sl02C .slider-selection{
 	background: #9370db;
 }
 
-#sl53C .slider-handle{
+#sl03C .slider-handle{
 	background: #2e8b57;
 }
-#sl53C .slider-selection{
+#sl03C .slider-selection{
 	background: #2e8b57;
 }
 
-#sl54C .slider-handle{
+#sl04C .slider-handle{
 	background: #008b8b;
 }
-#sl54C .slider-selection{
+#sl04C .slider-selection{
 	background: #008b8b;
 }
 
-#sl55C .slider-handle{
+#sl05C .slider-handle{
 	background: #808000;
 }
-#sl55C .slider-selection{
+#sl05C .slider-selection{
 	background: #808000;
 }
 
-#sl56C .slider-handle{
+#sl06C .slider-handle{
 	background: #ba55d3;
 }
-#sl56C .slider-selection{
+#sl06C .slider-selection{
 	background: #ba55d3;
 }
 

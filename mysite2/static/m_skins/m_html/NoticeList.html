@@ -2,14 +2,14 @@
 
  <div id="qna_board">
               
-              <table class="ui table">
+              <table class="ui unstackable table">
                  <thead>
                   <tr>
-                      <th class="two wide"><center>번호</center></th>
-                      <th class="eight wide"><center>제목</center></th>
-                      <th class="two wide"><center>작성자</center></th>
-                      <th class="two wide"><center>날짜</center></th>
-                      <th class="two wide"><center>조회수</center></th>
+                      <th class="one wide"><center>번호</center></th>
+                      <th class="eleven wide"><center>제목</center></th>
+                      <th class="three wide"><center>작성자</center></th>
+                      <th class="one wide"><center>날짜</center></th>
+                      <th class="one wide"><center>조회</center></th>
                   </tr>
                 </thead>
                 
@@ -42,8 +42,12 @@
         
         {% for i in  TotalCount %}
     
+            {%if PageInformation.1 == i%}
+
+              <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+             {%else%}
               <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
-              {% endfor%}
+            {%endif%}
          
               <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>

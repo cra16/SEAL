@@ -1,103 +1,3 @@
-#Swan {
-    font-family: 'Fredoka One', cursive;
-    color: #87CEFA;
-    font-size: 30px;
-}
-
-#recommendtop > a {
-    text-decoration: none;
-}
-
-/* Preloader */
-
-#preloader {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background-color:#fff; /* change if the mask should have another color then white */
-    z-index:99; /* makes sure it stays on top */
-}
-
-#status {
-    width:200px;
-    height:200px;
-    position:absolute;
-    left:50%; /* centers the loading animation horizontally one the screen */
-    top:50%; /* centers the loading animation vertically one the screen */
-    background-image:url(loader.gif); /* path to your loading animation */
-    background-repeat:no-repeat;
-    background-position:center;
-    margin:-100px 0 0 -100px; /* is width and height divided by two */
-}
-
-#contents {
-    padding-top: 60px;
-    padding-bottom: 200px;
-}
-
-div {
-display: block;
-}
-
-.cname {
-    font-size: 23px;
-    font-weight: bold;
-}
-
-.glyphicon.glyphicon-heart {
-    font-size: 40px;
-    color: red;
-}
-
-#book > i {
-    font-size: 50px;
-    color: #87cefa;
-}
-
-#pencil > i {
-    font-size: 50px;
-    color: #87cefa;
-}
-
-#heart > i {
-    font-size: 50px;
-    color: #87cefa;
-}
-
-#eye > i{
-    font-size: 50px;
-    color: #87cefa;
-}
-
-#logout {
-    font-size: 12px;
-    font-weight: normal;
-    color: red;
-}
-
-#firstcourse, #secondcourse, #thirdcourse, #fourthcourse, #fifthcourse, #sixthcourse, #seventhcourse {
-    float: left;
-    margin-right: 20px;
-}
-
-#recommendtop {
-    margin-bottom: 20px;
-}
-
-
-#sl11, #sl12, #sl13, #sl14, #sl15, #sl16,
-#sl21, #sl22, #sl23, #sl24, #sl25, #sl26,
-#sl31, #sl32, #sl33, #sl34, #sl35, #sl36,
-#sl41, #sl42, #sl43, #sl44, #sl45, #sl46,
-#sl51, #sl52, #sl53, #sl54, #sl55, #sl56,
-#sl61, #sl62, #sl63, #sl64, #sl65, #sl66 {
-    width: 150px;
-}
-
-
-
 
 
 #tooltips{
@@ -294,14 +194,20 @@ display: block;
     background: #008b8b;
 }
 
+
+
+
+
+
 #sl111, #sl112, #sl113, #sl114, 
 #sl121, #sl122, #sl123, #sl124, 
 #sl131, #sl132, #sl133, #sl134, 
 #sl141, #sl142, #sl143, #sl144, 
 #sl151, #sl152, #sl153, #sl154, 
 #sl161, #sl162, #sl163, #sl164{
-    width: 150px;
+    width: 180px;
 }
+
 
 #sl111C .slider-handle{
     background: #ff7f50;

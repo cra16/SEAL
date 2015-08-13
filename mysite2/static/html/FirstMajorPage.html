@@ -5,7 +5,7 @@
 
 
            {% if forloop.counter0|divisibleby:"2" %}
-        <div class="ui two column grid">
+        <div class="ui stackable two column grid">
           {% endif %}
             <div class="column">
              <div class="ui raised segment">
@@ -50,10 +50,10 @@
       {% for PBoard1 in PageBoard.0%}
                     
           <div class="column">
-            <div class="ui raised segment grid">
+            <div class="ui raised segment">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
-                <center><button id="likebutton" name = "{{PBoard1.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><button id="likebutton" name = "{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard1.Total_Count}}</span> LIKES</center>
               </div>             
                  
@@ -83,6 +83,7 @@
                </div>
             </div>
           </div>
+            <div class="ui divider"></div>
       
             {%endfor%}
 
@@ -108,14 +109,4 @@
             </div></center>
             
         {%endif%}
-         <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
-      
-<script type="text/javascript">
-      //<![CDATA[
-      $(window).load(function() { // makes sure the whole site is loaded
-        $('#status').fadeIn(); // will first fade out the loading animation
-        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(350).css({'overflow':'visible'});
-      });
-      //]]>
-    </script>
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

@@ -45,7 +45,7 @@
     </style>
     
     {% block head %}
-     아아아   
+     
     {% endblock%}
 
     <title> {% block title %} SWAN - Login {% endblock %}</title>
@@ -54,13 +54,15 @@
 
   </head>
   <body>
+
+
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
    
    {% if not user == None%}
     <!-- Preloader -->
     
-    <div id="preloader">
-      <div id="status">&nbsp;</div>
-    </div>
 
 
     <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -132,7 +134,7 @@
                   <i class="glyphicon glyphicon-pencil"></i><br />Wanted Features
                 </div>
                 <p>We provide valid information of powerful courses that suit just for you.</p>
-                <a class="ui button" href="file:///C:/workspace/html%20project%20practice/index.html">www.SEAL.com</a>
+                <a class="ui button" href="#">www.SEAL.com</a>
               </div>
                           
               <div class="column">
@@ -228,7 +230,7 @@
   </div>
 
     
-
+{%endif%}
     <!-- Preloader -->
     <script type="text/javascript">
       //<![CDATA[
@@ -239,7 +241,7 @@
       });
       //]]>
     </script>
-   {%endif%}
+   
   </body>
 </html>
 

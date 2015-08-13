@@ -32,7 +32,7 @@ $(document).ready(function() {
     });
 
     $("#table").find("td").each(function(i, e){
-          $(this).unbind("click");
+      $(this).unbind("click");
       $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(event){
         event.stopPropagation();
         $.ajax(
@@ -42,7 +42,6 @@ $(document).ready(function() {
                   },
             type : "POST",
             success:function(resp){
-                $("#sch-result").off("click","#sch-select");
               $('#rt_table').html(resp);
             },
             error:function(xhr, option, error){

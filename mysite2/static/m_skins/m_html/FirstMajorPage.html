@@ -50,7 +50,8 @@
       {% for PBoard1 in PageBoard.0%}
                     
           <div class="column">
-            <div class="ui raised segment grid">
+            <div class="ui raised segment">
+              <div class="sixteen wide column">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
                 <center><button id="likebutton" name = "{{PBoard1.Course.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
@@ -58,7 +59,7 @@
               </div>             
                  
 
-              <div id="firstcourse" class="sixteen wide column">
+              <div class="sixteen wide column">
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
@@ -66,12 +67,14 @@
                  <p><a><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></a></p>
             
               </div>
+            </div>
               
-               <div id="recommendtop" class="sixteen wide column">
-                  &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>&nbsp;&nbsp;
+               <div class="center aligned sixteen wide column">
+                <br></br>
+                  <a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>&nbsp;&nbsp;
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   &nbsp;&nbsp;<a id="tooltips"  data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;<a id="tooltips"  data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>&nbsp;&nbsp;
+                  <a id="tooltips"  data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>&nbsp;&nbsp;
                   <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Question}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재위주</a>

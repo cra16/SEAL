@@ -30,7 +30,7 @@
 
       <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
-      <div class="col-md-8 col-sm-10 col-xs-10">
+      <div class="col-md-12 col-sm-12 col-xs-12">
 
         <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항
            {% if user.profile.UserName == "관리자"%}
@@ -46,19 +46,18 @@
         <div id="Notice_List" class="ui column">
           <div id="qna_board">
               
-              <table class="ui table">
+              <table class="ui unstackable table">
                  <thead>
                   <tr>
-                      <th class="two wide"><center>번호</center></th>
-                      <th class="eight wide"><center>제목</center></th>
-                      <th class="two wide"><center>작성자</center></th>
-                      <th class="two wide"><center>날짜</center></th>
-                      <th class="two wide"><center>조회수</center></th>
+                      <th class="one wide"><center>번호</center></th>
+                      <th class="eleven wide"><center>제목</center></th>
+                      <th class="three wide"><center>작성자</center></th>
+                      <th class="one wide"><center>날짜</center></th>
+                      <th class="one wide"><center>조회</center></th>
                   </tr>
                 </thead>
                 
-                
-                
+
                 <tbody class="qna_sub">
                   {%for Board in PageBoard%}
 				  
@@ -99,6 +98,7 @@
             </div></center>
               
           </div>
+          <div class="ui section divider" style="margin-bottom: 0px;"></div>
         </div>
 
      {% endblock%}

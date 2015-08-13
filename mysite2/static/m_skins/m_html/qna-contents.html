@@ -24,20 +24,24 @@
 
       <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
-      <div class="col-md-8 col-sm-10 col-xs-10">
+      <div class="col-md-12 col-sm-12 col-xs-12">
 
         <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)
         {% if user.profile.UserName == "관리자"%}
-        <a href="/mysite2/QnA/Reply/{{Current.id}}"> <div style="margin-top:20px" class="ui right floated tiny blue button">
+        <a href="/mysite2/QnA/Reply/{{Current.id}}"> <div style="margin-top:8px" class="ui right floated tiny blue button">
           
           <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
+
+        <div class="ui section divider" style="margin-top: 50px;"></div>
+ 
           {% endif %}
-        <a href="/mysite2/QnA"> <div style="margin-top:20px" class="ui right floated tiny teal button">
+        <a href="/mysite2/QnA"> <div style="margin-top: 8px" class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
 
-        <div id="h_sectiondivider" class="ui section divider"></div>
+        <div class="ui section divider" style="margin-top: 50px;"></div>
+ 
 
-            <div id="qna_border_q" class="ui raised segment">
+            <div id="qna_border_q" class="ui raised segment" style="margin-left: 2px;">
               <div class="ui large blue ribbon label">{{Current.TextName}}</div>
               <p></p>
               <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
@@ -64,7 +68,7 @@
 
       </div>
             
-            <div id="qna_border_a" class="ui raised segment">
+            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
               <div class="ui large red right ribbon label">{{QnA.TextName}}</div>
               <p></p>
               <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}  </div>
@@ -83,6 +87,8 @@
               </a>
             </div></center>
                         
-      
+             
+        <div class="ui section divider" style="border-color: lightgray; margin-top: 30px; margin-bottom: 0px;"></div>
+ 
      {% endblock%}       
 </html>

@@ -68,11 +68,11 @@ def Page(request): #Main Page를 보여주는 함수
 	try:
 		if request.method =="POST":
 			PostDic = dict()
-			for key in request.POST.keys():
+			for key in request.POST.keys(): #현재 ajax에서 받아온 post값들 key를 비교해서 dictionary로 표현해서 씀
 				Data=request.POST[key]	
 				PostDic[key] =request.POST[key]
-			if 'Course' in request.POST.keys():
-				if request.POST['Course']!="":
+			if 'Course' in request.POST.keys(): 
+				if request.POST['Course']!="": # 강의 이름이 입력 되었을 때 해당 강의이름의 code까지 얻어 오기 위함
 					if 'Code' not in request.POST.keys():
 						A=Lecture.objects.filter(CourseName =PostDic['Course'])[0]
 						PostDic['Code']= A.Code
@@ -87,16 +87,16 @@ def Page(request): #Main Page를 보여주는 함수
 	elif PostDic['Current'] =="ThirdPage" or PostDic['Current'] =="ThirdPageNation":
 		Page="2"
 	else:
-		Page ="0"
+		Page ="0" #어디쪽에 뿌릴지 결정함
 
-	PostDic['Page']= PostDic['Page'] !="0" and PostDic['Page'] or "1"
+	PostDic['Page']= PostDic['Page'] !="0" and PostDic['Page'] or "1" #페이지 위치에 따른 값 결정
 	
-	if PostDic['Course'] == "":
+	if PostDic['Course'] == "": #그냥 전체강의에서 pagenation 하는 경우
 		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
 		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
 		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page))
-	else:
+	else: #반대의 경우
 		target = TargetTemplate(PostDic['Current'])
 		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
 	
@@ -156,7 +156,15 @@ def Search(request): #과목 검색 기능
 		LectureData = [[]]
 		TotalAdd=[]
 		j=0
-		try:
+		try: 
+			"""
+			밑의 알고리즘은 현재 DB에 등록 되어있는 강의 이름을 토대로 group by로 묶어서 중복되는 강의이름을 하나로 묶어 버린후에
+			그 강의이름 정보를 토대로 다시 DB에서 호출하는데 그 강의중 중복되는 정보만 추출하면 되는 거라 하나씩 불러서 그 부른 강의들을
+			list화 시킴. 그리고 나서 그 list화 시킨 강의 정보를 다시 전체 평가 한 강의 부분 DB에서 다시 호출해 강의마다 평가된 
+			평가 갯수를 다 더해서 함
+			ps)물론 DB하나 더 만들면 더 간단한 알고리즘이 되겠지만 어차피 DB에서 한번더 불러야 하는건 마찬가지라 속도가 비슷할 거같아서
+			안만듬
+			"""
 			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
 			for lec in temp:
 
@@ -176,6 +184,7 @@ def Search(request): #과목 검색 기능
 
 		DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
 		SearchCount=DataCount(10,DBCount)
+		
 		if DBCount != 0 : 
 			L_Data=PageView(LectureData)
 		else:

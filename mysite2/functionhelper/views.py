@@ -13,6 +13,11 @@ register = template.Library()
 """
 전반적으로 해당 view에서 보이지 않는 모든 함수를 여기에 한곳에 모음
 현재는 기능과 DB와 관련된 모든 함수가 섞여있는데 나중에 분류할 예정 7/6일 자
+
+8/13
+이 page는 위에 설명한것과 마찬가지로 전반적인 동작 함수를 전부다 모아서 나중에 찾기 쉽게 하려고 모아놓음
+대부분 2번이상 사용할 수 있는 것들만 모아놨음.
+알고리즘은 대체적으로 돌아가게끔만 해놓은 것이라서 느릴 수도 있지만, 변수 특성만 바꾸지않으면 왠만해선 다돌아감(?)
 """
 
 #세션 유지된 아이디 확인
@@ -89,6 +94,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	#user의 전공에 따른 전공 코드를 뿌려줌
 	CourseCode = MajorSelect(User)
 	
+	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
 	T_Count=[[] ,[] ,[]]
 	if CourseCode[0] !="ENG":
 		DBCount1 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).count()
@@ -97,7 +103,6 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		T_Count[1] = DataCount(10,DBCount2)
 	else:
 		DBCount1=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).count()
-		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
 		T_Count[0] = DataCount(10,DBCount1)
 		T_Count[1] = DataCount(10,DBCount1)
 	DBCount3= Lecture.objects.values('CourseName').annotate(Count('CourseName')).count()
@@ -169,16 +174,6 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			except:
 					continue
 			TotalAdd[2].append(total)
-
-	#2차원 list로 각 전공당 총 페이지 수 저장
-	
-
-	
-	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
-	#PageBoard = PageView(TotalBoard)
-	##Session Save
-	
-	##각 강의의 총 평가 수
 
 
 	# 페이지 총 수(페이지 넘길 때)

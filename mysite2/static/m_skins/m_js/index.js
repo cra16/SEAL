@@ -177,7 +177,33 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-         
 });
 
 
+function onLoad() {
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+}
+
+function onDeviceReady() {
+
+    document.addEventListener("backbutton", onBackKeyDown, false);
+
+}
+
+function onBackKeyDown() {
+
+    navigator.notification.confirm('종료하시겠습니까?', onBackKeyDownMsg, '종료', '취소, 종료');
+
+}
+
+function onBackKeyDownMsg() {
+
+    if(button == 2) {
+
+        navigator.app.exitApp();
+
+    }
+
+}

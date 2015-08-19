@@ -173,12 +173,37 @@ $("div").on('click',"#cname",function(event){
             
           });
 
+        $(document).keydown(function(e){
+
+      if(e.keyCode===8){
+        location.reload();
+        return false;
+
+         }
+        else if(event.keyCode==4){
+         alert("ggg");
+      }
+    });
 
 
     });
 
+
+document.addEventListener('backbutton', function(){
+  
+  
+alert("aa");  
+});
+$(document).bind('keydown', function(event) {
+  if (event.keyCode == 27) {
+    // Prevent default (disable the back button behavior)
+   alert("GG");
+
+    // Your code to show another page or whatever...
+  }
 });
 
+});
 
 function onLoad() {
 
@@ -207,3 +232,7 @@ function onBackKeyDownMsg() {
     }
 
 }
+
+
+
+

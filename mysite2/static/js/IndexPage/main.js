@@ -110,7 +110,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPageNation")
                        $('#FirstPage').html(resp);
@@ -154,7 +154,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPageNation")
                        $('#FirstPage').html(resp);
@@ -232,7 +232,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                        $('#Search_Page').html(resp);
                  },
@@ -266,7 +266,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   $('#Search_Page').html(resp);
                 },
@@ -296,7 +296,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   $('#Search_Page').html(resp);
                 },

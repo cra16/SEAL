@@ -39,7 +39,7 @@ $("div").on('click',"#cname",function(event){
                       'Semester':semester
 
                     },
-              sync : true,
+              async : false,
               type : "POST",
               success:function(resp){  
 
@@ -70,17 +70,17 @@ $("div").on('click',"#cname",function(event){
           $(this).unbind("click");
 
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-       
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
+                      'Course':CurrentCourse
                     },
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);
@@ -107,17 +107,17 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
+                      'Course':CurrentCourse
                     },
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);
@@ -147,17 +147,17 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/mysite2/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
+                      'Course':CurrentCourse
                     },
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);

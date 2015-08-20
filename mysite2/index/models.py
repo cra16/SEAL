@@ -11,6 +11,8 @@ class Course_Evaluation(models.Model):
 	Question = models.PositiveSmallIntegerField(default=5, null=False)
 	Exam = models.PositiveSmallIntegerField(default=5, null=False)
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
+	P_Knowledge = models.PositiveSmallIntegerField(default=5, null=False)
+	CourseComment = models.TextField(max_length=200)
 		
 	def __unicode__(self):
 		return self.Course.CourseName
@@ -24,6 +26,8 @@ class Total_Evaluation(models.Model):
 		Total_Exam = models.IntegerField(default=0)
 		Total_Homework=models.IntegerField(default=0)
 		Total_Count =models.IntegerField(default=0)
+		Total_P_Knowledge = models.IntegerField(default=5, null=False)
+	
 		def __unicode__(self):
 			return self.Course.Code
 

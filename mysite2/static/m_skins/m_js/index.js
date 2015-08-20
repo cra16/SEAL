@@ -173,11 +173,66 @@ $("div").on('click',"#cname",function(event){
             
           });
 
+        $(document).keydown(function(e){
+
+      if(e.keyCode===8){
+        location.reload();
+        return false;
+
+         }
+        else if(event.keyCode==4){
+         alert("ggg");
+      }
+    });
 
 
     });
 
-         
+
+document.addEventListener('backbutton', function(){
+  
+  
+alert("aa");  
 });
+$(document).bind('keydown', function(event) {
+  if (event.keyCode == 27) {
+    // Prevent default (disable the back button behavior)
+   alert("GG");
+
+    // Your code to show another page or whatever...
+  }
+});
+
+});
+
+function onLoad() {
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+}
+
+function onDeviceReady() {
+
+    document.addEventListener("backbutton", onBackKeyDown, false);
+
+}
+
+function onBackKeyDown() {
+
+    navigator.notification.confirm('종료하시겠습니까?', onBackKeyDownMsg, '종료', '취소, 종료');
+
+}
+
+function onBackKeyDownMsg() {
+
+    if(button == 2) {
+
+        navigator.app.exitApp();
+
+    }
+
+}
+
+
 
 

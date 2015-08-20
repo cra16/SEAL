@@ -278,7 +278,12 @@
                 <a id="tooltips" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
               </div>
             </div>
+
+            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+                  <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
+              </div>
           </div>
+
 	
 		</div>
       {% endif %} 
@@ -386,6 +391,9 @@
                 <a id="tooltips" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
               </div>
             </div>
+            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+                  <p>{{OtherBoard.CourseComment}}</p>
+              </div>
           </div>
 
         {%endfor%}

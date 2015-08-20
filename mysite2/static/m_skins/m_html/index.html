@@ -17,9 +17,25 @@
     <script type="text/javascript" src="{% static "m_skins/m_js/index.js" %}"></script>
 
     {% endblock%}
-    
+    <script>
+ document.onkeydown = function (e) {
+
+            key = (e) ? e.keyCode : event.keyCode;
+            
+                if (e) {
+                    e.preventDefault();
+                } //if(e)
+                else {
+                    event.keyCode = 0;
+                    event.returnValue = false;
+                }
+            
+        }
+     
+});
+</script>
  
-  <body>
+  <body onload="onLoad()">
     {% block content %}  
     
     

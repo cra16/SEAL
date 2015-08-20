@@ -15,11 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
     <script type="text/javascript" src="{% static "js/index.js" %}"></script>
-
+   
     {% endblock%}
     
  
-  <body>
+  <body  onload="onLoad()">
     {% block content %}  
     
     
@@ -33,7 +33,7 @@
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
-        
+      
       {%if Search == None%}
       <div class="ui small tabular filter menu">
         <a id="FirstMajor" class="active item" data-tab="unread">1전공</a>
@@ -64,7 +64,7 @@
               </div>
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
-                 <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
+                 <p><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
     
                 <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">

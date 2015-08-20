@@ -278,6 +278,10 @@
                 <input type="text" id="sl06" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl06C"/>
               </div>
             </div>
+
+              <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+                  <p>{{MyCourseBoard.CourseComment}}</p>
+              </div>
           </div>
 	
 		</div>
@@ -386,6 +390,10 @@
                 <input type="text" id="sl{{forloop.counter}}6" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}6C"/>
               </div>
             </div>
+
+            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+                  <p>{{OtherBoard.CourseComment}}</p>
+              </div>
           </div>
 
         {%endfor%}

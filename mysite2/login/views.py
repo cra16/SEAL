@@ -79,7 +79,7 @@ def Confirm(request):
 def HisnetCheck(request):
 	hisnet_url = "http://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
-		#try:
+		try:
 			stu_num = request.POST['stu_num']
 			hisnet_id = request.POST['hisnet_id']
 			hisnet_pw = request.POST['hisnet_pw']
@@ -102,12 +102,12 @@ def HisnetCheck(request):
 			# 로그인 이후 지연시간 발생 예외처리
 			while True:
 				try:
-					driver.get("https://hisnet.handong.edu/for_student/main.php")
-					haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
+					driver.get("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")	# 학사정보 접근
+					# haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
 					break
 				except:
 					continue
-			haksa_button.click()
+			# haksa_button.click()
 			# 학사 정보에서 학번 확인하기
 			grade_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[2]/td[2]")
 			# driver.save_screenshot('hisnet_haksa.png')
@@ -165,7 +165,7 @@ def HisnetCheck(request):
 				return render_to_response('html/register.html', ctx)
 			else:
 				return render_to_response('m_skins/m_html/register.html', ctx)
-		#except:
+		except:
 			# 히스넷 체크 안될 시 에러페이지 출력
 			if request.flavour =='full':
 				return render_to_response('html/confirm_error.html')

@@ -20,9 +20,10 @@ def func_strip(arg):
 	return arg
 
 def func_int(arg):
-	if arg != '':
+	try:
 		return int(arg)
-	return arg
+	except ValueError:
+		return arg
 
 def UpdateLogin(request):
 	return render_to_response('html/DBUpdate.html')

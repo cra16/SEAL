@@ -85,7 +85,8 @@ def HisnetCheck(request):
 			hisnet_pw = request.POST['hisnet_pw']
 			
 			if User.objects.filter(username=stu_num):
-				render_to_response('stu_num_duplicate.html')
+				# return render_to_response('html/stu_num_duplicate.html')
+				return render_to_response('html/stu_num_duplicate.html')
 
 			# 히스넷 로그인
 			driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')

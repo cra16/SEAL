@@ -232,8 +232,6 @@ def lec_update(request):
 				if not (var[8] == ''):
 					var[8] = int(var[8])
 				var = list(map(func_strip, var))
-				if var[-1]:
-					var[-1] = "Unconfirmed"
 				try:
 					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])
 					if d_lec: # 업데이트 가능한 요소들

@@ -20,7 +20,7 @@ def func_strip(arg):
 	return arg
 
 def func_int(arg):
-	if arg:
+	if arg != '':
 		return int(arg)
 	return arg
 

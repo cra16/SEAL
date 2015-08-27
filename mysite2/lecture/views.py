@@ -29,7 +29,9 @@ def func_strip(arg):
 def func_int(arg):
 	try:
 		return int(arg)
-	except ValueError or TypeError:	# NoneType -> TypeError, String -> ValueError
+	except ValueError:	# String -> ValueError
+		return arg
+	except TypeError:	# NoneType -> TypeError
 		return arg
 
 def UpdateLogin(request):

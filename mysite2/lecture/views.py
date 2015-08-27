@@ -19,6 +19,11 @@ def func_strip(arg):
 		return arg.strip()
 	return arg
 
+def func_int(arg):
+	if arg:
+		return int(arg)
+	return arg
+
 def UpdateLogin(request):
 	return render_to_response('html/DBUpdate.html')
 
@@ -115,12 +120,9 @@ def auto_lec_update(request):
 						)
 						temp_lec = list(map(func_strip, temp_lec))	# tuple -> list(strip_string)
 						hakbu_info_lst.append(temp_lec)
-						if temp_lec[9] == '':
-							temp_lec[9] = 0
-						else:
-							temp_lec[9] = int(temp_lec[9])
-						temp_lec[2] = int(temp_lec[2])
-						temp_lec[8] = int(temp_lec[8])
+						temp_lec[9] = func_int(temp_lec[9])
+						temp_lec[2] = func_int(temp_lec[2])
+						temp_lec[8] = func_int(temp_lec[8])
 						# DB 값 Update
 						db_lec = Lecture.objects.filter(Semester=cur_semester, Code=temp_lec[1], Class=temp_lec[2])
 

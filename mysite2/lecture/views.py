@@ -15,14 +15,9 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def func_strip(arg):
-	# if type(arg) == str:
-	# 	return arg.strip()
-	# return arg
 	try:
 		arg = arg.strip()
-		if arg:
-			return arg
-		return None
+		return arg
 	except AttributeError:
 		return arg
 
@@ -187,7 +182,7 @@ def lec_update(request):
 	'12-1', '12-2', '12-Summer', '12-Winter', 
 	'13-1', '13-2', '13-Summer', '13-Winter', 
 	'14-1', '14-2', '14-Summer', '14-Winter',
-	'15-1', '15-2', '15-Summer'
+	'15-1', '15-Summer'
 	]
 	# semester_lst = ['15-2']
 	semester_lst.sort(reverse=True)
@@ -237,6 +232,8 @@ def lec_update(request):
 				if not (var[8] == ''):
 					var[8] = int(var[8])
 				var = list(map(func_strip, var))
+				if var[-1]:
+					var[-1] = "Unconfirmed"
 				try:
 					d_lec = Lecture.objects.filter(Semester=semester, Code=var[1], Class=var[2])
 					if d_lec: # 업데이트 가능한 요소들

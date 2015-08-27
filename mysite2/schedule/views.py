@@ -28,27 +28,37 @@ def SelectPeriod(request, period, page):
 		SearchName = request.POST['SearchName']
 		Page = request.POST['Page']
 
+		cur_page = int(page)
+		start = 6 * (cur_page-1)
+		end = 6 * cur_page
+
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
 		if SelectMajor == "전체" :
 			SelectMajor=""
+
 		if SelectCategory=="전체":
-			SelectCategory= ""
-
-		cur_page = int(page)
-		# cur_page = request.session['cur_page']
-
-		start = 6 * (cur_page-1)
-		end = 6 * cur_page
-		# 데이터가 많으므로 현재 학기만 가져오도록 한다.
-		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
-			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			# Category 전체, NULL값까지 같이 찾음.
+			# SelectCategory= ""
+			if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			else:
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		else:
-			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
-			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
+			# Category가 있는 경우
+			if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			else:
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
+
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
@@ -98,24 +108,35 @@ def SearchSelectPeriod(request):
 		SearchName = request.POST['SearchName']
 		# cur_page = request.session['cur_page']
 
+		start = 6 * (cur_page-1)
+		end = 6 * cur_page
+
 		SelectMajor=Major(major)
 		SelectCategory=Category(category)
 		if SelectMajor == "전체" :
 			SelectMajor=""
-		if SelectCategory=="전체":
-			SelectCategory= ""
 
-		start = 6 * (cur_page-1)
-		end = 6 * cur_page
-		# 데이터가 많으므로 현재 학기만 가져오도록 한다.
-		if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
-			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
-			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+		if SelectCategory=="전체":
+			# Category 전체, NULL값까지 같이 찾음.
+			# SelectCategory= ""
+			if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			else:
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		else:
-			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
-			lec_cnt = DataCount(6,DBCount)
-			lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
+			# Category가 있는 경우
+			if not period[1:3].isdigit():	# 1교시의 경우 10교시가 같이 나오는 것을 방지하기 위한 장치
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10').count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).exclude(Period__contains='10')[start:end]
+			else:
+				DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1]).count()
+				lec_cnt = DataCount(6,DBCount)
+				lec_lst = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=SearchName, Semester=cur_semester, Period__contains=period[:-1])[start:end]
 		total_page = ( (lec_cnt - 1) / 6 ) + 1
 		is_odd = lec_cnt % 2
 
@@ -201,7 +222,7 @@ def SelectLecture(request):
 			if p in my_lec_period_lst:
 				is_duplicated = True	# 나의 강의목록 시간 중에 중복되는 시간 있을 시 True.
 		if is_duplicated:	# 중복될 시 바로 return 처리, confirm 처리 추후 개발
-			my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
+			# my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0]
 			my_lec_table = MakeTable(request, my_profile)
 
 			Dic = {
@@ -213,8 +234,10 @@ def SelectLecture(request):
 				return render_to_response('html/scheduleTable.html',Dic)
 			else:
 				return render_to_response('m_skins/m_html/scheduleTable.html',Dic)
-		
-		my_lec = Lecture.objects.filter(Code=ccode, Professor=cprof, Period=cperiod)[0] # Unique한 value를 위한 Key = (Code, Class, Semester)
+		if cprof == "None":
+			cprof = None
+		# Unique한 value를 위한 Key = (Code, Class, Semester) or (Code, Prof, Period, Semster) -> but, prof=null 일 경우 중복에러 가능
+		my_lec = Lecture.objects.filter(Semester=cur_semester, Code=ccode, Professor=cprof, Period=cperiod)[0]
 		my_profile.MyLecture.add(my_lec)
 		my_profile.save()
 		my_lec_table = MakeTable(request, my_profile)
@@ -275,18 +298,20 @@ def SearchSubject(request):
 		start = 6 *(PostDic['Page']-1)
 		end = 6 * (PostDic['Page'])
 
-
 		SelectMajor=Major(PostDic['major'])
 		SelectCategory=Category(PostDic['category'])
 		if SelectMajor == "전체" :
 			SelectMajor=""
+
 		if SelectCategory=="전체":
-			SelectCategory= ""
-
-
-		DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=PostDic['SearchName']).count()
-		SubjectCount = DataCount(6,DBCount)
-		Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory,CourseName__contains=PostDic['SearchName'])[start:end]
+			# SelectCategory= ""
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=PostDic['SearchName'], Semester=cur_semester).count()
+			SubjectCount = DataCount(6,DBCount)
+			Subject = Lecture.objects.filter(Major__contains=SelectMajor, CourseName__contains=PostDic['SearchName'], Semester=cur_semester)[start:end]
+		else:
+			DBCount = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=PostDic['SearchName'], Semester=cur_semester).count()
+			SubjectCount = DataCount(6,DBCount)
+			Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=PostDic['SearchName'], Semester=cur_semester)[start:end]
 
 		if New == 1:
 			PageInformation = FirstPageView(SubjectCount)
@@ -330,6 +355,7 @@ def SearchSubject(request):
 			return render_to_response('html/schedule.html',Dic)
 		else:
 			return render_to_response('m_skins/m_html/schedule.html', Dic)
+
 @csrf_exempt
 def DeleteMylecture(request):
 	if CheckingLogin(request.user.username):
@@ -344,14 +370,15 @@ def DeleteMylecture(request):
 	UserData.save()
 	my_lec_table = MakeTable(request, UserData)
 	if request.flavour =='full':
-			return render_to_response('html/scheduleTable.html',{"my_lec_table": my_lec_table})
+		return render_to_response('html/scheduleTable.html',{"my_lec_table": my_lec_table})
 	else:
-			return render_to_response('m_skins/m_html/scheduleTable.html',{"my_lec_table": my_lec_table})
+		return render_to_response('m_skins/m_html/scheduleTable.html',{"my_lec_table": my_lec_table})
+
 def Major(major):
 	if major == "0001":
 		major = "글로벌"
 	elif major == "0009":
-		major = "창의융합교육원"
+		major = "창의융합"
 	elif major == "0010":
 		major = "Global EDISON"
 	elif major == "0011":

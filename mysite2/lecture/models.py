@@ -14,7 +14,7 @@ class Lecture(models.Model):
 	Period = models.CharField(max_length=30, null=True, blank=True, default=None)
 	ClassRoom = models.CharField(max_length=20, null=True, blank=True, default=None)
 	Fix_num = models.PositiveSmallIntegerField(default=0, null=True)
-	Take_num = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
+	Take_num = models.CharField(max_length=5, null=True, blank=True)
 	EnglishRatio = models.CharField(max_length=10, null=True)
 	CategoryDetail = models.CharField(max_length=20, null=True, blank=True, default=None)
 

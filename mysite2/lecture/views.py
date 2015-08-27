@@ -15,9 +15,16 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def func_strip(arg):
-	if type(arg) == str:
-		return arg.strip()
-	return arg
+	# if type(arg) == str:
+	# 	return arg.strip()
+	# return arg
+	try:
+		arg = arg.strip()
+		if arg:
+			return arg
+		return None
+	except AttributeError:
+		return arg
 
 def func_int(arg):
 	try:

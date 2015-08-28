@@ -166,7 +166,7 @@ def auto_lec_update(request):
 			all_info_lst.append(hakbu_info_lst)
 		return HttpResponse('성공적으로 데이터를 입력했습니다.')
 	else:
-		return HttpResponseRedirect('/mysite2')
+		return HttpResponseRedirect('/')
 
 
 def lec_update(request):

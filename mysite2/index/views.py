@@ -20,7 +20,7 @@ sys.setdefaultencoding("utf-8")
 
 def MyPage(request):	#MyPage 루트
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	dic = {'user':request.user,'BestBoard':BestBoardView()}
 		
 	if request.flavour =='full':
@@ -30,7 +30,7 @@ def MyPage(request):	#MyPage 루트
 
 def About(request): #About template 루트
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	dic = {'user':request.user, 'BestBoard':BestBoardView()}
 	
@@ -41,7 +41,7 @@ def About(request): #About template 루트
 
 def Schedule(request): #Schedule template 기능
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	
 	dic={'user':request.user,'BestBoard':BestBoardView()}
 
@@ -53,7 +53,7 @@ def Schedule(request): #Schedule template 기능
 def Judgement(request): # 신고 게시판 기능
 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	dic = {'user':request.user,'BestBoard':BestBoardView()}
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_report.html',dic)
@@ -64,7 +64,7 @@ def Judgement(request): # 신고 게시판 기능
 @csrf_exempt
 def Page(request): #Main Page를 보여주는 함수 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		if request.method =="POST":
 			PostDic = dict()
@@ -117,7 +117,7 @@ def Page(request): #Main Page를 보여주는 함수
 
 def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	dic = {'user':request.user}
 
@@ -128,7 +128,7 @@ def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 
 def SiteMap(request): #사이트 맵
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	dic = {'user':request.user}
 
 	if request.flavour =='full':
@@ -138,7 +138,7 @@ def SiteMap(request): #사이트 맵
 
 def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		if CheckingLogin(request.user.username):
-			return HttpResponseRedirect("/mysite2")
+			return HttpResponseRedirect("/")
 		MyProfile = Profile.objects.get(User=request.user)
 		
 		LikePage=LikePage_Course.objects.filter(CreatedID= MyProfile)
@@ -155,7 +155,7 @@ def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 @csrf_exempt
 def Search(request): #과목 검색 기능
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	if request.method =="POST":
 		SearchData = request.POST['search']
@@ -220,11 +220,11 @@ def Search(request): #과목 검색 기능
 		else:
 			return render_to_response('m_skins/m_html/index.html', dic)
 	else:
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 @csrf_exempt
 def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	if request.POST['Page'] !="0":
 		cur_page = int(request.POST['Page'])

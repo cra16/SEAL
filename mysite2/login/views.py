@@ -66,7 +66,7 @@ def login(request):
 #로그아웃
 def logout_page(request):
     logout(request)
-    return HttpResponseRedirect('/mysite2')
+    return HttpResponseRedirect('/')
 
 
 def Confirm(request):
@@ -204,7 +204,7 @@ def Register(request):
 			else:
 				render_to_response('m_skins/m_html/error.html')
 		if request.flavour =='full':
-			return HttpResponseRedirect('/mysite2')
+			return HttpResponseRedirect('/')
 		else:
 			return render_to_response('m_skins/m_html/login.html')
 		

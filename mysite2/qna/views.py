@@ -16,7 +16,7 @@ from functionhelper.views import *
 
 def QnAMain(request): #Q&A 메인 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	count=QnA_Board.objects.count()
 
 	PageFirst=0
@@ -56,7 +56,7 @@ def QnAMain(request): #Q&A 메인
 def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		offset = int(request.POST['Page'])
 	except ValueError:
@@ -104,7 +104,7 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 	
 def QnAWrite(request): #Q&A Write 기능
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	dic = {'user':request.user, 'BestBoard':BestBoardView()}
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_faq.html',dic)
@@ -113,7 +113,7 @@ def QnAWrite(request): #Q&A Write 기능
 @csrf_exempt
 def QnA_Writing(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	if request.method =="POST":
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)
@@ -121,10 +121,10 @@ def QnA_Writing(request):
 		created = datetime.datetime.now()
 		new_QnA = QnA_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 		new_QnA.save()
-	return HttpResponseRedirect("/mysite2/QnA")
+	return HttpResponseRedirect("/QnA")
 def QnARead(request, offset): #Q&A read 기능
 		if CheckingLogin(request.user.username):
-				return HttpResponseRedirect("/mysite2")
+				return HttpResponseRedirect("/")
 		try:
 			offset = int(offset)
 		except ValueError:
@@ -168,7 +168,7 @@ def QnARead(request, offset): #Q&A read 기능
 
 def QnA_Reply(request, offset): 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		offset = int(offset)
 	except ValueError:
@@ -181,7 +181,7 @@ def QnA_Reply(request, offset):
 @csrf_exempt
 def QnA_Replying(request,offset):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	if request.method =="POST":
 		try:
 			offset = int(offset)
@@ -197,7 +197,7 @@ def QnA_Replying(request,offset):
 		Question_ID = Current.id
 		new_QnAReply = Reply(QuestionID= Question_ID,TextWriter = new_TextWriter, Text=new_Text, TextName=new_TextName)
 		new_QnAReply.save()
-	return HttpResponseRedirect("/mysite2/QnA")
+	return HttpResponseRedirect("/QnA")
 
 # Create your views here.
 		

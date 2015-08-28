@@ -16,7 +16,7 @@ from functionhelper.views import *
 def Recommend(request, offset): #강의 추천 스크롤 기능
 			
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 			offset = int(offset)
 	except:
@@ -25,15 +25,15 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	UserProfile=Profile.objects.get(User = request.user)
 	try:
 		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset),CreatedID = UserProfile),CreatedID =UserProfile) 
-		return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
+		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
 
 	if RecommendData != None:
 		if request.flavour =='full':
-			return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
+			return HttpResponseRedirect('/NotEmptyRecommend')
 		else:
-			return  HttpResponseRedirect("/mysite2/NotEmptyRecommend")
+			return  HttpResponseRedirect("/NotEmptyRecommend")
 	else:
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
@@ -55,12 +55,12 @@ def Recommend_NotEmpty(request):
 def Recommend_Write(request): #추천 강의 DB입력
 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	ID=request.session['Recommend_ID']
 	UserProfile=Profile.objects.get(User = request.user)
 	try:
 		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=ID),CreatedID = UserProfile),CreatedID =UserProfile) 
-		return HttpResponseRedirect('/mysite2/NotEmptyRecommend')
+		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
 
@@ -115,15 +115,15 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval.Total_Count += 1
 			T_Eval.save()
 	
-		URL = "/mysite2/Course/"+str(request.session['Recommend_ID'])
+		URL = "/Course/"+str(request.session['Recommend_ID'])
 		return HttpResponseRedirect(URL)
 
 	else:
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 @csrf_exempt
 def Like(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 
 	if request.method=="POST":
@@ -157,6 +157,6 @@ def Like(request):
 		
 
 		
-		URL = "/mysite2/Course/"+str(LectureID)
+		URL = "/Course/"+str(LectureID)
 		return HttpResponseRedirect(URL)
 		

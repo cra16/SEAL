@@ -20,7 +20,7 @@ def SelectPeriod(request, period, page):
 	page -> pagination에서 선택한 page
 	"""
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	elif request.method =="POST":
  		category = request.POST['category']
@@ -89,7 +89,7 @@ def SearchSelectPeriod(request):
 	page -> pagination에서 선택한 page
 	"""
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	elif request.method=="POST":
 		period = request.POST['Period']
 		cur_page = int(request.POST['Page'])
@@ -177,7 +177,7 @@ def MakeTable(request, my_profile):
 @csrf_exempt
 def SelectLecture(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	if request.method == "POST":
 		ccode = request.POST['ccode']
@@ -258,7 +258,7 @@ def RemoveLecture(request):
 @csrf_exempt
 def SearchSubject(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
  	if request.method =="POST":
  		PostDic=dict()
@@ -333,7 +333,7 @@ def SearchSubject(request):
 @csrf_exempt
 def DeleteMylecture(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	if request.method =="POST":
 		code = request.POST['ccode']

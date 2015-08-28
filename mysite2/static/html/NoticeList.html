@@ -20,7 +20,7 @@
 				  
 				  <tr id="qna1">
                     <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
-                    <td class="qna_title"><a href="/mysite2/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
+                    <td class="qna_title"><a href="/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
                     {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
                     <img src="{% static "fonts/latest.gif"%}"></span></td>
                     {%endif%}

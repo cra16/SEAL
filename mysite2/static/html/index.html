@@ -65,10 +65,12 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
                  <p><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
+                 <button id ="professorSl">교수님</button>
     
                 <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard1.Professor}}">
+
                 </div>
             </div>
            {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
@@ -111,7 +113,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard2.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard2.CourseName}}</span></a></p>
-                
+                <button id ="professorSl">교수님</button>
                 <input type = "hidden" id="period" value = "{{PBoard2.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard2.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard2.Professor}}">
@@ -156,7 +158,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard3.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard3.CourseName}}</span></a></p>
-                
+                <button id ="professorSl">교수님</button>
                 <input type = "hidden" id="period" value = "{{PBoard3.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard3.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard3.Professor}}">
@@ -206,7 +208,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                
+                <button id ="professorSl">교수님</button>
                 <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">

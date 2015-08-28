@@ -102,7 +102,7 @@
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course 
@@ -145,7 +145,7 @@
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course
@@ -187,7 +187,7 @@
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course
@@ -224,7 +224,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -257,7 +257,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -288,7 +288,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -315,7 +315,7 @@
        event.stopPropagation();
           
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"FirstPage",
 
@@ -343,7 +343,7 @@
        event.stopPropagation();
        
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"SecondPage",
 
@@ -370,7 +370,7 @@
        event.stopPropagation();
         
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"ThirdPage",
 

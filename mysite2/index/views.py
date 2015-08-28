@@ -78,6 +78,9 @@ def Page(request): #Main Page를 보여주는 함수
 						PostDic['Code']= A.Code
 			else:
 				PostDic['Course']= ""
+			if 'ProSelect' not in request.POST.keys():
+				PostDic['ProSelect'] = 0
+			
 	except ValueError:
 			raise Http404() 
 	if PostDic['Current'] =="FirstPage" or PostDic['Current'] =="FirstPageNation":
@@ -96,6 +99,11 @@ def Page(request): #Main Page를 보여주는 함수
 		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
 		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page))
+	elif PostDic['ProSelect'] == "1":
+		target = TargetTemplate(PostDic['Current'])
+		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
+		template =  SelectProfessorView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
+
 	else: #반대의 경우
 		target = TargetTemplate(PostDic['Current'])
 		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)

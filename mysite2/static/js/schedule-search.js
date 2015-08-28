@@ -12,7 +12,7 @@ $('#sch-result .button').click(function(event) {
         event.stopPropagation();
         $(this).unbind("click");
         $.ajax(
-            { url : "/mysite2/Schedule/",
+            { url : "/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),

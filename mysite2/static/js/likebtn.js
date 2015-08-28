@@ -5,7 +5,7 @@ $('div').on('click','#likebutton',function(event){
 	$(this).unbind("click");
     confirm1 = window.confirm("이 강의를 추천하시겠습니까?");
             if(confirm1){
-                window.location.href = "/mysite2/Recommend/" + $(this).attr('name');
+                window.location.href = "/Recommend/" + $(this).attr('name');
             }
     });
 

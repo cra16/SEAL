@@ -83,7 +83,7 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 					return render_to_response('html/course.html',dic)
 				else:
 					return render_to_response("m_skins/m_html/course.html",dic)
-#페이지 넘겼을 때 작동되는 함수
+#페이지 넘겼을 때 작동되는 함수9
 @csrf_exempt
 def CoursePage(request, offset):
 	if CheckingLogin(request.user.username):

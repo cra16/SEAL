@@ -72,7 +72,7 @@
         <div id="pw" class="ui grid">
           <div class="left floated right aligned three wide column"><span id="firstcolumn">비밀번호</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <form id = "PasswordChange" action = "/mysite2/MyPage/PasswordChange/" method = "POST">
+          <form id = "PasswordChange" action = "/MyPage/PasswordChange/" method = "POST">
            {%csrf_token%}
          
           <div class="right floated three wide column"><button id="btnnum4" type = "button" class="btn btn-info">비밀번호 변경</button></div> 
@@ -83,14 +83,14 @@
           <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 추천한 강의</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
           <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.RecommendCount}}개</span></div>
-          <div class="right floated three wide column"><a href = "/mysite2/MyCourse"><button  class="btn btn-info">목록으로 가기</button></a></div> 
+          <div class="right floated three wide column"><a href = "/MyCourse"><button  class="btn btn-info">목록으로 가기</button></a></div> 
         </div>
 
         <div id="wantcourse" class="ui grid">
           <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 듣고 싶은 강의</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
           <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.LikeCount}}개</span></div>
-          <div class="right floated three wide column"><a href = "/mysite2/MyCourse"><button class="btn btn-info"> 목록으로 가기</button></a></div>
+          <div class="right floated three wide column"><a href = "/MyCourse"><button class="btn btn-info"> 목록으로 가기</button></a></div>
         </div>
 
       </div>

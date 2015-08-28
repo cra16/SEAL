@@ -10,7 +10,7 @@ $(document).ready(function(event) {
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/QnA/Page/",
+            { url : "/QnA/Page/",
               data : {'Page': $(this).attr("name"),
            
                     },
@@ -43,7 +43,7 @@ $(document).ready(function(event) {
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/QnA/Page/",
+            { url : "/QnA/Page/",
               data : {'Page': $(this).attr("name"),
      
                     },
@@ -73,7 +73,7 @@ $(document).ready(function(event) {
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/QnA/Page/",
+            { url : "/QnA/Page/",
               data : {'Page': $(this).attr("name"),
       
                     },

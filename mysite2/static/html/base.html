@@ -75,8 +75,8 @@
         <div class="col-md-1 col-sm-0"></div>
         <div class="col-md-10 col-sm-12">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/mysite2">SEAL</a>
-            <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/mysite2/Search/" method = "POST" >{%csrf_token%}
+            <a class="navbar-brand" href="/">SEAL</a>
+            <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 <button type="submit" id ="SearchButton" class="btn btn-info"  onclick="">Search <i class="glyphicon glyphicon-search"></i></button>
       
@@ -93,16 +93,16 @@
           </div>
           <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/mysite2/MyPage">MY PAGE</a></li>
-              <li><a href= "/mysite2/About">ABOUT</a></li>
+              <li><a href="/MyPage">MY PAGE</a></li>
+              <li><a href= "/About">ABOUT</a></li>
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="/mysite2/QnA">Q&A</a></li>
-                  <li><a href="/mysite2/Notice">공지사항</a></li>
-                  <li><a href="/mysite2/Judgement">신고</a></li>
-                  <li><a href="/mysite2/SubScript">개선요구사항</a></li>
-                  <li><a href="/mysite2/SiteMap">SITEMAP</a></li>
+                  <li><a href="/QnA">Q&A</a></li>
+                  <li><a href="/Notice">공지사항</a></li>
+                  <li><a href="/Judgement">신고</a></li>
+                  <li><a href="/SubScript">개선요구사항</a></li>
+                  <li><a href="/SiteMap">SITEMAP</a></li>
                 </ul>
               </li>
             </ul>
@@ -166,13 +166,13 @@
 
               <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
                    
-                <h3><a href="/mysite2/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/mysite2/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
+                <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
-                <p><span id="label"><a href="/mysite2/MyCourse">내가 추천한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
+                <p><span id="label"><a href="/MyCourse">내가 추천한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
 
-                <p id="last"><span id="label"><a href="/mysite2/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
+                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
 
-                <a href="/mysite2/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
+                <a href="/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
 
               </profile>
 
@@ -182,9 +182,9 @@
 
                 <span id="best-list">   
                   <h3 class="col-md-1 col-sm-1 col-xs-1">
-                    <span id="num1"><a href="/mysite2/Course/{{BestBoard.0.Course.id}}">1</a></span>
-                    <span id="num2"><a href="/mysite2/Course/{{BestBoard.1.Course.id}}">2</a></span>
-                    <span id="num3"><a href="/mysite2/Course/{{BestBoard.2.Course.id}}">3</a></span>
+                    <span id="num1"><a href="/Course/{{BestBoard.0.Course.id}}">1</a></span>
+                    <span id="num2"><a href="/Course/{{BestBoard.1.Course.id}}">2</a></span>
+                    <span id="num3"><a href="/Course/{{BestBoard.2.Course.id}}">3</a></span>
                   </h3>
 
                 <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">

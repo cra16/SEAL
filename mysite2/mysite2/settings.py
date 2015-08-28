@@ -113,7 +113,7 @@ USE_TZ = True
 
 STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static'
 
-STATIC_URL = '/mysite2/static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
 ('css', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/css'),

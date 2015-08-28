@@ -29,7 +29,7 @@ $("div").on('click',"#cname",function(event){
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/mysite2/Select_Course/",
+            { url : "/Select_Course/",
               data : {'Course' : $(this).text(),
                       'Page': "0",
                       'Current':CurrentPage,
@@ -76,7 +76,7 @@ $("div").on('click',"#cname",function(event){
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/mysite2/Select_Professor/",
+            { url : "/Select_Professor/",
               data : {'Course' : Course,
                       'Page': "0",
                       'Current':CurrentPage,
@@ -118,7 +118,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse
@@ -155,7 +155,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse
@@ -191,7 +191,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Select_Professor/",
+            { url : "/Select_Professor/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
@@ -230,7 +230,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Select_Professor/",
+            { url : "/Select_Professor/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
@@ -270,7 +270,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Select_Professor/",
+            { url : "/Select_Professor/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
@@ -309,7 +309,7 @@ $("div").on('click',"#cname",function(event){
           var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Select_Professor/",
+            { url : "/Select_Professor/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
@@ -361,5 +361,5 @@ $("div").on('click',"#cname",function(event){
 });
 
 
-});
+
 

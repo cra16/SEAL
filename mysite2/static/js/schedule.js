@@ -10,7 +10,7 @@ $(document).ready(function () {
           var period = $(this).parent().find("[id=cperiod]").text();
              
         $.ajax(
-          { url : "/mysite2/Sel_lecture/",
+          { url : "/Sel_lecture/",
             data : {"ccode" : Code,
                     "cname" : name,
                     "cprof" : prof,
@@ -34,7 +34,7 @@ $(document).ready(function () {
         $(this).unbind("click");
  
         $.ajax(
-            { url : "/mysite2/Schedule/",
+            { url : "/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
@@ -69,7 +69,7 @@ $(document).ready(function () {
        event.stopPropagation();
        $(this).unbind("click");
         $.ajax(
-            { url : "/mysite2/Schedule/",
+            { url : "/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
@@ -97,7 +97,7 @@ $(document).ready(function () {
          event.stopPropagation();
         $(this).unbind("click");
         $.ajax(
-            { url : "/mysite2/Schedule/",
+            { url : "/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
@@ -125,7 +125,7 @@ $(document).ready(function () {
          event.stopPropagation();
          $(this).unbind("click");
         $.ajax(
-            { url : "/mysite2/Schedule/",
+            { url : "/Schedule/",
               data : {'major' : $('#major').val(),
                       'category': $('#category').val(),
                       'SearchName': $('#SearchName').val(),
@@ -158,7 +158,7 @@ $(document).ready(function () {
           var CurrentPage=$(this).parent().attr("id")
 
          $.ajax(
-            { url : "/mysite2/Sel_periodLecture/",
+            { url : "/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
                     'Period': $('#Period').attr("name"),
                     'SelectMajor': $('#SelectMajor').attr("name"),
@@ -194,7 +194,7 @@ $(document).ready(function () {
           var CurrentPage=$(this).parent().attr("id")
 
          $.ajax(
-            { url : "/mysite2/Sel_periodLecture/",
+            { url : "/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
                     'Period': $('#Period').attr("name"),
                     'SelectMajor': $('#SelectMajor').attr("name"),
@@ -227,7 +227,7 @@ $(document).ready(function () {
           var CurrentPage=$(this).parent().attr("id")
 
          $.ajax(
-            { url : "/mysite2/Sel_periodLecture/",
+            { url : "/Sel_periodLecture/",
               data : {'Page': $(this).attr("name"),
                     'Period': $('#Period').attr("name"),
                     'SelectMajor': $('#SelectMajor').attr("name"),

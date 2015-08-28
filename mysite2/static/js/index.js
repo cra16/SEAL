@@ -343,14 +343,7 @@ $("div").on('click',"#cname",function(event){
     });
     $(document).keydown(function(e){
 
-      if(e.keyCode===8){
-        location.reload();
-        return false;
-
-         }
-      else if(event.keyCode==27){
-         alert("ggg");
-      }
+     
     });
 
   $('.ui.sticky').sticky({

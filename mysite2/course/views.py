@@ -18,7 +18,7 @@ from functionhelper.views import *
  
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
 		if CheckingLogin(request.user.username):
-			return HttpResponseRedirect("/mysite2")
+			return HttpResponseRedirect("/")
 
 		#현재 접속한 아이디 정보 받아옴
 		try:
@@ -87,7 +87,7 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 @csrf_exempt
 def CoursePage(request, offset):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		offset = int(offset)
 		if request.method=="POST":

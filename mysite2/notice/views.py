@@ -17,7 +17,7 @@ from functionhelper.views import *
 def NoticeMain(request):#Notice 기능
 		
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	count=Notice_Board.objects.count()
 	
@@ -46,7 +46,7 @@ def NoticeMain(request):#Notice 기능
 def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		offset = int(request.POST['Page'])
 	except ValueError:
@@ -83,7 +83,7 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 
 def Notice_Read(request, offset): #Notice Read 기능
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	try:
 		offset = int(offset)
 	except ValueError:
@@ -117,7 +117,7 @@ def Notice_Read(request, offset): #Notice Read 기능
 
 def Notice_Write(request): #Q&A Write 기능
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 	dic = {'user':request.user}
 	if request.flavour =='full':
@@ -127,7 +127,7 @@ def Notice_Write(request): #Q&A Write 기능
 @csrf_exempt
 def Notice_Writing(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 	if request.method =="POST":
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)
@@ -135,5 +135,5 @@ def Notice_Writing(request):
 		created = datetime.datetime.now()
 		new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
 		new_Notice.save()
-	return HttpResponseRedirect("/mysite2/Notice")
+	return HttpResponseRedirect("/Notice")
 # Create your views here.

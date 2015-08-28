@@ -13,7 +13,7 @@ from functionhelper.views import CheckingLogin
 @csrf_exempt
 def MyPagePassWordChange(request):
 	if CheckingLogin(request.user.username):
-		return HttpResponseRedirect("/mysite2")
+		return HttpResponseRedirect("/")
 
 		if request.method =="POST":
 			ChangePassword = request.POST['PasswordBox']

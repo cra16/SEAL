@@ -64,7 +64,53 @@ $("div").on('click',"#cname",function(event){
          
     });
  
+  $("div").on('click',"#professorSl",function(event){
+        event.stopPropagation();
+        $(this).unbind("click");
+        CurrentPage=$(this).parent().parent().parent().parent().attr("id");
 
+        var Parent=$(this).parent();
+        var Course = Parent.find("[id=cname]").text();
+        var Code = Parent.find("[id=ccode]").text();
+        var prof = Parent.find("[id=professor]").val();
+        var period = Parent.find("[id=period]").val();
+        var semester = Parent.find("[id=semester]").val();
+        $.ajax(
+            { url : "/mysite2/Select_Professor/",
+              data : {'Course' : Course,
+                      'Page': "0",
+                      'Current':CurrentPage,
+                      'Code':Code,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester,
+                      'ProSelect':"1"
+
+                    },
+              async : false,
+              type : "POST",
+              success:function(resp){  
+
+                  if(CurrentPage=="FirstPage")
+                    $('#FirstPage').html(resp);
+                  else if(CurrentPage=="SecondPage")
+                    $('#SecondPage').html(resp);
+                  else if(CurrentPage=="ThirdPage")
+                    $('#ThirdPage').html(resp);
+                  else if(CurrentPage=="Search_Page")
+                    $('#Search_Page').html(resp);
+                 
+               
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용                  
+                 } 
+
+          });
+
+         
+    });
     $('div').on('click',"#CoursePage",function(event){
           event.stopPropagation();
           $(this).unbind("click");
@@ -138,21 +184,18 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-    $('.ui.sticky').sticky({
-      context: '#sticky',
-      pushing: true
-    });
-
-    $('div').on('click','#CoursePrevious',function(){
+  
+    $('div').on('click','#ProPrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/mysite2/Select_Professor/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':CurrentCourse
+                      'Course':CurrentCourse,
+                      'ProSelect':1
                     },
               
               datatype:"json",
@@ -167,6 +210,87 @@ $("div").on('click',"#cname",function(event){
                         $('#ThirdPage').html(resp);
                 },
                 error: function(xhr, option, error){
+
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+  
+
+    $('div').on('click',"#ProPage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/mysite2/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#ProNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/mysite2/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                   if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
                   alert(error); //오류내용
 
@@ -178,6 +302,45 @@ $("div").on('click',"#cname",function(event){
 
     });
 
+  
+    $('div').on('click','#ProPrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/mysite2/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+             
+                  if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+                   
+                  } 
+            
+          });
+
+
+
+    });
     $(document).keydown(function(e){
 
       if(e.keyCode===8){
@@ -190,21 +353,13 @@ $("div").on('click',"#cname",function(event){
       }
     });
 
+  $('.ui.sticky').sticky({
+      context: '#sticky',
+      pushing: true
+    });
 
 });
 
 
-document.addEventListener('backbutton', function(){
-  
-  
-alert("aa");  
-});
-$(document).bind('keydown', function(event) {
-  if (event.keyCode == 27) {
-    // Prevent default (disable the back button behavior)
-   alert("GG");
-
-    // Your code to show another page or whatever...
-  }
 });
 

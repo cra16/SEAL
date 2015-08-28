@@ -47,6 +47,7 @@ urlpatterns += patterns('index.views',
 	url(r'^SecondPage/$','Page'),
 	url(r'^ThirdPage/$','Page'),
 	url(r'^Select_Course/$','Page'),
+	url(r'^Select_Professor/$','Page')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

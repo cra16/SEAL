@@ -20,7 +20,7 @@ $('form').on('click', '#changebtn4',function(){
             }
            
             $.ajax(
-            { url : "/mysite2/MyPage/PasswordChange/",
+            { url : "/MyPage/PasswordChange/",
               data : {'PasswordBox' : $('#PasswordBox').val()},
               type : "POST",
               success:function(resp){  

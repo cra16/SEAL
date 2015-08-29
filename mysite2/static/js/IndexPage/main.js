@@ -98,7 +98,7 @@
           var CurrentPage=$(this).parent().attr("id")
           
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(
@@ -141,7 +141,7 @@
           var CurrentPage=$(this).parent().attr("id")
           
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(
@@ -183,7 +183,7 @@
           var CurrentPage=$(this).parent().attr("id")
    
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(

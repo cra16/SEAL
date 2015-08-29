@@ -28,14 +28,14 @@
 
         <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)
         {% if user.profile.UserName == "관리자"%}
-        <a href="/mysite2/QnA/Reply/{{Current.id}}"> <div style="margin-top:8px" class="ui right floated tiny blue button">
+        <a href="/QnA/Reply/{{Current.id}}"> <div style="margin-top:8px" class="ui right floated tiny blue button">
           
           <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
 
         <div class="ui section divider" style="margin-top: 50px;"></div>
  
           {% endif %}
-        <a href="/mysite2/QnA"> <div style="margin-top: 8px" class="ui right floated tiny teal button">
+        <a href="/QnA"> <div style="margin-top: 8px" class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
 
         <div class="ui section divider" style="margin-top: 50px;"></div>
@@ -78,11 +78,11 @@
                                           
               <center>
               <div class="ui buttons">
-              <a class="ui red inverted button" href = "/mysite2/QnA/{{Previous}}">
+              <a class="ui red inverted button" href = "/QnA/{{Previous}}">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
                 <div class="or"></div>
-              <a class="ui blue inverted button" href = "/mysite2/QnA/{{Next}}">
+              <a class="ui blue inverted button" href = "/QnA/{{Next}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

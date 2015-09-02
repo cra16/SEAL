@@ -28,7 +28,7 @@ def loginCheck(request):
 	if request.method == 'POST':
 		if request.POST['stuNum']:
 			username = request.POST['stuNum']
-			user = authenticate(username = username, password="123")
+			user = authenticate(username = username)
 		else:
 			username = request.POST['UserID']
 			userpassword = request.POST['UserPassword']

@@ -26,7 +26,7 @@ from functionhelper.views import *
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
 	if request.method == 'POST':
-		if request.POST['stuNum']:
+		if 'stuNum' in request.POST:
 			username = request.POST['stuNum']
 			user = User.objects.filter(username=username)[0]
 		else:

@@ -7,6 +7,7 @@ from lecture.models import *#강의 목록
 from django.contrib.auth.decorators import login_required#로그인 허용기능
 from django.contrib.auth import logout #로그아웃 기능
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login as auth_login
@@ -24,7 +25,9 @@ from functionhelper.views import *
 @csrf_exempt
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
-	if request.session[stuNum] == "21100399":
+	return HttpResponse(request.session.keys())
+	if request.session.keys():
+		return HttpResponseRedirect({request.session.keys()})
 		user = authenticate(username = username)
 		if user is not None:
 			auth_login(request,user)

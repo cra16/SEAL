@@ -30,7 +30,10 @@ def loginCheck(request):
 			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
 				logout(request)
 			username = request.POST['stuNum']
-			user = User.objects.filter(username=username)[0]
+			try:
+				user = User.objects.filter(username=username)[0]
+			except IndexError:
+				user = None
 		else:
 			username = request.POST['UserID']
 			userpassword = request.POST['UserPassword']

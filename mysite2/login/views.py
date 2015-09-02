@@ -7,6 +7,7 @@ from lecture.models import *#강의 목록
 from django.contrib.auth.decorators import login_required#로그인 허용기능
 from django.contrib.auth import logout #로그아웃 기능
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login as auth_login
@@ -23,40 +24,50 @@ from functionhelper.views import *
 
 @csrf_exempt
 def loginCheck(request):
-		##로그인 할때 체킹하는 부분
-		if request.method == 'POST':
+	##로그인 할때 체킹하는 부분
+	if request.method == 'POST':
+		if 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
+			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
+				logout(request)
+			username = request.POST['stuNum']
+			try:
+				user = User.objects.filter(username=username)[0]
+			except IndexError:
+				user = None
+		else:
 			username = request.POST['UserID']
 			userpassword = request.POST['UserPassword']
 			user = authenticate(username = username, password=userpassword)
-			##로그인 완료시 메인페이지 view
-			if user is not None:
-				auth_login(request,user)
-				#메인페이지 보여줄 함수 호출
-				UserData = MainPageView(request.user,None,None,None)
-				request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
-				if request.flavour =='full':
-					return render_to_response('html/index.html',UserData)
-				else:
-					return render_to_response("m_skins/m_html/index.html",UserData)
-			else:
-				if request.flavour =='full':
-					return render_to_response('html/login_error.html')
-				else:
-					return render_to_response("m_skins/m_html/login_error.html")
-        #로그인 되지 않았을 경우 다시 로그인페이지로
-		elif request.user.username =="":
-			if request.flavour =='full':
-				return render_to_response('html/login.html')
-			else:
-				return render_to_response('m_skins/m_html/login.html')
-		#이미 로그인 되어있으면 
-		else:
+		##로그인 완료시 메인페이지 view
+		if user is not None:
+			user.backend = 'django.contrib.auth.backends.ModelBackend'
+			auth_login(request, user)
+			#메인페이지 보여줄 함수 호출
 			UserData = MainPageView(request.user,None,None,None)
 			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
 			if request.flavour =='full':
 				return render_to_response('html/index.html',UserData)
 			else:
-				return render_to_response("m_skins/m_html/index.html", UserData)
+				return render_to_response("m_skins/m_html/index.html",UserData)
+		else:
+			if request.flavour =='full':
+				return render_to_response('html/login_error.html')
+			else:
+				return render_to_response("m_skins/m_html/login_error.html")
+	#로그인 되지 않았을 경우 다시 로그인페이지로
+	elif request.user.username =="":
+		if request.flavour =='full':
+			return render_to_response('html/login.html')
+		else:
+			return render_to_response('m_skins/m_html/login.html')
+	#이미 로그인 되어있으면 
+	else:
+		UserData = MainPageView(request.user,None,None,None)
+		request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
+		if request.flavour =='full':
+			return render_to_response('html/index.html',UserData)
+		else:
+			return render_to_response("m_skins/m_html/index.html", UserData)
 #로그인 페이지	
 def login(request):
 	if request.flavour =='full':

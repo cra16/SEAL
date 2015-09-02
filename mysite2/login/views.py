@@ -25,9 +25,7 @@ from functionhelper.views import *
 @csrf_exempt
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
-	if request.method == 'POST':
-		username = request.POST['stuNum']
-		return HttpResponse(username)
+	return HttpResponse(request.POST)
 
 	if request.method == 'POST':
 		username = request.POST['UserID']

@@ -31,13 +31,13 @@ def func_int(arg):
 
 def UpdateLogin(request):
 	if not request.user.username=='admin_seal':
-		return HttpResponseRedirect('/mysite2')
+		return HttpResponseRedirect('/')
 	return render_to_response('html/DBUpdate.html')
 
 @csrf_exempt
 def auto_lec_update(request):
 	if not request.user.username=='admin_seal':
-		return HttpResponseRedirect('/mysite2')
+		return HttpResponseRedirect('/')
 	"""
 	Hisnet 개설시간표 자동 update function
 	"""
@@ -182,7 +182,7 @@ def auto_lec_update(request):
 
 def lec_update(request):
 	if not request.user.username=='admin_seal':
-		return HttpResponseRedirect('/mysite2')
+		return HttpResponseRedirect('/')
 
 	semester_lst = [
 	'11-1', '11-2', '11-Summer', '11-Winter', 

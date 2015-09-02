@@ -25,25 +25,10 @@ from functionhelper.views import *
 @csrf_exempt
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
-	return HttpResponse(request.session.keys())
-	if request.session.keys():
-		return HttpResponseRedirect({request.session.keys()})
-		user = authenticate(username = username)
-		if user is not None:
-			auth_login(request,user)
-			#메인페이지 보여줄 함수 호출
-			UserData = MainPageView(request.user,None,None,None)
-			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
-			if request.flavour =='full':
-				return render_to_response('html/index.html',UserData)
-			else:
-				return render_to_response("m_skins/m_html/index.html",UserData)
-		else:
-			if request.flavour =='full':
-				return render_to_response('html/login_error.html')
-			else:
-				return render_to_response("m_skins/m_html/login_error.html")
-	elif request.method == 'POST':
+	username = request.POST['stuNum']
+	return HttpResponse({username})
+	
+	if request.method == 'POST':
 		username = request.POST['UserID']
 		userpassword = request.POST['UserPassword']
 		user = authenticate(username = username, password=userpassword)

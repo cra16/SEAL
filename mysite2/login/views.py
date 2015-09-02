@@ -25,12 +25,14 @@ from functionhelper.views import *
 @csrf_exempt
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
-	return HttpResponse(request.POST)
-
 	if request.method == 'POST':
-		username = request.POST['UserID']
-		userpassword = request.POST['UserPassword']
-		user = authenticate(username = username, password=userpassword)
+		if request.POST['stuNum']:
+			username = request.POST['stuNum']
+			user = authenticate(username = username)
+		else:
+			username = request.POST['UserID']
+			userpassword = request.POST['UserPassword']
+			user = authenticate(username = username, password=userpassword)
 		##로그인 완료시 메인페이지 view
 		if user is not None:
 			auth_login(request,user)

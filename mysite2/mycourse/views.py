@@ -13,6 +13,8 @@ import datetime
 
 #현재 내가 추천한 강의 보여주는 함수
 def MyCourse(request):
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
         
 		Data=MyCoursePage(request,1)
 		if request.flavour =='full':

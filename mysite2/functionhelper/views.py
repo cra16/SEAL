@@ -234,7 +234,7 @@ def MajorSelect(user):
 		elif FirstMajor.find("한국법") != -1 or FirstMajor.find("UIL")!= -1:
 			MajorCode[0]="LAW"
 			MajorCode[1]="UIL"
-		elif FirstMajor.find("공연영상")!= -1 or FirstMajor.find("언로정보학")!= -1:
+		elif FirstMajor.find("공연영상")!= -1 or FirstMajor.find("언론정보학")!= -1:
 			MajorCode[0]="CCC"
 			MajorCode[1]="None"
 		elif FirstMajor.find("건설공학") != -1 or FirstMajor.find("도시환경")!= -1:

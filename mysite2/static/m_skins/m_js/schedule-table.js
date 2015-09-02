@@ -8,7 +8,7 @@ $(document).ready(function() {
       event.stopPropagation();
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
-          var link_page = '/mysite2/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_/" + 1 + "/";
+          var link_page = '/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_/" + 1 + "/";
           $.ajax(
             { url : link_page,
               data : {'major' : $('#major').val(),
@@ -32,17 +32,16 @@ $(document).ready(function() {
     });
 
     $("#table").find("td").each(function(i, e){
-          $(this).unbind("click");
+      $(this).unbind("click");
       $("#del-my-lec" + parseInt(i / 6) + "-" + (i % 6 + 1)).click(function(event){
         event.stopPropagation();
         $.ajax(
-          { url : "/mysite2/Remove_lecture/",
+          { url : "/Remove_lecture/",
             data : {"ccode" : $("#table-ccode" + parseInt(i / 6) + "-" + (i % 6 + 1)).text(),
                     "cclass" : $("#table-cclass" + parseInt(i / 6) + "-" + (i % 6 + 1)).text()
                   },
             type : "POST",
             success:function(resp){
-                $("#sch-result").off("click","#sch-select");
               $('#rt_table').html(resp);
             },
             error:function(xhr, option, error){

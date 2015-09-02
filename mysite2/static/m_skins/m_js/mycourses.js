@@ -125,7 +125,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                       'CurrentPage':CurrentPage
                     },
@@ -157,7 +157,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                       'CurrentPage':CurrentPage
                     },
@@ -186,7 +186,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                       'CurrentPage':CurrentPage
                     },
@@ -220,7 +220,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                         'CurrentPage':CurrentPage
                     },
@@ -252,7 +252,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                       'CurrentPage':CurrentPage
                     },
@@ -282,7 +282,7 @@ $("[data-toggle=tooltip]").tooltip();
           var CurrentPage=$(this).parent().attr("id")
 
          $.ajax(
-            { url : "/mysite2/MyCoursePage/",
+            { url : "/MyCoursePage/",
               data : {'Page': $(this).attr("name"),
                     'CurrentPage':CurrentPage
                     },

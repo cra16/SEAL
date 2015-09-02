@@ -30,7 +30,7 @@
 
       <h2 class="ui header"><i class="glyphicon glyphicon-time"></i> My Schedule</h2>
       
-    <form id = "search_subject" action = "/mysite2/Schedule/" mehtod ="POST">
+    <form id = "search_subject" action = "/Schedule/" mehtod ="POST">
     {%csrf_token%}
       <div class="ui small form">
         <div class="four fields">
@@ -134,7 +134,7 @@
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{lec.Total_Count}}</span> SEALS</center>
               </div>
               [<span id="ccode" name="ccode" value="{{ lec.Course.Code }}">{{ lec.Course.Code }}</span>]
-              <p><a href="/mysite2/Course/{{lec.Course.id}}"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.Course.CourseName }}">{{ lec.Course.CourseName }}</span></a></p>
+              <p><a href="/Course/{{lec.Course.id}}"><span class="cname" id="cname{{forloop.counter}}" name="cname" value="{{ lec.Course.CourseName }}">{{ lec.Course.CourseName }}</span></a></p>
               <p><a><span id="csem" name = "cprof">{{lec.Course.Semester}} </span>학기</a></p>
               <p><a><span id="cprof" value="{{ lec.Course.Professor }}">{{ lec.Course.Professor }}</span></a></p>
               <span id = "sch-select-p" class="for-select-child">

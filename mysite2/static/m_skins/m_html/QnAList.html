@@ -18,7 +18,7 @@
 		  <tr id="qna{{Board.id}}">
                     <td><center><span id="qna_num{{Board.id}}">{{Board.id}}</span></center></td>
                    
-                    <td class="qna_title"><a href="/mysite2/QnA/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
+                    <td class="qna_title"><a href="/QnA/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
                     <img src="{% static "fonts/latest.gif"%}"> {% endif %}</span></td>
                    
                     <td><center>{{Board.TextWriter.UserName}}</center></td>
@@ -34,7 +34,7 @@
                   <tr class="ans" id="ans{{Board.id}}">
                       
                       <td></td>
-                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/mysite2/QnA/{{Board.id}}">{{Reply.TextName}}</a></td>
+                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/QnA/{{Board.id}}">{{Reply.TextName}}</a></td>
                       <td><center>{{Reply.TextWriter.UserName}}</center></td>
                       <td><center>{{Reply.created|date:"Y-m-d"}}</center></td>
                   

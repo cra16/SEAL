@@ -15,6 +15,6 @@ $(document).ready(function(){
 	});
 
 	$('#register').click(function(){
-		window.location.href = "./mysite2/Confirm";
+		window.location.href = "./Confirm";
 	});
 });

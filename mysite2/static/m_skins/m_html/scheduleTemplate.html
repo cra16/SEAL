@@ -15,7 +15,7 @@
               </div>
                         
               [<span id="ccode" name="ccode">{{ lec.Course.Code }}</span>]
-              <p><a href="/mysite2/Course/{{lec.Course.id}}"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
+              <p><a href="/Course/{{lec.Course.id}}"><span class="cname" id="cname" name="cname">{{ lec.Course.CourseName }}</span></a></p>
               <p><a><span id="cprof">{{ lec.Course.Professor }}</span>교수님</a></p>
               <p><a><span id="csem" name = "cprof">{{lec.Course.Semester}} </span>학기</a></p>
               <span id = "sch-select-p" class="for-select-child">
@@ -42,9 +42,9 @@
               {% for i in total_page %}
               {% if PageInformation.1 == i%}
               <a id="Page" name="{{i}}" class="active item">{{i}}</a>
-              {%else%}
+              {% else %}
               <a id="Page" name="{{i}}" class="item">{{i}}</a>
-              {%endif%}
+              {% endif %}
               {% endfor %}
               <a id="Next" name ="{{PageInformation.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>

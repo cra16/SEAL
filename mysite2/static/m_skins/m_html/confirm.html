@@ -37,9 +37,9 @@
         <div class="box" id="mycontent-right">
 
 
-          <form id="confirmForm" method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
+          <form id="confirmForm" method ="POST" action="/HisnetCheck/">{%csrf_token%}
 
-            <div class="form-group" method="post" action="/mysite2/Register">
+            <div class="form-group" method="post" action="/Register">
               <label class="control-label" for="stu_num">학번</label>
               <input type="text" id="stu_num" name="stu_num" class="form-control" placeholder="학번">
 
@@ -54,7 +54,7 @@
                 <div class="ui medium buttons">
                   <input type="submit" id="check" value="확인" class="ui blue button">
                   <div class="or"></div>
-                  <a href = "/mysite2"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
+                  <a href = "/"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
                 </div>
                </div>
             </div>

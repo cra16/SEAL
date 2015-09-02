@@ -75,7 +75,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Helper=int(request.POST['sl3'])
 			new_Question=int(request.POST['sl4'])
 			new_Exam=int(request.POST['sl5'])
-			new_Homework=int(request.POST['sl6'])
+#			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
 		except:
 			new_CourseComment=request.POST['CourseComment']
@@ -84,9 +84,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Helper=5
 			new_Question=5
 			new_Exam=5
-			new_Homework=5
+#			new_Homework=5
 			
-		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam, Homework=new_Homework,CourseComment=new_CourseComment)
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 
@@ -103,7 +103,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.RecommendCount+=1
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
-			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Homework = new_Homework,  Total_Count =1)
+			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1)
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)
@@ -111,7 +111,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Question += int(new_Question)
 			T_Eval.Total_Exam += int(new_Question)
-			T_Eval.Total_Homework += int(new_Homework)
+			#T_Eval.Total_Homework += int(new_Homework)
 			T_Eval.Total_Count += 1
 			T_Eval.save()
 	

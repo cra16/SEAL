@@ -29,7 +29,7 @@ $("div").on('click',"#cname",function(event){
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/mysite2/Select_Course/",
+            { url : "/Select_Course/",
               data : {'Course' : $(this).text(),
                       'Page': "0",
                       'Current':CurrentPage,
@@ -39,10 +39,10 @@ $("div").on('click',"#cname",function(event){
                       'Semester':semester
 
                     },
-              sync : true,
+              async : false,
               type : "POST",
               success:function(resp){  
-                  
+
                   if(CurrentPage=="FirstPage")
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")
@@ -51,7 +51,8 @@ $("div").on('click',"#cname",function(event){
                     $('#ThirdPage').html(resp);
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
-    
+                 
+               
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -63,23 +64,69 @@ $("div").on('click',"#cname",function(event){
          
     });
  
+  $("div").on('click',"#professorSl",function(event){
+        event.stopPropagation();
+        $(this).unbind("click");
+        CurrentPage=$(this).parent().parent().parent().parent().attr("id");
 
+        var Parent=$(this).parent();
+        var Course = Parent.find("[id=cname]").text();
+        var Code = Parent.find("[id=ccode]").text();
+        var prof = Parent.find("[id=professor]").val();
+        var period = Parent.find("[id=period]").val();
+        var semester = Parent.find("[id=semester]").val();
+        $.ajax(
+            { url : "/Select_Professor/",
+              data : {'Course' : Course,
+                      'Page': "0",
+                      'Current':CurrentPage,
+                      'Code':Code,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester,
+                      'ProSelect':"1"
+
+                    },
+              async : false,
+              type : "POST",
+              success:function(resp){  
+
+                  if(CurrentPage=="FirstPage")
+                    $('#FirstPage').html(resp);
+                  else if(CurrentPage=="SecondPage")
+                    $('#SecondPage').html(resp);
+                  else if(CurrentPage=="ThirdPage")
+                    $('#ThirdPage').html(resp);
+                  else if(CurrentPage=="Search_Page")
+                    $('#Search_Page').html(resp);
+                 
+               
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용                  
+                 } 
+
+          });
+
+         
+    });
     $('div').on('click',"#CoursePage",function(event){
           event.stopPropagation();
           $(this).unbind("click");
 
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-       
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
+                      'Course':CurrentCourse
                     },
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);
@@ -106,17 +153,17 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
+                      'Course':CurrentCourse
                     },
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);
@@ -137,101 +184,174 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-    $('.ui.sticky').sticky({
+  
+    $('div').on('click','#ProPrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+  
+
+    $('div').on('click',"#ProPage",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+     
+
+
+
+    });
+
+    $('div').on('click','#ProNext',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                   if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+  
+    $('div').on('click','#ProPrevious',function(){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Select_Professor/",
+              data : {'Page': $(this).attr("name"),
+                      'Current':CurrentPage,
+                      'Course':CurrentCourse,
+                      'ProSelect':1
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+             
+                  if(CurrentPage =="FirstPageNation")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPageNation")
+                        $('#SecondPage').html(resp);
+                  else if(CurrentPage =="ThirdPageNation")
+                        $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+                   
+                  } 
+            
+          });
+
+
+
+    });
+    $(document).keydown(function(e){
+
+     
+    });
+
+  $('.ui.sticky').sticky({
       context: '#sticky',
       pushing: true
     });
 
-    $('div').on('click','#CoursePrevious',function(){
-        event.stopPropagation();
-          $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
-
-        $.ajax(
-            { url : "/mysite2/Page/",
-              data : {'Page': $(this).attr("name"),
-                      'Current':CurrentPage,
-                      'Course':$("#CourseHidden").val()
-                    },
-              
-              datatype:"json",
-              type : "POST",
-              async:true,
-              success:function(resp){     
-                  if(CurrentPage =="FirstPage")
-                       $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPage")
-                        $('#SecondPage').html(resp);
-                  else
-                        $('#ThirdPage').html(resp);
-                },
-                error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
-                  alert(error); //오류내용
-
-                  } 
-            
-          });
-
-        $(document).keydown(function(e){
-
-      if(e.keyCode===8){
-        location.reload();
-        return false;
-
-         }
-        else if(event.keyCode==4){
-         alert("ggg");
-      }
-    });
-
-
-    });
-
-
-document.addEventListener('backbutton', function(){
-  
-  
-alert("aa");  
 });
-$(document).bind('keydown', function(event) {
-  if (event.keyCode == 27) {
-    // Prevent default (disable the back button behavior)
-   alert("GG");
-
-    // Your code to show another page or whatever...
-  }
-});
-
-});
-
-function onLoad() {
-
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-}
-
-function onDeviceReady() {
-
-    document.addEventListener("backbutton", onBackKeyDown, false);
-
-}
-
-function onBackKeyDown() {
-
-    navigator.notification.confirm('종료하시겠습니까?', onBackKeyDownMsg, '종료', '취소, 종료');
-
-}
-
-function onBackKeyDownMsg() {
-
-    if(button == 2) {
-
-        navigator.app.exitApp();
-
-    }
-
-}
 
 
 

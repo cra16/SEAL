@@ -18,7 +18,7 @@ $(document).ready(function()
         var prof = profFirst.substring(0, profFirst.indexOf("  ")-1);
          
           $.ajax(
-            { url : "/mysite2/Sel_periodDelete/",
+            { url : "/Sel_periodDelete/",
               data : {"ccode" : Code,
                       "cname" : Course,
                       "cprof" : prof,

@@ -98,11 +98,11 @@
           var CurrentPage=$(this).parent().attr("id")
           
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course 
@@ -110,7 +110,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPageNation")
                        $('#FirstPage').html(resp);
@@ -141,11 +141,11 @@
           var CurrentPage=$(this).parent().attr("id")
           
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course
@@ -154,7 +154,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   if(CurrentPage =="FirstPageNation")
                        $('#FirstPage').html(resp);
@@ -183,11 +183,11 @@
           var CurrentPage=$(this).parent().attr("id")
    
           if(CurrentPage=="SearchPageNation")
-              Course = $('#CourseName').val();
+              Course = $('#CourseHidden').val();
           else
               Course = "";
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':Course
@@ -224,7 +224,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -232,7 +232,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                        $('#Search_Page').html(resp);
                  },
@@ -257,7 +257,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -266,7 +266,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   $('#Search_Page').html(resp);
                 },
@@ -288,7 +288,7 @@
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/SearchPage/",
+            { url : "/SearchPage/",
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':$("#cname").text()
@@ -296,7 +296,7 @@
               
               datatype:"json",
               type : "POST",
-              async:true,
+              async : false,
               success:function(resp){     
                   $('#Search_Page').html(resp);
                 },
@@ -315,7 +315,7 @@
        event.stopPropagation();
           
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"FirstPage",
 
@@ -343,7 +343,7 @@
        event.stopPropagation();
        
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"SecondPage",
 
@@ -370,7 +370,7 @@
        event.stopPropagation();
         
         $.ajax(
-            { url : "/mysite2/Page/",
+            { url : "/Page/",
               data : {'Page': "0",
                       'Current':"ThirdPage",
 

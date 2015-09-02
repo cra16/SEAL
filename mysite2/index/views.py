@@ -237,7 +237,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	PageInformation = request.session['SearchPageInformation']
 
 
-	DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
+	DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
 	SearchCount = DataCount(10,DBCount)
 	PageInformation = CurrentPageView(SearchCount,cur_page)
 	PageInformation[1]=cur_page
@@ -246,7 +246,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	LectureData = [[]]
 	TotalAdd=[]
 	j=0
-	temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
+	temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
 	for lec in temp:
 				if lec['CourseName'] not in LectureData[0]:		
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		

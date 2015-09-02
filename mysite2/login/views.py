@@ -35,7 +35,8 @@ def loginCheck(request):
 			user = authenticate(username = username, password=userpassword)
 		##로그인 완료시 메인페이지 view
 		if user is not None:
-			auth_login(request,user)
+			user.backend = 'django.contrib.auth.backends.ModelBackend'
+			auth_login(request, user)
 			#메인페이지 보여줄 함수 호출
 			UserData = MainPageView(request.user,None,None,None)
 			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]

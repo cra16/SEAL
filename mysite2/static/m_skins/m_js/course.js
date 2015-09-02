@@ -116,7 +116,7 @@ for(var i=0; i<ccode.length; i++)
 
 
         $.ajax(
-            { url : "/mysite2/CoursePageNation"+cURL,
+            { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage
                     },
@@ -143,7 +143,7 @@ for(var i=0; i<ccode.length; i++)
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/CoursePageNation"+cURL,
+            { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage
                     },
@@ -170,7 +170,7 @@ for(var i=0; i<ccode.length; i++)
           var CurrentPage=$(this).parent().attr("id")
 
         $.ajax(
-            { url : "/mysite2/CoursePageNation"+cURL,
+            { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage
                     },
@@ -198,7 +198,7 @@ for(var i=0; i<ccode.length; i++)
               var CurrentPage=$(this).attr("name")
 
               $.ajax(
-                  { url : "/mysite2/Like/",
+                  { url : "/Like/",
                     data : {'Page': CurrentPage,
                           },
                     

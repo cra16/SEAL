@@ -58,24 +58,23 @@
 
                <div id="firstcourse" class="five wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
-                 <p><a href="/Course/{{SBoard.Course.id}}"><span  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                 <p><a><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></a></p>
-                <p><a><span id="csem1" name = "cprof">{{SBoard.Course.Semester}} 학기</span></a></p>
+                 <p><a><span  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
+                  <p><a><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></a></p>
                </div>
 
                <div id="recommendtop" class="seven wide column">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
                   <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}2C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
                   <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}3C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 자세하게 설명하심">자세함</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
                   <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
                </div>
 
               
@@ -101,7 +100,8 @@
               <a id="ProNext" class="item" name="{{PageInformation.0.2}}">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
-              <input type ="hidden" id = "CourseHidden" value ="{{PageBoard.0.0.Course.CourseName}}"> 
+              <input type ="hidden" id = "CourseHidden" value ="{{PageBoard.0.0.Course.CourseName}}">
+            
             </div></center>
             
     {%else%}
@@ -121,18 +121,18 @@
                </div>
 
                <div id="recommendtop" class="seven wide column">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
                   <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}2C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+                  <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
                   <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}3C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 자세하게 설명하심">자세함</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
                   <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
                </div>
 
               

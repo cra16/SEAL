@@ -45,12 +45,12 @@
               <div class="sixteen wide column" style="padding-bottom: 30px;">
                 <div class="left floated ui compact segment">
                   <center><a href="/mysite2/Recommend/{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
-                  <center><span id="likenum1">{{PageBoard.Total_Count}}</span> LIKES</center>
+                  <center><span id="likenum1">{{PageBoard.Total_Count}}</span> SEALS</center>
                 </div>
 
                 <div class="sixteen wide column">
                   [<span id="ccode1">{{PageBoard.Course.Code}}</span>]
-                  <p><a href="/mysite2/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname1">{{PageBoard.Course.CourseName}}</span></a></p>
+                  <p><a href="/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname1">{{PageBoard.Course.CourseName}}</span></a></p>
 
                   <p><a><span id="cprof1">{{PageBoard.Course.Professor}} 교수님</span></a></p>
                 </div>
@@ -100,12 +100,12 @@
               <div class="sixteen wide column" style="padding-bottom: 30px;">
                 <div class="left floated ui compact segment two wide column">
                   <center><a href="/mysite2/Recommend/{{PageBoard2.Course.id}}"><i class="glyphicon glyphicon-heart"></i></a></center>
-                  <center><span id="likenum11">{{PageBoard2.Total_Count}}</span> LIKES</center>
+                  <center><span id="likenum11">{{PageBoard2.Total_Count}}</span> SEALS</center>
                 </div>
                     
                 <div class="sixteen wide column">    
                   [<span id="ccode11">{{PageBoard2.Course.Code}}</span>]
-                  <p><a href="/mysite2/Course/{{PageBoard2.Course.id}}"><span class="cname" id="cname11">{{PageBoard2.Course.CourseName}}</span></a></p>
+                  <p><a href="/Course/{{PageBoard2.Course.id}}"><span class="cname" id="cname11">{{PageBoard2.Course.CourseName}}</span></a></p>
 
                   <p><a><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></a></p>
                 </div>
@@ -113,16 +113,16 @@
 
               <div class="center aligned sixteen wide column" style="padding-left: 16px;">
                   &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>&nbsp;&nbsp;
-                  <input type="text" id="sl1{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}1C" data-slider-value ="{{PageBoard2.Total_Speedy}}"/>
+                  <input type="text" id="sl11{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}1C" data-slider-value ="{{PageBoard2.Total_Speedy}}"/>
                   &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a><br />
                   &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>&nbsp;&nbsp;
-                  <input type="text" id="sl1{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}2C" data-slider-value ="{{PageBoard2.Total_Question}}"/>
+                  <input type="text" id="sl11{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}2C" data-slider-value ="{{PageBoard2.Total_Question}}"/>
                   &nbsp;&nbsp;<a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재위주</a>
-                  <input type="text" id="sl1{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}3C" data-slider-value ="{{PageBoard2.Total_Reliance}}"/>
+                  <input type="text" id="sl11{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}3C" data-slider-value ="{{PageBoard2.Total_Reliance}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의위주</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내도움</a>
-                  <input type="text" id="sl1{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}4C" data-slider-value ="{{PageBoard2.Total_Helper}}"/>
+                  <input type="text" id="sl11{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}4C" data-slider-value ="{{PageBoard2.Total_Helper}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외도움</a>
               </div>
             </div>

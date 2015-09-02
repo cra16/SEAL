@@ -59,18 +59,18 @@
           <div id="blankspace" class="ui column"></div>
 	   <form action = "/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
           <div class="ui grid">
-            <div id="firstcolumn" class="left floated center aligned three wide column">진도 속도</div>
+            <div id="firstcolumn" class="left floated center aligned three wide column"><b>진도 속도</b></div>
             <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">신속함</a>
+              <a id="tooltips" data-toggle="tooltip" title="신속하게 중요한 점들만 짚어 가신다">느긋함</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>	
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">느긋함</a>
+              <a id="tooltips" data-toggle="tooltip" title="느긋하고 자세하게 가르쳐 주신다">신속함</a>
             </div>
           </div>
 
@@ -79,18 +79,18 @@
 
 
           <div class="ui grid">
-            <div id="secondcolumn" class="left floated center aligned three wide column">강의 교재</div>
+            <div id="secondcolumn" class="left floated center aligned three wide column"><b>교재 사용도</b></div>
             <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">교재 위주</a>
+              <a id="tooltips" data-toggle="tooltip" title="주로 교재에 있는 내용을 바탕으로 가르쳐 주신다">적음</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl2" name ="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">강의 위주</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의에서 사용하는 PPT나 강의 말씀이 중요하다">많음</a>
             </div>
           </div>
 
@@ -99,18 +99,18 @@
 
 
           <div class="ui grid">
-            <div id="thirdcolumn" class="left floated center aligned three wide column">실질적 도움</div>
+            <div id="thirdcolumn" class="left floated center aligned three wide column"><b>실질적 도움</b></div>
             <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내에서 도움</a>
+              <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">교내 도움</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl3" name ="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외에서 도움</a>
+              <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">교외 도움</a>
             </div>
           </div>
 
@@ -119,18 +119,18 @@
 
 
           <div class="ui grid">
-            <div id="fourthcolumn" class="left floated center aligned three wide column">질문에 대한 대답</div>
+            <div id="fourthcolumn" class="left floated center aligned three wide column"><b>강의 방식</b></div>
             <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable4" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable4" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="요약해서 중요한 점들만 알기 쉽게 가르쳐 주신다">요약됨</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl4" name="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="자세하게 이해할 때까지 가르쳐 주신다">자세함</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 자세하게 설명하심">자세함</a>
             </div>
           </div>
 
@@ -139,50 +139,33 @@
 
 
           <div class="ui grid">
-            <div id="fifthcolumn" class="left floated center aligned three wide column">시험 방식</div>
+            <div id="fifthcolumn" class="left floated center aligned three wide column"><b>시험 방식</b></div>
             <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식 위주</a>
+              <a id="tooltips" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl5" name="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식 위주</a>
+              <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식</a>
             </div>
           </div>
 
+            <br><br>         
 
-          <div id="h_innersectiondivider" class="ui section divider"></div>
+            <div class="ui raised segment">
 
+              <div class="ui form">
+                <div class="field">
+                <label><h4><i class="glyphicon glyphicon-pencil"></i> <b>Comment<b></h4></label>
+                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500"></textarea>
+                </div>
+              </div>
 
-          <div class="ui grid">
-            <div id="sixthcolumn" class="left floated center aligned three wide column">과제물 방식</div>
-            <div class="left floated center aligned two wide column">
-              <button type ="button" id="enable6" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
             </div>
-            <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제 위주</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl6" name="sl6" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl6C" data-slider-disabled="false" />
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제 위주</a>
-            </div>
-          </div>
-
-         
-
-                    
-            <div id="notice_border" class="ui raised segment">
-
-           <textarea id = "CourseComment" name="CourseComment" cols="100" rows="10" placeholder="Body" maxlength="500"></textarea>
-
-
-            </div>  
                                                       
 
           <div id="recommendbtn" class="ui grid">
@@ -197,9 +180,6 @@
         
 
         <div id="h_sectiondivider" class="ui section divider"></div>
-
-
-        
 
 
         <div id="h_sectiondivider" class="ui section divider"></div>     

@@ -26,7 +26,9 @@ from functionhelper.views import *
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
 	if request.method == 'POST':
-		if 'stuNum' in request.POST:
+		if 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
+			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
+				logout(request)
 			username = request.POST['stuNum']
 			user = User.objects.filter(username=username)[0]
 		else:

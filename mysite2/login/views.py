@@ -51,7 +51,7 @@ def loginCheck(request):
 				return render_to_response("m_skins/m_html/index.html",UserData)
 		else:
 			if request.flavour =='full':
-				return HttpResponse(request.POST['stuNum'])
+				return HttpResponse(request.POST)
 			else:
 				return render_to_response("m_skins/m_html/login_error.html")
 	#로그인 되지 않았을 경우 다시 로그인페이지로

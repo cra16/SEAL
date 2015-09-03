@@ -29,15 +29,16 @@ $("div").on('click',"#cname",function(event){
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/Select_Course/",
-              data : {'Course' : $(this).text(),
+            { url : "/Select_Professor/",
+              data : {
+                      'Course' : $(this).text(),
                       'Page': "0",
                       'Current':CurrentPage,
                       'Code':Code,
                       'Professor':prof,
                       'Period':period,
-                      'Semester':semester
-
+                      'Semester':semester,
+                      'ProSelect':"1"
                     },
               async : false,
               type : "POST",
@@ -76,16 +77,15 @@ $("div").on('click',"#cname",function(event){
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/Select_Professor/",
-              data : {'Course' : Course,
+            { url : "/Select_Course/",
+              data : {
+                      'Course' : Course,
                       'Page': "0",
                       'Current':CurrentPage,
                       'Code':Code,
                       'Professor':prof,
                       'Period':period,
-                      'Semester':semester,
-                      'ProSelect':"1"
-
+                      'Semester':semester
                     },
               async : false,
               type : "POST",

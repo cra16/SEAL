@@ -277,7 +277,7 @@ def MajorSelect(user):
 		if SecondMajor.find("국제")!=-1 or SecondMajor.find("영어")!=-1:
 			MajorCode[2]="ISE"
 			MajorCode[3]="None"
-		elif SecondMajor.find("경영학")!=-1 or SecondMajor.find("경제학")!=-1 or or SecondMajor.find("GM"):
+		elif SecondMajor.find("경영학")!=-1 or SecondMajor.find("경제학")!=-1 or SecondMajor.find("GM")!=-1:
 			MajorCode[2]="GMP"
 			MajorCode[3]="MEC"
 		elif SecondMajor.find("한국법")!=-1 or SecondMajor.find("UIL")!=-1:

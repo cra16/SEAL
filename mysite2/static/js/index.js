@@ -341,6 +341,46 @@ $("div").on('click',"#cname",function(event){
 
 
     });
+    
+    $('div').on('click',"#BackButton",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
+
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Page/",
+              data : {'Page': "0",
+                      'Current':CurrentPage,
+                      
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+     
+
+
+
+    });
+
+
     $(document).keydown(function(e){
 
      

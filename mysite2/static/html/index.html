@@ -48,7 +48,8 @@
 
     {%if Search == None%}
     <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab"  data-tab="unread">
-
+      <button id = "BackButton">Back</button>
+     
         
 
      {% for PBoard1 in PageBoard.0%}
@@ -65,7 +66,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
                  <p><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
-                 <button id ="professorSl" class="ui mini basic blue circular button">교수님</button>
+                 <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
 
                 <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
@@ -100,7 +101,8 @@
                
                				
       <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
-	    {% for PBoard2 in PageBoard.1%}      
+	     <button id = "BackButton">Back</button>
+      {% for PBoard2 in PageBoard.1%}      
           {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}
@@ -113,7 +115,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard2.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard2.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">교수님</button>
+                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{PBoard2.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard2.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard2.Professor}}">
@@ -145,6 +147,7 @@
           </div>
          
 	<div id ="ThirdPage" class="ui divided very relaxed inbox selection list tab" data-tab="all">
+    <button id = "BackButton">Back</button>
     {% for PBoard3 in PageBoard.2%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -158,7 +161,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{PBoard3.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard3.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">교수님</button>
+                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{PBoard3.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard3.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard3.Professor}}">
@@ -194,8 +197,10 @@
           <div id = "Search_Page">
           {% if not Search == None  %}
             {% if Search.0 != None%}
+                        <button id = "BackButton">Back</button>
+     
             {% for SBoard in Search.0%}
-               
+     
             {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}
@@ -208,7 +213,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">교수님</button>
+                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">

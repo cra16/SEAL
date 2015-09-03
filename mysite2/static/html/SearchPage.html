@@ -2,7 +2,7 @@
 {% load app_filter %}
 
   {% if CourseName == None %}
-
+        <button id = "BackButton">Back</button>
         {% for SBoard in Search.0%}
              {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -16,7 +16,7 @@
               
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">학기별</button>
+                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">
@@ -48,7 +48,7 @@
               </a>
             </div></center>
     {% elif ProSelect == 1 %}
-
+<button id = "BackButton">Back</button>
     {% for SBoard in PageBoard.0%}
              <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
@@ -105,7 +105,7 @@
             </div></center>
             
     {%else%}
-
+<button id = "BackButton">Back</button>
     {% for SBoard in PageBoard.0%}
              <div class="ui raised segment grid">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">

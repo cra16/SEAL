@@ -1,6 +1,7 @@
 {% load app_filter %}
 {% load staticfiles %}
     {%if CourseName == None%}           			
+      <button id = "BackButton">Back</button>
       {% for PBoard1 in PageBoard.0%}
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -14,7 +15,7 @@
               
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">학기별</button>
+                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard1.Professor}}">
@@ -45,7 +46,7 @@
               </a>
             </div></center>
       {% elif ProSelect == 1 %}
-
+      <button id = "BackButton">Back</button>
       {% for PBoard1 in PageBoard.0%}
                     
           <div  class="column">
@@ -106,6 +107,7 @@
               <input type = "hidden" id="CourseHidden" value = "{{CourseName}}">
             </div></center>
       {%else%}
+      <button id = "BackButton">Back</button>
       {% for PBoard1 in PageBoard.0%}
                     
           <div class="column">

@@ -29,6 +29,7 @@ urlpatterns += patterns('login.views',
 	url(r'^Confirm/$','Confirm'),
 	url(r'^HisnetCheck/$','HisnetCheck'),
 	url(r'^Register/$','Register'),
+	url(r'^RegisterInfo/$','RegisterInfo'),
 	url(r'^$', 'loginCheck'),
 	url(r'^Logout/$', 'logout_page'),
 	)#login view

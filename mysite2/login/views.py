@@ -108,9 +108,9 @@ def HisnetCheck(request):
 			}
 
 			if request.flavour =='full':
-				return render_to_response('html/register.html', ctx)
+				return render_to_response('html/agree_reg.html', ctx)
 			else:
-				return render_to_response('m_skins/m_html/register.html', ctx)
+				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
 
 		else:
 			try:
@@ -244,6 +244,39 @@ def Register(request):
 		else:
 			return render_to_response('m_skins/m_html/login.html')
 
+@csrf_exempt
+def RegisterInfo(request):
+	if request.method=='POST':
+		stu_num = request.POST['stu_num']
+		stu_name = request.POST['stu_name']
+		first_major = request.POST['first_major']
+		second_major = request.POST.get('second_major', 'None')
 
-#로그인 후 보여줄 메인페이지 함수
+		try:
+			user = User.objects.create_user(username=stu_num)
+			user.save()
+			get_user = User.objects.get(username=stu_num)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name)
+			profile.save()
+		except:
+			# User를 만들었으나 Profile에서 실패할 경우 User만 등록되는 겨우가 발생함.
+			# 예외처리로 User만 등록되었을 때를 위한 처리
+			e_user = User.objects.filter(username=stu_num)
+			if e_user:
+				e_user.delete()
 
+			if request.flavour =='full':
+				render_to_response('html/stu_num_duplicate.html')
+			else:
+				render_to_response('m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
+
+		if request.flavour =='full':
+			return HttpResponseRedirect('/')
+		else:
+			return render_to_response('m_skins/m_html/login.html')
+
+	else:
+		if request.flavour =='full':
+			return render_to_response('html/login.html')
+		else:
+			return render_to_response('m_skins/m_html/login.html')

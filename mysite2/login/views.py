@@ -33,10 +33,11 @@ def loginCheck(request):
 			try:
 				user = User.objects.filter(username=username)[0]
 			except IndexError:
+				return HttpResponse(request.POST['stuMajor'])
 				user = None
 		else:
 			username = request.POST['UserID']
-			userpassword = request.POST['UserPassword']
+			userpassword = request.POST['UserPassword']igo
 			user = authenticate(username = username, password=userpassword)
 		##로그인 완료시 메인페이지 view
 		if user is not None:

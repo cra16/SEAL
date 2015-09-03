@@ -35,10 +35,8 @@ def loginCheck(request):
 			try:
 				user = User.objects.filter(username=username)[0]
 			except IndexError:
-				return HttpResponse(request.POST['stuMajor'])
-				# lst = [ request.POST['stuNum'], request.POST['name'], request.POST['stuMajor'] ]
-				# return HttpResponse(lst)
-				user = None
+				return HisnetCheck(request)
+				# user = None
 		else:
 			username = request.POST['UserID']
 			userpassword = request.POST['UserPassword']
@@ -98,7 +96,20 @@ def HisnetCheck(request):
 		if 'stuNum' in request.POST:
 			stu_num = request.POST['stuNum']
 			stu_name = request.POST['name']
-			stu_major = reuqest.POST['stuMajor']
+			stu_major = reuqest.POST['stuMajor'].split('.')
+			first_major = stu_major[0].strip()
+			second_major = stu_major[1].strip()
+
+			ctx = {
+				'stu_num': stu_num,
+				'stu_name': stu_name,
+				'first_major': first_major,
+				'second_major': second_major,
+			}
+			if request.flavour =='full':
+				return render_to_response('html/register.html', ctx)
+			else:
+				return render_to_response('m_skins/m_html/register.html', ctx)
 
 		else:
 			try:

@@ -37,7 +37,7 @@ def loginCheck(request):
 				user = None
 		else:
 			username = request.POST['UserID']
-			userpassword = request.POST['UserPassword']igo
+			userpassword = request.POST['UserPassword']
 			user = authenticate(username = username, password=userpassword)
 		##로그인 완료시 메인페이지 view
 		if user is not None:

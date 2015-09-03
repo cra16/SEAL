@@ -35,7 +35,7 @@ def loginCheck(request):
 			try:
 				user = User.objects.filter(username=username)[0]
 			except IndexError:
-				return HttpResponse(username)
+				return HttpResponse(request.POST['stuMajor'])
 				# lst = [ request.POST['stuNum'], request.POST['name'], request.POST['stuMajor'] ]
 				# return HttpResponse(lst)
 				user = None

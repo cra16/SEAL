@@ -1,7 +1,6 @@
 {% load app_filter %}
 {%load staticfiles%}
        {% if CourseName == None%}
-       <button id = "BackButton">Back</button>
        {% for PBoard2 in PageBoard.1%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -45,7 +44,6 @@
             </div></center>
             
       {% elif ProSelect == 1 %}
-      <button id = "BackButton">Back</button>
       {% for PBoard2 in PageBoard.1%}
 
 
@@ -106,7 +104,6 @@
             </div></center>
          
       {%else%}
-      <button id = "BackButton">Back</button>
       {% for PBoard2 in PageBoard.1%}
 
 

@@ -47,9 +47,7 @@
         <div class="column" >
 
     {%if Search == None%}
-    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab"  data-tab="unread">
-      <button id = "BackButton">Back</button>
-     
+    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab"  data-tab="unread">     
         
 
      {% for PBoard1 in PageBoard.0%}
@@ -101,7 +99,6 @@
                
                				
       <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
-	     <button id = "BackButton">Back</button>
       {% for PBoard2 in PageBoard.1%}      
           {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -147,7 +144,6 @@
           </div>
          
 	<div id ="ThirdPage" class="ui divided very relaxed inbox selection list tab" data-tab="all">
-    <button id = "BackButton">Back</button>
     {% for PBoard3 in PageBoard.2%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -197,7 +193,6 @@
           <div id = "Search_Page">
           {% if not Search == None  %}
             {% if Search.0 != None%}
-                        <button id = "BackButton">Back</button>
      
             {% for SBoard in Search.0%}
      

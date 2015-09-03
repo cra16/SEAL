@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/register.css"%}" />
     <script type="text/javascript" src="{% static "js/LoginPage/register.js"%}"></script>
 
+    </script>
+
     <title>{% block title %}SEAL - Login{% endblock %}</title>
 	{% endblock %}
   </head>
@@ -56,9 +58,9 @@
 
             <div class="form-group" method="post" action="#">
               <div class="ui medium buttons">
-                <input type="submit" id="register" value="Register" class="ui blue button">
+                <input type="submit" id="register" value="Agree" class="ui blue button">
                 <div class="or"></div>
-                <input type="button" id="cancel" value="Cancel" class="ui blue button">
+                <input type="button" id="cancel" value="Cancel" class="ui blue button" onclick="window.history.back();">
               </div>
             </div>                
 

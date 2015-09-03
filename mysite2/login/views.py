@@ -96,7 +96,7 @@ def HisnetCheck(request):
 		if 'stuNum' in request.POST:
 			stu_num = request.POST['stuNum']
 			stu_name = request.POST['name']
-			stu_major = reuqest.POST['stuMajor'].split('.')
+			stu_major = request.POST['stuMajor'].split('.')
 			first_major = stu_major[0].strip()
 			second_major = stu_major[1].strip()
 

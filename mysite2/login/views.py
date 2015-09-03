@@ -28,7 +28,11 @@ def loginCheck(request):
 	if request.method == 'POST':
 		if 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 			if not request.POST['stuNum']:
-				return HttpResponse("igo에서 다시 로그인해주세요.")
+				if request.flavour =='full':
+					return render_to_response('html/connect_error.html')
+				else:
+					return render_to_response('m_skins/m_html/connect_error.html')
+				
 			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
 				logout(request)
 			username = request.POST['stuNum']

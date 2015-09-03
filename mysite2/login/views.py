@@ -95,7 +95,7 @@ def HisnetCheck(request):
 	if request.method == 'POST':
 		if 'stuNum' in request.POST:
 			stu_num = request.POST['stuNum']
-			stu_name = request.POST['name']
+			stu_name = request.POST['usr_name']
 			stu_major = request.POST['stuMajor'].split('.')
 			first_major = stu_major[0].strip()
 			second_major = stu_major[1].strip()
@@ -106,6 +106,7 @@ def HisnetCheck(request):
 				'first_major': first_major,
 				'second_major': second_major,
 			}
+
 			if request.flavour =='full':
 				return render_to_response('html/register.html', ctx)
 			else:
@@ -113,7 +114,6 @@ def HisnetCheck(request):
 
 		else:
 			try:
-				stu_num = request.POST['stu_num']
 				hisnet_id = request.POST['hisnet_id']
 				hisnet_pw = request.POST['hisnet_pw']
 				
@@ -153,16 +153,12 @@ def HisnetCheck(request):
 				first_major = major_info.text.split('.')[0]
 				second_major = major_info.text.split('.')[1]
 
-				# 학번 일치하는지 확인
-				if stu_num == h_stu_num:
-					ctx = {
-						'stu_num':h_stu_num,
-						'stu_name':h_stu_name,
-						'first_major':first_major,
-						'second_major':second_major,
-					}
-				else:
-					raise NotFoundStudentException
+				ctx = {
+					'stu_num':h_stu_num,
+					'stu_name':h_stu_name,
+					'first_major':first_major,
+					'second_major':second_major,
+				}
 
 				# # 수강정보 들어가기 *에러발생 시 반복수행
 				# sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")

@@ -41,10 +41,7 @@ def loginCheck(request):
 			except IndexError:
 				return HisnetCheck(request)
 				# user = None
-		else:
-			username = request.POST['UserID']
-			userpassword = request.POST['UserPassword']
-			user = authenticate(username = username, password=userpassword)
+
 		##로그인 완료시 메인페이지 view
 		if user is not None:
 			user.backend = 'django.contrib.auth.backends.ModelBackend'	# To login without password
@@ -56,17 +53,20 @@ def loginCheck(request):
 				return render_to_response('html/index.html',UserData)
 			else:
 				return render_to_response("m_skins/m_html/index.html",UserData)
+
 		else:
 			if request.flavour =='full':
 				return render_to_response('html/login_error.html')
 			else:
 				return render_to_response("m_skins/m_html/login_error.html")
+
 	#로그인 되지 않았을 경우 다시 로그인페이지로
 	elif request.user.username =="":
 		if request.flavour =='full':
 			return render_to_response('html/login.html')
 		else:
 			return render_to_response('m_skins/m_html/login.html')
+			
 	#이미 로그인 되어있으면 
 	else:
 		UserData = MainPageView(request.user,None,None,None)
@@ -251,7 +251,7 @@ def Register(request):
 @csrf_exempt
 def RegisterInfo(request):
 	if request.method=='POST':
-		stu_num = request.POST['stu_num']
+		stu_num = request.POST['stuNum']
 		stu_name = request.POST['stu_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
@@ -262,6 +262,7 @@ def RegisterInfo(request):
 			get_user = User.objects.get(username=stu_num)
 			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name)
 			profile.save()
+
 		except:
 			# User를 만들었으나 Profile에서 실패할 경우 User만 등록되는 겨우가 발생함.
 			# 예외처리로 User만 등록되었을 때를 위한 처리
@@ -275,9 +276,9 @@ def RegisterInfo(request):
 				render_to_response('m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
 
 		if request.flavour =='full':
-			return HttpResponseRedirect('/')
+			return loginCheck(request)
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return loginCheck(request)
 
 	else:
 		if request.flavour =='full':

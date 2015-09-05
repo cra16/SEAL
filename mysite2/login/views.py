@@ -41,6 +41,10 @@ def loginCheck(request):
 			except IndexError:
 				return HisnetCheck(request)
 				# user = None
+		else:
+			username = request.POST['id']
+			password = request.POST['pw']
+			user = authenticate(username=username, password=password)
 
 		##로그인 완료시 메인페이지 view
 		if user is not None:

@@ -88,7 +88,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		User= user
 		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
-		MajorNumber=0
+		MajorNumber=2
 
 
 	#user의 전공에 따른 전공 코드를 뿌려줌
@@ -160,7 +160,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	temp = Total_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+	temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 	CourseList=[]
 	for lec in temp:
 		if lec.Course.CourseName not in CourseList:

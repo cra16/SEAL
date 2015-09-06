@@ -151,6 +151,75 @@ def CoursePage(request, offset):
 		return render_to_response("m_skins/m_html/coursepage.html",dic )
 
 # Create your views here.
+def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
+
+		#현재 접속한 아이디 정보 받아옴
+		try:
+			UserData = Profile.objects.get(User = request.user)
+		except :
+			UserData =None
+		
+		#강의 추천 1번이상 안했을 시 정보 안 보여줌
+		if UserData.RecommendCount <1:
+			if request.flavour =='full':
+					return render_to_response("html/Course_error.html")
+			else:
+				return render_to_response("m_skins/m_html/Course_error.html")
+		else:
+				try:
+					offset = int(offset)
+				except:
+					raise Http404()
+				#보려는 강의 정보 
+				LectureInformation=Lecture.objects.get(id=offset)
+
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				
+				
+				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
+				try:
+					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+				except:
+					MyCourseBoard = None
+				
+				#한 페이지에 뿌리는 기능
+				PageFirst = 3*(1-1)
+				PageLast = 3*(1-1)+3
+				OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
+				
+				OtherCourseBoard = []
+				#접속한 아이디와 중복되는 경우 제거
+				for Board in OtherCourse:
+					if Board.CreatedID == UserData:
+							pass
+					else:
+						OtherCourseBoard.append(Board)
+
+				
+				#pageNation과 관련된 기능
+				DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				O_Count = DataCount(3,DBCount)
+				
+				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+				PageInformation=FirstPageView(O_Count)
+				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+				OtherCount=PageTotalCount(O_Count,PageInformation)
+				dic ={'user':request.user,
+					'BestBoard':BestBoardView(),
+					'CourseBoard':CourseBoard,
+					'MyCourseBoard':MyCourseBoard,
+					'OtherCourseBoard':OtherCourseBoard,
+					'OtherCount':OtherCount,
+					'PageInformation':PageInformation
+					}
+				if request.flavour =='full':
+					return render_to_response('html/course.html',dic)
+				else:
+					return render_to_response("m_skins/m_html/course.html",dic)
+
+
 
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
@@ -172,3 +241,31 @@ def TotalCourse(offset):
 		CourseBoard.Total_Homework = 5
 
 	return CourseBoard
+def TotalCourseProfessor(CourseName,Professor):
+		Course = Total_Evaluation.objects.filter(Course__CourseName=CourseName,Course__Professor=Professor)
+		CourseBoard = Total_Evaluation(Course=Course[0].Course)
+		CourseBoard.Total_Speedy = 0
+		CourseBoard.Total_Reliance = 0
+		CourseBoard.Total_Helper = 0
+		CourseBoard.Total_Question = 0
+		CourseBoard.Total_Exam= 0
+		CourseBoard.Total_Homework = 0
+		CourseBoard.Total_Count = 0
+
+		for CourseList in Course:
+			CourseBoard.Total_Count +=CourseList.Total_Count
+			CourseBoard.Total_Speedy += CourseList.Total_Speedy
+			CourseBoard.Total_Reliance += CourseList.Total_Reliance
+			CourseBoard.Total_Helper += CourseList.Total_Helper
+			CourseBoard.Total_Question += CourseList.Total_Question
+			CourseBoard.Total_Exam += CourseList.Total_Exam
+			CourseBoard.Total_Homework += CourseList.Total_Homework
+
+			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+			CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+			CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+			CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+			CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+
+		return CourseBoard

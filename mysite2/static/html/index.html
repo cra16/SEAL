@@ -47,7 +47,7 @@
         <div class="column" >
 
     {%if Search == None%}
-    <div id ="FirstPage" class="ui divided very relaxed selection inbox list active tab"  data-tab="unread">     
+    <div id ="FirstPage" class="ui divided very relaxed inbox selection list tab"  data-tab="unread">     
         
 
      {% for PBoard1 in PageBoard.0%}
@@ -143,27 +143,110 @@
             </div></center>
           </div>
          
-	<div id ="ThirdPage" class="ui divided very relaxed inbox selection list tab" data-tab="all">
+	<div id ="ThirdPage" class="ui divided very relaxed selection inbox list active tab" data-tab="all">
     {% for PBoard3 in PageBoard.2%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}
           <div class="column">
              <div class="ui raised segment">
-              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
-                <center><button class="likebutton" name = "{{PBoard3.id}}" ><i class="glyphicon glyphicon-heart"></i></button></center>
-                <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.2|lookup:forloop.counter0}}</span> SEALS</center>
+
+              <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>
+
+               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <center><button name = "{{PBoard3.id}}" class = "likebutton" ><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.2|lookup:forloop.counter0}}</span> SEAL</center>
               </div>
               
-                 [<span id="ccode" name ="ccode" value ="a">{{PBoard3.Code}}</span>]
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard3.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">학기별 View&Write</button>
                 <input type = "hidden" id="period" value = "{{PBoard3.Period}}">
-                <input type = "hidden" id="semester" value = "{{PBoard3.Semester}}">
-                <input type = "hidden" id="professor" value = "{{PBoard3.Professor}}">
-                </div>
+                <span id="semester">{{PBoard3.Semester}}학기</span>
+                <p><span id="professor">{{PBoard3.Professor}} 교수님</span></p>
+
+                <br><br>
+
+          <div id="recommending" class="ui column">
+            <div id="blankspace" class="ui column"></div>
+
+            <div class="ui grid">
+              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips"  data-toggle="tooltip" title="강의 속도가 느림">느림</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}1C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
+              </div>
             </div>
-           {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+
+
+            <div class="ui grid">
+              <div id="secondcolumn" class="left floated center aligned four wide column">교재 사용도</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a>
+              </div>
+            </div>
+
+
+            <div class="ui grid">
+              <div id="thirdcolumn" class="left floated center aligned four wide column">과 내/외 도움</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                 <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Helper}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
+              </div>
+            </div>
+
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약됨</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}4C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
+              </div>
+            </div>
+
+
+            <div class="ui grid">
+              <div id="fifthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식 위주</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}5C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식 위주</a>
+              </div>
+            </div>
+
+
+            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+                  <p><b>Comment</b>  {{MyCourseBoard.CourseComment|linebreaks}}</p>
+              </div>
+          </div>
+
+            </div>
+          </div>
+               {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
         </div>
         <div class="ui divider"></div>
           {% endif %}
@@ -253,7 +336,7 @@
 
 
 
-   <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
     <script id="indexslider" type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     {%endblock%}
     </div>

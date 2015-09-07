@@ -10,7 +10,7 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
-			if (document.getElementById("UserID").innerHTML == "admin_seal" ){
+			if (username == "admin_seal" ){
 				document.loginForm.action = "/";
 				alert("관리자 계정 접속");
 			}

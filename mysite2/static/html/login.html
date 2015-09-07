@@ -10,6 +10,13 @@
 
     <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/login.css" %}" />
     <script type="text/javascript" src="{% static "js/LoginPage/login.js" %}"></script>
+    <script>
+      function submitChk(){
+        if (document.getElementById("id") == "admin_seal" )
+          document.loginForm.action = "/";
+        document.loginForm.submit();
+      }
+    </script>
 
     <title>SEAL - Login</title>
    {% endblock%}
@@ -37,8 +44,13 @@
 
         <div class="box" id="mycontent-right">
 
+<<<<<<< HEAD
           <form id="loginForm" action = "http://igo.handong.edu/hisnetAPI.php" method ="POST">{%csrf_token%}
-          <input type="hidden" name="rtnURL" value="http://52.69.86.137/">
+          <input type="hidden" name="rtnURL" value="http://seal.handong.edu/">
+=======
+          <form id="loginForm" name="loginForm" action = "http://igo.handong.edu/hisnetAPI.php" method ="POST">{%csrf_token%}
+          <input type="hidden" name="rtnURL" value="http://seal.handong.edu/">
+>>>>>>> d305510f4f283e5b9104198e1685de25885a26c9
 
             <div class="form-group" method="post">
               <label class="control-label" for="username">아이디(Hisnet)</label>
@@ -50,7 +62,7 @@
               <p></p>
             <div class="form-group" method="post">            
               <div class="ui medium buttons">
-                <input type="submit" id="login" value="Login" class="ui blue button">
+                <input type="button" id="login" value="Login" class="ui blue button" onClick="javascript:submitChk();">
                 <div class="or"></div>
                 <input type="button" id="register" value="Register" class="ui blue button">
               </div>

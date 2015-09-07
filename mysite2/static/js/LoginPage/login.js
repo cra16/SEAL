@@ -10,7 +10,9 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
-
+			if (document.getElementById("UserID") == "admin_seal" )
+				document.loginForm.action = "/";
+			document.loginForm.submit();
 		}
 	});
 

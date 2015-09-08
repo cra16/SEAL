@@ -166,7 +166,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		if lec.Course.CourseName not in CourseList:
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0
-			TotalBoard[2].append(A[0])
+			TotalBoard[2].append(lec)
 			CourseList.append(lec.Course.CourseName)
 			try:
 				Eval=Total_Evaluation.objects.filter(Course__CourseName=lec.Course.CourseName)

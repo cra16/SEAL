@@ -10,7 +10,7 @@
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/register.css"%}" />
-    <script type="text/javascript" src="{% static "js/LoginPage/register.js"%}"></script>
+    <script type="text/javascript" src="{% static "js/LoginPage/terms.js"%}"></script>
 
     <title>{% block title %}SEAL - Login{% endblock %}</title>
 	{% endblock %}
@@ -33,12 +33,9 @@
             <p>Powered by CRA</p>
         </div>
 
-        <div class="box" id="mycontent-right">
-
-          <form method ="POST" action="/RegisterInfo/">
+          <form id="regform" method ="POST" action="/RegisterInfo/">
 
             <div class="form-group" method="post" action="#">
-              <label class="control-label" for="stu_num"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{stu_num}}</h4></label>
               <input type="hidden" id="stu_num" class="form-control" name="stuNum" value="{{stu_num}}">
               <input type="hidden" id="first_major" class="form-control" name="first_major" value="{{first_major}}">
               <input type="hidden" id="second_major" class="form-control" name="second_major" value="{{second_major}}">
@@ -46,12 +43,11 @@
 
              <br></br>
 
-              <label class="control-label" for="user_name" style="padding-top: 15px;">약관1</label>
               <section>
-                <div class="wrapper col-xs-12 col-md-4 col-md-offset-4">
-                  <form action="./php/agree.php" method="post">
+                <div class="wrapper col-xs-12 col-md-12" style="height: 300px; width:580px; overflow:auto;">
+                  <form action="" method="post">
                     <h3>SEAL 이용약관</h3>
-                    이용약관은 다음과 같은 내용을 담고 있습니다.
+                    <pre>이용약관은 다음과 같은 내용을 담고 있습니다.
 
 제 1 장 총 칙
 제 2 장 권리 및 의무 
@@ -224,14 +220,15 @@
 이 　　　름　:　양진혁
 소속 / 직위　:　한동대학교 CRA / 회장
 E - M A I L　:　cra.handong@gmail.com
+                  </pre>
                   </form>
                 </div>
               </section>
 
-              <div class="col-xs-12 col-md-4 col-md-offset-4">
+              <div class="col-xs-12 col-md-12">
                 <p>
-                  <label>
-                    <input type="checkbox" name="agree" id="agree" value="agree" checked="checked">
+                  <label style="font-size:15px;">
+                    <input type="checkbox" name="agree" id="agree2" value="agree" checked="checked">
                     약관을 모두 읽었으며 동의합니다.
                   </label>
                 </p>
@@ -239,13 +236,11 @@ E - M A I L　:　cra.handong@gmail.com
 
              <br></br>
 
-              <label class="control-label" for="first_major" style="padding-top: 15px;">약관2</label>
-
               <section>
-                <div class="wrapper col-xs-12 col-md-4 col-md-offset-4">
-                  <form action="./php/agree.php" method="post">
+                <div class="wrapper col-xs-12 col-md-12" style="height: 300px; width: 580px; overflow:auto;">
+                  <form action="" method="post">
                     <h3>SEAL 개인정보보호정책</h3>
-                    1. 한동 대학교 CRA는 귀하의 개인정보보호를 매우 중요시하며, [정보통신망이용촉진등에관한법률]상의 개인정보보호 규정 및 정보통신부가 제정한 [개인정보 보호지침]을 준수하고 있습니다.
+                    <pre>1. 한동 대학교 CRA는 귀하의 개인정보보호를 매우 중요시하며, [정보통신망이용촉진등에관한법률]상의 개인정보보호 규정 및 정보통신부가 제정한 [개인정보 보호지침]을 준수하고 있습니다.
 
 한동대학교 CRA는 개인정보보호방침을 통하여 귀하께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며 개인정보보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.
 
@@ -363,24 +358,24 @@ SEAL의 개인정보 보호정책은 다음과 같은 내용을 담고 있습니
 이 　　　름　:　양진혁
 소속 / 직위　:　한동대학교 CRA / 회장
 E - M A I L　:　cra.handong@gmail.com
+                  </pre>
                   </form>
                 </div>
               </section>
 
-              <div class="col-xs-12 col-md-4 col-md-offset-4">
+              <div class="col-xs-12 col-md-12">
                 <p>
-                  <label>
-                    <input type="checkbox" name="agree" id="agree" value="agree" checked="checked">
+                  <label style="font-size:15px;">
+                    <input type="checkbox" name="agree" id="agree1" value="agree" checked="checked">
                     약관을 모두 읽었으며 동의합니다.
                   </label>
                 </p>
               </div>
 
-            </div>
 
             <div class="form-group" method="post" action="#">
               <div class="ui medium buttons">
-                <input type="submit" id="register" value="Agree" class="ui blue button">
+                <input type="button" id="register" value="Agree" class="ui blue button">
                 <div class="or"></div>
                 <input type="button" id="cancel" value="Cancel" class="ui blue button" onclick="window.history.back();">
               </div>

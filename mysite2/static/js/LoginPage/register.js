@@ -32,7 +32,6 @@ $(document).ready(function(){
 			repassword = $("#repassword").val(),
 			email = $("#email").val();
 
-
 		if(username == "" || password == "" || repassword == "" || email == ""){
 			$('input[type="text"], input[type="password"]').css("border", "2px solid red");
 			$('input[type="text"], input[type="password"]').css("box-shadow", "0 0 3px red");

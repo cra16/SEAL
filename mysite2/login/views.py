@@ -26,13 +26,18 @@ from functionhelper.views import *
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
 	if request.method == 'POST':
-		if 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
+		if request.POST['id'] == 'admin_seal':
+			username = request.POST['id']
+			password = request.POST['pw']
+			user = authenticate(username=username, password=password)
+			
+		elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 			if not request.POST['stuNum']:
 				if request.flavour =='full':
 					return render_to_response('html/connect_error.html')
 				else:
 					return render_to_response('m_skins/m_html/connect_error.html')
-				
+
 			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
 				logout(request)
 			username = request.POST['stuNum']
@@ -41,11 +46,7 @@ def loginCheck(request):
 			except IndexError:
 				return HisnetCheck(request)
 				# user = None
-		else:
-			username = request.POST['id']
-			password = request.POST['pw']
-			user = authenticate(username=username, password=password)
-
+			
 		##로그인 완료시 메인페이지 view
 		if user is not None:
 			user.backend = 'django.contrib.auth.backends.ModelBackend'	# To login without password

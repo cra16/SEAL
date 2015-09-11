@@ -26,7 +26,7 @@ from functionhelper.views import *
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
 	if request.method == 'POST':
-		if request.POST['id'] == 'admin_seal':
+		if request.POST.get('id', 'None') == 'admin_seal':
 			username = request.POST['id']
 			password = request.POST['pw']
 			user = authenticate(username=username, password=password)

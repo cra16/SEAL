@@ -162,7 +162,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 	temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 	CourseList=[]
-	for lec in temp:
+	for lec in temp: 
 		if lec.Course.CourseName not in CourseList:
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0

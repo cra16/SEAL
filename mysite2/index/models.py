@@ -11,6 +11,7 @@ class Course_Evaluation(models.Model):
 	Question = models.PositiveSmallIntegerField(default=5, null=False)
 	Exam = models.PositiveSmallIntegerField(default=5, null=False)
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
+	Check = models.BooleanField(default=False)
 	P_Knowledge = models.PositiveSmallIntegerField(default=5, null=False)
 	CourseComment = models.TextField(max_length=200)
 		

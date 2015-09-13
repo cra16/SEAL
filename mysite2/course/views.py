@@ -243,14 +243,17 @@ def TotalCourse(offset):
 	return CourseBoard
 def TotalCourseProfessor(CourseName,Professor):
 		Course = Total_Evaluation.objects.filter(Course__CourseName=CourseName,Course__Professor=Professor)
-		CourseBoard = Total_Evaluation(Course=Course[0].Course)
-		CourseBoard.Total_Speedy = 0
-		CourseBoard.Total_Reliance = 0
-		CourseBoard.Total_Helper = 0
-		CourseBoard.Total_Question = 0
-		CourseBoard.Total_Exam= 0
-		CourseBoard.Total_Homework = 0
-		CourseBoard.Total_Count = 0
+		try:
+			CourseBoard = Total_Evaluation(Course=Course[0].Course)
+		except:
+			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor)[0])
+			CourseBoard.Total_Speedy = 5
+			CourseBoard.Total_Reliance = 5
+			CourseBoard.Total_Helper = 5
+			CourseBoard.Total_Question = 5
+			CourseBoard.Total_Exam= 5
+			CourseBoard.Total_Homework = 5
+			CourseBoard.Total_Count = 5
 
 		for CourseList in Course:
 			CourseBoard.Total_Count +=CourseList.Total_Count

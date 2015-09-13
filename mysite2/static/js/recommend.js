@@ -127,6 +127,10 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
-
-
+$('#ButtonTrue').on('click', function(){
+  $('#Result').value("1")
+});
+$('#ButtonFalse').on('click', function(){
+  $('#Result').value("0")
+});
 });

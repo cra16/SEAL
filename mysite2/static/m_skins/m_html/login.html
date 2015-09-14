@@ -37,13 +37,14 @@
 
         <div class="box" id="mycontent-right">
 
-          <form id="loginForm" action = "/" method ="POST">{%csrf_token%}
+          <form id="loginForm" name="loginForm" method ="POST">{%csrf_token%}
+          <input type="hidden" name="rtnURL" value="http://seal.handong.edu/">
 
             <div class="form-group" method="post">
-              <label class="control-label" for="username">아이디(학번)</label>
-              <input type="text" id="UserID" name ="UserID" class="form-control" placeholder="아이디(학번)">
+              <label class="control-label" for="username">아이디(Hisnet)</label>
+              <input type="text" id="UserID" name ="UserID" class="form-control" placeholder="아이디(Hisnet)">
               <label class="control-label" for="password" style="padding-top: 15px;">비밀번호</label>
-              <input type="password" id="UserPassword" name ="UserPassword" class="form-control" placeholder="비밀번호">
+              <input type="password" id="UserPassword" name ="pw" class="form-control" placeholder="비밀번호">
             </div>
 
               <p></p>

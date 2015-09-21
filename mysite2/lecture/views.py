@@ -69,6 +69,9 @@ def auto_lec_update(request):
 		login_button = driver.find_element_by_xpath("//input[@type='image'][@src='/2012_images/intro/btn_login.gif']")
 		login_button.click()
 
+		prev_db = Lecture.objects.filter(Semester=cur_semester)
+		prev_db.delete()
+
 		all_info_lst = []
 		for hakbu in hakbu_lst:
 			# 학부 설정 후 첫페이지 이동

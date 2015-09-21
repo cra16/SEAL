@@ -97,13 +97,12 @@ $('#enable5').on('click', function(){
 
 $('#enable6').on('click', function(){
   if(checked[5] == "False"){
-    $('#sl6').slider('enable');
-    $('#sl6').slider('setValue', 5);
+    $('#ButtonCheck').val("True")
     checked[5] = "True";
     $('#enable6').css('background-color', '#9acd32');
   } else {
     $('#sl6').slider('disable');
-    $('#sl6').slider('setValue', 0);
+    $('#ButtonCheck').val("False")
     checked[5] = "False";
     $('#enable6').css('background-color', '#ccc');
   }
@@ -127,10 +126,4 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
-$('#ButtonTrue').on('click', function(){
-  $('#Result').value("1")
-});
-$('#ButtonFalse').on('click', function(){
-  $('#Result').value("0")
-});
 });

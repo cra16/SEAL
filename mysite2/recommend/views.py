@@ -77,7 +77,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Exam=int(request.POST['sl5'])
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
-			new_Check = request.POST['ButtonCheck']
+			new_Check = request.POST['ButtonCheck'] =="True" and True or False
+
+		
 		except:
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5
@@ -85,7 +87,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Helper=5
 			new_Question=5
 			new_Exam=5
-			new_Check = False
+			new_Check = request.POST['ButtonCheck'] =="True" and True or False
 #			new_Homework=5
 			
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check)

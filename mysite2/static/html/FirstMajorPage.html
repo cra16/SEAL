@@ -1,5 +1,8 @@
+
 {% load app_filter %}
 {% load staticfiles %}
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+  
     {%if CourseName == None%}           			
       {% for PBoard1 in PageBoard.0%}
            {% if forloop.counter0|divisibleby:"2" %}
@@ -87,6 +90,7 @@
             </div>
         </div>
         {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
         <div class="ui divider"></div>
           {% endif %}
             {%endfor%}
@@ -154,6 +158,7 @@
             </div>
         </div>
         {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
         <div class="ui divider"></div>
           {% endif %}
             {%endfor%}
@@ -180,4 +185,3 @@
             </div></center>
             
         {%endif%}
-          <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>

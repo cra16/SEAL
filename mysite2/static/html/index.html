@@ -165,7 +165,12 @@
                 <p><span id="professor">{{PBoard3.Course.Professor}} 교수님</span></p>
 
                 <br><br>
-
+            {% if PBoard3.Check == True %}
+          <button type ="button" id="enable6" style="background-color:#9acd32" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+            {% else %}
+           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+           {%endif%}
+         
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 

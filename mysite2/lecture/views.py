@@ -70,7 +70,8 @@ def auto_lec_update(request):
 		login_button.click()
 
 		prev_db = Lecture.objects.filter(Semester=cur_semester)
-		prev_db.delete()
+		for obj in prev_db:
+			obj.delete()
 
 		all_info_lst = []
 		for hakbu in hakbu_lst:

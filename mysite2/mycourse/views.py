@@ -70,7 +70,7 @@ def MyCoursePage(request,Page):
 	PageInformation=list()
 	TotalCount=list()
 	for i in range(0,2):
-		PageInformation.append(FirstPageView(Count[i]))									
+		PageInformation.append(CurrentPageView(Count[i],Page))									
 		TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
 
 	MyCoursePageData=dict()
@@ -79,7 +79,8 @@ def MyCoursePage(request,Page):
 						'RecommendPage':RecommendPage,
 						'LikePage':LikePage,
 						'PageInformation' : PageInformation,
-						'TotalCount':TotalCount
+						'TotalCount':TotalCount,
+						'Page':Page
 						}
 	return MyCoursePageData
 #MyCourse쪽 비동기식 구현

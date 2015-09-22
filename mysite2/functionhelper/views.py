@@ -163,7 +163,6 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 	CourseList=[]
 	for lec in temp: 
-		if lec.Course.CourseName not in CourseList:
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0
 			TotalBoard[2].append(lec)
@@ -176,7 +175,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 					continue
 			TotalAdd[2].append(total)
 
-	DBCount3= len(TotalBoard[2])
+	DBCount3=Course_Evaluation.objects.count()
 	T_Count[2] = DataCount(10,DBCount3)
 	
 		#현재 페이지 위치정보
@@ -552,24 +551,24 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount2)
 	else:
 		DBCount1=len(TotalBoard[0])
 		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount1)
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount1)
 	DBCount3=len(TotalBoard[2])
-	T_Count[2] = DataCount(5,DBCount3)
+	T_Count[2] = DataCount(10,DBCount3)
 	
 
 	#현재 페이지 위치정보
 	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
 
-	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
+	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
+	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 
 	
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
@@ -670,24 +669,24 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount2)
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount2)
 	else:
 		DBCount1=len(TotalBoard[0])
 		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(5,DBCount1)
-		T_Count[1] = DataCount(5,DBCount1)
+		T_Count[0] = DataCount(10,DBCount1)
+		T_Count[1] = DataCount(10,DBCount1)
 	DBCount3=len(TotalBoard[2])
-	T_Count[2] = DataCount(5,DBCount3)
+	T_Count[2] = DataCount(10,DBCount3)
 	
 
 	#현재 페이지 위치정보
 	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
 	PageInformation[MajorNumber][1] = PageNumber
 
-	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
+	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
+	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 
 	
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산

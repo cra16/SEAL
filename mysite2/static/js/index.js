@@ -152,7 +152,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#CourseNext',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("name");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Page/",

@@ -188,7 +188,7 @@
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {% for i in TotalCount.1%}
-              {%if PageInformation.0.1 == i%}
+              {%if Page == i%}
               <a id ="LikePage" name="{{i}}" class="active item">{{i}}</a>
               {%else%}
               <a id ="LikePage" name="{{i}}" class="item">{{i}}</a>

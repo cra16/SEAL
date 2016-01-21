@@ -15,7 +15,8 @@ $(document).ready(function(){
 				alert("관리자 계정 접속");
 			}
 			else{
-				document.loginForm.action = "http://igo.handong.edu/hisnetAPI.php";
+				// document.loginForm.action = "http://igo.handong.edu/hisnetAPI.php";
+				document.loginForm.action = "/";
 			}
 			document.loginForm.submit();
 		}

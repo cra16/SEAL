@@ -21,15 +21,36 @@ from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
 from django.contrib.auth.models import User	# user model 등록
 from functionhelper.views import *
+import mechanize
+from bs4 import BeautifulSoup
 
 @csrf_exempt
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
 	if request.method == 'POST':
-		if request.POST.get('id', 'None') == 'admin_seal':
+		#if request.POST.get('id', 'None') == 'admin_seal':
+		if request.POST.get('id', 'None'):
 			username = request.POST['id']
 			password = request.POST['pw']
-			user = authenticate(username=username, password=password)
+
+			browser = mechanize.Browser()
+			browser.set_handle_robots(False)
+			browser.open("https://hisnet.handong.edu/login/login.php")  
+			browser.select_form(name='login') 
+			browser.form['id'] = username
+			browser.form['password'] = password  
+			browser.submit()
+
+			browser.open("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")
+			contents = browser.response().read()
+			soup = BeautifulSoup(contents, "html.parser")
+			titles = soup.find_all(class_='tblcationTitlecls')
+			# Save the information
+			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
+			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
+			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+
+			user = User.objects.filter(username=stu_num)[0]
 			
 		elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 			if not request.POST['stuNum']:
@@ -100,7 +121,7 @@ def Confirm(request):
 
 @csrf_exempt
 def HisnetCheck(request):
-	hisnet_url = "http://hisnet.handong.edu/login/login.php"
+	#hisnet_url = "http://hisnet.handong.edu/login/login.php"
 	if request.method == 'POST':
 		if 'stuNum' in request.POST:
 			stu_num = request.POST['stuNum']
@@ -125,94 +146,132 @@ def HisnetCheck(request):
 				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
 
 		else:
+			hisnet_id = request.POST['hisnet_id']
+			hisnet_pw = request.POST['hisnet_pw']
+
+			browser = mechanize.Browser()
+			browser.set_handle_robots(False)
+			browser.open("https://hisnet.handong.edu/login/login.php")  
+			browser.select_form(name='login') 
+			browser.form['id'] = hisnet_id
+			browser.form['password'] = hisnet_pw  
+			browser.submit()
+
+			browser.open("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")
+			contents = browser.response().read()
+			soup = BeautifulSoup(contents, "html.parser")
+			titles = soup.find_all(class_='tblcationTitlecls')
+			# Save the information
+			stu_name = titles[0].next_sibling.next_sibling.text[:-1]
+			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
+			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
+			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+
 			try:
-				hisnet_id = request.POST['hisnet_id']
-				hisnet_pw = request.POST['hisnet_pw']
-				
-				if User.objects.filter(username=stu_num):
-					# return render_to_response('html/stu_num_duplicate.html')
-					return render_to_response('html/stu_num_duplicate.html')
-
-				# 히스넷 로그인
-				driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
-				driver.get(hisnet_url)
-				driver.set_window_size(1024,768)
-				main_login_frame = driver.find_element_by_name("MainFrame")
-				driver.switch_to_frame(main_login_frame)
-				idinput = driver.find_element_by_name("id")
-				idinput.send_keys(hisnet_id)
-				pwinput = driver.find_element_by_name("password")
-				pwinput.send_keys(hisnet_pw)
-				login_button = driver.find_element_by_xpath("//input[@type='image'][@src='/2012_images/intro/btn_login.gif']")
-				login_button.click()
-				# 로그인 이후 지연시간 발생 예외처리
-				while True:
-					try:
-						driver.get("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")	# 학사정보 접근
-						# haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
-						break
-					except:
-						continue
-				# haksa_button.click()
-				# 학사 정보에서 학번 확인하기
-				grade_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[2]/td[2]")
-				# driver.save_screenshot('hisnet_haksa.png')
-				h_stu_num = grade_info.text[7:]
-				# 학사 정보에서 이름 확인하기
-				name_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[1]/td[2]")
-				h_stu_name = name_info.text[:3]
-				major_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[6]/td[4]")
-				first_major = major_info.text.split('.')[0]
-				second_major = major_info.text.split('.')[1]
-
-				ctx = {
-					'stu_num':h_stu_num,
-					'stu_name':h_stu_name,
-					'first_major':first_major,
-					'second_major':second_major,
-				}
-
-				# # 수강정보 들어가기 *에러발생 시 반복수행
-				# sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")
-				# sugang_button.click()
-
-				# # 시간표 읽어들이기
-				# lecture_lst = []
-				# for period in range(2,12):
-				# 	for day in range(2,8):
-				# 		detail = {}	# 딕셔너리 초기화
-				# 		try:
-				# 		# xpath 각각의 딕셔너리 사용 방법
-				# 		# detail['name'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[1]" % (period, day)).text
-				# 		# detail['prof'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[2]" % (period, day)).text
-				# 		# detail['room'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[3]" % (period, day)).text
-
-				# 			# 텍스트로 분류 방법
-				# 			t_text = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]" % (period, day)).text
-				# 			t_lst = t_text.split('\n')
-				# 			detail['name'] = t_lst[0]
-				# 			detail['prof'] = t_lst[1]
-				# 			detail['room'] = t_lst[2]
-
-				# 			# 시간표 찾기 위한 장치
-				# 			detail['period'] = period
-				# 			detail['day'] = day
-
-				# 			lecture_lst.append(detail)
-				# 		except:
-				# 			continue
-				# ctx['lecture_lst'] = lecture_lst
-				
-				if request.flavour =='full':
-					return render_to_response('html/register.html', ctx)
-				else:
-					return render_to_response('m_skins/m_html/register.html', ctx)
+				second_major = stu_major2.strip()
 			except:
-				# 히스넷 체크 안될 시 에러페이지 출력
-				if request.flavour =='full':
-					return render_to_response('html/confirm_error.html')
-				else:
-					return render_to_response('m_skins/m_html/confirm_error.html')
+				second_major = None
+
+			ctx = {
+				'stu_num': stu_num,
+				'stu_name': stu_name,
+				'first_major': stu_major,
+				'second_major': second_major,
+			}
+
+			if request.flavour =='full':
+				return render_to_response('html/agree_reg.html', ctx)
+			else:
+				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
+
+			# try:
+			# 	hisnet_id = request.POST['hisnet_id']
+			# 	hisnet_pw = request.POST['hisnet_pw']
+				
+			# 	if User.objects.filter(username=stu_num):
+			# 		# return render_to_response('html/stu_num_duplicate.html')
+			# 		return render_to_response('html/stu_num_duplicate.html')
+
+			# 	# 히스넷 로그인
+			# 	driver = webdriver.PhantomJS(service_log_path='/opt/bitnami/python/lib/python2.7/site-packages/selenium/webdriver/phantomjs/ghostdriver.log')
+			# 	driver.get(hisnet_url)
+			# 	driver.set_window_size(1024,768)
+			# 	main_login_frame = driver.find_element_by_name("MainFrame")
+			# 	driver.switch_to_frame(main_login_frame)
+			# 	idinput = driver.find_element_by_name("id")
+			# 	idinput.send_keys(hisnet_id)
+			# 	pwinput = driver.find_element_by_name("password")
+			# 	pwinput.send_keys(hisnet_pw)
+			# 	login_button = driver.find_element_by_xpath("//input[@type='image'][@src='/2012_images/intro/btn_login.gif']")
+			# 	login_button.click()
+			# 	# 로그인 이후 지연시간 발생 예외처리
+			# 	while True:
+			# 		try:
+			# 			driver.get("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")	# 학사정보 접근
+			# 			# haksa_button = driver.find_element_by_xpath("//a[@href='/for_student/haksa_info/01.php']")
+			# 			break
+			# 		except:
+			# 			continue
+			# 	# haksa_button.click()
+			# 	# 학사 정보에서 학번 확인하기
+			# 	grade_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[2]/td[2]")
+			# 	# driver.save_screenshot('hisnet_haksa.png')
+			# 	h_stu_num = grade_info.text[7:]
+			# 	# 학사 정보에서 이름 확인하기
+			# 	name_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[1]/td[2]")
+			# 	h_stu_name = name_info.text[:3]
+			# 	major_info = driver.find_element_by_xpath("//form[@name='form1']/table/tbody/tr[6]/td[4]")
+			# 	first_major = major_info.text.split('.')[0]
+			# 	second_major = major_info.text.split('.')[1]
+
+			# 	ctx = {
+			# 		'stu_num':h_stu_num,
+			# 		'stu_name':h_stu_name,
+			# 		'first_major':first_major,
+			# 		'second_major':second_major,
+			# 	}
+
+			# 	# # 수강정보 들어가기 *에러발생 시 반복수행
+			# 	# sugang_button = driver.find_element_by_xpath("//a[@href='/for_student/course/01.php']")
+			# 	# sugang_button.click()
+
+			# 	# # 시간표 읽어들이기
+			# 	# lecture_lst = []
+			# 	# for period in range(2,12):
+			# 	# 	for day in range(2,8):
+			# 	# 		detail = {}	# 딕셔너리 초기화
+			# 	# 		try:
+			# 	# 		# xpath 각각의 딕셔너리 사용 방법
+			# 	# 		# detail['name'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[1]" % (period, day)).text
+			# 	# 		# detail['prof'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[2]" % (period, day)).text
+			# 	# 		# detail['room'] = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]/a/font[3]" % (period, day)).text
+
+			# 	# 			# 텍스트로 분류 방법
+			# 	# 			t_text = driver.find_element_by_xpath("//table[@id='att_list']/tbody/tr[%d]/td[%d]" % (period, day)).text
+			# 	# 			t_lst = t_text.split('\n')
+			# 	# 			detail['name'] = t_lst[0]
+			# 	# 			detail['prof'] = t_lst[1]
+			# 	# 			detail['room'] = t_lst[2]
+
+			# 	# 			# 시간표 찾기 위한 장치
+			# 	# 			detail['period'] = period
+			# 	# 			detail['day'] = day
+
+			# 	# 			lecture_lst.append(detail)
+			# 	# 		except:
+			# 	# 			continue
+			# 	# ctx['lecture_lst'] = lecture_lst
+				
+			# 	if request.flavour =='full':
+			# 		return render_to_response('html/register.html', ctx)
+			# 	else:
+			# 		return render_to_response('m_skins/m_html/register.html', ctx)
+			# except:
+			# 	# 히스넷 체크 안될 시 에러페이지 출력
+			# 	if request.flavour =='full':
+			# 		return render_to_response('html/confirm_error.html')
+			# 	else:
+			# 		return render_to_response('m_skins/m_html/confirm_error.html')
 	else:
 		if request.flavour =='full':
 			return render_to_response('html/login.html')

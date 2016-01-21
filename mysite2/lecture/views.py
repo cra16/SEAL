@@ -115,8 +115,7 @@ def auto_lec_update(request):
 						kr_name = lec_name.split('\n')[0]
 						en_name = lec_name.split('\n')[1][1:-1]	# 괄호 제외
 						lec_credit = lec_parent.find_element_by_xpath("./td[5]").text 	# 과목학점
-						lec_major = lec_parent.find_element_by_xpath("./td[6]").text.split('\n')[0] # 강의전공
-						lec_prof = lec_parent.find_element_by_xpath("./td[6]/font").text # 강의교수
+						lec_prof = lec_parent.find_element_by_xpath("./td[6]").text # 담당교수
 						lec_period = lec_parent.find_element_by_xpath("./td[7]").text 	# 강의시간
 						kr_period = lec_period.split('\n')[0]	# 강의시간(한글)
 						lec_room = lec_parent.find_element_by_xpath("./td[8]").text 	# 강의실
@@ -126,9 +125,9 @@ def auto_lec_update(request):
 						lec_category_detail = lec_parent.find_element_by_xpath("./td[12]").text # 교양실무
 						temp_lec = (
 							lec_category, lec_code, lec_class, kr_name,
-							lec_credit,  lec_major,  kr_period, lec_room,
+							lec_credit, lec_prof, kr_period, lec_room,
 							lec_fix_num, lec_take_num, lec_eng_ratio, lec_category_detail,
-							en_name, lec_prof
+							en_name
 						)
 						temp_lec = list(map(func_strip, temp_lec))	# tuple -> list(strip_string)
 						hakbu_info_lst.append(temp_lec)
@@ -146,7 +145,7 @@ def auto_lec_update(request):
 								Class=temp_lec[2],
 								CourseName=temp_lec[3],
 								Credit=temp_lec[4],
-								Major=temp_lec[5],
+								Professor=temp_lec[5],
 								Period=temp_lec[6],
 								ClassRoom=temp_lec[7],
 								Fix_num=temp_lec[8],
@@ -154,7 +153,6 @@ def auto_lec_update(request):
 								EnglishRatio=temp_lec[10],
 								CategoryDetail=temp_lec[11],
 								CourseName_Eng=temp_lec[12],
-								Professor=temp_lec[13]
 							)
 						else:
 							new_lec = Lecture(
@@ -164,7 +162,7 @@ def auto_lec_update(request):
 								Class=temp_lec[2],
 								CourseName=temp_lec[3],
 								Credit=temp_lec[4],
-								Major=temp_lec[5],
+								Professor=temp_lec[5],
 								Period=temp_lec[6],
 								ClassRoom=temp_lec[7],
 								Fix_num=temp_lec[8],
@@ -172,7 +170,6 @@ def auto_lec_update(request):
 								EnglishRatio=temp_lec[10],
 								CategoryDetail=temp_lec[11],
 								CourseName_Eng=temp_lec[12],
-								Professor=temp_lec[13]
 							)
 							new_lec.save()
 					except NoSuchElementException as e:		# page에 강의가 15개 이하인 경우

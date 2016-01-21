@@ -9,7 +9,7 @@ class Lecture(models.Model):
 	CourseName = models.CharField(max_length=80, null=True)
 	CourseName_Eng = models.CharField(max_length=80, null=True)
 	Credit = models.CharField(max_length=4, null=True)
-	Major = models.CharField(max_length=20, null=True)
+	Major = models.CharField(max_length=40, null=True)
 	Professor = models.CharField(max_length=30, null=True)
 	Period = models.CharField(max_length=30, null=True, blank=True, default=None)
 	ClassRoom = models.CharField(max_length=20, null=True, blank=True, default=None)

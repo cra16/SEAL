@@ -57,7 +57,7 @@ def auto_lec_update(request):
 		hakbu_dict = {
 		'0001':'글로벌리더십학부',
 		'0009':'창의융합교육원',
-		'0010':'Global EDISON Academy',
+		'0010':'Global EDISON',
 		'0011':'국제어문학부',
 		'0012':'언론정보문화학부',
 		'0021':'경영경제학부',

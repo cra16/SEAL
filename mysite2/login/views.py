@@ -329,7 +329,7 @@ def Register(request):
 @csrf_exempt
 def RegisterInfo(request):
 	if request.method=='POST':
-		stu_num = request.POST['stuNum']
+		stu_num = request.POST['stu_num']
 		stu_name = request.POST['stu_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')

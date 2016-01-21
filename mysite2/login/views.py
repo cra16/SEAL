@@ -153,8 +153,8 @@ def HisnetCheck(request):
 				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
 
 		else:
-			hisnet_id = request.POST['hisnet_id']
-			hisnet_pw = request.POST['hisnet_pw']
+			hisnet_id = request.POST['id']
+			hisnet_pw = request.POST['pw']
 
 			browser = mechanize.Browser()
 			browser.set_handle_robots(False)

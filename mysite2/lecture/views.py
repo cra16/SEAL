@@ -47,7 +47,7 @@ def auto_lec_update(request):
 		hisnet_url = "http://hisnet.handong.edu/login/login.php"
 		hak_year = "2015"
 		hak_term = "2"
-		cur_semester = "15-2"
+		cur_semester = "16-1"
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',

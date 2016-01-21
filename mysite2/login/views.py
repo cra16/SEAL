@@ -54,7 +54,10 @@ def loginCheck(request):
 			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
 			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
 
-			user = User.objects.filter(username=stu_num)[0]
+			try:
+				user = User.objects.filter(username=stu_num)[0]
+			except IndexError:
+				return HisnetCheck(request)
 			
 		# elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 		# 	if not request.POST['stuNum']:

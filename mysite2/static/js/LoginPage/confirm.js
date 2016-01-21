@@ -1,10 +1,9 @@
 $(document).ready(function(){
 	$("#confirmForm").submit(function(){
-		var stu_num = $("#stu_num").val(),
-		 	his_id = $("#hisnet_id").val(),
-		 	his_pw = $("#hisnet_pw").val();
+		var username = $("#UserID").val();
+		var password = $("#UserPassword").val();
 		//check if there is blank fields
-		if(stu_num== "" || his_id == "" || his_pw == ""){
+		if(username == "" || password == ""){
 			$('input[type="text"], input[type="password"]').css("border", "2px solid red");
 			$('input[type="text"], input[type="password"]').css("box-shadow", "0 0 3px red");
 			alert("Please fill in the fields.");

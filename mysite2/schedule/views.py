@@ -10,7 +10,7 @@ from functionhelper.views import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User	# user model 등록
 
-cur_semester = '15-2'
+cur_semester = '16-1'
 
 # 시간표 선택시 검색 기능
 @csrf_exempt

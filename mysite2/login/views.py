@@ -33,7 +33,7 @@ def loginCheck(request):
 			password = request.POST['pw']
 			user = authenticate(username=username, password=password)
 
-		else:
+		elif request.POST.get('id', 'None'):
 			username = request.POST['id']
 			password = request.POST['pw']
 
@@ -59,8 +59,12 @@ def loginCheck(request):
 			except IndexError:
 				return HisnetCheck(request)
 			
-		# elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
-		# 	if not request.POST['stuNum']:
+		elif 'stu_num' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
+			username = request.POST['stu_num']
+			user = User.objects.filter(username=username)[0]
+
+				# user = None
+		#	if not request.POST['stuNum']:
 		# 		if request.flavour =='full':
 		# 			return render_to_response('html/connect_error.html')
 		# 		else:

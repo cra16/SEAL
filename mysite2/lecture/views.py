@@ -45,8 +45,8 @@ def auto_lec_update(request):
 		hisnet_id = request.POST['HisnetID']
 		hisnet_pw = request.POST['HisnetPassword']
 		hisnet_url = "http://hisnet.handong.edu/login/login.php"
-		hak_year = "2015"
-		hak_term = "2"
+		hak_year = "2016"
+		hak_term = "1"
 		cur_semester = "16-1"
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',

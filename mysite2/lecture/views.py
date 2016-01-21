@@ -107,9 +107,11 @@ def auto_lec_update(request):
 				last_button.click()
 			except NoSuchElementException as e:
 				pass
-			
-			last_num = int(driver.find_element_by_class_name("orangebold").text)	# 마지막 페이지 number
-
+			try:
+				last_num = int(driver.find_element_by_class_name("orangebold").text)	# 마지막 페이지 number
+			except NoSuchElementException as e:
+				continue
+				
 			hakbu_info_lst = []
 			for page in range(1, last_num+1):	# from 1 to last_num
 				href = "https://hisnet.handong.edu/for_student/course/PLES330M.php?Page=" \

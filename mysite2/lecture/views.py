@@ -52,8 +52,25 @@ def auto_lec_update(request):
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',
 			'0033', '0071', '0074', '0077',
-			'0078', '0090'
+			'0078', '0079', '0090'
 		]	# 학부 코드 list
+		hakbu_dict = {
+		'0001':'글로벌리더십학부',
+		'0009':'창의융합교육원',
+		'0010':'Global EDISON Academy',
+		'0011':'국제어문학부',
+		'0012':'언론정보문화학부',
+		'0021':'경영경제학부',
+		'0022':'법학부',
+		'0024':'상담심리사회복지학부',
+		'0033':'생명과학부',
+		'0071':'전산전자공학부',
+		'0074':'산업정보디자인학부',
+		'0077':'기계제어공학부',
+		'0078':'공간환경시스템공학부',
+		'0079':'콘텐츠융합디자인학부',
+		'0090':'산업교육학부'
+		}
 		# hakbu_lst = ['0071']	# Debug list
 
 		# 히스넷 로그인
@@ -153,6 +170,7 @@ def auto_lec_update(request):
 								EnglishRatio=temp_lec[10],
 								CategoryDetail=temp_lec[11],
 								CourseName_Eng=temp_lec[12],
+								Major=hakbu_dict[hakbu]
 							)
 						else:
 							new_lec = Lecture(
@@ -170,6 +188,7 @@ def auto_lec_update(request):
 								EnglishRatio=temp_lec[10],
 								CategoryDetail=temp_lec[11],
 								CourseName_Eng=temp_lec[12],
+								Major=hakbu_dict[hakbu]								
 							)
 							new_lec.save()
 					except NoSuchElementException as e:		# page에 강의가 15개 이하인 경우

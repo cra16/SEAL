@@ -33,28 +33,6 @@ def loginCheck(request):
 			password = request.POST['pw']
 			user = authenticate(username=username, password=password)
 
-		# else:
-		# 	username = request.POST['id']
-		# 	password = request.POST['pw']
-
-		# 	browser = mechanize.Browser()
-		# 	browser.set_handle_robots(False)
-		# 	browser.open("https://hisnet.handong.edu/login/login.php")  
-		# 	browser.select_form(name='login') 
-		# 	browser.form['id'] = username
-		# 	browser.form['password'] = password  
-		# 	browser.submit()
-
-		# 	browser.open("https://hisnet.handong.edu/haksa/hakjuk/HHAK110M.php")
-		# 	contents = browser.response().read()
-		# 	soup = BeautifulSoup(contents, "html.parser")
-		# 	titles = soup.find_all(class_='tblcationTitlecls')
-		# 	# Save the information
-		# 	stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-		# 	stu_major = titles[11].next_sibling.next_sibling.text[:-2]
-		# 	stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
-
-		# 	user = User.objects.filter(username=stu_num)[0]
 			
 		# elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 		# 	if not request.POST['stuNum']:
@@ -71,7 +49,7 @@ def loginCheck(request):
 		# 	except IndexError:
 		# 		return HisnetCheck(request)
 		# 		# user = None
-			
+
 		##로그인 완료시 메인페이지 view
 		if user is not None:
 			user.backend = 'django.contrib.auth.backends.ModelBackend'	# To login without password

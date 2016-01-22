@@ -176,8 +176,12 @@
 
            
 
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p><b>Comment</b>  {{PBoard3.CourseComment|linebreaks}}</p>
+             <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;"><b>Comment</b>
+            <div id="open" >
+                    {{PBoard3.CourseComment}}</div>
+            <div id ="close" style="display:none">
+              {{PBoard3.CourseComment|linebreaks}}</div>
+             
               </div>
           </div>
 

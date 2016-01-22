@@ -36,8 +36,12 @@
          
               
 
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p><b>Comment</b>  {{PBoard3.CourseComment|linebreaks}}</p>
+           <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;"><b>Comment</b>
+            <div id="open" >
+                    {{PBoard3.CourseComment}}</div>
+            <div id ="close" style="display:none">
+              {{PBoard3.CourseComment|linebreaks}}</div>
+             
               </div>
           </div>
 
@@ -50,8 +54,8 @@
       {% endfor%} 
 
 			  <center><div id ="ThirdPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" class="item" name="{{PageInformation.2.0}}">
-                <i class="glyphicon glyphicon-menu-left"></i> Previous   
+              <a id ="Previous" clcomass="item" name="{{PageInformation.2.0}}">
+                <i class="glyphicon glyphicon-menu-comleft"></i> Previous   
               </a>
 			
 				{% for i in TotalCount.2%}

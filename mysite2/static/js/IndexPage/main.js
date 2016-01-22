@@ -393,6 +393,24 @@
 
 
     });
+     $('div').on('click',"#Close",function(event){
+         event.stopPropagation();
+          $(this).unbind("click");
+        var Find = $(this).parent().find("[id=Open]");
+        alert("GG");
+        $(this).hide();
+        $(Find).show();
+    });
+    $('div').on('click',"#Open",function(event){
+       event.stopPropagation();
+          $(this).unbind("click");
+        var Find = $(this).parent().find("[id=Close]");
+        
+        alert("FF");
+        $(this).hide();
+        $(Find).show();
+    });    
+
 });
 
 

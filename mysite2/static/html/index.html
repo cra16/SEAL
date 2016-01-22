@@ -15,7 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
     <script type="text/javascript" src="{% static "js/index.js" %}"></script>
-   
+   <script type="text/javascript" src="{% static "js/IndexPage/commenthide.js" %}"></script>
+    
     {% endblock%}
     
  
@@ -178,7 +179,7 @@
 
              <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;"><b>Comment</b>
             <div id="open" >
-                    {{PBoard3.CourseComment}}</div>
+                    {{PBoard3.CourseComment|truncatechars:30|linebreaks}}</div>
             <div id ="close" style="display:none">
               {{PBoard3.CourseComment|linebreaks}}</div>
              

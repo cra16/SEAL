@@ -46,7 +46,7 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
 				except:
 					MyCourseBoard = None
 				
@@ -139,7 +139,7 @@ def CoursePage(request, offset):
 
 	if UserData !=None:
 		try:
-				MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+				MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
 		except:
 				MyCourseBoard=None
 		            #자신 이외 다른사람이 추천한 정보 보여줌
@@ -212,7 +212,7 @@ def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
 				except:
 					MyCourseBoard = None
 				
@@ -292,7 +292,7 @@ def PeriodCourse(request,offset):
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
 				except:
 					MyCourseBoard = None
 				

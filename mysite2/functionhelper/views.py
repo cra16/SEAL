@@ -449,9 +449,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy = (TempTotal.Total_Speedy + T.Total_Speedy)/TempTotal.Total_Count
 						TempTotal.Total_Reliance =(TempTotal.Total_Reliance + T.Total_Reliance)/TempTotal.Total_Count
-						TempTotal.Total_Helper =(TempTotal.Total_Helpr + T.Total_Helper)/TempTotal.Total_Count
+						TempTotal.Total_Helper =(TempTotal.Total_Helper + T.Total_Helper)/TempTotal.Total_Count
 						TempTotal.Total_Question =(TempTotal.Total_Question + T.Total_Question)/TempTotal.Total_Count
-						TempTotal.Total_Exam =(TempTotal.Total_Exam + T.Exam)/TempTotal.Total_Count
+						TempTotal.Total_Exam =(TempTotal.Total_Exam + T.Total_Exam)/TempTotal.Total_Count
 						TempTotal.Total_Homework =(TempTotal.Total_Homework + T.Total_Homework)/TempTotal.Total_Count
 
 					TotalBoard[i].append(TempTotal)

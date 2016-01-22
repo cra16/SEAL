@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 from functionhelper.views import *
+from itertools import chain, islice
  
 def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
 		if CheckingLogin(request.user.username):
@@ -52,9 +53,23 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				#한 페이지에 뿌리는 기능
 				PageFirst = 3*(1-1)
 				PageLast = 3*(1-1)+3
-				OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
-				
+				MergeCourse=None
+				count=0
+				totalcount=0
+				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+				for TempData in t:
+					if count==0:
+						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += OtherCourse.count()
+					if count>=1:
+						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += TempCourse.count()
+						MergeCourse=chain(TempCourse,OtherCourse)
+						OtherCourse = MergeCourse
+					count+=1
+				OtherCourse=islice(OtherCourse,PageFirst,PageLast)
 				OtherCourseBoard = []
+
 				#접속한 아이디와 중복되는 경우 제거
 				for Board in OtherCourse:
 					if Board.CreatedID == UserData:
@@ -64,8 +79,8 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 
 				
 				#pageNation과 관련된 기능
-				DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,DBCount)
+				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				O_Count = DataCount(3,totalcount)
 				
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				PageInformation=FirstPageView(O_Count)
@@ -102,8 +117,23 @@ def CoursePage(request, offset):
 
 	CourseBoard = TotalCourse(offset)
 	try:
-			DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
-			O_Count = DataCount(3,DBCount)
+			MergeCourse=None
+			count=0
+			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+			totalcount=0
+			for TempData in t:
+				if count==0:
+					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+					totalcount += OtherCourse.count()
+				if count>=1:
+					TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+					totalcount += TempCourse.count()
+					MergeCourse=chain(TempCourse,OtherCourse)
+					OtherCourse = MergeCourse
+				count+=1
+
+			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
+			O_Count = DataCount(3,totalcount)
 	except:
 			DBCount = 0
 
@@ -125,8 +155,10 @@ def CoursePage(request, offset):
 	#해당 페이지에 출력할 데이터들 갯수 정하는 기능
 	PageFirst = (offset2-1)*3
 	PageLast = (offset2-1)*3+3
+	OtherCourse=islice(OtherCourse,PageFirst,PageLast)
 	try:
-			OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
+			pass
+					
 	except:
 		OtherCourse=None
 	OtherCourseBoard = []
@@ -187,8 +219,93 @@ def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것
 				#한 페이지에 뿌리는 기능
 				PageFirst = 3*(1-1)
 				PageLast = 3*(1-1)+3
-				OtherCourse = Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')[PageFirst:PageLast]
+				MergeCourse=None
+				count=0
+				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+				totalcount=0
+				for TempData in t:
+					if count==0:
+						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += OtherCourse.count()
+					if count>=1:
+						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += TempCourse.count()
+						MergeCourse=chain(TempCourse,OtherCourse)
+						OtherCourse = MergeCourse
+					count+=1
+				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
+				OtherCourseBoard = []
+				#접속한 아이디와 중복되는 경우 제거
+				for Board in OtherCourse:
+					if Board.CreatedID == UserData:
+							pass
+					else:
+						OtherCourseBoard.append(Board)
+
 				
+				#pageNation과 관련된 기능
+				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				O_Count = DataCount(3,totalcount)
+				
+				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+				PageInformation=FirstPageView(O_Count)
+				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+				OtherCount=PageTotalCount(O_Count,PageInformation)
+				dic ={'user':request.user,
+					'BestBoard':BestBoardView(),
+					'CourseBoard':CourseBoard,
+					'MyCourseBoard':MyCourseBoard,
+					'OtherCourseBoard':OtherCourseBoard,
+					'OtherCount':OtherCount,
+					'PageInformation':PageInformation
+					}
+				if request.flavour =='full':
+					return render_to_response('html/course.html',dic)
+				else:
+					return render_to_response("m_skins/m_html/course.html",dic)
+def PeriodCourse(request,offset):
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
+
+		#현재 접속한 아이디 정보 받아옴
+		try:
+			UserData = Profile.objects.get(User = request.user)
+		except :
+			UserData =None
+		
+		#강의 추천 1번이상 안했을 시 정보 안 보여줌
+		if UserData.RecommendCount <1:
+			if request.flavour =='full':
+					return render_to_response("html/Course_error.html")
+			else:
+				return render_to_response("m_skins/m_html/Course_error.html")
+		else:
+				try:
+					offset = int(offset)
+				except:
+					raise Http404()
+				#보려는 강의 정보 
+				LectureInformation=Lecture.objects.get(id=offset)
+
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				
+				
+				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
+				try:
+					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+				except:
+					MyCourseBoard = None
+				
+				#한 페이지에 뿌리는 기능
+				PageFirst = 3*(1-1)
+				PageLast = 3*(1-1)+3
+				MergeCourse=None
+			
+				
+				OtherCourse=Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')
+					
+
+		
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
 				for Board in OtherCourse:
@@ -219,8 +336,86 @@ def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것
 				else:
 					return render_to_response("m_skins/m_html/course.html",dic)
 
+def PeriodCoursePage(request,offset):
+		if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
 
+		#현재 접속한 아이디 정보 받아옴
+		try:
+			UserData = Profile.objects.get(User = request.user)
+		except :
+			UserData =None
+		
+		#강의 추천 1번이상 안했을 시 정보 안 보여줌
+		if UserData.RecommendCount <1:
+			if request.flavour =='full':
+					return render_to_response("html/Course_error.html")
+			else:
+				return render_to_response("m_skins/m_html/Course_error.html")
+		else:
+				try:
+					offset = int(offset)
+				except:
+					raise Http404()
+				#보려는 강의 정보 
+				LectureInformation=Lecture.objects.get(id=offset)
 
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				
+				
+				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
+				try:
+					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+				except:
+					MyCourseBoard = None
+				
+				#한 페이지에 뿌리는 기능
+				PageFirst = (offset2-1)*3
+				PageLast = (offset2-1)*3+3
+				MergeCourse=None
+				count=0
+				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+				totalcount=0
+				for TempData in t:
+					if count==0:
+						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += OtherCourse.count()
+					if count>=1:
+						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+						totalcount += TempCourse.count()
+						MergeCourse=chain(TempCourse,OtherCourse)
+						OtherCourse = MergeCourse
+					count+=1
+				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
+				OtherCourseBoard = []
+				#접속한 아이디와 중복되는 경우 제거
+				for Board in OtherCourse:
+					if Board.CreatedID == UserData:
+							pass
+					else:
+						OtherCourseBoard.append(Board)
+
+				
+				#pageNation과 관련된 기능
+				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				O_Count = DataCount(3,totalcount)
+				
+				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+				PageInformation=FirstPageView(O_Count)
+				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+				OtherCount=PageTotalCount(O_Count,PageInformation)
+				dic ={'user':request.user,
+					'BestBoard':BestBoardView(),
+					'CourseBoard':CourseBoard,
+					'MyCourseBoard':MyCourseBoard,
+					'OtherCourseBoard':OtherCourseBoard,
+					'OtherCount':OtherCount,
+					'PageInformation':PageInformation
+					}
+				if request.flavour =='full':
+					return render_to_response('html/course.html',dic)
+				else:
+					return render_to_response("m_skins/m_html/course.html",dic)
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	try:

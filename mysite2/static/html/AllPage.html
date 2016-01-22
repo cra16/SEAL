@@ -28,7 +28,12 @@
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 
-            <button type ="button" id="enable6" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+            {% if PBoard3.Check == True %}
+          <button type ="button" id="enable6" style="background-color:#9acd32" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+            {% else %}
+           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+           {%endif%}
+         
               
 
             <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">

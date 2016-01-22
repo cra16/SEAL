@@ -40,7 +40,7 @@ var sl01 = $('#sl01').slider(),
 $('#sl01').slider('disable');
 $('#sl02').slider('disable');
 $('#sl03').slider('disable');
-$('#sl0	4').slider('disable');
+$('#sl04').slider('disable');
 $('#sl05').slider('disable');
 $('#sl06').slider('disable');
 

@@ -61,13 +61,13 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">질문에 대한 대답</div>
               <div class="left floated right aligned three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약됨</a>
+                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
               </div>
               <div class="left floated center aligned six wide column">
                 <input type="text" id="sl04" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
               </div>
               <div class="three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 자세하게 설명하심">자세함</a>
+                <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해할 수 있도록 자세하게 설명하심">자세함</a>
               </div>
             </div>
 
@@ -162,13 +162,13 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">강의 방식</div>
               <div class="left floated right aligned three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
+                <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
               </div>
               <div class="left floated center aligned six wide column">
                 <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}4C"/>
               </div>
               <div class="three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 자세하게 설명하심">자세함</a>
+                <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
             </div>
 
@@ -195,7 +195,7 @@
 
         
             <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p>{{OtherBoard.CourseComment}}</p>
+                  <p>{{OtherBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
 

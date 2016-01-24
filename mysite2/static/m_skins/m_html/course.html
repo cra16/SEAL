@@ -109,7 +109,7 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약됨</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
             </div>
             <div id="rchoice" class="right floated right aligned eight wide column">
               <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 설명하심">자세함</a>
@@ -220,12 +220,12 @@
 
 
             <div class="ui grid">
-              <div id="fourthcolumn" class="left floated left aligned sixteen wide column">가의 방식</div>
+              <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
               <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약됨</a>
+                <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
               </div>
               <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해할 수 있또록 자세히 설명하심">자세함</a>
+                <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
                 <input type="text" id="sl04" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
@@ -250,24 +250,8 @@
             </div>
 
 
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated left aligned sixteen wide column">과제물 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제</a>
-              </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제</a>
-              </div>
-              <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl06" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl06C"/>
-              </div>
-            </div>
-
               <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p>{{MyCourseBoard.CourseComment}}</p>
+                  <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
 	
@@ -334,7 +318,7 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
               <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약됨</a>
+                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
               </div>
               <div id="rchoice" class="right floated right aligned eight wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해할 수 있도록 자세히 설명하심">자세함</a>
@@ -362,24 +346,8 @@
             </div>
 
 
-            <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-            <div class="ui grid">
-              <div id="sixthcolumn" class="left floated left aligned sixteen wide column">과제물 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="조별로 나뉘어서 하는 과제가 많다">조별과제</a>
-              </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="개인별로 나뉘어서 하는 과제가 많다">개인과제</a>
-              </div>
-              <div id="sldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}6" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}6C"/>
-              </div>
-            </div>
-
             <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p>{{OtherBoard.CourseComment}}</p>
+                  <p>{{OtherBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
 

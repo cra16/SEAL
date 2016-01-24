@@ -412,7 +412,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:
@@ -468,7 +468,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 
 	else:		
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:

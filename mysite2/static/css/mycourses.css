@@ -6,6 +6,16 @@
 }
 
 
+#sl11, #sl12, #sl13, #sl14, #sl15,
+#sl21, #sl22, #sl23, #sl24, #sl25,
+#sl31, #sl32, #sl33, #sl34, #sl35,
+#sl41, #sl42, #sl43, #sl44, #sl45,
+#sl51, #sl52, #sl53, #sl54, #sl55,
+#sl61, #sl62, #sl63, #sl64, #sl65
+{ 
+width : 177px !important; 
+}
+
 #sl11C .slider-handle{
     background: #ff7f50;
 }
@@ -205,7 +215,7 @@
 #sl141, #sl142, #sl143, #sl144, 
 #sl151, #sl152, #sl153, #sl154, 
 #sl161, #sl162, #sl163, #sl164{
-    width: 180px;
+    width: 180px !important;
 }
 
 

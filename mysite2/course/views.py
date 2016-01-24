@@ -17,7 +17,8 @@ from django.db.models import Q
 from functionhelper.views import *
 from itertools import chain, islice
  
-def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
+def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴
+
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
@@ -45,10 +46,7 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
-				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
-				except:
-					MyCourseBoard = None
+				
 				
 				#한 페이지에 뿌리는 기능
 				PageFirst = 3*(1-1)
@@ -57,11 +55,19 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 				count=0
 				totalcount=0
 				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+				MyCourseBoard = None
 				for TempData in t:
+					if MyCourseBoard == None:
+
+						try:
+							MyCourseBoard = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+						except:
+							MyCourseBoard = None
+					
 					if count==0:
 						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 						totalcount += OtherCourse.count()
-					if count>=1:
+					elif count>=1:
 						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 						totalcount += TempCourse.count()
 						MergeCourse=chain(TempCourse,OtherCourse)
@@ -100,7 +106,8 @@ def Course(request, offset): #강의 추천 된 것을 종합하는 것을 보�
 					return render_to_response("m_skins/m_html/course.html",dic)
 #페이지 넘겼을 때 작동되는 함수9
 @csrf_exempt
-def CoursePage(request, offset):
+def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴(페이지 넘긴후)
+	
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	try:
@@ -114,22 +121,27 @@ def CoursePage(request, offset):
 	#현 페이지에 대한 강의 정보
 	LectureInformation = Lecture.objects.get(id = offset)
 
-
 	CourseBoard = TotalCourse(offset)
 	try:
 			MergeCourse=None
 			count=0
 			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
 			totalcount=0
+			MyCourseBoard = None
 			for TempData in t:
 				if count==0:
+					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 					totalcount += OtherCourse.count()
+					
 				if count>=1:
 					TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 					totalcount += TempCourse.count()
 					MergeCourse=chain(TempCourse,OtherCourse)
 					OtherCourse = MergeCourse
+					TempCourse = MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+					MergeCourse = chain(TempCourse,MyCourse)
+					MyCourse = MergeCourse
 				count+=1
 
 			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
@@ -137,14 +149,7 @@ def CoursePage(request, offset):
 	except:
 			DBCount = 0
 
-	if UserData !=None:
-		try:
-				MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
-		except:
-				MyCourseBoard=None
-		            #자신 이외 다른사람이 추천한 정보 보여줌
-	else:
-		MyCourseBoard = None
+	
 	#이전페이지 다음페이지 기능 구현
 
 	PageInformation=CurrentPageView(O_Count,offset2)
@@ -163,6 +168,11 @@ def CoursePage(request, offset):
 		OtherCourse=None
 	OtherCourseBoard = []
 	#접속한 아이디와 중복되는 경우 제거
+	MyCourseBoard = None
+	for Board in MyCourse:
+		MyCourseBoard.append(Board)
+
+
 	for Board in OtherCourse:
 		if Board.CreatedID == UserData:
 				pass
@@ -183,7 +193,7 @@ def CoursePage(request, offset):
 		return render_to_response("m_skins/m_html/coursepage.html",dic )
 
 # Create your views here.
-def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것을 보여주는 기능
+def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
@@ -211,31 +221,46 @@ def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것
 				
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
-				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
-				except:
-					MyCourseBoard = None
-				
+			
 				#한 페이지에 뿌리는 기능
 				PageFirst = 3*(1-1)
 				PageLast = 3*(1-1)+3
 				MergeCourse=None
 				count=0
-				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-				totalcount=0
-				for TempData in t:
-					if count==0:
-						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-						totalcount += OtherCourse.count()
-					if count>=1:
-						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-						totalcount += TempCourse.count()
-						MergeCourse=chain(TempCourse,OtherCourse)
-						OtherCourse = MergeCourse
-					count+=1
+				MyCourseBoard = None
+				try:
+					MergeCourse=None
+					count=0
+					t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+					totalcount=0
+					MyCourseBoard = None
+					for TempData in t:
+						if count==0:
+							MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+							OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+							totalcount += OtherCourse.count()
+							
+						if count>=1:
+							TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+							totalcount += TempCourse.count()
+							MergeCourse=chain(TempCourse,OtherCourse)
+							OtherCourse = MergeCourse
+							TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+							MergeCourse = chain(TempCourse,MyCourse)
+							MyCourse = MergeCourse
+						count+=1
+
+					#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
+					O_Count = DataCount(3,totalcount)
+				except:
+					DBCount = 0
 				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
+				MyCourseBoard = []
+				for Board in MyCourse:
+					MyCourseBoard.append(Board)
+	
 				for Board in OtherCourse:
 					if Board.CreatedID == UserData:
 							pass
@@ -263,7 +288,7 @@ def CourseProfessor(request, offset): #강의 추천 된 것을 종합하는 것
 					return render_to_response('html/course.html',dic)
 				else:
 					return render_to_response("m_skins/m_html/course.html",dic)
-def PeriodCourse(request,offset):
+def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(처음 눌럿을때 )
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
@@ -336,7 +361,7 @@ def PeriodCourse(request,offset):
 				else:
 					return render_to_response("m_skins/m_html/course.html",dic)
 
-def PeriodCoursePage(request,offset):
+def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(페이지 번호 눌렀을때)
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
@@ -376,19 +401,40 @@ def PeriodCoursePage(request,offset):
 				count=0
 				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
 				totalcount=0
-				for TempData in t:
-					if count==0:
-						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-						totalcount += OtherCourse.count()
-					if count>=1:
-						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-						totalcount += TempCourse.count()
-						MergeCourse=chain(TempCourse,OtherCourse)
-						OtherCourse = MergeCourse
-					count+=1
+				MyCourseBoard = None
+				try:
+						MergeCourse=None
+						count=0
+						t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+						totalcount=0
+						MyCourseBoard = None
+						for TempData in t:
+							if count==0:
+								MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+								OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+								totalcount += OtherCourse.count()
+								
+							if count>=1:
+								TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+								totalcount += TempCourse.count()
+								MergeCourse=chain(TempCourse,OtherCourse)
+								OtherCourse = MergeCourse
+								TempCourse = MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+								MergeCourse = chain(TempCourse,MyCourse)
+								MyCourse = MergeCourse
+							count+=1
+
+						#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
+						O_Count = DataCount(3,totalcount)
+				except:
+						DBCount = 0
 				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
+				MyCourseBoard = None
+				for Board in MyCourse:
+					MyCourseBoard.append(Board)
+	
 				for Board in OtherCourse:
 					if Board.CreatedID == UserData:
 							pass
@@ -459,11 +505,11 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Exam += CourseList.Total_Exam
 			CourseBoard.Total_Homework += CourseList.Total_Homework
 
-			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-			CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-			CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-			CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-			CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
+		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
+		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 
 		return CourseBoard

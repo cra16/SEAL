@@ -48,7 +48,7 @@ def AutoFastLecUpdate(request):
 		hisnet_pw = request.POST['HisnetPassword']
 		
 		hak_lst = ['2015-2', '2015-4', '2016-1']
-		cur_semester = "15-Winter"
+		cur_semester_lst = ['15-2', '15-Winter', '16-1']
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',
@@ -84,9 +84,11 @@ def AutoFastLecUpdate(request):
 		cnt = 1
 
 		lec_lst = []
-		for hak in hak_lst:
+		for idx, hak in enumerate(hak_lst):
 			hak_year = hak.split('-')[0]
 			hak_term = hak.split('-')[1]
+			cur_semester = cur_semester_lst[idx]
+
 			for hakbu in hakbu_lst:
 				try:
 					for page in range(1,100):
@@ -162,8 +164,8 @@ def AutoFastLecUpdate(request):
 								new_lec.save()
 
 							cnt += 1
-					except AttributeError as e:
-						continue
+				except AttributeError as e:
+					continue
 		return HttpResponse('성공적으로 데이터를 입력했습니다.')
 	else:
 		return HttpResponseRedirect('/')

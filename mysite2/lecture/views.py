@@ -37,6 +37,139 @@ def UpdateLogin(request):
 	return render_to_response('html/DBUpdate.html')
 
 @csrf_exempt
+def AutoFastLecUpdate(request):
+	if not request.user.username=='admin_seal':
+		return HttpResponseRedirect('/')
+	"""
+	Hisnet 개설시간표 자동 update function
+	"""
+	if request.method == 'POST':
+		hisnet_id = request.POST['HisnetID']
+		hisnet_pw = request.POST['HisnetPassword']
+		
+		hak_lst = ['2015-2', '2015-4', '2016-1']
+		cur_semester = "15-Winter"
+		hakbu_lst = [
+			'0001', '0009', '0010', '0011',
+			'0012', '0021', '0022', '0024',
+			'0033', '0071', '0074', '0077',
+			'0078', '0079', '0090'
+		]	# 학부 코드 list
+		hakbu_dict = {
+		'0001':'글로벌리더십학부',
+		'0009':'창의융합교육원',
+		'0010':'Global EDISON',
+		'0011':'국제어문학부',
+		'0012':'언론정보문화학부',
+		'0021':'경영경제학부',
+		'0022':'법학부',
+		'0024':'상담심리사회복지학부',
+		'0033':'생명과학부',
+		'0071':'전산전자공학부',
+		'0074':'산업정보디자인학부',
+		'0077':'기계제어공학부',
+		'0078':'공간환경시스템공학부',
+		'0079':'콘텐츠융합디자인학부',
+		'0090':'산업교육학부',
+		'0111':'없는학부(테스트)'
+		}
+
+		browser = mechanize.Browser()
+		browser.set_handle_robots(False)
+		browser.open("https://hisnet.handong.edu/login/login.php")  
+		browser.select_form(name='login') 
+		browser.form['id'] = hisnet_id  
+		browser.form['password'] = hisnet_pw  
+		browser.submit()
+		cnt = 1
+
+		lec_lst = []
+		for hak in hak_lst:
+			hak_year = hak.split('-')[0]
+			hak_term = hak.split('-')[1]
+			for hakbu in hakbu_lst:
+				try:
+					for page in range(1,100):
+						target_url = "https://hisnet.handong.edu/for_student/course/PLES330M.php?Page=" + str(page) + "&hak_year=2016&hak_term=1&hakbu=" + hakbu + "&isugbn=%C0%FC%C3%BC&injung=%C0%FC%C3%BC&ksearch=search" + "&hak_year=" + hak_year + "&hak_term=" + hak_term
+						browser.open(target_url)
+						contents = browser.response().read()
+						soup = BeautifulSoup(contents, "html.parser")
+						titles = soup.find_all(class_='tblcationTitlecls')
+						# last_page = int(soup.find_all('img', src='/myboard/images/btn_say_next.gif')[0].parent.previous_sibling.previous_sibling.previous_sibling.previous_sibling.text)
+
+						td = titles
+						for i in range(15):
+							temp_lec = []
+							temp = td[0].parent.next_sibling.next_sibling
+							td = temp.find_all('td')
+							temp_lec.append(td[0].text.strip())	# 전공,선택구분
+							temp_lec.append(td[1].text.strip())	# 과목코드
+							temp_lec.append(func_int(td[2].text.strip()))	# 분반
+							temp_lec.append(td[3].br.previous_sibling.strip())	# 과목명(한글)
+							temp_lec.append(td[3].br.text.strip('')[1:-1])	# 과목명(영어)
+							temp_lec.append(td[4].text.strip())	# 학점
+							temp_lec.append(td[5].text.strip())	# 교수님
+							try:
+								temp_lec.append(td[6].text.split()[0])	# 강의시간
+							except IndexError as e:
+								temp_lec.append('')
+							temp_lec.append(td[7].text.strip())	# 강의실
+							temp_lec.append(func_int(td[8].text.strip()))	# 정원
+							temp_lec.append(func_int(td[9].text.strip()))	# 인원
+							temp_lec.append(td[10].text.strip())	# 영어비율
+							temp_lec.append(td[11].text.strip())	# 교양구분
+							temp_lec.append(hakbu_dict[hakbu])	# 학부
+							lec_lst.append(temp_lec)
+							# DB 값 Update
+							db_lec = Lecture.objects.filter(Semester=cur_semester, Code=temp_lec[1], Class=temp_lec[2])
+
+							if db_lec:
+								db_lec.update(
+									Semester=cur_semester,
+									Category=temp_lec[0],
+									Code=temp_lec[1],
+									Class=temp_lec[2],
+									CourseName=temp_lec[3],
+									CourseName_Eng=temp_lec[4],
+									Credit=temp_lec[5],
+									Professor=temp_lec[6],
+									Period=temp_lec[7],
+									ClassRoom=temp_lec[8],
+									Fix_num=temp_lec[9],
+									Take_num=temp_lec[10],
+									EnglishRatio=temp_lec[11],
+									CategoryDetail=temp_lec[12],
+									Major=temp_lec[13]
+								)
+							else:
+								new_lec = Lecture(
+									Semester=cur_semester,
+									Category=temp_lec[0],
+									Code=temp_lec[1],
+									Class=temp_lec[2],
+									CourseName=temp_lec[3],
+									CourseName_Eng=temp_lec[4],
+									Credit=temp_lec[5],
+									Professor=temp_lec[6],
+									Period=temp_lec[7],
+									ClassRoom=temp_lec[8],
+									Fix_num=temp_lec[9],
+									Take_num=temp_lec[10],
+									EnglishRatio=temp_lec[11],
+									CategoryDetail=temp_lec[12],
+									Major=temp_lec[13]							
+								)
+								new_lec.save()
+
+							cnt += 1
+					except AttributeError as e:
+						continue
+		return HttpResponse('성공적으로 데이터를 입력했습니다.')
+	else:
+		return HttpResponseRedirect('/')
+
+
+@csrf_exempt
 def auto_lec_update(request):
 	if not request.user.username=='admin_seal':
 		return HttpResponseRedirect('/')

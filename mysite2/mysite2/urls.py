@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 	url(r'^MyCourse/$','mycourse.views.MyCourse'),
 	url(r'^update/$','lecture.views.lec_update'),
 	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
-	url(r'^CurUpdate/$','lecture.views.auto_lec_update'),
+	url(r'^CurUpdate/$','lecture.views.AutoFastLecUpdate'),
 	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
 	
 )
@@ -27,7 +27,7 @@ urlpatterns += patterns('schedule.views',
 
 urlpatterns += patterns('login.views',
 	url(r'^Confirm/$','Confirm'),
-	url(r'^HisnetCheck/$','HisnetCheck'),
+	url(r'^HisnetCeck/$','HisnetCheck'),
 	url(r'^Register/$','Register'),
 	url(r'^RegisterInfo/$','RegisterInfo'),
 	url(r'^$', 'loginCheck'),
@@ -76,8 +76,7 @@ urlpatterns += patterns('qna.views',
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
 	url(r'^CoursePageNation/(\d+)$','CoursePage'),
-	url(r'^CourseProfessor/(\d+)$','CourseProfessor'),
-	url(r'^Course/Period/(\d+)$','PeriodCourse')
+	url(r'^CourseProfessor/(\d+)$','CourseProfessor')
 ) # course view
 
 urlpatterns += patterns('notice.views',

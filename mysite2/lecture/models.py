@@ -11,7 +11,7 @@ class Lecture(models.Model):
 	Credit = models.CharField(max_length=4, null=True)
 	Major = models.CharField(max_length=40, null=True)
 	Professor = models.CharField(max_length=30, null=True)
-	Period = models.CharField(max_length=30, null=True, blank=True, default=None)
+	Period = models.CharField(max_length=150, null=True, blank=True, default=None)
 	ClassRoom = models.CharField(max_length=20, null=True, blank=True, default=None)
 	Fix_num = models.PositiveSmallIntegerField(default=0, null=True)
 	Take_num = models.CharField(max_length=5, null=True, blank=True)

@@ -390,7 +390,7 @@ def Major(major):
 	elif major == "0022":
 		major = "법학부"
 	elif major =="0024":
-		major = "상담복지"
+		major = "상담심리"
 	elif major =="0033":
 		major = "생명과학"
 	elif major == "0071":
@@ -401,6 +401,8 @@ def Major(major):
 		major = "기계제어"
 	elif major == "0078":
 		major = "공간환경"
+	elif major == "0090":
+		major = "산업교육"
 	else:
 		major = "전체"
 

@@ -139,7 +139,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 					totalcount += TempCourse.count()
 					MergeCourse=chain(TempCourse,OtherCourse)
 					OtherCourse = MergeCourse
-					TempCourse = MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+					TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 					MergeCourse = chain(TempCourse,MyCourse)
 					MyCourse = MergeCourse
 				count+=1
@@ -168,7 +168,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 		OtherCourse=None
 	OtherCourseBoard = []
 	#접속한 아이디와 중복되는 경우 제거
-	MyCourseBoard = None
+	MyCourseBoard = []
 	for Board in MyCourse:
 		MyCourseBoard.append(Board)
 
@@ -431,7 +431,7 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
-				MyCourseBoard = None
+				MyCourseBoard = []
 				for Board in MyCourse:
 					MyCourseBoard.append(Board)
 	
@@ -459,9 +459,9 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 					'PageInformation':PageInformation
 					}
 				if request.flavour =='full':
-					return render_to_response('html/course.html',dic)
+					return render_to_response('html/coursepage.html',dic)
 				else:
-					return render_to_response("m_skins/m_html/course.html",dic)
+					return render_to_response("m_skins/m_html/coursepage.html",dic)
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	try:

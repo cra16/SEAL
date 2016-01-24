@@ -44,6 +44,12 @@ def MyCoursePage(request,Page):
 			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
 		except:
 			RecommendData = None
+		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
+		RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
+		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
+		RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
+		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
+		RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
 		RecommendPage.append(RecommendData)	
 
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]
@@ -59,7 +65,12 @@ def MyCoursePage(request,Page):
 					LikeData.Total_Helper=5
 					LikeData.Total_Exam =5
 					LikeData.Total_Homework = 5
-
+			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
+			LikeData.Total_Reliance =LikeData.Total_Reliance/LikeData.Total_Count
+			LikeData.Total_Question=LikeData.Total_Question/LikeData.Total_Count
+			LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
+			LikeData.Total_Exam = LikeData.Total_Exam/LikeData.Total_Count
+			LikeData.Total_Homework = LikeData.Total_Homework/LikeData.Total_Count
 			LikePage.append(LikeData)
 	Count = [[],[]]
 	DBCount=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()

@@ -53,7 +53,6 @@ def MobileFirstPageView(Count):
 def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
 	#페이지가 0으로 떨어질때 필요한 조건
-	
 	Condition =((offset%10) !=0 )and offset%10 or 10
 	
 	#Pagenation 하는 부분의 수가 11개 이상일 경우(즉 1,2,3,4,5,6.... 11일 경우 11,12,13...20으로 맞추기 위해 필요한 조건)

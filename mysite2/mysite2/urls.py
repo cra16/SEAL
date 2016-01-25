@@ -76,7 +76,9 @@ urlpatterns += patterns('qna.views',
 urlpatterns += patterns('course.views',
 	url(r'^Course/(\d+)$','Course'),
 	url(r'^CoursePageNation/(\d+)$','CoursePage'),
-	url(r'^CourseProfessor/(\d+)$','CourseProfessor')
+	url(r'^CourseProfessor/(\d+)$','CourseProfessor'),
+	url(r'^Course/Period(\d+)$','PeriodCourse'),
+	url(r'^CoursePageNation/(\w+)$','PeriodCoursePage')
 ) # course view
 
 urlpatterns += patterns('notice.views',

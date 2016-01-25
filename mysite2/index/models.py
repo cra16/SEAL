@@ -14,6 +14,7 @@ class Course_Evaluation(models.Model):
 	Check = models.BooleanField(default=False)
 	P_Knowledge = models.PositiveSmallIntegerField(default=5, null=False)
 	CourseComment = models.TextField(max_length=200)
+	StarPoint =models.FloatField(default=0)
 		
 	def __unicode__(self):
 		return self.Course.CourseName
@@ -28,7 +29,8 @@ class Total_Evaluation(models.Model):
 		Total_Homework=models.IntegerField(default=0)
 		Total_Count =models.IntegerField(default=0)
 		Total_P_Knowledge = models.IntegerField(default=5, null=False)
-	
+		Total_StarPoint = models.FloatField(default=0)
+
 		def __unicode__(self):
 			return self.Course.Code
 

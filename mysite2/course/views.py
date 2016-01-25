@@ -16,7 +16,7 @@ import datetime
 from django.db.models import Q
 from functionhelper.views import *
 from itertools import chain, islice
- 
+
 def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴
 
 		if CheckingLogin(request.user.username):
@@ -128,6 +128,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
 			totalcount=0
 			MyCourseBoard = None
+
 			for TempData in t:
 				if count==0:
 					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
@@ -294,6 +295,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 
 		#현재 접속한 아이디 정보 받아옴
 		try:
+			
 			UserData = Profile.objects.get(User = request.user)
 		except :
 			UserData =None
@@ -317,7 +319,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)[0]
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)
 				except:
 					MyCourseBoard = None
 				
@@ -361,15 +363,20 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				else:
 					return render_to_response("m_skins/m_html/course.html",dic)
 
+@csrf_exempt
 def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(페이지 번호 눌렀을때)
+		
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
 		#현재 접속한 아이디 정보 받아옴
 		try:
+			if request.method =="POST":
+				offset2 =int(request.POST["Page"]) 
 			UserData = Profile.objects.get(User = request.user)
 		except :
 			UserData =None
+			raise Http404()
 		
 		#강의 추천 1번이상 안했을 시 정보 안 보여줌
 		if UserData.RecommendCount <1:
@@ -379,7 +386,7 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				return render_to_response("m_skins/m_html/Course_error.html")
 		else:
 				try:
-					offset = int(offset)
+					offset = int(offset[6:])
 				except:
 					raise Http404()
 				#보려는 강의 정보 
@@ -390,51 +397,19 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.get(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)
 				except:
-					MyCourseBoard = None
+					MyCourseBoard = 1
 				
 				#한 페이지에 뿌리는 기능
 				PageFirst = (offset2-1)*3
 				PageLast = (offset2-1)*3+3
-				MergeCourse=None
-				count=0
-				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-				totalcount=0
-				MyCourseBoard = None
-				try:
-						MergeCourse=None
-						count=0
-						t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-						totalcount=0
-						MyCourseBoard = None
-						for TempData in t:
-							if count==0:
-								MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-								OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-								totalcount += OtherCourse.count()
-								
-							if count>=1:
-								TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-								totalcount += TempCourse.count()
-								MergeCourse=chain(TempCourse,OtherCourse)
-								OtherCourse = MergeCourse
-								TempCourse = MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-								MergeCourse = chain(TempCourse,MyCourse)
-								MyCourse = MergeCourse
-							count+=1
+				OtherCourse=Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')
+					
 
-						#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
-						O_Count = DataCount(3,totalcount)
-				except:
-						DBCount = 0
-				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
+		
 				OtherCourseBoard = []
 				#접속한 아이디와 중복되는 경우 제거
-				MyCourseBoard = []
-				for Board in MyCourse:
-					MyCourseBoard.append(Board)
-	
 				for Board in OtherCourse:
 					if Board.CreatedID == UserData:
 							pass
@@ -443,8 +418,8 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 
 				
 				#pageNation과 관련된 기능
-				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,totalcount)
+				DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				O_Count = DataCount(3,DBCount)
 				
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				PageInformation=FirstPageView(O_Count)

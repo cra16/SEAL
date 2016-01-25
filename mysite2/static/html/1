@@ -101,7 +101,7 @@
                 <div class="item" data-value="8">상담심리사회복지학부</div>
                 <div class="item" data-value="9">생명과학부</div>
                 <div class="item" data-value="10">전산전자공학부</div>
-                <div class="item" data-value="11">산업정보디자인학부</div>
+                <div class="item" data-value="11">콘텐츠융합디자인학부</div>
                 <div class="item" data-value="12">기계제어공학부</div>
                 <div class="item" data-value="13">공간환경시스템공학부</div>
                 <div class="item" data-value="14">산업교육학부</div>
@@ -572,7 +572,7 @@
                     
       <h3><a href="#"><span id="name"></span></a> <span id="detail"><br /><span id="year"></span>학번 / <span id="major"></span></span></h3>
 
-      <p><span id="label"><a href="#">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
+      <p><span id="label"><a href="#">내가 평가한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
 
       <p id="last"><span id="label"><a href="#">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
 
@@ -617,19 +617,19 @@
         <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename1">강의명</span><br />
           <span id="pname1">교수명</span><br />
-          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">추천개수</span> Seals</span>
+          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">평가개수</span> Seals</span>
         </p>
 
         <p id="second-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename2">강의명</span><br />
           <span id="pname2">교수명</span><br />
-          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">추천개수</span> Seals</span>
+          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">평가개수</span> Seals</span>
         </p>
 
         <p id="third-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename3">강의명</span><br />
           <span id="pname3">교수명</span><br />
-          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">추천개수</span> Seals</span>
+          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">평가개수</span> Seals</span>
         </p>
                     
       </span>

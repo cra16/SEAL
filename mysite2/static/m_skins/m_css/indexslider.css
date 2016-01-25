@@ -10,6 +10,11 @@
 #sl51, #sl52, #sl53, #sl54,
 #sl61, #sl62, #sl63, #sl64,
 #sl71, #sl72, #sl73, #sl74,
+#sl75, #sl81, #sl82, #sl83, 
+#sl84, #sl85, #sl91, #sl92, 
+#sl93, #sl94, #sl95, #sl101, 
+#sl102, #sl103, #sl104, #sl105,
+
 #sa11, #sa12, #sa13, #sa14,
 #sa21, #sa22, #sa23, #sa24,
 #sa31, #sa32, #sa33, #sa34,
@@ -17,14 +22,23 @@
 #sa51, #sa52, #sa53, #sa54,
 #sa61, #sa62, #sa63, #sa64,
 #sa71, #sa72, #sa73, #sa74,
+#sa75, #sa81, #sa82, #sa83, 
+#sa84, #sa85, #sa91, #sa92, 
+#sa93, #sa94, #sa95, #sa101,
+#sa102, #sa103, #sa104, #sa105,
+
 #sk11, #sk12, #sk13, #sk14,
 #sk21, #sk22, #sk23, #sk24,
 #sk31, #sk32, #sk33, #sk34,
 #sk41, #sk42, #sk43, #sk44,
 #sk51, #sk52, #sk53, #sk54,
 #sk61, #sk62, #sk63, #sk64,
-#sk71, #sk72, #sk73, #sk74{
-width : 177px;
+#sk71, #sk72, #sk73, #sk74,
+#sk75, #sk81, #sk82, #sk83, 
+#sk84, #sk85, #sk91, #sk92,
+#sk93, #sk94, #sk95, #sk101,
+#sk102, #sk103, #sk104, #sk105{
+width : 177px !important;
 }
 
 
@@ -247,6 +261,114 @@ width : 177px;
 }
 #sl74C .slider-selection{
 	background: #008b8b;
+}
+#sl75C .slider-handle{
+    background: #808000;
+}
+#sl75C .slider-selection{
+    background: #808000;
+}
+
+#sl81C .slider-handle{
+	background: #ff7f50;
+}
+#sl81C .slider-selection{
+	background: #ff7f50;
+}
+
+#sl82C .slider-handle{
+	background: #9370db;
+}
+#sl82C .slider-selection{
+	background: #9370db;
+}
+
+#sl83C .slider-handle{
+	background: #2e8b57;
+}
+#sl83C .slider-selection{
+	background: #2e8b57;
+}
+
+#sl84C .slider-handle{
+	background: #008b8b;
+}
+#sl84C .slider-selection{
+	background: #008b8b;
+}
+#sl85C .slider-handle{
+    background: #808000;
+}
+#sl85C .slider-selection{
+    background: #808000;
+}
+
+#sl91C .slider-handle{
+	background: #ff7f50;
+}
+#sl91C .slider-selection{
+	background: #ff7f50;
+}
+
+#sl92C .slider-handle{
+	background: #9370db;
+}
+#sl92C .slider-selection{
+	background: #9370db;
+}
+
+#sl93C .slider-handle{
+	background: #2e8b57;
+}
+#sl93C .slider-selection{
+	background: #2e8b57;
+}
+
+#sl94C .slider-handle{
+	background: #008b8b;
+}
+#sl94C .slider-selection{
+	background: #008b8b;
+}
+#sl95C .slider-handle{
+    background: #808000;
+}
+#sl95C .slider-selection{
+    background: #808000;
+}
+
+#sl101C .slider-handle{
+	background: #ff7f50;
+}
+#sl101C .slider-selection{
+	background: #ff7f50;
+}
+
+#sl102C .slider-handle{
+	background: #9370db;
+}
+#sl102C .slider-selection{
+	background: #9370db;
+}
+
+#sl103C .slider-handle{
+	background: #2e8b57;
+}
+#sl103C .slider-selection{
+	background: #2e8b57;
+}
+
+#sl104C .slider-handle{
+	background: #008b8b;
+}
+#sl104C .slider-selection{
+	background: #008b8b;
+}
+#sl105C .slider-handle{
+    background: #808000;
+}
+#sl105C .slider-selection{
+    background: #808000;
 }
 
 
@@ -479,7 +601,112 @@ width : 177px;
 #sa74C .slider-selection{
 	background: #008b8b;
 }
+#sa75C .slider-handle{
+    background: #808000;
+}
+#sa75C .slider-selection{
+    background: #808000;
+}
 
+#sa81C .slider-handle{
+	background: #ff7f50;
+}
+#sa81C .slider-selection{
+	background: #ff7f50;
+}
+
+#sa82C .slider-handle{
+	background: #9370db;
+}
+#sa82C .slider-selection{
+	background: #9370db;
+}
+
+#sa83C .slider-handle{
+	background: #2e8b57;
+}
+#sa83C .slider-selection{
+	background: #2e8b57;
+}
+
+#sa84C .slider-handle{
+	background: #008b8b;
+}
+#sa84C .slider-selection{
+	background: #008b8b;
+}
+#sa85C .slider-handle{
+    background: #808000;
+}
+#sa85C .slider-selection{
+    background: #808000;
+}
+#sa91C .slider-handle{
+	background: #ff7f50;
+}
+#sa91C .slider-selection{
+	background: #ff7f50;
+}
+
+#sa92C .slider-handle{
+	background: #9370db;
+}
+#sa92C .slider-selection{
+	background: #9370db;
+}
+
+#sa93C .slider-handle{
+	background: #2e8b57;
+}
+#sa93C .slider-selection{
+	background: #2e8b57;
+}
+
+#sa94C .slider-handle{
+	background: #008b8b;
+}
+#sa94C .slider-selection{
+	background: #008b8b;
+}
+#sa95C .slider-handle{
+    background: #808000;
+}
+#sa95C .slider-selection{
+    background: #808000;
+}
+#sa101C .slider-handle{
+	background: #ff7f50;
+}
+#sa101C .slider-selection{
+	background: #ff7f50;
+}
+
+#sa102C .slider-handle{
+	background: #9370db;
+}
+#sa102C .slider-selection{
+	background: #9370db;
+}
+
+#sa103C .slider-handle{
+	background: #2e8b57;
+}
+#sa103C .slider-selection{
+	background: #2e8b57;
+}
+
+#sa104C .slider-handle{
+	background: #008b8b;
+}
+#sa104C .slider-selection{
+	background: #008b8b;
+}
+#sa105C .slider-handle{
+    background: #808000;
+}
+#sa105C .slider-selection{
+    background: #808000;
+}
 
 
 
@@ -718,4 +945,112 @@ width : 177px;
 }
 #sk74C .slider-selection{
 	background: #008b8b;
+}
+#sk75C .slider-handle{
+    background: #808000;
+}
+#sk75C .slider-selection{
+    background: #808000;
+}
+
+#sk81C .slider-handle{
+	background: #ff7f50;
+}
+#sk81C .slider-selection{
+	background: #ff7f50;
+}
+
+#sk82C .slider-handle{
+	background: #9370db;
+}
+#sk82C .slider-selection{
+	background: #9370db;
+}
+
+#sk83C .slider-handle{
+	background: #2e8b57;
+}
+#sk83C .slider-selection{
+	background: #2e8b57;
+}
+
+#sk84C .slider-handle{
+	background: #008b8b;
+}
+#sk84C .slider-selection{
+	background: #008b8b;
+}
+#sk85C .slider-handle{
+    background: #808000;
+}
+#sk85C .slider-selection{
+    background: #808000;
+}
+
+#sk91C .slider-handle{
+	background: #ff7f50;
+}
+#sk91C .slider-selection{
+	background: #ff7f50;
+}
+
+#sk92C .slider-handle{
+	background: #9370db;
+}
+#sk92C .slider-selection{
+	background: #9370db;
+}
+
+#sk93C .slider-handle{
+	background: #2e8b57;
+}
+#sk93C .slider-selection{
+	background: #2e8b57;
+}
+
+#sk94C .slider-handle{
+	background: #008b8b;
+}
+#sk94C .slider-selection{
+	background: #008b8b;
+}
+#sk95C .slider-handle{
+    background: #808000;
+}
+#sk95C .slider-selection{
+    background: #808000;
+}
+
+#sk101C .slider-handle{
+	background: #ff7f50;
+}
+#sk101C .slider-selection{
+	background: #ff7f50;
+}
+
+#sk102C .slider-handle{
+	background: #9370db;
+}
+#sk102C .slider-selection{
+	background: #9370db;
+}
+
+#sk103C .slider-handle{
+	background: #2e8b57;
+}
+#sk103C .slider-selection{
+	background: #2e8b57;
+}
+
+#sk104C .slider-handle{
+	background: #008b8b;
+}
+#sk104C .slider-selection{
+	background: #008b8b;
+}
+#sk105C .slider-handle{
+    background: #808000;
+}
+#sk105C .slider-selection{
+    background: #808000;
 }

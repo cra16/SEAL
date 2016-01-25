@@ -401,6 +401,8 @@ def Major(major):
 		major = "기계제어"
 	elif major == "0078":
 		major = "공간환경"
+	elif major == "0079":
+		major = "콘텐츠융합"
 	elif major == "0090":
 		major = "산업교육"
 	else:

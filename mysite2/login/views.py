@@ -36,6 +36,22 @@ def loginCheck(request):
 		elif 'stu_num' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
 			username = request.POST['stu_num']
 			user = User.objects.filter(username=username)[0]
+
+		elif 'stuNum' in request.POST:	# 학번 값이 들어올 경우 해당 학번으로 로그인 제공.
+			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
+				logout(request)
+			username = request.POST['stuNum']
+			if not username:
+				if request.flavour =='full':
+					return render_to_response('html/login_error.html')
+				else:
+					return render_to_response("m_skins/m_html/login_error.html")
+
+			try:
+				user = User.objects.filter(username=username)[0]
+			except IndexError:
+				return HisnetCheck(request)
+				# user = None
 			
 		elif request.POST.get('id', 'None'):
 			username = request.POST['id']
@@ -55,31 +71,17 @@ def loginCheck(request):
 			titles = soup.find_all(class_='tblcationTitlecls')
 			# Save the information
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
-			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+			temp_major = titles[11].next_sibling.next_sibling.text.split()
+			first_major = temp_major[0][:-1]
+			try:
+				second_major = temp_major[1]
+			except IndexError as e:
+				second_major = None
 
 			try:
 				user = User.objects.filter(username=stu_num)[0]
 			except IndexError:
 				return HisnetCheck(request)
-			
-		
-
-				# user = None
-		#	if not request.POST['stuNum']:
-		# 		if request.flavour =='full':
-		# 			return render_to_response('html/connect_error.html')
-		# 		else:
-		# 			return render_to_response('m_skins/m_html/connect_error.html')
-
-		# 	if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
-		# 		logout(request)
-		# 	username = request.POST['stuNum']
-		# 	try:
-		# 		user = User.objects.filter(username=username)[0]
-		# 	except IndexError:
-		# 		return HisnetCheck(request)
-		# 		# user = None
 
 		##로그인 완료시 메인페이지 view
 		if user is not None:
@@ -177,18 +179,18 @@ def HisnetCheck(request):
 			# Save the information
 			stu_name = titles[0].next_sibling.next_sibling.text[:-1]
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
-			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+			temp_major = titles[11].next_sibling.next_sibling.text.split()
+			first_major = temp_major[0][:-1]
 
 			try:
-				second_major = stu_major2.strip()
-			except:
+				second_major = temp_major[1]
+			except IndexError as e:
 				second_major = None
 
 			ctx = {
 				'stu_num': stu_num,
 				'stu_name': stu_name,
-				'first_major': stu_major,
+				'first_major': first_major,
 				'second_major': second_major,
 			}
 

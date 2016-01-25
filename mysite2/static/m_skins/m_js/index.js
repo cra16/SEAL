@@ -202,12 +202,14 @@ $("div").on('click',"#cname",function(event){
               type : "POST",
               async : false,
               success:function(resp){     
-                  if(CurrentPage =="FirstPage")
+                  if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
                        $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPage")
+                  else if(CurrentPage =="SecondPageNation"|| CurrentPage == "SecondPage")
                         $('#SecondPage').html(resp);
-                  else
+                  else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
                 },
                 error: function(xhr, option, error){
 
@@ -223,11 +225,11 @@ $("div").on('click',"#cname",function(event){
     });
   
 
-    $('div').on('click',"#ProPage",function(event){
+    $('div').on('click',"#ProNext",function(){
           event.stopPropagation();
           $(this).unbind("click");
-
-          var CurrentPage=$(this).parent().attr("id");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -241,11 +243,11 @@ $("div").on('click',"#cname",function(event){
               type : "POST",
               async : false,
               success:function(resp){     
-                  if(CurrentPage =="FirstPageNation")
+                  if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
                        $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPageNation")
+                  else if(CurrentPage =="SecondPageNation"|| CurrentPage == "SecondPage")
                         $('#SecondPage').html(resp);
-                  else if(CurrentPage =="ThirdPageNation")
+                  else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
                   else
                     $("#Search_Page").html(resp);
@@ -264,10 +266,11 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-    $('div').on('click','#ProNext',function(){
+    $('div').on('click','#ProPrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().attr("id");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -281,11 +284,11 @@ $("div").on('click',"#cname",function(event){
               type : "POST",
               async : false,
               success:function(resp){     
-                   if(CurrentPage =="FirstPageNation")
+                   if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
                        $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPageNation")
+                  else if(CurrentPage =="SecondPageNation"|| CurrentPage == "SecondPage")
                         $('#SecondPage').html(resp);
-                  else if(CurrentPage =="ThirdPageNation")
+                  else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
                   else
                     $("#Search_Page").html(resp);
@@ -321,14 +324,12 @@ $("div").on('click',"#cname",function(event){
               async : false,
               success:function(resp){     
              
-                  if(CurrentPage =="FirstPageNation")
+                  if(CurrentPage =="FirstPage")
                        $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPageNation")
+                  else if(CurrentPage =="SecondPage")
                         $('#SecondPage').html(resp);
-                  else if(CurrentPage =="ThirdPageNation")
-                        $('#ThirdPage').html(resp);
                   else
-                    $("#Search_Page").html(resp);
+                        $('#ThirdPage').html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -341,6 +342,25 @@ $("div").on('click',"#cname",function(event){
 
 
     });
+
+$('div').on('click',"#Close",function(event){
+         event.stopPropagation();
+          $(this).unbind("click");
+        var Find = $(this).parent().find("[id=Open]");
+        alert("줄이기");
+        $(this).hide();
+        $(Find).show();
+    });
+    $('div').on('click',"#Open",function(event){
+       event.stopPropagation();
+          $(this).unbind("click");
+        var Find = $(this).parent().find("[id=Close]");
+        
+        alert("더보기");
+        $(this).hide();
+        $(Find).show();
+    });    
+
     $(document).keydown(function(e){
 
      

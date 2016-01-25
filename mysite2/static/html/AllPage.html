@@ -38,7 +38,7 @@
 
            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;"><b>Comment</b>
             <div id="open" >
-                    {{PBoard3.CourseComment}}</div>
+                    {{PBoard3.CourseComment|truncatechars:30|linebreaks}}</div>
             <div id ="close" style="display:none">
               {{PBoard3.CourseComment|linebreaks}}</div>
              
@@ -97,7 +97,7 @@
                <div class="center aligned sixteen wide column">
                 <br><br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
-                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
+                  <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
                   <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>

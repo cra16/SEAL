@@ -72,7 +72,7 @@ $("div").on('click',"#cname",function(event){
 
         var Parent=$(this).parent();
         var Course = Parent.find("[id=cname]").text();
-        var Code = Parent.find("[id=ccode]").text();
+        var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
@@ -195,7 +195,7 @@ $("div").on('click',"#cname",function(event){
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
-                      'ProSelect':1
+     
                     },
               
               datatype:"json",
@@ -230,7 +230,6 @@ $("div").on('click',"#cname",function(event){
           $(this).unbind("click");
 
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -271,7 +270,6 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -311,7 +309,6 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -382,23 +379,6 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-$('div').on('click',"#Close",function(event){
-         event.stopPropagation();
-          $(this).unbind("click");
-        var Find = $(this).parent().find("[id=Open]");
-        alert("GG");
-        $(this).hide();
-        $(Find).show();
-    });
-    $('div').on('click',"#Open",function(event){
-       event.stopPropagation();
-          $(this).unbind("click");
-        var Find = $(this).parent().find("[id=Close]");
-        
-        alert("FF");
-        $(this).hide();
-        $(Find).show();
-    });    
 
 
     $(document).keydown(function(e){

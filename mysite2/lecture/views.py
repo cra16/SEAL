@@ -92,7 +92,7 @@ def AutoFastLecUpdate(request):
 			for hakbu in hakbu_lst:
 				try:
 					for page in range(1,100):
-						target_url = "https://hisnet.handong.edu/for_student/course/PLES330M.php?Page=" + str(page) + "&hak_year=2016&hak_term=1&hakbu=" + hakbu + "&isugbn=%C0%FC%C3%BC&injung=%C0%FC%C3%BC&ksearch=search" + "&hak_year=" + hak_year + "&hak_term=" + hak_term
+						target_url = "https://hisnet.handong.edu/for_student/course/PLES330M.php?Page=" + str(page) + "&hakbu=" + hakbu + "&isugbn=%C0%FC%C3%BC&injung=%C0%FC%C3%BC&ksearch=search&hak_year=" + hak_year + "&hak_term=" + hak_term
 						browser.open(target_url)
 						contents = browser.response().read()
 						soup = BeautifulSoup(contents, "html.parser")

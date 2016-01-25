@@ -41,12 +41,17 @@ def loginCheck(request):
 			if request.user.is_authenticated():	# 로그인 중일 때는 로그아웃 후에 재 로그인
 				logout(request)
 			username = request.POST['stuNum']
+			if not username:
+				if request.flavour =='full':
+					return render_to_response('html/login_error.html')
+				else:
+					return render_to_response("m_skins/m_html/login_error.html")
+
 			try:
 				user = User.objects.filter(username=username)[0]
 			except IndexError:
 				return HisnetCheck(request)
 				# user = None
-
 			
 		elif request.POST.get('id', 'None'):
 			username = request.POST['id']

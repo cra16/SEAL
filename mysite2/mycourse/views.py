@@ -16,13 +16,14 @@ def MyCourse(request):
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
         
-		Data=MyCoursePage(request,1)
+		Mobile = request.flavour
+		Data=MyCoursePage(request,1,Mobile)
 		if request.flavour =='full':
 			return render_to_response('html/mycourses.html',Data)
 		else:
 			return render_to_response("m_skins/m_html/mycourses.html", Data)
 #위의 함수 세부함수
-def MyCoursePage(request,Page):
+def MyCoursePage(request,Page,Mobile):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	try:
@@ -87,9 +88,15 @@ def MyCoursePage(request,Page):
 	
 	PageInformation=list()
 	TotalCount=list()
-	for i in range(0,2):
-		PageInformation.append(CurrentPageView(Count[i],Page))									
-		TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
+	if Mobile == "full":
+
+		for i in range(0,2):
+			PageInformation.append(CurrentPageView(Count[i],Page))									
+			TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
+	else:
+		for i in range(0,2):
+			PageInformation.append(MobileCurrentPageView(Count[i],Page))									
+			TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i]))
 
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 
@@ -112,7 +119,7 @@ def MyCoursePageNation(request):
 		Page = int(request.POST['Page'])
 		CurrentPage = request.POST['CurrentPage']
 	CheckingLogin(request.user.username)
-	Data=MyCoursePage(request,Page)
+	Data=MyCoursePage(request,Page,request.flavour)
 	if CurrentPage == "RecommendPageNation":
 		template="RecommendPage.html"
 	else:

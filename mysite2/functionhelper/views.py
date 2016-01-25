@@ -38,6 +38,17 @@ def FirstPageView(Count):
 		PageInformation[1] = 1
 		PageInformation[2] = Count
 	return PageInformation
+def MobileFirstPageView(Count):
+	PageInformation =[1,1,1]
+	if Count>4:
+		PageInformation[0] = 1
+		PageInformation[1] = 1
+		PageInformation[2] = 4
+	else :
+		PageInformation[0] = 1
+		PageInformation[1] = 1
+		PageInformation[2] = Count
+	return PageInformation
 #최초로 페이지 도달한 것을 제외한 모든 상황에서 1전공 2전공 all의 페이지 위치 정보 알려주는 기능
 def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
@@ -67,6 +78,34 @@ def CurrentPageView(T_Count,offset):
 			PageInformation[0] = 1
 			PageInformation[2] = T_Count
 	return PageInformation
+def MobileCurrentPageView(T_Count,offset):
+	PageInformation =[1,1,1]
+	#페이지가 0으로 떨어질때 필요한 조건
+	
+	Condition =((offset%3) !=0 )and offset%3 or 3
+	
+	#Pagenation 하는 부분의 수가 11개 이상일 경우(즉 1,2,3,4,5,6.... 11일 경우 11,12,13...20으로 맞추기 위해 필요한 조건)
+	if T_Count >=4:
+	#현재 페이지가 11이상일 경우
+			if offset>=4:
+				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
+				#되도록 표현 
+				if (offset+3)>=T_Count:
+					PageInformation[0] = (offset -Condition)-2
+					PageInformation[2] = T_Count
+				#아니면 그냥 원래대로 표현
+				else:
+					PageInformation[0] = (offset -Condition)-2
+					PageInformation[2] = (offset -Condition)+4
+			#현재 페이지가 11이하일경우 
+			else:
+				PageInformation[0] = 1
+				PageInformation[2] = (offset - Condition)+4
+		#총 페이지가 11이하일 경우 
+	else:
+			PageInformation[0] = 1
+			PageInformation[2] = T_Count
+	return PageInformation	
 #PageNation하는 부분 표시하기 위한 기능
 def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
@@ -75,10 +114,17 @@ def PageTotalCount(T_Count,PageInformation):
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)
 	return TotalCount
+def MobilePageTotalCount(T_Count,PageInformation,mobilecount):
+	Codition = ((PageInformation[1]%mobilecount !=0) and PageInformation[1]%mobilecount or mobilecount)
+	if (PageInformation[1]/mobilecount) >= T_Count/mobilecount and PageInformation[1]%mobilecount != 0:
+			TotalCount = range(PageInformation[1]- Codition+1,T_Count+1)
+	else:
+			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+mobilecount+1)
+	return TotalCount
 
 
 #Main Page 강의 추천하는 곳을 보여주는 기능
-def MainPageView(user, pageinformation,PageNumber,MajorNumber):
+def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 
 	#login view에서 사용하는 MainPageView와 로그인 되었을때 mainPageView가 조금씩 달라서 설정
 	if pageinformation !=None:
@@ -99,16 +145,22 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	if CourseCode[0] !="ENG":
 		DBCount1 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).count()
 		DBCount2 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).count()
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount2)
+		if Mobile=="full":
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount2)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount2)
 	else:
 		DBCount1=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount1)
+		if Mobile=="full":
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount1)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount2)
 	
 	#현재 페이지 위치정보
-	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-	PageInformation[MajorNumber][1] = PageNumber
 
 
 	temp=[]
@@ -116,8 +168,13 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 	TotalBoard = [[],[],[]]
 	TotalAdd =[[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+		if Mobile == 'full':
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+		else :
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
+	
 		i=0
 		
 		for t in temp:
@@ -137,8 +194,13 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 					TotalAdd[i].append(total)
 			i+=1	
 	else:
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-		temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+		if Mobile == 'full':
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+		else :
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
+	
 		i=0
 		
 		for t in temp: 
@@ -160,7 +222,11 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+	if Mobile == 'full':
+		temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+	else:
+		temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+	
 	CourseList=[]
 	for lec in temp: 
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
@@ -176,17 +242,32 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber):
 			TotalAdd[2].append(total)
 
 	DBCount3=Course_Evaluation.objects.count()
-	T_Count[2] = DataCount(10,DBCount3)
+	if Mobile=="full":
+		T_Count[2] = DataCount(10,DBCount3)
+	else:
+		T_Count[2] = DataCount(5,DBCount3)
 	
 		#현재 페이지 위치정보
-	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-	PageInformation[MajorNumber][1] = PageNumber
+	if Mobile == 'full':
+		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
+	else:
+		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
 
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
-	for i in range(0,len(T_Count)):
-		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	
+	if Mobile == 'full':
+		for i in range(0,len(T_Count)):
+			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+
+	else :
+		for i in range(0,len(T_Count)):
+			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
+
 	#추천많이받은 순으로 보여주는 Board
+
 	BestBoard = BestBoardView()
 	
 	dic = {'user':User,
@@ -393,7 +474,7 @@ def BestBoardView():
 
 	return BestBoard
 
-def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
+def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mobile):
 	if pageinformation !=None:
 			User = user
 			PageInformation=pageinformation
@@ -578,35 +659,54 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount2)
+		if Mobile == 'full':
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount2)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount1)
+
 	else:
 		DBCount1=len(TotalBoard[0])
 		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount1)
+		if Mobile == 'full':
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount1)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount1)
+
 	DBCount3=len(TotalBoard[2])
-	T_Count[2] = DataCount(10,DBCount3)
-	
+	if Mobile == 'full':
+		T_Count[2] = DataCount(10,DBCount3)
+	else:
+		T_Count[2] = DataCount(5,DBCount3)
+
 
 	#현재 페이지 위치정보
-	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-	PageInformation[MajorNumber][1] = PageNumber
+	if Mobile == 'full':
+		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
+	else:
+		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
 
-	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
-	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
-	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
-
-	
-	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
-	
-	##Session Save
-	
-
-	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
-	for i in range(0,len(T_Count)):
-		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	if Mobile == 'full':
+		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
+		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
+		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+		for i in range(0,len(T_Count)):
+			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+
+	else :
+		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+		for i in range(0,len(T_Count)):
+			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
+
+	
 	#추천많이받은 순으로 보여주는 Board
 	BestBoard = BestBoardView()
 
@@ -623,7 +723,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 
 	return dic
 
-def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
+def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 	#login view에서 사용하는 MainPageView와 로그인 되었을때 mainPageView가 조금씩 달라서 설정
 	if pageinformation !=None:
 			User = user
@@ -696,24 +796,49 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount2)
+		if Mobile == 'full':
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount2)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount2)
 	else:
 		DBCount1=len(TotalBoard[0])
 		#DBCount2=Lecture.objects.filter(Q(Code__contains=CourseCode[0]) | Q(Code__contains= CourseCode[1]) | Q(Code__contains=CourseCode[2])| Q(Code__contains=CourseCode[3]) | Q(Code__contains=CourseCode[4]) | Q(Code__contains=CourseCode[5])).count()
-		T_Count[0] = DataCount(10,DBCount1)
-		T_Count[1] = DataCount(10,DBCount1)
+		if Mobile == 'full':
+			T_Count[0] = DataCount(10,DBCount1)
+			T_Count[1] = DataCount(10,DBCount1)
+		else:
+			T_Count[0] = DataCount(5,DBCount1)
+			T_Count[1] = DataCount(5,DBCount1)
 	DBCount3=len(TotalBoard[2])
-	T_Count[2] = DataCount(10,DBCount3)
+	if Mobile == 'full':	
+		T_Count[2] = DataCount(10,DBCount3)
+	else:
+		T_Count[2] = DataCount(5,DBCount3)
 	
-
 	#현재 페이지 위치정보
-	PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-	PageInformation[MajorNumber][1] = PageNumber
+	if Mobile == 'full':
+		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
+	else:
+		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
 
-	TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
-	TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
-	TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+	TotalCount=list()
+	if Mobile == 'full':
+		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
+		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
+		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+		for i in range(0,len(T_Count)):
+			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+
+	else :
+		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+		for i in range(0,len(T_Count)):
+			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
 
 	
 	#페이지에 나타나는 강의 추천된 Board를 평균에 맞춰서 계산
@@ -722,9 +847,8 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
 	
 
 	# 페이지 총 수(페이지 넘길 때)
-	TotalCount=list()
-	for i in range(0,len(T_Count)):
-		TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+	
+	
 	#추천많이받은 순으로 보여주는 Board
 	BestBoard = BestBoardView()
 

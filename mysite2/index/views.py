@@ -63,6 +63,7 @@ def Judgement(request): # 신고 게시판 기능
 
 @csrf_exempt
 def Page(request): #Main Page를 보여주는 함수 
+	mobile = request.flavour
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	try:
@@ -98,15 +99,15 @@ def Page(request): #Main Page를 보여주는 함수
 		#웹에 뿌려줄 template 종류 정하는 함수(functionhelper 참고)
 		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page))
+		template = MainPageView(request.user, request.session['PageInformation'],int(PostDic['Page']),int(Page),mobile)
 	elif PostDic['ProSelect'] == "1":
 		target = TargetTemplate(PostDic['Current'])
 		#메인에다가 강의 정보 뿌려주는 함수(functionhelper 참고)
-		template =  SelectProfessorView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
+		template =  SelectProfessorView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic,mobile)
 
 	else: #반대의 경우
 		target = TargetTemplate(PostDic['Current'])
-		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic)
+		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic,mobile)
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']
@@ -156,7 +157,7 @@ def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 def Search(request): #과목 검색 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-
+	Mobile = request.flavour
 	if request.method =="POST":
 		SearchData = request.POST['search']
 		SearchData.upper()
@@ -173,9 +174,11 @@ def Search(request): #과목 검색 기능
 			ps)물론 DB하나 더 만들면 더 간단한 알고리즘이 되겠지만 어차피 DB에서 한번더 불러야 하는건 마찬가지라 속도가 비슷할 거같아서
 			안만듬
 			"""
-			temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
+			if Mobile == "full":
+				temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
+			else:
+				temp=temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
 			for lec in temp:
-
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
 					LectureData[0].append(Lecture.objects.filter(CourseName=lec['CourseName'])[0])
 					total=0
@@ -189,9 +192,12 @@ def Search(request): #과목 검색 기능
 	
 		except:
 			LectureData[0]=None
-
-		DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
-		SearchCount=DataCount(10,DBCount)
+		if Mobile == "full":
+			DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
+			SearchCount=DataCount(10,DBCount)
+		else:
+			DBCount = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).count()
+			SearchCount=DataCount(5,DBCount)
 		
 		if DBCount != 0 : 
 			L_Data=PageView(LectureData)
@@ -200,9 +206,12 @@ def Search(request): #과목 검색 기능
 			L_Data[0]=None
 		PageInformation =[1,1,1]
 
-		PageInformation=FirstPageView(SearchCount)
-
-		T_Count = PageTotalCount(SearchCount,PageInformation)
+		if Mobile =="full":
+			PageInformation=FirstPageView(SearchCount)
+			T_Count = PageTotalCount(SearchCount,PageInformation)
+		else:
+			PageInformation=MobileFirstPageView(SearchCount)
+			T_Count = MobilePageTotalCount(SearchCount,PageInformation,3)
 
 		request.session['SearchPageInformation'] = PageInformation
 		request.session['SearchValue'] = SearchData
@@ -225,7 +234,7 @@ def Search(request): #과목 검색 기능
 def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-
+	Mobile = request.flavour
 	if request.POST['Page'] !="0":
 		cur_page = int(request.POST['Page'])
 	else:
@@ -236,17 +245,27 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	
 	PageInformation = request.session['SearchPageInformation']
 
-
-	DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
-	SearchCount = DataCount(10,DBCount)
-	PageInformation = CurrentPageView(SearchCount,cur_page)
-	PageInformation[1]=cur_page
-
+	if Mobile == 'full':
+		DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
+		SearchCount = DataCount(10,DBCount)
+	else :
+		DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
+		SearchCount = DataCount(5,DBCount)
+	
+	if Mobile == 'full':
+		PageInformation = CurrentPageView(SearchCount,cur_page)
+		PageInformation[1]=cur_page
+	else:
+		PageInformation = MobileCurrentPageView(SearchCount,cur_page)
+		PageInformation[1]=cur_page
 	
 	LectureData = [[]]
 	TotalAdd=[]
-	j=0
-	temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
+	if Mobile == 'full':
+		temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
+	else:
+		temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	
 	for lec in temp:
 				if lec['CourseName'] not in LectureData[0]:		
 					A=Lecture.objects.filter(CourseName=lec['CourseName'])		
@@ -263,9 +282,10 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 
 	L_Data=PageView(LectureData)
 	
-	
-	T_Count=PageTotalCount(SearchCount,PageInformation)
-		
+	if Mobile == 'full':
+		T_Count=PageTotalCount(SearchCount,PageInformation)
+	else:
+		T_Count=MobilePageTotalCount(SearchCount,PageInformation,3)
 
 	request.session['SearchPageInformation'] = PageInformation
 	

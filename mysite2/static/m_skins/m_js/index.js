@@ -24,20 +24,21 @@ $("div").on('click',"#cname",function(event){
         $(this).unbind("click");
         CurrentPage=$(this).parent().parent().parent().parent().parent().parent().attr("id");
         var Parent=$(this).parent().parent().parent();
-        var Code = Parent.find("[id=ccode]").text();
+        var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/Select_Course/",
-              data : {'Course' : $(this).text(),
-                      'Page': "0",
+            { url : "/Select_Professor/",
+              data : {
+                      'Course' : $(this).text(),
+                      'Page': "1",
                       'Current':CurrentPage,
                       'Code':Code,
                       'Professor':prof,
                       'Period':period,
-                      'Semester':semester
-
+                      'Semester':semester,
+                      'ProSelect':"1"
                     },
               async : false,
               type : "POST",
@@ -71,21 +72,20 @@ $("div").on('click',"#cname",function(event){
 
         var Parent=$(this).parent();
         var Course = Parent.find("[id=cname]").text();
-        var Code = Parent.find("[id=ccode]").text();
+        var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
         $.ajax(
-            { url : "/Select_Professor/",
-              data : {'Course' : Course,
+            { url : "/Select_Course/",
+              data : {
+                      'Course' : Course,
                       'Page': "0",
                       'Current':CurrentPage,
                       'Code':Code,
                       'Professor':prof,
                       'Period':period,
-                      'Semester':semester,
-                      'ProSelect':"1"
-
+                      'Semester':semester
                     },
               async : false,
               type : "POST",
@@ -185,7 +185,7 @@ $("div").on('click',"#cname",function(event){
     });
 
   
-    $('div').on('click','#ProPrevious',function(){
+    $('div').on('click','#CoursePrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
@@ -195,7 +195,7 @@ $("div").on('click',"#cname",function(event){
               data : {'Page': $(this).attr("name"),
                       'Current':CurrentPage,
                       'Course':CurrentCourse,
-                      'ProSelect':1
+     
                     },
               
               datatype:"json",
@@ -225,11 +225,11 @@ $("div").on('click',"#cname",function(event){
     });
   
 
-    $('div').on('click',"#ProNext",function(){
+    $('div').on('click',"#ProPage",function(event){
           event.stopPropagation();
           $(this).unbind("click");
+
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -266,11 +266,10 @@ $("div").on('click',"#cname",function(event){
 
     });
 
-    $('div').on('click','#ProPrevious',function(){
+    $('div').on('click','#ProNext',function(){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().parent().attr("id");
-          alert(CurrentPage);
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -284,7 +283,7 @@ $("div").on('click',"#cname",function(event){
               type : "POST",
               async : false,
               success:function(resp){     
-                   if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
+                  if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPageNation"|| CurrentPage == "SecondPage")
                         $('#SecondPage').html(resp);
@@ -309,7 +308,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#ProPrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().attr("id");
+          var CurrentPage=$(this).parent().parent().parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -323,13 +322,14 @@ $("div").on('click',"#cname",function(event){
               type : "POST",
               async : false,
               success:function(resp){     
-             
-                  if(CurrentPage =="FirstPage")
+                  if(CurrentPage =="FirstPageNation" || CurrentPage == "FirstPage")
                        $('#FirstPage').html(resp);
-                  else if(CurrentPage =="SecondPage")
+                  else if(CurrentPage =="SecondPageNation"|| CurrentPage == "SecondPage")
                         $('#SecondPage').html(resp);
-                  else
+                  else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
+                  else
+                    $("#Search_Page").html(resp);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -342,24 +342,44 @@ $("div").on('click',"#cname",function(event){
 
 
     });
+    
+    $('div').on('click',"#BackButton",function(event){
+          event.stopPropagation();
+          $(this).unbind("click");
 
-$('div').on('click',"#Close",function(event){
-         event.stopPropagation();
-          $(this).unbind("click");
-        var Find = $(this).parent().find("[id=Open]");
-        alert("줄이기");
-        $(this).hide();
-        $(Find).show();
+          var CurrentPage=$(this).parent().attr("id");
+          var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
+        $.ajax(
+            { url : "/Page/",
+              data : {'Page': "0",
+                      'Current':CurrentPage,
+                      
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async : false,
+              success:function(resp){     
+                  if(CurrentPage =="FirstPage")
+                       $('#FirstPage').html(resp);
+                  else if(CurrentPage =="SecondPage")
+                        $('#SecondPage').html(resp);
+                  else
+                        $('#ThirdPage').html(resp);
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
     });
-    $('div').on('click',"#Open",function(event){
-       event.stopPropagation();
-          $(this).unbind("click");
-        var Find = $(this).parent().find("[id=Close]");
-        
-        alert("더보기");
-        $(this).hide();
-        $(Find).show();
-    });    
+
+
 
     $(document).keydown(function(e){
 

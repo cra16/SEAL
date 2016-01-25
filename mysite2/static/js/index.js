@@ -24,7 +24,7 @@ $("div").on('click',"#cname",function(event){
         $(this).unbind("click");
         CurrentPage=$(this).parent().parent().parent().parent().parent().parent().attr("id");
         var Parent=$(this).parent().parent().parent();
-        var Code = Parent.find("[id=ccode]").text();
+        var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
         var period = Parent.find("[id=period]").val();
         var semester = Parent.find("[id=semester]").val();
@@ -32,7 +32,7 @@ $("div").on('click',"#cname",function(event){
             { url : "/Select_Professor/",
               data : {
                       'Course' : $(this).text(),
-                      'Page': "0",
+                      'Page': "1",
                       'Current':CurrentPage,
                       'Code':Code,
                       'Professor':prof,

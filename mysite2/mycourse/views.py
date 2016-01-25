@@ -44,6 +44,9 @@ def MyCoursePage(request,Page):
 			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
 		except:
 			RecommendData = None
+		if TempTotal.Total_Count==0:
+			RecommendPage.append(RecommendData)
+			break
 		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
 		RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
 		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
@@ -65,6 +68,10 @@ def MyCoursePage(request,Page):
 					LikeData.Total_Helper=5
 					LikeData.Total_Exam =5
 					LikeData.Total_Homework = 5
+			if TempTotal.Total_Count==0:
+				LikePage.append(LikeData)
+				break
+	
 			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
 			LikeData.Total_Reliance =LikeData.Total_Reliance/LikeData.Total_Count
 			LikeData.Total_Question=LikeData.Total_Question/LikeData.Total_Count

@@ -411,16 +411,16 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:
 				On=0;
 				ListProfessor =list()
-				for j in range(0,len(TotalBoard[0])):
+				for j in range(0,len(TotalBoard[i])):
 					if lec.Professor not in ListProfessor:
-						if lec.Professor == TotalBoard[0][j].Course.Professor: 
+						if lec.Professor == TotalBoard[i][j].Course.Professor: 
 								ListProfessor.append(lec.Professor)
 								On=1
 								break
@@ -454,30 +454,30 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 						TempTotal.Total_Exam += T.Total_Exam
 						TempTotal.Total_Homework +=T.Total_Homework
 					if TempTotal.Total_Count==0:
-						TotalBoard[0].append(TempTotal)
-						break
+						TotalBoard[i].append(TempTotal)
+						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
 					TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
 					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-					TotalBoard[0].append(TempTotal)
+					TotalBoard[i].append(TempTotal)
 			i+=1
-	
+
 
 	else:		
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:
 				On=0;
-				ListCode =list()
-				for j in range(0,len(TotalBoard[1])):
-					if lec.Code not in ListCode:
-						if lec.Professor == TotalBoard[1][j].Course.Professor:
-								ListCode.append(lec.Code)
+				ListProfessor =list()
+				for j in range(0,len(TotalBoard[i])):
+					if lec.Professor not in ListProfessor:
+						if lec.Professor == TotalBoard[i][j].Course.Professor: 
+								ListProfessor.append(lec.Professor)
 								On=1
 								break
 				if On==0:
@@ -510,16 +510,15 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic):
 						TempTotal.Total_Exam += T.Total_Exam
 						TempTotal.Total_Homework +=T.Total_Homework
 					if TempTotal.Total_Count==0:
-						TotalBoard[1].append(TempTotal)
-						break
+						TotalBoard[i].append(TempTotal)
+						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
 					TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
 					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-					
-					TotalBoard[1].append(TempTotal)
+					TotalBoard[i].append(TempTotal)
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
@@ -644,7 +643,7 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
 	TotalBoard = [[],[],[]]
 	if CourseCode[0] !="ENG":
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:
@@ -663,7 +662,7 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic):
 
 	else:		
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
-		#temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester'))
 		i=0
 		for t in temp:
 			for lec in t:

@@ -40,7 +40,7 @@
        
      
         <span id="cprof">{{CourseBoard.Course.Professor}} 교수님</span></p>
-        <a href="/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">추천하기!</button></a>
+        <a href="/Recommend/{{CourseBoard.Course.id}}"><button class="btn btn-danger">평가하기!</button></a>
         <a id="listenButton" name = "{{CourseBoard.Course.id}}"><button class="btn btn-info">듣고싶어!</button></a>
        
       </div>
@@ -109,10 +109,10 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
+              <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
             </div>
             <div id="rchoice" class="right floated right aligned eight wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해 할 수 있도록 설명하심">자세함</a>
+              <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 강의하심">자세함</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
               <input type="text" id="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C"/>
@@ -126,10 +126,10 @@
           <div class="ui grid">
             <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식</a>
+              <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
             </div>
             <div id="rchoice" class="right floated right aligned eight wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식</a>
+              <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
               <input type="text" id="sl5" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl5C"/>
@@ -239,10 +239,10 @@
             <div class="ui grid">
               <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
               <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식</a>
+                <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
               </div>
               <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식</a>
+                <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
                 <input type="text" id="sl05" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
@@ -318,10 +318,10 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
               <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 간단히 요약해서 설명하심">요약적</a>
+                <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
               </div>
               <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의가 학생들이 이해할 수 있도록 자세히 설명하심">자세함</a>
+                <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
                 <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}4C"/>
@@ -335,10 +335,10 @@
             <div class="ui grid">
               <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
               <div id="lchoice" class="left floated left aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="주로 에세이 형식으로 나타난다">주관식</a>
+                <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
               </div>
               <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식</a>
+                <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
                 <input type="text" id="sl{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}5C"/>

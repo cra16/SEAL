@@ -572,7 +572,7 @@
                     
       <h3><a href="#"><span id="name"></span></a> <span id="detail"><br /><span id="year"></span>학번 / <span id="major"></span></span></h3>
 
-      <p><span id="label"><a href="#">내가 추천한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
+      <p><span id="label"><a href="#">내가 평가한 강의</a> :</span> <span id="num"><span id="num1"></span>개</span></p>
 
       <p id="last"><span id="label"><a href="#">듣고 싶은 강의</a> :</span> <span id="num"><span id="num2"></span>개</span></p>
 
@@ -617,19 +617,19 @@
         <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename1">강의명</span><br />
           <span id="pname1">교수명</span><br />
-          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">추천개수</span> Seals</span>
+          <span id="rnumall1"><i class="glyphicon glyphicon-heart"></i> <span id="rnum1">평가개수</span> Seals</span>
         </p>
 
         <p id="second-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename2">강의명</span><br />
           <span id="pname2">교수명</span><br />
-          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">추천개수</span> Seals</span>
+          <span id="rnumall2"><i class="glyphicon glyphicon-heart"></i> <span id="rnum2">평가개수</span> Seals</span>
         </p>
 
         <p id="third-place" class="col-md-9 col-sm-9 col-xs-9">
           <span id="coursename3">강의명</span><br />
           <span id="pname3">교수명</span><br />
-          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">추천개수</span> Seals</span>
+          <span id="rnumall3"><i class="glyphicon glyphicon-heart"></i> <span id="rnum3">평가개수</span> Seals</span>
         </p>
                     
       </span>

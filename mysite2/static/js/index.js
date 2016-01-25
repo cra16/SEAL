@@ -378,8 +378,6 @@ $("div").on('click',"#cname",function(event){
             
           });
 
-     
-
 
 
     });

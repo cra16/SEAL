@@ -25,9 +25,10 @@
         <div class="box" id="mycontent-left-register">
             <h class="title1 hidden-xs">SEAL</h>
             <p class="title2 visible-xs">SEAL</p>
-            <p class="detail">Students' Excellent Achievements in Learning</p>
+            <p class="detail">Students' Excellent Achievement</p>
+            <p class="detail"> in Learning</p>
             <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
-            <p class="detail2">강의추천 및 강의정보 열람서비스입니다.</p>
+            <p class="detail2">강의추천 및 강의정보 열람 서비스 입니다.</p>
         </div>
          
 
@@ -37,16 +38,14 @@
           <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
 
             <div class="form-group" method="post" action="/mysite2/Register">
-            <h2>입력값이 올바르지 않습니다.</h2>
-            <h3> 1. 학번이 올바른지 확인하세요. <br/>
-             2. 히즈넷 아이디를 확인하세요. <br/>
-             3. 히즈넷 비밀번호를 확인하세요. </h3>
+            <h3> 중복된 회원입니다. 이미 가입된 회원입니다. <br/>
+              문의: cra.handong@gmail.com </h3>
           
              <p>&nbsp;</p>
               <div class="ui medium buttons">
-                  <a href = "/mysite2/Confirm"><input type="button" id="return" value="돌아가기" class="ui blue button"></a>
+                  <input type="button" id="return" value="돌아가기" class="ui blue button" onclick="window.history.back();">
                   <div class="or"></div>
-                  <a href = "/mysite2"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
+                  <a href = "/"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
               </div>
 
             </div>

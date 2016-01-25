@@ -355,7 +355,7 @@ for(var i=0; i<ccode.length; i++)
                     datatype:"json",
                     type : "POST",
                     success:function(resp){     
-                        alert("좋아하는 강의로 등록 되었습니다.")
+                        alert("듣고 싶은 강의로 등록 되었습니다.")
                       },
                       error: function(xhr, option, error){
                         alert(xhr.status); //오류코드

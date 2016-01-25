@@ -55,8 +55,12 @@ def loginCheck(request):
 			titles = soup.find_all(class_='tblcationTitlecls')
 			# Save the information
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
-			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+			temp_major = titles[11].next_sibling.next_sibling.text.split()
+			first_major = temp_major[0][:-1]
+			try:
+				second_major = temp_major[1]
+			except IndexError as e:
+				second_major = None
 
 			try:
 				user = User.objects.filter(username=stu_num)[0]
@@ -177,18 +181,18 @@ def HisnetCheck(request):
 			# Save the information
 			stu_name = titles[0].next_sibling.next_sibling.text[:-1]
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			stu_major = titles[11].next_sibling.next_sibling.text[:-2]
-			stu_major2 = titles[13].next_sibling.next_sibling.text[:-2]
+			temp_major = titles[11].next_sibling.next_sibling.text.split()
+			first_major = temp_major[0][:-1]
 
 			try:
-				second_major = stu_major2.strip()
-			except:
+				second_major = temp_major[1]
+			except IndexError as e:
 				second_major = None
 
 			ctx = {
 				'stu_num': stu_num,
 				'stu_name': stu_name,
-				'first_major': stu_major,
+				'first_major': first_major,
 				'second_major': second_major,
 			}
 

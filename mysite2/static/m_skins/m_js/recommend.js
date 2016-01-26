@@ -98,11 +98,11 @@ $('#enable5').on('click', function(){
 
 $('#enable6').on('click', function(){
   if(checked[5] == "False"){
-    $('#ButtonCheck').val("True")
+    $('#ButtonCheck').val("False")
     checked[5] = "True";
     $('#enable6').css('background-color', '#FFEB3B');
   } else {
-    $('#ButtonCheck').val("False")
+    $('#ButtonCheck').val("True")
     checked[5] = "False";
     $('#enable6').css('background-color', '#ccc');
   }

@@ -524,6 +524,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Exam = 0
 					TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
+					TempTotal.Total_StarPoint = 0
 					
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
@@ -533,6 +534,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Question += T.Total_Question
 						TempTotal.Total_Exam += T.Total_Exam
 						TempTotal.Total_Homework +=T.Total_Homework
+						TempTotal.Total_StarPoint += T.Total_StarPoint
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
@@ -542,6 +544,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
 					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 			i+=1
 
@@ -580,6 +583,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Exam = 0
 					TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
+					TempTotal.Total_StarPoint=0
 					
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
@@ -589,6 +593,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Question += T.Total_Question
 						TempTotal.Total_Exam += T.Total_Exam
 						TempTotal.Total_Homework +=T.Total_Homework
+						TempTotal.Total_StarPoint += T.Total_StarPoint
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
@@ -598,6 +603,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
 					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
@@ -634,6 +640,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Exam = 0
 						TempTotal.Total_Homework = 0
 						TempTotal.Total_Count =0
+						TempTotal.Total_StarPoint=0
 						
 						for T in TotalDic:
 							TempTotal.Total_Count += T.Total_Count
@@ -643,6 +650,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Question += T.Total_Question
 							TempTotal.Total_Exam += T.Total_Exam
 							TempTotal.Total_Homework +=T.Total_Homework
+							TempTotal.Total_StarPoint += T.Total_StarPoint
 						if TempTotal.Total_Count==0:
 							TotalBoard[2].append(TempTotal)
 							break
@@ -652,6 +660,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 						TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
 						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[]]

@@ -173,13 +173,8 @@
         <h3><b>개인 : </b></h3>
 
           {%for MyCourseBoard in MyCourseBoard%}
-<<<<<<< HEAD
-          <div id="recommending" class="ui column">          
-            <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
-=======
           <div id="recommending" class="ui column">
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
->>>>>>> 900bdd0717e995ae5b86b05a08ef10130727ece4
             <div id="blankspace" class="ui column"></div>
 
             <br>
@@ -274,13 +269,8 @@
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
-<<<<<<< HEAD
-            <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
-=======
             <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="floated left aligned two wide column" style="margin-left:-15px; margin-top:10px;"><span class="starvalue"></span></div>
->>>>>>> 569c66d8c0b6f126de446b1f006956436b810a46
+           <div class="floated left aligned two wide column" style="margin-left:-15px; margin-top:10px;"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
          
           </div>
 
@@ -295,11 +285,7 @@
 
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>
-<<<<<<< HEAD
-          <div id="recommending" class="ui column">            
-=======
           <div id="recommending" class="ui column">
->>>>>>> 900bdd0717e995ae5b86b05a08ef10130727ece4
             <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 

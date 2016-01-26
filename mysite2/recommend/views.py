@@ -89,7 +89,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Question=5
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
-			new_Satisfy = 0.0
+			new_Satisfy = 2.0
 			
 #			new_Homework=5
 			

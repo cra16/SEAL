@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <div class="ui column">
         <h3><b>개인 : </b></h3>
          {%for MyCourseBoard in MyCourseBoard%}
@@ -66,7 +67,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
+                <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}4C"/>
               </div>
             </div>
 
@@ -83,7 +84,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="주로 선택지 형식으로 나타난다">객관식</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
+                <input type="text" id="sl{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}5C"/>
               </div>
             </div>
 
@@ -194,7 +195,7 @@
            
         
       </div>
-      {% if OtherCount.0 != None%}
+      {%if OtherCount.0 != None%}
 		<div class="ui section divider"></div>
       <center><div id = "CoursePagenation" class="ui borderless pagination menu">
               <a id ="CoursePrevious" name = "{{PageInformation.0}}" class="item" >

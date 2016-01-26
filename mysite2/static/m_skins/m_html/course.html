@@ -174,9 +174,10 @@
       <div id="CoursePage">
       <div class="ui column">
         <h3><b>개인 : {{MyCourseBoard.Reliance}}</b></h3>
+
           {%for MyCourseBoard in MyCourseBoard%}
-          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
           <div id="recommending" class="ui column">
+          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">
@@ -239,7 +240,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl04C"/>
+                <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}4C"/>
               </div>
             </div>
 
@@ -256,7 +257,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl05" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl05C"/>
+                <input type="text" id="sl{{forloop.counter}}5" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Exam}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}5C"/>
               </div>
             </div>
 
@@ -265,7 +266,7 @@
                   <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
-	        {% endfor %} 
+	        {%endfor%} 
 		</div>
  
 

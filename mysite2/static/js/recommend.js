@@ -126,3 +126,20 @@ for(var i=0; i<ccode.length; i++)
 }
 
 });
+
+$(document).ready(function(){
+
+  $('.stars').on("click", "input",function(event){
+        event.stopPropagation();
+        $(this).unbind("click");
+        var splitdata = $(this).attr("id");
+ 
+        splitdata = splitdata.split("-");
+        var starcount = splitdata[1];
+   
+        $("#StarValue").val(starcount);
+
+
+
+    });
+ });

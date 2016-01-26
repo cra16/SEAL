@@ -13,6 +13,7 @@ $.fn.slider.Constructor.prototype.enable = function () {
   }
 }
 
+
 var sl1 = $('#sl1').slider(),
     sl2 = $('#sl2').slider(),
     sl3 = $('#sl3').slider(),
@@ -126,6 +127,24 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
+
+
+});
+
+
+$(document).ready(function(){
+
+   $('.stars').on("click", ".star",function(event){
+        event.stopPropagation();
+        var splitdata = $(this).attr("id");
+        splitdata = splitdata.split("-");
+        var starcount = splitdata[1];
+        alert("GG");
+        $("#StarValue").val(starcount);
+
+
+
+    });
 
 
 });

@@ -96,11 +96,11 @@ $('#enable5').on('click', function(){
 });
 
 $('#enable6').on('click', function(){
-  if($('#ButtonCheck').val() == "False"){
-    $('#ButtonCheck').val("True")
+  if($('#ButtonCheck').val() == "True"){
+    $('#ButtonCheck').val("False")
     $('#enable6').css('background-color', '#ccc');
   } else {
-    $('#ButtonCheck').val("False")
+    $('#ButtonCheck').val("True")
     $('#enable6').css('background-color', '#FFEB3B');
   }
 });

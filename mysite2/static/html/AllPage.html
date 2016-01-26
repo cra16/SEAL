@@ -23,17 +23,17 @@
                 <span id="semester">{{PBoard3.Course.Semester}}학기</span>
                 <p><span id="professor">{{PBoard3.Course.Professor}} 교수님</span></p>
 
-                <br/><br/>
+                <br/>
 
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#9acd32" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
-         
+           <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->         
               
 
            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;"><b>Comment</b>
@@ -90,12 +90,14 @@
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a  href ="/CourseProfessor/{{PBoard3.Course.id}}"><span  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
-                <p><a><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></a></p>                
+                <p><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>                
               </div>
             </div>
 
                <div class="center aligned sixteen wide column">
-                <br><br>
+                <br>
+                <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -156,13 +158,16 @@
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a href="/mysite2/Course/{{PBoard3.Course.id}}"><span  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
-                <p><a><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></a></p>
-                <p><a><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></a></p>
+                <p><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>
+                <p><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
 
               </div>
             </div>
 
               <div class="center aligned sixteen wide column">
+                <br>
+                <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />

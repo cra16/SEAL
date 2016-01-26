@@ -66,12 +66,14 @@
   
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
                 <p><a  href ="/CourseProfessor/{{PBoard2.Course.id}}" href="/CourseProfessor/{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
-                <p><a><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></a></p>
+                <p><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></p>
               </div>
             </div>
 
               <div class="center aligned sixteen wide column">
-                  <br><br>
+                  <br>
+                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->
+                  <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -139,7 +141,9 @@
             </div>
 
               <div class="center aligned sixteen wide column">
-                  <br><br>
+                  <br>
+                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->
+                  <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />

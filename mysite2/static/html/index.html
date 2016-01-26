@@ -166,12 +166,13 @@
                 <span id="semester">{{PBoard3.Course.Semester}}학기</span>
                 <p><span id="professor">{{PBoard3.Course.Professor}} 교수님</span></p>
 
-                <br><br>
+                <br>
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#9acd32" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
+           <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"><span style="width:63.6px"></span></span></div>  <!-- width = 평균 별점 * 16 px -->
          
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>

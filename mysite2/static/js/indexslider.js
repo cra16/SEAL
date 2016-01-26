@@ -329,9 +329,4 @@ $('#sk105').slider('disable');
 
 $("[data-toggle=tooltip]").tooltip();
 
-
-
-
-
-
 });

@@ -221,6 +221,7 @@ $('#sa103').slider('disable');
 $('#sa104').slider('disable');
 $('#sa105').slider('disable');
 
+
 var sl1 = $('#sl1').slider(),
     sl2 = $('#sl2').slider(),
     sl3 = $('#sl3').slider(),
@@ -237,7 +238,7 @@ $('#sl6').slider('disable');
 
 
 
-var	ccode = document.getElementsByName('ccode')
+var ccode = document.getElementsByName('ccode')
 var cname = document.getElementsByName('cname')
 var cprof = document.getElementsByName('cprof')
 
@@ -249,9 +250,9 @@ var elikenum1 = document.getElementById('likenum1');
 
 for(var i=0; i<ccode.length; i++)
 {
-	ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
-	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
-	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
+  ccode[i].textContent = document.getElementsByName('ccode')[i].innerHTML;
+  cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
+  cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
           var CurrentPage=$(this).parent().attr("id")

@@ -26,7 +26,6 @@
 }
 
 #recommending {
-	
 	padding: 20px;
 	border: 1px solid #87cefa;
 	border-radius: 10px;
@@ -39,61 +38,6 @@
 	text-decoration: none;
 	color: black;
 }
-
-#lchoice {
-	margin-left: -5px;
-	margin-top: -8px;
-	margin-bottom: -8px;
-}
-
-#rchoice {
-	margin-right: -5px;
-	margin-top: -10px;
-	margin-bottom: -10px;
-}
-
-#sldbr {
-	margin-left: 68px;
-	margin-top: -45px;
-	margin-bottom: -45px;
-}
-
-#avgsldbr {
-	margin-left: 80px;
-	margin-top: -45px;
-	margin-bottom: -45px;
-}
-
-#mysldbr {
-	margin-left: 58px;
-	margin-top: -45px;
-	margin-bottom: -45px;
-}
-
-#tooltips{
-	text-decoration: none;
-	color: black;
-}
-
-#firstcolumn{
-	color: #ff7f50;
-}
-#secondcolumn{
-	color: #9370db;
-}
-#thirdcolumn{
-	color: #2e8b57;
-}
-#fourthcolumn{
-	color: #008b8b;
-}
-#fifthcolumn{
-	color: #808000;
-}
-#sixthcolumn{
-	color: #ba55d3;
-}
-
 
 #firstcolumn{
 	color: #ff7f50;

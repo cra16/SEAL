@@ -49,8 +49,8 @@
 
       {% for PBoard1 in PageBoard.0%}
                     
-         <div class="column">
             <div class="ui raised segment">
+
               <div class="sixteen wide column">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
@@ -62,14 +62,16 @@
               <div class="sixteen wide column">
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
-                <p><a href="/CourseProfessor/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                <p><a style="cursor:pointer" href="/CourseProfessor/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                 <p><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>
             
               </div>
             </div>
               
                <div class="center aligned sixteen wide column">
-                <br></br>
+                <br>
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -84,9 +86,11 @@
                   <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
                </div>
             </div>
-          </div>
+          
       
             {%endfor%}
+            <div class="ui divider"></div>
+
             
             <center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
               <a id ="ProPrevious" name="{{PageInformation.0.0}}" class="item" >
@@ -110,7 +114,6 @@
             </div></center>
       {%else%}
       {% for PBoard1 in PageBoard.0%}      
-          <div class="column">
             <div class="ui raised segment">
               <div class="sixteen wide column">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
@@ -125,7 +128,7 @@
               <div class="sixteen wide column">
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
-                <p><a href="/Course/Period{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                <p><a style="cursor:pointer" href="/Course/Period{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                 <p><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>
                  <p><span id="csem1" name = "cprof">{{PBoard1.Course.Semester}} 학기</span></p>
             
@@ -133,7 +136,9 @@
             </div>
               
                <div class="center aligned sixteen wide column">
-                <br></br>
+                <br>
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -148,7 +153,7 @@
                   <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
                </div>
             </div>
-          </div>
+          
 
             {%endfor%}
 

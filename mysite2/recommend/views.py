@@ -82,14 +82,15 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 		
 		except:
+
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5
 			new_Reliance=5
 			new_Helper=5
 			new_Question=5
 			new_Exam=5
-			new_Check = request.POST['ButtonCheck'] =="True" and True or False
-			new_Satisfy = 2.0
+			new_Check = request.POST['ButtonCheck'] == "True" and True or False
+			new_Satisfy = float(request.POST['StarValue'])
 			
 #			new_Homework=5
 			

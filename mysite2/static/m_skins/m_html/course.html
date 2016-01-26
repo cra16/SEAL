@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/course.css" %}">
     <script type="text/javascript" src="{% static "m_skins/m_js/course.js" %}">history.go(-2);</script>
+    <script type="text/javascript" src="{% static "m_skins/m_js//index.js" %}"></script>
   {%endblock%}  
   </head>
 
@@ -141,7 +142,7 @@
 
           <div class="ui grid">
             <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>
-            <div class="right floated center aligned six wide column" style="margin-right:50px;"><span class="starvalue"></span></div>
+            <div class="right floated center aligned six wide column" style="margin-right:50px;"><span class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
          
           </div>
 
@@ -267,7 +268,7 @@
            {%endif%}
 
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="center aligned two wide column"><span class="starvalue"></span></div>
+           <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
          
           </div>
 
@@ -378,7 +379,7 @@
            {%endif%}
 
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="center aligned two wide column"><span class="starvalue"></span></div>
+           <div class="center aligned two wide column"><span class="starvalue">{{OtherBoard.StarPoint}}</span></div>
          
           </div>
 

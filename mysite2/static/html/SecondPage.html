@@ -72,7 +72,7 @@
 
               <div class="center aligned sixteen wide column">
                   <br>
-                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard2.StarPoint}}</span></div> 
+                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard2.Total_StarPoint}}</span></div> 
                   <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>
@@ -129,7 +129,7 @@
                 <center><button id="likebutton" name = "{{PBoard2.Course.id}}" >
                   <i class="glyphicon glyphicon-heart"><h5 style="margin:-33px; font-family:fantasy; color:yellow;">&nbsp;&nbsp;Click</h5></i></button>
                 </center>
-                <center style="margin-top:16px"><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard1.Total_Count}}</span> SEALS</center>
+                <center style="margin-top:16px"><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard2.Total_Count}}</span> SEALS</center>
               </div>
 
               <div class="sixteen wide column">
@@ -144,7 +144,7 @@
 
               <div class="center aligned sixteen wide column">
                   <br>
-                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard2.StarPoint}}</span></div>  
+                  <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard2.Total_StarPoint}}</span></div>  
                   <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>

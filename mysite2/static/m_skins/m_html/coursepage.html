@@ -1,10 +1,9 @@
 {% load staticfiles %}
 <div class="ui column">
         <h3><b>개인 : </b></h3>
-         {%for MyCourseBoard in MyCourseBoard%}
-		<div id="recommending" class="ui column">
-        <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>          
+         {%for MyCourseBoard in MyCourseBoard%}        
           <div id="recommending" class="ui column">
+            <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>          
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">
@@ -114,9 +113,9 @@
       
 
 		{%for OtherBoard in OtherCourseBoard%}
-          <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}</b></h4>
+          <div id="h_outersectiondivider" class="ui section divider"></div>          
           <div id="recommending" class="ui column">            
+            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">

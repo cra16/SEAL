@@ -57,11 +57,11 @@
           <div id="blankspace" class="ui column"></div>
 
           <div class="ui grid">
-            <div id="firstcolumn" class="left floated left aligned sixteen wide column">진도 속도</div>
-            <div id="lchoice" class="left floated left aligned eight wide column">
+            <div id="firstcolumn" class="floated center aligned sixteen wide column">진도 속도</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
             </div>
-            <div id="rchoice" class="right floated right aligned eight wide column">
+            <div id="rchoice" class="right floated left aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
@@ -74,11 +74,11 @@
 
 
           <div class="ui grid">
-            <div id="secondcolumn" class="left floated left aligned sixteen wide column">교재 사용도</div>
-            <div id="lchoice" class="left floated left aligned eight wide column">
+            <div id="secondcolumn" class="left floated center aligned sixteen wide column">교재 사용도</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
             </div>
-            <div id="rchoice" class="right floated right aligned eight wide column">
+            <div id="rchoice" class="right floated left aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
@@ -91,11 +91,11 @@
 
 
           <div class="ui grid">
-            <div id="thirdcolumn" class="left floated left aligned sixteen wide column">과 내/외 도움</div>
-            <div id="lchoice" class="left floated left aligned eight wide column">
+            <div id="thirdcolumn" class="left floated center aligned sixteen wide column">과 내/외 도움</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
             </div>
-            <div id="rchoice" class="right floated right aligned eight wide column">
+            <div id="rchoice" class="right floated left aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
@@ -108,11 +108,11 @@
 
 
           <div class="ui grid">
-            <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
-            <div id="lchoice" class="left floated left aligned eight wide column">
+            <div id="fourthcolumn" class="left floated center aligned sixteen wide column">강의 방식</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
             </div>
-            <div id="rchoice" class="right floated right aligned eight wide column">
+            <div id="rchoice" class="right floated left aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 강의하심">자세함</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
@@ -125,11 +125,11 @@
 
 
           <div class="ui grid">
-            <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
-            <div id="lchoice" class="left floated left aligned eight wide column">
+            <div id="fifthcolumn" class="left floated center aligned sixteen wide column">시험 방식</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
             </div>
-            <div id="rchoice" class="right floated right aligned eight wide column">
+            <div id="rchoice" class="right floated left aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
             </div>
             <div id="avgsldbr" class="center aligned eight wide column">
@@ -141,8 +141,13 @@
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
           <div class="ui grid">
+<<<<<<< HEAD
             <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>
             <div class="right floated center aligned six wide column" style="margin-right:50px;"><span class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
+=======
+            <div class="left floated right aligned seven wide column" style="color:orange"><h4><b>만족도</b></h4></div>
+            <div class="right floated left aligned nine wide column" style="margin-top:10px;"><span class="starvalue"></span></div>
+>>>>>>> 569c66d8c0b6f126de446b1f006956436b810a46
          
           </div>
 
@@ -176,12 +181,13 @@
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
+            <br>
             <div class="ui grid">
-              <div id="firstcolumn" class="left floated left aligned sixteen wide column">진도 속도</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="firstcolumn" class="left floated center aligned sixteen wide column">진도 속도</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips"  data-toggle="tooltip" title="강의속도가 느림">느림</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
@@ -194,12 +200,12 @@
 
 
             <div class="ui grid">
-              <div id="secondcolumn" class="left floated left aligned sixteen wide column">교재 사용도</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="secondcolumn" class="left floated center aligned sixteen wide column">교재 사용도</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
-                <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 많음">많음</a>
+              <div id="rchoice" class="right floated left aligned four wide column">
+                <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
                 <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
@@ -211,11 +217,11 @@
 
 
             <div class="ui grid">
-              <div id="thirdcolumn" class="left floated left aligned sixteen wide column">과 내/외 도움</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="thirdcolumn" class="left floated center aligned sixteen wide column">과 내/외 도움</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
@@ -228,11 +234,11 @@
 
 
             <div class="ui grid">
-              <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="fourthcolumn" class="left floated center aligned sixteen wide column">강의 방식</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
@@ -245,11 +251,11 @@
 
 
             <div class="ui grid">
-              <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="fifthcolumn" class="left floated center aligned sixteen wide column">시험 방식</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
@@ -267,8 +273,13 @@
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
+<<<<<<< HEAD
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
+=======
+            <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+           <div class="floated left aligned two wide column" style="margin-left:-15px; margin-top:10px;"><span class="starvalue"></span></div>
+>>>>>>> 569c66d8c0b6f126de446b1f006956436b810a46
          
           </div>
 
@@ -288,11 +299,11 @@
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">
-              <div id="firstcolumn" class="left floated left aligned sixteen wide column">진도 속도</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="firstcolumn" class="left floated center aligned sixteen wide column">진도 속도</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
@@ -305,11 +316,11 @@
 
 
             <div class="ui grid">
-              <div id="secondcolumn" class="left floated left aligned sixteen wide column">교재 사용도</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="secondcolumn" class="left floated center aligned sixteen wide column">교재 사용도</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
@@ -322,11 +333,11 @@
 
 
             <div class="ui grid">
-              <div id="thirdcolumn" class="left floated left aligned sixteen wide column">과 내/외 도움</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="thirdcolumn" class="left floated center aligned sixteen wide column">과 내/외 도움</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
@@ -339,11 +350,11 @@
 
 
             <div class="ui grid">
-              <div id="fourthcolumn" class="left floated left aligned sixteen wide column">강의 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="fourthcolumn" class="left floated center aligned sixteen wide column">강의 방식</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
@@ -356,11 +367,11 @@
 
 
             <div class="ui grid">
-              <div id="fifthcolumn" class="left floated left aligned sixteen wide column">시험 방식</div>
-              <div id="lchoice" class="left floated left aligned eight wide column">
+              <div id="fifthcolumn" class="left floated center aligned sixteen wide column">시험 방식</div>
+              <div id="lchoice" class="left floated right aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제된다">주관식</a>
               </div>
-              <div id="rchoice" class="right floated right aligned eight wide column">
+              <div id="rchoice" class="right floated left aligned four wide column">
                 <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제된다">객관식</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
@@ -378,8 +389,13 @@
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
+<<<<<<< HEAD
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="center aligned two wide column"><span class="starvalue">{{OtherBoard.StarPoint}}</span></div>
+=======
+            <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+           <div class="floated left aligned two wide column" style="margin-left:-15px; margin-top:10px;"><span class="starvalue"></span></div>
+>>>>>>> 569c66d8c0b6f126de446b1f006956436b810a46
          
           </div>
 

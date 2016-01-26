@@ -31,7 +31,7 @@
             {% else %}
            <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
-           <div class="center aligned sixteen wide column" style="margin-left:115px; margin-top:-25px;"><span class="starvalue"></span></div>  <!-- width = 평균 별점 * 16 px -->
+           <div class="center aligned sixteen wide column" style="margin-left:115px; margin-top:-25px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
          
               
 
@@ -39,7 +39,7 @@
             <div id="open" >
                     {{PBoard3.CourseComment}}</div>
             <div id ="close" style="display:none">
-              {{PBoard3.CourseComment|linebreaks}}</div>
+              {{PBoard3.CourseComment|truncatechars:30|linebreaks}}</div>
              
             </div>
           </div>
@@ -95,7 +95,7 @@
 
               <div class="center aligned sixteen wide column">
                 <br>
-                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>
@@ -162,7 +162,7 @@
 
               <div class="center aligned sixteen wide column">
                 <br>
-                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue"></span></div>  <!-- width = 평균 별점 * 16 px -->
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>

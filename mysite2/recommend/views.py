@@ -78,6 +78,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
+			new_Satisfy = request.POST['StarValue']
 
 		
 		except:
@@ -88,9 +89,11 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Question=5
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
+			new_Satisfy = 0.0
+			
 #			new_Homework=5
 			
-		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check)
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 
@@ -107,7 +110,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.RecommendCount+=1
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
-			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1)
+			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1,Total_StarPoint=new_Satisfy)
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)
@@ -116,7 +119,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval.Total_Question += int(new_Question)
 			T_Eval.Total_Exam += int(new_Question)
 			#T_Eval.Total_Homework += int(new_Homework)
+			T_Eval.Total_StarPoint += float(new_Satisfy)
 			T_Eval.Total_Count += 1
+			
 			T_Eval.save()
 	
 		URL = "/Course/"+str(request.session['Recommend_ID'])

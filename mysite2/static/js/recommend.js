@@ -99,9 +99,8 @@ $('#enable6').on('click', function(){
   if(checked[5] == "False"){
     $('#ButtonCheck').val("True")
     checked[5] = "True";
-    $('#enable6').css('background-color', '#9acd32');
+    $('#enable6').css('background-color', '#FFEB3B');
   } else {
-    $('#sl6').slider('disable');
     $('#ButtonCheck').val("False")
     checked[5] = "False";
     $('#enable6').css('background-color', '#ccc');

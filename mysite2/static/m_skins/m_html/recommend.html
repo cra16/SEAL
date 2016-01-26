@@ -11,6 +11,7 @@
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="{% static "js/recommend.js" %}">
     </script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/recommend.css" %}">
 
     <style>
@@ -60,7 +61,7 @@
           <div class="ui grid">
             <div id="firstcolumn" class="left floated center aligned eight wide column">진도 속도</div>
             <div id="enbutton" class="left floated center aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
@@ -81,7 +82,7 @@
           <div class="ui grid">
             <div id="secondcolumn" class="left floated center aligned eight wide column">교재 사용도</div>
             <div id="enbutton" class="left floated center aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
@@ -102,7 +103,7 @@
           <div class="ui grid">
             <div id="thirdcolumn" class="left floated center aligned eight wide column">과 내/외 도움</div>
             <div id="enbutton" class="left floated center aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
@@ -123,7 +124,7 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned eight wide column">강의 방식</div>
             <div id="enbutton" class="left floated center aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable4" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated left aligned eight wide column">
@@ -143,7 +144,7 @@
 
           <div class="ui grid">
             <div id="fifthcolumn" class="left floated center aligned eight wide column">시험 방식</div>
-            <div id="enbutton" class="left floated center aligned two wide column">
+            <div id="enbutton" class="left floated center aligned four wide column">
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
@@ -163,10 +164,28 @@
 
 
           <div class="ui grid">
-            <div id="sixthcolumn" class="left floated center aligned three wide column"><b> 추천</b></div>            
+            <div id="sixthcolumn" class="left floated center aligned three wide column"><h4><b> 추천</b></h4></div>            
             <div class="left floated center aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable5" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+               <a id="tooltips" data-toggle="tooltip"><button type ="button" id="enable6" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button></a>
+             <input type ="hidden" id="ButtonCheck" name ="ButtonCheck"value ="">
+             
             </div>
+            <div class="floated center aligned nine wide column" style="color:orange"><h4><b>만족도</b></h4></div>
+            <div class="stars">
+              <form action="">
+                <input class="star star-5" id="star-5" type="radio" name="star"/>
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star"/>
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star"/>
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star"/>
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star"/>
+                <label class="star star-1" for="star-1"></label>
+              </form>
+            </div>
+            
           </div>
 
             <br>         

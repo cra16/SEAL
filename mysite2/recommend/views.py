@@ -70,11 +70,11 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_CreatedID = Profile.objects.get(User= request.user)
 		
 		try:
-			new_Speedy=int(request.POST['sl1'])
-			new_Reliance=int(request.POST['sl2'])
-			new_Helper=int(request.POST['sl3'])
-			new_Question=int(request.POST['sl4'])
-			new_Exam=int(request.POST['sl5'])
+			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
+			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
+			new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+			new_Question=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
+			new_Exam=(request.POST['sl5'] !="" and int(request.POST['sl5']) or 5)
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False

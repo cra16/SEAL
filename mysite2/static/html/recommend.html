@@ -59,6 +59,48 @@
 		
           <div id="blankspace" class="ui column"></div>
 	   <form action = "/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
+
+          <div ui="ui grid">
+            <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
+            <select class="ui search dropdown">
+            <option value="">학기</option>
+            <option value="16-1">16-1</option>
+            <option value="AK">15-Winter</option>
+            <option value="AZ">15-2</option>
+            <option value="AR">15-Summer</option>
+            <option value="CA">15-1</option>
+            <option value="CO">14-Winter</option>
+            <option value="CT">14-2</option>
+            <option value="DE">14-Summer</option>
+            <option value="DC">14-1</option>
+            <option value="FL">13-Winter</option>
+            <option value="GA">13-2</option>
+            <option value="HI">13-Summer</option>
+            <option value="ID">13-1</option>
+            <option value="IL">12-Winter</option>
+            <option value="IN">12-2</option>
+            <option value="IA">12-Summer</option>
+            <option value="KS">12-1</option>
+            <option value="KY">11-Winter</option>
+            <option value="LA">11-2</option>
+            <option value="ME">11-Summer</option>
+            <option value="MD">11-1</option>
+            <option value="MA">10-Winter</option>
+            <option value="MI">10-2</option>
+            <option value="MN">10-Summer</option>
+            <option value="MS">10-1</option>
+            <option value="MO">09-Winter</option>
+            <option value="MT">09-2</option>
+            <option value="NE">09-Summer</option>
+            <option value="NV">09-1</option>          
+          </select>
+        </div>
+        
+        <br>
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
           <div class="ui grid">
             <div id="firstcolumn" class="left floated center aligned three wide column"><b>진도 속도</b></div>
             <div class="left floated center aligned two wide column">

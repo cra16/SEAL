@@ -64,7 +64,7 @@
         <div class="column" style="margin-top: -15px; padding-right: 0.4rem;">
 
     {%if Search == None%}
-    <div id ="FirstPage" class="ui divided very relaxed selection inbox list tab" style="margin-top: 15px;" data-tab="unread">
+    <div id ="FirstPage" class="ui divided very relaxed selection inbox list tab" style="margin-top: 13px;" data-tab="unread">
 
         
 
@@ -116,7 +116,7 @@
     </div>
                
                				
-      <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+      <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" style="margin-top: 13px;" data-tab="saved">
 	    {% for PBoard2 in PageBoard.1%}      
           {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">

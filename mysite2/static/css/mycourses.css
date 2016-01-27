@@ -11,7 +11,11 @@
 #sl31, #sl32, #sl33, #sl34, #sl35,
 #sl41, #sl42, #sl43, #sl44, #sl45,
 #sl51, #sl52, #sl53, #sl54, #sl55,
-#sl61, #sl62, #sl63, #sl64, #sl65
+#sl61, #sl62, #sl63, #sl64, #sl65,
+#sl71, #sl72, #sl73, #sl74, #sl75,
+#sl81, #sl82, #sl83, #sl84, #sl85,
+#sl91, #sl92, #sl93, #sl94, #sl95,
+#sl101, #sl102, #sl103, #sl104, #sl105
 { 
 width : 177px !important; 
 }
@@ -204,6 +208,121 @@ width : 177px !important;
     background: #008b8b;
 }
 
+#sl71C .slider-handle{
+    background: #ff7f50;
+}
+#sl71C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl72C .slider-handle{
+    background: #9370db;
+}
+#sl72C .slider-selection{
+    background: #9370db;
+}
+
+#sl73C .slider-handle{
+    background: #2e8b57;
+}
+#sl73C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl74C .slider-handle{
+    background: #008b8b;
+}
+#sl74C .slider-selection{
+    background: #008b8b;
+}
+
+#sl81C .slider-handle{
+    background: #ff7f50;
+}
+#sl81C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl82C .slider-handle{
+    background: #9370db;
+}
+#sl82C .slider-selection{
+    background: #9370db;
+}
+
+#sl83C .slider-handle{
+    background: #2e8b57;
+}
+#sl83C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl84C .slider-handle{
+    background: #008b8b;
+}
+#sl84C .slider-selection{
+    background: #008b8b;
+}
+
+#sl91C .slider-handle{
+    background: #ff7f50;
+}
+#sl91C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl92C .slider-handle{
+    background: #9370db;
+}
+#sl92C .slider-selection{
+    background: #9370db;
+}
+
+#sl93C .slider-handle{
+    background: #2e8b57;
+}
+#sl93C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl94C .slider-handle{
+    background: #008b8b;
+}
+#sl94C .slider-selection{
+    background: #008b8b;
+}
+
+#sl101C .slider-handle{
+    background: #ff7f50;
+}
+#sl101C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl102C .slider-handle{
+    background: #9370db;
+}
+#sl102C .slider-selection{
+    background: #9370db;
+}
+
+#sl103C .slider-handle{
+    background: #2e8b57;
+}
+#sl103C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl104C .slider-handle{
+    background: #008b8b;
+}
+#sl104C .slider-selection{
+    background: #008b8b;
+}
+
+
+
+
 
 
 
@@ -214,7 +333,12 @@ width : 177px !important;
 #sl131, #sl132, #sl133, #sl134, 
 #sl141, #sl142, #sl143, #sl144, 
 #sl151, #sl152, #sl153, #sl154, 
-#sl161, #sl162, #sl163, #sl164{
+#sl161, #sl162, #sl163, #sl164,
+#sl171, #sl172, #sl173, #sl174,
+#sl181, #sl182, #sl183, #sl184,
+#sl191, #sl192, #sl193, #sl194,
+#sl161, #sl1102, #sl1103, #sl1104
+{
     width: 180px !important;
 }
 
@@ -404,5 +528,118 @@ width : 177px !important;
     background: #008b8b;
 }
 #sl164C .slider-selection{
+    background: #008b8b;
+}
+
+#sl171C .slider-handle{
+    background: #ff7f50;
+}
+#sl171C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl172C .slider-handle{
+    background: #9370db;
+}
+#sl172C .slider-selection{
+    background: #9370db;
+}
+
+#sl173C .slider-handle{
+    background: #2e8b57;
+}
+#sl173C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl174C .slider-handle{
+    background: #008b8b;
+}
+#sl174C .slider-selection{
+    background: #008b8b;
+}
+
+#sl181C .slider-handle{
+    background: #ff7f50;
+}
+#sl181C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl182C .slider-handle{
+    background: #9370db;
+}
+#sl182C .slider-selection{
+    background: #9370db;
+}
+
+#sl183C .slider-handle{
+    background: #2e8b57;
+}
+#sl183C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl184C .slider-handle{
+    background: #008b8b;
+}
+#sl184C .slider-selection{
+    background: #008b8b;
+}
+
+
+#sl191C .slider-handle{
+    background: #ff7f50;
+}
+#sl191C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl192C .slider-handle{
+    background: #9370db;
+}
+#sl192C .slider-selection{
+    background: #9370db;
+}
+
+#sl193C .slider-handle{
+    background: #2e8b57;
+}
+#sl193C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl194C .slider-handle{
+    background: #008b8b;
+}
+#sl194C .slider-selection{
+    background: #008b8b;
+}
+
+#sl1101C .slider-handle{
+    background: #ff7f50;
+}
+#sl1101C .slider-selection{
+    background: #ff7f50;
+}
+
+#sl1102C .slider-handle{
+    background: #9370db;
+}
+#sl1102C .slider-selection{
+    background: #9370db;
+}
+
+#sl1103C .slider-handle{
+    background: #2e8b57;
+}
+#sl1103C .slider-selection{
+    background: #2e8b57;
+}
+
+#sl1104C .slider-handle{
+    background: #008b8b;
+}
+#sl1104C .slider-selection{
     background: #008b8b;
 }

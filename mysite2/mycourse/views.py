@@ -53,8 +53,8 @@ def MyCoursePage(request,Page,Mobile):
 		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
 		#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
 		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
-		RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
-		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_count 
+		#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
+		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
 		RecommendPage.append(RecommendData)	
 
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]

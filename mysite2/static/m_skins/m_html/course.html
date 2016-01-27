@@ -172,12 +172,14 @@
       <div class="ui column">
         <h3><b>개인 : </b></h3>
 
-            <div id="recommending" class="ui column">
+            
           {%for MyCourseBoard in MyCourseBoard%}
+          <div id="h_sectiondivider" class="ui section divider"></div>
+          <div id="recommending" class="ui column">
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
-            <br>
+            <br><br>
             <div class="ui grid">
               <div id="firstcolumn" class="left floated center aligned sixteen wide column">진도 속도</div>
               <div id="lchoice" class="left floated right aligned four wide column">

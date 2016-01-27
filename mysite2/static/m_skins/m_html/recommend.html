@@ -59,41 +59,24 @@
           <div id="blankspace" class="ui column"></div>
 	   <form action = "/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
           
-           <div ui="ui grid">
-            <h4 style="margin-left:20px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
-            <select class="ui search dropdown" style="margin-top:15px; margin-left:60px;">
-            <option value="">학기</option>
-            <option value="16-1">16-1</option>
-            <option value="AK">15-Winter</option>
-            <option value="AZ">15-2</option>
-            <option value="AR">15-Summer</option>
-            <option value="CA">15-1</option>
-            <option value="CO">14-Winter</option>
-            <option value="CT">14-2</option>
-            <option value="DE">14-Summer</option>
-            <option value="DC">14-1</option>
-            <option value="FL">13-Winter</option>
-            <option value="GA">13-2</option>
-            <option value="HI">13-Summer</option>
-            <option value="ID">13-1</option>
-            <option value="IL">12-Winter</option>
-            <option value="IN">12-2</option>
-            <option value="IA">12-Summer</option>
-            <option value="KS">12-1</option>
-            <option value="KY">11-Winter</option>
-            <option value="LA">11-2</option>
-            <option value="ME">11-Summer</option>
-            <option value="MD">11-1</option>
-            <option value="MA">10-Winter</option>
-            <option value="MI">10-2</option>
-            <option value="MN">10-Summer</option>
-            <option value="MS">10-1</option>
-            <option value="MO">09-Winter</option>
-            <option value="MT">09-2</option>
-            <option value="NE">09-Summer</option>
-            <option value="NV">09-1</option>          
-          </select>
+          <div ui="ui grid">
+            <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
+            
+              <div class="ui selection dropdown">
+              <div class="default text">학기</div>
+                <i class="dropdown icon"></i>
+                <input id="HSemster"  name="HSemster" type="hidden" value ="0">
+                <div class="menu">
+                  <div class="item" data-value=""></div>
+                  {%for SemesterData in SemesterData%}
+                  <div class="item" data-value="{{SemesterData.Semester}}">{{SemesterData.Semester}}</div>
+                  {%endfor%}
+                 </div>
+              </div>
+
         </div>
+         <input id="HCourseName"  name="HCourseName" type="hidden" value ="{{CourseBoard.CourseName}}">
+          <input id="HCourseCode"  name="HCourseCode" type="hidden" value ="{{CourseBoard.Code}}">
         
         <br>
 

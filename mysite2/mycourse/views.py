@@ -51,7 +51,7 @@ def MyCoursePage(request,Page,Mobile):
 		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
 		RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
 		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
-		RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
+		#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
 		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
 		RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
 		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_count 
@@ -77,7 +77,7 @@ def MyCoursePage(request,Page,Mobile):
 			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
 			LikeData.Total_Reliance =LikeData.Total_Reliance/LikeData.Total_Count
 			LikeData.Total_Question=LikeData.Total_Question/LikeData.Total_Count
-			LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
+			#LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
 			LikeData.Total_Exam = LikeData.Total_Exam/LikeData.Total_Count
 			LikeData.Total_Homework = LikeData.Total_Homework/LikeData.Total_Count
 			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count

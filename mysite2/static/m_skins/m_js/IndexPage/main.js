@@ -18,77 +18,7 @@
   });
     
     $('.fullscreen.modal').modal('show');
-    /*
-    $('div').on('click','#FirstMajor',function(){
-      event.stopPropagation();
-      $(this).unbind("click");
-        $.ajax(
-            { url : "/mysite2/FirstPage/",
-              data : {
-                      'Page': "0"
-                     },
-              datatype : "json",
-              type : "POST",
-
-              success:function(resp){
-                  
-                  $('#FirstPage').html(resp);
-                     
-                },
-                error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
-                  alert(error); //오류내용
-
-                  } 
-            
-          });
-      });
-    $('div').on('click','#SecondMajor',function(){
-      event.stopPropagation();
-          $(this).unbind("click");
-        $.ajax(
-            { url : "/mysite2/SecondPage/",
-              data : {
-                           'Page': "0"
-                    },
-              type : "POST",
-              success:function(resp){      
-
-                  $('#SecondPage').html(resp);
-                     
-                },
-                error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
-                  alert(error); //오류내용
-
-                  } 
-            
-          });
-      });
-
-      $('div').on('click','#All',function(){
-        event.stopPropagation();
-          $(this).unbind("click");
-        $.ajax(
-            { url : "/mysite2/ThirdPage/",
-              data : {'Page': "0"
-                    },
-              datatype : "json",
-              type : "POST",
-              success:function(resp){         
-                  $('#ThirdPage').html(resp);
-     
-                     
-                },
-                error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
-                  alert(error); //오류내용
-
-                  } 
-            
-          });
-        });
-*/
+  
 
 
 
@@ -96,7 +26,7 @@
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-          
+               alert($(this).attr("name"));
           if(CurrentPage=="SearchPageNation")
               Course = $('#CourseHidden').val();
           else
@@ -144,6 +74,7 @@
               Course = $('#CourseHidden').val();
           else
               Course = "";
+     
         $.ajax(
             { url : "/Page/",
               data : {'Page': $(this).attr("name"),
@@ -397,7 +328,7 @@
          event.stopPropagation();
           $(this).unbind("click");
         var Find = $(this).parent().find("[id=Open]");
-        alert("GG");
+ 
         $(this).hide();
         $(Find).show();
     });
@@ -406,7 +337,7 @@
           $(this).unbind("click");
         var Find = $(this).parent().find("[id=Close]");
         
-        alert("FF");
+   
         $(this).hide();
         $(Find).show();
     });    

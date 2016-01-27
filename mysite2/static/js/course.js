@@ -259,7 +259,7 @@ for(var i=0; i<ccode.length; i++)
           var url = location.href;
           var lastIndex = url.lastIndexOf('/');
           var cURL = url.substring(lastIndex);
-        $('div').on('click',"#CoursePrevious",function(event){
+        $('div').on('click',"#CoursePagePrevious",function(event){
           event.stopPropagation();
           $(this).unbind("click");
           
@@ -314,7 +314,7 @@ for(var i=0; i<ccode.length; i++)
           });
 });
 
-        $('div').on('click',"#CourseNext",function(event){
+        $('div').on('click',"#CoursePageNext",function(event){
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")

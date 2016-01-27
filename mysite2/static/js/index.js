@@ -111,7 +111,7 @@ $("div").on('click',"#cname",function(event){
 
          
     });
-    $('div').on('click',"#CoursePage",function(event){
+    $('div').on('click',"#CoursePageData",function(event){
           event.stopPropagation();
           $(this).unbind("click");
 

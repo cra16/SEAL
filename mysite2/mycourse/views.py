@@ -96,7 +96,7 @@ def MyCoursePage(request,Page,Mobile):
 	else:
 		for i in range(0,2):
 			PageInformation.append(MobileCurrentPageView(Count[i],Page))									
-			TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i]))
+			TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
 
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 

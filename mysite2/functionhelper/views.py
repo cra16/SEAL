@@ -157,10 +157,22 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			T_Count[1] = DataCount(10,DBCount1)
 		else:
 			T_Count[0] = DataCount(5,DBCount1)
-			T_Count[1] = DataCount(5,DBCount2)
+			T_Count[1] = DataCount(5,DBCount1)
 	
 	#현재 페이지 위치정보
-
+	DBCount3=Course_Evaluation.objects.count()
+	if Mobile=="full":
+		T_Count[2] = DataCount(10,DBCount3)
+	else:
+		T_Count[2] = DataCount(5,DBCount3)
+	
+		#현재 페이지 위치정보
+	if Mobile == 'full':
+		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
+	else:
+		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
+		PageInformation[MajorNumber][1] = PageNumber
 
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
@@ -240,19 +252,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 					continue
 			TotalAdd[2].append(total)
 
-	DBCount3=Course_Evaluation.objects.count()
-	if Mobile=="full":
-		T_Count[2] = DataCount(10,DBCount3)
-	else:
-		T_Count[2] = DataCount(5,DBCount3)
 	
-		#현재 페이지 위치정보
-	if Mobile == 'full':
-		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
-		PageInformation[MajorNumber][1] = PageNumber
-	else:
-		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
-		PageInformation[MajorNumber][1] = PageNumber
 
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()

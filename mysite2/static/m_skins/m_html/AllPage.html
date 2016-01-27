@@ -95,7 +95,7 @@
 
               <div class="center aligned sixteen wide column">
                 <br>
-                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sa{{forloop.counter}}1C"/>
@@ -167,7 +167,7 @@
               <div class="center aligned sixteen wide column">
                 <br>
 
-                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
 
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
@@ -200,10 +200,10 @@
         {% for i in TotalCount.2%}
          
         {%if i == Page %}
-         <a id ="CoursePage" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="CoursePageData" name ="{{i}}" class="active item" >{{i}}</a>
         
         {%else%}
-         <a id ="CoursePage" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="CoursePageData" name ="{{i}}" class="item" >{{i}}</a>
         {%endif%}
 {%endfor%}
               <a id ="CourseNext" name = "{{PageInformation.0.2}}" class="item" >

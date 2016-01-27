@@ -403,13 +403,13 @@
       {% if OtherCount.0 != None%}
 		<div class="ui section divider"></div>
       <center><div id = "CoursePagenation" class="ui borderless pagination menu">
-              <a id ="CoursePrevious" name = "{{PageInformation.0}}" class="item" >
+              <a id ="CoursePagePrevious" name = "{{PageInformation.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {%for i in OtherCount%}
               <a id = "CoursePageNumber" name ="{{i}}" class="item" >{{i}}</a>
               {%endfor%}
-              <a id = "CourseNext" name ="{{PageInformation.2}}" class="item">
+              <a id = "CoursePageNext" name ="{{PageInformation.2}}" class="item">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>   

@@ -23,11 +23,16 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 			raise Http404()
 
 	UserProfile=Profile.objects.get(User = request.user)
+	LectureData= Lecture.objects.get(id=offset)
 	try:
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=offset),CreatedID = UserProfile),CreatedID =UserProfile) 
+		
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
+		
+
 		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Class=1).order_by('-Semester')
 
 	if RecommendData != None:
 		if request.flavour =='full':
@@ -40,7 +45,8 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		dic = {'user':request.user,
               'BestBoard':BestBoardView(),
                'CourseBoard':CourseBoard,
-               'Recommend':RecommendData
+               'Recommend':RecommendData,
+               'SemesterData':SemesterData
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)
@@ -74,7 +80,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
-			new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
 			new_Question=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
 			new_Exam=(request.POST['sl5'] !="" and int(request.POST['sl5']) or 5)
 #			new_Homework=int(request.POST['sl6'])
@@ -84,11 +90,14 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 		
 		except:
-
+			CourseName=request.POST['HCourseName']
+			CourseCode=request.POST['HCourseCode']
+			Semester=request.POST['HSemster']
+		
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5
 			new_Reliance=5
-			new_Helper=5
+			#new_Helper=5
 			new_Question=5
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
@@ -96,10 +105,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 #			new_Homework=5
 		
-		new_Course=Lecture.objects.get(Semester=Semester ,Code=CourseCode, CourseName = CourseName)
+		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 			
-		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 
@@ -116,12 +125,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.RecommendCount+=1
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
-			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Helper = new_Helper, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1,Total_StarPoint=new_Satisfy)
+			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1,Total_StarPoint=new_Satisfy)
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)
 			T_Eval.Total_Reliance += int(new_Reliance)
-			T_Eval.Total_Helper += int(new_Helper)
+			#T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Question += int(new_Question)
 			T_Eval.Total_Exam += int(new_Question)
 			#T_Eval.Total_Homework += int(new_Homework)

@@ -443,19 +443,19 @@ def TotalCourse(offset):
 		CourseBoard = Total_Evaluation.objects.get(Course = Lecture.objects.get(id = offset))
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
+		#CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
 		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
 		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 	except:
 		CourseBoard = Total_Evaluation(Course =Lecture.objects.get(id=offset))
 		CourseBoard.Total_Speedy=5
 		CourseBoard.Total_Reliance =5
 		CourseBoard.Total_Question=5
-		CourseBoard.Total_Helper=5
+		#CourseBoard.Total_Helper=5
 		CourseBoard.Total_Exam =5
-		CourseBoard.Total_Homework = 5
+		#CourseBoard.Total_Homework = 5
 		CourseBoard.Total_StarPoint=0
 
 	return CourseBoard
@@ -467,10 +467,10 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor)[0])
 			CourseBoard.Total_Speedy = 5
 			CourseBoard.Total_Reliance = 5
-			CourseBoard.Total_Helper = 5
+			#CourseBoard.Total_Helper = 5
 			CourseBoard.Total_Question = 5
 			CourseBoard.Total_Exam= 5
-			CourseBoard.Total_Homework = 5
+			#CourseBoard.Total_Homework = 5
 			CourseBoard.Total_Count = 5
 			CourseBoard.Total_StarPoint=0
 
@@ -478,10 +478,10 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Count +=CourseList.Total_Count
 			CourseBoard.Total_Speedy += CourseList.Total_Speedy
 			CourseBoard.Total_Reliance += CourseList.Total_Reliance
-			CourseBoard.Total_Helper += CourseList.Total_Helper
+			#CourseBoard.Total_Helper += CourseList.Total_Helper
 			CourseBoard.Total_Question += CourseList.Total_Question
 			CourseBoard.Total_Exam += CourseList.Total_Exam
-			CourseBoard.Total_Homework += CourseList.Total_Homework
+			#CourseBoard.Total_Homework += CourseList.Total_Homework
 			CourseBoard.Total_StarPoint+= CourseList.Total_StarPoint
 
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
@@ -489,7 +489,7 @@ def TotalCourseProfessor(CourseName,Professor):
 		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
 		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
 		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 
 

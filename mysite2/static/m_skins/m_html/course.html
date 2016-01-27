@@ -172,7 +172,6 @@
       <div class="ui column">
         <h3><b>개인 : </b></h3>
 
-          <div id="recommending" class="ui column">
             <div id="recommending" class="ui column">
           {%for MyCourseBoard in MyCourseBoard%}
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
@@ -280,8 +279,7 @@
                   <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
-	        {%endfor%} 
-		</div>
+	        {%endfor%}
  
 
 		{%for OtherBoard in OtherCourseBoard%}

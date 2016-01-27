@@ -1,15 +1,10 @@
 {% load staticfiles %}
 <div class="ui column">
         <h3><b>개인 : </b></h3>
-<<<<<<< HEAD
-         {%for MyCourseBoard in MyCourseBoard%}        
-=======
-    
+
 		<div id="recommending" class="ui column">
     {%for MyCourseBoard in MyCourseBoard%}
         <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>          
->>>>>>> darkzero
-          <div id="recommending" class="ui column">
             <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}</b></h4>          
             <div id="blankspace" class="ui column"></div>
 
@@ -117,7 +112,6 @@
               </div>
           </div>
         {%endfor%}
-    </div>
       
 
 		{%for OtherBoard in OtherCourseBoard%}

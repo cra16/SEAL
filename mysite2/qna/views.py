@@ -159,7 +159,8 @@ def QnARead(request, offset): #Q&A read 기능
 			'Current':Current, 
 			'QnA_Reply' : QnA_Reply,
 			'Previous' : Previous,
-			'Next':Next}
+			'Next':Next,
+			'BestBoard':BestBoardView(),}
 
 		if request.flavour =='full':
 			return render_to_response('html/qna-contents.html',dic)

@@ -27,8 +27,8 @@ def MyCoursePage(request,Page,Mobile):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	try:
-			PageFirst=5*(int(Page)-1)
-			PageLast =5*(int(Page)-1)+5
+			PageFirst=10*(int(Page)-1)
+			PageLast =10*(int(Page)-1)+10
 	except:
 		raise Http404()
 	
@@ -54,6 +54,7 @@ def MyCoursePage(request,Page,Mobile):
 		RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
 		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
 		RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
+		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_count 
 		RecommendPage.append(RecommendData)	
 
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]
@@ -79,12 +80,13 @@ def MyCoursePage(request,Page,Mobile):
 			LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
 			LikeData.Total_Exam = LikeData.Total_Exam/LikeData.Total_Count
 			LikeData.Total_Homework = LikeData.Total_Homework/LikeData.Total_Count
+			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count
 			LikePage.append(LikeData)
 	Count = [[],[]]
 	DBCount=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
-	Count[0] = DataCount(5,DBCount)
+	Count[0] = DataCount(10,DBCount)
 	DBCount=Like_Course.objects.filter(CreatedID = MyProfile).count()
-	Count[1]=DataCount(5,DBCount)
+	Count[1]=DataCount(10,DBCount)
 	
 	PageInformation=list()
 	TotalCount=list()

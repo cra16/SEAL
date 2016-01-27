@@ -66,10 +66,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 	#form 가져오기
 	if request.method =="POST":
-		new_Course=Lecture.objects.get(id=request.session['Recommend_ID'])
-		new_CreatedID = Profile.objects.get(User= request.user)
 		
 		try:
+			CourseName=request.POST['HCourseName']
+			CourseCode=request.POST['HCourseCode']
+			Semester=request.POST['HSemster']
+
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 			new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
@@ -93,6 +95,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Satisfy = float(request.POST['StarValue'])
 			
 #			new_Homework=5
+		
+		new_Course=Lecture.objects.get(Semester=Semester ,Code=CourseCode, CourseName = CourseName)
+		new_CreatedID = Profile.objects.get(User= request.user)
 			
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Helper = new_Helper, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)
 		new_Eval.save()

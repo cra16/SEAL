@@ -16,7 +16,7 @@
               
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard2.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">✔&nbsp;&nbsp;강의 평가 하기</button>
+                
                 <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard1.Professor}}">
@@ -46,13 +46,16 @@
             </div></center>
         {% elif ProSelect == 1 %}
       {% for PBoard2 in PageBoard.1%}
+      {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
 
-
+          {% endif %}
+        <div class="column">
         <div class="ui raised segment">
 
               <div class="sixteen wide column">
                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
-                <center><button class="likebutton" name = "{{PBoard2.Course.id}}" ><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button></center>
+                <center><a href="/Recommend/{{PBoard2.Course.id}}"><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></a></center>
                 <center style="margin-top: 14px"><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard2.Total_Count}}</span> SEALS</center>
               </div>
 
@@ -82,7 +85,10 @@
                   <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제됨">단답형</a>
               </div>
             </div>
-
+          </div>
+          {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+          {% endif %}
               {% endfor%}
               <div class="ui divider"></div>
 
@@ -113,9 +119,9 @@
             <div class="ui raised segment">
 
               <div class="sixteen wide column">
-               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
 
-                <center><button id="likebutton" name = "{{PBoard1.Course.id}}" ><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button>
+                <center><button id="likebutton" name = "{{PBoard2.Course.id}}" ><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button>
                 </center>
                 <center style="margin-top: 14px"><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard2.Total_Count}}</span> SEALS</center>
               </div>
@@ -123,7 +129,7 @@
               <div class="sixteen wide column">
   
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
-                <p><a style="cursor:pointer" href="/Course/Period{{PBoard2.Course.id}}"><span  class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
+                <p><a style="cursor:pointer" href="/Course/Period{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
                 <p><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></p>
                 <p><span id="csem1" name = "cprof">{{PBoard2.Course.Semester}} 학기</span></p>
               </div>

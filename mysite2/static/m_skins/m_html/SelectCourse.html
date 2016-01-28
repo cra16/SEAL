@@ -7,7 +7,7 @@
           <div class="column">
             <div class="ui raised segment">
               <div class="sixteen wide column">
-                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
 
                 <center><button id="likebutton" name="{{PBoard3.Course.id}}"><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button></center>
                 <center><span id="likenum{{forloop.counter}}" name="liikenum">{{PBoard3.Total_Count}}</span> SEALS</center>
@@ -23,7 +23,7 @@
               </div>
 
               <div class="center aligned sixteen wide column">
-                <br><br>
+                <br>
                 <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>

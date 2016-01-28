@@ -22,7 +22,30 @@ $(document).ready(function() {
 $("div").on('click',"#cname",function(event){
         event.stopPropagation();
         $(this).unbind("click");
-        CurrentPage=$(this).parent().parent().parent().parent().parent().parent().attr("id");
+        var CurrentPage = null
+        $(".selection").each(function()
+        {   
+            temp = $(this).attr("class");
+            splitdata=temp.split(" ");
+            for(var i=0; i<splitdata.length; i++)
+            {
+                if(splitdata[i] =="active")
+                {
+                    CurrentPage =$(this).attr("id");
+
+                    break;
+                }
+            }
+            
+              
+
+        });
+
+       
+        if(CurrentPage==null)
+        {
+          CurrentPage="Search_Page";
+        }
         var Parent=$(this).parent().parent().parent();
         var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
@@ -394,26 +417,5 @@ $("div").on('click',"#cname",function(event){
 
 });
 
-
-$(function(){
-
-
-$.fn.starvalue = function() {
-    return $(this).each(function() {
-        // Get the value
-        var val = parseFloat($(this).html());
-        // Make sure that the value is in 0 - 5 range, multiply to get width
-        var size = Math.max(0, (Math.min(5, val))) * 16;
-        // Create stars holder
-        var $span = $('<span />').width(size);
-        // Replace the numerical value with stars
-        $(this).html($span);
-    });
-}
-
-$('span.starvalue').starvalue();
-
-
-});
 
 

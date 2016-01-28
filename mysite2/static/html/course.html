@@ -18,8 +18,9 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{% static "css/course.css" %}">
+      
     <script type="text/javascript" src="{% static "js/course.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/index.js" %}"></script>
+
   {%endblock%}  
   </head>
 
@@ -133,9 +134,8 @@
             <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>10개</b></h4>
 
             <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="left aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
-         
-          </div>
+           <div class="center left aligned two wide column"><span class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
+          
       
         </div>
 
@@ -372,6 +372,7 @@
             </div></center>   
         {%endif%}
         </div>
+          <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
       {%endblock%}
 
   </body>

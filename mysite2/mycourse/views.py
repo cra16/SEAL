@@ -45,7 +45,7 @@ def MyCoursePage(request,Page,Mobile):
 			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
 		except:
 			RecommendData = None
-		if RecommendData.Total_Count==0:
+		if RecommendData.Total_Count==None:
 			RecommendPage.append(RecommendData)
 			break
 		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count

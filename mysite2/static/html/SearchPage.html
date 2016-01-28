@@ -2,6 +2,7 @@
 {% load app_filter %}
 
   {% if CourseName == None %}
+ 
         {% for SBoard in Search.0%}
              {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -64,7 +65,7 @@
                <div class="sixteen wide column">
 
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
-                 <p><a style="cursor:pointer" href ="/CourseProfessor/{{SBoard.Course.id}}"><span  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
+                 <p><a style="cursor:pointer" href ="/CourseProfessor/{{SBoard.Course.id}}"><span id="cname" class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
                   <p><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></p>
                </div>
 
@@ -132,7 +133,7 @@
 
                <div class="sixteen wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
-                 <p><a style="cursor:pointer" href="/Course/Period{{SBoard.Course.id}}"><span  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
+                 <p><a style="cursor:pointer" href="/Course/Period{{SBoard.Course.id}}"><span id="cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
                  <p><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></p>
                 <p><span id="csem1" name = "cprof">{{SBoard.Course.Semester}} 학기</span></p>
                </div>
@@ -186,4 +187,4 @@
             {%endif%}
 
 <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
-<script type="text/javascript" src="{% static "js/index.js" %}"></script>
+ <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

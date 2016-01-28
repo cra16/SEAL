@@ -519,10 +519,10 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal = Total_Evaluation(Course=lec)
 					TempTotal.Total_Speedy =0
 					TempTotal.Total_Reliance =0
-					TempTotal.Total_Helper = 0
+					#TempTotal.Total_Helper = 0
 					TempTotal.Total_Question = 0
 					TempTotal.Total_Exam = 0
-					TempTotal.Total_Homework = 0
+					#TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
 					
@@ -530,20 +530,20 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy +=T.Total_Speedy
 						TempTotal.Total_Reliance += T.Total_Reliance
-						TempTotal.Total_Helper += T.Total_Helper
+						#TempTotal.Total_Helper += T.Total_Helper
 						TempTotal.Total_Question += T.Total_Question
 						TempTotal.Total_Exam += T.Total_Exam
-						TempTotal.Total_Homework +=T.Total_Homework
+						#TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-					TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
+					#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 			i+=1
@@ -570,18 +570,18 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic = Total_Evaluation(Course=lec)
 						TotalDic.Total_Speedy =5
 						TotalDic.Total_Reliance =5
-						TotalDic.Total_Helper = 5
+						#TotalDic.Total_Helper = 5
 						TotalDic.Total_Question = 5
 						TotalDic.Total_Exam = 5
-						TotalDic.Total_Homework = 5
+						#TotalDic.Total_Homework = 5
 						TotalDic.Total_Count =0
 					TempTotal = Total_Evaluation(Course=lec)
 					TempTotal.Total_Speedy =0
 					TempTotal.Total_Reliance =0
-					TempTotal.Total_Helper = 0
+					#TempTotal.Total_Helper = 0
 					TempTotal.Total_Question = 0
 					TempTotal.Total_Exam = 0
-					TempTotal.Total_Homework = 0
+					#TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint=0
 					
@@ -589,20 +589,20 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy +=T.Total_Speedy
 						TempTotal.Total_Reliance += T.Total_Reliance
-						TempTotal.Total_Helper += T.Total_Helper
+						#TempTotal.Total_Helper += T.Total_Helper
 						TempTotal.Total_Question += T.Total_Question
 						TempTotal.Total_Exam += T.Total_Exam
-						TempTotal.Total_Homework +=T.Total_Homework
+						#TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-					TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
+					#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
 					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 					TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 			i+=1
@@ -627,18 +627,18 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalDic = Total_Evaluation(Course=lec)
 							TotalDic.Total_Speedy =5
 							TotalDic.Total_Reliance =5
-							TotalDic.Total_Helper = 5
+							#TotalDic.Total_Helper = 5
 							TotalDic.Total_Question = 5
 							TotalDic.Total_Exam = 5
-							TotalDic.Total_Homework = 5
+							#TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
 						TempTotal.Total_Speedy =0
 						TempTotal.Total_Reliance =0
-						TempTotal.Total_Helper = 0
+						#TempTotal.Total_Helper = 0
 						TempTotal.Total_Question = 0
 						TempTotal.Total_Exam = 0
-						TempTotal.Total_Homework = 0
+						#TempTotal.Total_Homework = 0
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						
@@ -646,20 +646,20 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Count += T.Total_Count
 							TempTotal.Total_Speedy +=T.Total_Speedy
 							TempTotal.Total_Reliance += T.Total_Reliance
-							TempTotal.Total_Helper += T.Total_Helper
+							#TempTotal.Total_Helper += T.Total_Helper
 							TempTotal.Total_Question += T.Total_Question
 							TempTotal.Total_Exam += T.Total_Exam
-							TempTotal.Total_Homework +=T.Total_Homework
+							#TempTotal.Total_Homework +=T.Total_Homework
 							TempTotal.Total_StarPoint += T.Total_StarPoint
 						if TempTotal.Total_Count==0:
 							TotalBoard[2].append(TempTotal)
 							break
 						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 						TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-						TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
+						#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
 						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
 						TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
 	#2차원 list로 각 전공당 총 페이지 수 저장

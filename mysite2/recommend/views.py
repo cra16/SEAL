@@ -81,8 +81,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
-			new_Question=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
-			new_Exam=(request.POST['sl5'] !="" and int(request.POST['sl5']) or 5)
+			new_Question=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+			new_Exam=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
@@ -122,7 +122,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval =None 
 
 		UserData = Profile.objects.get(User = request.user)
-		UserData.RecommendCount+=1
+		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=new_CreatedID).count()
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1,Total_StarPoint=new_Satisfy)
@@ -139,7 +139,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 			T_Eval.save()
 	
-		URL = "/Course/"+str(request.session['Recommend_ID'])
+		URL = "/Course/"+str(new_Course.id)
 		return HttpResponseRedirect(URL)
 
 	else:
@@ -176,7 +176,7 @@ def Like(request):
 		new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))
 		new_Like.save()
 		UserData = Profile.objects.get(User = request.user)
-		UserData.LikeCount +=1
+		UserData.LikeCount= Like_Course.objects.filter(CreatedID=UserData).count()
 		UserData.save()
 		
 

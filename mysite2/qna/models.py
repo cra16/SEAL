@@ -16,7 +16,7 @@ class Reply(models.Model):
 	ClickScroe = models.PositiveIntegerField(default = 0)
 	Text = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
-	QuestionID = models.PositiveIntegerField(max_length = 50)
+	QuestionID = models.PositiveIntegerField()
 
 	def __unicode__(self):
 		return self.TextName

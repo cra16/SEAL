@@ -9,13 +9,13 @@
           <div class="column">
              <div class="ui raised segment">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
-                <center><button name = "{{SBoard.Course.id}}" class = "likebutton" ><i class="glyphicon glyphicon-heart"></i></button></center>
+                <center><img src="../static/m_skins/m_css/seal.png" height="45px" width="45px"></center>
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{SBoard.Total_Count}}</span> SEALS</center>
               </div>
               
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                <button id ="professorSl" class="ui mini basic blue circular button">✔&nbsp;&nbsp;강의 평가 하기</button>
+                
                 <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">
@@ -54,31 +54,33 @@
             <div class="ui raised segment">
               <div class="sixteen wide column" style="padding-bottom: 10px;">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button class="likebutton" name ="{{SBoard.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
-                    <center><span id="likenum{{forloop.counter}}"></span>{{SBoard.Total_Count}} SEALS</center>
+                   <center><button class="likebutton" name ="{{SBoard.Course.id}}"><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button></center>
+                    <center><span id="likenum{{forloop.counter}}">{{SBoard.Total_Count}}</span> SEALS</center>
                </div>
 
                <div class="sixteen wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p><a  href ="/CourseProfessor/{{SBoard.Course.id}}"><span  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                  <p><a><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></a></p>
+                  <p><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></p>
                </div>
              </div>
 
                <div class="center aligned sixteen wide column">
-                <br></br>
+                <br><br>
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{SBoard.Total_StarPoint}}</span></div>  
+                <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
-                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}2C"/>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
-                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}3C"/>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
                   <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
-                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제됨">서술형</a>
+                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Exam}}" data-slider-id="sl{{forloop.counter}}4C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제됨">단답형</a>
                </div>    
               </div>
             </div>
@@ -115,33 +117,35 @@
            <div class="column">
             <div class="ui raised segment">
               <div class="sixteen wide column" style="padding-bottom: 10px;">
-               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button id="likebutton" name ="{{SBoard.Course.id}}"><i class="glyphicon glyphicon-heart"></i></button></center>
-                    <center><span id="likenum{{forloop.counter}}"></span>{{SBoard.Total_Count}} SEALS</center>
+               <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column" style="margin-bottom:23px">
+                   <center><button id="likebutton" name ="{{SBoard.Course.id}}"><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button></center>
+                    <center><span id="likenum{{forloop.counter}}">{{SBoard.Total_Count}}</span> SEALS</center>
                </div>
 
                <div class="sixteen wide column">
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p><a href="/Course/Period{{SBoard.Course.id}}"><span id ="cname" class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                 <p><a><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></a></p>
-                <p><a><span id="csem1" name = "cprof">{{SBoard.Course.Semester}} 학기</span></a></p>
+                 <p><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></p>
+                <p><span id="csem1" name = "cprof">{{SBoard.Course.Semester}} 학기</span></p>
                </div>
              </div>
 
                <div class="center aligned sixteen wide column">
-                <br></br>
+                <br>
+                <div class="center aligned sixteen wide column" style="margin-left:115px"><span class="starvalue">{{SBoard.Total_StarPoint}}</span></div>  
+                <br>
                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
-                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}2C"/>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
-                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}3C"/>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
                   <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="교내의 다른 수업에서 도움이 된다">과내 도움</a>
-                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Helper}}" data-slider-id="sl{{forloop.counter}}4C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="수업외의 외부활동이나 사회에서 도움이 된다">과외 도움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제됨">서술형</a>
+                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Exam}}" data-slider-id="sl{{forloop.counter}}4C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제됨">단답형</a>
                </div>    
               </div>
             </div>

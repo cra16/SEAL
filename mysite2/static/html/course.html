@@ -131,7 +131,7 @@
           <div class="ui grid">
 
             <div class="left floated right aligned four wide column" style="color:purple; margin-left:-30px; margin-right: 20px;"><h4><b>추천</b></h4></div>
-            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>10개</b></h4>
+            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{GoodCount}}</b></h4>
 
             <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="center left aligned two wide column"><span class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
@@ -235,7 +235,7 @@
 
             <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if PBoard3.Check == True %}
+            {% if MyCourseBoard.Check == True %}
           <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
@@ -331,7 +331,7 @@
 
             <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if PBoard3.Check == True %}
+            {% if OtherBoard.Check == True %}
           <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>

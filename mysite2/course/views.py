@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 # -*- coding: euc-kr -*-
 
 from django.shortcuts import render
@@ -66,6 +66,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 					
 					if count==0:
 						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+
 						totalcount += OtherCourse.count()
 					elif count>=1:
 						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
@@ -88,6 +89,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 				O_Count = DataCount(3,totalcount)
 				
+						
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				PageInformation=FirstPageView(O_Count)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
@@ -98,7 +100,8 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 					'MyCourseBoard':MyCourseBoard,
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
-					'PageInformation':PageInformation
+					'PageInformation':PageInformation,
+					
 					}
 				if request.flavour =='full':
 					return render_to_response('html/course.html',dic)
@@ -239,6 +242,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 						if count==0:
 							MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 							OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+
 							totalcount += OtherCourse.count()
 							
 						if count>=1:
@@ -272,7 +276,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				#pageNation과 관련된 기능
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 				O_Count = DataCount(3,totalcount)
-				
+				good_count=Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor))
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				PageInformation=FirstPageView(O_Count)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
@@ -283,7 +287,8 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					'MyCourseBoard':MyCourseBoard,
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
-					'PageInformation':PageInformation
+					'PageInformation':PageInformation,
+					'GoodCount':good_count[0]['Check__count']
 					}
 				if request.flavour =='full':
 					return render_to_response('html/course.html',dic)

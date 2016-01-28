@@ -174,11 +174,10 @@ def Search(request): #과목 검색 기능
 			ps)물론 DB하나 더 만들면 더 간단한 알고리즘이 되겠지만 어차피 DB에서 한번더 불러야 하는건 마찬가지라 속도가 비슷할 거같아서
 			안만듬
 			"""
-			Data=Lecture.objects.values('CourseName','Code').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
 			if Mobile == "full":
-				temp=Lecture.objects.values('CourseName','Code').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
+				temp=Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:10]
 			else:
-				temp=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
+				temp=Lecture.objects.values("Code").annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[0:5]
 			LecList = []
 			LecCodeList = []
 			for lec in temp:
@@ -200,10 +199,10 @@ def Search(request): #과목 검색 기능
 		except:
 			LectureData[0]=None
 		if Mobile == "full":
-			DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
+			DBCount = Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
 			SearchCount=DataCount(10,DBCount)
 		else:
-			DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
+			DBCount = Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
 			SearchCount=DataCount(5,DBCount)
 		
 		if DBCount != 0 : 
@@ -254,10 +253,10 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	PageInformation = request.session['SearchPageInformation']
 
 	if Mobile == 'full':
-		DBCount = Lecture.objects.values('CourseName').annotate(Count('-')).filter(CourseName__icontains=SearchData).count()
+		DBCount = Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
 		SearchCount = DataCount(10,DBCount)
 	else :
-		DBCount = Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
+		DBCount = Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).count()
 		SearchCount = DataCount(5,DBCount)
 	
 	if Mobile == 'full':
@@ -270,9 +269,9 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	LectureData = [[]]
 	TotalAdd=[]
 	if Mobile == 'full':
-		temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
+		temp=Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
 	else:
-		temp=Lecture.objects.values('CourseName').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+		temp=Lecture.objects.values('Code').annotate(Count('Code')).filter(CourseName__icontains=SearchData).order_by('-Semester')[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
 	LecList=[]
 	LecCodeList=[]
 	for lec in temp:
@@ -290,7 +289,6 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 						except:
 							continue
 						TotalAdd.append(total)
-	
 
 	L_Data=PageView(LectureData)
 	

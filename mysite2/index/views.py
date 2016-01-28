@@ -230,7 +230,7 @@ def Search(request): #과목 검색 기능
 				'PageInformation' : PageInformation,
 				'TotalCount':T_Count,
 				'TotalAdd':TotalAdd,
-				'Test':Data
+
 			}
 		if request.flavour =='full':
 			return render_to_response('html/index.html',dic)

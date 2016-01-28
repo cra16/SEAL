@@ -26,7 +26,7 @@
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-               alert($(this).attr("name"));
+       
           if(CurrentPage=="SearchPageNation")
               Course = $('#CourseHidden').val();
           else

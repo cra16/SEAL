@@ -32,7 +32,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
-		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Class=1).order_by('-Semester')
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor, Class=1).order_by('-Semester')
 
 	if RecommendData != None:
 		if request.flavour =='full':
@@ -64,19 +64,22 @@ def Recommend_Write(request): #추천 강의 DB입력
 		return HttpResponseRedirect("/")
 	ID=request.session['Recommend_ID']
 	UserProfile=Profile.objects.get(User = request.user)
-	try:
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =Lecture.objects.get(id=ID),CreatedID = UserProfile),CreatedID =UserProfile) 
-		return HttpResponseRedirect('/NotEmptyRecommend')
-	except:
-		RecommendData=None
+	
 
 	#form 가져오기
 	if request.method =="POST":
+		CourseName=request.POST['HCourseName']
+		CourseCode=request.POST['HCourseCode']
+		Semester=request.POST['HSemster']
+		try:
+			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName),CreatedID = UserProfile)
+			if(Recommend != None):
+				return HttpResponseRedirect('/NotEmptyRecommend')
+		except:
+			RecommendData=None
 		
 		try:
-			CourseName=request.POST['HCourseName']
-			CourseCode=request.POST['HCourseCode']
-			Semester=request.POST['HSemster']
+			
 
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
@@ -139,7 +142,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 			T_Eval.save()
 	
-		URL = "/Course/"+str(new_Course.id)
+		URL = "/CourseProfessor/"+str(new_Course.id)
 		return HttpResponseRedirect(URL)
 
 	else:

@@ -277,6 +277,11 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 				O_Count = DataCount(3,totalcount)
 				good_count=Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor))
+				goodresult=None
+				for goodcount in good_count:
+					if goodcount['Check']==True:
+						goodresult = goodcount
+
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				PageInformation=FirstPageView(O_Count)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
@@ -288,7 +293,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
 					'PageInformation':PageInformation,
-					'GoodCount':good_count[0]['Check__count']
+					'GoodCount': goodresult != None and goodresult['Check__count'] or 0
 					}
 				if request.flavour =='full':
 					return render_to_response('html/course.html',dic)

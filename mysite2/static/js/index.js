@@ -253,7 +253,7 @@ $("div").on('click',"#cname",function(event){
           event.stopPropagation();
           $(this).unbind("click");
 
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -293,7 +293,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#ProNext',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -332,7 +332,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#ProPrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",

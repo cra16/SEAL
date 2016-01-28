@@ -38,6 +38,22 @@ var sl1 = $('#sl11').slider(),
     sl22 = $('#sl62').slider(),
     sl23 = $('#sl63').slider(),
     sl24 = $('#sl64').slider(),
+    sl21 = $('#sl71').slider(),
+    sl22 = $('#sl72').slider(),
+    sl23 = $('#sl73').slider(),
+    sl24 = $('#sl74').slider(),
+    sl21 = $('#sl81').slider(),
+    sl22 = $('#sl82').slider(),
+    sl23 = $('#sl83').slider(),
+    sl24 = $('#sl84').slider(),
+    sl21 = $('#sl91').slider(),
+    sl22 = $('#sl92').slider(),
+    sl23 = $('#sl93').slider(),
+    sl24 = $('#sl94').slider(),
+    sl21 = $('#sl101').slider(),
+    sl22 = $('#sl102').slider(),
+    sl23 = $('#sl103').slider(),
+    sl24 = $('#sl104').slider(),
 
     sl01 = $('#sl111').slider(),
     sl02 = $('#sl112').slider(),
@@ -63,6 +79,23 @@ var sl1 = $('#sl11').slider(),
     sl022 = $('#sl162').slider(),
     sl023 = $('#sl163').slider(),
     sl024 = $('#sl164').slider();
+    sl021 = $('#sl171').slider(),
+    sl022 = $('#sl172').slider(),
+    sl023 = $('#sl173').slider(),
+    sl024 = $('#sl174').slider();
+    sl025 = $('#sl181').slider(),
+    sl026 = $('#sl182').slider(),
+    sl027 = $('#sl183').slider(),
+    sl028 = $('#sl184').slider();
+    sl029 = $('#sl191').slider(),
+    sl030 = $('#sl192').slider(),
+    sl031 = $('#sl193').slider(),
+    sl032 = $('#sl194').slider();
+    sl033 = $('#sl1101').slider(),
+    sl034 = $('#sl1102').slider(),
+    sl035 = $('#sl1103').slider(),
+    sl036 = $('#sl1104').slider();
+
 
 $('#sl11').slider('disable');
 $('#sl12').slider('disable');
@@ -88,6 +121,22 @@ $('#sl61').slider('disable');
 $('#sl62').slider('disable');
 $('#sl63').slider('disable');
 $('#sl64').slider('disable');
+$('#sl71').slider('disable');
+$('#sl72').slider('disable');
+$('#sl73').slider('disable');
+$('#sl74').slider('disable');
+$('#sl81').slider('disable');
+$('#sl82').slider('disable');
+$('#sl83').slider('disable');
+$('#sl84').slider('disable');
+$('#sl91').slider('disable');
+$('#sl92').slider('disable');
+$('#sl93').slider('disable');
+$('#sl94').slider('disable');
+$('#sl101').slider('disable');
+$('#sl102').slider('disable');
+$('#sl103').slider('disable');
+$('#sl104').slider('disable');
 
 $('#sl111').slider('disable');
 $('#sl112').slider('disable');
@@ -113,7 +162,22 @@ $('#sl161').slider('disable');
 $('#sl162').slider('disable');
 $('#sl163').slider('disable');
 $('#sl164').slider('disable');
-
+$('#sl171').slider('disable');
+$('#sl172').slider('disable');
+$('#sl173').slider('disable');
+$('#sl174').slider('disable');
+$('#sl181').slider('disable');
+$('#sl182').slider('disable');
+$('#sl183').slider('disable');
+$('#sl184').slider('disable');
+$('#sl191').slider('disable');
+$('#sl192').slider('disable');
+$('#sl193').slider('disable');
+$('#sl194').slider('disable');
+$('#sl1101').slider('disable');
+$('#sl1102').slider('disable');
+$('#sl1103').slider('disable');
+$('#sl1104').slider('disable');
 
 $("[data-toggle=tooltip]").tooltip();
 

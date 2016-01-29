@@ -32,7 +32,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
-		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor, Class=1).order_by('-Semester')
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
 
 	if RecommendData != None:
 		if request.flavour =='full':

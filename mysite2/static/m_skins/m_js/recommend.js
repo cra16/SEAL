@@ -141,10 +141,20 @@ $(document).ready(function(){
         var starcount = splitdata[1];
         alert("GG");
         $("#StarValue").val(starcount);
-
-
-
     });
 
+  $("#recommend_form").submit(function(){
+    var Hsemester = $("#HSemester").val();
+    //check if there is nothing
+    if(Hsemester == "0" || Hsemester == ""){
+      $("#dropdown_semester").css("border", "2px solid red");
+      $("#dropdown_semester").css("box-shadow", "0 0 3px red");
+      $.scrollTo(0,0, {duration: 200});
+      alert("Please select the semester.");
+      return false;
+    } else {
+      $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
+    }
+  });
 
 });

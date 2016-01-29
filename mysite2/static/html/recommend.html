@@ -9,11 +9,11 @@
 
     <title>▒ SEAL ▒</title>
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{% static "js/recommend.js" %}">
-    </script>
+    <script type="text/javascript" src="{% static "js/recommend.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery-scrollto.js" %}"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "css/recommend.css" %}">
-
+    
     <style>
       body, input {
         font-family: Helvetica, sans-serif;
@@ -63,7 +63,7 @@
           <div ui="ui grid">
             <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
             
-              <div id="dropdown_semester" class="ui selection dropdown">
+              <divid="recommend_form" class="ui selection dropdown">
               <div class="default text">학기</div>
                 <i class="dropdown icon"></i>
                 <input id="HSemester"  name="HSemester" type="hidden" value ="0">

@@ -146,10 +146,6 @@ $("#recommend_form").submit(function(){
       });
       return false;
     }
-    else{
-      document.recommend_form.action = "/Recommend/Recommend_Write";
-      document.recommend_form.submit();
-    }
   });
 
  });

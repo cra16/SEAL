@@ -7,7 +7,7 @@
           <div class="column">
             <div class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
-                <center><button id="likebutton" name="{{PBoard3.Course.id}}"><img src="../static/m_skins/m_css/write.png" height="45px" width="45px"></button></center>
+                <center><button id="likebutton" name="{{PBoard3.Course.id}}"><img src="{% static "m_skins/m_css/write.png" %}" height="45px" width="45px"></button></center>
                 <center><span id="likenum{{forloop.counter}}" name="liikenum">{{PBoard3.Total_Count}}</span> SEALS</center>
               </div>
 

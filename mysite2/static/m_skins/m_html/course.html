@@ -18,7 +18,7 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/course.css" %}">
-    <script type="text/javascript" src="{% static "m_skins/m_js/course.js" %}">history.go(-2);</script>
+    <script type="text/javascript" src="{% static "js/course.js" %}">history.go(-2);</script>
   
   {%endblock%}  
   </head>
@@ -32,7 +32,7 @@
 
     <div class="col-md-12 col-sm-12 col-xs-12">
 
-      <h2 class="ui header"><img src="../static/m_skins/m_css/seal.png" height="50px" width="50px"> Evaluation Result</h2>
+      <h2 class="ui header"><img src="{% static "m_skins/m_css/seal.png" %}" height="50px" width="50px"> Evaluation Result</h2>
 
       <div class="ui section divider"></div>
 
@@ -265,7 +265,7 @@
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>
           <div id="recommending" class="ui column">
-            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}</b></h4>
+            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번 / {{OtherBoard.CreatedID.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
             <br>

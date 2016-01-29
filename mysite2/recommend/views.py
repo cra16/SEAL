@@ -32,7 +32,13 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 		return HttpResponseRedirect('/NotEmptyRecommend')
 	except:
 		RecommendData=None
-		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor, Class=1).order_by('-Semester')
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
+		SemesterList=list()
+		for semester in SemesterData:
+			if semester.Semester not in SemesterList:
+				SemesterList.append(semester.Semester)
+
+
 
 	if RecommendData != None:
 		if request.flavour =='full':
@@ -46,7 +52,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
               'BestBoard':BestBoardView(),
                'CourseBoard':CourseBoard,
                'Recommend':RecommendData,
-               'SemesterData':SemesterData
+               'SemesterData':SemesterList
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)
@@ -70,7 +76,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 	if request.method =="POST":
 		CourseName=request.POST['HCourseName']
 		CourseCode=request.POST['HCourseCode']
-		Semester=request.POST['HSemster']
+		Semester=request.POST['HSemester']
 		try:
 			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName),CreatedID = UserProfile)
 			if(Recommend != None):
@@ -95,7 +101,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		except:
 			CourseName=request.POST['HCourseName']
 			CourseCode=request.POST['HCourseCode']
-			Semester=request.POST['HSemster']
+			Semester=request.POST['HSemester']
 		
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5

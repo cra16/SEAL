@@ -10,7 +10,7 @@
             <div class="ui raised segment">
               <div class="left floated ui compact segment">
                 
-                <center><button id="likebutton" name ="{{lec.Course.id}}"><img src="static/m_skins/m_css/seal.png" height="45px" width="45px"></button></center>
+                <center><button id="likebutton" name ="{{lec.Course.id}}"><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></button></center>
                     <center><span id="likenum{{forloop.counter}}"></span>{{lec.Total_Count}} SEALS</center>
               </div>
                         

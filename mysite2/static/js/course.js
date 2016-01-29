@@ -290,7 +290,7 @@ $(window).load(function()
             
           
           });
-           $("#starpoint").text(parseFloat(cssdata)/16.0);
+           $("#starpoint").text(parseFloat(cssdata)/30.0);
       });  
 
 
@@ -320,7 +320,7 @@ $(window).load(function()
             
           
           });
-        $("#starpoint").text(parseFloat(cssdata)/16.0);
+        $("#starpoint").text(parseFloat(cssdata)/30.0);
 
 
 });
@@ -350,7 +350,7 @@ $(window).load(function()
             
             
           });
-         $("#starpoint").text(parseFloat(cssdata)/16.0);
+         $("#starpoint").text(parseFloat(cssdata)/30.0);
 
 });
 

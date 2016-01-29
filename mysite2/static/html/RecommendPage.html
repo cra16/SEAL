@@ -8,7 +8,7 @@
             <div class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
-                  <center><button id="likebutton" name="{{PageBoard.Course.id}}"><img src="../static/css/seal.png" height="45px" width="45px"></a></center>
+                  <center><button id="likebutton" name="{{PageBoard.Course.id}}"><img src="{% static "css/seal.png" %}" height="45px" width="45px"></a></center>
                   <center><span id="likenum{{forloop.counter}}" name="likenum">{{PageBoard.Total_Count}}</span> SEALS</center>
                 </div>
 
@@ -64,5 +64,5 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+<script type="text/javascript" src="{% static "js/mycourses.js" %}"></script>
  <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

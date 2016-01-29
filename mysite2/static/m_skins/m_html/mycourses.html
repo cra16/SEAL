@@ -118,7 +118,7 @@
             <div class="ui raised segment">
                 <div class="left floated ui compact segment">
 
-                  <center><img src="../static/m_skins/m_css/seal.png" height="45px" width="45px"></center>
+                  <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
                   <center><span id="likenum{{forloop.counter}} name="likenum>{{PageBoard.Total_Count}}</span> SEALS</center>
                 </div>
 
@@ -188,7 +188,7 @@
             <div class="ui raised segment">
                 <div class="left floated ui compact segment two wide column">
 
-                  <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="../static/m_skins/m_css/seal.png" height="45px" width="45px"></a></center>
+                  <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></a></center>
                   <center><span id="likenum11">{{PageBoard2.Total_Count}}</span> SEALS</center>
                 </div>
                     

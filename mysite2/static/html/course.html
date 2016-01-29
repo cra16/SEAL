@@ -36,7 +36,7 @@
 
     <div class="col-md-8 col-sm-10 col-xs-10">
 
-      <h1 class="ui header"><img src="../static/css/seal.png" height="60px" width="60px"> Evaluation Result</h1>
+      <h1 class="ui header"><img src="{% static "css/seal.png" %}" height="60px" width="60px"> Evaluation Result</h1>
 
       <div class="ui section divider"></div>
 
@@ -262,7 +262,7 @@
 
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}//{{OtherBoard.Course.Semester}}</b></h4>          
+          <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>          
           <div id="recommending" class="ui column">          
             <div id="blankspace" class="ui column"></div>
 
@@ -374,6 +374,7 @@
               </a>
             </div></center>   
         {%endif%}
+        </div>
         </div>
          
       {%endblock%}

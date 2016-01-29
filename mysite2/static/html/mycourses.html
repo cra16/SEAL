@@ -124,6 +124,7 @@
               <div class="sixteen wide column">
 
                 [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
+                <div class="right floated right aligned one wide column" style="display:inline"><a href=""><i id="delete" class="glyphicon glyphicon-remove"></i></a></div>
                 <p><a style="cursor:pointer" href="/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
                 <p id="title_s"><span id="cprof1" name="cprof">{{PageBoard.Course.Professor}} 교수님</span></p>
               </div>
@@ -189,8 +190,7 @@
             <div class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
-                <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="{% static 
-                " css/seal.png" %}" height="45px" width="45px"></a></center>
+                <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="{% static "css/seal.png" %}" height="45px" width="45px"></a></center>
                 <center><span id="likenum{{forloop.counter}}">{{PageBoard2.Total_Count}}</span> SEALS</center>
               </div>
 
@@ -257,8 +257,9 @@
                               
         </div>
       </div>
- <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+
      <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+ <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
     {%endblock%}
 
   </body>

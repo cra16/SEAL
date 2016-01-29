@@ -9,7 +9,7 @@
               <div class="sixteen wide column" style="padding-bottom: 30px;">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
-                <center><a href="/Recommend/{{PageBoard.Course.id}}"><img src="../static/m_skins/m_css/seal.png" height="45px" width="45px"></a></center>
+                <center><a href="/Recommend/{{PageBoard.Course.id}}"><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></a></center>
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{PageBoard.Total_Count}}</span> SEALS</center>
               </div>
 

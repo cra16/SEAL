@@ -31,7 +31,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
 
 
-        <h2 class="ui header"><img src="../static/m_skins/m_css/write.png" height="50px" width="50px">&nbsp;&nbsp;강의 평가 하기</h2>
+        <h2 class="ui header"><img src="{% static "m_skins/m_css/write.png" %}" height="50px" width="50px">&nbsp;&nbsp;강의 평가 하기</h2>
 
         <div id="coursenameheader" class="ui column">
                 
@@ -59,7 +59,7 @@
 	   <form id="recommend_form" method ="POST">{% csrf_token %}
           
           <div ui="ui grid">
-            <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
+            <h4 style="display:inline; margin-left:30px;"><img src="{% static "css/seal.png" %}" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
             
               <div id="recommend_form" class="ui selection dropdown" style="margin-top:15px;">
               <div id="text_semester" class="default text">학기</div>

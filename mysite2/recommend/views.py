@@ -70,7 +70,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 	if request.method =="POST":
 		CourseName=request.POST['HCourseName']
 		CourseCode=request.POST['HCourseCode']
-		Semester=request.POST['HSemster']
+		Semester=request.POST['HSemester']
 		try:
 			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName),CreatedID = UserProfile)
 			if(Recommend != None):
@@ -95,7 +95,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		except:
 			CourseName=request.POST['HCourseName']
 			CourseCode=request.POST['HCourseCode']
-			Semester=request.POST['HSemster']
+			Semester=request.POST['HSemester']
 		
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5

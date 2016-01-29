@@ -85,7 +85,7 @@
         <div class="col-md-1 col-sm-0"></div>
         <div class="col-md-10 col-sm-12">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="../static/css/seal_logo.png" height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
+            <a class="navbar-brand" href="/"><img src="{% static " css/seal_logo.png " %} " height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
             <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search">
                 <button type="submit" id ="SearchButton" class="btn btn-info"  onclick=""><i class="glyphicon glyphicon-search"></i></button>

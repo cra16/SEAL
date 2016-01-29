@@ -36,6 +36,7 @@
         <i class="glyphicon glyphicon-book"></i> My Courses
       </h2>
 
+<!--
       <div class="ui small form">
         <div class="four fields">
           <div class="field">
@@ -98,6 +99,7 @@
           </div>
         </div>
       </div>
+    -->
 
       <div class="ui small tabular filter menu">
         <a class="active item" data-tab="unread">내가 평가한 강의</a>
@@ -114,7 +116,6 @@
           {% endif %}
           <div  class="column">                
             <div class="ui raised segment">
-              <div class="sixteen wide column" style="padding-bottom: 30px;">
                 <div class="left floated ui compact segment">
 
                   <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
@@ -125,14 +126,16 @@
 
                   [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
                   <p><a style="cursor:pointer" href="/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
-                  <p><span id="cprof1">{{PageBoard.Course.Professor}} 교수님</span></p>
+                  <p id="title_s"><span id="cprof1">{{PageBoard.Course.Professor}} 교수님</span></p>
                 </div>
+
+              <div class="left floated left aligned sixteen wide column">                
+                <button type ="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;10</b></span></button>
+                <div class="right floated right aligned sixteen wide column" style="margin-top:-34px; margin-left:10px"><span class="starvalue">{{PageBoard.Total_StarPoint}}</span></div>
               </div>
 
               <div class="center aligned sixteen wide column">
-              <br>
-              <div class="center aligned sixteen wide column" style="margin-left:75px"><span class="starvalue">{{PageBoard.Total_StarPoint}}</span></div>
-                <br>
+                <br><br><br><br>
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
                   <input type="text" id="sl1{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}1C" data-slider-value = "{{PageBoard.Total_Speedy}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -183,7 +186,6 @@
             {% endif %}
             <div class="column">
             <div class="ui raised segment">
-              <div class="sixteen wide column" style="padding-bottom: 30px;">
                 <div class="left floated ui compact segment two wide column">
 
                   <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></a></center>
@@ -194,14 +196,16 @@
 
                   [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard2.Course.Code}}</span>]
                   <p><a style="cursor:pointer" href="/Course/{{PageBoard2.Course.id}}"><span class="cname" id="cname11">{{PageBoard2.Course.CourseName}}</span></a></p>
-                  <p><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></p>
+                  <p id="title_s"><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></p>
                 </div>
+
+              <div class="left floated left aligned sixteen wide column">                
+                <button type ="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;10</b></span></button>
+                <div class="right floated right aligned sixteen wide column" style="margin-top:-34px; margin-left:10px"><span class="starvalue">{{PageBoard2.Total_StarPoint}}</span></div>
               </div>
 
               <div class="center aligned sixteen wide column">
-                <br>
-                <div class="center aligned sixteen wide column" style="margin-left:75px"><span class="starvalue">{{PageBoard2.Total_StarPoint}}</span></div>
-                <br>
+                <br><br><br><br>
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}1C" data-slider-value ="{{PageBoard2.Total_Speedy}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />

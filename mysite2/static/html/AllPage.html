@@ -21,10 +21,8 @@
                  <p ><a style="cursor:pointer" href="/CourseProfessor/{{PBoard3.Course.id}}"><span id = "last_cname"  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
                 <input type = "hidden" id="period" value = "{{PBoard3.Period}}">                
                 <p><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>
-                <p><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
+                <p id="title_s"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
 
-                <br>
-                
             {% if PBoard3.Check == True %}
           <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
@@ -78,7 +76,6 @@
           {% endif %}
             <div class="column">
             <div class="ui raised segment">
-              <div class="sixteen wide column">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
                 <center><button class="likebutton" name = "{{PBoard3.Course.id}}" ><img src="../static/css/write.png" height="45px" width="45px"></button></center>
@@ -90,14 +87,18 @@
 
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a  href ="/CourseProfessor/{{PBoard3.Course.id}}"><span  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
-                <p><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>                
+                <p id="title_s"><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>                
               </div>
-            </div>
 
-               <div class="center aligned sixteen wide column">
-                <br>
-                <div class="center aligned sixteen wide column" style="margin-left:125px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
-                <br>
+            <div class="left floated center aligned sixteen wide column">                
+                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                 <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  
+              </div>
+
+              <br><br>
+              <div class="ui section divider" style="border: none;"></div>
+
+                 <div class="center aligned sixteen wide column" style="margin-top:-10px;">
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
@@ -146,7 +147,6 @@
           {% endif %}
             <div class="column">
             <div class="ui raised segment">
-              <div class="sixteen wide column">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
                 <center><button id="likebutton" name = "{{PBoard3.Course.id}}" ><img src="../static/css/write.png" height="45px" width="45px"></button></center>
@@ -159,15 +159,18 @@
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                 <p><a href="/Course/{{PBoard3.Course.id}}"><span  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>
                 <p><span id="cprof1" name = "cprof">{{PBoard3.Course.Professor}} 교수님</span></p>
-                <p><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
-
+                <p id="title_s"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
               </div>
-            </div>
 
-              <div class="center aligned sixteen wide column">
-                <br>
-                <div class="center aligned sixteen wide column" style="margin-left:125px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
-                <br>
+            <div class="left floated center aligned sixteen wide column">                
+                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                 <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  
+              </div>
+
+              <br><br>
+              <div class="ui section divider" style="border: none;"></div>
+
+                 <div class="center aligned sixteen wide column" style="margin-top:-10px;">
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />

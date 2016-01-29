@@ -144,6 +144,9 @@ $("#recommend_form").submit(function(){
       $("#dropdown_semester").scrollTo();
       alert("Please select the semester.");
       return false;
+    } else {
+      $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
+      
     }
   });
 

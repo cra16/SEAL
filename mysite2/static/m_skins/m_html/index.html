@@ -183,12 +183,12 @@
 
                 <br>
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:18px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:18px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
            
-           <div class="center aligned sixteen wide column" style="margin-left:115px; margin-top:-25px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>
+           <div class="center aligned sixteen wide column" style="margin-left:75px; margin-top:-35px; margin-bottom: 5px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>
          
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
@@ -250,8 +250,7 @@
               
                  [<span id="ccode" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
                  <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
-                 <button id ="professorSl" class="ui mini basic blue circular button">✔&nbsp;&nbsp;강의 평가 하기</button>
-
+                 
                 <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">

@@ -144,8 +144,10 @@ $("#recommend_form").submit(function(){
       alert("Please select the semester.");
       return false;
     }
-    else
+    else{
       document.loginForm.action = "/Recommend/Recommend_Write";
+      document.loginForm.submit();
+    }
   });
 
  });

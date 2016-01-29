@@ -141,12 +141,14 @@ $("#recommend_form").submit(function(){
     if(Hsemester == "0" || Hsemester == ""){
       $("#dropdown_semester").css("border", "2px solid red");
       $("#dropdown_semester").css("box-shadow", "0 0 3px red");
-      alert("Please select the semester.");
+      $("#dropdown_semester").focus(function(){
+        alert("Please select the semester.");
+      });
       return false;
     }
     else{
-      document.loginForm.action = "/Recommend/Recommend_Write";
-      document.loginForm.submit();
+      document.recommend_form.action = "/Recommend/Recommend_Write";
+      document.recommend_form.submit();
     }
   });
 

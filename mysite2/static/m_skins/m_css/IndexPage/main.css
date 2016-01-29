@@ -4,8 +4,24 @@
     font-size: 30px;
 }
 
+#title_s {
+    height:20px;
+    margin-bottom:15px;
+}
+
+#thumbs_up {
+    display:inline;
+    background-color:#FFEB3B;
+    margin-left:10px;
+    font-size:15px;
+}
+
 #recommendtop > a {
     text-decoration: none;
+}
+
+#title_h{
+    height:125px;
 }
 
 #likebtn1{

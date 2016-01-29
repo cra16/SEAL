@@ -4,6 +4,18 @@
     font-size: 30px;
 }
 
+#title_s {
+    height:25px;
+    margin-bottom:15px;
+}
+
+#thumbs_up {
+    display:inline;
+    background-color:#FFEB3B;
+    margin-left:10px;
+    font-size:15px;
+}
+
 #recommendtop > a {
     text-decoration: none;
 }
@@ -59,43 +71,53 @@
 #likebtn21{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn22{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 
 #likebtn23{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn24{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn25{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn26{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn27{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn28{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn29{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 #likebtn210{
     margin-top: 2%;
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 
 #likebutton

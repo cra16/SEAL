@@ -147,7 +147,7 @@ $(document).ready(function(){
     var Hsemester = $("#HSemester").val();
     //check if there is nothing
     if(Hsemester == "0" || Hsemester == ""){
-      window.scrollTo(0, 200);
+      window.scrollTo(0, 500);
       alert("Please select the semester.");
       $("#text_semester").css("border", "2px solid red");
       return false;

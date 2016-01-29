@@ -526,6 +526,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[]]
+	goodList= [[],[],[]]
 	if CourseCode[0] !="ENG":
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
@@ -562,6 +563,16 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
 					
+					try:
+						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+					except:
+						goodList[i].append(0)
+					TempInt=0
+					for goodcount in good_count:
+							if goodcount.Check==True:
+								TempInt+=1
+					goodList[i].append(TempInt)
+					
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy +=T.Total_Speedy
@@ -582,6 +593,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
+					
 			i+=1
 
 
@@ -630,6 +642,17 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Exam += T.Total_Exam
 						#TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
+					
+					try:
+						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+					except:
+						goodList[i].append(0)
+					TempInt=0
+					for goodcount in good_count:
+							if goodcount.Check==True:
+								TempInt+=1
+					goodList[i].append(TempInt)
+
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
@@ -641,6 +664,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
+					
+					
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
@@ -658,7 +683,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			if On==0:
 						try:
 							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
-						
+							
+
 						except:
 							TotalDic = Total_Evaluation(Course=lec)
 							TotalDic.Total_Speedy =5
@@ -687,6 +713,16 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Exam += T.Total_Exam
 							#TempTotal.Total_Homework +=T.Total_Homework
 							TempTotal.Total_StarPoint += T.Total_StarPoint
+						try:
+							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+						except:
+							goodList[i].append(0)
+						TempInt=0
+						for goodcount in good_count:
+								if goodcount.Check==True:
+									TempInt+=1
+						goodList[2].append(TempInt)
+
 						if TempTotal.Total_Count==0:
 							TotalBoard[2].append(TempTotal)
 							break
@@ -698,6 +734,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
+						
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[]]
 	if CourseCode[0] !="ENG":
@@ -754,6 +791,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	#추천많이받은 순으로 보여주는 Board
 	BestBoard = BestBoardView()
 
+	
 	dic = {'user':User,
 		   'PageBoard': TotalBoard,
 		   'TotalCount' : TotalCount,
@@ -762,7 +800,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		   'Page':PageNumber,
 		   'BestBoard':BestBoard,
 		   'CourseName':PostDic['Course'],
-		   'ProSelect' :int(PostDic['ProSelect'])
+		   'ProSelect' :int(PostDic['ProSelect']),
+		   'GoodCount' :  goodList
 		   }
 
 	return dic

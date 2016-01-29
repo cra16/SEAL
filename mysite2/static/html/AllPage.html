@@ -26,11 +26,11 @@
                 <br>
                 
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
-           <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-30px; margin-bottom:20px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>        
+           <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom:10px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>        
               
 
           <div id="recommending" class="ui column">
@@ -96,7 +96,7 @@
 
                <div class="center aligned sixteen wide column">
                 <br>
-                <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
+                <div class="center aligned sixteen wide column" style="margin-left:125px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
@@ -166,7 +166,7 @@
 
               <div class="center aligned sixteen wide column">
                 <br>
-                <div class="center aligned sixteen wide column" style="margin-left:155px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
+                <div class="center aligned sixteen wide column" style="margin-left:125px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div> 
                 <br>
                   <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
                   <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard3.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>

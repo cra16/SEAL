@@ -139,9 +139,9 @@
 
 span.starvalue, span.starvalue span {
     display: block;
-    background: url(stars.png) 0 -16px repeat-x;
-    width: 80px;
-    height: 16px;
+    background: url(stars.png) 0 -30px repeat-x;
+    width: 150px;
+    height: 30px;
 }
 
 span.starvalue span {

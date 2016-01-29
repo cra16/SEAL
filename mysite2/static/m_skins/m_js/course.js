@@ -259,6 +259,7 @@ for(var i=0; i<ccode.length; i++)
           var url = location.href;
           var lastIndex = url.lastIndexOf('/');
           var cURL = url.substring(lastIndex);
+           var cssdata=$("#starpoint").css("width");
         $('div').on('click',"#CoursePagePrevious",function(event){
           event.stopPropagation();
           $(this).unbind("click");
@@ -284,14 +285,17 @@ for(var i=0; i<ccode.length; i++)
                   } 
             
           
-          });});  
+          });
+
+      $("#starpoint").css("width",cssdata);
+    });  
 
 
         $('div').on('click',"#CoursePageNumber",function(event){
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-
+        
         $.ajax(
             { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
@@ -312,12 +316,15 @@ for(var i=0; i<ccode.length; i++)
             
           
           });
+        $("#starpoint").css("width",cssdata);
 });
 
         $('div').on('click',"#CoursePageNext",function(event){
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
+       
+          var cssdata=$("#starpoint").css("width");
 
         $.ajax(
             { url : "/CoursePageNation"+cURL,
@@ -339,6 +346,7 @@ for(var i=0; i<ccode.length; i++)
             
           
           });
+         $("#starpoint").css("width",cssdata);
 
 });
 

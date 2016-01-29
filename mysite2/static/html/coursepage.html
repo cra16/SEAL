@@ -77,14 +77,14 @@
 
           <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if PBoard3.Check == True %}
+            {% if MyCourseBoard.Check == True %}
           <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
+           <div class="center aligned two wide column"><span  class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
          
           </div>
           
@@ -173,7 +173,7 @@
 
           <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if PBoard3.Check == True %}
+            {% if OtherBoard.Check == True %}
           <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
@@ -214,6 +214,7 @@
             </div></center>
         {%endif%}
               </div>
-        <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
-<script type="text/javascript" src="{% static "js/course.js" %}"></script>
+                 
+              <script type="text/javascript" src="{% static "js/course.js" %}"></script>
    
+     <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

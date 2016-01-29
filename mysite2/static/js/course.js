@@ -235,7 +235,7 @@ $('#sl3').slider('disable');
 $('#sl4').slider('disable');
 $('#sl5').slider('disable');
 $('#sl6').slider('disable');
-
+});
 
 
 var	ccode = document.getElementsByName('ccode')
@@ -254,15 +254,20 @@ for(var i=0; i<ccode.length; i++)
 	cname[i].textContent = document.getElementsByName('cname')[i].innerHTML;
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
+$(window).load(function()
+{
 
-          var CurrentPage=$(this).parent().attr("id")
+
+          var CurrentPage=$(this).parent().attr("id");
           var url = location.href;
           var lastIndex = url.lastIndexOf('/');
           var cURL = url.substring(lastIndex);
+        
+
         $('div').on('click',"#CoursePagePrevious",function(event){
           event.stopPropagation();
           $(this).unbind("click");
-          
+           var cssdata=$("#starsize").css("width");
 
 
         $.ajax(
@@ -284,13 +289,16 @@ for(var i=0; i<ccode.length; i++)
                   } 
             
           
-          });});  
+          });
+           $("#starpoint").text(parseFloat(cssdata)/16.0);
+      });  
 
 
         $('div').on('click',"#CoursePageNumber",function(event){
           event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().attr("id")
+          var CurrentPage=$(this).parent().attr("id");
+            var cssdata=$("#starsize").css("width");
 
         $.ajax(
             { url : "/CoursePageNation"+cURL,
@@ -312,13 +320,16 @@ for(var i=0; i<ccode.length; i++)
             
           
           });
+        $("#starpoint").text(parseFloat(cssdata)/16.0);
+
+
 });
 
         $('div').on('click',"#CoursePageNext",function(event){
           event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().attr("id")
-
+          var CurrentPage=$(this).parent().attr("id");
+           var cssdata=$("#starsize").css("width");
         $.ajax(
             { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
@@ -337,8 +348,9 @@ for(var i=0; i<ccode.length; i++)
 
                   } 
             
-          
+            
           });
+         $("#starpoint").text(parseFloat(cssdata)/16.0);
 
 });
 
@@ -365,7 +377,8 @@ for(var i=0; i<ccode.length; i++)
                   
                 
                 });
+                
+            });
 
-});
-          
+           
         });

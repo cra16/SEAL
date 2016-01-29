@@ -1,5 +1,4 @@
-
-$(function(){
+$(document).ready(function(){
 
 
 $.fn.starvalue = function() {
@@ -9,7 +8,7 @@ $.fn.starvalue = function() {
         // Make sure that the value is in 0 - 5 range, multiply to get width
         var size = Math.max(0, (Math.min(5, val))) * 16;
         // Create stars holder
-        var $span = $('<span />').width(size);
+        var $span = $('<span id="starsize" />').width(size);
         // Replace the numerical value with stars
         $(this).html($span);
     });

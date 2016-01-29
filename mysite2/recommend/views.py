@@ -33,6 +33,12 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	except:
 		RecommendData=None
 		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
+		SemesterList=list()
+		for semester in SemesterData:
+			if semester.Semester not in SemesterList:
+				SemesterList.append(semester.Semester)
+
+
 
 	if RecommendData != None:
 		if request.flavour =='full':
@@ -46,7 +52,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
               'BestBoard':BestBoardView(),
                'CourseBoard':CourseBoard,
                'Recommend':RecommendData,
-               'SemesterData':SemesterData
+               'SemesterData':SemesterList
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)

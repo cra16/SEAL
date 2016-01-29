@@ -58,15 +58,15 @@
         <div id="recommending" class="ui column">
 		
           <div id="blankspace" class="ui column"></div>
-	   <form action = "/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
+	   <form id="recommend_form" method ="POST">{% csrf_token %}
 
           <div ui="ui grid">
             <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
             
-              <div class="ui selection dropdown">
+              <div id="dropdown_semster" class="ui selection dropdown">
               <div class="default text">학기</div>
                 <i class="dropdown icon"></i>
-                <input id="HSemster"  name="HSemster" type="hidden" value ="0">
+                <input id="HSemester"  name="HSemester" type="hidden" value ="0">
                 <div class="menu">
                   <div class="item" data-value=""></div>
                   {%for SemesterData in SemesterData%}

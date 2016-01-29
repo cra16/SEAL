@@ -126,18 +126,26 @@ for(var i=0; i<ccode.length; i++)
 });
 
 $(document).ready(function(){
-
   $('.stars').on("click", "input",function(event){
-        event.stopPropagation();
-        $(this).unbind("click");
-        var splitdata = $(this).attr("id");
- 
-        splitdata = splitdata.split("-");
-        var starcount = splitdata[1];
-   
-        $("#StarValue").val(starcount);
+    event.stopPropagation();
+    $(this).unbind("click");
+    var splitdata = $(this).attr("id");
+    splitdata = splitdata.split("-");
+    var starcount = splitdata[1];
+    $("#StarValue").val(starcount);
+  });
 
+$("#recommend_form").submit(function(){
+    var Hsemester = $("#HSemester").val();
+    //check if there is nothing
+    if(Hsemester == "0" || Hsemester == ""){
+      $("#dropdown_semester").css("border", "2px solid red");
+      $("#dropdown_semester").css("box-shadow", "0 0 3px red");
+      alert("Please select the semester.");
+      return false;
+    }
+    else
+      document.loginForm.action = "/Recommend/Recommend_Write";
+  });
 
-
-    });
  });

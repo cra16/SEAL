@@ -141,7 +141,7 @@ $("#recommend_form").submit(function(){
     if(Hsemester == "0" || Hsemester == ""){
       $("#dropdown_semester").css("border", "2px solid red");
       $("#dropdown_semester").css("box-shadow", "0 0 3px red");
-      $.scrollTo('div#dropdown_semester');
+      $("#dropdown_semester").scrollTo();
       alert("Please select the semester.");
       return false;
     }

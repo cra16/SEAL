@@ -9,8 +9,7 @@
 
     <title>▒ SEAL ▒</title>
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{% static "js/recommend.js" %}">
-    </script>
+    <script type="text/javascript" src="{% static "js/recommend.js" %}"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/recommend.css" %}">
 
@@ -57,15 +56,15 @@
         <div id="recommending" class="ui column">
 		
           <div id="blankspace" class="ui column"></div>
-	   <form action = "/Recommend/Recommend_Write" method ="POST">{% csrf_token %}
+	   <form id="recommend_form" method ="POST">{% csrf_token %}
           
           <div ui="ui grid">
             <h4 style="display:inline; margin-left:30px;"><img src="../static/css/seal.png" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
             
-              <div class="ui selection dropdown" style="margin-top:15px;">
-              <div class="default text">학기</div>
+              <div id="recommend_form" class="ui selection dropdown" style="margin-top:15px;">
+              <div id="text_semester" class="default text">학기</div>
                 <i class="dropdown icon"></i>
-                <input id="HSemster"  name="HSemster" type="hidden" value ="0">
+                <input id="HSemester"  name="HSemester" type="hidden" value ="0">
                 <div class="menu">
                   <div class="item" data-value=""></div>
                   {%for SemesterData in SemesterData%}

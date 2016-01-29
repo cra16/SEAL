@@ -50,7 +50,7 @@ def QnAMain(request): #Q&A 메인
 	if request.flavour =='full':
 		return render_to_response('html/QnA.html',dic)
 	else:
-		return render_to_response("m_skins/m_html/QnA.html",dic)
+		return render_to_response("m_skins/m_html/qna.html",dic)
 
 @csrf_exempt		
 def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능

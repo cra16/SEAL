@@ -149,7 +149,7 @@ $(document).ready(function(){
     if(Hsemester == "0" || Hsemester == ""){
       $("#dropdown_semester").css("border", "2px solid red");
       $("#dropdown_semester").css("box-shadow", "0 0 3px red");
-      $.scrollTo(0,0, {duration: 200});
+      window.scrollTo(0, 50);
       alert("Please select the semester.");
       return false;
     } else {

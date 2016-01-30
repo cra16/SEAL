@@ -85,8 +85,6 @@ def Recommend_Write(request): #추천 강의 DB입력
 			RecommendData=None
 		
 		try:
-			
-
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
@@ -96,8 +94,6 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
-
-		
 		except:
 			CourseName=request.POST['HCourseName']
 			CourseCode=request.POST['HCourseCode']
@@ -111,6 +107,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
+		# 추천 여부에 따라 1 or 0
+		is_recommend = request.POST['ButtonCheck']
+		if is_recommend:
+			recommend_cnt = 1
+		else:
+			recommend_cnt = 0
 			
 #			new_Homework=5
 		
@@ -134,7 +136,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=new_CreatedID).count()
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
-			Total_Eval = Total_Evaluation(Course = new_Course, Total_Speedy = new_Speedy, Total_Reliance = new_Reliance, Total_Question = new_Question,Total_Exam = new_Exam,  Total_Count =1,Total_StarPoint=new_Satisfy)
+			Total_Eval = Total_Evaluation(
+				Course = new_Course,Total_Speedy = new_Speedy,
+				Total_Reliance = new_Reliance, Total_Question = new_Question,
+				Total_Exam = new_Exam,  Total_Count = 1,
+				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt
+			)
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)
@@ -145,6 +152,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			#T_Eval.Total_Homework += int(new_Homework)
 			T_Eval.Total_StarPoint += float(new_Satisfy)
 			T_Eval.Total_Count += 1
+			T_Eval.Total_Recommend += recommend_cnt
 			
 			T_Eval.save()
 	

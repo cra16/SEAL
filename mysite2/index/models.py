@@ -20,19 +20,20 @@ class Course_Evaluation(models.Model):
 		return self.Course.CourseName
 
 class Total_Evaluation(models.Model):
-		Course = models.ForeignKey(Lecture)
-		Total_Speedy = models.IntegerField(default=0)
-		Total_Reliance = models.IntegerField(default=0)
-		Total_Helper = models.IntegerField(default=0)
-		Total_Question = models.IntegerField(default=0)
-		Total_Exam = models.IntegerField(default=0)
-		Total_Homework=models.IntegerField(default=0)
-		Total_Count =models.IntegerField(default=0)
-		Total_P_Knowledge = models.IntegerField(default=5, null=False)
-		Total_StarPoint = models.FloatField(default=0)
+	Course = models.ForeignKey(Lecture)
+	Total_Speedy = models.IntegerField(default=0)
+	Total_Reliance = models.IntegerField(default=0)
+	Total_Helper = models.IntegerField(default=0)
+	Total_Question = models.IntegerField(default=0)
+	Total_Exam = models.IntegerField(default=0)
+	Total_Homework=models.IntegerField(default=0)
+	Total_Count =models.IntegerField(default=0)
+	Total_P_Knowledge = models.IntegerField(default=5, null=False)
+	Total_StarPoint = models.FloatField(default=0)
+	Total_Recommend = models.IntegerField(default=0, null=False)
 
-		def __unicode__(self):
-			return self.Course.Code
+	def __unicode__(self):
+		return self.Course.Code
 
 
 

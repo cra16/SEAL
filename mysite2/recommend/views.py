@@ -77,8 +77,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 		CourseName=request.POST['HCourseName']
 		CourseCode=request.POST['HCourseCode']
 		Semester=request.POST['HSemester']
+		Professor=request.POST['HCourseProfessor']
+
 		try:
-			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName),CreatedID = UserProfile)
+			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor),CreatedID = UserProfile)
 			if(Recommend != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
 		except:
@@ -116,7 +118,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 #			new_Homework=5
 		
-		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName)[0]
+		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 			
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)

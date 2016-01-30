@@ -108,7 +108,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
 		# 추천 여부에 따라 1 or 0
-		is_recommend = request.POST['ButtonCheck']
+		is_recommend = bool(request.POST['ButtonCheck'])
 		if is_recommend:
 			recommend_cnt = 1
 		else:

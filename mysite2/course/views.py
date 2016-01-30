@@ -87,7 +87,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 				
 				#pageNation과 관련된 기능
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,totalcount)
+				O_Count = DataCount(3,len(OtherCount))
 				
 						
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
@@ -149,18 +149,18 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 				count+=1
 
 			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
-			O_Count = DataCount(3,totalcount)
+			
 	except:
 			DBCount = 0
 
 	
 	#이전페이지 다음페이지 기능 구현
 
-	PageInformation=CurrentPageView(O_Count,offset2)
 	
-	OtherCount=PageTotalCount(O_Count,PageInformation)
+	
+	
 
-	PageInformation[1]=offset2
+	
 	#해당 페이지에 출력할 데이터들 갯수 정하는 기능
 	PageFirst = (offset2-1)*3
 	PageLast = (offset2-1)*3+3
@@ -182,7 +182,10 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 				pass
 		else:
 			OtherCourseBoard.append(Board)
-
+	O_Count = DataCount(3,len(OtherCourseBoard))
+	PageInformation=CurrentPageView(O_Count,offset2)
+	PageInformation[1]=offset2
+	OtherCount=PageTotalCount(O_Count,PageInformation)
 	dic ={'user':request.user,
 			'BestBoard':BestBoardView(),
 			'CourseBoard':CourseBoard,
@@ -275,7 +278,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				
 				#pageNation과 관련된 기능
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,totalcount)
+				O_Count = DataCount(3,len(OtherCourseBoard))
 				good_count=Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor))
 				goodresult=None
 				for goodcount in good_count:

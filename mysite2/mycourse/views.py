@@ -132,15 +132,20 @@ def MyCoursePageNation(request):
 			return render_to_response('m_skins/m_html/'+template, Data)
 
 
-
+@csrf_exempt
 def CourseDelete(request):
 	if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
 	if request.method == "POST":
-		LectureData=Lecture.objects.get(id=1)
+		Code = request.POST['Code']
+		Professor = request.POST['Professor']
+		Period = request.POST['Period']
+		Semster= request.POST['Semester']
+
+		LectureData=Lecture.objects.get(Code = Code, Professor = Professor, Period =Period, Semester =Semster)
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.get(Course=LectureData, User=UserData)
+		DeleteData=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
 		
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
 
@@ -158,13 +163,14 @@ def CourseDelete(request):
 
 		UpdateData.update()
 		DeleteData.delete()
+		return render_to_response('html/RecommendPage.html',Data)
 def CourseUpdate(request):
 	if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 	if request.method == "POST":
 		LectureData=Lecture.objects.get(id=1)
 		UserData = Profile.objects.get(User = request.user)
-		UpdateCourseEval=Course_Evaluation.objects.get(Course=LectureData, User=UserData)
+		UpdateCourseEval=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
 		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)
 		
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy

@@ -370,20 +370,22 @@ $("[data-toggle=tooltip]").tooltip();
 
     });
 
-    $('div').on('click','#delete',function(){
+    $('div').on('click','#delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id")
-           var Parent=$(this).parent().parent().parent();
-            var Code = Parent.find("[class=ccode]").text();
-            var prof = Parent.find("[id=prof]").val();
+           var Parent=$(this).parent().parent();
+            var Code = Parent.find("[name=ccode]").text();
+            var CourseName=Parent.find("[id=cname]").val();
+            var prof = Parent.find("[id=professor]").val();
             var period = Parent.find("[id=period]").val();
             var semester = Parent.find("[id=semester]").val();
+ 
          $.ajax(
-            { url : "/MyCoursePage/",
+            { url : "/MyCourseDelete/",
               data : {
-                
-                       'Code':Code,
+                      'Code':Code,
+                      'CourseName': CourseName,
                       'Professor':prof,
                       'Period':period,
                       'Semester':semester,

@@ -131,7 +131,7 @@
               </div>
 
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard.Total_Recommend}}</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PageBoard.Total_StarPoint}}</span></div>  
               </div>
 
@@ -178,10 +178,6 @@
 
           </div>
 
-
-
-
-
           <div id = "LikePageMain" class="ui divided very relaxed inbox selection list tab" style="margin-top:-1em;" data-tab="saved">
           {% for PageBoard2 in LikePage%}
           {% if forloop.counter0|divisibleby:"2" %}
@@ -203,7 +199,7 @@
               </div>
 
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PageBoard2.Total_StarPoint}}</span></div>  
               </div>
 
@@ -212,16 +208,17 @@
 
                 <div class="center aligned sixteen wide column" style="margin-top:-10px;">
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
-                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard2.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
-                  <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
-                  <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
-                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard2.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
+
+                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}1C" data-slider-value ="{{PageBoard2.Total_Speedy}}"/>
+                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}2C" data-slider-value ="{{PageBoard2.Total_Reliance}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
-                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard2.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}3C" data-slider-value ="{{PageBoard2.Total_Question}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제됨">서술형</a>
-                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard2.Total_Exam}}" data-slider-id="sl{{forloop.counter}}4C"/>
+                  <input type="text" id="sl{{forloop.counter}}4" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}4C" data-slider-value ="{{PageBoard2.Total_Exam}}"/>
                   <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제됨">단답형</a>
                </div>
             </div>
@@ -262,6 +259,7 @@
 
  <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
    <script type="text/javascript" src="{% static "js/mycourses.js" %}"></script>
+
     {%endblock%}
 
   </body>

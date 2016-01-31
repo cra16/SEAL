@@ -21,15 +21,16 @@
               </div>
             
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PageBoard2.Total_StarPoint}}</span></div>  
               </div>
 
               <br><br>
               <div class="ui section divider" style="border: none;"></div>
 
-                 <div class="center aligned sixteen wide column" style="margin-top:-10px;">
-                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
+
+                 <div class="center aligned sixteen wide column">
+                  <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림보</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard2.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
                   <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
@@ -67,6 +68,7 @@
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
-         <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
-      <script type="text/javascript" src="{% static "js/mycourses.js" %}"></script>
 
+    <script type="text/javascript" src="{% static "js/mycourses.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

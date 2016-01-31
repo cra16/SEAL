@@ -133,4 +133,53 @@ def MyCoursePageNation(request):
 
 
 
+def CourseDelete(request):
+	if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
+
+	if request.method == "POST":
+		LectureData=Lecture.objects.get(id=1)
+		UserData = Profile.objects.get(User = request.user)
+		DeleteData=Course_Evaluation.objects.get(Course=LectureData, User=UserData)
+		
+		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
+
+		UpdateData.Total_Count -=1
+		if UpdateData.Total_Count ==0:
+			UpdateData.delete()
+			DeleteData.delete()
+			return 
+			
+		UpdateData.Total_Speedy -= DeleteData.Speedy
+		UpdateData.Total_Reliance -= DeleteData.Reliance
+		UpdateData.Total_Question -= DeleteData.Question
+		UpdateData.Total_Exam -= DeleteData.Exam
+		UpdateData.Total_StarPoint -= DeleteData.StarPoint
+
+		UpdateData.update()
+		DeleteData.delete()
+def CourseUpdate(request):
+	if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
+	if request.method == "POST":
+		LectureData=Lecture.objects.get(id=1)
+		UserData = Profile.objects.get(User = request.user)
+		UpdateCourseEval=Course_Evaluation.objects.get(Course=LectureData, User=UserData)
+		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)
+		
+		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy
+		UpdateTotalEval.Total_Reliance -= UpdateCourseEval.Reliance
+		UpdateTotalEval.Total_Question -= UpdateCourseEval.Question
+		UpdateTotalEval.Total_Exam -= UpdateCourseEval.Exam
+		UpdateTotalEval.Total_StarPoint -= UpdateCourseEval.StarPoint
+
+		UpdateCourseEval.Speedy = request.POST['Speedy']
+		UpdateCourseEval.Reliance = request.POST['Reliance']
+		UpdateCourseEval.Question = request.POST['Reliance']
+		UpdateCourseEval.Exam = request.POST['Exam'] 
+		UpdateCourseEval.StarPoint =request.POST['StarPoint']
+
+		UpdeateTotalEval.update()
+		UpdateCourseEval.update()
+
 # Create your views here.

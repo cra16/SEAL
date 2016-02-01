@@ -45,7 +45,7 @@ def MyCoursePage(request,Page,Mobile):
 			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
 		except:
 			RecommendData = None
-		if RecommendData.Total_Count==None:
+		if RecommendData==None:
 			RecommendPage.append(RecommendData)
 			break
 		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
@@ -70,7 +70,7 @@ def MyCoursePage(request,Page,Mobile):
 					LikeData.Total_Helper=5
 					LikeData.Total_Exam =5
 					LikeData.Total_Homework = 5
-			if LikeData.Total_Count==0:
+			if LikeData==0:
 				LikePage.append(LikeData)
 				break
 	
@@ -134,6 +134,7 @@ def MyCoursePageNation(request):
 
 @csrf_exempt
 def CourseDelete(request):
+	Mobile = request.flavour
 	if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 
@@ -142,18 +143,21 @@ def CourseDelete(request):
 		Professor = request.POST['Professor']
 		Period = request.POST['Period']
 		Semster= request.POST['Semester']
+		CourseName = request.POST['CourseName']
+		Page = request.POST['CurrentPage']
+		Page= int(Page)
+		PageFirst=10*(int(Page)-1)
+		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Lecture.objects.get(Code = Code, Professor = Professor, Period =Period, Semester =Semster)
+		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Period =Period, Semester =Semster)
 		UserData = Profile.objects.get(User = request.user)
 		DeleteData=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
 		
+
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
 
-		UpdateData.Total_Count -=1
-		if UpdateData.Total_Count ==0:
-			UpdateData.delete()
-			DeleteData.delete()
-			return 
+		
+		
 			
 		UpdateData.Total_Speedy -= DeleteData.Speedy
 		UpdateData.Total_Reliance -= DeleteData.Reliance
@@ -161,8 +165,57 @@ def CourseDelete(request):
 		UpdateData.Total_Exam -= DeleteData.Exam
 		UpdateData.Total_StarPoint -= DeleteData.StarPoint
 
-		UpdateData.update()
-		DeleteData.delete()
+		
+		UpdateData.Total_Count -=1
+		if UpdateData.Total_Count ==0:
+			UpdateData.delete()
+			DeleteData.delete()
+		else:
+			UpdateData.update()
+			DeleteData.delete()
+		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
+		RecommendPage =[]
+		for Board in Recommend:
+			try :
+				RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
+			except:
+				RecommendData = None
+			if RecommendData!=None:
+				RecommendPage.append(RecommendData)
+				break
+			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
+			RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
+			RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
+			#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
+			RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
+			#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
+			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
+			RecommendPage.append(RecommendData)
+		Count = [[],[]]
+		DBCount=Course_Evaluation.objects.filter(CreatedID = UserData).count()
+		Count[0] = DataCount(10,DBCount)
+		DBCount=Like_Course.objects.filter(CreatedID = UserData).count()
+		Count[1]=DataCount(10,DBCount)
+		PageInformation=list()
+		TotalCount=list()
+		if Mobile == "full":
+
+			for i in range(0,2):
+				PageInformation.append(CurrentPageView(Count[i],Page))									
+				TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
+		else:
+			for i in range(0,2):
+				PageInformation.append(MobileCurrentPageView(Count[i],Page))									
+				TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
+	
+
+		Data={
+		"RecommendPage":RecommendPage,
+		'PageInformation' : PageInformation,
+		'TotalCount':TotalCount,
+		'Page':Page
+		}
+
 		return render_to_response('html/RecommendPage.html',Data)
 def CourseUpdate(request):
 	if CheckingLogin(request.user.username):

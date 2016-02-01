@@ -1,6 +1,7 @@
 {%load staticfiles%}
 {%for PageBoard in RecommendPage%}
 {% if forloop.counter0|divisibleby:"2" %}
+ {{Page}}
         <div class="ui stackable two column grid">
 
           {% endif %}
@@ -58,7 +59,9 @@
               <a id ="RecommendPrevious" name = "{{PageInformation.0.0}}" class="item">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
+
               {% for i in TotalCount.0%}
+
               {%if Page == i%}
 
               <a id ="RecommendPage" name="{{i}}" class="active item" >{{i}}</a>

@@ -190,6 +190,7 @@ def CourseDelete(request):
 			RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
 			#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
 			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
+			RecommendData.Total_Recommend = RecommendData.Total_Recommend/RecommendData.Total_Count
 			RecommendPage.append(RecommendData)
 		Count = [[],[]]
 		DBCount=Course_Evaluation.objects.filter(CreatedID = UserData).count()

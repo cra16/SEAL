@@ -267,9 +267,9 @@ def RegisterInfo(request):
 				e_user.delete()
 
 			if request.flavour =='full':
-				render_to_response('html/stu_num_duplicate.html')
+				return render_to_response('html/stu_num_duplicate.html')
 			else:
-				render_to_response('m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
+				return render_to_response('m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
 
 		if request.flavour =='full':
 			return loginCheck(request)

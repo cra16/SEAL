@@ -279,7 +279,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				#pageNation과 관련된 기능
 				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 				O_Count = DataCount(3,len(OtherCourseBoard))
-				good_count=Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor))
+				good_count=Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)[0])
 				goodresult=None
 				for goodcount in good_count:
 					if goodcount['Check']==True:

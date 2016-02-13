@@ -209,8 +209,12 @@ def CourseDelete(request):
 				PageInformation.append(MobileCurrentPageView(Count[i],Page))									
 				TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
 	
-
+		UserData = Profile.objects.get(User = request.user)
+		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=UserData).count()
+		UserData.save()
 		Data={
+
+		'User':UserData,
 		"RecommendPage":RecommendPage,
 		'PageInformation' : PageInformation,
 		'TotalCount':TotalCount,

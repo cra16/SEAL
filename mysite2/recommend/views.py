@@ -200,6 +200,6 @@ def Like(request):
 		
 
 		
-		URL = "/Course/"+str(LectureID)
+		URL = "/CourseProfessor/"+str(LectureID)
 		return HttpResponseRedirect(URL)
 		

@@ -216,6 +216,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			return HttpResponseRedirect("/")
 
 		#현재 접속한 아이디 정보 받아옴
+		Mobile=request.flavour
 		try:
 			UserData = Profile.objects.get(User = request.user)
 		except :

@@ -363,11 +363,10 @@ for(var i=0; i<ccode.length; i++)
                     datatype:"json",
                     type : "POST",
                     success:function(resp){     
-                        alert("듣고 싶은 강의로 등록 되었습니다.")
+                        alert("듣고 싶은 강의로 등록 되었습니다.");
                       },
                       error: function(xhr, option, error){
-                        alert(xhr.status); //오류코드
-                        alert(error); //오류내용
+                        alert("이미 듣고 싶은 강의로 등록이 되어 있습니다.");
 
                         } 
                   

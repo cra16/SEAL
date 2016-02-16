@@ -189,7 +189,7 @@ def Like(request):
 		if request.flavour =='full':
 			raise Exception
 		else:
-			return render_to_response("m_skins/m_html/Like_error.html")
+			raise Exception
 	else:
 		CourseLecture = Lecture.objects.get(id = LectureID)
 		new_Like=Like_Course(Course = CourseLecture, CreatedID = UserData)

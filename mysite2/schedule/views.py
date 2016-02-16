@@ -19,6 +19,7 @@ def SelectPeriod(request, period, page):
 	period -> 테이블에서 선택한 강의시간
 	page -> pagination에서 선택한 page
 	"""
+	Mobile =request.flavour
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 
@@ -64,14 +65,17 @@ def SelectPeriod(request, period, page):
 
 		total = [lec_lst]
 		TotalBoard = PageView(total)
-		PageInformation = FirstPageView(lec_cnt)
+		if Mobile =="full":
+				PageInformation = FirstPageView(lec_cnt)
+		else:
+				PageInformation = MobileFirstPageView(lec_cnt)
 		PageInformation[1]=cur_page
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
 		ctx = {
 			'user':request.user,
 			'period':period,
-			'total_page': PageTotalCount(lec_cnt,PageInformation),
+			'total_page': Mobile == "full" and PageTotalCount(lec_cnt,PageInformation) or MobilePageTotalCount(lec_cnt,PageInformation,3),
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
 			'cur_page':cur_page,
@@ -98,6 +102,7 @@ def SearchSelectPeriod(request):
 	period -> 테이블에서 선택한 강의시간
 	page -> pagination에서 선택한 page
 	"""
+	Mobile = request.flavour
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	elif request.method=="POST":
@@ -142,7 +147,10 @@ def SearchSelectPeriod(request):
 
 		total = [lec_lst]
 		TotalBoard = PageView(total)
-		PageInformation = CurrentPageView(lec_cnt,cur_page)
+		if Mobile =="full":
+				PageInformation = CurrentPageView(lec_cnt,cur_page)
+		else :
+				PageInformation =MobileCurrentPageView(lec_cnt,cur_page)
 		PageInformation[1]=cur_page
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)
@@ -150,7 +158,7 @@ def SearchSelectPeriod(request):
 		ctx = {
 			'user':request.user,
 			'period':period,
-			'total_page': PageTotalCount(lec_cnt,PageInformation),
+			'total_page': Mobile == "full" and PageTotalCount(lec_cnt,PageInformation) or MobilePageTotalCount(lec_cnt,PageInformation,3),
 			'lec_lst':lec_lst,
 			'is_odd':is_odd,
 			'cur_page':cur_page,
@@ -282,7 +290,7 @@ def RemoveLecture(request):
 def SearchSubject(request):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-
+	Mobile =request.flavour
  	if request.method =="POST":
  		PostDic=dict()
  		for key in request.POST.keys():
@@ -314,12 +322,22 @@ def SearchSubject(request):
 			Subject = Lecture.objects.filter(Major__contains=SelectMajor, CategoryDetail__contains=SelectCategory, CourseName__contains=PostDic['SearchName'], Semester=cur_semester)[start:end]
 
 		if New == 1:
-			PageInformation = FirstPageView(SubjectCount)
-			TotalCount=PageTotalCount(SubjectCount,PageInformation)
+			if Mobile == "full":
+					PageInformation = FirstPageView(SubjectCount)
+					TotalCount=PageTotalCount(SubjectCount,PageInformation)
+			else :
+					PageInformation = MobileFirstPageView(SubjectCount)
+					TotalCount=MobilePageTotalCount(SubjectCount,PageInformation,3)
 		else :
-			PageInformation = CurrentPageView(SubjectCount,PostDic['Page'])
-			PageInformation[1]=PostDic['Page']
-			TotalCount = PageTotalCount(SubjectCount,PageInformation)
+			if Mobile =="full":
+					PageInformation = CurrentPageView(SubjectCount,PostDic['Page'])
+					PageInformation[1]=PostDic['Page']
+					TotalCount = PageTotalCount(SubjectCount,PageInformation)
+			else:
+					PageInformation = MobileCurrentPageView(SubjectCount,PostDic['Page'])
+					PageInformation[1]=PostDic['Page']
+					TotalCount = MobilePageTotalCount(SubjectCount,PageInformation,3)
+				
 		TotalBoard = PageView([Subject])
 		my_profile = Profile.objects.filter(User_id=request.user.id)[0]
 		my_lec_table = MakeTable(request, my_profile)

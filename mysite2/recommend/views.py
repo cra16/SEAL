@@ -24,19 +24,19 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 
 	UserProfile=Profile.objects.get(User = request.user)
 	LectureData= Lecture.objects.get(id=offset)
-	try:
+	#try:
 		
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
+		#RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
 		
 
-		return HttpResponseRedirect('/NotEmptyRecommend')
-	except:
-		RecommendData=None
-		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
-		SemesterList=list()
-		for semester in SemesterData:
-			if semester.Semester not in SemesterList:
-				SemesterList.append(semester.Semester)
+		#return HttpResponseRedirect('/NotEmptyRecommend')
+	#except:
+	RecommendData=None
+	SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
+	SemesterList=list()
+	for semester in SemesterData:
+		if semester.Semester not in SemesterList:
+			SemesterList.append(semester.Semester)
 
 
 
@@ -80,8 +80,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 		Professor=request.POST['HCourseProfessor']
 
 		try:
-			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor),CreatedID = UserProfile)
-			if(Recommend != None):
+			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0],CreatedID = UserProfile)
+			if(RecommendData != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
 		except:
 			RecommendData=None

@@ -370,9 +370,7 @@ $(window).load(function()
                         alert("듣고 싶은 강의로 등록 되었습니다.")
                       },
                       error: function(xhr, option, error){
-                        alert(xhr.status); //오류코드
-                        alert(error); //오류내용
-
+                        alert("이미 중복된 강의가 있습니다.");
                         } 
                   
                 

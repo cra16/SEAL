@@ -126,7 +126,7 @@
 
                 [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
                 <div class="right floated right aligned one wide column" style="display:inline"><i id="delete" class="glyphicon glyphicon-remove"></i></div>
-                <p><a style="cursor:pointer" href="/Course/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
+                <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
 
                 <p id="title_s"><span id="cprof1" name="cprof">{{PageBoard.Course.Professor}} 교수님</span></p>
                 <input type = "hidden" id="period" value = "{{PageBoard.Course.Period}}">
@@ -196,7 +196,7 @@
               <div class="sixteen wide column">
                     
                 [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard2.Course.Code}}</span>]
-                <p><a style="cursor:pointer" href="/Course/{{PageBoard2.Course.id}}"><span class="cname" id="cname">{{PageBoard2.Course.CourseName}}</span></a></p>
+                <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard2.Course.id}}"><span class="cname" id="cname">{{PageBoard2.Course.CourseName}}</span></a></p>
 
                 <p id="title_s"><span id="cprof1" name="cprof">{{PageBoard2.Course.Professor}} 교수님</span></p>
               </div>

@@ -181,25 +181,24 @@ def Like(request):
 		pass
 
 	try:
-		LikeData=Like_Course.objects.get(CreatedID = Profile.objects.get(User = UserData), Course = Lecture.objects.get(id=page))
+		LikeData=Like_Course.objects.get(Course = Lecture.objects.get(id=LectureID),CreatedID = UserData)
 	except:
 		LikeData=None
 
 	if LikeData != None:
 		if request.flavour =='full':
-			return render_to_response('m_skins/m_html/Like_error.html')
+			raise Exception
 		else:
-			return render_to_response("m_skins/m_html/Like_error.html")
+			raise Exception
 	else:
 		CourseLecture = Lecture.objects.get(id = LectureID)
-		new_Like=Like_Course(Course = CourseLecture, CreatedID = Profile.objects.get(User = request.user))
+		new_Like=Like_Course(Course = CourseLecture, CreatedID = UserData)
 		new_Like.save()
-		UserData = Profile.objects.get(User = request.user)
 		UserData.LikeCount= Like_Course.objects.filter(CreatedID=UserData).count()
 		UserData.save()
 		
 
 		
-		URL = "/Course/"+str(LectureID)
+		URL = "/CourseProfessor/"+str(LectureID)
 		return HttpResponseRedirect(URL)
 		

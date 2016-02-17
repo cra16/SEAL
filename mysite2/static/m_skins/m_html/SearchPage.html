@@ -53,7 +53,7 @@
             <div class="column">
             <div class="ui raised segment">
                <div id="likebtn{{forloop.counter}}" class="left floated ui compact segment two wide column">
-                   <center><button class="likebutton" name ="{{SBoard.Course.id}}"><img src="{% static "m_skins/m_css/write.png" %}" height="45px" width="45px"></button></center>
+                   <center><button id="likebutton" name ="{{SBoard.Course.id}}"><img src="{% static "m_skins/m_css/write.png" %}" height="45px" width="45px"></button></center>
                     <center><span id="likenum{{forloop.counter}}">{{SBoard.Total_Count}}</span> SEALS</center>
                </div>
 
@@ -64,7 +64,7 @@
                </div>
 
                <div class="left floated left aligned sixteen wide column">                
-                <button type ="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
+                <button type ="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
                 <div class="right floated right aligned sixteen wide column" style="margin-top:-34px; margin-left:10px"><span class="starvalue">{{SBoard.Total_StarPoint}}</span></div>
               </div>
               

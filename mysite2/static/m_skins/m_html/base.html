@@ -82,21 +82,21 @@
         <div class="col-md-1 col-sm-0"></div>
         <div class="col-md-10 col-sm-12">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="{% static "css/seal_logo.png" %}" height="42px" width="42px" style="display:inline; margin-top:-6px; margin-left:-20px; margin-right:20px;"><h4 style="font-size:25px; margin-left:-25px; margin-top:0px">SEAL</h4></a>
-            <form id = "form" class="navbar-form navbar-left col-xs-7 form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
-                <input type="text" id="search" name="search" class="form-control" placeholder="Search">
-                <button type="submit" id ="SearchButton" class="btn btn-info" style="margin-left:107px" onclick=""><i class="glyphicon glyphicon-search"></i></button>
-      
-              <div class="form-group">
+            <a class="navbar-brand" style="margin-top:3px; margin-left:-33px;" href="/">SEAL</a>
 
-              </div>
+            <form id = "form" class="navbar-form navbar-left col-xs-6 form-inline" style="margin-top:10px;" role="search" action="/Search/" method = "POST" >{%csrf_token%}
+                <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                <button type="submit" id ="SearchButton" class="btn btn-info" style="margin-top:-53px; margin-left:123px;" onclick=""><i class="glyphicon glyphicon-search"></i></button>
+      
              </form>
-            <button type="button" class="navbar-toggle" style="margin-right:-15px" data-toggle="collapse" data-target=".navbar-menubuilder">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" style="margin-right:-18px; margin-top:10px;" data-target=".navbar-menubuilder">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+
           </div>
           <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">

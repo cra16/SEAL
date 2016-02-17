@@ -79,6 +79,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
 
+
 		try:
 			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0],CreatedID = UserProfile)
 			if(RecommendData != None):
@@ -91,11 +92,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
 			new_Question=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
-			new_Exam=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
+			#new_Exam=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] =="True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
+			new_Answer_list = request.POST.getlist('Answer[]')
 		except:
 			CourseName=request.POST['HCourseName']
 			CourseCode=request.POST['HCourseCode']
@@ -109,6 +111,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
+			new_Answer_list = request.POST.getlist('Answer[]')
 		# 추천 여부에 따라 1 or 0
 		is_recommend = ( request.POST['ButtonCheck'] == "True" )
 		if is_recommend:
@@ -120,7 +123,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		
 		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
-			
+		for new_Answer in new_Answer_list:#서술형 답변
+			Description_Answer = Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer)
+
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question, Exam = new_Exam,CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
@@ -150,7 +155,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval.Total_Reliance += int(new_Reliance)
 			#T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Question += int(new_Question)
-			T_Eval.Total_Exam += int(new_Question)
+			#T_Eval.Total_Exam += int(new_Question)
 			#T_Eval.Total_Homework += int(new_Homework)
 			T_Eval.Total_StarPoint += float(new_Satisfy)
 			T_Eval.Total_Count += 1

@@ -13,7 +13,7 @@ class Course_Evaluation(models.Model):
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 	Check = models.BooleanField(default=False)
 	P_Knowledge = models.PositiveSmallIntegerField(default=5, null=False)
-	CourseComment = models.TextField(max_length=200)
+	CourseComment = models.TextField(max_length=500)
 	StarPoint =models.FloatField(default=0)
 		
 	def __unicode__(self):
@@ -34,7 +34,12 @@ class Total_Evaluation(models.Model):
 
 	def __unicode__(self):
 		return self.Course.Code
+class Description_Answer(models.Model):
+	CreatedID = models.ManyToManyField(Profile)
+	Answer = models.TextField(max_length=200)
 
+	def __unicode__(self):
+		return self.Description.CreatedID
 
 
 # Create your models here.

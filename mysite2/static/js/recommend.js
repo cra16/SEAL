@@ -123,9 +123,6 @@ for(var i=0; i<ccode.length; i++)
 	cprof[i].textContent = document.getElementsByName('cprof')[i].innerHTML;
 }
 
-});
-
-$(document).ready(function(){
   $('.stars').on("click", "input",function(event){
     event.stopPropagation();
     $(this).unbind("click");
@@ -135,8 +132,8 @@ $(document).ready(function(){
     $("#StarValue").val(starcount);
   });
 
-$("#recommend_form").submit(function(){
-    var Hsemester = $("#HSemester").val();
+  $("#recommend_form").submit(function(){
+    var Hsemester = $("#Hsemester").val();
     //check if there is nothing
     if(Hsemester == "0" || Hsemester == ""){
       window.scrollTo(0, 200);
@@ -147,5 +144,31 @@ $("#recommend_form").submit(function(){
       $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
     }
   });
+});
 
- });
+$(document).ready(function(){
+  $('.ui.button').on('click', function(){
+    $(this).addClass('active').siblings().removeClass('active');
+    });
+});
+
+$(document).ready(function(){
+  var max_fields = 10; //maximum input boxes allowed
+  var wrapper = $(".input_fields_wrap"); //Fields wrapper
+  var add_button = $(".add_field_button"); //Add button ID
+  
+  var x = 1; //initlal text box count
+  $(add_button).on('click', function(){
+  //on add input button click
+      if(x < max_fields){ //max input box allowed
+          x++; //text box increment
+          $(wrapper).append('<div style="margin-top:3px;"><input type="text" size="50" name="mytext[]"/><a class="remove_field" style="cursor:pointer; font-size:13px; margin-right:-9px"> x</a></div>'); //add input box
+      }
+      else
+        alert("최대 10개까지 등록이 가능합니다.");
+  });
+  
+  $(wrapper).on("click",".remove_field", function(){ //user click on remove text
+      $(this).parent('div').remove(); x--;
+  })
+});

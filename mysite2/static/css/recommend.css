@@ -33,6 +33,18 @@ label.star:before {
   font-family: FontAwesome;
 }
 
+.ui.piled.segment:before {
+	transform: rotate(-1.2deg);
+	top: 0;
+	z-index: -2;
+}
+
+.ui.piled.segment:after {
+	transform: rotate(1.2deg);
+	top: 0;
+	z-index: -1;
+}
+
 #ccode_p {
 	font-size: 20px;
 }

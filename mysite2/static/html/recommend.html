@@ -124,43 +124,57 @@
 
 
           <div class="ui grid">
-            <div id="thirdcolumn" class="left floated center aligned three wide column"><b>강의 방식</b></div>
+            <div id="thirdcolumn" class="left floated center aligned three wide column"><b>난이도</b></div>
             <div class="left floated center aligned two wide column">
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="간단히 요약해서 강의하심">요약적</a>
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl3" name ="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="학생들이 이해할 수 있도록 자세하게 강의하심">자세함</a>
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
             </div>
           </div>
-
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
-
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned three wide column"><b>시험 방식</b></div>
-            <div class="left floated center aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable4" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
-            </div>
-            <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="주관식/서술형 문제가 주로 출제됨">서술형</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl4" name="sl4" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl4C" data-slider-disabled="false" />
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="객관식 문제가 주로 출제됨">단답형</a>
+            
+            <div class="right floated center aligned twelve wide column">
+              <div class="ui buttons" style="margin-top:-10px">
+                <button type ="button" class="ui button" value="1">서술형</button>
+                <button type ="button" class="ui button" value="2">단답형</button>
+                <button type ="button" class="ui button" value="3">혼합형</button>
+              </div>
             </div>
           </div>
-           
-            <br><br>
-              
+
+          <form class="ui form stackable attached fluid segment">
+            <div class="ui center aligned piled segment">
+            <div class="field">
+              <label><h4>기억에 남는 시험 문제는? <h5>(익명이 보장되며, 무작위로 보여집니다)</h5></h4></label>
+              <div class="input_fields_wrap">
+                <input type="text" size="50" name="mytext[]">
+                <button type ="button" class="add_field_button" style="margin-right:-24px;">+</button>
+              </div>
+            </div>
+            <br>
+            <div class="field">
+              <label><h4>어떤 사람에게 이 과목을 추천하시나요?</h4></label><br>
+              <input type="text" size="50" value="" name="who">
+            </div>
+            <br>
+            <div class="field">
+              <label><h4>참고하면 좋은 사이트 URL</h4></label><br>
+              <input type="text" size="50" value="" name="url">
+            </div>
+          </div>
+          </form>
+
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
           <div class="ui grid">

@@ -491,7 +491,7 @@ def TotalCourse(offset):
 		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
 		#CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
 		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+		#CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
 		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 	except:
@@ -515,7 +515,7 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Reliance = 5
 			#CourseBoard.Total_Helper = 5
 			CourseBoard.Total_Question = 5
-			CourseBoard.Total_Exam= 5
+			#CourseBoard.Total_Exam= 5
 			#CourseBoard.Total_Homework = 5
 			CourseBoard.Total_Count = 5
 			CourseBoard.Total_StarPoint=0
@@ -526,7 +526,7 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Reliance += CourseList.Total_Reliance
 			#CourseBoard.Total_Helper += CourseList.Total_Helper
 			CourseBoard.Total_Question += CourseList.Total_Question
-			CourseBoard.Total_Exam += CourseList.Total_Exam
+			#CourseBoard.Total_Exam += CourseList.Total_Exam
 			#CourseBoard.Total_Homework += CourseList.Total_Homework
 			CourseBoard.Total_StarPoint+= CourseList.Total_StarPoint
 
@@ -534,7 +534,7 @@ def TotalCourseProfessor(CourseName,Professor):
 		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
 		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
 		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-		CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
+		#CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
 		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 

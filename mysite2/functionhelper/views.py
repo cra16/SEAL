@@ -428,7 +428,7 @@ def PageView(TotalBoard):
 				BoardData.Total_Reliance = BoardData.Total_Reliance/BoardData.Total_Count
 				BoardData.Total_Helper = BoardData.Total_Helper/BoardData.Total_Count
 				BoardData.Total_Question = BoardData.Total_Question/BoardData.Total_Count
-				BoardData.Total_Exam = BoardData.Total_Exam/BoardData.Total_Count
+				#BoardData.Total_Exam = BoardData.Total_Exam/BoardData.Total_Count
 				BoardData.Total_Homework = BoardData.Total_Homework/BoardData.Total_Count
 				PageBoard[count].append(BoardData)
 			else:
@@ -437,7 +437,7 @@ def PageView(TotalBoard):
 				BoardData.Total_Reliance =5
 				BoardData.Total_Helper = 5
 				BoardData.Total_Question = 5
-				BoardData.Total_Exam = 5
+				#BoardData.Total_Exam = 5
 				BoardData.Total_Homework = 5
 				BoardData.Total_Count =0
 				PageBoard[count].append(BoardData)
@@ -550,19 +550,23 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic.Total_Reliance =5
 						TotalDic.Total_Helper = 5
 						TotalDic.Total_Question = 5
-						TotalDic.Total_Exam = 5
+						#TotalDic.Total_Exam = 5
 						TotalDic.Total_Homework = 5
 						TotalDic.Total_Count =0
+
 					TempTotal = Total_Evaluation(Course=lec)
 					TempTotal.Total_Speedy =0
 					TempTotal.Total_Reliance =0
 					#TempTotal.Total_Helper = 0
 					TempTotal.Total_Question = 0
-					TempTotal.Total_Exam = 0
+					#TempTotal.Total_Exam = 0
 					#TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
-					
+					TempTotal.Total_Mix=0
+					TempTotal.Total_Short_Answer=0
+					TempTotal.Total_Long_Answer=0
+
 					try:
 						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
 					except:
@@ -582,6 +586,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Exam += T.Total_Exam
 						#TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
+						TempTotal.Total_Mix +=T.Total_Mix
+						TempTotal.Total_Short_Answer += T.Total_Short_Answer
+						TempTotal.Total_Long_Answer += T.Total_Long_Answer
 					if TempTotal.Total_Count==0:
 						TotalBoard[i].append(TempTotal)
 						continue
@@ -632,6 +639,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					#TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint=0
+					TempTotal.Total_Mix =0
+					TempTotal.Total_Short_Answer =0
+					TempTotal.Total_Long_Answer =0
 					
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
@@ -642,6 +652,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Exam += T.Total_Exam
 						#TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
+						TempTotal.Total_Mix +=T.Total_Mix
+						TempTotal.Total_Short_Answer += T.Total_Short_Answer
+						TempTotal.Total_Long_Answer += T.Total_Long_Answer
 					
 					try:
 						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
@@ -691,7 +704,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalDic.Total_Reliance =5
 							#TotalDic.Total_Helper = 5
 							TotalDic.Total_Question = 5
-							TotalDic.Total_Exam = 5
+							#TotalDic.Total_Exam = 5
 							#TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
@@ -703,6 +716,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = 0
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
+						TempTotal.Total_Mix =0
+						TempTotal.Total_Short_Answer =0
+						TempTotal.Total_Long_Answer = 0
 						
 						for T in TotalDic:
 							TempTotal.Total_Count += T.Total_Count
@@ -713,6 +729,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							#TempTotal.Total_Exam += T.Total_Exam
 							#TempTotal.Total_Homework +=T.Total_Homework
 							TempTotal.Total_StarPoint += T.Total_StarPoint
+							TempTotal.Total_Mix +=T.Total_Mix
+							TempTotal.Total_Short_Answer += T.Total_Short_Answer
+							TempTotal.Total_Long_Answer += T.Total_Long_Answer
 						try:
 							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
 						except:

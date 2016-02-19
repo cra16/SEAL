@@ -346,8 +346,7 @@ def lec_update(request):
 	'11-1', '11-2', '11-Summer', '11-Winter', 
 	'12-1', '12-2', '12-Summer', '12-Winter', 
 	'13-1', '13-2', '13-Summer', '13-Winter', 
-	'14-1', '14-2', '14-Summer', '14-Winter',
-	'15-1', '15-Summer'
+	'14-1', '14-2', '14-Summer', '14-Winter'
 	]
 	# semester_lst = ['15-2']
 	semester_lst.sort(reverse=True)

@@ -146,6 +146,7 @@ for(var i=0; i<ccode.length; i++)
   });
 });
 
+
 $(document).ready(function(){
   $('.ui.button').on('click', function(){
     $(this).addClass('active').siblings().removeClass('active');
@@ -162,13 +163,12 @@ $(document).ready(function(){
   //on add input button click
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          $(wrapper).append('<div style="margin-top:3px;"><input type="text" size="50" name="mytext[]"/><a class="remove_field" style="cursor:pointer; font-size:13px; margin-right:-9px"> x</a></div>'); //add input box
+          $(wrapper).append('<div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">기억에 남는 시험 문제 추가</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>'); //add input box
       }
       else
         alert("최대 10개까지 등록이 가능합니다.");
   });
   
   $(wrapper).on("click",".remove_field", function(){ //user click on remove text
-      $(this).parent('div').remove(); x--;
   })
 });

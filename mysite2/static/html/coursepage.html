@@ -63,11 +63,24 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-                  <button type ="button" class="ui button" value="">형식</button>
+              <div class="ui buttons" style="margin-top:-10px">
+                <button type ="button" class="ui toggle button" value="1">서술형</button>
+                <button type ="button" class="ui toggle button" value="2">단답형</button>
+                <button type ="button" class="ui toggle button" value="3">혼합형</button>
               </div>
+            </div>
             </div>
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div class="ui piled segment">
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: </h4>
+              <br>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: </h4>
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>            
+
 
           <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
@@ -84,9 +97,10 @@
           
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
-              </div>
+            <div id="qna_border_a" class="ui raised segment">
+               <h5><b>Comment</b></h5>
+               <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
+            </div>
           </div>
 
   {% endfor %} 
@@ -153,8 +167,20 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-                  <button type ="button" class="ui button" value="">형식</button>
+              <div class="ui buttons" style="margin-top:-10px">
+                <button type ="button" class="ui toggle button" value="1">서술형</button>
+                <button type ="button" class="ui toggle button" value="2">단답형</button>
+                <button type ="button" class="ui toggle button" value="3">혼합형</button>
               </div>
+            </div>
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div class="ui piled segment">
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: </h4>
+              <br>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: </h4>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -174,12 +200,11 @@
 
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
         
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
-                  <p>{{OtherBoard.CourseComment|linebreaks}}</p>
-              </div>
+            <div id="qna_border_a" class="ui raised segment">
+              <h5><b>Comment</b></h5>
+              <p>{{OtherBoard.CourseComment|linebreaks}}</p>
+            </div>
           </div>
 
         {%endfor%}

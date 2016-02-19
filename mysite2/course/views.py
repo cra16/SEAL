@@ -21,7 +21,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
-
+		Mobile = request.flavour
 		#현재 접속한 아이디 정보 받아옴
 		try:
 			UserData = Profile.objects.get(User = request.user)
@@ -91,9 +91,14 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 				
 						
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				PageInformation=FirstPageView(O_Count)
+				if Mobile == 'full':
+						PageInformation=FirstPageView(O_Count)
+						OtherCount=PageTotalCount(O_Count,PageInformation)
+				else:
+						PageInformation = MobileFirstPageView(O_Count)
+						OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				OtherCount=PageTotalCount(O_Count,PageInformation)
+				
 				dic ={'user':request.user,
 					'BestBoard':BestBoardView(),
 					'CourseBoard':CourseBoard,
@@ -113,6 +118,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 	
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
+	Mobile = request.flavour
 	try:
 		offset = int(offset)
 		if request.method=="POST":
@@ -183,9 +189,14 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 		else:
 			OtherCourseBoard.append(Board)
 	O_Count = DataCount(3,len(OtherCourseBoard))
-	PageInformation=CurrentPageView(O_Count,offset2)
-	PageInformation[1]=offset2
-	OtherCount=PageTotalCount(O_Count,PageInformation)
+	if Mobile =="full":
+		PageInformation=CurrentPageView(O_Count,offset2)
+		PageInformation[1]=offset2
+		OtherCount=PageTotalCount(O_Count,PageInformation)
+	else:
+		PageInformation=MobileCurrentPageView(O_Count,offset2)
+		PageInformation[1]=offset2
+		OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
 	dic ={'user':request.user,
 			'BestBoard':BestBoardView(),
 			'CourseBoard':CourseBoard,
@@ -205,6 +216,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			return HttpResponseRedirect("/")
 
 		#현재 접속한 아이디 정보 받아옴
+		Mobile=request.flavour
 		try:
 			UserData = Profile.objects.get(User = request.user)
 		except :
@@ -291,9 +303,14 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 							goodresult = goodcount
 
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				PageInformation=FirstPageView(O_Count)
+				if Mobile == "full":
+					PageInformation=FirstPageView(O_Count)
+					OtherCount=PageTotalCount(O_Count,PageInformation)
+				else:
+					PageInformation=MobileFirstPageView(O_Count)
+					OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
+
 				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				OtherCount=PageTotalCount(O_Count,PageInformation)
 				dic ={'user':request.user,
 					'BestBoard':BestBoardView(),
 					'CourseBoard':CourseBoard,
@@ -310,7 +327,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(처음 눌럿을때 )
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
-
+		Mobile=request.flavour
 		#현재 접속한 아이디 정보 받아옴
 		try:
 			
@@ -364,10 +381,15 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 				O_Count = DataCount(3,DBCount)
 				
-				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				PageInformation=FirstPageView(O_Count)
-				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				OtherCount=PageTotalCount(O_Count,PageInformation)
+				if Mobile =="full":					
+					#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+					PageInformation=FirstPageView(O_Count)
+					#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+					OtherCount=PageTotalCount(O_Count,PageInformation)
+				else:
+					PageInformation=MobileFirstPageView(O_Count)
+					#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+					OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
 				dic ={'user':request.user,
 					'BestBoard':BestBoardView(),
 					'CourseBoard':CourseBoard,
@@ -386,7 +408,7 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 		
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
-
+		Mobile = request.flavour
 		#현재 접속한 아이디 정보 받아옴
 		try:
 			if request.method =="POST":
@@ -440,9 +462,15 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				O_Count = DataCount(3,DBCount)
 				
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				PageInformation=FirstPageView(O_Count)
-				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				OtherCount=PageTotalCount(O_Count,PageInformation)
+				if Mobile =="full":
+					PageInformation=FirstPageView(O_Count)
+					#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+					OtherCount=PageTotalCount(O_Count,PageInformation)
+				else:
+					PageInformation=MobileFirstPageView(O_Count)
+					#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+					OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
+
 				dic ={'user':request.user,
 					'BestBoard':BestBoardView(),
 					'CourseBoard':CourseBoard,

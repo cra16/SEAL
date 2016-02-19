@@ -234,7 +234,7 @@ def Register(request):
 		user_name = request.POST['user_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
-		all_rec = request.POST('all_rec')
+		all_rec = request.POST['all_rec']
 
 		try:
 			user = User.objects.create_user(username=stu_num, password=user_pw, email=user_email)
@@ -270,8 +270,8 @@ def RegisterInfo(request):
 		stu_name = request.POST['stu_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
-		all_rec = request.POST('all_rec')
-		
+		all_rec = request.POST['all_rec']
+
 		try:
 			user = User.objects.create_user(username=stu_num)
 			user.save()

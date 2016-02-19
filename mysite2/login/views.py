@@ -205,7 +205,7 @@ def HisnetCheck(request):
 				for i, tr in enumerate(trs):
 					if i < 2:
 						continue
-					all_rec += '$$' tr.find('td').text		# 구분자 '$$' 나중에 split하기 위함.
+					all_rec += '$$' + tr.find('td').text		# 구분자 '$$' 나중에 split하기 위함.
 
 			ctx = {
 				'stu_num': stu_num,
@@ -234,7 +234,7 @@ def Register(request):
 		user_name = request.POST['user_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
-		all_rec = request.POST.get('all_rec')
+		all_rec = request.POST('all_rec')
 
 		try:
 			user = User.objects.create_user(username=stu_num, password=user_pw, email=user_email)

@@ -9,19 +9,6 @@ class Description_Answer(models.Model):
 	def __unicode__(self):
 		return self.CreatedID.User.username
 
-class Description_Who(models.Model):
-	CreatedID = models.ForeignKey(Profile)
-	Answer = models.TextField(max_length=200)
-	Course = models.ForeignKey(Lecture)
-	def __unicode__(self):
-		return self.CreatedID.User.username
-
-class Description_Url(models.Model):
-	CreatedID = models.ForeignKey(Profile)
-	Answer = models.TextField(max_length=200)
-	Course = models.ForeignKey(Lecture)
-	def __unicode__(self):
-		return self.CreatedID.User.username	
 class Course_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
 	CreatedID = models.ForeignKey(Profile)
@@ -37,8 +24,8 @@ class Course_Evaluation(models.Model):
 	StarPoint =models.FloatField(default=0)
 	What_Answer = models.IntegerField(default=0)
 	Exam_Answer = models.ManyToManyField(Description_Answer)
-	Who_Answer = models.TextField(max_length=200)
-	Url_Answer = models.TextField(max_length=200)
+	Who_Answer = models.TextField(max_length=200, null=True)
+	Url_Answer = models.TextField(max_length=200, null=True)
 	def __unicode__(self):
 		return self.Course.CourseName
 

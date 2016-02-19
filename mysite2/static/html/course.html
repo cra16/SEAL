@@ -117,11 +117,28 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
-              <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui toggle button" value="1">서술형</button>
-                <button type ="button" class="ui toggle button" value="2">단답형</button>
-                <button type ="button" class="ui toggle button" value="3">혼합형</button>
-              </div>
+
+              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  </div>
+              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  </div>
+              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  </div>
+              {% else %}
+               GG
+              {%endif%}
             </div>
           </div>
 
@@ -220,13 +237,33 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-              <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui toggle button" value="1">서술형</button>
-                <button type ="button" class="ui toggle button" value="2">단답형</button>
-                <button type ="button" class="ui toggle button" value="3">혼합형</button>
+
+                  {% if MyCourseBoard.What_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    </div>
+                  {%else%}
+                  {%endif%}
               </div>
             </div>
-            </div>
+            {{Answer_Dis}}
+            {% for Answer_Dis in Answer_Dis %}
+              {{Answer_Dis.Answer}}
+            {%endfor%}
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
@@ -247,9 +284,11 @@
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
-            <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+
+          <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>
+
            <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
-         
+           
           </div>
 
             <div id="qna_border_a" class="ui raised segment">
@@ -321,12 +360,27 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-              <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui toggle button" value="1">서술형</button>
-                <button type ="button" class="ui toggle button" value="2">단답형</button>
-                <button type ="button" class="ui toggle button" value="3">혼합형</button>
+
+              {% if OtherBoard.What_Answer == 1%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  </div>
+              {% elif OtherBoard.What_Answer == 2%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  </div>
+              {% elif OtherBoard.What_Answer == 3%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  </div>
+              {%endif%}
               </div>
-            </div>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>

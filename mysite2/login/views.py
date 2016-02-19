@@ -190,11 +190,29 @@ def HisnetCheck(request):
 			except IndexError as e:
 				second_major = None
 
+			browser.open("https://hisnet.handong.edu/haksa/record/HREC110M.php")
+			record_contents = browser.response().read()
+			record_soup = BeautifulSoup(record_contents, "html.parser")
+
+			tables = record_soup.find_all(id='att_list')
+			all_rec = ''	# 전체 수강목록 저장
+
+			for i, table in enumerate(tables):
+				if i < 2:
+					continue
+				trs = table.find_all('tr')
+				# rec_semester = trs[0].text.split()[0]	# 수강 학기
+				for i, tr in enumerate(trs):
+					if i < 2:
+						continue
+					all_rec += '$$' + tr.find('td').text		# 구분자 '$$' 나중에 split하기 위함.
+
 			ctx = {
 				'stu_num': stu_num,
 				'stu_name': stu_name,
 				'first_major': first_major,
 				'second_major': second_major,
+				'all_rec': all_rec,
 			}
 
 			if request.flavour =='full':
@@ -216,12 +234,13 @@ def Register(request):
 		user_name = request.POST['user_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
+		all_rec = request.POST['all_rec']
 
 		try:
 			user = User.objects.create_user(username=stu_num, password=user_pw, email=user_email)
 			user.save()
 			get_user = User.objects.get(username=stu_num)
-			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=user_name)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=user_name, LectureRecord=all_rec)
 			profile.save()
 		except:
 			# User를 만들었으나 Profile에서 실패할 경우 User만 등록되는 겨우가 발생함.
@@ -251,12 +270,13 @@ def RegisterInfo(request):
 		stu_name = request.POST['stu_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
+		all_rec = request.POST['all_rec']
 
 		try:
 			user = User.objects.create_user(username=stu_num)
 			user.save()
 			get_user = User.objects.get(username=stu_num)
-			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name, LectureRecord=all_rec)
 			profile.save()
 
 		except:

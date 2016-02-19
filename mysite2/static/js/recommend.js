@@ -150,6 +150,10 @@ $(document).ready(function(){
   $('.ui.button').on('click', function(){
     $(this).addClass('active').siblings().removeClass('active');
     });
+  $('div').on("click",".paper_button",function()
+  {
+    $(".paper_value").val($(this).val());
+  });
 });
 
 $(document).ready(function(){
@@ -170,5 +174,7 @@ $(document).ready(function(){
   
   $(wrapper).on("click",".remove_field", function(){ //user click on remove text
       $(this).parent('div').remove(); x--;
-  })
+  
+
+  });
 });

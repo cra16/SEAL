@@ -275,7 +275,7 @@ def RegisterInfo(request):
 			user = User.objects.create_user(username=stu_num)
 			user.save()
 			get_user = User.objects.get(username=stu_num)
-			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name, LectureRecord=all_rec)
 			profile.save()
 
 		except:

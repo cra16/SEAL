@@ -116,7 +116,15 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
-              <button type ="button" class="ui button" value="">형식</button>
+              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer %}
+                  <button type ="button" class="ui button" value="">단답형</button>
+              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer %}
+                  <button type ="button" class="ui button" value="">서술형</button>
+              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer %}
+                  <button type ="button" class="ui button" value="">혼합형</button>
+              {% else %}
+               GG
+              {%endif%}
             </div>
           </div>
 
@@ -215,9 +223,20 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-                  <button type ="button" class="ui button" value="">형식</button>
+                  {% if MyCourseBoard.What_Answer == 1%}
+                  <button type ="button" class="ui button" value="">단답형</button>
+                  {% elif MyCourseBoard.What_Answer == 2%}
+                      <button type ="button" class="ui button" value="">서술형</button>
+                  {% elif MyCourseBoard.What_Answer == 3%}
+                      <button type ="button" class="ui button" value="">혼합형</button>
+                  {%else%}
+                  {%endif%}
               </div>
             </div>
+            {{Answer_Dis}}
+            {% for Answer_Dis in Answer_Dis %}
+              {{Answer_Dis.Answer}}
+            {%endfor%}
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
@@ -229,9 +248,9 @@
            <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
-            <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+          <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
-         
+           
           </div>
 
 
@@ -304,7 +323,13 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-                  <button type ="button" class="ui button" value="">형식</button>
+              {% if OtherBoard.What_Answer == 1%}
+                  <button type ="button" class="ui button" value="">단답형</button>
+              {% elif OtherBoard.What_Answer == 2%}
+                  <button type ="button" class="ui button" value="">서술형</button>
+              {% elif OtherBoard.What_Answer == 3%}
+                  <button type ="button" class="ui button" value="">혼합형</button>
+              {%endif%}
               </div>
             </div>
 

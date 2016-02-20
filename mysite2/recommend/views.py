@@ -128,9 +128,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 		for new_Answer in new_Answer_list:#서술형 답변
-			temp=Description_Answer.objects.create(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
+			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 		
-		new_Eval = Course_Evaluation.objects.create(Course = new_Course, CreatedID = new_CreatedID, 
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
 			Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url)
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID).objects.create()

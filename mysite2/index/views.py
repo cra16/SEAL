@@ -90,6 +90,8 @@ def Page(request): #Main Page를 보여주는 함수
 		Page ="1"
 	elif PostDic['Current'] =="ThirdPage" or PostDic['Current'] =="ThirdPageNation":
 		Page="2"
+	elif PostDic['Current'] =="SugangPage" or PostDic['Current'] =="SugangPageNation":
+		Page="3"
 	else:
 		Page ="0" #어디쪽에 뿌릴지 결정함
 

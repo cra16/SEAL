@@ -158,6 +158,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Eval.Total_Short_Answer+=1
 			elif new_paper_value ==3:
 				Total_Eval.Total_Mix+=1
+			elif new_paper_value ==4:
+				Total_Eval.Total_Unknown_Answer+=1
 
 			Total_Eval.save()
 		else: #update
@@ -176,7 +178,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				T_Eval.Total_Short_Answer+=1
 			elif new_paper_value ==3:
 				T_Eval.Total_Mix+=1
-			
+			elif new_paper_value ==4:
+				Total_Eval.Total_Unknown_Answer+=1			
 			T_Eval.save()
 	
 		URL = "/CourseProfessor/"+str(new_Course.id)

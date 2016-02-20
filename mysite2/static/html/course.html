@@ -117,30 +117,35 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
-
-              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer %}
-                  <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
-                  </div>
-              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer %}
-                  <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
-                  </div>
-              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer %}
+            {{CourseBoard}}{{CourseBoard.Total_Mix}}{{CourseBoard.Total_Short_Answer}}{{CourseBoard.Total_Long_Answer}}{{CourseBoard.Total_Unknown_Answer}}
+              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
                   <div class="ui buttons" style="margin-top:-10px">
                     <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
                     <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                   </div>
-              {% else %}
-               GG
+              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Unknown_Answer%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and Courseboard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Long_Answer%}
+               <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button " value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
               {%endif%}
             </div>
           </div>
@@ -262,8 +267,14 @@
                       <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                     </div>
-                  {%else%}
-                  {%endif%}
+                  {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
+              {%endif%}
               </div>
             </div>
             {{Answer_Dis}}
@@ -275,10 +286,9 @@
 
             
             <div class="ui piled segment">
-<<<<<<< HEAD
-              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <b>&nbsp;&nbsp;~~~한 사람</b></h4>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <b>{{MyCourseBoard.Who_Answer}}</b></h4>
               <br>
-              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: &nbsp;&nbsp;<b><u><a href="http://seal.handong.edu/">http://seal.handong.edu/</a></u></b></h4>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: <b><u><a href="{{MyCourseBoard.Url_Answer}}">{{MyCourseBoard.Url_Answer}}</a></u></b></h4>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>            
@@ -388,6 +398,13 @@
                     <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
                     <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
                   </div>
               {%endif%}
               </div>

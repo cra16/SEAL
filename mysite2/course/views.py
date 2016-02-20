@@ -534,7 +534,7 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Mix += CourseList.Total_Mix
 			CourseBoard.Total_Short_Answer += CourseList.Total_Short_Answer
 			CourseBoard.Total_Long_Answer += CourseList.Total_Long_Answer
-
+			CourseBoard.Total_Unknown_Answer += CourseList.Total_Unknown_Answer
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
 		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
@@ -542,6 +542,6 @@ def TotalCourseProfessor(CourseName,Professor):
 		#CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
 		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
-
+		
 
 		return CourseBoard

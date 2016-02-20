@@ -44,6 +44,7 @@ class Total_Evaluation(models.Model):
 	Total_Mix = models.IntegerField(default=0)
 	Total_Short_Answer = models.IntegerField(default=0)
 	Total_Long_Answer = models.IntegerField(default=0)
+	Total_Unknown_Answer = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return self.Course.Code

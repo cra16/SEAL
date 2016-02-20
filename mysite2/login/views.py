@@ -194,8 +194,8 @@ def HisnetCheck(request):
 			record_contents = browser.response().read()
 			record_soup = BeautifulSoup(record_contents, "html.parser")
 
-			tables = record_soup.find_all(id='att_list')
-			all_rec = ''	# 전체 수강목록 저장
+			tables = record_soup.find_all(id='att_list')	# navigate to lecture list table
+			all_rec = ''	# 전체 수강목록 string 초기화
 
 			for i, table in enumerate(tables):
 				if i < 2:
@@ -205,7 +205,10 @@ def HisnetCheck(request):
 				for i, tr in enumerate(trs):
 					if i < 2:
 						continue
-					all_rec += '$$' + tr.find('td').text		# 구분자 '$$' 나중에 split하기 위함.
+					rec_code = tr.find('td')
+					rec_name = rec_code.next_sibling.next_sibling
+					all_rec += rec_code.text + '->' + rec_name.text + '$$'		# 구분자 '$$' 나중에 split하기 위함.
+				all_rec = all_rec[:-2]	# 마지막 구분자 '$$'' 제거
 
 			ctx = {
 				'stu_num': stu_num,

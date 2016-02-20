@@ -75,11 +75,46 @@
                   <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
                   <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
                   <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
                   <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
                </div>
+
+               <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+              <div class="right floated center aligned twelve wide column">
+
+                  {% if MyCourseBoard.What_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {%else%}
+                  {%endif%}
+              </div>
             </div>
+            {{Answer_Dis}}
+            {% for Answer_Dis in Answer_Dis %}
+              {{Answer_Dis.Answer}}
+            {%endfor%}
+
+          </div>
           
       
             {%endfor%}
@@ -142,7 +177,7 @@
                   <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
                   <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
                   <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
                   <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
                </div>

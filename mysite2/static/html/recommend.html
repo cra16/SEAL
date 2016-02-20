@@ -152,6 +152,7 @@
                 <button type ="button" class="ui button toggle paper_button" value="1">서술형</button>
                 <button type ="button" class="ui button toggle paper_button" value="2">단답형</button>
                 <button type ="button" class="ui button toggle paper_button" value="3">혼합형</button>
+                <button type ="button" class="ui button toggle paper_button" value="4">해당없음</button>
                 <input type="hidden" name = "paper_value" class="paper_value" value ="1">
 
               </div>
@@ -159,6 +160,8 @@
           </div>
 
           <div class="ui center aligned piled segment">
+            <div class="ui grid" style="margin-left:10px">
+            <div class="center aligned twelve wide column">
 
             <br>
 
@@ -166,22 +169,8 @@
             <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i></h2>
             <div class="input_fields_wrap">
               <input type="text" name="mytext[]" label="기억에 남는 시험 문제는?" active-color='#3F51B5' class="demo-form">
-                <button type="button" class="ui vertical mini animated button add_field_button" tabindex="0" style="margin-top:-80px">
-                  <div class="hidden content">Add</div>
-                  <div class="visible content">
-                    <i class="glyphicon glyphicon-plus"></i>
-                  </div>
-                </button>
-          
-            <!--<div class="ui center aligned piled segment">
-            <div class="field">
-              <label><h4>기억에 남는 시험 문제는? <h5>(익명이 보장되며, 무작위로 보여집니다)</h5></h4></label>
-              <div class="input_fields_wrap">
-                <input type="text" size="50" name="mytext[]">
-                <button type ="button" class="add_field_button" style="margin-right:-24px;">+</button>-->
-
               </div>
-            <p style="margin-top:-30px; color:grey">*** 익명이 보장되며, 무작위로 보여집니다. ***</p>
+            <p style="margin-top:-40px; color:grey">*** 익명이 보장되며, 무작위로 보여집니다. ***</p>
           </div>
 
             <br>
@@ -196,6 +185,17 @@
             <div class="field">
               <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i></h2>
               <input type="text" name="mytext[]" label="참고하면 좋은 사이트 URL" name="url" active-color='#3F51B5' class="demo-form">
+            </div>
+
+            </div>
+            <div class="four wide column">
+              <button type="button" class="ui vertical mini animated button add_field_button" tabindex="0" style="margin-bottom:-220px; margin-left:-25px">
+                <div class="hidden content">Add</div>
+                <div class="visible content">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </div>
+              </button>
+            </div>
             </div>
           </div>
 

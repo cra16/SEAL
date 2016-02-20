@@ -263,6 +263,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 					continue
 			TotalAdd[2].append(total)
 	temp=[]
+	'''
 	for SugangData in SugangDataList:
 			if SugangData =="":
 				continue
@@ -286,7 +287,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 						except:
 								continue
 						TotalAdd[3].append(total)
-
+	'''
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
 		
@@ -790,6 +791,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
+	'''
 	for lec in temp:
 		for lec in t:
 			On=0;
@@ -860,7 +862,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[3].append(TempTotal)
-						
+		'''				
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":

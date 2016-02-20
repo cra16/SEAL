@@ -133,7 +133,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
 			Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url)
-		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID).objects.create()
+		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 
 		L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
 

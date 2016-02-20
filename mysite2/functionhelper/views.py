@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.db.models import Q #데이터 베이스 OR 기능 구현
 from django.db.models import Count#Group By 쓰기 위해 해야함
 from index.models import * #아직 시험중		
+from login.models import *
 from django import template
 # Create your views here.
 
@@ -131,7 +132,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=2
 
@@ -140,7 +141,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	CourseCode = MajorSelect(User)
 	
 	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
-	T_Count=[[] ,[] ,[]]
+	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":
 		DBCount1 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).count()
 		DBCount2 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).count()
@@ -165,6 +166,16 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		T_Count[2] = DataCount(10,DBCount3)
 	else:
 		T_Count[2] = DataCount(5,DBCount3)
+	ProfileData=Profile.objects.get(User=User)
+	SugangDataList=ProfileData.LectureRecord.split("$$")
+	DBCount4=0
+	for SugangData in SugangDataList:
+			DBCount4+=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData).count()
+	if Mobile=="full":
+		T_Count[3] = DataCount(10,DBCount4)
+	else:
+		T_Count[3] = DataCount(5,DBCount4)
+	
 	
 		#현재 페이지 위치정보
 	if Mobile == 'full':
@@ -176,8 +187,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
-	TotalBoard = [[],[],[]]
-	TotalAdd =[[],[],[]]
+	TotalBoard = [[],[],[],[]]
+	TotalAdd =[[],[],[],[]]
 	if CourseCode[0] !="ENG":
 		if Mobile == 'full':
 			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
@@ -251,12 +262,34 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			except:
 					continue
 			TotalAdd[2].append(total)
+	temp=[]
+	for SugangData in SugangDataList:
+			if SugangData =="":
+				continue
 
-	
+			if Mobile == 'full':
+				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10])
+			else:
+				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5])
+			
+			for t in temp: 
+				for lec in t:
+					if lec['CourseName'] not in TotalBoard[3]:
+						A=Lecture.objects.filter(CourseName=lec['CourseName'])		
+						TotalBoard[3].append(A[0])
+						total=0
+							
+						try:
+							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
+							for Ev in Eval:
+								total += Ev.Total_Count 
+						except:
+								continue
+						TotalAdd[3].append(total)
 
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
-	
+		
 	if Mobile == 'full':
 		for i in range(0,len(T_Count)):
 			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
@@ -278,6 +311,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'BestBoard':BestBoard,
 		   'MajorNumber':MajorNumber,
 		   'TotalAdd':TotalAdd,
+		   'SugangList':SugangDataList,
 		   'CourseName':None,
 		   'ProSelect' :0
 		  }
@@ -295,6 +329,9 @@ def TargetTemplate(Current):
 	elif Current =="ThirdPageNation" or Current =="ThirdPage":
 		target[0] = "AllPage.html"
 		target[1] = "2"
+	elif Current =="SugangPageNation" or Current=="SugangPage" :
+		target[0] = "SugangPage.html"
+		target[1] = "3"
 	else:
 		target[0] = "SearchPage.html"
 		target[1] = "0"
@@ -412,7 +449,7 @@ def MajorSelect(user):
 
 #강의 추천 평균 계산
 def PageView(TotalBoard):
-	PageBoard=[[],[],[]]
+	PageBoard=[[],[],[],[]]
 	count =0
 	
 	for DBBoard in TotalBoard:
@@ -515,7 +552,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=0
 
@@ -525,8 +562,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
-	TotalBoard = [[],[],[]]
-	goodList= [[],[],[]]
+	TotalBoard = [[],[],[],[]]
+	goodList= [[],[],[],[]]
 	if CourseCode[0] !="ENG":
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
 		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
@@ -735,7 +772,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						try:
 							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
 						except:
-							goodList[i].append(0)
+							goodList[2].append(0)
 						TempInt=0
 						for goodcount in good_count:
 								if goodcount.Check==True:
@@ -753,9 +790,79 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
+	for lec in temp:
+		for lec in t:
+			On=0;
+			ListCode =list()
+			for j in range(0,len(TotalBoard[3])):
+				if lec.Code not in ListCode:
+					if lec.Professor == TotalBoard[3][j].Course.Professor:
+							ListCode.append(lec.Code)
+							On=1
+							break
+			if On==0:
+						try:
+							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
+							
+
+						except:
+							TotalDic = Total_Evaluation(Course=lec)
+							TotalDic.Total_Speedy =5
+							TotalDic.Total_Reliance =5
+							#TotalDic.Total_Helper = 5
+							TotalDic.Total_Question = 5
+							#TotalDic.Total_Exam = 5
+							#TotalDic.Total_Homework = 5
+							TotalDic.Total_Count =0
+						TempTotal = Total_Evaluation(Course=lec)
+						TempTotal.Total_Speedy =0
+						TempTotal.Total_Reliance =0
+						#TempTotal.Total_Helper = 0
+						TempTotal.Total_Question = 0
+						#TempTotal.Total_Exam = 0
+						#TempTotal.Total_Homework = 0
+						TempTotal.Total_Count =0
+						TempTotal.Total_StarPoint=0
+						TempTotal.Total_Mix =0
+						TempTotal.Total_Short_Answer =0
+						TempTotal.Total_Long_Answer = 0
+						
+						for T in TotalDic:
+							TempTotal.Total_Count += T.Total_Count
+							TempTotal.Total_Speedy +=T.Total_Speedy
+							TempTotal.Total_Reliance += T.Total_Reliance
+							#TempTotal.Total_Helper += T.Total_Helper
+							TempTotal.Total_Question += T.Total_Question
+							#TempTotal.Total_Exam += T.Total_Exam
+							#TempTotal.Total_Homework +=T.Total_Homework
+							TempTotal.Total_StarPoint += T.Total_StarPoint
+							TempTotal.Total_Mix +=T.Total_Mix
+							TempTotal.Total_Short_Answer += T.Total_Short_Answer
+							TempTotal.Total_Long_Answer += T.Total_Long_Answer
+						try:
+							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+						except:
+							goodList[3].append(0)
+						TempInt=0
+						for goodcount in good_count:
+								if goodcount.Check==True:
+									TempInt+=1
+						goodList[3].append(TempInt)
+
+						if TempTotal.Total_Count==0:
+							TotalBoard[3].append(TempTotal)
+							break
+						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
+						TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
+						#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
+						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
+						#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
+						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
+						TotalBoard[3].append(TempTotal)
 						
 	#2차원 list로 각 전공당 총 페이지 수 저장
-	T_Count=[[] ,[] ,[]]
+	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
@@ -781,7 +888,11 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		T_Count[2] = DataCount(10,DBCount3)
 	else:
 		T_Count[2] = DataCount(5,DBCount3)
-
+	DBCount4=len(TotalBoard[3])
+	if Mobile == 'full':
+		T_Count[3] = DataCount(10,DBCount4)
+	else:
+		T_Count[3] = DataCount(5,DBCount4)
 
 	#현재 페이지 위치정보
 	if Mobile == 'full':
@@ -796,6 +907,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10]
 		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
 		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+		TotalBoard[3] = TotalBoard[3][(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]
 		for i in range(0,len(T_Count)):
 			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
 
@@ -803,6 +915,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		TotalBoard[0] = TotalBoard[0][(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
+		TotalBoard[3] = TotalBoard[3][(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]
 		for i in range(0,len(T_Count)):
 			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
 

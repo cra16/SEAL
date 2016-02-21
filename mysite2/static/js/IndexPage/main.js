@@ -323,6 +323,33 @@
 
 
     });
+     $('div').on('click','#SugangMajor',function(){
+       event.stopPropagation();
+        
+        $.ajax(
+            { url : "/Page/",
+              data : {'Page': "0",
+                      'Current':"SugangPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                        $('#SugangPage').html(resp);
+                   },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
      $('div').on('click',"#Close",function(event){
          event.stopPropagation();
           $(this).unbind("click");

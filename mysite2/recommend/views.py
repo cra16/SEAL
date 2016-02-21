@@ -129,12 +129,13 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_CreatedID = Profile.objects.get(User= request.user)
 		for new_Answer in new_Answer_list:#서술형 답변
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
-		
+			temp.save()
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
 			Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url)
+		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
-
+		new_Recommend.save()
 		L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
 
 		try:
@@ -157,6 +158,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Eval.Total_Short_Answer+=1
 			elif new_paper_value ==3:
 				Total_Eval.Total_Mix+=1
+			elif new_paper_value ==4:
+				Total_Eval.Total_Unknown_Answer+=1
 
 			Total_Eval.save()
 		else: #update
@@ -175,7 +178,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				T_Eval.Total_Short_Answer+=1
 			elif new_paper_value ==3:
 				T_Eval.Total_Mix+=1
-			
+			elif new_paper_value ==4:
+				Total_Eval.Total_Unknown_Answer+=1			
 			T_Eval.save()
 	
 		URL = "/CourseProfessor/"+str(new_Course.id)

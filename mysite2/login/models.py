@@ -13,7 +13,8 @@ class Profile(models.Model):
 	UserName = models.CharField(max_length=30)
 	Point = models.IntegerField(default=0)
 	RecommendCount = models.IntegerField(default=0)
-	LikeCount=models.IntegerField(default=0)
+	LikeCount = models.IntegerField(default=0)
+	LectureRecord = models.TextField(null=True)
 	MyLecture = models.ManyToManyField(Lecture)
 	
 	def __unicode__(self):

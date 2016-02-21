@@ -13,6 +13,12 @@ $.fn.slider.Constructor.prototype.enable = function () {
     }
 }
 
+$(document).ready(function(){
+  $('#exam').on('click', function(){
+    $('.long.modal').modal('show');
+    });
+});
+
 $("[data-toggle=tooltip]").tooltip();
 
 var sl11 = $('#sl11').slider(),

@@ -90,7 +90,7 @@ def loginCheck(request):
 			auth_login(request, user)
 			#메인페이지 보여줄 함수 호출
 			UserData = MainPageView(request.user,None,None,None,Mobile)
-			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
+			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 			if request.flavour =='full':
 				return render_to_response('html/index.html',UserData)
 			else:
@@ -109,7 +109,7 @@ def loginCheck(request):
 	#이미 로그인 되어있으면 
 	else:
 		UserData = MainPageView(request.user,None,None,None,Mobile)
-		request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1]]
+		request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		if request.flavour =='full':
 			return render_to_response('html/index.html',UserData)
 		else:
@@ -190,11 +190,32 @@ def HisnetCheck(request):
 			except IndexError as e:
 				second_major = None
 
+			browser.open("https://hisnet.handong.edu/haksa/record/HREC110M.php")
+			record_contents = browser.response().read()
+			record_soup = BeautifulSoup(record_contents, "html.parser")
+
+			tables = record_soup.find_all(id='att_list')	# navigate to lecture list table
+			all_rec = ''	# 전체 수강목록 string 초기화
+
+			for i, table in enumerate(tables):
+				if i < 2:
+					continue
+				trs = table.find_all('tr')
+				# rec_semester = trs[0].text.split()[0]	# 수강 학기
+				for i, tr in enumerate(trs):
+					if i < 2:
+						continue
+					rec_code = tr.find('td')
+					rec_name = rec_code.next_sibling.next_sibling
+					all_rec += rec_code.text + '->' + rec_name.text + '$$'		# 구분자 '$$' 나중에 split하기 위함.
+				all_rec = all_rec[:-2]	# 마지막 구분자 '$$'' 제거
+
 			ctx = {
 				'stu_num': stu_num,
 				'stu_name': stu_name,
 				'first_major': first_major,
 				'second_major': second_major,
+				'all_rec': all_rec,
 			}
 
 			if request.flavour =='full':
@@ -216,12 +237,13 @@ def Register(request):
 		user_name = request.POST['user_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
+		all_rec = request.POST['all_rec']
 
 		try:
 			user = User.objects.create_user(username=stu_num, password=user_pw, email=user_email)
 			user.save()
 			get_user = User.objects.get(username=stu_num)
-			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=user_name)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=user_name, LectureRecord=all_rec)
 			profile.save()
 		except:
 			# User를 만들었으나 Profile에서 실패할 경우 User만 등록되는 겨우가 발생함.
@@ -251,12 +273,13 @@ def RegisterInfo(request):
 		stu_name = request.POST['stu_name']
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
+		all_rec = request.POST['all_rec']
 
 		try:
 			user = User.objects.create_user(username=stu_num)
 			user.save()
 			get_user = User.objects.get(username=stu_num)
-			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name)
+			profile = Profile(User=get_user, FirstMajor=first_major, SecondMajor=second_major, UserName=stu_name, LectureRecord=all_rec)
 			profile.save()
 
 		except:

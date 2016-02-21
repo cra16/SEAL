@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <title>▒ SEAL ▒</title>
-    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{% static "js/recommend.js" %}"></script>
+    <link href="http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "css/recommend.css" %}">
+
+    <script type="text/javascript" src="{% static "js/recommend.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     
     <style>
       body, input {
@@ -146,34 +148,56 @@
             
             <div class="right floated center aligned twelve wide column">
               <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui button" value="1">서술형</button>
-                <button type ="button" class="ui button" value="2">단답형</button>
-                <button type ="button" class="ui button" value="3">혼합형</button>
+
+                <button type ="button" class="ui button toggle paper_button" value="1">서술형</button>
+                <button type ="button" class="ui button toggle paper_button" value="2">단답형</button>
+                <button type ="button" class="ui button toggle paper_button" value="3">혼합형</button>
+                <button type ="button" class="ui button toggle paper_button" value="4">해당없음</button>
+                <input type="hidden" name = "paper_value" class="paper_value" value ="1">
+
               </div>
             </div>
           </div>
 
-          <form class="ui form stackable attached fluid segment">
-            <div class="ui center aligned piled segment">
-            <div class="field">
-              <label><h4>기억에 남는 시험 문제는? <h5>(익명이 보장되며, 무작위로 보여집니다)</h5></h4></label>
-              <div class="input_fields_wrap">
-                <input type="text" size="50" name="mytext[]">
-                <button type ="button" class="add_field_button" style="margin-right:-24px;">+</button>
+          <div class="ui center aligned piled segment">
+            <div class="ui grid" style="margin-left:10px">
+            <div class="center aligned twelve wide column">
+
+            <br>
+
+          <div class="field" style="margin-top:20px;">
+            <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i></h2>
+            <div class="input_fields_wrap">
+              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는?" active-color='#3F51B5' class="demo-form">
               </div>
-            </div>
+            <p style="margin-top:-40px; color:grey">*** 익명이 보장되며, 무작위로 보여집니다. ***</p>
+          </div>
+
             <br>
+
             <div class="field">
-              <label><h4>어떤 사람에게 이 과목을 추천하시나요?</h4></label><br>
-              <input type="text" size="50" value="" name="who">
-            </div>
+              <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i></h2>
+              <input type="text" name="who" label="어떤 사람에게 이 과목을 추천하시나요?" active-color='#3F51B5' class="demo-form">
+            </div>               
+              
             <br>
+
             <div class="field">
-              <label><h4>참고하면 좋은 사이트 URL</h4></label><br>
-              <input type="text" size="50" value="" name="url">
+              <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i></h2>
+              <input type="text" name="url" label="참고하면 좋은 사이트 URL" active-color='#3F51B5' class="demo-form">
+            </div>
+
+            </div>
+            <div class="four wide column">
+              <button type="button" class="ui vertical mini animated button add_field_button" tabindex="0" style="margin-bottom:-220px; margin-left:-25px">
+                <div class="hidden content">Add</div>
+                <div class="visible content">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </div>
+              </button>
+            </div>
             </div>
           </div>
-          </form>
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
@@ -211,7 +235,13 @@
               <div class="ui form">
                 <div class="field">
                 <label><h4><i class="glyphicon glyphicon-pencil"></i> <b>Comment<b></h4></label>
-                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500"></textarea>
+                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500">
+1.  수업 외 도움 받을 수 있는 기회가 있나요? (TA세션, 교수님 면담, 멘토링 등)
+2.  교수님의 강의 방식은 어땠나요?
+3.  기억에 남는 강의 내용은 무엇인가요?
+4.  어떤 방식의 과제가 몇 번 주어졌나요? 
+
+                </textarea>
                 </div>
               </div>
 
@@ -234,6 +264,6 @@
         <div id="h_sectiondivider" class="ui section divider"></div>     
 
     
-
+    <script type="text/javascript" src="{% static "js/jquery.polymer-form.min.js" %}"></script>
    {%endblock%}
 </html>

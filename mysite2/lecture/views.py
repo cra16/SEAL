@@ -48,7 +48,7 @@ def AutoFastLecUpdate(request):
 		hisnet_pw = request.POST['HisnetPassword']
 		
 		hak_lst = ['2015-1', '2015-3', '2015-2', '2015-4', '2016-1']
-		cur_semester_lst = ['15-1', '15-Summer', '15-2', '15-Winter', '16-1']
+		cur_semester_lst = ['15-1', '15-3', '15-2', '15-4', '16-1']
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',
@@ -343,11 +343,10 @@ def lec_update(request):
 		return HttpResponseRedirect('/')
 
 	semester_lst = [
-	'11-1', '11-2', '11-Summer', '11-Winter', 
-	'12-1', '12-2', '12-Summer', '12-Winter', 
-	'13-1', '13-2', '13-Summer', '13-Winter', 
-	'14-1', '14-2', '14-Summer', '14-Winter',
-	'15-1', '15-Summer'
+	'11-1', '11-2', '11-3', '11-4', 
+	'12-1', '12-2', '12-3', '12-4', 
+	'13-1', '13-2', '13-3', '13-4', 
+	'14-1', '14-2', '14-3', '14-4'
 	]
 	# semester_lst = ['15-2']
 	semester_lst.sort(reverse=True)

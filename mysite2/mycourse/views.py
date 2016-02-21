@@ -66,9 +66,6 @@ def MyCoursePage(request,Page,Mobile):
 			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
 			LikeData.Total_Homework =LikeData.Total_Homework/LikeData.Total_Count
 			LikeData.Total_Level_Difficulty=LikeData.Total_Level_Difficulty/LikeData.Total_Count
-			#LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
-			LikeData.Total_Exam = LikeData.Total_Exam/LikeData.Total_Count
-			LikeData.Total_Homework = LikeData.Total_Homework/LikeData.Total_Count
 			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count
 			LikePage.append(LikeData)
 	Count = [[],[]]

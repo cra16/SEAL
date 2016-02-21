@@ -300,7 +300,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'TotalAdd':TotalAdd,
 		   'SugangList':Sugang,
 		   'CourseName':None,
-		   'ProSelect' :0
+		   'ProSelect' :PageInformation
+
 		  }
 
 	return dic
@@ -886,7 +887,7 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=0
 

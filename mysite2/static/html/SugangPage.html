@@ -2,7 +2,6 @@
 {% load app_filter %}
 {% load staticfiles %}
     {%if CourseName == None%}           			
-
       {% for SuBoard in SugangList%}
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -27,8 +26,8 @@
           {% endif %}
       {%endfor%}
      
-			<center><div id ="SugangPageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
+			<center><div id ="SugangPageNation" name="SugangPageNation" class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.3.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 			
@@ -42,7 +41,7 @@
         {%endif%}
 
 {%endfor%}
-              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="Next" name = "{{PageInformation.3.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -95,7 +94,7 @@
             {%endfor%}
 
       <center><div id ="SugangPageNation" name="SugangPageNation" class="ui borderless pagination menu">
-              <a id ="ProPrevious" name="{{PageInformation.0.0}}" class="item" >
+              <a id ="ProPrevious" name="{{PageInformation.3.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
@@ -108,7 +107,7 @@
          <a id ="ProPage" name ="{{i}}" class="item" >{{i}}</a>
         {%endif%}
         {%endfor%}
-              <a id ="ProNext" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="ProNext" name = "{{PageInformation.3.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
 
@@ -165,11 +164,11 @@
             {%endfor%}
 
       <center><div id ="CoursePageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="CoursePrevious" name="{{PageInformation.0.0}}" class="item" >
+              <a id ="CoursePrevious" name="{{PageInformation.3.0}}" class="item" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
-        {% for i in TotalCount.0%}
+        {% for i in TotalCount.3%}
          
         {%if i == Page %}
          <a id ="CoursePageData" name ="{{i}}" class="active item" >{{i}}</a>
@@ -178,7 +177,7 @@
          <a id ="CoursePageData" name ="{{i}}" class="item" >{{i}}</a>
         {%endif%}
 {%endfor%}
-              <a id ="CourseNext" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="CourseNext" name = "{{PageInformation.3.2}}" class="item" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
 

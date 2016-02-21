@@ -59,7 +59,7 @@ def MyCoursePage(request,Page,Mobile):
 					LikeData.Total_Homework =5
 					LikeData.Total_Level_Difficulty=5
 				
-			if LikeData==0:
+			if LikeData.Total_Count==0:
 				LikePage.append(LikeData)
 				break
 	

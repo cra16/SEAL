@@ -369,4 +369,47 @@ $("[data-toggle=tooltip]").tooltip();
 
 
     });
+    $('div').on('click','#delete',function(event){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().attr("id")
+           var Parent=$(this).parent().parent();
+            var Code = Parent.find("[name=ccode]").text();
+            var CourseName=Parent.find("[id=cname]").text();
+            var prof = Parent.find("[id=professor]").val();
+            var period = Parent.find("[id=period]").val();
+            var semester = Parent.find("[id=semester]").val();
+            var pagenation=$('body').find('[id=RecommendPageNation]');
+            var CurrentPage = pagenation.find('.active','item').attr('name');
+          
+
+         $.ajax(
+            { url : "/MyCourseDelete/",
+              data : {
+                      'Code':Code,
+                      'CourseName': CourseName,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester,
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#RecommendPageMain').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
 });

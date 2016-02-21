@@ -71,7 +71,7 @@ urlpatterns += patterns('qna.views',
 	url(r'^QnA/(\d+)/$','QnARead'),
 	url(r'^QnA/Reply/(\d+)$','QnA_Reply'),
 	url(r'^QnA/Replying/(\d+)$','QnA_Replying'),
-
+	url(r'^SubScriptWrite/$','Improvement_Write')
 )
 
 urlpatterns += patterns('course.views',

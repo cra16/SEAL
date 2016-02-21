@@ -41,22 +41,13 @@ def MyCoursePage(request,Page,Mobile):
 	Recommend = Recommend_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]			
 	
 	for Board in Recommend:
-		try :
-			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
-		except:
-			RecommendData = None
-		if RecommendData==None:
-			RecommendPage.append(RecommendData)
-			break
-		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
-		RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
-		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
-		#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
-		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
-		#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
-		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
-		RecommendPage.append(RecommendData)	
-
+			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
+			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
+			RecommendData.Total_Homework =RecommendData.Total_Homework/RecommendData.Total_Count
+			RecommendData.Total_Level_Difficulty=RecommendData.Total_Level_Difficulty/RecommendData.Total_Count
+			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
+			RecommendPage.append(RecommendData)	
+			
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]
 
 	for Board2 in Like:
@@ -65,21 +56,16 @@ def MyCoursePage(request,Page,Mobile):
 			except:
 					LikeData = Total_Evaluation(Course =Board2.Course)
 					LikeData.Total_Speedy=5
-					LikeData.Total_Reliance =5
-					LikeData.Total_Question=5
-					LikeData.Total_Helper=5
-					LikeData.Total_Exam =5
-					LikeData.Total_Homework = 5
+					LikeData.Total_Homework =5
+					LikeData.Total_Level_Difficulty=5
+				
 			if LikeData==0:
 				LikePage.append(LikeData)
 				break
 	
 			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
-			LikeData.Total_Reliance =LikeData.Total_Reliance/LikeData.Total_Count
-			LikeData.Total_Question=LikeData.Total_Question/LikeData.Total_Count
-			#LikeData.Total_Helper=LikeData.Total_Helper/LikeData.Total_Count
-			LikeData.Total_Exam = LikeData.Total_Exam/LikeData.Total_Count
-			LikeData.Total_Homework = LikeData.Total_Homework/LikeData.Total_Count
+			LikeData.Total_Homework =LikeData.Total_Homework/LikeData.Total_Count
+			LikeData.Total_Level_Difficulty=LikeData.Total_Level_Difficulty/LikeData.Total_Count
 			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count
 			LikePage.append(LikeData)
 	Count = [[],[]]
@@ -107,7 +93,8 @@ def MyCoursePage(request,Page,Mobile):
 						'LikePage':LikePage,
 						'PageInformation' : PageInformation,
 						'TotalCount':TotalCount,
-						'Page':Page
+						'Page':Page,
+						'Recommend':Recommend
 						}
 	return MyCoursePageData
 #MyCourse쪽 비동기식 구현
@@ -149,9 +136,9 @@ def CourseDelete(request):
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Period =Period, Semester =Semster)
+		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semster)
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
+		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
 
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
@@ -160,9 +147,8 @@ def CourseDelete(request):
 		
 			
 		UpdateData.Total_Speedy -= DeleteData.Speedy
-		UpdateData.Total_Reliance -= DeleteData.Reliance
-		UpdateData.Total_Question -= DeleteData.Question
-		UpdateData.Total_Exam -= DeleteData.Exam
+		UpdateData.Total_Homework -= DeleteData.Homework
+		UpdateData.Total_Level_Difficulty -= DeleteData.Level_Difficulty
 		UpdateData.Total_StarPoint -= DeleteData.StarPoint
 
 		
@@ -171,24 +157,15 @@ def CourseDelete(request):
 			UpdateData.delete()
 			DeleteData.delete()
 		else:
-			UpdateData.update()
+			UpdateData.save()
 			DeleteData.delete()
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]
 		for Board in Recommend:
-			try :
-				RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
-			except:
-				RecommendData = None
-			if RecommendData!=None:
-				RecommendPage.append(RecommendData)
-				break
+			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
 			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
-			RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
-			RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
-			#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
-			RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
-			#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
+			RecommendData.Total_Homework =RecommendData.Total_Homework/RecommendData.Total_Count
+			RecommendData.Total_Level_Difficulty=RecommendData.Total_Level_Difficulty/RecommendData.Total_Count
 			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
 			RecommendData.Total_Recommend = RecommendData.Total_Recommend/RecommendData.Total_Count
 			RecommendPage.append(RecommendData)
@@ -232,15 +209,13 @@ def CourseUpdate(request):
 		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)
 		
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy
-		UpdateTotalEval.Total_Reliance -= UpdateCourseEval.Reliance
-		UpdateTotalEval.Total_Question -= UpdateCourseEval.Question
-		UpdateTotalEval.Total_Exam -= UpdateCourseEval.Exam
+		UpdateTotalEval.Total_Homework -= UpdateCourseEval.Homework
+		UpdateTotalEval.Total_Level_Difficulty -= UpdateCourseEval.Level_Difficulty
 		UpdateTotalEval.Total_StarPoint -= UpdateCourseEval.StarPoint
 
 		UpdateCourseEval.Speedy = request.POST['Speedy']
-		UpdateCourseEval.Reliance = request.POST['Reliance']
-		UpdateCourseEval.Question = request.POST['Reliance']
-		UpdateCourseEval.Exam = request.POST['Exam'] 
+		UpdateCourseEval.Homework = request.POST['Homework']
+		UpdateCourseEval.Level_Difficulty = request.POST['Level_Difficulty']
 		UpdateCourseEval.StarPoint =request.POST['StarPoint']
 
 		UpdeateTotalEval.update()

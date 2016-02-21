@@ -1,7 +1,6 @@
 {%load staticfiles%}
 {%for PageBoard in RecommendPage%}
 {% if forloop.counter0|divisibleby:"2" %}
- {{Page}}
         <div class="ui stackable two column grid">
 
           {% endif %}
@@ -38,10 +37,10 @@
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
                   <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
-                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Reliance}}" data-slider-id="sl{{forloop.counter}}2C"/>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Homework}}" data-slider-id="sl{{forloop.counter}}2C"/>
                   <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴">많음</a><br />
                   <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
-                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Question}}" data-slider-id="sl{{forloop.counter}}3C"/>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Level_Difficulty}}" data-slider-id="sl{{forloop.counter}}3C"/>
                   <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
                </div>
             </div>

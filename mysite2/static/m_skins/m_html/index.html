@@ -57,6 +57,8 @@
         <a id="All" class="active item" data-tab="all">최신순</a>
         <a id="FirstMajor" class="item" data-tab="unread">1전공</a>
         <a id="SecondMajor" class="item" data-tab="saved">2전공</a>
+        <a id="SugangMajor" class="item" data-tab="sugang">수강목록</a>
+
       </div>
       {%endif%}
 
@@ -231,6 +233,53 @@
             </div></center>
 
       </div>
+      <div id ="SugangPage" class="ui divided very relaxed selection inbox list tab" style="margin-top: 13px;" data-tab="sugang">
+
+        
+
+      {% for SuBoard in SugangList%}
+           {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
+
+          {% endif %}
+            <div class="column">
+             <div class="ui raised segment">
+              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">
+              </div>
+              
+                 [<span id="ccode" name ="ccode" value ="a">{{SuBoard.0}}</span>]
+                 <p><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SuBoard.1}}</span></a></p>
+                 
+                </div>
+            </div>
+           {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+          {% endif %}
+      {%endfor%}
+              <div class="ui divider"></div>
+
+                        
+      <center><div id ="SugangPageNation" class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.3.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+      
+        {% for i in TotalCount.3%}
+{%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}        
+        {%endfor%}
+              <a id ="Next" name = "{{PageInformation.3.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+      </div></center>
+    </div>
+    
       {%endif%}
 
           <div id = "Search_Page">

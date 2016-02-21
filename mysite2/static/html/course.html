@@ -4,6 +4,7 @@
    
 <html lang='ko'>
   <head>
+  {% load app_filter %}
   {% load staticfiles%}
   {% block head%}
     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
@@ -59,114 +60,23 @@
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
               <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
-
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
+              {% for Answer_List in Answer_Dis %}
+                {% for Answer in Answer_List %}
+                {%if forloop.counter|divisibleby:2 %}
+                <div class="column" style="padding-right:10px;">
+                  <div class="ui segment" style="margin-left:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
                 </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
+                {% else %}
+                <div class="column" style="padding-left:10px;">
+                  <div class="ui segment" style="margin-right:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
                 </div>
-              </div>
-              
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-
+                {%endif%}
+                {%endfor%}
+              {%endfor%}
             </div>
                 
             <div class="actions">
@@ -209,7 +119,7 @@
               <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
             </div>
             <div class="left floated center aligned six wide column">
-              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
@@ -226,7 +136,7 @@
               <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
             </div>
             <div class="left floated center aligned six wide column">
-               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
             </div>
             <div class="three wide column">
               <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
@@ -240,7 +150,6 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
-            {{CourseBoard}}{{CourseBoard.Total_Mix}}{{CourseBoard.Total_Short_Answer}}{{CourseBoard.Total_Long_Answer}}{{CourseBoard.Total_Unknown_Answer}}
               {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
                   <div class="ui buttons" style="margin-top:-10px">
                     <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
@@ -339,7 +248,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
+                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
@@ -356,7 +265,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
+                <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
@@ -400,10 +309,6 @@
               {%endif%}
               </div>
             </div>
-            {{Answer_Dis}}
-            {% for Answer_Dis in Answer_Dis %}
-              {{Answer_Dis.Answer}}
-            {%endfor%}
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
@@ -470,7 +375,7 @@
                 <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
+                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
@@ -487,7 +392,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
               </div>
               <div class="left floated center aligned six wide column">
-                <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
+                <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
               </div>
               <div class="three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>

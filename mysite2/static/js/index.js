@@ -330,8 +330,8 @@ $("div").on('click',"#cname",function(event){
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
-                  else if(CurrentPage=="SugangPage" || CurrentPage =="SugangPageNation")
-                    $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
+                        $('#SugangPage').html(resp);     
 
                   else
                     $("#Search_Page").html(resp);

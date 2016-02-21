@@ -168,9 +168,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		T_Count[2] = DataCount(5,DBCount3)
 	ProfileData=Profile.objects.get(User=User)
 	SugangDataList=ProfileData.LectureRecord.split("$$")
-	DBCount4=0
-	for SugangData in SugangDataList:
-			DBCount4+=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData).count()
+	DBCount4=len(SugangDataList)
 	if Mobile=="full":
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
@@ -263,31 +261,19 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 					continue
 			TotalAdd[2].append(total)
 	temp=[]
-	'''
+	Sugang=[]
+	if Mobile == "full":
+			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]	
+	else:
+			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]	
+
 	for SugangData in SugangDataList:
 			if SugangData =="":
 				continue
 
-			if Mobile == 'full':
-				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10])
-			else:
-				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5])
-			
-			for t in temp: 
-				for lec in t:
-					if lec['CourseName'] not in TotalBoard[3]:
-						A=Lecture.objects.filter(CourseName=lec['CourseName'])		
-						TotalBoard[3].append(A[0])
-						total=0
-							
-						try:
-							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
-							for Ev in Eval:
-								total += Ev.Total_Count 
-						except:
-								continue
-						TotalAdd[3].append(total)
-	'''
+			Sugang.append(SugangData.split('->'))
+
+	
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
 		
@@ -312,9 +298,10 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'BestBoard':BestBoard,
 		   'MajorNumber':MajorNumber,
 		   'TotalAdd':TotalAdd,
-		   'SugangList':SugangDataList,
+		   'SugangList':Sugang,
 		   'CourseName':None,
-		   'ProSelect' :0
+		   'ProSelect' :PageInformation
+
 		  }
 
 	return dic
@@ -463,20 +450,15 @@ def PageView(TotalBoard):
 
 			if BoardData is not None:
 				BoardData.Total_Speedy = BoardData.Total_Speedy/BoardData.Total_Count
-				BoardData.Total_Reliance = BoardData.Total_Reliance/BoardData.Total_Count
-				BoardData.Total_Helper = BoardData.Total_Helper/BoardData.Total_Count
-				BoardData.Total_Question = BoardData.Total_Question/BoardData.Total_Count
-				#BoardData.Total_Exam = BoardData.Total_Exam/BoardData.Total_Count
 				BoardData.Total_Homework = BoardData.Total_Homework/BoardData.Total_Count
+				BoardData.Total_Level_Difficulty = BoardData.Total_Level_Difficulty/BoardData.Total_Count
 				PageBoard[count].append(BoardData)
 			else:
 				BoardData = Total_Evaluation(Course=Board)
 				BoardData.Total_Speedy =5
-				BoardData.Total_Reliance =5
-				BoardData.Total_Helper = 5
-				BoardData.Total_Question = 5
-				#BoardData.Total_Exam = 5
 				BoardData.Total_Homework = 5
+				BoardData.Total_Level_Difficulty = 5
+				
 				BoardData.Total_Count =0
 				PageBoard[count].append(BoardData)
 		count=count+1
@@ -585,20 +567,14 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					except:
 						TotalDic = Total_Evaluation(Course=lec)
 						TotalDic.Total_Speedy =5
-						TotalDic.Total_Reliance =5
-						TotalDic.Total_Helper = 5
-						TotalDic.Total_Question = 5
-						#TotalDic.Total_Exam = 5
 						TotalDic.Total_Homework = 5
+						TotalDic.Total_Level_Difficulty = 5
 						TotalDic.Total_Count =0
 
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Reliance =0
-					#TempTotal.Total_Helper = 0
-					TempTotal.Total_Question = 0
-					#TempTotal.Total_Exam = 0
-					#TempTotal.Total_Homework = 0
+					TempTotal.Total_Speedy =5
+					TempTotal.Total_Level_Difficulty = 5
+					TempTotal.Total_Homework = 5
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
 					TempTotal.Total_Mix=0
@@ -618,11 +594,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy +=T.Total_Speedy
-						TempTotal.Total_Reliance += T.Total_Reliance
-						#TempTotal.Total_Helper += T.Total_Helper
-						TempTotal.Total_Question += T.Total_Question
-						#TempTotal.Total_Exam += T.Total_Exam
-						#TempTotal.Total_Homework +=T.Total_Homework
+						TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+						TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
 						TempTotal.Total_Mix +=T.Total_Mix
 						TempTotal.Total_Short_Answer += T.Total_Short_Answer
@@ -632,11 +605,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalBoard[i].append(TempTotal)
 						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-					#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
-					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
-					#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 					
@@ -663,19 +633,13 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					except:
 						TotalDic = Total_Evaluation(Course=lec)
 						TotalDic.Total_Speedy =5
-						TotalDic.Total_Reliance =5
-						#TotalDic.Total_Helper = 5
-						TotalDic.Total_Question = 5
-						#TotalDic.Total_Exam = 5
-						#TotalDic.Total_Homework = 5
+						TotalDic.Total_Level_Difficulty = 5
+						TotalDic.Total_Homework = 5
 						TotalDic.Total_Count =0
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Reliance =0
-					#TempTotal.Total_Helper = 0
-					TempTotal.Total_Question = 0
-					#TempTotal.Total_Exam = 0
-					#TempTotal.Total_Homework = 0
+					TempTotal.Total_Speedy =5
+					TempTotal.Total_Level_Difficulty = 5
+					TempTotal.Total_Homework = 5
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint=0
 					TempTotal.Total_Mix =0
@@ -685,11 +649,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					for T in TotalDic:
 						TempTotal.Total_Count += T.Total_Count
 						TempTotal.Total_Speedy +=T.Total_Speedy
-						TempTotal.Total_Reliance += T.Total_Reliance
-						#TempTotal.Total_Helper += T.Total_Helper
-						TempTotal.Total_Question += T.Total_Question
-						#TempTotal.Total_Exam += T.Total_Exam
-						#TempTotal.Total_Homework +=T.Total_Homework
+						TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+						TempTotal.Total_Homework +=T.Total_Homework
 						TempTotal.Total_StarPoint += T.Total_StarPoint
 						TempTotal.Total_Mix +=T.Total_Mix
 						TempTotal.Total_Short_Answer += T.Total_Short_Answer
@@ -710,11 +671,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalBoard[i].append(TempTotal)
 						continue
 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-					TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-					#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
-					TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
-					#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-					#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+					TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 					TotalBoard[i].append(TempTotal)
 					
@@ -741,19 +699,13 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						except:
 							TotalDic = Total_Evaluation(Course=lec)
 							TotalDic.Total_Speedy =5
-							TotalDic.Total_Reliance =5
-							#TotalDic.Total_Helper = 5
-							TotalDic.Total_Question = 5
-							#TotalDic.Total_Exam = 5
-							#TotalDic.Total_Homework = 5
+							TotalDic.Total_Level_Difficulty = 5
+							TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Reliance =0
-						#TempTotal.Total_Helper = 0
-						TempTotal.Total_Question = 0
-						#TempTotal.Total_Exam = 0
-						#TempTotal.Total_Homework = 0
+						TempTotal.Total_Speedy =5
+						TempTotal.Total_Level_Difficulty = 5
+						TempTotal.Total_Homework = 5
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0
@@ -763,11 +715,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						for T in TotalDic:
 							TempTotal.Total_Count += T.Total_Count
 							TempTotal.Total_Speedy +=T.Total_Speedy
-							TempTotal.Total_Reliance += T.Total_Reliance
-							#TempTotal.Total_Helper += T.Total_Helper
-							TempTotal.Total_Question += T.Total_Question
-							#TempTotal.Total_Exam += T.Total_Exam
-							#TempTotal.Total_Homework +=T.Total_Homework
+							TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+							TempTotal.Total_Homework +=T.Total_Homework
 							TempTotal.Total_StarPoint += T.Total_StarPoint
 							TempTotal.Total_Mix +=T.Total_Mix
 							TempTotal.Total_Short_Answer += T.Total_Short_Answer
@@ -787,14 +736,11 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalBoard[2].append(TempTotal)
 							break
 						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-						TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-						#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
-						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
-						#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
-	'''
+	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester')
 	for lec in temp:
 		for lec in t:
 			On=0;
@@ -813,19 +759,13 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						except:
 							TotalDic = Total_Evaluation(Course=lec)
 							TotalDic.Total_Speedy =5
-							TotalDic.Total_Reliance =5
-							#TotalDic.Total_Helper = 5
-							TotalDic.Total_Question = 5
-							#TotalDic.Total_Exam = 5
-							#TotalDic.Total_Homework = 5
+							TotalDic.Total_Level_Difficulty = 5
+							TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Reliance =0
-						#TempTotal.Total_Helper = 0
-						TempTotal.Total_Question = 0
-						#TempTotal.Total_Exam = 0
-						#TempTotal.Total_Homework = 0
+						TempTotal.Total_Speedy =5
+						TempTotal.Total_Level_Difficulty = 5
+						TempTotal.Total_Homework = 5
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0
@@ -835,11 +775,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						for T in TotalDic:
 							TempTotal.Total_Count += T.Total_Count
 							TempTotal.Total_Speedy +=T.Total_Speedy
-							TempTotal.Total_Reliance += T.Total_Reliance
-							#TempTotal.Total_Helper += T.Total_Helper
-							TempTotal.Total_Question += T.Total_Question
-							#TempTotal.Total_Exam += T.Total_Exam
-							#TempTotal.Total_Homework +=T.Total_Homework
+							TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+							TempTotal.Total_Homework +=T.Total_Homework
 							TempTotal.Total_StarPoint += T.Total_StarPoint
 							TempTotal.Total_Mix +=T.Total_Mix
 							TempTotal.Total_Short_Answer += T.Total_Short_Answer
@@ -858,14 +795,11 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalBoard[3].append(TempTotal)
 							break
 						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-						TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-						#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
-						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
-						#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[3].append(TempTotal)
-		'''				
+					
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":
@@ -950,7 +884,7 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=0
 

@@ -35,7 +35,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
+                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
             </div>
 
@@ -52,7 +52,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
               </div>
               <div id="mysldbr" class="center aligned eight wide column">
-                <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
+                <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
             </div>
 
@@ -63,7 +63,35 @@
               <div id="fourthcolumn" class="left floated center aligned seven wide column"><b>시험 방식</b></div>
               
               <div class="ui stackable center floated center aligned nine wide column">
-                <button type ="button" class="ui button" value="">형식</button>
+                {% if MyCourseBoard.What_Answer == 1%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  </div>
+              {% elif MyCourseBoard.What_Answer == 2%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  </div>
+              {% elif MyCourseBoard.What_Answer == 3%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  </div>
+              {%else%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
+                  </div>
+              {%endif%}
               </div>
             </div>
 
@@ -126,7 +154,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
-                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Reliance}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
+                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
               </div>
             </div>
 
@@ -143,7 +171,7 @@
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
               </div>
               <div id="sldbr" class="center aligned eight wide column">
-                <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Question}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
+                <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
               </div>
             </div>
 
@@ -173,14 +201,21 @@
                     <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
                   </div>
+              {%else%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
+                  </div>
               {%endif%}
               </div>
             </div>
 
             <div class="ui piled segment">
-              <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <br><b>&nbsp;&nbsp;&nbsp;~~~한 사람</b></h4>
+              <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <br><b>&nbsp;&nbsp;&nbsp;{{OtherBoard.Who_Answer}}</b></h4>
               <br>
-              <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: <br>&nbsp;&nbsp;&nbsp;<b><u><a href="http://seal.handong.edu/">http://seal.handong.edu/</a></u></b></h4>
+              <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: <br>&nbsp;&nbsp;&nbsp;<b><u><a href="{{OtherBoard.Url_Answer}}">{{OtherBoard.Url_Answer}}</a></u></b></h4>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>      

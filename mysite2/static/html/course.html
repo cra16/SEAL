@@ -60,8 +60,8 @@
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
               <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
-              {% for Answer_List in Answer_Dis%}
-                {%for Answer in Answer_List%}
+              {% for Answer_List in Answer_Dis %}
+                {% for Answer in Answer_List %}
                 {%if forloop.counter|divisibleby:2 %}
                 <div class="column" style="padding-right:10px;">
                   <div class="ui segment" style="margin-left:15px;">
@@ -74,7 +74,7 @@
                     <div class="content">ㆍ{{Answer.Answer}}</div>
                   </div>
                 </div>
-                {% endif %}
+                {%endif%}
                 {%endfor%}
               {%endfor%}
             </div>

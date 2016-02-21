@@ -504,21 +504,15 @@ def TotalCourse(offset):
 	try:
 		CourseBoard = Total_Evaluation.objects.get(Course = Lecture.objects.get(id = offset))
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-		#CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-		#CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 
 	except:
 		CourseBoard = Total_Evaluation(Course =Lecture.objects.get(id=offset))
 		CourseBoard.Total_Speedy=5
-		CourseBoard.Total_Reliance =5
-		CourseBoard.Total_Question=5
-		#CourseBoard.Total_Helper=5
-		CourseBoard.Total_Exam =5
-		#CourseBoard.Total_Homework = 5
+		CourseBoard.Total_Homework =5
+		CourseBoard.Total_Level_Difficulty=5
 		CourseBoard.Total_StarPoint=0
 
 	return CourseBoard
@@ -531,7 +525,7 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Speedy = 5
 			CourseBoard.Total_Homework = 5
 			CourseBoard.Total_Level_Difficulty = 5
-			CourseBoard.Total_Count = 5
+			CourseBoard.Total_Count = 0
 			CourseBoard.Total_StarPoint=0
 
 		for CourseList in Course:
@@ -544,10 +538,11 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Short_Answer += CourseList.Total_Short_Answer
 			CourseBoard.Total_Long_Answer += CourseList.Total_Long_Answer
 			CourseBoard.Total_Unknown_Answer += CourseList.Total_Unknown_Answer
-		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
-		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
-		
+		if CourseBoard.Total_Count!=0:
+			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
+			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
+			
 
 		return CourseBoard

@@ -31,7 +31,6 @@ class Total_Evaluation(models.Model):
 	Total_Homework = models.IntegerField(default=0)
 	Total_Level_Difficulty = models.IntegerField(default=0)
 	Total_Count =models.IntegerField(default=0)
-	Total_P_Knowledge = models.IntegerField(default=5, null=False)
 	Total_StarPoint = models.FloatField(default=0)
 	Total_Recommend = models.IntegerField(default=0, null=False)
 	Total_Mix = models.IntegerField(default=0)

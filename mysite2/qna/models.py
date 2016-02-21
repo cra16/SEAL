@@ -20,6 +20,12 @@ class Reply(models.Model):
 
 	def __unicode__(self):
 		return self.TextName
-
+class Improvement(models.Model):
+	TextName= models.CharField(max_length=50)
+	Text = models.TextField()
+	TextWriter = models.ForeignKey(Profile)
+	
+	def __unicode__(self):
+		return self.TextName
 
 # Create your models here.

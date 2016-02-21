@@ -572,9 +572,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic.Total_Count =0
 
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Level_Difficulty = 0
-					TempTotal.Total_Homework = 0
+					TempTotal.Total_Speedy =5
+					TempTotal.Total_Level_Difficulty = 5
+					TempTotal.Total_Homework = 5
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
 					TempTotal.Total_Mix=0
@@ -637,9 +637,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic.Total_Homework = 5
 						TotalDic.Total_Count =0
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Level_Difficulty = 0
-					TempTotal.Total_Homework = 0
+					TempTotal.Total_Speedy =5
+					TempTotal.Total_Level_Difficulty = 5
+					TempTotal.Total_Homework = 5
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint=0
 					TempTotal.Total_Mix =0
@@ -703,9 +703,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Level_Difficulty = 0
-						#TempTotal.Total_Homework = 0
+						TempTotal.Total_Speedy =5
+						TempTotal.Total_Level_Difficulty = 5
+						TempTotal.Total_Homework = 5
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0
@@ -763,9 +763,9 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalDic.Total_Homework = 5
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Level_Difficulty = 0
-						TempTotal.Total_Homework = 0
+						TempTotal.Total_Speedy =5
+						TempTotal.Total_Level_Difficulty = 5
+						TempTotal.Total_Homework = 5
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0
@@ -795,11 +795,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TotalBoard[3].append(TempTotal)
 							break
 						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-						TempTotal.Total_Reliance = TempTotal.Total_Reliance/TempTotal.Total_Count
-						#TempTotal.Total_Helper = TempTotal.Total_Helper/TempTotal.Total_Count
-						TempTotal.Total_Question = TempTotal.Total_Question/TempTotal.Total_Count
-						#TempTotal.Total_Exam = TempTotal.Total_Exam/TempTotal.Total_Count
-						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[3].append(TempTotal)
 					

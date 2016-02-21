@@ -199,6 +199,18 @@ def QnA_Replying(request,offset):
 		new_QnAReply = Reply(QuestionID= Question_ID,TextWriter = new_TextWriter, Text=new_Text, TextName=new_TextName)
 		new_QnAReply.save()
 	return HttpResponseRedirect("/QnA")
-
+@csrf_exempt
+def Improvement_Write(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	if request.method=="POST":
+		new_Text=request.POST['msg-body-txtarea']		
+		new_TextWriter = Profile.objects.get(User=request.user)
+		new_TextName = request.POST['msg-title-input']
+		new_QnA = Improvement(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+		new_QnA.save()
+		return HttpResponseRedirect("/")
+	else:
+		return HttpResponseRedirect("/")
 # Create your views here.
 		

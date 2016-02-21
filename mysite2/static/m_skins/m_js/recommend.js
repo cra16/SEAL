@@ -102,9 +102,9 @@ for(var i=0; i<ccode.length; i++)
   });
 
   $("#recommend_form").submit(function(){
-    var Hsemester = $("#Hsemester").val();
+    var HSemester = $("#HSemester").val();
     //check if there is nothing
-    if(Hsemester == "0" || Hsemester == ""){
+    if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
       alert("Please select the semester.");
       $("#text_semester").css("border", "2px solid red");

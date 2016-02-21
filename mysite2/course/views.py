@@ -204,7 +204,9 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			'MyCourseBoard':MyCourseBoard,
 			'OtherCourseBoard':OtherCourseBoard,
 			'PageInformation':PageInformation,
-			'OtherCount':OtherCount
+			'OtherCount':OtherCount,
+			'Answer_Dis' : Description_Answer.objects.all()
+					
 			}
 	if request.flavour =='full':
 		return render_to_response('html/coursepage.html',dic)
@@ -319,7 +321,9 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
 					'PageInformation':PageInformation,
-					'GoodCount': goodresult != None and goodresult['Check__count'] or 0
+					'GoodCount': goodresult != None and goodresult['Check__count'] or 0,
+					'Answer_Dis' : Description_Answer.objects.all()
+					
 					}
 				if request.flavour =='full':
 					return render_to_response('html/course.html',dic)

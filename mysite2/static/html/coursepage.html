@@ -63,20 +63,44 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-              <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui toggle button" value="1">서술형</button>
-                <button type ="button" class="ui toggle button" value="2">단답형</button>
-                <button type ="button" class="ui toggle button" value="3">혼합형</button>
-              </div>
+              {% if MyCourseBoard.What_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                    </div>
+                  {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
+              {%endif%}
             </div>
             </div>
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
             <div class="ui piled segment">
-              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: </h4>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <b>{{MyCourseBoard.Who_Answer}}</b></h4>
               <br>
-              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: </h4>
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: <b><u><a href="{{MyCourseBoard.Url_Answer}}">{{MyCourseBoard.Url_Answer}}</a></u></b></h4>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>            
@@ -167,21 +191,47 @@
             <div class="ui grid">
               <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
               <div class="right floated center aligned twelve wide column">
-              <div class="ui buttons" style="margin-top:-10px">
-                <button type ="button" class="ui toggle button" value="1">서술형</button>
-                <button type ="button" class="ui toggle button" value="2">단답형</button>
-                <button type ="button" class="ui toggle button" value="3">혼합형</button>
-              </div>
-            </div>
+                  {% if OtherBoard.What_Answer == 1%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif OtherBoard.What_Answer == 2%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif OtherBoard.What_Answer == 3%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
+              {%endif%}
+                      </div>
             </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
-            <div class="ui piled segment">
+           <div class="ui piled segment">
               <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: </h4>
-              <br>
+              {{OtherBoard.Who_Answer}}<br>
               <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: </h4>
+              {{OtherBoard.Url_Answer}}
             </div>
+
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 

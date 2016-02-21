@@ -48,6 +48,8 @@
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else if(CurrentPage =="SugangPageNation")
+                        $('#SugangPage').html(resp);
                   else
                       $('#Search_Page').html(resp);
                 },
@@ -93,6 +95,8 @@
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else if(CurrentPage=="SugangPageNation")
+                        $("#SugangPage").html(resp);
                   else
                       $('#Search_Page').html(resp);
                 },
@@ -134,6 +138,8 @@
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else if(CurrentPage=="SugangPageNation")
+                        $("#SugangPage").html(resp);
                   else
                         $('#Search_Page').html(resp);
                 },
@@ -312,6 +318,34 @@
               async:false,
               success:function(resp){     
                         $('#ThirdPage').html(resp);
+                   },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+    });
+
+  $('div').on('click','#SugangMajor',function(){
+       event.stopPropagation();
+        
+        $.ajax(
+            { url : "/Page/",
+              data : {'Page': "0",
+                      'Current':"SugangPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                        $('#SugangPage').html(resp);
                    },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

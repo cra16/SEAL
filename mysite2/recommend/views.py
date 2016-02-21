@@ -89,9 +89,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		
 		try:
 			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
-			new_Reliance= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
+			new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
-			new_Question=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+			new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
 			#new_Exam=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
 #			new_Homework=int(request.POST['sl6'])
 			new_CourseComment=request.POST['CourseComment']
@@ -131,7 +131,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 			temp.save()
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
-			Speedy = new_Speedy, Reliance = new_Reliance, Question = new_Question,
+			Speedy = new_Speedy, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
@@ -149,7 +149,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(
 				Course = new_Course,Total_Speedy = new_Speedy,
-				Total_Reliance = new_Reliance, Total_Question = new_Question,  Total_Count = 1,
+				Total_Homework = new_Homework, Total_Level_Difficulty = new_Level_Difficulty,  Total_Count = 1,
 				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0
 			)
 			if new_paper_value==1:

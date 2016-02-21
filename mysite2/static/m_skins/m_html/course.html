@@ -52,20 +52,22 @@
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
               <!--column 2개씩 for문. (여기는 두개 마진 설정 똑같음!)-->
-              {% for Answer in Answer_Dis%}
-              {%if forloop.counter|divisibleby:2 %}
-              <div class="column">
-                <div class="ui segment" style="margin-left:10px; margin-right:10px">
-                  <div class="content">ㆍ{{Answer.Answer}}</div>
+              {% for Answer_List in Answer_Dis%}
+                {% for Answer in Answer_List}
+                {%if forloop.counter|divisibleby:2 %}
+                <div class="column">
+                  <div class="ui segment" style="margin-left:10px; margin-right:10px">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
                 </div>
-              </div>
-              {% else %}
-              <div class="column">
-                <div class="ui segment" style="margin-left:10px; margin-right:10px">
-                  <div class="content">ㆍ{{Answer.Answer}}</div>
+                {% else %}
+                <div class="column">
+                  <div class="ui segment" style="margin-left:10px; margin-right:10px">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
                 </div>
-              </div>
-              {% endif %}
+                {% endif %}
+                {%endfor%}
               {%endfor%}
               
             </div>

@@ -54,11 +54,16 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 				MergeCourse=None
 				count=0
 				totalcount=0
-				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+				Description=[]
+				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor,Code =LectureInformation.Code)
+				
 				MyCourseBoard = None
 				for TempData in t:
+					try:
+						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
+					except:
+						pass
 					if MyCourseBoard == None:
-
 						try:
 							MyCourseBoard = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 						except:
@@ -106,7 +111,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
 					'PageInformation':PageInformation,
-					'Answer_Dis' : Description_Answer.objects.all()
+					'Answer_Dis' : Description
 					
 					}
 				if request.flavour =='full':
@@ -138,8 +143,12 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
 			totalcount=0
 			MyCourseBoard = None
-
+			Description=[]
 			for TempData in t:
+				try:
+						Description.append(Description_Answer.objects.filter(Course=TempData,CreateID=UserData))
+				except:
+					pass				
 				if count==0:
 					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
@@ -205,7 +214,6 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			'OtherCourseBoard':OtherCourseBoard,
 			'PageInformation':PageInformation,
 			'OtherCount':OtherCount,
-			'Answer_Dis' : Description_Answer.objects.all()
 					
 			}
 	if request.flavour =='full':
@@ -250,6 +258,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				MergeCourse=None
 				count=0
 				MyCourseBoard = None
+				Description=[]
 				try:
 					MergeCourse=None
 					count=0
@@ -257,6 +266,8 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					totalcount=0
 					MyCourseBoard = None
 					for TempData in t:
+						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
+					
 						if count==0:
 							MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 							OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
@@ -322,7 +333,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					'OtherCount':OtherCount,
 					'PageInformation':PageInformation,
 					'GoodCount': goodresult != None and goodresult['Check__count'] or 0,
-					'Answer_Dis' : Description_Answer.objects.all()
+					'Answer_Dis' : Description
 					
 					}
 				if request.flavour =='full':
@@ -518,33 +529,24 @@ def TotalCourseProfessor(CourseName,Professor):
 		except:
 			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor)[0])
 			CourseBoard.Total_Speedy = 5
-			CourseBoard.Total_Reliance = 5
-			#CourseBoard.Total_Helper = 5
-			CourseBoard.Total_Question = 5
-			#CourseBoard.Total_Exam= 5
-			#CourseBoard.Total_Homework = 5
+			CourseBoard.Total_Homework = 5
+			CourseBoard.Total_Level_Difficulty = 5
 			CourseBoard.Total_Count = 5
 			CourseBoard.Total_StarPoint=0
 
 		for CourseList in Course:
 			CourseBoard.Total_Count +=CourseList.Total_Count
 			CourseBoard.Total_Speedy += CourseList.Total_Speedy
-			CourseBoard.Total_Reliance += CourseList.Total_Reliance
-			#CourseBoard.Total_Helper += CourseList.Total_Helper
-			CourseBoard.Total_Question += CourseList.Total_Question
-			#CourseBoard.Total_Exam += CourseList.Total_Exam
-			#CourseBoard.Total_Homework += CourseList.Total_Homework
+			CourseBoard.Total_Homework += CourseList.Total_Homework
+			CourseBoard.Total_Level_Difficulty += CourseList.Total_Level_Difficulty
 			CourseBoard.Total_StarPoint+= CourseList.Total_StarPoint
 			CourseBoard.Total_Mix += CourseList.Total_Mix
 			CourseBoard.Total_Short_Answer += CourseList.Total_Short_Answer
 			CourseBoard.Total_Long_Answer += CourseList.Total_Long_Answer
 			CourseBoard.Total_Unknown_Answer += CourseList.Total_Unknown_Answer
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-		CourseBoard.Total_Reliance = CourseBoard.Total_Reliance/CourseBoard.Total_Count
-		CourseBoard.Total_Helper = CourseBoard.Total_Helper/CourseBoard.Total_Count
-		CourseBoard.Total_Question = CourseBoard.Total_Question/CourseBoard.Total_Count
-		#CourseBoard.Total_Exam = CourseBoard.Total_Exam/CourseBoard.Total_Count
-		#CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
 		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 		
 

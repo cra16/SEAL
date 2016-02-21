@@ -52,7 +52,8 @@ $("div").on('click',"#cname",function(event){
                     $('#ThirdPage').html(resp);
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
-                 
+                  else if(CurrentPage=="SugangPage")
+                    $("#SugangPage").html(resp);
                
                 },
                 error: function(xhr, option, error){

@@ -48,6 +48,8 @@
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation")
                         $('#ThirdPage').html(resp);
+                  else if(CurrentPage =="SugangPageNation")
+                        $('#SugangPage').html(resp);
                   else
                       $('#Search_Page').html(resp);
                 },

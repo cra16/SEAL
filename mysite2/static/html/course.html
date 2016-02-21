@@ -4,6 +4,7 @@
    
 <html lang='ko'>
   <head>
+  {% load app_filter %}
   {% load staticfiles%}
   {% block head%}
     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
@@ -59,114 +60,21 @@
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
               <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
-
+              {% for Answer in Answer_Dis%}
+              {%if forloop.counter|divisibleby:2 %}
               <div class="column" style="padding-right:10px;">
                 <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
+                  <div class="content">ㆍ{{Answer.Answer}}</div>
                 </div>
               </div>
+              {% else %}
               <div class="column" style="padding-left:10px;">
                 <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
+                  <div class="content">ㆍ{{Answer.Answer}}</div>
                 </div>
               </div>
-              
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-              <div class="column" style="padding-left:10px;">
-                <div class="ui segment" style="margin-right:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 2</div>
-                </div>
-              </div>
-              <div class="column" style="padding-right:10px;">
-                <div class="ui segment" style="margin-left:15px;">
-                  <div class="content">ㆍ네트워크 챕터별로 시험 봄 1</div>
-                </div>
-              </div>
-
+              {% endif %}
+              {%endfor%}
             </div>
                 
             <div class="actions">
@@ -240,7 +148,6 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
-            {{CourseBoard}}{{CourseBoard.Total_Mix}}{{CourseBoard.Total_Short_Answer}}{{CourseBoard.Total_Long_Answer}}{{CourseBoard.Total_Unknown_Answer}}
               {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
                   <div class="ui buttons" style="margin-top:-10px">
                     <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
@@ -400,10 +307,6 @@
               {%endif%}
               </div>
             </div>
-            {{Answer_Dis}}
-            {% for Answer_Dis in Answer_Dis %}
-              {{Answer_Dis.Answer}}
-            {%endfor%}
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 

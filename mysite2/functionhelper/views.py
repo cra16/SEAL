@@ -168,9 +168,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		T_Count[2] = DataCount(5,DBCount3)
 	ProfileData=Profile.objects.get(User=User)
 	SugangDataList=ProfileData.LectureRecord.split("$$")
-	DBCount4=0
-	for SugangData in SugangDataList:
-			DBCount4+=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData).count()
+	DBCount4=len(SugangDataList)
 	if Mobile=="full":
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
@@ -263,31 +261,19 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 					continue
 			TotalAdd[2].append(total)
 	temp=[]
-	'''
+	Sugang=[]
+	if Mobile == "full":
+			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]	
+	else:
+			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]	
+
 	for SugangData in SugangDataList:
 			if SugangData =="":
 				continue
 
-			if Mobile == 'full':
-				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10])
-			else:
-				temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Code=SugangData)[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5])
-			
-			for t in temp: 
-				for lec in t:
-					if lec['CourseName'] not in TotalBoard[3]:
-						A=Lecture.objects.filter(CourseName=lec['CourseName'])		
-						TotalBoard[3].append(A[0])
-						total=0
-							
-						try:
-							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
-							for Ev in Eval:
-								total += Ev.Total_Count 
-						except:
-								continue
-						TotalAdd[3].append(total)
-	'''
+			Sugang.append(SugangData.split('->'))
+
+	
 	# 페이지 총 수(페이지 넘길 때)
 	TotalCount=list()
 		
@@ -312,7 +298,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'BestBoard':BestBoard,
 		   'MajorNumber':MajorNumber,
 		   'TotalAdd':TotalAdd,
-		   'SugangList':SugangDataList,
+		   'SugangList':Sugang,
 		   'CourseName':None,
 		   'ProSelect' :0
 		  }
@@ -794,7 +780,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
-	'''
+	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester')
 	for lec in temp:
 		for lec in t:
 			On=0;
@@ -865,7 +851,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						#TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[3].append(TempTotal)
-		'''				
+					
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":

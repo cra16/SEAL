@@ -41,22 +41,16 @@ def MyCoursePage(request,Page,Mobile):
 	Recommend = Recommend_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]			
 	
 	for Board in Recommend:
-		try :
-			RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
-		except:
-			RecommendData = None
-		if RecommendData==None:
-			RecommendPage.append(RecommendData)
-			break
-		RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
-		RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
-		RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
-		#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
-		RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
-		#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
-		RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
-		RecommendPage.append(RecommendData)	
-
+			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
+			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
+			RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
+			RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count
+			#RecommendData.Total_Helper=RecommendData.Total_Helper/RecommendData.Total_Count
+			RecommendData.Total_Exam = RecommendData.Total_Exam/RecommendData.Total_Count
+			#RecommendData.Total_Homework = RecommendData.Total_Homework/RecommendData.Total_Count
+			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
+			RecommendPage.append(RecommendData)	
+			
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]
 
 	for Board2 in Like:
@@ -107,7 +101,8 @@ def MyCoursePage(request,Page,Mobile):
 						'LikePage':LikePage,
 						'PageInformation' : PageInformation,
 						'TotalCount':TotalCount,
-						'Page':Page
+						'Page':Page,
+						'Recommend':Recommend
 						}
 	return MyCoursePageData
 #MyCourse쪽 비동기식 구현
@@ -149,9 +144,9 @@ def CourseDelete(request):
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Period =Period, Semester =Semster)
+		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semster)
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
+		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
 
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
@@ -171,18 +166,12 @@ def CourseDelete(request):
 			UpdateData.delete()
 			DeleteData.delete()
 		else:
-			UpdateData.update()
+			UpdateData.save()
 			DeleteData.delete()
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]
 		for Board in Recommend:
-			try :
-				RecommendData = Total_Evaluation.objects.get(Course=Board.Course.Course)
-			except:
-				RecommendData = None
-			if RecommendData!=None:
-				RecommendPage.append(RecommendData)
-				break
+			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
 			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
 			RecommendData.Total_Reliance =RecommendData.Total_Reliance/RecommendData.Total_Count
 			RecommendData.Total_Question=RecommendData.Total_Question/RecommendData.Total_Count

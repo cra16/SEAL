@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
 $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
 $.fn.slider.Constructor.prototype.enable = function () {
   if (this.touchCapable) {

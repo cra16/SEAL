@@ -15,11 +15,8 @@ $.fn.slider.Constructor.prototype.enable = function () {
 
 var sl1 = $('#sl1').slider(),
     sl2 = $('#sl2').slider(),
-    sl3 = $('#sl3').slider(),
-    sl4 = $('#sl4').slider(),
-    sl5 = $('#sl5').slider(),
-    sl6 = $('#sl6').slider();
-
+    sl3 = $('#sl3').slider();
+    
 $("[data-toggle=tooltip]").tooltip();
 
 
@@ -64,34 +61,6 @@ $('#enable3').on('click', function(){
     $('#sl3').slider('setValue', 0);
     checked[2] = "False";
     $('#enable3').css('background-color', '#ccc');
-  }
-});
-
-$('#enable4').on('click', function(){
-  if(checked[3] == "False"){
-    $('#sl4').slider('enable');
-    $('#sl4').slider('setValue', 5);
-    checked[3] = "True";
-    $('#enable4').css('background-color', '#9acd32');
-  } else {
-    $('#sl4').slider('disable');
-    $('#sl4').slider('setValue', 0);
-    checked[3] = "False";
-    $('#enable4').css('background-color', '#ccc');
-  }
-});
-
-$('#enable5').on('click', function(){
-  if(checked[4] == "False"){
-    $('#sl5').slider('enable');
-    $('#sl5').slider('setValue', 5);
-    checked[4] = "True";
-    $('#enable5').css('background-color', '#9acd32');
-  } else {
-    $('#sl5').slider('disable');
-    $('#sl5').slider('setValue', 0);
-    checked[4] = "False";
-    $('#enable5').css('background-color', '#ccc');
   }
 });
 

@@ -13,10 +13,23 @@ $.fn.slider.Constructor.prototype.enable = function () {
     }
 }
 
-$(document).ready(function(){
-  $('#exam').on('click', function(){
-    $('.long.modal').modal('show');
-    });
+$(document).ready(function() {
+  $(".ui.modal").modal("hide");
+});
+
+$(document).on("click", ".show", function () {
+    $(".ui.modal").modal("setting", {
+        closable: true,
+        onApprove: function () {
+            return false;
+        }
+    }).modal("show");
+}).on("click", ".ui.button", function () {
+    switch ($(this).data("value")) {
+        case 'close':
+            $(".ui.modal").modal("hide");
+            break;
+    }
 });
 
 $("[data-toggle=tooltip]").tooltip();

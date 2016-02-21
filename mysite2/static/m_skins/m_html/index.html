@@ -62,7 +62,7 @@
 
      
       <div class="ui very relaxed column grid">
-        <div class="column" style="margin-top: -15px; padding-right: 0.4rem;">
+        <div class="column" style="padding-right: 0.4rem;">
 
     {%if Search == None%}
     <div id ="FirstPage" class="ui divided very relaxed selection inbox list tab" style="margin-top: 13px;" data-tab="unread">
@@ -98,7 +98,7 @@
                         
       <center><div id ="FirstPageNation" class="ui borderless pagination menu">
               <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
               </a>
       
         {% for i in TotalCount.0%}
@@ -144,7 +144,7 @@
 
         <center><div id = "SecondPageNation" class="ui borderless pagination menu">
               <a id ="Previous" name ="{{PageInformation.1.0}}" class="item" >
-                <i class="glyphicon glyphicon-menu-left"></i> Previous  
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
               </a>
       
         {% for i in TotalCount.1%}
@@ -214,7 +214,7 @@
 
           <center><div id ="ThirdPageNation" class="ui borderless pagination menu">
               <a id ="Previous" class="item" name="{{PageInformation.2.0}}">
-                <i class="glyphicon glyphicon-menu-left"></i> Previous   
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
               </a>
       
         {% for i in TotalCount.2%}
@@ -265,7 +265,7 @@
          
              <center><div id = "SearchPageNation" class="ui borderless pagination menu">
               <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" >
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
               </a>
 
               {% for i in TotalCount %}

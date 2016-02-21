@@ -208,7 +208,7 @@ def HisnetCheck(request):
 					rec_code = tr.find('td')
 					rec_name = rec_code.next_sibling.next_sibling
 					all_rec += rec_code.text + '->' + rec_name.text + '$$'		# 구분자 '$$' 나중에 split하기 위함.
-				all_rec = all_rec[:-2]	# 마지막 구분자 '$$'' 제거
+			all_rec = all_rec[:-2]	# 마지막 구분자 '$$'' 제거
 
 			ctx = {
 				'stu_num': stu_num,

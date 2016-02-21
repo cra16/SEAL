@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/feed.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/seal_menubar.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "css/seal_profile.css"%}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/seal_bestc.css"%}">    
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_bestc.css"%}">    
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     
     <script type="text/javascript" src="{% static "js/jquery.js"%}"></script>
@@ -133,9 +133,9 @@
                       
                 <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
-                <p><span id="label"><a href="/MyCourse">내가 평가한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
+                <p><span id="label"><a href="/MyCourse">내가 평가한 강의 &nbsp;</a> </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
 
-                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
+                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의 &nbsp;</a> </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
 
                 <a href="/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
 

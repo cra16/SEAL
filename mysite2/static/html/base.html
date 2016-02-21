@@ -76,8 +76,6 @@
    {% if not user == None%}
     <!-- Preloader -->
     
-
-
     <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="col-md-1 col-sm-0"></div>
@@ -86,7 +84,7 @@
             <a class="navbar-brand" href="/"><img src="{% static "css/seal_logo.png" %} " height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
             <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search">
-                <button type="submit" id ="SearchButton" class="btn btn-info"  onclick=""><i class="glyphicon glyphicon-search"></i></button>
+                <button type="submit" id ="SearchButton" class="btn btn-info" style="float:right" onclick=""><i class="glyphicon glyphicon-search"></i></button>
       
               <div class="form-group">
 
@@ -176,9 +174,9 @@
                    
                 <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
-                <p><span id="label"><a href="/MyCourse">내가 평가한 강의</a> : </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
+                <p><span id="label"><a href="/MyCourse">내가 평가한 강의</a> </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
 
-                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의</a> : </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
+                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의</a> </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
 
                 <a href="/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
 

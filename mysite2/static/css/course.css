@@ -39,6 +39,10 @@
 	color: black;
 }
 
+.scrolling.transition{
+	display:block !important;
+}
+
 #firstcolumn{
 	color: #ff7f50;
 }

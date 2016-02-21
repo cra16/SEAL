@@ -27,15 +27,15 @@
 
               <div class="center aligned sixteen wide column">
                  <br><br><br><br>
-                 <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림">느림</a>
+                 <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림 &nbsp;">느림</a>
                   <input type="text" id="sl1{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Speedy}}" data-slider-id="sl1{{forloop.counter}}1C"/>
-                  <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
-                  <a id="tooltips"  data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
+                  <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a><br />
+                  <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
                   <input type="text" id="sl1{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Reliance}}" data-slider-id="sl1{{forloop.counter}}2C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a><br />
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
                   <input type="text" id="sl1{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PageBoard.Total_Question}}" data-slider-id="sl1{{forloop.counter}}3C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
         
         <center><div id ="RecommendPageNation" class="ui borderless pagination menu">
               <a id ="RecommendPrevious" name = "{{PageInformation.0.0}}" class="item">
-                <i class="glyphicon glyphicon-menu-left"></i> Previous
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
               </a>
               {% for i in TotalCount.0%}
               {%if PageInformation.0.1 == i%}

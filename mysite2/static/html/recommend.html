@@ -106,18 +106,18 @@
 
 
           <div class="ui grid">
-            <div id="secondcolumn" class="left floated center aligned three wide column"><b>교재 사용도</b></div>
+            <div id="secondcolumn" class="left floated center aligned three wide column"><b>과제량</b></div>
             <div class="left floated center aligned two wide column">
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 낮음">적음</a>
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
             </div>
             <div class="left floated center aligned six wide column">
               <input type="text" id="sl2" name ="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C" data-slider-disabled="false" />
             </div>
             <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="교재 의존도가 높음">많음</a>
+              <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴">많음</a>
             </div>
           </div>
 
@@ -170,14 +170,14 @@
             <div class="input_fields_wrap">
               <input type="text" name="mytext[]" label="기억에 남는 시험 문제는?" active-color='#3F51B5' class="demo-form">
               </div>
-            <p style="margin-top:-40px; color:grey">*** 익명이 보장되며, 무작위로 보여집니다. ***</p>
+            <p style="margin-top:-40px; color:grey">*** 평가와 별개로 무작위로 보여집니다. ***</p>
           </div>
 
             <br>
 
             <div class="field">
               <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i></h2>
-              <input type="text" name="who" label="어떤 사람에게 이 과목을 추천하시나요?" active-color='#3F51B5' class="demo-form">
+              <input type="text" name="who" label="어떤 사람에게 추천하나요?" active-color='#3F51B5' class="demo-form">
             </div>               
               
             <br>
@@ -235,13 +235,18 @@
               <div class="ui form">
                 <div class="field">
                 <label><h4><i class="glyphicon glyphicon-pencil"></i> <b>Comment<b></h4></label>
-                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500">
+                <pre style="font-family: mono; font-size:11px; color:#727272; background-color:#f5f5f5"><span style="font-size:15px">** 평가 가이드라인 **</span>
+자체적으로 제시하는 가이드 라인입니다. 아래 질문지에 맞춰 선택적으로 작성하시면 됩니다.
+
 1.  수업 외 도움 받을 수 있는 기회가 있나요? (TA세션, 교수님 면담, 멘토링 등)
 2.  교수님의 강의 방식은 어땠나요?
 3.  기억에 남는 강의 내용은 무엇인가요?
-4.  어떤 방식의 과제가 몇 번 주어졌나요? 
-
-                </textarea>
+4.  어떤 방식의 과제가 몇 번 주어졌나요?
+5.  과제, 퀴즈, 시험, 팀 프로젝트 중 실질적으로 비중이 높은 부분은 무엇인가요?
+6.  과목 특성 상 이 과목을 어떻게 공부하면 좋을까요?
+7.  본 강의를 통해 가장 크게 얻은 부분은 무엇인가요?
+8.  기타 의견</pre>
+                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500"></textarea>
                 </div>
               </div>
 

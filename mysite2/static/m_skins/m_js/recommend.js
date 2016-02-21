@@ -103,13 +103,27 @@ for(var i=0; i<ccode.length; i++)
 
   $("#recommend_form").submit(function(){
     var HSemester = $("#HSemester").val();
+    var paper_value =$("#paper_value").val();
+    var CourseComment = $("#CourseComment").val().length;
+    
     //check if there is nothing
     if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
       alert("Please select the semester.");
       $("#text_semester").css("border", "2px solid red");
       return false;
-    } else {
+    } 
+    else if(CourseComment<30)
+    {
+      alert("comment의 길이는 30자 이상 이어야 합니다.");
+      return false;
+    }
+    else if(paper_value==0)
+    {
+      alert("시험방식을 클릭하지 않으셨습니다.")
+    }
+
+    else {
       $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
     }
   });

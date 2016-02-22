@@ -48,9 +48,8 @@
                     
             <div class="ui raised segment">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
-
-                <center><button id="likebutton" name = "{{SuBoard.Course.id}}" ><img src="{% static "m_skins/m_css/write.png" %} " height="45px" width="45px"></button></center>
-                <center style="margin-top: 14px"><span id="likenum{{forloop.counter}}" name="likenum">{{SuBoard.Total_Count}}</span> SEALS</center>
+                <center><button id="likebutton" name = "{{SuBoard.Course.id}}" ><img src="{% static "m_skins/m_css/write.png" %} " height="45px" width="45px">
+                  <div style="margin-top:16px; color:teal"><b><u>WRITE</u></b></div></button></center>
               </div>             
                 
               <div class="sixteen wide column">
@@ -103,72 +102,7 @@
 
               <input type = "hidden" id="CourseHidden" value = "{{CourseName}}">
             </div></center>
-      {%else%}
-      {% for SuBoard in PageBoard.3%}      
-            <div class="ui raised segment">
-              <div id="title_h" class="sixteen wide column">
-              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
-
-                <center><button id="likebutton" name = "{{SuBoard.Course.id}}" ><img src="{% static "m_skins/m_css/write.png" %}" height="45px" width="45px"></button>
-                </center>
-                <center style="margin-top: 14px"><span id="likenum{{forloop.counter}}" name="likenum">{{SuBoard.Total_Count}}</span> SEALS</center>
-              </div>             
-                 
-
-              <div class="sixteen wide column">
-
-                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SuBoard.Course.Code}}</span>]
-                <p><a style="cursor:pointer" href="/Course/Period{{SuBoard.Course.id}}"><span class="cname" name="cname" value = "">{{SuBoard.Course.CourseName}}</span></a></p>
-                <p><span id="cprof1" name = "cprof">{{SuBoard.Course.Professor}} 교수님</span></p>
-                 <p><span id="csem1" name = "cprof">{{SuBoard.Course.Semester}} 학기</span></p>
-            
-              </div>
-            </div>
-
-            <div class="left aligned sixteen wide column">
-                
-                <button type ="button" id="enable6" style="display:inline; background-color:#FFEB3B; margin-left:22px; font-size:15px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
-                <div class="center aligned sixteen wide column" style="margin-left:115px; margin-bottom:-15px; margin-top:-34px;"><span class="starvalue">{{SuBoard.Total_StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
-              </div>
-              
-               <div class="center aligned sixteen wide column">
-                <br><br>
-                  <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림 &nbsp;">느림</a>
-                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SuBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
-                  <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a><br />
-                  <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
-                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Homework}}" data-slider-id="sl{{forloop.counter}}2C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a><br />
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
-                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SuBoard.Total_Level_Difficulty}}" data-slider-id="sl{{forloop.counter}}3C"/>
-                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
-               </div>
-            </div>
-          
-
-            {%endfor%}
-
-      <center><div id ="CoursePageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="CoursePrevious" name="{{PageInformation.0.0}}" class="item" >
-                <i class="glyphicon glyphicon-menu-left"></i> Prev
-              </a>
       
-        {% for i in TotalCount.0%}
-         
-        {%if i == Page %}
-         <a id ="CoursePageData" name ="{{i}}" class="active item" >{{i}}</a>
-        
-        {%else%}
-         <a id ="CoursePageData" name ="{{i}}" class="item" >{{i}}</a>
-        {%endif%}
-{%endfor%}
-              <a id ="CourseNext" name = "{{PageInformation.0.2}}" class="item" >
-                Next <i class="glyphicon glyphicon-menu-right"></i>
-              </a>
-
-              <input type = "hidden" id="CourseHidden" value = "{{CourseName}}">
-            </div></center>
-            
         {%endif%}
          <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
          <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

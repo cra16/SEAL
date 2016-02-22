@@ -23,7 +23,7 @@ $('form').on('click', '#changebtn4',function(){
             }
               });
             
-            $('#idtxtbox4').remove();
+            $('#Nickname').remove();
             $('#changebtn4').remove();
             $('#cancelbtn4').remove();
 
@@ -42,6 +42,7 @@ $('form').on('click', '#changebtn4',function(){
           btn1 = $('<button id="changebtn4" type = "button" class="btn btn-info">').text('Change');
           btn2 = $('<button id="cancelbtn4" type = "button" class="btn btn-info">').text('Cancel');
 
+      $('#thirdcolumn').hide();
       $('#btnnum4').hide();
       $('#btnnum4').before(btn1);
       $('#btnnum4').after(btn2);
@@ -54,11 +55,12 @@ $('form').on('click', '#changebtn4',function(){
   });
  
   $('form').on('click', '#cancelbtn4', function(){
-      $('#idtxtbox4').remove();
+      $('#Nickname').remove();
       $('#changebtn4').remove();
       $('#cancelbtn4').remove();
       $('#spannum4').show();
       $('#btnnum4').show();
+      $('#thirdcolumn').show();
   });
 
  

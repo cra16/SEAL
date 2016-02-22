@@ -13,13 +13,13 @@ from functionhelper.views import CheckingLogin
 def NicknameChange(request):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-
+	else:
 		if request.method =="POST":
 			nickname = request.POST['Nickname']
 			myprofile = Profile.objects.get(User = request.user)
 			is_same = Profile.objects.filter(UserName = nickname)
-			if len(is_same) > 0:	# 중복 여부 검사
-				return 'Duplicate'
+			# if len(is_same) > 0:	# 중복 여부 검사
+			# 	return render_to_response('html/sealmypage.html')
 
 			myprofile.update(UserName = nickname)
 			if request.flavour =='full':

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# -*- coding: euc-kr -*-
 
 from django.shortcuts import render
 from django.shortcuts import render_to_response
@@ -11,18 +10,18 @@ from functionhelper.views import CheckingLogin
 # Create your views here.
 #암호 바꾸기
 @csrf_exempt
-def MyPagePassWordChange(request):
+def NicknameChange(request):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 
 		if request.method =="POST":
-			ChangePassword = request.POST['PasswordBox']
-			ProfileData = Profile.objects.get(User = request.user)
-			
-			#외래키는 저장이안되서 직접 해야 되네요. (솔직히 그냥 불러도되긴한데...)		
-			UserData = ProfileData.User
-			UserData.set_password(ChangePassword)
-			UserData.save()
+			nickname = request.POST['Nickname']
+			myprofile = Profile.objects.get(User = request.user)
+			is_same = Profile.objects.filter(UserName = nickname)
+			if len(is_same) > 0:	# 중복 여부 검사
+				return 'Duplicate'
+
+			myprofile.update(UserName = nickname)
 			if request.flavour =='full':
 				return render_to_response('html/sealmypage.html')
 			else:	

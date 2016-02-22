@@ -53,7 +53,7 @@ urlpatterns += patterns('index.views',
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',
-	url(r'^MyPage/PasswordChange$', 'MyPagePassWordChange'),
+	url(r'^MyPage/NicknameChange$', 'NicknameChange'),
 )#mypage view
 
 urlpatterns += patterns('recommend.views',

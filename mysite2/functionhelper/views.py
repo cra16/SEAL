@@ -548,8 +548,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	TotalBoard = [[],[],[],[]]
 	goodList= [[],[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).order_by('Semester','Professor'))
+		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).order_by('Semester','Professor'))
 		i=0
 		for t in temp:
 			for lec in t:
@@ -614,8 +614,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 
 
 	else:		
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).order_by('Semester','Professor'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).order_by('Semester','Professor'))
 		i=0
 		for t in temp:
 			for lec in t:

@@ -11,7 +11,7 @@ $('form').on('click', '#changebtn4',function(){
         else{
             //connect to DB at here
             $.ajax(
-            { url : "/MyPage/NicknameChange",
+            { url : "/MyPage/NicknameChange/",
               data : {'Nickname' : $('#Nickname').val()},
               type : "POST",
               success:function(resp){  

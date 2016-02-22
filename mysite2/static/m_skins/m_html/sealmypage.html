@@ -42,9 +42,14 @@
       <div id="myprofile" class="ui column">
         
         <div id="myname" class="ui grid">
-          <div class="left floated right aligned four wide column"><span id="firstcolumn">이름</span></div>
+          <div class="left floated right aligned four wide column"><span id="firstcolumn">닉네임</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned ten wide column"><span id="thirdcolumn">{{user.profile.UserName}}</span></div> 
+          <div class="left floated left aligned four wide column"><span id="thirdcolumn">{{user.profile.UserName}}</span></div>
+          <!--<form id = "PasswordChange" action = "/MyPage/PasswordChange/" method = "POST">
+           {%csrf_token%}
+         -->
+          <div class="center aligned five wide column"><button id="btnnum4" type = "button" class="btn btn-info">닉네임 변경</button></div> 
+          <!--</form>-->
         </div>
 
         <div id="yrnum" class="ui grid">
@@ -63,22 +68,6 @@
           <div class="left floated left aligned five wide column"><span id="firstcolumn">제2전공</span></div>
           <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
           <div class="left floated left aligned nine wide column"><span id="thirdcolumn"></span>{{user.profile.SecondMajor}}</div>
-        </div>
-
-        <div id="id" class="ui grid">
-          <div class="left floated left aligned five wide column"><span id="firstcolumn">아이디</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.username}}</span></div>
-        </div>
-
-        <div id="pw" class="ui grid">
-          <div class="left floated lfet aligned five wide column"><span id="firstcolumn">비밀번호</span></div>
-          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
-          <form id = "PasswordChange" action = "/MyPage/PasswordChange/" method = "POST">
-           {%csrf_token%}
-         
-          <div class="center aligned nine wide column"><button id="btnnum4" type = "button" class="btn btn-info">비밀번호 변경</button></div> 
-          </form> 
         </div>
         
         <div id="recomcourse" class="ui grid">

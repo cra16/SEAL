@@ -146,7 +146,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			Description=[]
 			for TempData in t:
 				try:
-						Description.append(Description_Answer.objects.filter(Course=TempData,CreateID=UserData))
+						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
 				except:
 					pass				
 				if count==0:

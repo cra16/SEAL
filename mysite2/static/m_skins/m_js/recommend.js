@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
 $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
 $.fn.slider.Constructor.prototype.enable = function () {
   if (this.touchCapable) {
@@ -16,7 +16,7 @@ $.fn.slider.Constructor.prototype.enable = function () {
 var sl1 = $('#sl1').slider(),
     sl2 = $('#sl2').slider(),
     sl3 = $('#sl3').slider();
-
+    
 $("[data-toggle=tooltip]").tooltip();
 
 
@@ -105,6 +105,7 @@ for(var i=0; i<ccode.length; i++)
     var HSemester = $("#HSemester").val();
     var paper_value =$("#paper_value").val();
     var CourseComment = $("#CourseComment").val().length;
+    var StarValue = $("#StarValue").val();
     //check if there is nothing
     if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
@@ -122,12 +123,51 @@ for(var i=0; i<ccode.length; i++)
       alert("시험방식을 클릭하지 않으셨습니다.");
       return false;
     }
+    else if(StarValue==0)
+    {
+      alert("별점 0점은 줄 수 없습니다.");
+      return false;
+    }
 
     else {
       $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
     }
   });
+
+  $("#Update_form").submit(function(){
+    var HSemester = $("#HSemester").val();
+    var paper_value =$("#paper_value").val();
+    var CourseComment = $("#CourseComment").val().length;
+    var StarValue = $("#StarValue").val();
+    //check if there is nothing
+    if(HSemester == "0" || HSemester == ""){
+      window.scrollTo(0, 200);
+      alert("Please select the semester.");
+      $("#text_semester").css("border", "2px solid red");
+      return false;
+    } 
+    else if(CourseComment<30)
+    {
+      alert("comment의 길이는 30자 이상 이어야 합니다.");
+      return false;
+    }
+    else if(paper_value==0)
+    {
+      alert("시험방식을 클릭하지 않으셨습니다.");
+      return false;
+    }
+    else if(StarValue==0)
+    {
+      alert("별점 0점은 줄 수 없습니다.");
+      return false;
+    }
+
+    else {
+      $('#Update_form').attr({action:'/UpdateWrite/'}).submit();
+    }
+  });
 });
+
 
 $(document).ready(function(){
   $('.ui.button').on('click', function(){
@@ -143,13 +183,14 @@ $(document).ready(function(){
   var max_fields = 10; //maximum input boxes allowed
   var wrapper = $(".input_fields_wrap"); //Fields wrapper
   var add_button = $(".add_field_button"); //Add button ID
-  
+  var add_div = $(".add").next().next();
+  $(add_div).after("<a class='remove_field' style='cursor:pointer; font-size:13px; color:red;'>Del</a>");
   var x = 1; //initlal text box count
   $(add_button).on('click', function(){
   //on add input button click
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          $(wrapper).append('<div class="polymer-form dirty" style="margin-top:20px; margin-bottom:30px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가 &nbsp;</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; text-align:right; font-size:13px; color:red;">Del</a></div>'); //add input box
+          $(wrapper).append('<div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>'); //add input box
       }
       else
         alert("최대 10개까지 등록이 가능합니다.");

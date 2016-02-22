@@ -87,37 +87,33 @@ def Recommend_Write(request): #추천 강의 DB입력
 		except:
 			RecommendData=None
 		
-		try:
-			new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
-			new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
-			#new_Helper= (request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
-			new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
-			#new_Exam=(request.POST['sl4'] !="" and int(request.POST['sl4']) or 5)
-#			new_Homework=int(request.POST['sl6'])
-			new_CourseComment=request.POST['CourseComment']
-			new_Check = request.POST['ButtonCheck'] =="True" and True or False
-			new_Satisfy = float(request.POST['StarValue'])
-			new_Answer_list = request.POST.getlist('mytext[]')
-			new_Who = request.POST['who']
-			new_Url = request.POST['url']
-			new_paper_value= int(request.POST['paper_value'])
-		except:
-			CourseName=request.POST['HCourseName']
-			CourseCode=request.POST['HCourseCode']
-			Semester=request.POST['HSemester']
 		
-			new_CourseComment=request.POST['CourseComment']
+		new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
+		new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
+		
+		new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+		
+#			
+		new_CourseComment=request.POST['CourseComment']
+		new_Check = request.POST['ButtonCheck'] =="True" and True or False
+		new_Satisfy = float(request.POST['StarValue'])
+		new_Answer_list = request.POST.getlist('mytext[]')
+		new_Who = request.POST['who']
+		new_Url = request.POST['url']
+		new_paper_value= int(request.POST['paper_value'])
+		'''
+		except:
 			new_Speedy=5
 			new_Level_Difficulty=5
-			#new_Helper=5
 			new_Homework=5
-			new_Exam=5
+			new_CourseComment=request.POST['CourseComment']
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
+			new_Answer_list = request.POST.getlist('mytext[]')
 			new_Who = request.POST['who']
 			new_Url = request.POST['url']
 			new_paper_value= int(request.POST['paper_value'])
-			new_Answer_list = request.POST.getlist('mytext[]')
+		'''
 		# 추천 여부에 따라 1 or 0
 		is_recommend = ( request.POST['ButtonCheck'] == "True" )
 		if is_recommend:
@@ -140,10 +136,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 		new_Recommend.save()
-		L_Eval = Lecture.objects.get(id=request.session['Recommend_ID'])#해당 강의 정보를 일단 DB에서 불러옴
 
 		try:
-			T_Eval=Total_Evaluation.objects.get(Course=L_Eval)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
+			T_Eval=Total_Evaluation.objects.get(Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor=Professor)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
 		except:
 			T_Eval =None 
 

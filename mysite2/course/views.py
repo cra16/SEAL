@@ -247,7 +247,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				#보려는 강의 정보 
 				LectureInformation=Lecture.objects.get(id=offset)
 
-				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
 				
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
@@ -365,7 +365,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				#보려는 강의 정보 
 				LectureInformation=Lecture.objects.get(id=offset)
 
-				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
 				
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
@@ -448,7 +448,7 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				#보려는 강의 정보 
 				LectureInformation=Lecture.objects.get(id=offset)
 
-				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor)#해당 강의 전체 추천한 Data DB 불러오기
+				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
 				
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
@@ -516,12 +516,12 @@ def TotalCourse(offset):
 		CourseBoard.Total_StarPoint=0
 
 	return CourseBoard
-def TotalCourseProfessor(CourseName,Professor):
-		Course = Total_Evaluation.objects.filter(Course__CourseName=CourseName,Course__Professor=Professor)
+def TotalCourseProfessor(CourseName,Professor,Code):
+		Course = Total_Evaluation.objects.filter(Course__CourseName=CourseName,Course__Professor=Professor).order_by('Course__Semester')
 		try:
 			CourseBoard = Total_Evaluation(Course=Course[0].Course)
 		except:
-			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor)[0])
+			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor,Code =Code).order_by('Semester')[0])
 			CourseBoard.Total_Speedy = 5
 			CourseBoard.Total_Homework = 5
 			CourseBoard.Total_Level_Difficulty = 5
@@ -543,6 +543,6 @@ def TotalCourseProfessor(CourseName,Professor):
 			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
 			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
-			
+		
 
 		return CourseBoard

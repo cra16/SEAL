@@ -412,5 +412,48 @@ $("[data-toggle=tooltip]").tooltip();
 
 
 
+
+    });
+
+$('div').on('click','#edit',function(event){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var CurrentPage=$(this).parent().parent().attr("id")
+           var Parent=$(this).parent().parent().parent();
+            var Code = Parent.find("[name=ccode]").text();
+            var CourseName=Parent.find("[id=cname]").text();
+            var prof = Parent.find("[id=professor]").val();
+            var period = Parent.find("[id=period]").val();
+            var semester = Parent.find("[id=semester]").val();
+            var pagenation=$('body').find('[id=RecommendPageNation]');
+            var CurrentPage = pagenation.find('.active','item').attr('name');
+          
+
+            var form =document.createElement("form");
+            form.method ="POST";
+            form.action = "/UpdateCourse/"
+            var inputdata ={
+              'Code':Code,
+                      'CourseName': CourseName,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester,
+                      'CurrentPage':CurrentPage
+            }
+            var input; 
+            for(key in inputdata)
+            {
+              input= document.createElement("input");
+              input.name =key;
+              input.value=inputdata[key];
+              input.type="hidden";
+              form.appendChild(input);
+            }
+            form.submit();    
+             
+          
+
+
+
     });
 });

@@ -201,26 +201,117 @@ def CourseDelete(request):
 		}
 
 		return render_to_response('html/RecommendPage.html',Data)
+@csrf_exempt
+def UpdateRedirect(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	if request.method =="POST":
+		CourseName=request.POST['CourseName']
+		CourseCode=request.POST['Code']
+		Semester=request.POST['Semester']
+		Professor=request.POST['Professor']
+	UserProfile=Profile.objects.get(User = request.user)
+	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)[0]
+	LectureData2= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor)
+	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor).order_by('-Semester')
+	SemesterList=list()
+	for semester in SemesterData:
+		if semester.Semester not in SemesterList:
+			SemesterList.append(semester.Semester)
+
+	CourseBoard = Course_Evaluation.objects.get(Course=LectureData) #DB 고유 ID로 접근해서 검색		
+	
+	totalcount=0
+	MyCourseBoard = None
+	
+	Description=Description_Answer.objects.filter(Course=LectureData,CreatedID=UserProfile)
+			
+	dic = {'user':request.user,
+          'BestBoard':BestBoardView(),
+           'CourseBoard':CourseBoard,
+    	   'Description':Description,
+           'SemesterData':SemesterList
+			}
+	if request.flavour =='full':
+		return render_to_response('html/update.html',dic)
+	else:
+		return render_to_response("m_skins/m_html/update.html",dic)
+@csrf_exempt
 def CourseUpdate(request):
 	if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 	if request.method == "POST":
-		LectureData=Lecture.objects.get(id=1)
-		UserData = Profile.objects.get(User = request.user)
-		UpdateCourseEval=Course_Evaluation.objects.get(Course=LectureData, CreatedID=UserData)
-		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)
+		new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
+		new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 		
+		new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
+		
+#			
+		new_CourseComment=request.POST['CourseComment']
+		new_Check = request.POST['ButtonCheck'] =="True" and True or False
+		new_Satisfy = float(request.POST['StarValue'])
+		new_Answer_list = request.POST.getlist('mytext[]')
+		new_Who = request.POST['who']
+		new_Url = request.POST['url']
+		new_paper_value= int(request.POST['paper_value'])
+		CourseName=request.POST['HCourseName']
+		Code=request.POST['HCourseCode']
+		Semester=request.POST['HSemester']
+		Professor=request.POST['HCourseProfessor']
+
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
+		UserData = Profile.objects.get(User = request.user)
+		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester, CreatedID=UserData)
+		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)
+		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester,CreatedID=UserData)
+
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy
 		UpdateTotalEval.Total_Homework -= UpdateCourseEval.Homework
 		UpdateTotalEval.Total_Level_Difficulty -= UpdateCourseEval.Level_Difficulty
 		UpdateTotalEval.Total_StarPoint -= UpdateCourseEval.StarPoint
+		if UpdateCourseEval.What_Answer == 1:
+			UpdateTotalEval.Total_Mix -= 1
+		elif UpdateCourseEval.What_Answer ==2:
+			UpdateTotalEval.Total_Short_Answer-=1
+		elif UpdateCourseEval.What_Answer ==3:
+			UpdateTotalEval.Total_Long_Answer -=1
+		elif UpdateCourseEval.What_Answer ==4:
+			UpdateTotalEval.Total_Unknown_Answer -=1
 
-		UpdateCourseEval.Speedy = request.POST['Speedy']
-		UpdateCourseEval.Homework = request.POST['Homework']
-		UpdateCourseEval.Level_Difficulty = request.POST['Level_Difficulty']
-		UpdateCourseEval.StarPoint =request.POST['StarPoint']
+		UpdateCourseEval.Speedy = new_Speedy
+		UpdateCourseEval.Homework =new_Homework
+		UpdateCourseEval.Level_Difficulty = new_Level_Difficulty
+		UpdateCourseEval.StarPoint =new_Satisfy
+		UpdateCourseEval.Check = new_Check
+		UpdateCourseEval.StarPoint = new_Satisfy
+		UpdateCourseEval.What_Answer = new_paper_value
+		UpdateCourseEval.Who_Answer = new_Who
+		UpdateCourseEval.Url_Answer = new_Url
+		UpdateCourseEval.CourseComment = new_CourseComment
+		
+		if UpdateCourseEval.What_Answer == 1:
+			UpdateTotalEval.Total_Mix += 1
+		elif UpdateCourseEval.What_Answer ==2:
+			UpdateTotalEval.Total_Short_Answer +=1
+		elif UpdateCourseEval.What_Answer ==3:
+			UpdateTotalEval.Total_Long_Answer +=1
+		elif UpdateCourseEval.What_Answer ==4:
+			UpdateTotalEval.Total_Unknown_Answer +=1
 
-		UpdeateTotalEval.update()
-		UpdateCourseEval.update()
+		UpdateTotalEval.Total_Speedy += UpdateCourseEval.Speedy
+		UpdateTotalEval.Total_Homework += UpdateCourseEval.Homework
+		UpdateTotalEval.Total_Level_Difficulty += UpdateCourseEval.Level_Difficulty
+		UpdateTotalEval.Total_StarPoint += UpdateCourseEval.StarPoint
+
+		Update_Dis.delete()
+		for new_Answer in new_Answer_list:#서술형 답변
+			if new_Answer =="":
+				continue
+			temp=Description_Answer(CreatedID=UserData,Answer = new_Answer,Course=LectureData)
+			temp.save()
+		
+		UpdateTotalEval.save()
+		UpdateCourseEval.save()
+		return HttpResponseRedirect("/MyCourse")
 
 # Create your views here.

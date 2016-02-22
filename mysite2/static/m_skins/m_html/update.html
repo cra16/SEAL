@@ -1,0 +1,296 @@
+<!doctype html>
+{% extends "m_skins/m_html/base.html" %}
+
+   
+  {%block head%}
+   {%load staticfiles%}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>▒ SEAL ▒</title>
+    <link href="http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{% static "m_skins/m_js/recommend.js" %}"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/recommend.css" %}">
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+     {%endblock%}
+
+     {%block content%}
+
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+        <h2 class="ui header"><img src="{% static "m_skins/m_css/write.png" %}" height="50px" width="50px">&nbsp;&nbsp;강의 평가 하기</h2>
+
+        <div id="coursenameheader" class="ui column">
+                
+          <p id="ccode_p">[<span id="ccode">{{CourseBoard.Code}}</span>]<br />
+          <span id="cname">{{CourseBoard.CourseName}}</span><br />
+          <span id="cprof">{{CourseBoard.professor}}</span></p>
+
+        </div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <div id="cautions">
+          <p>* SEAL은 한동대학생이 자신이 들은 수업을 평가하는 사이트 입니다.</p>
+          <p>* 평가의 기준 위에 마우스 커서를 올리면 구체적으로 어떤 기준인지 설명을 보실 수 있습니다.</p>
+          <p>* 가운데에서 양쪽으로 각각 4단계씩 있습니다. 자신이 생각하기에 이 수업은 어느 방향으로 어느 정도인지 표시해주십시오.</p>
+          <p>* 왼쪽의 버튼은 추천 기준을 활성화 또는 비활성화 시킵니다.</p>
+          <p>* 추천 기준을 다 정했다면 오른쪽 밑의 Submit 버튼을 눌러주시면 됩니다.</p>
+        </div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <div id="recommending" class="ui column">
+		
+          <div id="blankspace" class="ui column"></div>
+	   <form id="recommend_form" method ="POST">{% csrf_token %}
+          
+          <div ui="ui grid">
+            <h4 style="display:inline; margin-left:30px;"><img src="{% static "css/seal.png" %}" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
+            
+              <div id="recommend_form" class="ui selection dropdown" style="margin-top:15px;">
+              <div id="text_semester" class="default text">학기</div>
+                <i class="dropdown icon"></i>
+                <input id="HSemester"  name="HSemester" type="hidden" value ="0">
+                <div class="menu">
+                  <div class="item" data-value="{{CourseBoard.Course.Semester}}"></div>
+                  {%for SemesterData in SemesterData%}
+                  <div class="item" data-value="{{SemesterData}}">{{SemesterData}}</div>
+                  {%endfor%}
+                 </div>
+              </div>
+
+        </div>
+         <input id="HCourseName"  name="HCourseName" type="hidden" value ="{{CourseBoard.Course.CourseName}}">
+          <input id="HCourseCode"  name="HCourseCode" type="hidden" value ="{{CourseBoard.Course.Code}}">
+          <input id="HCourseProfessor"  name="HCourseProfessor" type="hidden" value ="{{CourseBoard.Course.Professor}}">
+        
+        <br>
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <div class="ui grid">
+            <div id="firstcolumn" class="left floated right aligned eight wide column">진도 속도</div>
+            <div id="enbutton" class="left floated center aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+            </div>
+            <div class="left floated center aligned four wide column">&nbsp;</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
+            </div>
+            <div id="rchoice" class="right floated left aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
+            </div>
+            <div id="sldbr" class="left aligned sixteen wide column">
+              <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>  
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="secondcolumn" class="left floated right aligned eight wide column">과제량</div>
+            <div id="enbutton" class="left floated center aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+            </div>
+            <div class="left floated center aligned four wide column">&nbsp;</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
+            </div>
+            <div id="rchoice" class="right floated left aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
+            </div>
+            <div id="sldbr" class="left aligned sixteen wide column">
+              <input type="text" id="sl2" name ="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C" data-slider-disabled="false" />
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="thirdcolumn" class="left floated right aligned eight wide column">난이도</div>
+            <div id="enbutton" class="left floated center aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
+            </div>
+            <div class="left floated center aligned four wide column">&nbsp;</div>
+            <div id="lchoice" class="left floated right aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
+            </div>
+            <div id="rchoice" class="right floated left aligned four wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
+            </div>
+            <div id="sldbr" class="left aligned sixteen wide column">
+              <input type="text" id="sl3" name ="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C" data-slider-disabled="false" />
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <div class="ui grid">
+            <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
+            
+            <div class="ui stackable center floated center aligned ten wide column">
+            {% if MyCourseBoard.What_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button paper_button active" value="" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button paper_button" value="" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button paper_button" value="" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button paper_button" value="" >해당 없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button paper_button" value="" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button paper_button active" value="" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button" value="" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button paper_button" value="" >해당 없음</button>
+                    </div>
+                  {% elif MyCourseBoard.What_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button paper_button" value="" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button paper_button" value="" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle button paper_button active" value="" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button paper_button" value="" >해당 없음</button>
+                    </div>
+                  {%else%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle paper_button button" value="" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle paper_button button" value="">&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+                      <button type ="button" class="ui toggle paper_button button" value="">&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+                    <button type ="button" class="ui toggle button paper_button active" value="" >해당 없음</button>
+                    </div>
+              <button type ="button" class="ui button toggle paper_button" value="1">&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
+              <button type ="button" class="ui button toggle paper_button" value="2">&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
+              <button type ="button" class="ui button toggle paper_button" value="3">&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
+              <button type ="button" class="ui button toggle paper_button" value="4">해당 없음</button>
+              <input type="hidden" id="paper_value" name = "paper_value" class="paper_value" value ="0">
+            </div>
+          </div>
+
+          <div class="ui center aligned piled segment">
+
+            <br>
+
+          <div class="field" style="margin-top:20px;">
+            <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i></h2>
+            <div class="input_fields_wrap">
+              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는? &nbsp;" active-color='#3F51B5' class="demo-form">
+
+              <div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>
+              </div>
+
+              
+
+              <p style="margin-top:-30px; color:grey">*** 평가와 별개로 무작위로 보여집니다. ***</p>
+              <button type="button" class="ui vertical mini animated button add_field_button" tabindex="0" style="margin-top:-5px">
+                <div class="hidden content">Add</div>
+                <div class="visible content">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </div>
+              </button>
+          </div>
+
+            <br>
+
+            <div class="field">
+              <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i></h2>
+              <input type="text" label="어떤 사람에게 추천하나요? &nbsp;" name="who" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Who_Answer}}">
+            </div>               
+        
+            <div class="field">
+              <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i></h2>
+              <input type="text" label="참고하면 좋은 사이트 URL &nbsp;" name="url" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Url_Answer}}">
+            </div>
+          </div>
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+          <br>
+
+          <div class="ui grid">
+            <div id="sixthcolumn" class="left floated center aligned four wide column"><h4><b> 추천</b></h4></div>            
+            
+               <a id="tooltips" data-toggle="tooltip"><button type ="button" id="enable6" class="circular ui icon button" style="font-size:20px"><i class="glyphicon glyphicon-thumbs-up"></i></button></a>
+             <input type ="hidden" id="ButtonCheck" name ="ButtonCheck"value ="False">
+             
+            </div>
+
+            <br>
+
+            <div class="floated center aligned one wide column" style="color:orange; margin-left:9px"><h4><b>만족도</b></h4></div>
+            <div class="stars" style="margin-top:-50px; margin-left:-55px;">
+                <input class="star star-5" id="star-5" type="radio" name="star"/>
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star"/>
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star"/>
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star"/>
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star"/>
+                <label class="star star-1" for="star-1"></label>
+            </div>
+            <input type="hidden" id = "StarValue" name = "StarValue" value = "0">
+            
+          </div>
+
+            <br>
+
+           <div id="notice_border" class="ui raised segment">
+
+              <div class="ui form">
+                <div class="field">
+                <label><h4><i class="glyphicon glyphicon-pencil"></i> <b>Comment<b></h4></label>
+                <pre style="font-family: mono; font-size:11px; color:#727272; background-color:#f5f5f5"><span style="font-size:15px">** 평가 가이드라인 **</span>
+자체적으로 제시하는 가이드 라인입니다. 아래 질문지에 맞춰 선택적으로 작성하시면 됩니다.
+
+1.  수업 외 도움 받을 수 있는 기회가 있나요? (TA세션, 교수님 면담, 멘토링 등)
+2.  교수님의 강의 방식은 어땠나요?
+3.  기억에 남는 강의 내용은 무엇인가요?
+4.  어떤 방식의 과제가 몇 번 주어졌나요?
+5.  과제, 퀴즈, 시험, 팀 프로젝트 중 실질적으로 비중이 높은 부분은 무엇인가요?
+6.  과목 특성 상 이 과목을 어떻게 공부하면 좋을까요?
+7.  본 강의를 통해 가장 크게 얻은 부분은 무엇인가요?
+8.  기타 의견</pre>
+                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500">{{CourseBoard.CourseComment}}</textarea>
+                </div>
+              </div>
+
+          <div id="recommendbtn" class="ui grid">          
+            <div class="left floated right aligned sixteen wide column">
+              <button id="recommendbtn_d" class="btn btn-info btn-lg"><i class="glyphicon glyphicon-heart"></i>&nbsp;Submit</button>
+            </div>
+          </div>
+
+        </div>
+		</form>
+        
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+
+        
+
+
+        <div id="h_sectiondivider" class="ui section divider"></div>     
+
+    
+    <script type="text/javascript" src="{% static "js/jquery.polymer-form.min.js" %}"></script>
+   {%endblock%}
+</html>

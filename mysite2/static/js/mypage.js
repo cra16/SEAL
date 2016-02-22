@@ -16,9 +16,9 @@ $('form').on('click', '#changebtn4',function(){
               type : "POST",
               success:function(resp){  
                   alert('Successfully changed!');
+                  location.reload();
                   } ,
               error: function(xhr, option, error){
-                  alert(xhr.status); //오류코드
                   alert('중복되는 닉네임이 존재합니다'); //오류내용
             }
               });

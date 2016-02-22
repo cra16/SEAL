@@ -140,7 +140,7 @@ def CourseDelete(request):
 		UserData = Profile.objects.get(User = request.user)
 		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
-		Delete_Dis = Description_Answer.objects.filter(Course=LectureData)
+		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semster,CreatedID=UserData)
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
 
 		

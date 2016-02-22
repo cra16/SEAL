@@ -506,7 +506,7 @@ def BestBoardView():
 		for Board in TotalBoard:
 			TotalCount += Board.Total_Count
 		for Board in TotalBoard:
-			if TotalCount>=MaxCount:
+			if TotalCount>MaxCount:
 				MaxCount=TotalCount
 				BestBoard[1] = BestBoard[0]
 				BestBoard[2]= BestBoard[1]

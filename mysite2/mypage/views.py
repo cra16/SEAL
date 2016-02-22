@@ -16,10 +16,10 @@ def NicknameChange(request):
 	else:
 		if request.method =="POST":
 			nickname = request.POST['Nickname']
-			myprofile = Profile.objects.get(User = request.user)
+			myprofile = Profile.objects.filter(User = request.user)
 			is_same = Profile.objects.filter(UserName = nickname)
-			# if len(is_same) > 0:	# 중복 여부 검사
-			# 	return render_to_response('html/sealmypage.html')
+			if len(is_same) > 0:	# 중복 여부 검사
+				return 'Duplicate error'
 
 			myprofile.update(UserName = nickname)
 			if request.flavour =='full':

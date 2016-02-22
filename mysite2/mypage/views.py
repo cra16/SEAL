@@ -13,7 +13,7 @@ from functionhelper.views import CheckingLogin
 def NicknameChange(request):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-
+	else:
 		if request.method =="POST":
 			nickname = request.POST['Nickname']
 			myprofile = Profile.objects.get(User = request.user)

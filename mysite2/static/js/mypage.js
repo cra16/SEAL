@@ -38,7 +38,7 @@ $('form').on('click', '#changebtn4',function(){
       }
   });
   $('#btnnum4').click(function(){
-      var PasswordDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><span id = "firstcolumn"> 비밀번호 :</span> <input type="text" id="Nickname"> </div> ');
+      var NicknameDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><input type="text" id="Nickname"></div> ');
           
           btn1 = $('<button id="changebtn4" type = "button" class="btn btn-info">').text('Change'),
           btn2 = $('<button id="cancelbtn4" type = "button" class="btn btn-info">').text('Cancel');
@@ -48,7 +48,7 @@ $('form').on('click', '#changebtn4',function(){
       $('#btnnum4').after(btn2);
       $('#spannum4').hide();
         
-      $('#PasswordChange').prepend(PasswordDiv);
+      $('#NicknameChange').prepend(NicknameDiv);
     //  $('#PasswordD').show();
      
 
@@ -58,11 +58,6 @@ $('form').on('click', '#changebtn4',function(){
       $('#idtxtbox4').remove();
       $('#changebtn4').remove();
       $('#cancelbtn4').remove();
-      $('#PasswordBox').remove();
-      $('#RePasswordBox').remove();
-      $('#PassWordText').remove();
-      $('#RePassWordText').remove();
-      $('#PasswordD').remove();
       $('#spannum4').show();
       $('#btnnum4').show();
   });

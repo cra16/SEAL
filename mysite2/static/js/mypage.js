@@ -32,7 +32,6 @@ $('form').on('click', '#changebtn4',function(){
             $('#btnnum4').show();
           }
         }
-      }
       else {
         alert('닉네임은 2자 이상 10자 이하로 사용해야 합니다');
       }
@@ -40,7 +39,7 @@ $('form').on('click', '#changebtn4',function(){
   $('#btnnum4').click(function(){
       var NicknameDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><input type="text" id="Nickname"></div> ');
           
-          btn1 = $('<button id="changebtn4" type = "button" class="btn btn-info">').text('Change'),
+          btn1 = $('<button id="changebtn4" type = "button" class="btn btn-info">').text('Change');
           btn2 = $('<button id="cancelbtn4" type = "button" class="btn btn-info">').text('Cancel');
 
       $('#btnnum4').hide();

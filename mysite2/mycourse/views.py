@@ -136,11 +136,11 @@ def CourseDelete(request):
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semster)
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semster)[0]
 		UserData = Profile.objects.get(User = request.user)
 		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
-
+		Delete_Dis = Description_Answer.objects.filter(Course=LectureData)
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
 
 		
@@ -155,9 +155,11 @@ def CourseDelete(request):
 		UpdateData.Total_Count -=1
 		if UpdateData.Total_Count ==0:
 			UpdateData.delete()
+			Delete_Dis.delete()
 			DeleteData.delete()
 		else:
 			UpdateData.save()
+			Delete_Dis.delete()
 			DeleteData.delete()
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]

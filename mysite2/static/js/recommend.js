@@ -119,7 +119,8 @@ for(var i=0; i<ccode.length; i++)
     }
     else if(paper_value==0)
     {
-      alert("시험방식을 클릭하지 않으셨습니다.")
+      alert("시험방식을 클릭하지 않으셨습니다.");
+      return false;
     }
 
     else {

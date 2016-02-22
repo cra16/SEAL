@@ -105,7 +105,7 @@ for(var i=0; i<ccode.length; i++)
     var HSemester = $("#HSemester").val();
     var paper_value =$("#paper_value").val();
     var CourseComment = $("#CourseComment").val().length;
-    
+    var mytext = $("[name=mytext[]]").val();
     //check if there is nothing
     if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
@@ -120,8 +120,10 @@ for(var i=0; i<ccode.length; i++)
     }
     else if(paper_value==0)
     {
-      alert("시험방식을 클릭하지 않으셨습니다.")
+      alert("시험방식을 클릭하지 않으셨습니다.");
+      return false;
     }
+   
 
     else {
       $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();

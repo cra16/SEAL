@@ -44,7 +44,7 @@
 
 
             <div class="ui grid">
-              <div id="thirdcolumn" class="left floated center aligned four wide column">강의 방식</div>
+              <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
               <div class="left floated right aligned three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
               </div>
@@ -65,15 +65,15 @@
               <div class="right floated center aligned twelve wide column">
               {% if MyCourseBoard.What_Answer == 1%}
                     <div class="ui buttons" style="margin-top:-10px">
-                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
-                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
                       <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                     </div>
                   {% elif MyCourseBoard.What_Answer == 2%}
                     <div class="ui buttons" style="margin-top:-10px">
-                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
-                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
                       <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                     </div>

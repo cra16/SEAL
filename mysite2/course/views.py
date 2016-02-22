@@ -310,11 +310,11 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 				for temp in tempLecture:
 					good_count.append(Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=temp));
 			
-				goodresult=None
+				goodresult=0
 				for goocount in good_count:
 					for goodcount in goocount:
 						if goodcount['Check']==True:
-							goodresult = goodcount
+							goodresult += 1
 
 				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 				if Mobile == "full":
@@ -332,7 +332,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 					'OtherCourseBoard':OtherCourseBoard,
 					'OtherCount':OtherCount,
 					'PageInformation':PageInformation,
-					'GoodCount': goodresult != None and goodresult['Check__count'] or 0,
+					'GoodCount': goodresult,
 					'Answer_Dis' : Description
 					
 					}

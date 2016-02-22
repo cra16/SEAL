@@ -108,14 +108,16 @@ def Recommend_Write(request): #추천 강의 DB입력
 		
 			new_CourseComment=request.POST['CourseComment']
 			new_Speedy=5
-			new_Reliance=5
+			new_Level_Difficulty=5
 			#new_Helper=5
-			new_Question=5
+			new_Homework=5
 			new_Exam=5
 			new_Check = request.POST['ButtonCheck'] == "True" and True or False
 			new_Satisfy = float(request.POST['StarValue'])
-			new_Answer_list = request.POST.getlist('Answer[]')
+			new_Who = request.POST['who']
+			new_Url = request.POST['url']
 			new_paper_value= int(request.POST['paper_value'])
+			new_Answer_list = request.POST.getlist('mytext[]')
 		# 추천 여부에 따라 1 or 0
 		is_recommend = ( request.POST['ButtonCheck'] == "True" )
 		if is_recommend:
@@ -128,6 +130,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 		for new_Answer in new_Answer_list:#서술형 답변
+			if new_Answer =="":
+				continue
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 			temp.save()
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
@@ -164,11 +168,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 			Total_Eval.save()
 		else: #update
 			T_Eval.Total_Speedy += int(new_Speedy)
-			T_Eval.Total_Reliance += int(new_Reliance)
 			#T_Eval.Total_Helper += int(new_Helper)
-			T_Eval.Total_Question += int(new_Question)
+			T_Eval.Total_Homework += int(new_Homework)
 			#T_Eval.Total_Exam += int(new_Question)
-			#T_Eval.Total_Homework += int(new_Homework)
+			T_Eval.Total_Level_Difficulty += int(new_Level_Difficulty)
 			T_Eval.Total_StarPoint += float(new_Satisfy)
 			T_Eval.Total_Count += 1
 			T_Eval.Total_Recommend += recommend_cnt
@@ -179,7 +182,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			elif new_paper_value ==3:
 				T_Eval.Total_Mix+=1
 			elif new_paper_value ==4:
-				Total_Eval.Total_Unknown_Answer+=1			
+				T_Eval.Total_Unknown_Answer+=1			
 			T_Eval.save()
 	
 		URL = "/CourseProfessor/"+str(new_Course.id)

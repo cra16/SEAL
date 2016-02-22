@@ -1,13 +1,14 @@
 from django.db import models
-from lecture.models import Lecture
 from login.models import Profile
+from lecture.models import Lecture
+
 	
 class Description_Answer(models.Model):
-	CreatedID = models.ForeignKey(Profile)
-	Answer = models.TextField(max_length=200)
-	Course = models.ForeignKey(Lecture)
-	def __unicode__(self):
-		return self.CreatedID.User.username
+    CreatedID = models.ForeignKey(Profile)
+    Answer = models.TextField(max_length=200)
+    Course = models.ForeignKey(Lecture)
+    def __unicode__(self):
+        return self.CreatedID.User.username
 
 class Course_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
@@ -16,7 +17,7 @@ class Course_Evaluation(models.Model):
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 	Level_Difficulty = models.PositiveSmallIntegerField(default=5, null=False)
 	Check = models.BooleanField(default=False)
-	CourseComment = models.TextField(max_length=500)
+	CourseComment = models.TextField(max_length=1000)
 	StarPoint =models.FloatField(default=0)
 	What_Answer = models.IntegerField(default=0)
 	Exam_Answer = models.ManyToManyField(Description_Answer)

@@ -7,7 +7,7 @@
   
    {% block head %}    
      <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
-     <link rel="shortcut icon" href="static/m_skins/m_css/seal_title.png">    
+     <link rel="shortcut icon" href="{% static "m_skins/m_css/seal_title.png" %}">    
    
    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
 
@@ -242,7 +242,7 @@
              <div class="ui raised segment">
 
                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
-                <center><img src="/static/css/seal.png" height="45px" width="45px"></center>
+                <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
 
               </div>
               

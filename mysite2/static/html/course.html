@@ -63,14 +63,14 @@
               {% for Answer_List in Answer_Dis %}
                 {% for Answer in Answer_List %}
                 {%if forloop.counter|divisibleby:2 %}
-                <div class="column" style="padding-right:10px;">
-                  <div class="ui segment" style="margin-left:15px;">
+                <div class="column" style="padding-left:10px;">
+                  <div class="ui segment" style="margin-right:15px;">
                     <div class="content">ㆍ{{Answer.Answer}}</div>
                   </div>
                 </div>
                 {% else %}
-                <div class="column" style="padding-left:10px;">
-                  <div class="ui segment" style="margin-right:15px;">
+                <div class="column" style="padding-right:10px;">
+                  <div class="ui segment" style="margin-left:15px;">
                     <div class="content">ㆍ{{Answer.Answer}}</div>
                   </div>
                 </div>

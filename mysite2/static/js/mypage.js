@@ -19,17 +19,10 @@ $('form').on('click', '#changebtn4',function(){
                   } ,
               error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
-                  alert(error); //오류내용
+                  alert('중복되는 닉네임이 존재합니다'); //오류내용
             }
               });
             
-            $('#Nickname').remove();
-            $('#changebtn4').remove();
-            $('#cancelbtn4').remove();
-
-      $('#NickDiv').remove();
-            $('#spannum4').show();
-            $('#btnnum4').show();
           }
         }
       else {

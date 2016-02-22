@@ -164,9 +164,9 @@
                 <p id="title_s"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
 
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px" class="circular ui icon button"s><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
            <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom: 10px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>
          
@@ -227,16 +227,14 @@
                 <p id="title_s"><span id="csem1" name = "cprof">{{SuBoard.Course.Semester}} 학기</span></p>
 
             {% if SuBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
            <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom: 10px"><span class="starvalue">{{SuBoard.StarPoint}}</span></div>
          
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
-
-           
 
           </div>
 

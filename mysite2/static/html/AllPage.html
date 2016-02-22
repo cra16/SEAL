@@ -24,9 +24,9 @@
                 <p id="title_s"><span id="csem1" name = "cprof">{{PBoard3.Course.Semester}} 학기</span></p>
 
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:22px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
            <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom:10px;"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>        
               
@@ -91,7 +91,7 @@
               </div>
 
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                <button type="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  
               </div>
 
@@ -160,7 +160,7 @@
               </div>
 
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
+                <button type="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;10</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>  
               </div>
 

@@ -189,7 +189,7 @@
           <div class="ui grid">
 
             <div class="left floated right aligned four wide column" style="color:purple; margin-left:-40px; margin-right: 20px;"><h4><b>추천</b></h4></div>
-            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{GoodCount}}</b></h4>
+            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{GoodCount}}</b></h4>
 
             <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="center left aligned two wide column"><span id="starpoint" class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
@@ -323,9 +323,9 @@
             <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
             {% if MyCourseBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
 
@@ -450,9 +450,9 @@
            <div class="ui grid">
             <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
             {% if OtherBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
 
             <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            

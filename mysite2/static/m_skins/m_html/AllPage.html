@@ -26,9 +26,9 @@
             <div id="blankspace" class="ui column"></div>
 
             {% if PBoard3.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:18px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; margin-left:18px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
             {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:18px; font-size:18px;" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           <button type ="button" id="enable6" style="background-color:#CCC; margin-left:18px; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
            {%endif%}
            <div class="center aligned sixteen wide column" style="margin-left:115px; margin-top:-35px; margin-bottom: 5px"><span class="starvalue">{{PBoard3.StarPoint}}</span></div>  <!-- width = 평균 별점 * 16 px -->
          
@@ -158,7 +158,7 @@
             </div>
 
             <div class="left floated left aligned sixteen wide column">                
-                <button type ="button" id="thumbs_up" class="circular ui icon button"><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;10</b></span></button>
+                <button type ="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;10</b></span></button>
                 <div class="right floated right aligned sixteen wide column" style="margin-top:-34px; margin-left:10px"><span class="starvalue">{{PBoard3.Total_StarPoint}}</span></div>
               </div>
 

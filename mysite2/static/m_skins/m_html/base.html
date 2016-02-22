@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/slider.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/feed.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/seal_menubar.css"%}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/seal_profile.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_profile.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_bestc.css"%}">    
     <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     
@@ -112,6 +112,7 @@
                   <li><a href="/SiteMap">SITEMAP</a></li>
                 </ul>
               </li>
+              <li><a href="/Logout">LOGOUT</a></li>
             </ul>
           </div>
         </div>
@@ -128,21 +129,22 @@
      
     </div>
 
-            <div class="wrapper" style="padding-left: 63px;">
-              <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
+            <div class="wrapper">
+              <profile id="profile" class="col-md-12 col-sm-12 col-xs-12">
                       
-                <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
+                <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a><a href="/Logout"><span id="logout">LOGOUT&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                  <span id="detail"><br /><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
                 <p><span id="label"><a href="/MyCourse">내가 평가한 강의 &nbsp;</a> </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
 
                 <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의 &nbsp;</a> </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
 
-                <a href="/Schedule"><button class="btn btn-info"><span id="btntext">My Schedule</span></button></a>
+                <a href="/Schedule"><button class="btn btn-info" style="position:relative; left:19%"><span id="btntext">My Schedule</span></button></a>
 
               </profile>
             </div>
 
-            <div class="wrapper" style="padding-left: 63px;">
+            <div class="wrapper">
               <best id="best" class="col-md-2 col-sm-2 col-xs-2">
                     
                 <h3 id="best-title">HOT COURSES</h3>

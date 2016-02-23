@@ -254,7 +254,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			TotalBoard[2].append(lec)
 			CourseList.append(lec.Course.CourseName)
 			try:
-				Eval=Total_Evaluation.objects.filter(Course__CourseName=lec.Course.CourseName)
+				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
 				for Ev in Eval:
 						total += Ev.Total_Count
 			except:
@@ -629,7 +629,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 								break
 				if On==0:
 					try:
-						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
+						TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
 					except:
 						TotalDic = Total_Evaluation(Course=lec)
 						TotalDic.Total_Speedy =0
@@ -658,7 +658,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
 						
 					try:
-						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+						good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
 					except:
 						goodList[i].append(0)
 					TempInt=0
@@ -693,7 +693,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							break
 			if On==0:
 						try:
-							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
+							TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
 							
 
 						except:
@@ -723,7 +723,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Long_Answer += T.Total_Long_Answer
 							TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
 						try:
-							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+							good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'], Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
 						except:
 							goodList[2].append(0)
 						TempInt=0

@@ -4,7 +4,6 @@ $(document).ready(function()
          event.stopPropagation();
           $(this).unbind("click");
         var Find = $(this).parent().find("[id=open]");
-        alert("줄이기");
         $(this).hide();
         $(Find).show();
     });
@@ -13,7 +12,7 @@ $(document).ready(function()
           $(this).unbind("click");
         var Find = $(this).parent().find("[id=close]");
         
-        alert("더보기");
+
         $(this).hide();
         $(Find).show();
     });    

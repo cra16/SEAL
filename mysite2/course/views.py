@@ -63,21 +63,21 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 		MyCourseBoard = None
 		for TempData in t:
 			try:
-				Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
+				Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code,CreatedID=UserData))
 			except:
 				pass
 			if MyCourseBoard == None:
 				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
 				except:
 					MyCourseBoard = None
 			
 			if count==0:
-				OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
 
 				totalcount += OtherCourse.count()
 			elif count>=1:
-				TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
 				totalcount += TempCourse.count()
 				MergeCourse=chain(TempCourse,OtherCourse)
 				OtherCourse = MergeCourse
@@ -143,29 +143,27 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 	try:
 			MergeCourse=None
 			count=0
-			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+			TempData= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor,Code =LectureInformation.Code)[0]
 			totalcount=0
 			MyCourseBoard = None
 			Description=[]
-			for TempData in t:
-				try:
-						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
-				except:
-					pass				
-				if count==0:
-					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-					totalcount += OtherCourse.count()
-					
-				if count>=1:
-					TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-					totalcount += TempCourse.count()
-					MergeCourse=chain(TempCourse,OtherCourse)
-					OtherCourse = MergeCourse
-					TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-					MergeCourse = chain(TempCourse,MyCourse)
-					MyCourse = MergeCourse
-				count+=1
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code,CreatedID=UserData))
+			if count==0:
+				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code).order_by('-id')
+
+				totalcount += OtherCourse.count()
+				
+			if count>=1:
+				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
+				totalcount += TempCourse.count()
+				MergeCourse=chain(TempCourse,OtherCourse)
+				OtherCourse = MergeCourse
+				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
+				MergeCourse = chain(TempCourse,MyCourse)
+				MyCourse = MergeCourse
+			count+=1
+
 
 			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
 			
@@ -268,27 +266,27 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 		try:
 			MergeCourse=None
 			count=0
-			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+			TempData= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor,Code =LectureInformation.Code)[0]
 			totalcount=0
 			MyCourseBoard = None
-			for TempData in t:
-				Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
+	
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code,CreatedID=UserData))
 			
-				if count==0:
-					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+			if count==0:
+				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code).order_by('-id')
 
-					totalcount += OtherCourse.count()
-					
-				if count>=1:
-					TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-					totalcount += TempCourse.count()
-					MergeCourse=chain(TempCourse,OtherCourse)
-					OtherCourse = MergeCourse
-					TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-					MergeCourse = chain(TempCourse,MyCourse)
-					MyCourse = MergeCourse
-				count+=1
+				totalcount += OtherCourse.count()
+				
+			if count>=1:
+				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
+				totalcount += TempCourse.count()
+				MergeCourse=chain(TempCourse,OtherCourse)
+				OtherCourse = MergeCourse
+				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
+				MergeCourse = chain(TempCourse,MyCourse)
+				MyCourse = MergeCourse
+			count+=1
 
 			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
 			O_Count = DataCount(3,totalcount)
@@ -376,7 +374,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
 				except:
 					MyCourseBoard = None
 				
@@ -386,7 +384,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 				MergeCourse=None
 			
 				
-				OtherCourse=Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
 					
 
 		
@@ -400,7 +398,7 @@ def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 �
 
 				
 				#pageNation과 관련된 기능
-				DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+				DBCount =Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).count()
 				O_Count = DataCount(3,DBCount)
 				
 				if Mobile =="full":					
@@ -459,14 +457,14 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				
 				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 				try:
-					MyCourseBoard = Course_Evaluation.objects.filter(Course = LectureInformation, CreatedID = UserData)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
 				except:
 					MyCourseBoard = 1
 				
 				#한 페이지에 뿌리는 기능
 				PageFirst = (offset2-1)*3
 				PageLast = (offset2-1)*3+3
-				OtherCourse=Course_Evaluation.objects.filter(Course = LectureInformation).order_by('-id')
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
 					
 
 		
@@ -507,8 +505,9 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 					return render_to_response("m_skins/m_html/coursepage.html",dic)
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
+	LectureInformation=Lecture.objects.get(id = offset)
 	try:
-		CourseBoard = Total_Evaluation.objects.get(Course = Lecture.objects.get(id = offset))
+		CourseBoard = Total_Evaluation.objects.get(Course__Code =LectureInformation.Code,Course__CourseName=LectureInformation.CourseName, Course__Professor=LectureInformation.Professor)
 		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
@@ -523,7 +522,7 @@ def TotalCourse(offset):
 
 	return CourseBoard
 def TotalCourseProfessor(CourseName,Professor,Code):
-		Course = Total_Evaluation.objects.filter(Course__CourseName=CourseName,Course__Professor=Professor).order_by('Course__Semester')
+		Course = Total_Evaluation.objects.filter(Course__Code =Code,Course__CourseName=CourseName,Course__Professor=Professor).order_by('Course__Semester')
 		try:
 			CourseBoard = Total_Evaluation(Course=Course[0].Course)
 		except:

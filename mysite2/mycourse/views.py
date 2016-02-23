@@ -218,7 +218,7 @@ def UpdateRedirect(request):
 		if semester.Semester not in SemesterList:
 			SemesterList.append(semester.Semester)
 
-	CourseBoard = Course_Evaluation.objects.get(Course=LectureData,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
+	CourseBoard = Course_Evaluation.objects.get(Course__Code = CourseCode, Course__CourseName=CourseName, Course__Professor=Professor,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
 	
 	totalcount=0
 	MyCourseBoard = None
@@ -314,3 +314,25 @@ def CourseUpdate(request):
 		return HttpResponseRedirect("/MyCourse")
 
 # Create your views here.
+@csrf_exempt
+def LikeDelete(request):
+	Mobile = request.flavour
+	if CheckingLogin(request.user.username):
+			return HttpResponseRedirect("/")
+
+	if request.method == "POST":
+		Code = request.POST['Code']
+		Professor = request.POST['Professor']
+		Period = request.POST['Period']
+		Semester= request.POST['Semester']
+		CourseName = request.POST['CourseName']
+		Page = request.POST['CurrentPage']
+		Page= int(Page)
+		PageFirst=10*(int(Page)-1)
+		PageLast =10*(int(Page)-1)+10
+
+		LectureData=Course_Evaluation.objects.filter(Course__Code = Code, Course__CourseName=CourseName, Course__Professor = Professor,Course__Semester=Semester)[0]
+		UserData = Profile.objects.get(User = request.user)
+		DeleteData = Like_Course.objects.get(Course=LectureData,CreatedID=UserData)
+		DeleteData.delete()
+		return HttpResponseRedirect("/MyCourse")

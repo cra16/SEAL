@@ -192,7 +192,14 @@
             <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i></h2>
             <div class="input_fields_wrap">
               <input type="text" name="mytext[]" label="기억에 남는 시험 문제는? &nbsp;" active-color='#3F51B5' class="demo-form">
-
+                {% for Answer in Description %}
+                
+              {%if forloop.counter == 1%}
+              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는?  &nbsp" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
+               {%else%} 
+             <input type="text"  name="mytext[]" class="demo-form add" value ="{{Answer.Answer}}">
+              {%endif%}
+              {%endfor%}
               <div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>
               </div>
 
@@ -235,18 +242,18 @@
 
             <div class="floated center aligned one wide column" style="color:orange; margin-left:9px"><h4><b>만족도</b></h4></div>
             <div class="stars" style="margin-top:-50px; margin-left:-55px;">
-                <input class="star star-5" id="star-5" type="radio" name="star"/>
+             <input class="star star-5" id="star-5" type="radio" name="star" {% if CourseBoard.StarPoint == 5 %} checked {%endif%}/>
                 <label class="star star-5" for="star-5"></label>
-                <input class="star star-4" id="star-4" type="radio" name="star"/>
+                <input class="star star-4" id="star-4" type="radio" name="star" {% if CourseBoard.StarPoint == 4 %} checked {%endif%}/>
                 <label class="star star-4" for="star-4"></label>
-                <input class="star star-3" id="star-3" type="radio" name="star"/>
+                <input class="star star-3" id="star-3" type="radio" name="star" {% if CourseBoard.StarPoint == 3 %} checked {%endif%}/>
                 <label class="star star-3" for="star-3"></label>
-                <input class="star star-2" id="star-2" type="radio" name="star"/>
+                <input class="star star-2" id="star-2" type="radio" name="star" {% if CourseBoard.StarPoint == 2 %} checked {%endif%}/>
                 <label class="star star-2" for="star-2"></label>
-                <input class="star star-1" id="star-1" type="radio" name="star"/>
+                <input class="star star-1" id="star-1" type="radio" name="star" {% if CourseBoard.StarPoint == 1 %} checked {%endif%}/>
                 <label class="star star-1" for="star-1"></label>
             </div>
-            <input type="hidden" id = "StarValue" name = "StarValue" value = "0">
+            <input type="hidden" id = "StarValue" name = "StarValue" value = "{{CourseBoard.StarPoint}}">
             
           </div>
 

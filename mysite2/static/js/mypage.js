@@ -1,6 +1,6 @@
 $(function(){
 
-$('form').on('click', '#changebtn4',function(){
+  $('form').on('click', '#changebtn4',function(){
     
       var newnick = $('#Nickname').val();
      
@@ -29,6 +29,38 @@ $('form').on('click', '#changebtn4',function(){
         alert('닉네임은 2자 이상 10자 이하로 사용해야 합니다');
       }
   });
+  $("#Nickname").keydown(function (key) {
+    if (key.keyCode == 13) {
+      var newnick = $('#Nickname').val();
+     
+      if(newnick.length >= 2 && newnick.length <= 10){
+        if( newnick.indexOf(" ") !== -1 ){
+            alert("잘못된 입력입니다");
+        }
+        else{
+            //connect to DB at here
+            $.ajax(
+            { url : "/MyPage/NicknameChange/",
+              data : {'Nickname' : $('#Nickname').val()},
+              type : "POST",
+              success:function(resp){  
+                  alert('Successfully changed!');
+                  location.reload();
+                  } ,
+              error: function(xhr, option, error){
+                  alert('중복되는 닉네임이 존재합니다'); //오류내용
+            }
+              });
+            
+          }
+        }
+      else {
+        alert('닉네임은 2자 이상 10자 이하로 사용해야 합니다');
+      }
+    }
+  });
+
+
   $('#btnnum4').click(function(){
       var NicknameDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><input type="text" id="Nickname"></div> ');
           

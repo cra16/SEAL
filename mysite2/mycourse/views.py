@@ -138,7 +138,7 @@ def CourseDelete(request):
 
 		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, Semester =Semester, CreatedID=UserData)
+		DeleteData=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, Course__Semester =Semester, CreatedID=UserData)
 		
 		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester,CreatedID=UserData)
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)

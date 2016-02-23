@@ -54,3 +54,8 @@
 #menu.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #87cefa;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }

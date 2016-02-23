@@ -61,13 +61,16 @@
                 <p id="title_s"><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>
               </div>
               
-               <div class="left floated left aligned sixteen wide column">                
-                <button type ="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><bj>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
-                <div class="right floated right aligned sixteen wide column" style="margin-top:-34px; margin-left:10px"><span class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>
+              <br><br>
+
+              <button type ="button" id="thumbs_up" class="circular ui icon button" style="margin-left:10px;" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
+
+              <div class="center aligned sixteen wide column" style="margin-top:-35px; margin-bottom: 15px;">
+                <span class="starvalue" style="display:inline-block" >{{PBoard1.Total_StarPoint}}</span>       
               </div>
 
               <div class="center aligned sixteen wide column">
-                <br><br><br><br>
+                
                   <a id="tooltips" data-toggle="tooltip" title="강의 속도가 느림 &nbsp;">느림</a>
                   <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard1.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
                   <a id="tooltips"  data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a><br />

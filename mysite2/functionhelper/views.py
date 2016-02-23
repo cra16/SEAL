@@ -480,54 +480,27 @@ def BestBoardView():
 
 
 	TotalBoard = Total_Evaluation.objects.all()
-	MaxCount = 0  
-	SecondCount = 0
-	ThirdCount =0
-	BestBoard =[0,0,0]
-	TotalSortBoard=[]
-	ListProfessor =list()
-	ListCourse = list()
-	for lec in TotalBoard:
-				On=0;
-				
-				CourseTrue =lec.Course.CourseName not in ListCourse
-				ProfessorTrue = lec.Course.Professor not in ListProfessor
-				if CourseTrue or ProfessorTrue:
-					if ProfessorTrue:
-						ListProfessor.append(lec.Course.Professor)
-					if CourseTrue :
-						ListCourse.append(lec.Course.CourseName)
-				else:
-					continue
-					
+	MaxCount=0
+	SecondCount=0
+	ThirdCount=0
+	BestBoard=[[],[],[]]			
 						
-				TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Course.Professor, Course__CourseName=lec.Course.CourseName)
-				TotalSortBoard.append(TotalDic)
 	TotalCount=0
-	for TotalBoard in TotalSortBoard:
-		for Board in TotalBoard:
-			TotalCount += Board.Total_Count
-		for Board in TotalBoard:
-			if TotalCount>MaxCount:
-				MaxCount=TotalCount
-				BestBoard[1] = BestBoard[0]
-				BestBoard[2]= BestBoard[1]
-				BestBoard[0] = Board
-				BestBoard[0].Total_Count=TotalCount
-				break
-			elif TotalCount>=SecondCount :	
-				SecondCount=TotalCount
-				BestBoard[2] = BestBoard[1]
-				BestBoard[1] = Board
-				BestBoard[1].Total_Count =TotalCount
-				break
-			elif TotalCount >=ThirdCount :
-				ThirdCount=TotalCount
-				BestBoard[2] = Board
-				BestBoard[2].Total_Count=TotalCount
-				break
+	for Board in TotalBoard:
+		TotalCount = Board.Total_Count
+		if TotalCount>MaxCount:
+			MaxCount=TotalCount
+			BestBoard[1] = BestBoard[0]
+			BestBoard[2] = BestBoard[1]
+			BestBoard[0] = Board
+		elif TotalCount>SecondCount :	
+			SecondCount=TotalCount
+			BestBoard[2] = BestBoard[1]
+			BestBoard[1] = Board
+		elif TotalCount >ThirdCount :
+			ThirdCount=TotalCount
+			BestBoard[2] = Board
 
-		TotalCount=0
 
 	return BestBoard	
 

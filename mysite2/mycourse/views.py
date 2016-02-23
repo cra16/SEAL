@@ -210,9 +210,8 @@ def UpdateRedirect(request):
 		CourseCode=request.POST['Code']
 		Semester=request.POST['Semester']
 		Professor=request.POST['Professor']
-
 	UserProfile=Profile.objects.get(User = request.user)
-	LectureData= Lecture.objects.get(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)
+	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)[0]
 	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor).order_by('-Semester')
 	SemesterList=list()
 	for semester in SemesterData:
@@ -259,7 +258,7 @@ def CourseUpdate(request):
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
 
-		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
 		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester, CreatedID=UserData)
 		UpdateTotalEval = Total_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor)

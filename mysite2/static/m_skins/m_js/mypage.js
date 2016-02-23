@@ -1,5 +1,7 @@
 $(function(){
-
+  $("#NicknameChange").submit(function(e){
+    return false;
+  });
   $('form').on('click', '#changebtn4',function(){
     
       var newnick = $('#Nickname').val();

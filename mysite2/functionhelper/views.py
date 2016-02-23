@@ -442,9 +442,11 @@ def PageView(TotalBoard):
 	
 	for DBBoard in TotalBoard:
 		for Board in DBBoard:
+
 			try:
 				# 총 강의 추천된 DB 강의 명으로 호출
-				BoardData = Total_Evaluation.objects.get(Course=Board)
+				BoardData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.CourseName,
+					Course__Code = Board.Course.Code,Course__Professor=Board.Course.Professor)
 			except :
 				BoardData = None
 

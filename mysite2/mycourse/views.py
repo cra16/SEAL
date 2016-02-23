@@ -129,18 +129,18 @@ def CourseDelete(request):
 		Code = request.POST['Code']
 		Professor = request.POST['Professor']
 		Period = request.POST['Period']
-		Semster= request.POST['Semester']
+		Semester= request.POST['Semester']
 		CourseName = request.POST['CourseName']
 		Page = request.POST['CurrentPage']
 		Page= int(Page)
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semster)[0]
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
+		DeleteData=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, Semester =Semester, CreatedID=UserData)
 		
-		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semster,CreatedID=UserData)
+		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester,CreatedID=UserData)
 		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
 
 		
@@ -211,15 +211,14 @@ def UpdateRedirect(request):
 		Semester=request.POST['Semester']
 		Professor=request.POST['Professor']
 	UserProfile=Profile.objects.get(User = request.user)
-	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)[0]
-	LectureData2= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor)
+	LectureData= Lecture.objects.get(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)
 	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor).order_by('-Semester')
 	SemesterList=list()
 	for semester in SemesterData:
 		if semester.Semester not in SemesterList:
 			SemesterList.append(semester.Semester)
 
-	CourseBoard = Course_Evaluation.objects.get(Course=LectureData) #DB 고유 ID로 접근해서 검색		
+	CourseBoard = Course_Evaluation.objects.get(Course=LectureData,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
 	
 	totalcount=0
 	MyCourseBoard = None
@@ -259,7 +258,7 @@ def CourseUpdate(request):
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
 
-		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
+		LectureData=Lecture.objects.get(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)
 		UserData = Profile.objects.get(User = request.user)
 		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester, CreatedID=UserData)
 		UpdateTotalEval = Total_Evaluation.objects.get(Course=LectureData)

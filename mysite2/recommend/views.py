@@ -24,20 +24,13 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 
 	UserProfile=Profile.objects.get(User = request.user)
 	LectureData= Lecture.objects.get(id=offset)
-	#try:
+	try:
 		
-		#RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
-		
-
-		#return HttpResponseRedirect('/NotEmptyRecommend')
-	#except:
-	RecommendData=None
-	SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
-	SemesterList=list()
-	for semester in SemesterData:
-		if semester.Semester not in SemesterList:
-			SemesterList.append(semester.Semester)
-
+		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
+		return HttpResponseRedirect('/NotEmptyRecommend')
+	except:
+			RecommendData=None
+	
 
 
 	if RecommendData != None:
@@ -45,7 +38,14 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 			return HttpResponseRedirect('/NotEmptyRecommend')
 		else:
 			return  HttpResponseRedirect("/NotEmptyRecommend")
+
 	else:
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
+		SemesterList=list()
+		for semester in SemesterData:
+			if semester.Semester not in SemesterList:
+				SemesterList.append(semester.Semester)
+
 		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
 		request.session['Recommend_ID'] = offset #offset 미리 저장
 		dic = {'user':request.user,

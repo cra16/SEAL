@@ -16,6 +16,7 @@ urlpatterns = patterns('',
 	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
 	url(r'^CurUpdate/$','lecture.views.AutoFastLecUpdate'),
 	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
+
 	
 )
 
@@ -74,7 +75,8 @@ urlpatterns += patterns('qna.views',
 	url(r'^QnA/(\d+)/$','QnARead'),
 	url(r'^QnA/Reply/(\d+)$','QnA_Reply'),
 	url(r'^QnA/Replying/(\d+)$','QnA_Replying'),
-	url(r'^SubScriptWrite/$','Improvement_Write')
+	url(r'^SubScriptWrite/$','Improvement_Write'),
+	url(r'^Judgement_Write/$','Judgement_Write')
 )
 
 urlpatterns += patterns('course.views',

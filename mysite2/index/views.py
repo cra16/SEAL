@@ -122,7 +122,7 @@ def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 
-	dic = {'user':request.user}
+	dic = {'user':request.user,'BestBoard':BestBoardView()}
 
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_improve.html',dic)

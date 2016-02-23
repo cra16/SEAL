@@ -207,8 +207,22 @@ def Improvement_Write(request):
 		new_Text=request.POST['msg-body-txtarea']		
 		new_TextWriter = Profile.objects.get(User=request.user)
 		new_TextName = request.POST['msg-title-input']
-		new_QnA = Improvement(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
-		new_QnA.save()
+		new_Improvement = Improvement(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+		new_Improvement.save()
+		return HttpResponseRedirect("/")
+	else:
+		return HttpResponseRedirect("/")
+
+@csrf_exempt
+def Judgement_Write(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	if request.method=="POST":
+		new_Text=request.POST['msg-body-txtarea']		
+		new_TextWriter = Profile.objects.get(User=request.user)
+		new_TextName = request.POST['msg-title-input']
+		new_Judgement = Judgement(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+		new_Judgement.save()
 		return HttpResponseRedirect("/")
 	else:
 		return HttpResponseRedirect("/")

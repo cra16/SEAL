@@ -455,9 +455,9 @@ def PageView(TotalBoard):
 				PageBoard[count].append(BoardData)
 			else:
 				BoardData = Total_Evaluation(Course=Board)
-				BoardData.Total_Speedy =5
-				BoardData.Total_Homework = 5
-				BoardData.Total_Level_Difficulty = 5
+				BoardData.Total_Speedy =0
+				BoardData.Total_Homework = 0
+				BoardData.Total_Level_Difficulty = 0
 				
 				BoardData.Total_Count =0
 				PageBoard[count].append(BoardData)
@@ -566,15 +566,15 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
 					except:
 						TotalDic = Total_Evaluation(Course=lec)
-						TotalDic.Total_Speedy =5
-						TotalDic.Total_Homework = 5
-						TotalDic.Total_Level_Difficulty = 5
+						TotalDic.Total_Speedy =0
+						TotalDic.Total_Homework = 0
+						TotalDic.Total_Level_Difficulty = 0
 						TotalDic.Total_Count =0
 
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =5
-					TempTotal.Total_Level_Difficulty = 5
-					TempTotal.Total_Homework = 5
+					TempTotal.Total_Speedy =0
+					TempTotal.Total_Level_Difficulty = 0
+					TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint = 0
 					TempTotal.Total_Mix=0
@@ -632,14 +632,14 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
 					except:
 						TotalDic = Total_Evaluation(Course=lec)
-						TotalDic.Total_Speedy =5
-						TotalDic.Total_Level_Difficulty = 5
-						TotalDic.Total_Homework = 5
+						TotalDic.Total_Speedy =0
+						TotalDic.Total_Level_Difficulty = 0
+						TotalDic.Total_Homework = 0
 						TotalDic.Total_Count =0
 					TempTotal = Total_Evaluation(Course=lec)
-					TempTotal.Total_Speedy =5
-					TempTotal.Total_Level_Difficulty = 5
-					TempTotal.Total_Homework = 5
+					TempTotal.Total_Speedy =0
+					TempTotal.Total_Level_Difficulty = 0
+					TempTotal.Total_Homework = 0
 					TempTotal.Total_Count =0
 					TempTotal.Total_StarPoint=0
 					TempTotal.Total_Mix =0
@@ -698,14 +698,14 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 
 						except:
 							TotalDic = Total_Evaluation(Course=lec)
-							TotalDic.Total_Speedy =5
-							TotalDic.Total_Level_Difficulty = 5
-							TotalDic.Total_Homework = 5
+							TotalDic.Total_Speedy =0
+							TotalDic.Total_Level_Difficulty = 0
+							TotalDic.Total_Homework = 0
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =5
-						TempTotal.Total_Level_Difficulty = 5
-						TempTotal.Total_Homework = 5
+						TempTotal.Total_Speedy =0
+						TempTotal.Total_Level_Difficulty = 0
+						TempTotal.Total_Homework = 0
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0
@@ -758,14 +758,14 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 
 						except:
 							TotalDic = Total_Evaluation(Course=lec)
-							TotalDic.Total_Speedy =5
-							TotalDic.Total_Level_Difficulty = 5
-							TotalDic.Total_Homework = 5
+							TotalDic.Total_Speedy =0
+							TotalDic.Total_Level_Difficulty = 0
+							TotalDic.Total_Homework = 0
 							TotalDic.Total_Count =0
 						TempTotal = Total_Evaluation(Course=lec)
-						TempTotal.Total_Speedy =5
-						TempTotal.Total_Level_Difficulty = 5
-						TempTotal.Total_Homework = 5
+						TempTotal.Total_Speedy =0
+						TempTotal.Total_Level_Difficulty = 0
+						TempTotal.Total_Homework = 0
 						TempTotal.Total_Count =0
 						TempTotal.Total_StarPoint=0
 						TempTotal.Total_Mix =0

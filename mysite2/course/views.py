@@ -27,97 +27,100 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 			UserData = Profile.objects.get(User = request.user)
 		except :
 			UserData =None
-		
+
+
 		#강의 추천 1번이상 안했을 시 정보 안 보여줌
 		if UserData.RecommendCount <1:
-			if request.flavour =='full':
-					return render_to_response("html/Course_error.html")
+			if UserData.User.username[1:3]=="16":
+				pass
+			elif request.flavour =='full':
+				return render_to_response("html/Course_error.html",dic)
 			else:
-				return render_to_response("m_skins/m_html/Course_error.html")
-		else:
+				return render_to_response("m_skins/m_html/Course_error.html",dic)
+
+		try:
+			offset = int(offset)
+		except:
+			raise Http404()
+		#보려는 강의 정보 
+		LectureInformation=Lecture.objects.get(id=offset)
+
+		CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
+		
+		
+		#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
+		
+		
+		#한 페이지에 뿌리는 기능
+		PageFirst = 3*(1-1)
+		PageLast = 3*(1-1)+3
+		MergeCourse=None
+		count=0
+		totalcount=0
+		Description=[]
+		t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor,Code =LectureInformation.Code)
+		
+		MyCourseBoard = None
+		for TempData in t:
+			try:
+				Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
+			except:
+				pass
+			if MyCourseBoard == None:
 				try:
-					offset = int(offset)
+					MyCourseBoard = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
 				except:
-					raise Http404()
-				#보려는 강의 정보 
-				LectureInformation=Lecture.objects.get(id=offset)
+					MyCourseBoard = None
+			
+			if count==0:
+				OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 
-				CourseBoard=TotalCourse(offset)#해당 강의 전체 추천한 Data DB 불러오기
-				
-				
-				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
-				
-				
-				#한 페이지에 뿌리는 기능
-				PageFirst = 3*(1-1)
-				PageLast = 3*(1-1)+3
-				MergeCourse=None
-				count=0
-				totalcount=0
-				Description=[]
-				t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor,Code =LectureInformation.Code)
-				
-				MyCourseBoard = None
-				for TempData in t:
-					try:
-						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
-					except:
-						pass
-					if MyCourseBoard == None:
-						try:
-							MyCourseBoard = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-						except:
-							MyCourseBoard = None
-					
-					if count==0:
-						OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+				totalcount += OtherCourse.count()
+			elif count>=1:
+				TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+				totalcount += TempCourse.count()
+				MergeCourse=chain(TempCourse,OtherCourse)
+				OtherCourse = MergeCourse
+			count+=1
+		OtherCourse=islice(OtherCourse,PageFirst,PageLast)
+		OtherCourseBoard = []
 
-						totalcount += OtherCourse.count()
-					elif count>=1:
-						TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-						totalcount += TempCourse.count()
-						MergeCourse=chain(TempCourse,OtherCourse)
-						OtherCourse = MergeCourse
-					count+=1
-				OtherCourse=islice(OtherCourse,PageFirst,PageLast)
-				OtherCourseBoard = []
+		#접속한 아이디와 중복되는 경우 제거
+		for Board in OtherCourse:
+			if Board.CreatedID == UserData:
+					pass
+			else:
+				OtherCourseBoard.append(Board)
 
-				#접속한 아이디와 중복되는 경우 제거
-				for Board in OtherCourse:
-					if Board.CreatedID == UserData:
-							pass
-					else:
-						OtherCourseBoard.append(Board)
-
+		
+		#pageNation과 관련된 기능
+		#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+		O_Count = DataCount(3,len(OtherCount))
+		
 				
-				#pageNation과 관련된 기능
-				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,len(OtherCount))
-				
-						
-				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				if Mobile == 'full':
-						PageInformation=FirstPageView(O_Count)
-						OtherCount=PageTotalCount(O_Count,PageInformation)
-				else:
-						PageInformation = MobileFirstPageView(O_Count)
-						OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
-				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				
-				dic ={'user':request.user,
-					'BestBoard':BestBoardView(),
-					'CourseBoard':CourseBoard,
-					'MyCourseBoard':MyCourseBoard,
-					'OtherCourseBoard':OtherCourseBoard,
-					'OtherCount':OtherCount,
-					'PageInformation':PageInformation,
-					'Answer_Dis' : Description
-					
-					}
-				if request.flavour =='full':
-					return render_to_response('html/course.html',dic)
-				else:
-					return render_to_response("m_skins/m_html/course.html",dic)
+		#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+		if Mobile == 'full':
+				PageInformation=FirstPageView(O_Count)
+				OtherCount=PageTotalCount(O_Count,PageInformation)
+		else:
+				PageInformation = MobileFirstPageView(O_Count)
+				OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
+		#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+		
+		dic ={'user':request.user,
+			'BestBoard':BestBoardView(),
+			'CourseBoard':CourseBoard,
+			'MyCourseBoard':MyCourseBoard,
+			'OtherCourseBoard':OtherCourseBoard,
+			'OtherCount':OtherCount,
+			'PageInformation':PageInformation,
+			'Answer_Dis' : Description
+			
+			}
+		if request.flavour =='full':
+			return render_to_response('html/course.html',dic)
+		else:
+			return render_to_response("m_skins/m_html/course.html",dic)
 #페이지 넘겼을 때 작동되는 함수9
 @csrf_exempt
 def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴(페이지 넘긴후)
@@ -235,111 +238,114 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 		
 		#강의 추천 1번이상 안했을 시 정보 안 보여줌
 		if UserData.RecommendCount <1:
-			if request.flavour =='full':
-					return render_to_response("html/Course_error.html")
+			if UserData.User.username[1:3]=="16":
+				pass
+			elif request.flavour =='full':
+				return render_to_response("html/Course_error.html")
 			else:
 				return render_to_response("m_skins/m_html/Course_error.html")
-		else:
-				try:
-					offset = int(offset)
-				except:
-					raise Http404()
-				#보려는 강의 정보 
-				LectureInformation=Lecture.objects.get(id=offset)
 
-				CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
-				
-				
-				#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
-			
-				#한 페이지에 뿌리는 기능
-				PageFirst = 3*(1-1)
-				PageLast = 3*(1-1)+3
-				MergeCourse=None
-				count=0
-				MyCourseBoard = None
-				Description=[]
-				try:
-					MergeCourse=None
-					count=0
-					t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-					totalcount=0
-					MyCourseBoard = None
-					for TempData in t:
-						Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
-					
-						if count==0:
-							MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-							OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+		
+		try:
+			offset = int(offset)
+		except:
+			raise Http404()
+		#보려는 강의 정보 
+		LectureInformation=Lecture.objects.get(id=offset)
 
-							totalcount += OtherCourse.count()
-							
-						if count>=1:
-							TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
-							totalcount += TempCourse.count()
-							MergeCourse=chain(TempCourse,OtherCourse)
-							OtherCourse = MergeCourse
-							TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
-							MergeCourse = chain(TempCourse,MyCourse)
-							MyCourse = MergeCourse
-						count+=1
-
-					#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
-					O_Count = DataCount(3,totalcount)
-				except:
-					DBCount = 0
-				OtherCourse = islice(OtherCourse,PageFirst,PageLast)
-				OtherCourseBoard = []
-				#접속한 아이디와 중복되는 경우 제거
-				MyCourseBoard = []
-				for Board in MyCourse:
-					MyCourseBoard.append(Board)
+		CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
+		
+		
+		#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
 	
-				for Board in OtherCourse:
-					if Board.CreatedID == UserData:
-							pass
-					else:
-						OtherCourseBoard.append(Board)
-
-				
-				#pageNation과 관련된 기능
-				#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
-				O_Count = DataCount(3,len(OtherCourseBoard))
-				tempLecture=Lecture.objects.filter(Code=LectureInformation.Code,CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-				good_count=[]
-				for temp in tempLecture:
-					good_count.append(Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=temp));
+		#한 페이지에 뿌리는 기능
+		PageFirst = 3*(1-1)
+		PageLast = 3*(1-1)+3
+		MergeCourse=None
+		count=0
+		MyCourseBoard = None
+		Description=[]
+		try:
+			MergeCourse=None
+			count=0
+			t= Lecture.objects.filter(CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+			totalcount=0
+			MyCourseBoard = None
+			for TempData in t:
+				Description.append(Description_Answer.objects.filter(Course=TempData,CreatedID=UserData))
 			
-				goodresult=0
-				for goocount in good_count:
-					for goodcount in goocount:
-						if goodcount['Check']==True:
-							goodresult += 1
+				if count==0:
+					MyCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+					OtherCourse=Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
 
-				#전체 페이지가 11페이지 이상인 것을 기준으로 정의
-				if Mobile == "full":
-					PageInformation=FirstPageView(O_Count)
-					OtherCount=PageTotalCount(O_Count,PageInformation)
-				else:
-					PageInformation=MobileFirstPageView(O_Count)
-					OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
-
-				#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
-				dic ={'user':request.user,
-					'BestBoard':BestBoardView(),
-					'CourseBoard':CourseBoard,
-					'MyCourseBoard':MyCourseBoard,
-					'OtherCourseBoard':OtherCourseBoard,
-					'OtherCount':OtherCount,
-					'PageInformation':PageInformation,
-					'GoodCount': goodresult,
-					'Answer_Dis' : Description
+					totalcount += OtherCourse.count()
 					
-					}
-				if request.flavour =='full':
-					return render_to_response('html/course.html',dic)
-				else:
-					return render_to_response("m_skins/m_html/course.html",dic)
+				if count>=1:
+					TempCourse= Course_Evaluation.objects.filter(Course = TempData).order_by('-id')
+					totalcount += TempCourse.count()
+					MergeCourse=chain(TempCourse,OtherCourse)
+					OtherCourse = MergeCourse
+					TempCourse = Course_Evaluation.objects.filter(Course = TempData, CreatedID = UserData)
+					MergeCourse = chain(TempCourse,MyCourse)
+					MyCourse = MergeCourse
+				count+=1
+
+			#DBCount = Course_Evaluation.objects.filter(Course = LectureInformation).count()
+			O_Count = DataCount(3,totalcount)
+		except:
+			DBCount = 0
+		OtherCourse = islice(OtherCourse,PageFirst,PageLast)
+		OtherCourseBoard = []
+		#접속한 아이디와 중복되는 경우 제거
+		MyCourseBoard = []
+		for Board in MyCourse:
+			MyCourseBoard.append(Board)
+
+		for Board in OtherCourse:
+			if Board.CreatedID == UserData:
+					pass
+			else:
+				OtherCourseBoard.append(Board)
+
+		
+		#pageNation과 관련된 기능
+		#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
+		O_Count = DataCount(3,len(OtherCourseBoard))
+		tempLecture=Lecture.objects.filter(Code=LectureInformation.Code,CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
+		good_count=[]
+		for temp in tempLecture:
+			good_count.append(Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=temp));
+	
+		goodresult=0
+		for goocount in good_count:
+			for goodcount in goocount:
+				if goodcount['Check']==True:
+					goodresult += 1
+
+		#전체 페이지가 11페이지 이상인 것을 기준으로 정의
+		if Mobile == "full":
+			PageInformation=FirstPageView(O_Count)
+			OtherCount=PageTotalCount(O_Count,PageInformation)
+		else:
+			PageInformation=MobileFirstPageView(O_Count)
+			OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
+
+		#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
+		dic ={'user':request.user,
+			'BestBoard':BestBoardView(),
+			'CourseBoard':CourseBoard,
+			'MyCourseBoard':MyCourseBoard,
+			'OtherCourseBoard':OtherCourseBoard,
+			'OtherCount':OtherCount,
+			'PageInformation':PageInformation,
+			'GoodCount': goodresult,
+			'Answer_Dis' : Description
+			
+			}
+		if request.flavour =='full':
+			return render_to_response('html/course.html',dic)
+		else:
+			return render_to_response("m_skins/m_html/course.html",dic)
 def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(처음 눌럿을때 )
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")

@@ -32,20 +32,21 @@
           
           <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
 
-        <div class="ui section divider" style="margin-top: 50px;"></div>
+        <div class="ui section divider" style="margin-top: 40px;"></div>
  
           {% endif %}
-        <a href="/QnA"> <div style="margin-top: 8px" class="ui right floated tiny teal button">
+        <a href="/QnA"> <div class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
 
-        <div class="ui section divider" style="margin-top: 50px;"></div>
+        <div class="ui section divider" style="margin-top: 30px;"></div>
  
 
-            <div id="qna_border_q" class="ui raised segment" style="margin-left: 2px;">
+            <div id="qna_border_q" class="ui raised segment">
               <div class="ui large blue ribbon label">{{Current.TextName}}</div>
               <p></p>
               <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
-              <p class="qna_content"><PRE>{{Current.Text}}</PRE>/p>
+              <p style="qna_content">
+              <PRE style="background-color:#fff">{{Current.Text}}</PRE></p>
             </div>  
             {%for QnA in QnA_Reply%}
             
@@ -68,22 +69,23 @@
 
       </div>
             
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+            <div id="qna_border_a" class="ui raised segment">
               <div class="ui large red right ribbon label">{{QnA.TextName}}</div>
               <p></p>
-              <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}  </div>
-              <p class="reply"><PRE>{{QnA.Text}}</PRE></p>
+              <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}</div>
+              <p class="reply">
+              <PRE style="background-color:#fff">{{QnA.Text}}</PRE></p>
             </div>       
             {%endfor%}
                                           
               <center>
               <div class="ui buttons">
               <a class="ui red inverted button" href = "/QnA/{{Previous}}">
-                <i class="glyphicon glyphicon-menu-left"></i> Prev
+                <i class="glyphicon glyphicon-menu-left"></i>Prev
               </a>
                 <div class="or"></div>
               <a class="ui blue inverted button" href = "/QnA/{{Next}}">
-                Next <i class="glyphicon glyphicon-menu-right"></i>
+                Next<i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
                         

@@ -41,14 +41,14 @@
           <!--<div class="ui piled segment" style="transform:rotate(-1.2deg); top:0; z-index:-2; background-color: #fff; visibility: visible; content: ''; display: block; height: 100%; left: 0; position: absolute; width: 100%; box-shadow: 0 0 1px 1px rgba(39,41,43,.15);"></div>-->
             
         <div class="qna_div">                          
-            <div id="notice_border" class="ui raised segment">
+            <div class="ui raised segment" style="border: 3px solid #84bde0;">
 
               <div class="ui large blue ribbon label" style="font-size:1.1rem">{{Board.TextName}}</div>
               <p></p>
               <div class="ui small purple ribbon label">{{Board.TextWriter.UserName}}　{{Board.created|date:"Y.m.d"}} {{Board.created|time:"H:i"}}</div>
               <div></div>
               <br>
-              <PRE>{{Board.Text}}</PRE>
+              <PRE style="background-color:#fff">{{Board.Text}}</PRE>
             </div>  
                                                       
               <center>

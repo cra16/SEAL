@@ -32,7 +32,7 @@
       <h2 class="ui header">
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
-      
+              
       {%if Search == None%}
       <div class="ui small tabular filter menu">
         <a id="All" class="active item" data-tab="all">최신순</a>
@@ -269,6 +269,7 @@
       {%endif%}
 
           <div id = "Search_Page">
+            {{temp}}
           {% if not Search == None  %}
     
             {% if Search.0 != None%}

@@ -442,9 +442,11 @@ def PageView(TotalBoard):
 	
 	for DBBoard in TotalBoard:
 		for Board in DBBoard:
+
 			try:
 				# 총 강의 추천된 DB 강의 명으로 호출
-				BoardData = Total_Evaluation.objects.get(Course=Board)
+				BoardData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.CourseName,
+					Course__Code = Board.Course.Code,Course__Professor=Board.Course.Professor)
 			except :
 				BoardData = None
 
@@ -478,54 +480,27 @@ def BestBoardView():
 
 
 	TotalBoard = Total_Evaluation.objects.all()
-	MaxCount = 0  
-	SecondCount = 0
-	ThirdCount =0
-	BestBoard =[0,0,0]
-	TotalSortBoard=[]
-	ListProfessor =list()
-	ListCourse = list()
-	for lec in TotalBoard:
-				On=0;
-				
-				CourseTrue =lec.Course.CourseName not in ListCourse
-				ProfessorTrue = lec.Course.Professor not in ListProfessor
-				if CourseTrue or ProfessorTrue:
-					if ProfessorTrue:
-						ListProfessor.append(lec.Course.Professor)
-					if CourseTrue :
-						ListCourse.append(lec.Course.CourseName)
-				else:
-					continue
-					
+	MaxCount=0
+	SecondCount=0
+	ThirdCount=0
+	BestBoard=[[],[],[]]			
 						
-				TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Course.Professor, Course__CourseName=lec.Course.CourseName)
-				TotalSortBoard.append(TotalDic)
 	TotalCount=0
-	for TotalBoard in TotalSortBoard:
-		for Board in TotalBoard:
-			TotalCount += Board.Total_Count
-		for Board in TotalBoard:
-			if TotalCount>MaxCount:
-				MaxCount=TotalCount
-				BestBoard[1] = BestBoard[0]
-				BestBoard[2]= BestBoard[1]
-				BestBoard[0] = Board
-				BestBoard[0].Total_Count=TotalCount
-				break
-			elif TotalCount>=SecondCount :	
-				SecondCount=TotalCount
-				BestBoard[2] = BestBoard[1]
-				BestBoard[1] = Board
-				BestBoard[1].Total_Count =TotalCount
-				break
-			elif TotalCount >=ThirdCount :
-				ThirdCount=TotalCount
-				BestBoard[2] = Board
-				BestBoard[2].Total_Count=TotalCount
-				break
+	for Board in TotalBoard:
+		TotalCount = Board.Total_Count
+		if TotalCount>MaxCount:
+			MaxCount=TotalCount
+			BestBoard[1] = BestBoard[0]
+			BestBoard[2] = BestBoard[1]
+			BestBoard[0] = Board
+		elif TotalCount>SecondCount :	
+			SecondCount=TotalCount
+			BestBoard[2] = BestBoard[1]
+			BestBoard[1] = Board
+		elif TotalCount >ThirdCount :
+			ThirdCount=TotalCount
+			BestBoard[2] = Board
 
-		TotalCount=0
 
 	return BestBoard	
 
@@ -548,30 +523,21 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	TotalBoard = [[],[],[],[]]
 	goodList= [[],[],[],[]]
 	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).order_by('Semester','Professor'))
-		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).order_by('Semester','Professor'))
+		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
+		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
 		i=0
 		for t in temp:
 			for lec in t:
-				On=0;
-				ListProfessor =list()
-				for j in range(0,len(TotalBoard[i])):
-					if lec.Professor not in ListProfessor:
-						if lec.Professor == TotalBoard[i][j].Course.Professor: 
-								ListProfessor.append(lec.Professor)
-								On=1
-								break
-				if On==0:
 					try:
-						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
+						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
 					except:
-						TotalDic = Total_Evaluation(Course=lec)
+						TotalDic = Total_Evaluation()
 						TotalDic.Total_Speedy =0
 						TotalDic.Total_Homework = 0
 						TotalDic.Total_Level_Difficulty = 0
 						TotalDic.Total_Count =0
 
-					TempTotal = Total_Evaluation(Course=lec)
+					TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 					TempTotal.Total_Speedy =0
 					TempTotal.Total_Level_Difficulty = 0
 					TempTotal.Total_Homework = 0
@@ -582,7 +548,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 					TempTotal.Total_Long_Answer=0
 					TempTotal.Total_Unknown_Answer=0
 					try:
-						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
 					except:
 						goodList[i].append(0)
 					TempInt=0
@@ -614,29 +580,20 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 
 
 	else:		
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).order_by('Semester','Professor'))
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).order_by('Semester','Professor'))
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
+		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
 		i=0
 		for t in temp:
 			for lec in t:
-				On=0;
-				ListProfessor =list()
-				for j in range(0,len(TotalBoard[i])):
-					if lec.Professor not in ListProfessor:
-						if lec.Professor == TotalBoard[i][j].Course.Professor: 
-								ListProfessor.append(lec.Professor)
-								On=1
-								break
-				if On==0:
 					try:
-						TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
+						TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
 					except:
-						TotalDic = Total_Evaluation(Course=lec)
+						TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 						TotalDic.Total_Speedy =0
 						TotalDic.Total_Level_Difficulty = 0
 						TotalDic.Total_Homework = 0
 						TotalDic.Total_Count =0
-					TempTotal = Total_Evaluation(Course=lec)
+					TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 					TempTotal.Total_Speedy =0
 					TempTotal.Total_Level_Difficulty = 0
 					TempTotal.Total_Homework = 0
@@ -658,7 +615,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
 						
 					try:
-						good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+						good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
 					except:
 						goodList[i].append(0)
 					TempInt=0
@@ -680,29 +637,17 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	temp = Lecture.objects.filter(CourseName = PostDic['Course']).order_by('Professor','Semester')
+	temp = Lecture.objects.filter(CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct()
 	for lec in temp:
-		for lec in t:
-			On=0;
-			ListCode =list()
-			for j in range(0,len(TotalBoard[2])):
-				if lec.Code not in ListCode:
-					if lec.Professor == TotalBoard[2][j].Course.Professor:
-							ListCode.append(lec.Code)
-							On=1
-							break
-			if On==0:
 						try:
-							TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
-							
-
+							TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
 						except:
-							TotalDic = Total_Evaluation(Course=lec)
+							TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 							TotalDic.Total_Speedy =0
 							TotalDic.Total_Level_Difficulty = 0
 							TotalDic.Total_Homework = 0
 							TotalDic.Total_Count =0
-						TempTotal = Total_Evaluation(Course=lec)
+						TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 						TempTotal.Total_Speedy =0
 						TempTotal.Total_Level_Difficulty = 0
 						TempTotal.Total_Homework = 0
@@ -723,7 +668,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Long_Answer += T.Total_Long_Answer
 							TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
 						try:
-							good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'], Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+							good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'], Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
 						except:
 							goodList[2].append(0)
 						TempInt=0
@@ -740,29 +685,17 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
-	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).order_by('Professor','Semester')
+	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).values("Professor","CourseName","Code").distinct()
 	for lec in temp:
-		for lec in t:
-			On=0;
-			ListCode =list()
-			for j in range(0,len(TotalBoard[3])):
-				if lec.Code not in ListCode:
-					if lec.Professor == TotalBoard[3][j].Course.Professor:
-							ListCode.append(lec.Code)
-							On=1
-							break
-			if On==0:
 						try:
-							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec.Professor, Course__CourseName=lec.CourseName)
-							
-
+							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
 						except:
-							TotalDic = Total_Evaluation(Course=lec)
+							TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 							TotalDic.Total_Speedy =0
 							TotalDic.Total_Level_Difficulty = 0
 							TotalDic.Total_Homework = 0
 							TotalDic.Total_Count =0
-						TempTotal = Total_Evaluation(Course=lec)
+						TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
 						TempTotal.Total_Speedy =0
 						TempTotal.Total_Level_Difficulty = 0
 						TempTotal.Total_Homework = 0
@@ -771,6 +704,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Mix =0
 						TempTotal.Total_Short_Answer =0
 						TempTotal.Total_Long_Answer = 0
+						TempTotal.Total_Unknown_Answer=0
 						
 						for T in TotalDic:
 							TempTotal.Total_Count += T.Total_Count
@@ -781,8 +715,10 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 							TempTotal.Total_Mix +=T.Total_Mix
 							TempTotal.Total_Short_Answer += T.Total_Short_Answer
 							TempTotal.Total_Long_Answer += T.Total_Long_Answer
+							TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+						
 						try:
-							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec.CourseName, Course__Professor=lec.Professor)
+							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
 						except:
 							goodList[3].append(0)
 						TempInt=0
@@ -793,7 +729,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 
 						if TempTotal.Total_Count==0:
 							TotalBoard[3].append(TempTotal)
-							break
+							continue
 						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
 						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count

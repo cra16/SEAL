@@ -331,6 +331,9 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			PageInformation=MobileFirstPageView(O_Count)
 			OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
 		OtherCourseBoard=OtherCourseBoard[PageFirst:PageLast]
+		MyCourseBoard= VacationSemesterChange(MyCourseBoard)
+		OtherCourseBoard= VacationSemesterChange(OtherCourseBoard)
+		
 		#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
 		dic ={'user':request.user,
 			'BestBoard':BestBoardView(),

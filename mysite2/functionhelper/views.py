@@ -260,6 +260,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			except:
 					continue
 			TotalAdd[2].append(total)
+	TotalBoard[2]= VacationSemesterChange(TotalBoard[2])
 	temp=[]
 	Sugang=[]
 	if Mobile == "full":
@@ -685,6 +686,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
 						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
 						TotalBoard[2].append(TempTotal)
+
 	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).values("Professor","CourseName","Code").distinct()
 	for lec in temp:
 						try:
@@ -954,3 +956,11 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 		   }
 
 	return dic
+def VacationSemesterChange(Board):
+	for i in range(0,len(Board)):
+		if Board[i].Course.Semester[3]=="3":
+			Board[i].Course.Semester=str(Board[i].Course.Semester[0:3])+"Summer"
+		elif Board[i].Course.Semester[3]=="4":
+			Board[i].Course.Semester = str(Board[i].Course.Semester[0:3])+"Winter"
+
+	return Board

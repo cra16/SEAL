@@ -41,7 +41,7 @@
               <div class="ui large blue ribbon label">{{Current.TextName}}</div>
               <p></p>
               <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
-              <p class="qna_content"><PRE style="background-color:#fff">{{Current.Text}}</PRE></p>
+              <p class="qna_content"><PRE style="background-color:#fff; width:80%">{{Current.Text}}</PRE></p>
             </div>  
             {%for QnA in QnA_Reply%}
             
@@ -52,7 +52,7 @@
               <div class="ui large red right ribbon label">{{QnA.TextName}}</div>
               <p></p>
               <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}  </div>
-              <p class="reply"><PRE style="background-color:#fff">{{QnA.Text}}</PRE></p>
+              <p class="reply"><PRE style="background-color:#fff; width:80%; float:right">{{QnA.Text}}</PRE></p>
             </div>       
             {%endfor%}
                                           

@@ -38,6 +38,20 @@
       ga('create', 'UA-74131495-1', 'auto');
       ga('send', 'pageview');
     </script>
+    <script type="text/javascript">
+      function blink() {
+        var blinks = document.getElementsByTagName('blink');
+        for (var i = blinks.length - 1; i >= 0; i--) {
+          var s = blinks[i];
+          s.style.visibility = (s.style.visibility === 'visible') ? 'hidden' : 'visible';
+        }
+        window.setTimeout(blink, 450);
+      }
+      if (document.addEventListener) document.addEventListener("DOMContentLoaded", blink, false);
+      else if (window.addEventListener) window.addEventListener("load", blink, false);
+      else if (window.attachEvent) window.attachEvent("onload", blink);
+      else window.onload = blink;
+    </script>
    
    <style>
       body, input {
@@ -97,6 +111,15 @@
           </div>
           <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
+              <!--<li style="margin-top:13px">
+                <img style="margin-top:-10px" src="{% static "css/notice.png" %}">&nbsp;
+                <marquee loop="infinite" bgcolor="#87cefa" width="180" height="20" direction="left" style="height: 20px; width: 200px; background-color: transparent;">
+                <font size="2" color="white">현재까지 총 <font size="4" style="border:1"><blink><b>38</b></blink></font>개의 강의 평가가 등록되었습니다.
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                총 <font size="4" style="border:1"><blink><b>121</b></blink></font>명의 학생이 SEAL에 가입하였습니다.
+                </font>
+                </marquee>
+              </li>-->
               <li><a href="/MyPage">MY PAGE</a></li>
               <li><a href="/Notice">공지사항</a></li>
               <li class="dropdown">

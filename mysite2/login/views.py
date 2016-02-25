@@ -274,6 +274,9 @@ def RegisterInfo(request):
 		first_major = request.POST['first_major']
 		second_major = request.POST.get('second_major', 'None')
 		all_rec = request.POST['all_rec']
+		# 신입생 전공 비어있는 경우 직접 할당
+		if not first_major:
+			first_major = '글로벌리더십'
 
 		try:
 			user = User.objects.create_user(username=stu_num)

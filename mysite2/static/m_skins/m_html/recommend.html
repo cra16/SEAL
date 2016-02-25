@@ -61,7 +61,7 @@
           <div ui="ui grid">
             <h4 style="display:inline; margin-left:30px;"><img src="{% static "css/seal.png" %}" height="30px" width="30px"><b>&nbsp;수강 학기 선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></h4>
             
-              <div id="recommend_form" class="ui selection dropdown" style="margin-top:15px;">
+            <center><div id="recommend_form" class="ui selection dropdown" style="margin-top:15px;">
               <div id="text_semester" class="default text">학기</div>
                 <i class="dropdown icon"></i>
                 <input id="HSemester"  name="HSemester" type="hidden" value ="0">
@@ -79,7 +79,7 @@
                   </div>
                   {%endfor%}
                  </div>
-              </div>
+              </div></center>
 
         </div>
          <input id="HCourseName"  name="HCourseName" type="hidden" value ="{{CourseBoard.CourseName}}">
@@ -97,12 +97,12 @@
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated right aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;" style="font-size:13px">느림</a>
             </div>
             <div id="rchoice" class="right floated left aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;" style="font-size:13px">빠름</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>  
             </div>
           </div>
@@ -118,12 +118,12 @@
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated right aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;" style="font-size:13px">적음</a>
             </div>
             <div id="rchoice" class="right floated left aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
+              <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;" style="font-size:13px">많음</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl2" name ="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C" data-slider-disabled="false" />
             </div>
           </div>
@@ -139,12 +139,12 @@
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
             <div id="lchoice" class="left floated right aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;" style="font-size:13px">쉬움</a>
             </div>
             <div id="rchoice" class="right floated left aligned four wide column">
-              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;" style="font-size:13px">어려움</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl3" name ="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C" data-slider-disabled="false" />
             </div>
           </div>

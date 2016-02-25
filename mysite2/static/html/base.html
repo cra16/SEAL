@@ -90,8 +90,8 @@
     
     <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="col-md-1 col-sm-0"></div>
-        <div class="col-md-10 col-sm-12">
+        <div class="col-md-1 col-sm-0 col-xs-0"></div>
+        <div class="col-md-10 col-sm-12 col-xs-12">
           <div class="navbar-header">
             <a class="navbar-brand" href="/"><img src="{% static "css/seal_logo.png" %} " height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
             <form id = "form" class="navbar-form navbar-left col-xs-5 form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
@@ -148,7 +148,7 @@
         <div id="h_sectiondivider" class="ui section divider"></div>
     </div>
 
-              <profile id="profile" class="col-md-2 col-sm-2 col-xs-2">
+              <profile id="profile" class="col-md-2 col-sm-6 col-xs-12">
                    
                 <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
 
@@ -160,7 +160,7 @@
 
               </profile>
 
-              <best id="best" class="col-md-2 col-sm-2 col-xs-2">
+              <best id="best" class="col-md-2 col-sm-6 col-xs-12">
                     
                 <h3 id="best-title">HOT COURSES</h3>
        

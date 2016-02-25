@@ -117,8 +117,7 @@
         {%endfor%}
       
 
-		{%for OtherBoard in OtherCourseBoard%}
-          <div id="h_outersectiondivider" class="ui section divider"></div>          
+		{%for OtherBoard in OtherCourseBoard%}      
           <div id="recommending" class="ui column">            
             <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}{{OtherBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
@@ -230,9 +229,9 @@
               </div>
           </div>
 
-        
-        
+          <div id="h_innersectiondivider" class="ui section divider"></div>
             {%endfor%}
+
          {% if OtherCount.0 != None%}
     <div class="ui section divider"></div>
       <center><div id = "CoursePagenation" class="ui borderless pagination menu">

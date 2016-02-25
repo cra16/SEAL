@@ -187,7 +187,8 @@ label.star:before {
 }
 
 #sldbr {
-	margin-top: -45px;
+	margin-top: -10px;
+	padding-top:0;
 	margin-bottom: -45px;
 }
 

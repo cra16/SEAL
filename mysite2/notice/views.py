@@ -96,13 +96,13 @@ def Notice_Read(request, offset): #Notice Read 기능
 	NoticeCount = Notice_Board.objects.count()
 
 	if offset ==1:
-		Previous = 1
+		Next = 1
 	else:
-		Previous = offset-1
+		Next = offset-1
 	if offset == NoticeCount:
-		Next = NoticeCount
+		Previous = NoticeCount
 	else:
-		Next = offset+1
+		Previous = offset+1
 	
 	dic ={'user':request.user,
 		'BestBoard':BestBoardView(),

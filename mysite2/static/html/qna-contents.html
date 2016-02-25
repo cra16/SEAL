@@ -30,8 +30,7 @@
         <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)
         {% if user.username == "admin_seal" or user.username == Current.TextWriter.User.username%}
         <a href="/QnA/Reply/{{Current.id}}"> <div style="margin-top:20px" class="ui right floated tiny blue button">
-          
-          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Reply</div> </a>
           {% endif %}
         <a href="/QnA"> <div style="margin-top:20px" class="ui right floated tiny teal button">
           <i style="margin-left:-6px" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>

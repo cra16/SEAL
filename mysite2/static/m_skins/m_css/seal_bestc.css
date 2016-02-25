@@ -4,10 +4,10 @@
     background: #ffffff;
     border: 3px solid #87cefa; 
     border-radius: 5px; 
-    margin: 20px; 
+    margin: 20px 5px 10px 5px; 
     padding: 10px;
-    height: 310px;
-    width: 330px;
+    height: 320px;
+    width: 97%;
 }
 
 #best > #best-title {

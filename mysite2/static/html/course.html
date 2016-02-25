@@ -202,10 +202,12 @@
       <div id="h_sectiondivider" class="ui section divider"></div>
       <div id="CoursePage">
       <div class="ui column">
-        <h3><b>나의 평가 : </b></h3>
+      {% if MyCourseBoard.0 != None %}
+      <h3><b>나의 평가 : </b></h3>
+          {%endif%}
         
-		<div id="recommending" class="ui column">
      {%for MyCourseBoard in MyCourseBoard%}
+     <div id="recommending" class="ui column">
      <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>      
           <div id="recommending" class="ui column">                
             <div id="blankspace" class="ui column"></div>
@@ -327,13 +329,15 @@
             </div>
           </div>
           <br>
+      </div>
 	  {%endfor%} 
-		</div>
 
-    <h3><b>개인 평가 : </b></h3>
-    <div id="recommending" class="ui column">
+    {% if OtherCourseBoard.0 != None %}
+        <h3><b>개인 평가 : </b></h3>
+      {%endif%}
+    
 		{%for OtherBoard in OtherCourseBoard%}
-          <div id="h_outersectiondivider" class="ui section divider"></div>
+        <div id="recommending" class="ui column">
           <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>          
           <div id="recommending" class="ui column">          
             <div id="blankspace" class="ui column"></div>
@@ -455,8 +459,8 @@
                <p>{{OtherBoard.CourseComment|linebreaks}}</p>
             </div>
           </div>
-        {%endfor%}
-      </div>           
+         </div>     
+        {%endfor%}      
         
       </div>
       {% if OtherCount.0 != None%}

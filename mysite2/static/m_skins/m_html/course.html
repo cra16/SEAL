@@ -196,16 +196,15 @@
       <div id="h_sectiondivider" class="ui section divider"></div>
       <div id="CoursePage">
       <div class="ui column">
-        <h3><b>개인 : </b></h3>
-
-            
+        {% if MyCourseBoard.0 != None %}
+        <h3><b>나의 평가 : </b></h3>
+            {%endif%}
           {%for MyCourseBoard in MyCourseBoard%}
-          <div id="h_sectiondivider" class="ui section divider"></div>
-          <div id="recommending" class="ui column">
+           <div id="recommending" class="ui column">
+            <div class="ui divider" style="margin-top:-5px"></div>
           <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
-            <div id="blankspace" class="ui column"></div>
+            <div class="ui divider"></div>
 
-            <br><br>
             <div class="ui grid">
               <div id="firstcolumn" class="left floated center aligned sixteen wide column">진도 속도</div>
               <div id="lchoice" class="left floated right aligned four wide column">
@@ -318,20 +317,22 @@
          
           </div>
 
-              <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+              <div id="qna_border_a" class="ui raised segment">
+                <h5><b>Comment</b></h5>
                   <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
 	        {%endfor%}
  
-
-		{%for OtherBoard in OtherCourseBoard%}
-          <div id="h_outersectiondivider" class="ui section divider"></div>
+          {% if OtherCourseBoard.0 != None %}
+        <h3><b>개인 평가 : </b></h3>
+            {%endif%}
+    		{%for OtherBoard in OtherCourseBoard%}
           <div id="recommending" class="ui column">
+            <div class="ui divider" style="margin-top:-5px"></div>
             <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번 / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>
-            <div id="blankspace" class="ui column"></div>
+            <div class="ui divider"></div>
 
-            <br>
             <div class="ui grid">
               <div id="firstcolumn" class="left floated center aligned sixteen wide column">진도 속도</div>
               <div id="lchoice" class="left floated right aligned four wide column">
@@ -445,14 +446,13 @@
 
 
 
-            <div id="qna_border_a" class="ui raised segment" style="margin-right: 2px;">
+            <div id="qna_border_a" class="ui raised segment">
+              <h5><b>Comment</b></h5>
                   <p>{{OtherBoard.CourseComment|linebreaks}}</p>
               </div>
           </div>
 
         {%endfor%}
-        
-           
         
       
       {% if OtherCount.0 != None%}

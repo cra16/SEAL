@@ -143,8 +143,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
 	T_Count=[[] ,[] ,[],[]]
 	if CourseCode[0] !="ENG":
-		DBCount1 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).count()
-		DBCount2 = Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).count()
+		DBCount1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).values("CourseName").distinct().count()
+		DBCount2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).values("CourseName").distinct().count()
 		if Mobile=="full":
 			T_Count[0] = DataCount(10,DBCount1)
 			T_Count[1] = DataCount(10,DBCount2)
@@ -152,7 +152,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			T_Count[0] = DataCount(5,DBCount1)
 			T_Count[1] = DataCount(5,DBCount2)
 	else:
-		DBCount1=Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).count()
+		DBCount1=Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct().count()
 		if Mobile=="full":
 			T_Count[0] = DataCount(10,DBCount1)
 			T_Count[1] = DataCount(10,DBCount1)
@@ -189,47 +189,44 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	TotalAdd =[[],[],[],[]]
 	if CourseCode[0] !="ENG":
 		if Mobile == 'full':
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1])).values("CourseName").distinct()[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])).values("CourseName").distinct()[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
 		else :
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1]))[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3]))[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
+			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1])).values("CourseName").distinct()[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])).values("CourseName").distinct()[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
 	
 		i=0
 		
 		for t in temp:
-			for lec in t:
-				if lec['CourseName'] not in TotalBoard[i]:
-					A=Lecture.objects.filter(CourseName=lec['CourseName'])
-					TotalBoard[i].append(A[0])
-					
-					total=0	
-					
-					try:
-							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
-							for Ev in Eval:
-								total += Ev.Total_Count  
-					except:
-						continue
-					TotalAdd[i].append(total)
-			i+=1	
+				for lec in t:
+						A=Lecture.objects.filter(CourseName=lec['CourseName'])
+						TotalBoard[i].append(A[0])
+				
+						total=0	
+						try:
+								Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
+								for Ev in Eval:
+									total += Ev.Total_Count  
+						except:
+							continue
+						TotalAdd[i].append(total)
+				i+=1	
 	else:
 		if Mobile == 'full':
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
 		else :
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
-			temp.append(Lecture.objects.values('CourseName').annotate(Count('CourseName')).filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5]))[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
+			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
 	
 		i=0
 		
 		for t in temp: 
 			for lec in t:
-				if lec['CourseName'] not in TotalBoard[i]:
-						A=Lecture.objects.filter(CourseName=lec['CourseName'])		
+						A=Lecture.objects.filter(CourseName=lec['CourseName'])
 						TotalBoard[i].append(A[0])
-						total=0
-							
+						
+						total=0	
 						try:
 							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
 							for Ev in Eval:
@@ -247,12 +244,11 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	else:
 		temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 	
-	CourseList=[]
+
 	for lec in temp: 
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0
 			TotalBoard[2].append(lec)
-			CourseList.append(lec.Course.CourseName)
 			try:
 				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
 				for Ev in Eval:
@@ -301,9 +297,9 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'TotalAdd':TotalAdd,
 		   'SugangList':Sugang,
 		   'CourseName':None,
-		   'ProSelect' :PageInformation
+		   'ProSelect' :PageInformation,
 
-		  }
+			  }
 
 	return dic
 #MainPage Template설정
@@ -814,7 +810,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		   }
 
 	return dic
-
+'''
 def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 	#login view에서 사용하는 MainPageView와 로그인 되었을때 mainPageView가 조금씩 달라서 설정
 	if pageinformation !=None:
@@ -952,10 +948,13 @@ def SelectPageView(user, pageinformation,PageNumber,MajorNumber,PostDic,Mobile):
 		   'Page':PageNumber,
 		   'BestBoard':BestBoard,
 		   'CourseName':PostDic['Course'],
-		   'ProSelect' :int(PostDic['ProSelect'])
+		   'ProSelect' :int(PostDic['ProSelect']),
+
+	
 		   }
 
 	return dic
+'''
 def VacationSemesterChange(Board):
 	for i in range(0,len(Board)):
 		if Board[i].Course.Semester[3]=="3":

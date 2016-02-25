@@ -1,9 +1,10 @@
 
 {% load app_filter %}
 {% load staticfiles %}
-  {{temp}}
+
     {%if CourseName == None%}           			
       {% for PBoard1 in PageBoard.0%}
+
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}

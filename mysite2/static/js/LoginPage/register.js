@@ -67,7 +67,7 @@ $(document).ready(function(){
 	});
 
 	$("#cancel").click(function(){
-		window.location.href = "../Confirm";
+		window.location.href = "/";
 	});
 
 });

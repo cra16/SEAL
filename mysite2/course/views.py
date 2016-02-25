@@ -16,7 +16,7 @@ import datetime
 from django.db.models import Q
 from functionhelper.views import *
 from itertools import chain, islice
-
+'''
 def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴
 
 		if CheckingLogin(request.user.username):
@@ -122,6 +122,7 @@ def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불�
 			return render_to_response('html/course.html',dic)
 		else:
 			return render_to_response("m_skins/m_html/course.html",dic)
+'''
 #페이지 넘겼을 때 작동되는 함수9
 @csrf_exempt
 def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴(페이지 넘긴후)
@@ -351,6 +352,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			return render_to_response('html/course.html',dic)
 		else:
 			return render_to_response("m_skins/m_html/course.html",dic)
+'''
 def PeriodCourse(request,offset): #학기별로 나뉘어진 강의 눌렀을 때 나오는 강의 추천 결과(처음 눌럿을때 )
 		if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
@@ -510,6 +512,7 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 					return render_to_response('html/coursepage.html',dic)
 				else:
 					return render_to_response("m_skins/m_html/coursepage.html",dic)
+'''
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	LectureInformation=Lecture.objects.get(id = offset)

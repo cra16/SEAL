@@ -207,13 +207,13 @@
 
             <div class="ui grid">
               <div id="firstcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">진도 속도</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips"  data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
               </div>
               <div id="mysldbr" class="center aligned nine wide column">
                 <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned three wide column">
+              <div id="rchoice" class="center floated left aligned three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
               </div>
             </div>
@@ -224,13 +224,13 @@
 
             <div class="ui grid">
               <div id="secondcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">과제량</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
               </div>
               <div id="mysldbr" class="center aligned nine wide column">
                 <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned three wide column">
+              <div id="rchoice" class="center floated left aligned three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
               </div>
             </div>
@@ -241,13 +241,13 @@
 
             <div class="ui grid">
               <div id="thirdcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">난이도</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
               </div>
               <div id="mysldbr" class="center aligned nine wide column">
                 <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned four wide column" style="margin-left:-10px;">
+              <div id="rchoice" class="center floated left aligned four wide column" style="margin-left:-10px;">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
               </div>
             </div>
@@ -289,7 +289,6 @@
               <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-globe" style="color:teal"></i>&nbsp; Reference URL: <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u><a href="{{MyCourseBoard.Url_Answer}}" target="_blank">{{MyCourseBoard.Url_Answer}}</a></u></b></h4>
             </div>
 
-            
           <div class="ui grid">
             <div class="left floated center aligned five wide column" style="color:purple"><h4><b>추천</b></h4></div>
             {% if MyCourseBoard.Check == True %}
@@ -323,13 +322,13 @@
 
             <div class="ui grid">
               <div id="firstcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">진도 속도</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
               </div>
               <div id="sldbr" class="center aligned nine wide column">
                 <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}1C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned three wide column">
+              <div id="rchoice" class="center floated left aligned three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
               </div>
             </div>
@@ -340,13 +339,13 @@
 
             <div class="ui grid">
               <div id="secondcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">과제량</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
               </div>
               <div id="sldbr" class="center aligned nine wide column">
                 <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned three wide column">
+              <div id="rchoice" class="center floated left aligned three wide column">
                 <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
               </div>
             </div>
@@ -357,13 +356,13 @@
 
             <div class="ui grid">
               <div id="thirdcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">난이도</div>
-              <div id="lchoice" class="left floated right aligned three wide column" style="margin-left:10px;">
+              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
               </div>
               <div id="sldbr" class="center aligned nine wide column">
                 <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
               </div>
-              <div id="rchoice" class="right floated left aligned four wide column" style="margin-left:-10px;">
+              <div id="rchoice" class="center floated left aligned four wide column" style="margin-left:-10px;">
                 <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
               </div>
             </div>
@@ -417,7 +416,6 @@
           <div class="ui grid">
             <div class="left floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="floated left aligned two wide column" style="margin-left:-5px;"><span class="starvalue">{{OtherBoard.StarPoint}}</span></div>
-         
           </div>
 
 

@@ -69,14 +69,14 @@
                   <div class="item" data-value=""></div>
                   {%for SemesterData in SemesterData%}
                   <div class="item" data-value="{{SemesterData}}">
-                  {%if SemesterData.3 =="3"%}
+                    {%if SemesterData.3 == "3"%}
                       {{SemesterData|slice:":3"}}Summer
-                    {%elif SemesterData.3 =="4"%}
+                    {%elif SemesterData.3 == "4"%}
                       {{SemesterData|slice:":3"}}Winter
-                    {%else}
+                    {%else%}
                       {{SemesterData}}
-                      {%endif%}
-                    </div>
+                    {%endif%}
+                  </div>
                   {%endfor%}
                  </div>
               </div>

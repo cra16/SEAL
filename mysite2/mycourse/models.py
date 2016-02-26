@@ -14,16 +14,14 @@ from index.models import Course_Evaluation
 class Recommend_Course(models.Model):
 	Course = models.ForeignKey(Course_Evaluation)
 	CreatedID = models.ForeignKey(Profile)
-	created = models.DateTimeField(auto_now_add=True)
 
 	def __unicode__(self):
 		return u'%s %s' % (self.Course.Course, self.CreatedID.UserName)
 
-
 class Like_Course(models.Model):
 	Course = models.ForeignKey(Lecture)
 	CreatedID = models.ForeignKey(Profile)
-	created = models.DateTimeField(auto_now_add=True)
+
 	def __unicode__(self):
 		return u'%s %s' % (self.Course.CourseName, self.CreatedID.UserName)
 # Create your models here.

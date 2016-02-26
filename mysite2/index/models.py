@@ -7,7 +7,6 @@ class Description_Answer(models.Model):
     CreatedID = models.ForeignKey(Profile)
     Answer = models.TextField(max_length=200)
     Course = models.ForeignKey(Lecture)
-    created = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.CreatedID.User.username
 

@@ -18,14 +18,12 @@ class Reply(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	QuestionID = models.PositiveIntegerField()
 
-
 	def __unicode__(self):
 		return self.TextName
 class Improvement(models.Model):
 	TextName= models.CharField(max_length=50)
 	Text = models.TextField()
 	TextWriter = models.ForeignKey(Profile)
-	created = models.DateTimeField(auto_now_add=True)
 	
 	def __unicode__(self):
 		return self.TextName

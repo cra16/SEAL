@@ -39,18 +39,18 @@
                 
           <p id="ccode_p">[<span id="ccode">{{CourseBoard.Course.Code}}</span>]<br />
           <span id="cname">{{CourseBoard.Course.CourseName}}</span><br />
-          <span id="cprof">{{CourseBoard.Course.professor}}</span></p>
+          <span id="cprof">{{CourseBoard.Course.Professor}} 교수님</span></p>
 
         </div>
 
         <div id="h_sectiondivider" class="ui section divider"></div>
 
         <div id="cautions">
-          <p>* SEAL은 한동대학생이 자신이 들은 수업을 평가하는 사이트 입니다.</p>
-          <p>* 평가의 기준 위에 마우스 커서를 올리면 구체적으로 어떤 기준인지 설명을 보실 수 있습니다.</p>
-          <p>* 가운데에서 양쪽으로 각각 4단계씩 있습니다. 자신이 생각하기에 이 수업은 어느 방향으로 어느 정도인지 표시해주십시오.</p>
-          <p>* 왼쪽의 버튼은 추천 기준을 활성화 또는 비활성화 시킵니다.</p>
-          <p>* 추천 기준을 다 정했다면 오른쪽 밑의 Submit 버튼을 눌러주시면 됩니다.</p>
+          <p>* SEAL은 자신이 수강한 수업을 평가하는 사이트 입니다.</p>
+          <p>* 평가 기준 위에 마우스 커서를 올리면 기준에 대한 설명을 보실 수 있습니다.</p>
+          <p>* 가운데에서 양쪽으로 각각 4단계씩 있습니다. 자신이 생각하기에 이 수업은 어느 방향으로 어느 정도인지 표시해 주십시오.</p>
+          <p>* 초록색 체크 버튼은 평가 기준을 활성화 또는 비활성화 시킵니다.</p>
+          <p>* 평가가 끝난 후 오른쪽 밑의 Submit 버튼을 눌러주시면 됩니다.</p>
         </div>
 
         <div id="h_sectiondivider" class="ui section divider"></div>
@@ -90,13 +90,13 @@
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
-            <div id="lchoice" class="left floated right aligned four wide column">
+            <div id="lchoice" class="left floated right aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
             </div>
-            <div id="rchoice" class="right floated left aligned four wide column">
+            <div id="rchoice" class="right floated left aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>  
             </div>
           </div>
@@ -111,13 +111,13 @@
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable2" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
-            <div id="lchoice" class="left floated right aligned four wide column">
+            <div id="lchoice" class="left floated right aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
             </div>
-            <div id="rchoice" class="right floated left aligned four wide column">
+            <div id="rchoice" class="right floated left aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl2" name ="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C" data-slider-disabled="false" />
             </div>
           </div>
@@ -132,13 +132,13 @@
               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable3" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
             </div>
             <div class="left floated center aligned four wide column">&nbsp;</div>
-            <div id="lchoice" class="left floated right aligned four wide column">
+            <div id="lchoice" class="left floated right aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">쉬움</a>
             </div>
-            <div id="rchoice" class="right floated left aligned four wide column">
+            <div id="rchoice" class="right floated left aligned six wide column">
               <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
             </div>
-            <div id="sldbr" class="left aligned sixteen wide column">
+            <div id="sldbr" class="center aligned sixteen wide column">
               <input type="text" id="sl3" name ="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C" data-slider-disabled="false" />
             </div>
           </div>
@@ -151,33 +151,25 @@
             
             <div class="ui stackable center floated center aligned ten wide column">
             {% if CourseBoard.What_Answer == 1%}
-                    <div class="ui buttons" style="margin-top:-10px">
                       <button type ="button" class="ui toggle button paper_button active" value="1" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button paper_button" value="2" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button paper_button" value="3" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                     <button type ="button" class="ui toggle button paper_button" value="4" >해당 없음</button>
-                    </div>
                   {% elif CourseBoard.What_Answer == 2%}
-                    <div class="ui buttons" style="margin-top:-10px">
                       <button type ="button" class="ui toggle button paper_button" value="1" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button paper_button active" value="2" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button" value="3" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                     <button type ="button" class="ui toggle button paper_button" value="4" >해당 없음</button>
-                    </div>
                   {% elif CourseBoard.What_Answer == 3%}
-                    <div class="ui buttons" style="margin-top:-10px">
                       <button type ="button" class="ui toggle button paper_button" value="1" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button paper_button" value="2" >&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle button paper_button active" value="3" >&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                     <button type ="button" class="ui toggle button paper_button" value="4" >해당 없음</button>
-                    </div>
                   {%else%}
-                  <div class="ui buttons" style="margin-top:-10px">
                       <button type ="button" class="ui toggle paper_button button" value="1" >&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle paper_button button" value="2">&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                       <button type ="button" class="ui toggle paper_button button" value="3">&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                     <button type ="button" class="ui toggle button paper_button active" value="4" >해당 없음</button>
-                    </div>
            
               {%endif%}
               <input type="hidden" id="paper_value" name = "paper_value" class="paper_value" value ="{{CourseBoard.What_Answer}}">
@@ -194,15 +186,13 @@
               
                 {% for Answer in Description %}
                 
-              {%if forloop.counter == 1%}
-              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는?  &nbsp" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
+              {%if forloop.counter == 1 || forloop.counter == 0%}
+              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는? &nbsp;" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
                {%else%} 
              <input type="text"  name="mytext[]" class="demo-form add" value ="{{Answer.Answer}}">
               {%endif%}
               {%endfor%}
               </div>
-
-              
 
               <p style="margin-top:-30px; color:grey">*** 평가와 별개로 무작위로 보여집니다. ***</p>
               <button type="button" class="ui vertical mini animated button add_field_button" tabindex="0" style="margin-top:-5px">

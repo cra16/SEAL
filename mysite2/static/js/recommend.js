@@ -190,7 +190,7 @@ $(document).ready(function(){
   //on add input button click
       if(x < max_fields){ //max input box allowed
           x++; //text box increment
-          $(wrapper).append('<div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>'); //add input box
+          $(wrapper).append('<div class="polymer-form dirty" style="margin-top:20px; margin-bottom:50px;"><input type="text" name="mytext[]" class="demo-form"><label class="placeholder" style="color: rgb(153, 153, 153);">문제 추가 &nbsp;</label><div class="bar" style="height: 2px; background-color: rgb(170, 170, 170);"></div><a class="remove_field" style="cursor:pointer; font-size:13px; color:red;">Del</a></div>'); //add input box
       }
       else
         alert("최대 10개까지 등록이 가능합니다.");

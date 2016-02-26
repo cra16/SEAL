@@ -7,6 +7,7 @@ class Description_Answer(models.Model):
     CreatedID = models.ForeignKey(Profile)
     Answer = models.TextField(max_length=200)
     Course = models.ForeignKey(Lecture)
+    created = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.CreatedID.User.username
 
@@ -23,6 +24,7 @@ class Course_Evaluation(models.Model):
 	Exam_Answer = models.ManyToManyField(Description_Answer)
 	Who_Answer = models.TextField(max_length=200, null=True)
 	Url_Answer = models.TextField(max_length=200, null=True)
+	created = models.DateTimeField(auto_now_add=True)
 	def __unicode__(self):
 		return self.Course.CourseName
 
@@ -38,6 +40,7 @@ class Total_Evaluation(models.Model):
 	Total_Short_Answer = models.IntegerField(default=0)
 	Total_Long_Answer = models.IntegerField(default=0)
 	Total_Unknown_Answer = models.IntegerField(default=0)
+
 
 	def __unicode__(self):
 		return self.Course.Code

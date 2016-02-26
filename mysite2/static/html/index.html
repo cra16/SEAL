@@ -150,7 +150,7 @@
           <div class="column">
              <div class="ui raised segment">
 
-              <h4><b>{{PBoard3.CreatedID.UserName}}/{{PBoard3.CreatedID.User.username.1}}{{PBoard3.CreatedID.User.username.2}}학번/{{PBoard3.CreatedID.FirstMajor}}</b></h4>
+              <h4><b>{{PBoard3.CreatedID.UserName}}/{{PBoard3.CreatedID.FirstMajor}}</b></h4>
 
                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" style="margin-bottom:23px">
                 <center><img src="{% static "css/seal.png" %}" height="45px" width="45px"></center>
@@ -269,7 +269,6 @@
       {%endif%}
 
           <div id = "Search_Page">
-            {{temp}}
           {% if not Search == None  %}
     
             {% if Search.0 != None%}

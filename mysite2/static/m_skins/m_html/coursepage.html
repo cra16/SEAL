@@ -6,7 +6,7 @@
     {%for MyCourseBoard in MyCourseBoard%}
      <div id="h_innersectiondivider" class="ui section divider"></div>
       <div id="recommending" class="ui column">
-        <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>          
+        <h4><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>          
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">
@@ -119,7 +119,7 @@
 
 		{%for OtherBoard in OtherCourseBoard%}      
           <div id="recommending" class="ui column">            
-            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번/ {{OtherBoard.CreatedID.FirstMajor}}{{OtherBoard.Course.Semester}}</b></h4>
+            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}{{OtherBoard.Course.Semester}}</b></h4>
             <div id="blankspace" class="ui column"></div>
 
             <div class="ui grid">

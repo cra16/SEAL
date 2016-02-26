@@ -200,9 +200,10 @@
         <h3><b>나의 평가 : </b></h3>
             {%endif%}
           {%for MyCourseBoard in MyCourseBoard%}
+
            <div id="recommending" class="ui column">
             <div class="ui divider" style="margin-top:-5px"></div>
-          <h4><b>{{user.profile.UserName}}/{{user.username.1}}{{user.username.2}}학번/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
+          <h4><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div class="ui divider"></div>
 
             <div class="ui grid">
@@ -316,8 +317,9 @@
             {%endif%}
     		{%for OtherBoard in OtherCourseBoard%}
           <div id="recommending" class="ui column">
+            
             <div class="ui divider" style="margin-top:-5px"></div>
-            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.User.username.1}}{{OtherBoard.CreatedID.User.username.2}} 학번 / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>
+            <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>
             <div class="ui divider"></div>
 
             <div class="ui grid">

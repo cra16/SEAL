@@ -103,7 +103,7 @@
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
-
+          <br><br><br>
 
           <div class="ui grid">
             <div id="secondcolumn" class="left floated right aligned eight wide column">과제량</div>
@@ -124,7 +124,7 @@
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
-
+          <br><br><br>
 
           <div class="ui grid">
             <div id="thirdcolumn" class="left floated right aligned eight wide column">난이도</div>
@@ -145,6 +145,7 @@
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
+          <br><br>
 
           <div class="ui grid">
             <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
@@ -186,7 +187,7 @@
               
                 {% for Answer in Description %}
                 
-              {%if forloop.counter == 1 || forloop.counter == 0%}
+              {%if forloop.counter == 1%}
               <input type="text" name="mytext[]" label="기억에 남는 시험 문제는? &nbsp;" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
                {%else%} 
              <input type="text"  name="mytext[]" class="demo-form add" value ="{{Answer.Answer}}">

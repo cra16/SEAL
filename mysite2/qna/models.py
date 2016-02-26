@@ -31,7 +31,6 @@ class Judgement(models.Model):
 	TextName= models.CharField(max_length=50)
 	Text = models.TextField()
 	TextWriter = models.ForeignKey(Profile)
-	created = models.DateTimeField(auto_now_add=True)
 	
 	def __unicode__(self):
 		return self.TextName

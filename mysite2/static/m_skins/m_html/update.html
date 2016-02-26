@@ -188,7 +188,7 @@
                 {% for Answer in Description %}
                 
               {%if forloop.counter == 1%}
-              <input type="text" name="mytext[]" label="기억에 남는 시험 문제는? &nbsp;" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
+              <input type="text" name="mytext[]" label="기억에 남는 문제&유형(선택) &nbsp;" active-color='#3F51B5' class="demo-form" value ="{{Answer.Answer}}">
                {%else%} 
              <input type="text"  name="mytext[]" class="demo-form add" value ="{{Answer.Answer}}">
               {%endif%}
@@ -208,12 +208,12 @@
 
             <div class="field">
               <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i></h2>
-              <input type="text" label="어떤 사람에게 추천하나요? &nbsp;" name="who" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Who_Answer}}">
+              <input type="text" label="어떤 사람에게 추천하나요?(선택) &nbsp;" name="who" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Who_Answer}}">
             </div>               
         
             <div class="field">
               <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i></h2>
-              <input type="text" label="참고하면 좋은 사이트 URL &nbsp;" name="url" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Url_Answer}}">
+              <input type="text" label="참고하면 좋은 사이트 URL(선택) &nbsp;" name="url" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Url_Answer}}">
             </div>
           </div>
 

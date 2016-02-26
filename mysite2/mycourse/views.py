@@ -136,6 +136,7 @@ def CourseDelete(request):
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
+		
 		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
 		DeleteData=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, Course__Semester =Semester, CreatedID=UserData)
@@ -199,8 +200,11 @@ def CourseDelete(request):
 		'TotalCount':TotalCount,
 		'Page':Page
 		}
+		if request.flavour=="full":
+			return render_to_response('html/RecommendPage.html',Data)
+		else:
+			return render_to_response('m_skins/m_html/RecommendPage.html',Data)
 
-		return render_to_response('html/RecommendPage.html',Data)
 @csrf_exempt
 def UpdateRedirect(request):
 	if CheckingLogin(request.user.username):
@@ -331,8 +335,39 @@ def LikeDelete(request):
 		PageFirst=10*(int(Page)-1)
 		PageLast =10*(int(Page)-1)+10
 
-		LectureData=Course_Evaluation.objects.filter(Course__Code = Code, Course__CourseName=CourseName, Course__Professor = Professor,Course__Semester=Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData = Like_Course.objects.get(Course=LectureData,CreatedID=UserData)
+		DeleteData = Like_Course.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
+		
 		DeleteData.delete()
-		return HttpResponseRedirect("/MyCourse")
+		UserData.LikeCount =Like_Course.objects.filter(CreatedID=UserData).count()
+		UserData.save()
+		Count=[0,0]
+		DBCount=Course_Evaluation.objects.filter(CreatedID = UserData).count()
+		Count[0] = DataCount(10,DBCount)
+		DBCount=Like_Course.objects.filter(CreatedID = UserData).count()
+		Count[1]=DataCount(10,DBCount)
+		PageInformation=list()
+		TotalCount=list()
+		if Mobile == "full":
+
+			for i in range(0,2):
+				PageInformation.append(CurrentPageView(Count[i],Page))									
+				TotalCount.append(PageTotalCount(Count[i],PageInformation[i]))
+		else:
+			for i in range(0,2):
+				PageInformation.append(MobileCurrentPageView(Count[i],Page))									
+				TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
+		
+		LikePage = Like_Course.objects.filter(CreatedID=UserData)[PageFirst:PageLast]
+		Data={
+
+		'User':UserData,
+		"LikePage":LikePage,
+		'PageInformation' : PageInformation,
+		'TotalCount':TotalCount,
+		'Page':Page
+		}
+		if request.flavour == "full":
+			return render_to_response('html/LikePage.html',Data)
+		else:
+			return render_to_response("m_skins/m_html/LikePage.html",Data)

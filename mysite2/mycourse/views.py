@@ -27,8 +27,12 @@ def MyCoursePage(request,Page,Mobile):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	try:
+		if Mobile == "full":
 			PageFirst=10*(int(Page)-1)
 			PageLast =10*(int(Page)-1)+10
+		else:
+			PageFirst=5*(int(Page)-1)
+			PageLast =5*(int(Page)-1)+5	
 	except:
 		raise Http404()
 	
@@ -69,11 +73,16 @@ def MyCoursePage(request,Page,Mobile):
 			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count
 			LikePage.append(LikeData)
 	Count = [[],[]]
-	DBCount=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
-	Count[0] = DataCount(10,DBCount)
-	DBCount=Like_Course.objects.filter(CreatedID = MyProfile).count()
-	Count[1]=DataCount(10,DBCount)
+	Eval_Count=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
+	Like_Count=Like_Course.objects.filter(CreatedID = MyProfile).count()
 	
+	if Mobile == "full":
+		Count[0] = DataCount(10,Eval_Count)
+		Count[1]=DataCount(10,Like_Count)
+	else:
+		Count[0] = DataCount(5,Eval_Count)
+		Count[1]=DataCount(5,Like_Count)
+
 	PageInformation=list()
 	TotalCount=list()
 	if Mobile == "full":
@@ -85,7 +94,7 @@ def MyCoursePage(request,Page,Mobile):
 		for i in range(0,2):
 			PageInformation.append(MobileCurrentPageView(Count[i],Page))									
 			TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
-
+	PageInformation[0][1]=Page
 	MyCoursePageData=dict()
 	MyCoursePageData={'user':request.user, 
 						'BestBoard':BestBoardView(),
@@ -133,8 +142,12 @@ def CourseDelete(request):
 		CourseName = request.POST['CourseName']
 		Page = request.POST['CurrentPage']
 		Page= int(Page)
-		PageFirst=10*(int(Page)-1)
-		PageLast =10*(int(Page)-1)+10
+		if Mobile == "full":
+			PageFirst=10*(int(Page)-1)
+			PageLast =10*(int(Page)-1)+10
+		else:
+			PageFirst=5*(int(Page)-1)
+			PageLast =5*(int(Page)-1)+5	
 
 		
 		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
@@ -173,10 +186,15 @@ def CourseDelete(request):
 			RecommendData.Total_Recommend = RecommendData.Total_Recommend/RecommendData.Total_Count
 			RecommendPage.append(RecommendData)
 		Count = [[],[]]
-		DBCount=Course_Evaluation.objects.filter(CreatedID = UserData).count()
-		Count[0] = DataCount(10,DBCount)
-		DBCount=Like_Course.objects.filter(CreatedID = UserData).count()
-		Count[1]=DataCount(10,DBCount)
+		Eval_Count=Course_Evaluation.objects.filter(CreatedID = UserData).count()
+		Like_Count=Like_Course.objects.filter(CreatedID = UserData).count()
+		
+		if Mobile == "full":
+			Count[0] = DataCount(10,Eval_Count)
+			Count[1]=DataCount(10,Like_Count)
+		else:
+			Count[0] = DataCount(5,Eval_Count)
+			Count[1]=DataCount(5,Like_Count)
 		PageInformation=list()
 		TotalCount=list()
 		if Mobile == "full":
@@ -188,6 +206,7 @@ def CourseDelete(request):
 			for i in range(0,2):
 				PageInformation.append(MobileCurrentPageView(Count[i],Page))									
 				TotalCount.append(MobilePageTotalCount(Count[i],PageInformation[i],3))
+		PageInformation[0][1]=Page
 	
 		UserData = Profile.objects.get(User = request.user)
 		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=UserData).count()
@@ -342,10 +361,15 @@ def LikeDelete(request):
 		UserData.LikeCount =Like_Course.objects.filter(CreatedID=UserData).count()
 		UserData.save()
 		Count=[0,0]
-		DBCount=Course_Evaluation.objects.filter(CreatedID = UserData).count()
-		Count[0] = DataCount(10,DBCount)
-		DBCount=Like_Course.objects.filter(CreatedID = UserData).count()
-		Count[1]=DataCount(10,DBCount)
+		Eval_Count=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
+		Like_Count=Like_Course.objects.filter(CreatedID = MyProfile).count()
+		
+		if Mobile == "full":
+			Count[0] = DataCount(10,Eval_Count)
+			Count[1]=DataCount(10,Like_Count)
+		else:
+			Count[0] = DataCount(5,Eval_Count)
+			Count[1]=DataCount(5,Like_Count)
 		PageInformation=list()
 		TotalCount=list()
 		if Mobile == "full":

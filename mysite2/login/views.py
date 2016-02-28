@@ -70,8 +70,8 @@ def loginCheck(request):
 			# Save the information
 			try:
 				stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-				temp_major = titles[11].next_sibling.next_sibling.text.split()
-				first_major = temp_major[0][:-1]
+				temp_major = titles[11].next_sibling.next_sibling.text.split('.')
+				first_major = temp_major[0]
 			except IndexError as e:
 				return LoginError(request)	# 학번 혹은 전공 확인되지 않으면 로그인 에러
 			try:

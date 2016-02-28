@@ -125,7 +125,7 @@
                 <div class="sixteen wide column">
 
                   [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
-                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="course_delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
                   <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-edit" id="edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
                 
                   <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
@@ -203,9 +203,14 @@
                 <div class="sixteen wide column">    
 
                   [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard2.Course.Code}}</span>]
-                  <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard2.Course.id}}"><span class="cname" id="cname11">{{PageBoard2.Course.CourseName}}</span></a></p>
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="like_delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
+                  <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard2.Course.id}}"><span class="cname" id="cname">{{PageBoard2.Course.CourseName}}</span></a></p>
                   <p id="title_s"><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></p>
+                  <input type = "hidden" id="period" value = "{{PageBoard2.Course.Period}}">
+                  <input type = "hidden" id="semester" value = "{{PageBoard2.Course.Semester}}">
+                  <input type = "hidden" id="professor" value = "{{PageBoard2.Course.Professor}}">
                 </div>
+
 
                 <br><br>
 

@@ -8,17 +8,20 @@ urlpatterns = patterns('',
     # url(r'^$', 'mysite2.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 	url(r'^admin/', include(admin.site.urls)), 
-	url(r'^MyCourse/$','mycourse.views.MyCourse'),
-	url(r'^MyCourseDelete/$','mycourse.views.CourseDelete'),
-	url(r'^UpdateCourse/$','mycourse.views.UpdateRedirect'),
-	url(r'^UpdateWrite/$','mycourse.views.CourseUpdate'),
 	url(r'^update/$','lecture.views.lec_update'),
 	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
 	url(r'^CurUpdate/$','lecture.views.AutoFastLecUpdate'),
-	url(r'^MyCoursePage/$','mycourse.views.MyCoursePageNation'),
 
 	
 )
+urlpatterns += patterns('mycourse.views',
+	url(r'^MyCourse/$','MyCourse'),
+	url(r'^MyCoursePage/$','MyCoursePageNation'),
+	url(r'^MyCourseDelete/$','CourseDelete'),
+	url(r'^UpdateCourse/$','UpdateRedirect'),
+	url(r'^UpdateWrite/$','CourseUpdate'),
+	url(r'^LikeCourseDelete/$', 'LikeDelete')
+	)
 
 urlpatterns += patterns('schedule.views',
 	url(r'^sel_period/(?P<period>\w+)/(?P<page>\d+)/$', 'SelectPeriod'),
@@ -76,7 +79,8 @@ urlpatterns += patterns('qna.views',
 	url(r'^QnA/Reply/(\d+)$','QnA_Reply'),
 	url(r'^QnA/Replying/(\d+)$','QnA_Replying'),
 	url(r'^SubScriptWrite/$','Improvement_Write'),
-	url(r'^Judgement_Write/$','Judgement_Write')
+	url(r'^Judgement_Write/$','Judgement_Write'),
+
 )
 
 urlpatterns += patterns('course.views',

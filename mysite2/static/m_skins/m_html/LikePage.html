@@ -15,8 +15,14 @@
                 <div class="sixteen wide column" style="padding-bottom: 30px;">    
 
                   [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard2.Course.Code}}</span>]
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="like_delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
                   <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard2.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard2.Course.CourseName}}</span></a></p>
                   <p id="title_s"><span id="cprof1" name="cprof">{{PageBoard2.Course.Professor}} 교수님</span></p>
+                  <input type = "hidden" id="period" value = "{{PageBoard2.Course.Period}}">
+                  <input type = "hidden" id="semester" value = "{{PageBoard2.Course.Semester}}">
+                  <input type = "hidden" id="professor" value = "{{PageBoard2.Course.Professor}}">
+               
+
                 </div>
 
               <button type ="button" id="thumbs_up" class="circular ui icon button" style="margin-left:10px;" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>

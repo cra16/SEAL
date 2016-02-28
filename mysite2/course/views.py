@@ -314,16 +314,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 		#DBCount =Course_Evaluation.objects.filter(Course=LectureInformation).count()
 		O_Count = DataCount(3,len(OtherCourseBoard))
 		tempLecture=Lecture.objects.filter(Code=LectureInformation.Code,CourseName = LectureInformation.CourseName, Professor=LectureInformation.Professor)
-		good_count=[]
-		for temp in tempLecture:
-			good_count.append(Course_Evaluation.objects.values('Check').annotate(Count('Check')).filter(Course=temp));
-	
-		goodresult=0
-		for goocount in good_count:
-			for goodcount in goocount:
-				if goodcount['Check']==True:
-					goodresult += 1
-
+		
 		#전체 페이지가 11페이지 이상인 것을 기준으로 정의
 		if Mobile == "full":
 			PageInformation=FirstPageView(O_Count)
@@ -343,9 +334,8 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			'OtherCourseBoard':OtherCourseBoard,
 			'OtherCount':OtherCount,
 			'PageInformation':PageInformation,
-			'GoodCount': goodresult,
 			'Answer_Dis' : Description,
-			'Count':len(OtherCourseBoard)
+			
 			
 			}
 		if request.flavour =='full':
@@ -532,7 +522,22 @@ def TotalCourse(offset):
 
 	return CourseBoard
 def TotalCourseProfessor(CourseName,Professor,Code):
-		Course = Total_Evaluation.objects.filter(Course__Code =Code,Course__CourseName=CourseName,Course__Professor=Professor).order_by('Course__Semester')
+		try:
+			CourseBoard = Total_Evaluation.objects.filter(Course__Code =Code,Course__CourseName=CourseName,Course__Professor=Professor)[0]
+		except:
+			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor,Code =Code).order_by('Semester')[0])
+			CourseBoard.Total_Speedy = 5
+			CourseBoard.Total_Homework = 5
+			CourseBoard.Total_Level_Difficulty = 5
+			CourseBoard.Total_Count = 0
+			CourseBoard.Total_StarPoint=0
+		if CourseBoard.Total_Count!=0:
+			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
+			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
+
+		'''
 		try:
 			CourseBoard = Total_Evaluation(Course=Course[0].Course)
 		except:
@@ -559,5 +564,6 @@ def TotalCourseProfessor(CourseName,Professor,Code):
 			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
 			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
 		
-
+		return CourseBoard
+		'''
 		return CourseBoard

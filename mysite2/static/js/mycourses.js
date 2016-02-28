@@ -370,9 +370,14 @@ $("[data-toggle=tooltip]").tooltip();
 
     });
 
-    $('div').on('click','#delete',function(event){
+    $('div').on('click','#course_delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
+          var confirm1 = window.confirm("이 강의를 삭제하시겠습니까?");
+          if(!confirm1)
+          {
+            return;
+          }
           var CurrentPage=$(this).parent().attr("id")
            var Parent=$(this).parent().parent();
             var Code = Parent.find("[name=ccode]").text();
@@ -456,4 +461,55 @@ $('div').on('click','#edit',function(event){
 
 
     });
+    $('div').on('click','#like_delete',function(event){
+        event.stopPropagation();
+          $(this).unbind("click");
+          var confirm1 = window.confirm("이 강의를 삭제하시겠습니까?");
+          if(!confirm1)
+          {
+            return;
+          }
+          var CurrentPage=$(this).parent().attr("id")
+           var Parent=$(this).parent().parent();
+            var Code = Parent.find("[name=ccode]").text();
+            var CourseName=Parent.find("[id=cname]").text();
+            var prof = Parent.find("[id=professor]").val();
+            var period = Parent.find("[id=period]").val();
+            var semester = Parent.find("[id=semester]").val();
+            var pagenation=$('body').find('[id=RecommendPageNation]');
+            var CurrentPage = pagenation.find('.active','item').attr('name');
+          
+
+         $.ajax(
+            { url : "/LikeCourseDelete/",
+              data : {
+                      'Code':Code,
+                      'CourseName': CourseName,
+                      'Professor':prof,
+                      'Period':period,
+                      'Semester':semester,
+                      'CurrentPage':CurrentPage
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:true,
+              success:function(resp){     
+               $('#LikePageMain').html(resp);
+                
+                },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+
+
+
+
+    });
+
+
 });

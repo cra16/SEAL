@@ -525,7 +525,12 @@ def TotalCourseProfessor(CourseName,Professor,Code):
 		try:
 			CourseBoard = Total_Evaluation.objects.filter(Course__Code =Code,Course__CourseName=CourseName,Course__Professor=Professor)[0]
 		except:
-			pass
+			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor,Code =Code).order_by('Semester')[0])
+			CourseBoard.Total_Speedy = 5
+			CourseBoard.Total_Homework = 5
+			CourseBoard.Total_Level_Difficulty = 5
+			CourseBoard.Total_Count = 0
+			CourseBoard.Total_StarPoint=0
 		if CourseBoard.Total_Count!=0:
 			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count

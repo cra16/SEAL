@@ -81,7 +81,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 
 		try:
-			RecommendData=Course_Evaluation.objects.filter(Course__Code = CourseCode, Course__CourseName = CourseName, Course__Professor=Professor,CreatedID = UserProfile)
+			RecommendData=Course_Evaluation.objects.filter(Course =Lecture.objects.filter(Code=CourseCode, CourseName = CourseName, Professor=Professor)[0],CreatedID = UserProfile)[0]
 			if(RecommendData != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
 		except:

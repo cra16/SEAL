@@ -149,7 +149,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			totalcount=0
 			MyCourseBoard = None
 			Description=[]
-			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code,CreatedID=UserData))
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code))
 			if count==0:
 				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)
 				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code).order_by('-id')
@@ -273,7 +273,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			totalcount=0
 			MyCourseBoard = None
 	
-			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code,CreatedID=UserData))
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code))
 			
 			if count==0:
 				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)

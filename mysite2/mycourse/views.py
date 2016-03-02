@@ -150,12 +150,12 @@ def CourseDelete(request):
 			PageLast =5*(int(Page)-1)+5	
 
 		
-		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor)[0]
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)
+		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
-		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester,CreatedID=UserData)
-		UpdateData=Total_Evaluation.objects.get(Course=LectureData)
+		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
+		UpdateData=Total_Evaluation.objects.get(Course__Code = Code, Course__CourseName=CourseName, Course__Professor = Professor)
 
 		
 		

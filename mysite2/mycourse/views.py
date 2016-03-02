@@ -361,8 +361,8 @@ def LikeDelete(request):
 		UserData.LikeCount =Like_Course.objects.filter(CreatedID=UserData).count()
 		UserData.save()
 		Count=[0,0]
-		Eval_Count=Course_Evaluation.objects.filter(CreatedID = MyProfile).count()
-		Like_Count=Like_Course.objects.filter(CreatedID = MyProfile).count()
+		Eval_Count=Course_Evaluation.objects.filter(CreatedID = UserData).count()
+		Like_Count=Like_Course.objects.filter(CreatedID = UserData).count()
 		
 		if Mobile == "full":
 			Count[0] = DataCount(10,Eval_Count)

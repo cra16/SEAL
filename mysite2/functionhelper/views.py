@@ -487,8 +487,8 @@ def BestBoardView():
 		TotalCount = Board.Total_Count
 		if TotalCount>MaxCount:
 			MaxCount=TotalCount
-			BestBoard[1] = BestBoard[0]
 			BestBoard[2] = BestBoard[1]
+			BestBoard[1] = BestBoard[0]
 			BestBoard[0] = Board
 		elif TotalCount>SecondCount :	
 			SecondCount=TotalCount

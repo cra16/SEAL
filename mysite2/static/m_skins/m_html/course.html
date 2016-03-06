@@ -155,7 +155,7 @@
                   <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                   <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
                   <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and Courseboard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
+              {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
                   <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
                   <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
                   <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>

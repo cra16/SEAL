@@ -26,8 +26,8 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	LectureData= Lecture.objects.get(id=offset)
 	try:
 		
-		RecommendData=Recommend_Course.objects.get(Course = Course_Evaluation.objects.get(Course =LectureData, CreatedID = UserProfile),CreatedID =UserProfile) 
-		return HttpResponseRedirect('/NotEmptyRecommend')
+		RecommendData=Recommend_Course.objects.get(Course__Course__CourseName=LectureData.CourseName,Course__Course__Code = LectureData.Code, Course__Course__Professor=LectureData.Professor,CreatedID =UserProfile) 
+		
 	except:
 			RecommendData=None
 	
@@ -81,7 +81,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 
 
 		try:
-			RecommendData=Course_Evaluation.objects.get(Course =Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0],CreatedID = UserProfile)
+			RecommendData=Course_Evaluation.objects.get(Course__CourseName=LectureData.CourseName,Course__Code = LectureData.Code, Course__Professor=LectureData.Professor,CreatedID =UserProfile) 
+
 			if(RecommendData != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
 		except:

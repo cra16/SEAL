@@ -149,6 +149,7 @@
           <div class="ui grid">
             <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
             <div class="right floated center aligned twelve wide column">
+           
               {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
                   <div class="ui buttons" style="margin-top:-10px">
                     <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
@@ -163,7 +164,7 @@
                     <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                   </div>
-              {% elif Courseboard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and Courseboard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
+              {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
                   <div class="ui buttons" style="margin-top:-10px">
                     <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
@@ -398,15 +399,15 @@
 
               {% if OtherBoard.What_Answer == 1%}
                   <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>단답형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                   </div>
               {% elif OtherBoard.What_Answer == 2%}
                   <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active"  value="" disabled>단답형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                   </div>

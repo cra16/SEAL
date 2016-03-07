@@ -23,6 +23,8 @@ from django.contrib.auth.models import User	# user model 등록
 from functionhelper.views import *
 import mechanize
 from bs4 import BeautifulSoup
+# django encoding
+from django.utils.encoding import smart_str, smart_unicode
 
 @csrf_exempt
 def loginCheck(request):
@@ -51,7 +53,7 @@ def loginCheck(request):
 				# user = None
 			
 		elif request.POST.get('id', 'None'):
-			username = request.POST['id']
+			username = request.POST['id']		# 여기서 username은 학번이 아닌 입력받은 히스넷 아이디
 			password = request.POST['pw']
 
 			# 크롤링 Configuration
@@ -59,7 +61,7 @@ def loginCheck(request):
 			browser.set_handle_robots(False)
 			browser.open("https://hisnet.handong.edu/login/login.php")  
 			browser.select_form(name='login') 
-			browser.form['id'] = username
+			browser.form['id'] = smart_unicode(username).encode('euc-kr')
 			browser.form['password'] = password  
 			browser.submit()
 

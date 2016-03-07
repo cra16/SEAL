@@ -59,7 +59,7 @@ def loginCheck(request):
 			browser.set_handle_robots(False)
 			browser.open("https://hisnet.handong.edu/login/login.php")  
 			browser.select_form(name='login') 
-			browser.form['id'] = username.decode('mbcs').encode('euc-kr')
+			browser.form['id'] = username
 			browser.form['password'] = password  
 			browser.submit()
 

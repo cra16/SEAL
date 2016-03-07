@@ -87,7 +87,7 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 			#QnA 글에 맞춰서 reply 글도 그 QnA 고유 ID기준으로 reply 데이터 불러옴
 			
 
-
+	PageInformation[1]=offset
 	dic =  {'user':request.user,
 		  'BestBoard':BestBoardView(),
 		   'PageBoard':PageBoard,

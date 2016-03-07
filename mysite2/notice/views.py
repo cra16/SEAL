@@ -68,7 +68,7 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 	TotalCount = PageTotalCount(T_Count,PageInformation)
 
 	Today =datetime.date.today()    
-	
+	PageInformation[1]=offset	
 	dic={'user':request.user, 
 				  'BestBoard':BestBoardView(),
 				   'PageBoard':PageBoard,
@@ -133,7 +133,7 @@ def Notice_Writing(request):
 		new_TextWriter = Profile.objects.get(User=request.user)
 		new_TextName = request.POST['msg-title-input']
 		created = datetime.datetime.now()
-		new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter, TextName=new_TextName)
+		new_Notice = Notice_Board(Text=new_Text, TextWriter = new_TextWriter.UserName, TextName=new_TextName)
 		new_Notice.save()
 	return HttpResponseRedirect("/Notice")
 # Create your views here.

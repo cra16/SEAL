@@ -189,7 +189,8 @@ def MakeTable(request, my_profile):
 		for j in range(6):
 			my_lec_table[i].append([])
 
-	days_dic = {u"월":0, u"화":1, u"수":2, u"목":3, u"금":4, u"토":5}
+	# days_dic = {u"월":0, u"화":1, u"수":2, u"목":3, u"금":4, u"토":5}
+	days_dic = {u"Mon":0, u"Tue":1, u"Wed":2, u"Thu":3, u"Fri":4, u"Sat":5}
 
 	# 나의 강의정보 테이블 별로 삽입하기. 중복 확인 필수.
 	for lec in my_lec_lst:
@@ -198,8 +199,8 @@ def MakeTable(request, my_profile):
 		for period in p_lst:
 			if period == "":
 				break;
-			day = days_dic[period[0]]	# 0번째 값은 요일, ex) "월" -> 0
-			my_lec_table[int(period[1:])-1][day] = lec	# -1(index계산), 나머지는 교시, 10교시 이상 있을 수 있음 주의.
+			day = days_dic[period[:3]]	# 0번째 값은 요일, ex) "월" -> 0
+			my_lec_table[int(period[3:])-1][day] = lec	# -1(index계산), 나머지는 교시, 10교시 이상 있을 수 있음 주의.
 
 	return my_lec_table
 

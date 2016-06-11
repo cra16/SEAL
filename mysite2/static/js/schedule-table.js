@@ -3,12 +3,13 @@ $(document).ready(function() {
     $('.table td').css( 'cursor', 'pointer' );
     
     var arr=['월', '화', '수', '목', '금', '토'];
+    var eng_arr=['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
     $("div").on("click",'.table td',function(event) {
       event.stopPropagation();
       if(confirm((arr[$(this).index()-1]) + "요일 " + ($(this).parent().index()+1) + "교시 수업을 검색하시겠습니까?")==true){
           // $('#sch-result').fadeIn();
-          var link_page = '/sel_period/' + (arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_/" + 1 + "/";
+          var link_page = '/sel_period/' + (eng_arr[$(this).index()-1]) + ($(this).parent().index()+1)  + "_/" + 1 + "/";
           $.ajax(
             { url : link_page,
               data : {'major' : $('#major').val(),

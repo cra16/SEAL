@@ -111,8 +111,11 @@ def AutoFastLecUpdate(request):
 							temp_lec.append(td[0].text.strip())	# 전공,선택구분
 							temp_lec.append(td[1].text.strip())	# 과목코드
 							temp_lec.append(func_int(td[2].text.strip()))	# 분반
-							temp_lec.append(td[3].br.previous_sibling.strip())	# 과목명(한글)
-							temp_lec.append(td[3].br.text.strip('')[1:-1])	# 과목명(영어)
+							temp_lec.append(td[3].text.strip())	# 과목명(한글)
+							temp_lec.append(td[3].text.strip())	# 과목명(영어)
+							## Hisnet에서 더이상 영어 과목명 지원 안함에 따른 변경
+							# temp_lec.append(td[3].br.previous_sibling.strip())	# 과목명(한글)
+							# temp_lec.append(td[3].br.text.strip('')[1:-1])	# 과목명(영어)
 							temp_lec.append(td[4].text.strip())	# 학점
 							temp_lec.append(td[5].text.strip())	# 교수님
 							try:

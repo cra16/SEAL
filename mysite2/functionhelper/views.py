@@ -11,15 +11,13 @@ from django import template
 # Create your views here.
 
 register = template.Library()
-"""
-전반적으로 해당 view에서 보이지 않는 모든 함수를 여기에 한곳에 모음
-현재는 기능과 DB와 관련된 모든 함수가 섞여있는데 나중에 분류할 예정 7/6일 자
+# 전반적으로 해당 view에서 보이지 않는 모든 함수를 여기에 한곳에 모음
+# 현재는 기능과 DB와 관련된 모든 함수가 섞여있는데 나중에 분류할 예정 7/6일 자
 
-8/13
-이 page는 위에 설명한것과 마찬가지로 전반적인 동작 함수를 전부다 모아서 나중에 찾기 쉽게 하려고 모아놓음
-대부분 2번이상 사용할 수 있는 것들만 모아놨음.
-알고리즘은 대체적으로 돌아가게끔만 해놓은 것이라서 느릴 수도 있지만, 변수 특성만 바꾸지않으면 왠만해선 다돌아감(?)
-"""
+# 8/13
+# 이 page는 위에 설명한것과 마찬가지로 전반적인 동작 함수를 전부다 모아서 나중에 찾기 쉽게 하려고 모아놓음
+# 대부분 2번이상 사용할 수 있는 것들만 모아놨음.
+# 알고리즘은 대체적으로 돌아가게끔만 해놓은 것이라서 느릴 수도 있지만, 변수 특성만 바꾸지않으면 왠만해선 다돌아감(?)
 
 #세션 유지된 아이디 확인
 def CheckingLogin(userID):
@@ -27,7 +25,7 @@ def CheckingLogin(userID):
 		return True
 	else:
 		return False
-#최초로 페이지에 도달했을때 1전공 2전공 all의 페이지 위치 정보를 알려주는 기능
+#로그인 혹은 특정 페이지를 처음 들어 갔을 때 pagenation 값 설정 함수 
 def FirstPageView(Count):
 	PageInformation =[1,1,1]
 	if Count>11:
@@ -39,6 +37,7 @@ def FirstPageView(Count):
 		PageInformation[1] = 1
 		PageInformation[2] = Count
 	return PageInformation
+#위의 함수와 기능이 똑같지만 모바일 쪽 기능
 def MobileFirstPageView(Count):
 	PageInformation =[1,1,1]
 	if Count>4:
@@ -50,7 +49,7 @@ def MobileFirstPageView(Count):
 		PageInformation[1] = 1
 		PageInformation[2] = Count
 	return PageInformation
-#최초로 페이지 도달한 것을 제외한 모든 상황에서 1전공 2전공 all의 페이지 위치 정보 알려주는 기능
+#로그인 혹은 처음으로 특정 페이지를 도달 했을 때를 제외한 경우 pagenation의 prev next 현재 페이지 값 설정 함수 
 def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
 	#페이지가 0으로 떨어질때 필요한 조건
@@ -60,8 +59,7 @@ def CurrentPageView(T_Count,offset):
 	if T_Count >=11:
 	#현재 페이지가 11이상일 경우
 			if offset>=11:
-				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
-				#되도록 표현 
+				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 최대 페이지 
 				if (offset+10)>=T_Count:
 					PageInformation[0] = (offset -Condition)-9
 					PageInformation[2] = T_Count
@@ -78,6 +76,7 @@ def CurrentPageView(T_Count,offset):
 			PageInformation[0] = 1
 			PageInformation[2] = T_Count
 	return PageInformation
+#위의 함수와 기능은 동일하지만 모바일 함수
 def MobileCurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
 	#페이지가 0으로 떨어질때 필요한 조건
@@ -88,7 +87,7 @@ def MobileCurrentPageView(T_Count,offset):
 	if T_Count >=4:
 	#현재 페이지가 11이상일 경우
 			if offset>=4:
-				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 \
+				#현재 페이지에서 +10을 했을 때 총페이지 보다 크면 마지막 next를 누르면 총페이지가 최대 페이지 값이
 				#되도록 표현 
 				if (offset+3)>=T_Count:
 					PageInformation[0] = (offset -Condition)-2
@@ -106,7 +105,7 @@ def MobileCurrentPageView(T_Count,offset):
 			PageInformation[0] = 1
 			PageInformation[2] = T_Count
 	return PageInformation	
-#PageNation하는 부분 표시하기 위한 기능
+#pagenation에 대한 숫자 번호에 값을 부여 하기 위한 기능(1,2,3,4... 에 대한 번호링 부여)
 def PageTotalCount(T_Count,PageInformation):
 	Codition = ((PageInformation[1]%10 !=0) and PageInformation[1]%10 or 10)
 	if (PageInformation[1]/10) >= T_Count/10 and PageInformation[1]%10 != 0:
@@ -114,6 +113,7 @@ def PageTotalCount(T_Count,PageInformation):
 	else:
 			TotalCount = range(PageInformation[1]-Codition+1,PageInformation[1]-Codition+11)
 	return TotalCount
+#위의 함수와 동일 하지만 모바일 버전 용
 def MobilePageTotalCount(T_Count,PageInformation,mobilecount):
 	Codition = ((PageInformation[1]%mobilecount !=0) and PageInformation[1]%mobilecount or mobilecount)
 	if (PageInformation[1]/mobilecount) >= T_Count/mobilecount and PageInformation[1]%mobilecount != 0:
@@ -135,7 +135,6 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=2
-
 
 	#user의 전공에 따른 전공 코드를 뿌려줌
 	CourseCode = MajorSelect(User)
@@ -323,7 +322,7 @@ def TargetTemplate(Current):
 
 	return target
 
-#전공 코드 쏘는 기능
+#로그인 한 학생의 전공을 검색해 해당 코드를 뿌려주는 기능(강의 추천한 목록 보여줄 때 사용)
 def MajorSelect(user):
 		try:
 			Student = Profile.objects.get(User =user)

@@ -475,27 +475,13 @@ def DataCount(divide, DataBaseCount):
 def BestBoardView():
 
 
-	TotalBoard = Total_Evaluation.objects.all()
+	TotalBoard = Total_Evaluation.objects.all().order_by('-Total_Count')[0:3]
 	MaxCount=0
 	SecondCount=0
 	ThirdCount=0
-	BestBoard=[[],[],[]]			
+	BestBoard=[TotalBoard[0],TotalBoard[1],TotalBoard[2]]			
 						
-	TotalCount=0
-	for Board in TotalBoard:
-		TotalCount = Board.Total_Count
-		if TotalCount>MaxCount:
-			MaxCount=TotalCount
-			BestBoard[2] = BestBoard[1]
-			BestBoard[1] = BestBoard[0]
-			BestBoard[0] = Board
-		elif TotalCount>SecondCount :	
-			SecondCount=TotalCount
-			BestBoard[2] = BestBoard[1]
-			BestBoard[1] = Board
-		elif TotalCount >ThirdCount :
-			ThirdCount=TotalCount
-			BestBoard[2] = Board
+
 
 
 	return BestBoard	

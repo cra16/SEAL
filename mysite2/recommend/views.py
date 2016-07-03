@@ -102,6 +102,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Who = request.POST['who']
 		new_Url = request.POST['url']
 		new_paper_value= int(request.POST['paper_value'])
+		if new_Url.find("http://")==-1:
+			new_Url="http://"+new_Url
 		'''
 		except:
 			new_Speedy=5

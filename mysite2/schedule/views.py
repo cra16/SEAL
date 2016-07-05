@@ -440,7 +440,7 @@ def Category(category):
 	elif category == "W08":
 		category = "세계관1"
 	elif category == "W09":
-		category = "세계꽌2"
+		category = "세계관2"
 	elif category == "W10":
 		category = "인문"
 	elif category == "W11":

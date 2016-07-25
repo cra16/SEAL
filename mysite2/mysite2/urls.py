@@ -60,6 +60,7 @@ urlpatterns += patterns('index.views',
 
 urlpatterns += patterns('mypage.views',
 	url(r'^MyPage/NicknameChange/$', 'NicknameChange'),
+	url(r'^MyPage/StudentInformation_Update/$','Student_Information_Change')
 )#mypage view
 
 urlpatterns += patterns('recommend.views',
@@ -67,6 +68,7 @@ urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
 	url(r'^Like/$','Like'),
 	url(r'^NotEmptyRecommend/$','Recommend_NotEmpty'),
+
 
 )#recommend view
 

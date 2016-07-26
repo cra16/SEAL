@@ -61,7 +61,41 @@ $(function(){
       }
     }
   });
+ $('div').on("click", "#update_button", function () {
+    $(".ui.modal").modal("setting", {
+        closable: true,
+        onApprove: function () {
+            return false;
+        }
+    }).modal("show");
+}).on("click", ".ui.button", function () {
+    switch ($(this).data("value")) {
+        case 'close':
+            $(".ui.modal").modal("hide");
+            break;
+    }
+});
 
+$('form').on("click",'.submit_hisnet',function()
+{
+     $.ajax(
+            { url : "/MyPage/StudentInformation_Update/",
+              data : $("#hisnet_form").serialize(),
+              type : "POST",
+              success:function(resp){  
+                  alert("성공하였습니다");
+                   location.reload();
+                  $(".ui.modal").modal("hide");
+
+                  } ,
+              error: function(xhr, option, error){
+                  alert('히즈넷 아이디 혹은 비밀번호가 일치 하지 않습니다.'); //오류내용
+            }
+
+
+  });return false;
+
+})
   $('#btnnum4').click(function(){
       var NicknameDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><input type="text" id="Nickname"></div> ');
           

@@ -184,8 +184,8 @@ def HisnetCheck(request):
 			# Save the information
 			stu_name = titles[0].next_sibling.next_sibling.text[:-1]
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			temp_major = titles[11].next_sibling.next_sibling.text.split()
-			first_major = temp_major[0][:-1]
+			temp_major = titles[11].next_sibling.next_sibling.text.split('. ')
+			first_major = temp_major[0]
 
 			try:
 				second_major = temp_major[1]

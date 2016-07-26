@@ -61,8 +61,8 @@ def Student_Information_Change(request):
 			# Save the information
 			stu_name = titles[0].next_sibling.next_sibling.text[:-1]
 			stu_num = titles[2].next_sibling.next_sibling.text[-8:]
-			temp_major = titles[11].next_sibling.next_sibling.text.split()
-			first_major = temp_major[0][:-1]
+			temp_major = titles[11].next_sibling.next_sibling.text.split('. ')
+			first_major = temp_major[0]
 
 			try:
 				second_major = temp_major[1]
@@ -90,7 +90,7 @@ def Student_Information_Change(request):
 			all_rec = all_rec[:-2]	# 마지막 구분자 '$$'' 제거
 
 			myprofile.FirstMajor= first_major
-			if second_major==None:
+			if second_major=="":
 				myprofile.SecondMajor="None"
 			else:
 				myprofile.SecondMajor=second_major
@@ -102,6 +102,7 @@ def Student_Information_Change(request):
 			ctx = {
 				'stu_num': stu_num,
 				'stu_name': stu_name,
+				'all_major': titles[11].next_sibling.next_sibling.text,
 				'first_major': first_major,
 				'second_major': second_major,
 				'all_rec': all_rec,
@@ -109,4 +110,4 @@ def Student_Information_Change(request):
 			if request.flavour =='full':
 				return render_to_response('html/sealmypage.html', ctx)
 			else:
-				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
+				return render_to_response('m_skins/m_html/sealmypage.html', ctx)

@@ -85,6 +85,7 @@ $('form').on("click",'.submit_hisnet',function()
               success:function(resp){  
                   alert("성공하였습니다");
                   $(".ui.modal").modal("hide");
+                   location.reload();
 
                   } ,
               error: function(xhr, option, error){

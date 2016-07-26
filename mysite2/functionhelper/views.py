@@ -362,9 +362,9 @@ def MajorSelect(user):
 		elif FirstMajor.find("상담심리") != -1 or FirstMajor.find("사회복지")!= -1:
 			MajorCode[0]="CSW"
 			MajorCode[1]="None"
-		elif FirstMajor.find("에디슨")!= -1 :
-			MajorCode[0]="GEA"
-			MajorCode[1]="None"
+		#elif FirstMajor.find("global")!= -1 :
+	#		MajorCode[0]="GEA"
+	#		MajorCode[1]="None"
 		elif FirstMajor.find("영어학과")!= -1 or FirstMajor.find("경영학과")!= -1 or FirstMajor.find("사회복지학과")!= -1:
 			MajorCode[0]="SIE"
 			MajorCode[1]="None"
@@ -411,7 +411,7 @@ def MajorSelect(user):
 		elif SecondMajor.find("상담심리")!=-1 or SecondMajor.find("사회복지")!=-1:
 			MajorCode[2]="CSW"
 			MajorCode[3]="None"
-		elif SecondMajor.find("에디슨")!=-1:
+		elif SecondMajor.find("global")!=-1:
 			MajorCode[2]="GEA"
 			MajorCode[3]="None"
 		elif SecondMajor.find("영어학과") !=-1 or SecondMajor.find("경영학과") !=-1 or SecondMajor.find("사회복지학과")!=-1:

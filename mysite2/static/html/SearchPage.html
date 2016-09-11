@@ -30,20 +30,20 @@
               {%endfor%}
                      
              <center><div id = "SearchPageNation" class="ui borderless pagination menu">
-              <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" >
+              <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" herf="#Search_Page" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 
               {% for i in TotalCount%}
                  {%if i == PageInformation.1 %}
-                   <a id ="SearchPage" name ="{{i}}" class="active item" >{{i}}</a>
+                   <a id ="SearchPage" name ="{{i}}" class="active item" herf="#Search_Page" >{{i}}</a>
                   
                   {%else%}
-                   <a id ="SearchPage" name ="{{i}}" class="item" >{{i}}</a>
+                   <a id ="SearchPage" name ="{{i}}" class="item" herf="#Search_Page" >{{i}}</a>
                   {%endif%}        
               {%endfor%}
         
-              <a id="SearchNext" class="item" name="{{PageInformation.2}}">
+              <a id="SearchNext" class="item" name="{{PageInformation.2}}" herf="#Search_Page">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -99,21 +99,21 @@
               {%endfor%}
                      
              <center><div id = "SearchPageNation" class="ui borderless pagination menu">
-              <a id="ProPrevious" name ="{{PageInformation.0.0}}" class="item" >
+              <a id="ProPrevious" name ="{{PageInformation.0.0}}" class="item" herf="#Search_Page">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
             
               {% for i in SearchTotal %}
             
               {% if Pageinformation.0.1 == i %}
-                 <a id ="ProPage" name = "{{i}}" class="active item" >{{i}}</a>
+                 <a id ="ProPage" name = "{{i}}" class="active item" herf="#Search_Page" >{{i}}</a>
               {%else%}
-                 <a id ="ProPage" name = "{{i}}" class="item" >{{i}}</a>
+                 <a id ="ProPage" name = "{{i}}" class="item" herf="#Search_Page" >{{i}}</a>
               {%endif%} 
 
               {%endfor%}
         
-              <a id="ProNext" class="item" name="{{PageInformation.0.2}}">
+              <a id="ProNext" class="item" name="{{PageInformation.0.2}}" herf="#Search_Page">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
               <input type ="hidden" id = "CourseHidden" value ="{{PageBoard.0.0.Course.CourseName}}">

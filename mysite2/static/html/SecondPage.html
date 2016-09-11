@@ -29,18 +29,18 @@
       {% endfor%} 
 
         <center><div id ="SecondPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" class="item" name="{{PageInformation.1.0}}">
+              <a id ="Previous" class="item" name="{{PageInformation.1.0}}" herf="#SecondPage">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous   
               </a>
       
         {% for i in TotalCount.1%}
         {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#SecondPage">{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#SecondPage">{{i}}</a>
         {%endif%}{%endfor%}
-              <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
+              <a id = "Next" name = "{{PageInformation.1.2}}" class="item" herf="#SecondPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -96,20 +96,20 @@
               {% endfor%} 
 
       <center><div id ="SecondPageNation" name="AllPageNation" class="ui borderless pagination menu">
-              <a id ="ProPrevious" name="{{PageInformation.1.0}}" class="item" >
+              <a id ="ProPrevious" name="{{PageInformation.1.0}}" class="item" herf="#SecondPage">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
         {% for i in TotalCount.1%}
          
         {%if i == Page %}
-         <a id ="ProPage" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="ProPage" name ="{{i}}" class="active item" herf="#SecondPage">{{i}}</a>
         
         {%else%}
-         <a id ="ProPage" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="ProPage" name ="{{i}}" class="item" herf="#SecondPage">{{i}}</a>
         {%endif%}
       {%endfor%}
-              <a id ="ProNext" name = "{{PageInformation.1.2}}" class="item" >
+              <a id ="ProNext" name = "{{PageInformation.1.2}}" class="item" herf="#SecondPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
               <input type = "hidden" id="CourseHidden" value = "{{CourseName}}">

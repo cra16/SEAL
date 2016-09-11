@@ -83,7 +83,7 @@ $('form').on("click",'.submit_hisnet',function()
               data : $("#hisnet_form").serialize(),
               type : "POST",
               success:function(resp){  
-                  alert("성공하였습니다");
+                  alert("정보 변경이 완료 되었습니다.");
                    location.reload();
                   $(".ui.modal").modal("hide");
 

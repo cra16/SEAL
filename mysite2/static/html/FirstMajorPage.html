@@ -29,20 +29,20 @@
       {%endfor%}
      
 			<center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
+              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" herf="#FirstPage" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 			
 				{% for i in TotalCount.0%}
         				 
         {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
         {%endif%}
 {%endfor%}
-              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" herf="#FirstPage" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -96,20 +96,20 @@
             {%endfor%}
 
       <center><div id ="FirstPageNation" name="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="ProPrevious" name="{{PageInformation.0.0}}" class="item" >
+              <a id ="ProPrevious" name="{{PageInformation.0.0}}" class="item" herf="#FirstPage">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
         {% for i in TotalCount.0%}
          
         {%if i == Page %}
-         <a id ="ProPage" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="ProPage" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
         
         {%else%}
-         <a id ="ProPage" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="ProPage" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
         {%endif%}
         {%endfor%}
-              <a id ="ProNext" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="ProNext" name = "{{PageInformation.0.2}}" class="item" herf="#FirstPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
 

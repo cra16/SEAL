@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q #데이터 베이스 OR 기능 구현
 from index.models import * #아직 시험중
 from index.views import MajorSelect, PageView#전공 선택 및 페이지 메인 페이지 보여주는 함수를 불러옴
+from django.core.exceptions import PermissionDenied
 
 # from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -309,3 +310,5 @@ def RegisterInfo(request):
 			return render_to_response('html/login.html')
 		else:
 			return render_to_response('m_skins/m_html/login.html')
+def static_forbidden(request):
+	raise  PermissionDenied

@@ -84,125 +84,12 @@
             </div>
         </div>
 
-      <div id="h_sectiondivider" class="ui section divider"></div>
-
-        <br><br>
-       
-      <div class="ui column">
-
-        <h3><b>전체 평균 : </b></h3>
-
-        <div id="recommending" class="ui column">
-
-          <div id="blankspace" class="ui column"></div>
-
-          <div class="ui grid">
-            <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-            <div class="left floated right aligned three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
-            </div>
-          </div>
-
-
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-          <div class="ui grid">
-            <div id="secondcolumn" class="left floated center aligned four wide column">과제량</div>
-            <div class="left floated right aligned three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
-            </div>
-          </div>
-
-
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-          <div class="ui grid">
-            <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
-            <div class="left floated right aligned three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
-            </div>
-          </div>
-
-
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-          <div class="ui grid">
-            <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
-            <div class="right floated center aligned twelve wide column">
-           
-              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
-                  <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
-                  </div>
-              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Unknown_Answer%}
-                  <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
-                  </div>
-              {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
-                  <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
-                  </div>
-              {% elif CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Long_Answer%}
-               <div class="ui buttons" style="margin-top:-10px">
-                    <button type ="button" class="ui toggle button " value="" disabled>서술형</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
-                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
-                  </div>
-              {%endif%}
-            </div>
-          </div>
-
-
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-          <br><br>
-
-          <div class="ui grid">
-
-            <div class="left floated right aligned four wide column" style="color:purple; margin-left:-40px; margin-right: 20px;"><h4><b>추천</b></h4></div>
-            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{CourseBoard.Total_Recommend}}</b></h4>
-
-            <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
-           <div class="center left aligned two wide column"><span id="starpoint" class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
-          
       
-        </div>
-
-      </div>
 
       <div id="h_sectiondivider" class="ui section divider"></div>
-      <div id="CoursePage">
+      <div id="CoursePage" name="CoursePage">
       <div class="ui column">
+
       {% if MyCourseBoard.0 != None %}
       <h3><b>나의 평가 : </b></h3>
           {%endif%}
@@ -334,6 +221,7 @@
 	  {%endfor%} 
 
     {% if OtherCourseBoard.0 != None %}
+        <br>
         <h3><b>개인 평가 : </b></h3>
       {%endif%}
     
@@ -466,20 +354,136 @@
         {%endfor%}      
         
       </div>
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <br><br>
+       
+      <div class="ui column">
+
+        <h3><b>전체 평균 : </b></h3>
+
+        <div id="recommending" class="ui column">
+
+          <div id="blankspace" class="ui column"></div>
+
+          <div class="ui grid">
+            <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
+            <div class="left floated right aligned three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="secondcolumn" class="left floated center aligned four wide column">과제량</div>
+            <div class="left floated right aligned three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
+            <div class="left floated right aligned three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <div class="ui grid">
+            <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+            <div class="right floated center aligned twelve wide column">
+           
+              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Unknown_Answer%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Long_Answer%}
+               <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button " value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
+              {%endif%}
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <br><br>
+
+          <div class="ui grid">
+
+            <div class="left floated right aligned four wide column" style="color:purple; margin-left:-40px; margin-right: 20px;"><h4><b>추천</b></h4></div>
+            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{CourseBoard.Total_Recommend}}</b></h4>
+
+            <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+           <div class="center left aligned two wide column"><span id="starpoint" class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
+          
+      
+        </div>
+
+      </div>
       {% if OtherCount.0 != None%}
 		<div class="ui section divider"></div>
       <center><div id = "CoursePagenation" class="ui borderless pagination menu">
-              <a id ="CoursePagePrevious" name = "{{PageInformation.0}}" class="item" >
+              <a id ="CoursePagePrevious" name = "{{PageInformation.0}}" class="item"  herf="#CoursePage">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
               {%for i in OtherCount%}
-              <a id = "CoursePageNumber" name ="{{i}}" class="item" >{{i}}</a>
+              <a id = "CoursePageNumber" name ="{{i}}" class="item" herf="#CoursePage">{{i}}</a>
               {%endfor%}
-              <a id = "CoursePageNext" name ="{{PageInformation.2}}" class="item">
+              <a id = "CoursePageNext" name ="{{PageInformation.2}}" class="item"  herf="#CoursePage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>   
         {%endif%}
+
         </div>
         </div>
          

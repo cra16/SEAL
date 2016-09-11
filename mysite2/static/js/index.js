@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function()
+{
 
     $('.message .glyphicon').css('cursor','pointer');
     
@@ -23,29 +24,42 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation();
         $(this).unbind("click");
         var CurrentPage = null
-        $(".selection").each(function()
-        {   
-            temp = $(this).attr("class");
-            splitdata=temp.split(" ");
-            for(var i=0; i<splitdata.length; i++)
-            {
-                if(splitdata[i] =="active")
-                {
-                    CurrentPage =$(this).attr("id");
+        if($(".course_data").length != 0)
+        {
+          $(".course_data").each(function()
+          {   
+              temp = $(this).attr("class");
+              splitdata=temp.split(" ");
+              for(var i=0; i<splitdata.length; i++)
+              {
+                  if(splitdata[i] =="active")
+                  {
+                      CurrentPage =$(this).attr("id");
 
-                    break;
-                }
-            }
-            
+                      break;
+                  }
+              }
               
+                
 
-        });
+          });
+        }
+        else
+        {
 
+          if($(this).parent().parent().parent().parent().parent().parent().attr('id') =="SubjectSearch")
+          {
+            CurrentPage ="SubjectSearch"; 
+          }
        
+
+        }
+        
         if(CurrentPage==null)
         {
           CurrentPage="Search_Page";
         }
+       
         var Parent=$(this).parent().parent().parent();
         var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
@@ -66,7 +80,7 @@ $("div").on('click',"#cname",function(event){
               async : false,
               type : "POST",
               success:function(resp){  
-
+                  alert(CurrentPage);
                   if(CurrentPage=="FirstPage")
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")
@@ -77,7 +91,9 @@ $("div").on('click',"#cname",function(event){
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
                   else if(CurrentPage=="SugangPage")
-                    $('#SugangPage').html(resp);     
+                    $('#SugangPage').html(resp);  
+                  else if(CurrentPage=='SubjectSearch')
+                    $('#SubjectSearch').html(resp);   
                
                 },
                 error: function(xhr, option, error){
@@ -429,12 +445,10 @@ $("div").on('click',"#cname",function(event){
 
     });
 
+ 
 
 
-    $(document).keydown(function(e){
-
-     
-    });
+  
 
   $('.ui.sticky').sticky({
       context: '#sticky',

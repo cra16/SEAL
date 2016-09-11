@@ -1,0 +1,127 @@
+{% load staticfiles %}
+{% load app_filter %}
+    <div id ="SubjectSearch"> 
+  {% if CourseName == None %}
+ 
+  
+        {% for SBoard in SubjectList.0%}
+             {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
+          {% endif %}
+          <div class="column">
+             <div class="ui raised segment">
+              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <center><img src="{% static "css/seal.png" %} " height="45px" width="45px"></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd|lookup:forloop.counter0}}</span> SEALS</center>
+              </div>
+              
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
+                 <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
+                
+                <input type = "hidden" id="period" value = "{{SBoard.Course.Period}}">
+                <input type = "hidden" id="semester" value = "{{SBoard.Course.Semester}}">
+                <input type = "hidden" id="professor" value = "{{SBoard.Course.Professor}}">
+                </div>
+            </div>
+           {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+        <div class="ui divider"></div>
+        {% endif %}
+          
+              {%endfor%}
+                     
+             <center><div id = "SubjectSearchPageNation" class="ui borderless pagination menu">
+              <a id="SubjectSearchPrevious" name ="{{PageInformation.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+
+              {% for i in TotalCount%}
+                 {%if i == PageInformation.1 %}
+                   <a id ="SubjectSearchPage" name ="{{i}}" class="active item" >{{i}}</a>
+                  
+                  {%else%}
+                   <a id ="SubjectSearchPage" name ="{{i}}" class="item" >{{i}}</a>
+                  {%endif%}        
+              {%endfor%}
+        
+              <a id="SubjectSearchNext" class="item" name="{{PageInformation.2}}">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+    {% elif ProSelect == 1 %}
+
+    {% for SBoard in PageBoard.0%}
+    {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
+
+          {% endif %}
+          <div  class="column">
+             <div class="ui raised segment">
+                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <center><button id="likebutton" name = "{{SBoard.Course.id}}" ><img src="{% static "css/write.png" %} " height="45px" width="45px">
+                  <div style="margin-top:16px; color:teal"><b><u>WRITE</u></b></div></button></center>
+              </div>
+
+               <div class="sixteen wide column">
+
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{SBoard.Course.Code}}</span>]
+                 <p><a style="cursor:pointer" href ="/CourseProfessor/{{SBoard.Course.id}}"><span id="cname" class="cname" name="cname" value = "">{{SBoard.Course.CourseName}}</span></a></p>
+                  <p id="title_s"><span id="cprof1" name = "cprof">{{SBoard.Course.Professor}} 교수님</span></p>
+               </div>
+
+            <div class="left floated center aligned sixteen wide column">                
+                <button type="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
+                 <div class="right floated right aligned sixteen wide column" style="margin-left:30px; margin-bottom:-15px;"><span class="starvalue">{{SBoard.Total_StarPoint}}</span></div>  
+              </div>
+
+              <br><br>
+              <div class="ui section divider" style="border: none;"></div>
+              
+                <div class="center aligned sixteen wide column" style="margin-top:-10px;">
+                  <center><b>진도</b></center>
+                 <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
+                  <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Speedy}}" data-slider-id="sl{{forloop.counter}}1C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a><br />
+                  <center><b>과제</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Homework}}" data-slider-id="sl{{forloop.counter}}2C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴">많음</a><br />
+                  <center><b>난이도</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{SBoard.Total_Level_Difficulty}}" data-slider-id="sl{{forloop.counter}}3C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+               </div>              
+            </div>
+          </div>
+            {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+          </div>
+          <div class="ui divider"></div>
+            {% endif %}          
+              {%endfor%}
+                     
+             <center><div id = "SearchPageNation" class="ui borderless pagination menu">
+              <a id="ProPrevious" name ="{{PageInformation.0.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+            
+              {% for i in SearchTotal %}
+            
+              {% if Pageinformation.0.1 == i %}
+                 <a id ="ProPage" name = "{{i}}" class="active item" >{{i}}</a>
+              {%else%}
+                 <a id ="ProPage" name = "{{i}}" class="item" >{{i}}</a>
+              {%endif%} 
+
+              {%endfor%}
+        
+              <a id="ProNext" class="item" name="{{PageInformation.0.2}}">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+              <input type ="hidden" id = "CourseHidden" value ="{{PageBoard.0.0.Course.CourseName}}">
+            
+            </div></center>
+            
+            {%endif%}
+            </div>
+<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+ <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>

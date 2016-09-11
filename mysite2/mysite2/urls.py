@@ -39,6 +39,7 @@ urlpatterns += patterns('login.views',
 	url(r'^RegisterInfo/$','RegisterInfo'),
 	url(r'^$', 'loginCheck'),
 	url(r'^Logout/$', 'logout_page'),
+	url(r'^static','static_forbidden')
 	)#login view
 
 urlpatterns += patterns('index.views',
@@ -55,7 +56,11 @@ urlpatterns += patterns('index.views',
 	url(r'^SecondPage/$','Page'),
 	url(r'^ThirdPage/$','Page'),
 	url(r'^Select_Course/$','Page'),
-	url(r'^Select_Professor/$','Page')
+	url(r'^Select_Professor/$','Page'),
+	url(r'^Category_Change/','category_system'),
+	url(r'^Category_Subject_Change/','select_subject_list'),
+	url(r'^Category_Search/','search_subject_list'),
+	url(r'^SubjectSearchPage/','search_subject_page')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

@@ -309,5 +309,202 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 	else:
 			return render_to_response('m_skins/m_html/SearchPage.html',dic )
 
+@csrf_exempt
+def category_system(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	category_number = request.GET['category_number']
 
+	if category_number == '1':
+		category_name="학부"
+		category_list =['국제어문','언론정보','법학부','상담사회','생명과학','전산전자','콘텐츠융합디자인','기계제어','공간환경','ICT창업','창의융합교육원(인문)','창의융합교육원(이공)']
+		subject_list = Lecture.objects.filter(Major__icontains='국제어문').values("Code","CourseName").distinct()
+	elif category_number =='2':
+		category_name="일반기초교양"
+		category_list = ['신앙1','인성1','세계관1','세계관2','신앙3','예술','전공기초','사회과학','자연과학','리더십및문제해결','스포츠','기독교신앙기초1','기독교신앙기초2','영어1','영어2']
+		subject_list = Lecture.objects.filter(CategoryDetail__icontains='신앙1').values("Code","CourseName").distinct()
+	elif category_number =='3':
+		category_name="글로벌"
+		category_list = ['제2외국어','한국어','소통','융복합','프로그래밍기초','소프트웨어활용','ICT입문','특론및개별연구']
+		subject_list=Lecture.objects.filter(CategoryDetail__icontains='제2외국어').values("Code","CourseName").distinct()
+	else:
+		pass
+	dic = {
+		'category_list':category_list,
+		'category_name':category_name,
+		'subject_list':subject_list
+	}
+	if request.flavour =='full':
+			return render_to_response('html/category_list.html',dic)
+	else:
+			return render_to_response('m_skins/m_html/category_list.html',dic )
+def select_subject_list(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+
+	category_number = request.GET['category_number']
+	category_select_name = request.GET['category_name']
+
+	if category_number == '1':
+		category_name="학부"
+		category_list =['국제어문','언론정보','법학부','상담사회','생명과학','전산전자','콘텐츠융합디자인','기계제어','공간환경','ICT창업','창의융합교육원(인문)','창의융합교육원(이공)']
+		subject_list = Lecture.objects.filter(Major__icontains=category_select_name).values("Code","CourseName").distinct()
+	elif category_number =='2':
+		category_name="일반기초교양"
+		category_list = ['신앙1','인성1','세계관1','세계관2','신앙3','예술','전공기초','사회과학','자연과학','리더십및문제해결','스포츠','기독교신앙기초1','기독교신앙기초2','영어1','영어2']
+		subject_list = Lecture.objects.filter(CategoryDetail__icontains=category_select_name).values("Code","CourseName").distinct()
+	elif category_number =='3':
+		category_name="글로벌"
+		category_list = ['제2외국어','한국어','소통','융복합','프로그래밍기초','소프트웨어활용','ICT입문','특론및개별연구']
+		subject_list=Lecture.objects.filter(CategoryDetail__icontains=category_select_name).values("Code","CourseName").distinct()
+	else:
+		pass
+	dic = {
+		'category_list':category_list,
+		'category_name':category_name,
+		'subject_list':subject_list
+	}
+	if request.flavour =='full':
+			return render_to_response('html/category_list.html',dic)
+	else:
+			return render_to_response('m_skins/m_html/category_list.html',dic )
 # Create your views here
+def search_subject_list(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	Mobile = request.flavour
+	subject_code = request.GET['subject_category']
+	subject = subject_code.split('-')
+	TotalAdd=[]
+
+	"""
+	밑의 알고리즘은 현재 DB에 등록 되어있는 강의 이름을 토대로 group by로 묶어서 중복되는 강의이름을 하나로 묶어 버린후에
+	그 강의이름 정보를 토대로 다시 DB에서 호출하는데 그 강의중 중복되는 정보만 추출하면 되는 거라 하나씩 불러서 그 부른 강의들을
+	list화 시킴. 그리고 나서 그 list화 시킨 강의 정보를 다시 전체 평가 한 강의 부분 DB에서 다시 호출해 강의마다 평가된 
+	평가 갯수를 다 더해서 함
+	ps)물론 DB하나 더 만들면 더 간단한 알고리즘이 되겠지만 어차피 DB에서 한번더 불러야 하는건 마찬가지라 속도가 비슷할 거같아서
+	안만듬
+	"""
+			
+			
+	LectureData=[[]]
+	SearchResult = Lecture.objects.filter(Code=subject[0], CourseName=subject[1]).values("Code").distinct()[0:10]
+	for lec in SearchResult:
+						A=Lecture.objects.filter(Code=lec['Code'])
+						LectureData[0].append(A[0])
+						
+						total=0	
+						
+						try:
+								Eval=Total_Evaluation.objects.filter(Course__Code=lec['Code'])
+								for Ev in Eval:
+									total += Ev.Total_Count  
+						except:
+							continue
+						TotalAdd.append(total)
+	if Mobile == "full":
+		DBCount = Lecture.objects.filter(Q(Code=subject[0]) | Q(CourseName=subject[1])).values("Code").distinct().count()
+		SearchCount=DataCount(10,DBCount)
+	else:
+		DBCount = Lecture.objects.filter(Q(Code=subject[0]) | Q(CourseName=subject[1])).values("Code").distinct().count()
+		SearchCount=DataCount(5,DBCount)
+	
+	if DBCount != 0 : 
+		L_Data=PageView(LectureData)
+	else:
+		L_Data=[[]]
+		L_Data[0]=None
+	PageInformation =[1,1,1]
+
+	if Mobile =="full":
+		PageInformation=FirstPageView(SearchCount)
+		T_Count = PageTotalCount(SearchCount,PageInformation)
+	else:
+		PageInformation=MobileFirstPageView(SearchCount)
+		T_Count = MobilePageTotalCount(SearchCount,PageInformation,3)
+
+	request.session['SearchPageInformation'] = PageInformation
+
+	dic = {
+
+				'PageInformation' : PageInformation,
+				'user':request.user,
+				'SubjectList':L_Data,
+				'TotalAdd':TotalAdd,
+				'TotalCount':T_Count
+			}
+	if request.flavour =='full':
+		return render_to_response('html/Search_Category_Page.html',dic)
+	else:
+		return render_to_response('m_skins/m_html/earch_Category_Page.html',dic)
+def search_subject_page(request):
+	if CheckingLogin(request.user.username):
+		return HttpResponseRedirect("/")
+	Mobile = request.flavour
+	if request.GET['Page'] !="0":
+		cur_page = int(request.GET['Page'])
+	else:
+		cur_page = 1
+		Current = request.GET['Current']
+
+	Course = request.GET['Course']
+	
+	PageInformation = request.session['SearchPageInformation']
+
+	if Mobile == 'full':
+		DBCount = Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct().distinct().count()
+		SearchCount = DataCount(10,DBCount)
+	else :
+		DBCount = Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct().count()
+		SearchCount = DataCount(5,DBCount)
+	
+	if Mobile == 'full':
+		PageInformation = CurrentPageView(SearchCount,cur_page)
+		PageInformation[1]=cur_page
+	else:
+		PageInformation = MobileCurrentPageView(SearchCount,cur_page)
+		PageInformation[1]=cur_page
+	
+	LectureData = [[]]
+	TotalAdd=[]
+	if Mobile == 'full':
+		temp=Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct()[(PageInformation[1]-1)*10:(PageInformation[1]-1)*10+10]
+	else:
+		temp=Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct()[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+	LecList=[]
+	for lec in temp:
+				A=Lecture.objects.filter(Code=lec['Code'])
+				LectureData[0].append(A[0])
+				
+				total=0	
+				
+				try:
+						Eval=Total_Evaluation.objects.filter(Course__Code=lec['Code'])
+						for Ev in Eval:
+							total += Ev.Total_Count  
+				except:
+					continue
+				TotalAdd.append(total)
+
+	L_Data=PageView(LectureData)
+	
+	if Mobile == 'full':
+		T_Count=PageTotalCount(SearchCount,PageInformation)
+	else:
+		T_Count=MobilePageTotalCount(SearchCount,PageInformation,3)
+
+	request.session['SearchPageInformation'] = PageInformation
+	
+	dic = {
+				'user':request.user,
+				'BestBoard':BestBoardView(),
+				'Search' : L_Data,
+				'PageInformation' : PageInformation,
+				'TotalCount' : T_Count,
+				'TotalAdd':TotalAdd,
+				'temp':Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct()[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+			}
+	if request.flavour =='full':
+			return render_to_response('html/SearchPage.html',dic)
+	else:
+			return render_to_response('m_skins/m_html/SearchPage.html',dic )

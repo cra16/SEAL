@@ -33,6 +33,30 @@
         <i class="glyphicon glyphicon-book"></i> Courses
       </h2>
               
+      <form id = "category_subject_search">
+    {%csrf_token%}
+      <div class="ui small form">
+        <div class="four fields">
+          <div class="field">
+            <label>학부 선택</label>
+            <div class="ui selection dropdown all_course">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input id="category"  name="category" type="hidden" value ="0">
+              <div class="menu">
+                <div class="item category_item" data-value="1">전공학부</div>
+                <div class="item category_item" data-value="2">일반기초교양</div>
+                <div class="item category_item" data-value="3">글로벌융합교양</div>
+                <div class="item category_item" data-value="4">타대학</div>
+              </div>
+            </div> 
+          </div>
+          
+        </div>
+      </div>
+
+      </form>
+     
       {%if Search == None%}
       <div class="ui small tabular filter menu">
         <a id="All" class="active item" data-tab="all">최신순</a>
@@ -47,7 +71,7 @@
         <div class="column" >
 
     {%if Search == None%}
-    <div id ="FirstPage" class="ui divided very relaxed inbox selection list tab"  data-tab="unread">     
+    <div id ="FirstPage" name="FirstPage" class="course_data ui divided very relaxed inbox selection list tab"  data-tab="unread">     
         
 
      {% for PBoard1 in PageBoard.0%}
@@ -77,27 +101,27 @@
           {% endif %}
       {%endfor%}
                         
-      <center><div id ="FirstPageNation" class="ui borderless pagination menu">
-              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" >
+      <center><div id ="FirstPageNation" class="course_data ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.0.0}}" class="item" herf="#FirstPage" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
         {% for i in TotalCount.0%}
 {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
         {%endif%}        
         {%endfor%}
-              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" >
+              <a id ="Next" name = "{{PageInformation.0.2}}" class="item" herf="#FirstPage" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
       </div></center>
     </div>
                
                				
-      <div id="SecondPage" class="ui divided very relaxed inbox selection list tab" style="margin: 0em 0em;" data-tab="saved">
+      <div id="SecondPage" name="SecondPage" class="course_data ui divided very relaxed inbox selection list tab" style="margin: 0em 0em;" data-tab="saved">
       {% for PBoard2 in PageBoard.1%}      
           {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -130,19 +154,19 @@
       
         {% for i in TotalCount.1%}
       {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#SecondPage">{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#SecondPage">{{i}}</a>
         {%endif%}        
   {%endfor%}
-              <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
+              <a id = "Next" name = "{{PageInformation.1.2}}" class="item " herf="#SecondPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
           </div>
          
-	<div id ="ThirdPage" class="ui divided very relaxed selection inbox list active tab" style="margin: 0em 0em;" data-tab="all">
+	<div id ="ThirdPage" name="ThirdPage" class="ui divided very relaxed selection inbox list active tab" style="margin: 0em 0em;" data-tab="all">
     {% for PBoard3 in PageBoard.2%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -195,19 +219,19 @@
       
         {% for i in TotalCount.2%}
        {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#ThirdPage">{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#ThirdPage">{{i}} </a>
         {%endif%}        
  {%endfor%}
-              <a id = "Next" name = "{{PageInformation.2.2}}" class="item">
+              <a id = "Next" name = "{{PageInformation.2.2}}" class="item" herf="#ThirdPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
              
       </div>
-            <div id ="SugangPage" class="ui divided very relaxed selection inbox list tab" style="margin: 0em 0em;" data-tab="sugang">
+            <div id ="SugangPage" name="SugangPage" class="ui divided very relaxed selection inbox list tab" style="margin: 0em 0em;" data-tab="sugang">
     {% for SuBoard in SugangList%}
         {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -253,13 +277,13 @@
       
         {% for i in TotalCount.3%}
        {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="active item" herf="#SugangPage" >{{i}}</a>
         
         {%else%}
-         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+         <a id ="Page" name ="{{i}}" class="item" herf="#SugangPage" >{{i}}</a>
         {%endif%}        
  {%endfor%}
-              <a id = "Next" name = "{{PageInformation.2.2}}" class="item">
+              <a id = "Next" name = "{{PageInformation.2.2}}" class="item" herf="#SugangPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>
@@ -268,7 +292,7 @@
 
       {%endif%}
 
-          <div id = "Search_Page">
+          <div id = "Search_Page" name="Search_Page">
           {% if not Search == None  %}
     
             {% if Search.0 != None%}
@@ -301,20 +325,20 @@
               {%endfor%}
          
              <center><div id = "SearchPageNation" class="ui borderless pagination menu">
-              <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item" >
+              <a id="SearchPrevious" name ="{{PageInformation.0}}" class="item"  herf="#Search_Page">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
 
               {% for i in TotalCount %}
                 {%if i == PageInformation.1 %}
-                   <a id ="SearchPage" name ="{{i}}" class="active item" >{{i}}</a>
+                   <a id ="SearchPage" name ="{{i}}" class="active item" herf="#Search_Page">{{i}}</a>
                   
                   {%else%}
-                   <a id ="SearchPage" name ="{{i}}" class="item" >{{i}}</a>
+                   <a id ="SearchPage" name ="{{i}}" class="item" herf="#Search_Page" >{{i}}</a>
                   {%endif%}        
               {%endfor%}
         
-              <a id="SearchNext" class="item" name="{{PageInformation.2}}">
+              <a id="SearchNext" class="item" name="{{PageInformation.2}}" herf="#Search_Page">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
             </div></center>

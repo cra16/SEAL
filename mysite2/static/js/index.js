@@ -80,7 +80,7 @@ $("div").on('click',"#cname",function(event){
               async : false,
               type : "POST",
               success:function(resp){  
-                  alert(CurrentPage);
+                  
                   if(CurrentPage=="FirstPage")
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")

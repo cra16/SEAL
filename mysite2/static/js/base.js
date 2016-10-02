@@ -48,6 +48,7 @@ $(document).ready(function()
                      $('.all_course').dropdown();
                
                      $('#category').val(data_value);
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -80,6 +81,7 @@ $(document).ready(function()
                     $('.field:first').after(resp);
                     $('.all_course').dropdown();
                     $('#major_category').val(category_name);
+                    $('#major_category').prev().prev().text(category_name);
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

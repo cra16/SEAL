@@ -317,7 +317,7 @@ def category_system(request):
 
 	if category_number == '1':
 		category_name="학부"
-		category_list =['국제어문','언론정보','법학부','상담사회','생명과학','전산전자','콘텐츠융합디자인','기계제어','공간환경','ICT창업','창의융합교육원(인문)','창의융합교육원(이공)']
+		category_list =['국제어문','언론정보','법학부','상담심리','생명과학','전산전자','콘텐츠융합디자인','기계제어','공간환경','ICT창업','창의융합교육원(인문사회)','창의융합교육원(이공)']
 		subject_list = Lecture.objects.filter(Major__icontains='국제어문').values("Code","CourseName").distinct()
 	elif category_number =='2':
 		category_name="일반기초교양"

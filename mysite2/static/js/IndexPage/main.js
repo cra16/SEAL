@@ -50,6 +50,8 @@
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage =="SugangPageNation")
                         $('#SugangPage').html(resp);
+                  else if(CurrentPage=="LikeSugangPageNation")
+                        $("#LikeSugangPage").html(resp);
                   else
                       $('#Search_Page').html(resp);
                 },
@@ -356,7 +358,39 @@
 
 
 
+
     });
+
+     $('div').on('click','#LikeMajor',function(){
+       event.stopPropagation();
+        
+        $.ajax(
+            { url : "/Page/",
+              data : {'Page': "0",
+                      'Current':"LikeSugangPage",
+
+                    },
+              
+              datatype:"json",
+              type : "POST",
+              async:false,
+              success:function(resp){     
+                        $('#LikeSugangPage').html(resp);
+                   },
+                error: function(xhr, option, error){
+                  alert(xhr.status); //오류코드
+                  alert(error); //오류내용
+
+                  } 
+            
+          });
+      
+
+
+
+    });
+
+    
      $('div').on('click',"#Close",function(event){
          event.stopPropagation();
           $(this).unbind("click");

@@ -1,7 +1,7 @@
 from django.db import models
 from login.models import Profile
 from lecture.models import Lecture
-
+import datetime
 	
 class Description_Answer(models.Model):
     CreatedID = models.ForeignKey(Profile)
@@ -22,7 +22,10 @@ class Course_Evaluation(models.Model):
 	What_Answer = models.IntegerField(default=0)
 	Exam_Answer = models.ManyToManyField(Description_Answer)
 	Who_Answer = models.TextField(max_length=200, null=True)
+	Course_Answer = models.IntegerField(default=0)
 	Url_Answer = models.TextField(max_length=200, null=True)
+	create_date = models.DateTimeField(default=datetime.datetime.today())
+	update_date = models.DateTimeField(default=datetime.datetime.today())
 	def __unicode__(self):
 		return self.Course.CourseName
 
@@ -38,6 +41,9 @@ class Total_Evaluation(models.Model):
 	Total_Short_Answer = models.IntegerField(default=0)
 	Total_Long_Answer = models.IntegerField(default=0)
 	Total_Unknown_Answer = models.IntegerField(default=0)
+	Total_Book_Like=models.IntegerField(default=0)
+	Total_Ppt_Like = models.IntegerField(default=0)
+	Total_Practice_Like = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return self.Course.Code

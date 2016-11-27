@@ -35,7 +35,6 @@ $("div").on('click',"#cname",function(event){
                   if(splitdata[i] =="active")
                   {
                       CurrentPage =$(this).attr("id");
-
                       break;
                   }
               }
@@ -94,6 +93,8 @@ $("div").on('click',"#cname",function(event){
                     $('#SugangPage').html(resp);  
                   else if(CurrentPage=='SubjectSearch')
                     $('#SubjectSearch').html(resp);   
+                  else if(CurrentPage=="LikeSugangPage")
+                    $("#LikeSugangPage").html(resp);
                
                 },
                 error: function(xhr, option, error){

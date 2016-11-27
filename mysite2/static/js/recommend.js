@@ -177,6 +177,10 @@ $(document).ready(function(){
   {
     $(".paper_value").val($(this).val());
   });
+   $('div').on("click",".course_button",function()
+  {
+    $(".course_value").val($(this).val());
+  });
 });
 
 $(document).ready(function(){

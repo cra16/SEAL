@@ -6,22 +6,12 @@
 		<div id="recommending" class="ui column">
    
           
-          <h4><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
+          <h4 style="display:inline;"><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
+          <G style="float:right;">{{MyCourseBoard.create_date|date:"Y-m-d"}}</G>
           <div id="recommending" class="ui column">            
             <div id="blankspace" class="ui column"></div>
 
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips"  data-toggle="tooltip" title="강의 속도가 느림">느림</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
-              </div>
-            </div>
+        
 
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -96,6 +86,39 @@
               </div>
             </div>
 
+         <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+
+                  {% if MyCourseBoard.Course_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+            
+                    </div>
+                  {% elif MyCourseBoard.Course_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button " value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                    </div>
+                  {% elif MyCourseBoard.Course_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                    </div>
+                  {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+ 
+                  </div>
+                {%endif%}
+              </div>
+          </div>
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
             <div class="ui piled segment">
@@ -134,22 +157,12 @@
 
 		{%for OtherBoard in OtherCourseBoard%}
           <div id="h_outersectiondivider" class="ui section divider"></div>
-          <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>          
+          <h4 style="display:inline;"><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>
+          <G style="float:right;">{{OtherBoard.create_date|date:"Y-m-d"}}</G>      
           <div id="recommending" class="ui column">
             <div id="blankspace" class="ui column"></div>
 
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned four wide column">진도 속도</div>
-              <div class="left floated right aligned three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
-              </div>
-              <div class="left floated center aligned six wide column">
-                <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}1C"/>
-              </div>
-              <div class="three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
-              </div>
-            </div>
+            
 
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -223,6 +236,40 @@
               {%endif%}
                       </div>
             </div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+
+                  {% if OtherBoard.Course_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+            
+                    </div>
+                  {% elif OtherBoard.Course_Answer == 2%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button " value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                    </div>
+                  {% elif OtherBoard.Course_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                    </div>
+                  {% else %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+ 
+                  </div>
+                {%endif%}
+              </div>
+          </div>
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 

@@ -47,10 +47,10 @@ def AutoFastLecUpdate(request):
 		hisnet_id = request.POST['HisnetID']
 		hisnet_pw = request.POST['HisnetPassword']
 		
-		hak_lst = ['2016-3', '2016-2']
+		hak_lst = ['2010-2','2010-3','2010-4']
 		# cur_semester_lst = ['15-1', '15-3', '15-2', '15-4', '16-1', '16-3', '16-2']
 		hakbu_lst = [
-			'0001', '0009', '0010', '0011',
+			'0001', '0007','0008','0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',
 			'0033', '0071', '0074', '0077',
 			'0078', '0079', '0090',
@@ -58,6 +58,7 @@ def AutoFastLecUpdate(request):
 		]	# 학부 코드 list
 		hakbu_dict = {
 		'0001':'글로벌리더십학부',
+		'0007':'창의융합교육원(자연과학계열)',
 		'0008':'창의융합교육원(인문사회)',
 		'0009':'창의융합교육원(이공)',
 		'0010':'Global EDISON',
@@ -189,9 +190,9 @@ def auto_lec_update(request):
 		hisnet_id = request.POST['HisnetID']
 		hisnet_pw = request.POST['HisnetPassword']
 		hisnet_url = "http://hisnet.handong.edu/login/login.php"
-		hak_year = "2016"
+		hak_year = "2010"
 		hak_term = "1"
-		cur_semester = "16-1"
+		cur_semester = "10-1"
 		hakbu_lst = [
 			'0001', '0009', '0010', '0011',
 			'0012', '0021', '0022', '0024',

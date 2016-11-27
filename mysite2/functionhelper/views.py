@@ -132,7 +132,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=2
 
@@ -140,7 +140,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	CourseCode = MajorSelect(User)
 	
 	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
-	T_Count=[[] ,[] ,[],[]]
+	T_Count=[[] ,[] ,[],[],[]]
 	if CourseCode[0] !="ENG":
 		DBCount1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).values("CourseName").distinct().count()
 		DBCount2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).values("CourseName").distinct().count()
@@ -168,11 +168,16 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	ProfileData=Profile.objects.get(User=User)
 	SugangDataList=ProfileData.LectureRecord.split("$$")
 	DBCount4=len(SugangDataList)
+	DBCount5=Total_Evaluation.objects.count()
 	if Mobile=="full":
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
 		T_Count[3] = DataCount(5,DBCount4)
-	
+	if Mobile=="full":
+		T_Count[4] = DataCount(10,DBCount5)
+	else:
+		T_Count[4] = DataCount(5,DBCount5)
+
 	
 		#현재 페이지 위치정보
 	if Mobile == 'full':
@@ -261,7 +266,12 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	if Mobile == "full":
 			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]	
 	else:
-			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]	
+			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]
+
+	if Mobile == "full":
+			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
+	else:
+			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5] 	
 
 	for SugangData in SugangDataList:
 			if SugangData =="":
@@ -295,6 +305,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'MajorNumber':MajorNumber,
 		   'TotalAdd':TotalAdd,
 		   'SugangList':Sugang,
+		   'LikeList':LikeDataList,
 		   'CourseName':None,
 		   'ProSelect' :PageInformation,
 
@@ -316,6 +327,9 @@ def TargetTemplate(Current):
 	elif Current =="SugangPageNation" or Current=="SugangPage" :
 		target[0] = "SugangPage.html"
 		target[1] = "3"
+	elif Current =="LikeSugangPageNation" or Current=="LikeSugangPage":
+		target[0]="LikeSugangPage.html"
+		target[1]="4"
 	else:
 		target[0] = "SearchPage.html"
 		target[1] = "0"
@@ -492,7 +506,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			PageInformation=pageinformation
 	else:
 		User= user
-		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
+		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=0
 
@@ -502,8 +516,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	
 	temp=[]
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
-	TotalBoard = [[],[],[],[]]
-	goodList= [[],[],[],[]]
+	TotalBoard = [[],[],[],[],[]]
+	goodList= [[],[],[],[],[]]
 	if CourseCode[0] !="ENG":
 		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
 		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
@@ -720,7 +734,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 						TotalBoard[3].append(TempTotal)
 					
 	#2차원 list로 각 전공당 총 페이지 수 저장
-	T_Count=[[] ,[] ,[],[]]
+	T_Count=[[] ,[] ,[],[],[]]
 	if CourseCode[0] !="ENG":
 		DBCount1=len(TotalBoard[0])
 		DBCount2=len(TotalBoard[1])
@@ -747,11 +761,15 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	else:
 		T_Count[2] = DataCount(5,DBCount3)
 	DBCount4=len(TotalBoard[3])
+	DBCount5=Total_Evaluation.objects.count()
 	if Mobile == 'full':
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
 		T_Count[3] = DataCount(5,DBCount4)
-
+	if Mobile=="full":
+		T_Count[4] = DataCount(10,DBCount5)
+	else:
+		T_Count[4] = DataCount(5,DBCount5)
 	#현재 페이지 위치정보
 	if Mobile == 'full':
 		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)

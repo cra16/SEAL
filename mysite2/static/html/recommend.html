@@ -90,24 +90,7 @@
           <input id="HCourseProfessor"  name="HCourseProfessor" type="hidden" value ="{{CourseBoard.Professor}}">
         <br>
 
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-          <div class="ui grid">
-            <div id="firstcolumn" class="left floated center aligned three wide column"><b>진도 속도</b></div>
-            <div class="left floated center aligned two wide column">
-               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
-            </div>
-            <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="5" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false"/>	
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
-            </div>
-          </div>
+        
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -162,6 +145,21 @@
                 <button type ="button" class="ui button toggle paper_button" value="3">혼합형</button>
                 <button type ="button" class="ui button toggle paper_button" value="4">해당없음</button>
                 <input type="hidden" id="paper_value" name = "paper_value" class="paper_value" value ="0">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="ui grid">
+            <div id="fourthcolumn" class="left floated center aligned three wide column"><b>수업 방식</b></div>
+            
+            <div class="right floated center aligned twelve wide column">
+              <div class="ui buttons" style="margin-top:-10px">
+
+                <button type ="button" class="ui button toggle course_button" value="1">교재 중심</button>
+                <button type ="button" class="ui button toggle course_button" value="2">ppt 중심</button>
+                <button type ="button" class="ui button toggle course_button" value="3">실습 중심</button>
+                <input type="hidden" id="course_value" name = "course_value" class="course_value" value ="0">
 
               </div>
             </div>

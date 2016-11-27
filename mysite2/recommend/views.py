@@ -89,7 +89,6 @@ def Recommend_Write(request): #추천 강의 DB입력
 			RecommendData=None
 		
 		
-		new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 		new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 		
 		new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
@@ -102,6 +101,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Who = request.POST['who']
 		new_Url = request.POST['url']
 		new_paper_value= int(request.POST['paper_value'])
+		new_course_value= int(request.POST['course_value'])
 		if new_Url.find("http://")==-1:
 			new_Url="http://"+new_Url
 		'''
@@ -133,9 +133,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				continue
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 			temp.save()
-		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, 
-			Speedy = new_Speedy, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
-			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url)
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
+			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url,Course_Answer=new_course_value)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 		new_Recommend.save()
@@ -150,9 +149,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.save()
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(
-				Course = new_Course,Total_Speedy = new_Speedy,
+				Course = new_Course,
 				Total_Homework = new_Homework, Total_Level_Difficulty = new_Level_Difficulty,  Total_Count = 1,
-				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0
+				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0,Total_Book_Like=0, Total_Ppt_Like=0, Total_Practice_Like=0
 			)
 			if new_paper_value==1:
 				Total_Eval.Total_Long_Answer+=1
@@ -162,10 +161,15 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Eval.Total_Mix+=1
 			elif new_paper_value ==4:
 				Total_Eval.Total_Unknown_Answer+=1
-
+			if new_course_value==1:
+				Total_Eval.Total_Book_Like+=1
+			elif new_course_value==2:
+				Total_Eval.Total_Ppt_Like+=1
+			elif new_course_value==3:
+				Total_Eval.Total_Practice_Like+=1
 			Total_Eval.save()
 		else: #update
-			T_Eval.Total_Speedy += int(new_Speedy)
+	
 			#T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Homework += int(new_Homework)
 			#T_Eval.Total_Exam += int(new_Question)
@@ -181,6 +185,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 				T_Eval.Total_Mix+=1
 			elif new_paper_value ==4:
 				T_Eval.Total_Unknown_Answer+=1			
+			if new_course_value==1:
+				Total_Eval.Total_Book_Like+=1
+			elif new_course_value==2:
+				Total_Eval.Total_Ppt_Like+=1
+			elif new_course_value==3:
+				Total_Eval.Total_Practice_Like+=1
 			T_Eval.save()
 	
 		URL = "/CourseProfessor/"+str(new_Course.id)

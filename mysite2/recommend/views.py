@@ -99,11 +99,11 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Satisfy = float(request.POST['StarValue'])
 		new_Answer_list = request.POST.getlist('mytext[]')
 		new_Who = request.POST['who']
-		new_Url = request.POST['url']
+		#new_Url = request.POST['url']
 		new_paper_value= int(request.POST['paper_value'])
 		new_course_value= int(request.POST['course_value'])
-		if new_Url.find("http://")==-1:
-			new_Url="http://"+new_Url
+		#if new_Url.find("http://")==-1:
+		#	new_Url="http://"+new_Url
 		'''
 		except:
 			new_Speedy=5
@@ -134,7 +134,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 			temp.save()
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
-			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Url_Answer=new_Url,Course_Answer=new_course_value)
+			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Course_Answer=new_course_value)
 		new_Eval.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 		new_Recommend.save()

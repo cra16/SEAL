@@ -98,6 +98,8 @@
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPageNation")
                         $('#SugangPage').html(resp);
+                  else if(CurrentPage=="LikeSugangPageNation")
+                        $("#LikeSugangPage").html(resp);
                   else
                       $('#Search_Page').html(resp);
                 },
@@ -141,7 +143,8 @@
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPageNation")
                         $('#SugangPage').html(resp);
-                  
+                  else if(CurrentPage=="LikeSugangPageNation")
+                        $("#LikeSugangPage").html(resp);
                   else
                         $('#Search_Page').html(resp);
                 },

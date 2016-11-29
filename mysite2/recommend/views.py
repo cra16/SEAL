@@ -197,7 +197,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		except:
 			Group_Total=None
 		if Group_Total is None:
-			Group_Total = Group_Total_Evalution(CourseName = new_Course.CourseName, Code = new_Course.Code, GroupTotalCount=1)	
+			Group_Total = Group_Total_Evaluation(CourseName = new_Course.CourseName, Code = new_Course.Code, GroupTotalCount=1)	
 		else:
 			Group_Total.GroupTotalCount+=1
 			Group_Total.save()	

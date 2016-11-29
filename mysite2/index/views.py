@@ -510,3 +510,22 @@ def search_subject_page(request):
 			return render_to_response('html/SearchPage.html',dic)
 	else:
 			return render_to_response('m_skins/m_html/SearchPage.html',dic )
+
+def GroupTotalCountRenew(request):
+	if not request.user.username=='admin_seal':
+		return HttpResponseRedirect('/')
+
+	Total_Eval_List = Total_Evaluation.objects.all()
+
+	for Total_Eval in Total_Eval_List:
+		try:
+			Group_Total = Group_Total_Evaluation.objects.get(CourseName = Total_Eval.Course.CourseName,Code = Total_Eval.Course.Code)
+		except:
+			Group_Total=None
+		if Group_Total is None:
+			Group_Total = Group_Total_Evaluation(CourseName = Total_Eval.Course.CourseName,
+				Code = Total_Eval.Course.Code,GroupTotalCount=Total_Eval.Total_Count)
+		else:
+			Group_Total.GroupTotalCount +=Total_Eval.Total_Count
+		Group_Total.save()
+	return HttpResponseRedirect("/")

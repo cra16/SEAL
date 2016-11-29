@@ -192,7 +192,16 @@ def Recommend_Write(request): #추천 강의 DB입력
 			elif new_course_value==3:
 				Total_Eval.Total_Practice_Like+=1
 			T_Eval.save()
-	
+		try:
+			Group_Total = Group_Total_Evaluation.objects.get(CourseName=new_Course.Coursename,Code = new_Course.Code)
+		except:
+			Group_Total=None
+		if Group_Total is None:
+			Group_Total = Group_Total_Evalution(CourseName = new_Course.CourseName, Code = new_Course.Code, GroupTotalCount=1)	
+		else:
+			Group_Total.GroupTotalCount+=1
+			Group_Total.save()	
+
 		URL = "/CourseProfessor/"+str(new_Course.id)
 		return HttpResponseRedirect(URL)
 

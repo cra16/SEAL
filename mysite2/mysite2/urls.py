@@ -61,7 +61,8 @@ urlpatterns += patterns('index.views',
 	url(r'^Category_Subject_Change/','select_subject_list'),
 	url(r'^Category_Search/','search_subject_list'),
 	url(r'^SubjectSearchPage/','search_subject_page'),
-	url(r'^LikeSugangPage/','Page')
+	url(r'^LikeSugangPage/','Page'),
+	url(r'^TotalDBCountUpdate/','GroupTotalCountRenew')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

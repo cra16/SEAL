@@ -48,6 +48,12 @@ class Total_Evaluation(models.Model):
 	def __unicode__(self):
 		return self.Course.Code
 
+class Group_Total_Evaluation(models.Model):
+	Code = models.CharField(max_length=20, null=False)
+	CourseName = models.CharField(max_length=80, null=True)
+	GroupTotalCount = models.IntegerField(default=0)
 
+	def __unicode__(self):
+		  return '%s %s %d' % (self.CourseName, self.Code,self.GroupTotalCount)
 
 # Create your models here.

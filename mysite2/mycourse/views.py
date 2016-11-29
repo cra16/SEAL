@@ -175,6 +175,10 @@ def CourseDelete(request):
 			UpdateData.save()
 			Delete_Dis.delete()
 			DeleteData.delete()
+		Group_Total = Group_Total_Evaluation.objects.get(Code=Code,CourseName=CourseName)
+		Group_Total.GroupTotalCount-=1
+		Group_Total.save()
+
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]
 		for Board in Recommend:

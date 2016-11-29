@@ -186,11 +186,11 @@ def Recommend_Write(request): #추천 강의 DB입력
 			elif new_paper_value ==4:
 				T_Eval.Total_Unknown_Answer+=1			
 			if new_course_value==1:
-				Total_Eval.Total_Book_Like+=1
+				T_Eval.Total_Book_Like+=1
 			elif new_course_value==2:
-				Total_Eval.Total_Ppt_Like+=1
+				T_Eval.Total_Ppt_Like+=1
 			elif new_course_value==3:
-				Total_Eval.Total_Practice_Like+=1
+				T_Eval.Total_Practice_Like+=1
 			T_Eval.save()
 		try:
 			Group_Total = Group_Total_Evaluation.objects.get(CourseName=new_Course.Coursename,Code = new_Course.Code)

@@ -152,6 +152,10 @@ def CourseDelete(request):
 		
 		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor)[0]
 		UserData = Profile.objects.get(User = request.user)
+		try:
+		 	Group_Total = Group_Total_Evaluation.objects.get(Code=Code,CourseName=CourseName)
+		except:
+			Group_Total = None
 		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
 		
 		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
@@ -175,9 +179,9 @@ def CourseDelete(request):
 			UpdateData.save()
 			Delete_Dis.delete()
 			DeleteData.delete()
-		Group_Total = Group_Total_Evaluation.objects.get(Code=Code,CourseName=CourseName)
-		Group_Total.GroupTotalCount-=1
-		Group_Total.save()
+		if Group_Total!=None:
+			Group_Total.GroupTotalCount-=1
+			Group_Total.save()
 
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]

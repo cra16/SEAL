@@ -269,9 +269,9 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]
 
 	if Mobile == "full":
-			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
+			LikeDataList = 	Group_Total_Evaluation.objects.all().order_by('-TotalCount')[(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
 	else:
-			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5] 	
+			LikeDataList = 	Group_Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5] 	
 
 	for SugangData in SugangDataList:
 			if SugangData =="":

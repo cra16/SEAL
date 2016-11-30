@@ -190,11 +190,12 @@ def CourseDelete(request):
 			UpdateData.Total_Recommend -=1
 
 		if DeleteData.What_Answer == 1:
-			UpdateData.Total_Mix += 1
+			UpdateData.Total_Long_Answer +=1
+			
 		elif DeleteData.What_Answer ==2:
 			UpdateData.Total_Short_Answer +=1
 		elif DeleteData.What_Answer ==3:
-			UpdateData.Total_Long_Answer +=1
+			UpdateData.Total_Mix += 1
 		elif DeleteData.What_Answer ==4:
 			UpdateData.Total_Unknown_Answer +=1
 		if DeleteData.Course_Answer == 1:
@@ -349,11 +350,12 @@ def CourseUpdate(request):
 		UpdateTotalEval.Total_Level_Difficulty -= UpdateCourseEval.Level_Difficulty
 		UpdateTotalEval.Total_StarPoint -= UpdateCourseEval.StarPoint
 		if UpdateCourseEval.What_Answer == 1:
-			UpdateTotalEval.Total_Mix -= 1
+			UpdateTotalEval.Total_Long_Answer -=1
 		elif UpdateCourseEval.What_Answer ==2:
 			UpdateTotalEval.Total_Short_Answer-=1
 		elif UpdateCourseEval.What_Answer ==3:
-			UpdateTotalEval.Total_Long_Answer -=1
+			UpdateTotalEval.Total_Mix -= 1
+			
 		elif UpdateCourseEval.What_Answer ==4:
 			UpdateTotalEval.Total_Unknown_Answer -=1
 		if UpdateCourseEval.Course_Answer == 1:
@@ -376,11 +378,12 @@ def CourseUpdate(request):
 		UpdateCourseEval.CourseComment = new_CourseComment
 		
 		if UpdateCourseEval.What_Answer == 1:
-			UpdateTotalEval.Total_Mix += 1
+			UpdateTotalEval.Total_Long_Answer +=1
 		elif UpdateCourseEval.What_Answer ==2:
 			UpdateTotalEval.Total_Short_Answer +=1
 		elif UpdateCourseEval.What_Answer ==3:
-			UpdateTotalEval.Total_Long_Answer +=1
+			UpdateTotalEval.Total_Mix += 1
+			
 		elif UpdateCourseEval.What_Answer ==4:
 			UpdateTotalEval.Total_Unknown_Answer +=1
 		if UpdateCourseEval.Course_Answer == 1:

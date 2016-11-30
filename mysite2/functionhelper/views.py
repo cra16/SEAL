@@ -642,14 +642,12 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			TempTotal.Total_Unknown_Answer=0
 			for T in TotalDic:
 				TempTotal.Total_Count += T.Total_Count
-				TempTotal.Total_Speedy +=T.Total_Speedy
+				#TempTotal.Total_Speedy +=T.Total_Speedy
 				TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
 				TempTotal.Total_Homework +=T.Total_Homework
 				TempTotal.Total_StarPoint += T.Total_StarPoint
 				TempTotal.Total_Mix +=T.Total_Mix
-				TempTotal.Total_Short_Answer += T.Total_Short_Answer
-				TempTotal.Total_Long_Answer += T.Total_Long_Answer
-				TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+				
 				
 			try:
 				good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = PostDic['Course'], Course__Professor__contains=lec['Professor'])

@@ -513,11 +513,17 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 '''
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
+	
+
 	LectureInformation=Lecture.objects.get(id = offset)
-	renew_professor_name =LectureInformation.CourseName.split("외")[0] !=None and LectureInformation.CourseName.split("외")[0] or LectureInformation.CourseName
+	
+	renew_professor_name =LectureInformation.Professor.split("외")[0] !=None and LectureInformation.Professor.split("외")[0] or LectureInformation.Professor
+	CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=LectureInformation.CourseName,Professor__contains=renew_professor_name,Code =LectureInformation.Code).order_by('Semester')[0])
+	
+	CourseBoardList=None
+
 	try:
-		CourseBoard = Total_Evaluation.objects.filter(Course__Code =LectureInformation.Code,Course__CourseName=LectureInformation.CourseName, Course__Professor__contains=renew_professor_name)
-		raise Exception
+		CourseBoardList = Total_Evaluation.objects.filter(Course__Code =LectureInformation.Code,Course__CourseName=LectureInformation.CourseName, Course__Professor__contains=renew_professor_name)
 
 	except:
 		CourseBoard = Total_Evaluation(Course =Lecture.objects.get(id=offset))

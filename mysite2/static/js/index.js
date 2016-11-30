@@ -262,7 +262,8 @@ $("div").on('click',"#cname",function(event){
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPage" || CurrentPage =="SugangPageNation")
                     $('#SugangPage').html(resp);     
-
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
                 },
@@ -306,7 +307,8 @@ $("div").on('click',"#cname",function(event){
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
                         $('#SugangPage').html(resp);     
-
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
                 },
@@ -349,6 +351,8 @@ $("div").on('click',"#cname",function(event){
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
                         $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);     
 
                   else
                     $("#Search_Page").html(resp);

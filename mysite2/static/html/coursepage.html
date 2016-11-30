@@ -404,6 +404,39 @@
             </div>
           </div>
 
+          <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+
+              {% if CourseBoard.Total_Book_Like >= CourseBoard.Total_Ppt_Like and                   CourseBoard.Total_Book_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+            
+                    </div>
+              {% elif CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Book_Like and CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button " value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                    </div>
+              {% elif CourseBoard.Total_Practice_Like >= CourseBoard.Total_Ppt_Like and CourseBoard.Total_Practice >= CourseBoard.Total_Book_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                    </div>
+              {%else%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                   </div>
+              {%endif%}
+              </div>
+            </div>
+
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
 

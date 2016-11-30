@@ -255,7 +255,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 			lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Professor
 			TotalBoard[2].append(lec)
 			try:
-				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
+				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor__contains=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
 				for Ev in Eval:
 						total += Ev.Total_Count
 			except:

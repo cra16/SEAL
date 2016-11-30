@@ -212,7 +212,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 								for Ev in Eval:
 									total += Ev.Total_Count  
 						except:
-							continue
+							pass
 						TotalAdd[i].append(total)
 				i+=1	
 	else:
@@ -236,7 +236,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 							for Ev in Eval:
 								total += Ev.Total_Count 
 						except:
-								continue
+								pass
 						TotalAdd[i].append(total)
 
 						
@@ -259,7 +259,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 				for Ev in Eval:
 						total += Ev.Total_Count
 			except:
-					total=0
+				pass
 
 			TotalAdd[2].append(total)
 	TotalBoard[2]= VacationSemesterChange(TotalBoard[2])

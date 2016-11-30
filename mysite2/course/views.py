@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # -*- coding: euc-kr -*-
 
 from django.shortcuts import render
@@ -9,13 +9,18 @@ from lecture.models import *
 from login.models import *
 from django.views.decorators.csrf import csrf_exempt
 import datetime
-from django.db.models import Q
+from django.db.models import Q		
 
 from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 from functionhelper.views import *
 from itertools import chain, islice
+
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding('utf8')
 '''
 def Course(request, offset): #해당 수업에 대한 강의 추천 모두 불러옴
 
@@ -142,6 +147,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 	LectureInformation = Lecture.objects.get(id = offset)
 
 	CourseBoard = TotalCourse(offset)
+	renew_professor_name = LectureInformation.Professor.split("외")[0] != None and LectureInformation.Professor.split("외")[0] or LectureInformation.Professor
 	try:
 			MergeCourse=None
 			count=0
@@ -149,19 +155,19 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			totalcount=0
 			MyCourseBoard = None
 			Description=[]
-			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code))
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code))
 			if count==0:
-				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)
-				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code).order_by('-id')
+				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code = LectureInformation.Code, CreatedID = UserData)
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code = LectureInformation.Code).order_by('-id')
 
 				totalcount += OtherCourse.count()
 				
 			if count>=1:
-				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
+				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code).order_by('-id')
 				totalcount += TempCourse.count()
 				MergeCourse=chain(TempCourse,OtherCourse)
 				OtherCourse = MergeCourse
-				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
+				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code, CreatedID = UserData)
 				MergeCourse = chain(TempCourse,MyCourse)
 				MyCourse = MergeCourse
 			count+=1
@@ -175,7 +181,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 	
 	#이전페이지 다음페이지 기능 구현
 
-	
+	CourseBoard.Course.Professor=renew_professor_name
 	
 	
 
@@ -253,8 +259,8 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			raise Http404()
 		#보려는 강의 정보 
 		LectureInformation=Lecture.objects.get(id=offset)
-
-		CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,LectureInformation.Professor,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
+		renew_professor_name = LectureInformation.Professor.split("외")[0] != None and LectureInformation.Professor.split("외")[0]  or LectureInformation.Professor
+		CourseBoard=TotalCourseProfessor(LectureInformation.CourseName,renew_professor_name,LectureInformation.Code)#해당 강의 전체 추천한 Data DB 불러오기
 		
 		
 		#자신이 햇을 경우 자신이 평가한 정보를 보여주는 기능
@@ -273,20 +279,20 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			totalcount=0
 			MyCourseBoard = None
 	
-			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code))
+			Description.append(Description_Answer.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code))
 			
 			if count==0:
-				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code, CreatedID = UserData)
-				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code = LectureInformation.Code).order_by('-id')
+				MyCourse =  Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code = LectureInformation.Code, CreatedID = UserData)
+				OtherCourse=Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code = LectureInformation.Code).order_by('-id')
 
 				totalcount += OtherCourse.count()
 				
 			if count>=1:
-				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code).order_by('-id')
+				TempCourse= Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code).order_by('-id')
 				totalcount += TempCourse.count()
 				MergeCourse=chain(TempCourse,OtherCourse)
 				OtherCourse = MergeCourse
-				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor=LectureInformation.Professor,Course__Code =LectureInformation.Code, CreatedID = UserData)
+				TempCourse = Course_Evaluation.objects.filter(Course__CourseName = LectureInformation.CourseName, Course__Professor__contains=renew_professor_name,Course__Code =LectureInformation.Code, CreatedID = UserData)
 				MergeCourse = chain(TempCourse,MyCourse)
 				MyCourse = MergeCourse
 			count+=1
@@ -296,7 +302,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 		except:
 			DBCount = 0
 
-		
+		CourseBoard[0].Course.Professor=renew_professor_name
 		OtherCourseBoard = []
 		#접속한 아이디와 중복되는 경우 제거
 		MyCourseBoard = []
@@ -329,12 +335,14 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 		#총 데이터수와 page 넘길때 번호랑 호환되게 하기 위해 함	
 		dic ={'user':request.user,
 			'BestBoard':BestBoardView(),
-			'CourseBoard':CourseBoard,
+			'CourseBoard':CourseBoard[0],
 			'MyCourseBoard':MyCourseBoard,
 			'OtherCourseBoard':OtherCourseBoard,
 			'OtherCount':OtherCount,
 			'PageInformation':PageInformation,
 			'Answer_Dis' : Description,
+			'test':CourseBoard[1]	
+
 			
 			
 			}
@@ -506,12 +514,10 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	LectureInformation=Lecture.objects.get(id = offset)
+	renew_professor_name =LectureInformation.CourseName.split("외")[0] !=None and LectureInformation.CourseName.split("외")[0] or LectureInformation.CourseName
 	try:
-		CourseBoard = Total_Evaluation.objects.get(Course__Code =LectureInformation.Code,Course__CourseName=LectureInformation.CourseName, Course__Professor=LectureInformation.Professor)
-		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
-		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
+		CourseBoard = Total_Evaluation.objects.filter(Course__Code =LectureInformation.Code,Course__CourseName=LectureInformation.CourseName, Course__Professor__contains=renew_professor_name)
+		raise Exception
 
 	except:
 		CourseBoard = Total_Evaluation(Course =Lecture.objects.get(id=offset))
@@ -520,50 +526,74 @@ def TotalCourse(offset):
 		CourseBoard.Total_Level_Difficulty=5
 		CourseBoard.Total_StarPoint=0
 
+	for Course in CourseBoardList:
+			CourseBoard.Total_Speedy += Course.Total_Speedy
+			CourseBoard.Total_Homework += Course.Total_Homework
+			CourseBoard.Total_Level_Difficulty += Course.Total_Level_Difficulty
+			CourseBoard.Total_StarPoint += Course.Total_StarPoint
+			CourseBoard.Total_Count += Course.Total_Count
+			CourseBoard.Total_Recommend += Course.Total_Recommend
+			CourseBoard.Total_Mix += Course.Total_Mix
+			CourseBoard.Total_Long_Answer += Course.Total_Long_Answer
+			CourseBoard.Total_Unknown_Answer += Course.Total_Unknown_Answer
+			CourseBoard.Total_Book_Like += Course.Total_Book_Like
+			CourseBoard.Total_Ppt_Like += Course.Total_Ppt_Like
+			CourseBoard.Total_Practice_Like += Course.Total_Practice_Like
+
+	if CourseBoard.Total_Count!=0:
+		CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
+		CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
+		CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
+		CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
+		
+		CourseBoard.Total_Mix = CourseBoard.Total_Mix/CourseBoard.Total_Count
+		CourseBoard.Total_Long_Answer = CourseBoard.Total_Long_Answer/CourseBoard.Total_Count
+		CourseBoard.Total_Unknown_Answer = CourseBoard.Total_Unknown_Answer/CourseBoard.Total_Count
+		CourseBoard.Total_Book_Like = CourseBoard.Total_Book_Like/CourseBoard.Total_Count
+		CourseBoard.Total_Ppt_Like = CourseBoard.Total_Ppt_Like/CourseBoard.Total_Count
+		CourseBoard.Total_Practice_Like = CourseBoard.Total_Practice_Like/CourseBoard.Total_Count
+		
 	return CourseBoard
 def TotalCourseProfessor(CourseName,Professor,Code):
+		CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor__contains=Professor,Code =Code).order_by('Semester')[0])
+			
+		CourseBoardList=None
 		try:
-			CourseBoard = Total_Evaluation.objects.filter(Course__Code =Code,Course__CourseName=CourseName,Course__Professor=Professor)[0]
+			CourseBoardList = Total_Evaluation.objects.filter(Course__Code=Code,  Course__CourseName=CourseName,Course__Professor__contains=Professor)
 		except:
-			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor,Code =Code).order_by('Semester')[0])
-			CourseBoard.Total_Speedy = 5
-			CourseBoard.Total_Homework = 5
-			CourseBoard.Total_Level_Difficulty = 5
-			CourseBoard.Total_Count = 0
-			CourseBoard.Total_StarPoint=0
-		if CourseBoard.Total_Count!=0:
-			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
-			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
-			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
-			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
-
-		'''
-		try:
-			CourseBoard = Total_Evaluation(Course=Course[0].Course)
-		except:
-			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor=Professor,Code =Code).order_by('Semester')[0])
+			CourseBoard = Total_Evaluation(Course=Lecture.objects.filter(CourseName=CourseName,Professor__contains=Professor,Code =Code).order_by('Semester')[0])
 			CourseBoard.Total_Speedy = 5
 			CourseBoard.Total_Homework = 5
 			CourseBoard.Total_Level_Difficulty = 5
 			CourseBoard.Total_Count = 0
 			CourseBoard.Total_StarPoint=0
 
-		for CourseList in Course:
-			CourseBoard.Total_Count +=CourseList.Total_Count
-			CourseBoard.Total_Speedy += CourseList.Total_Speedy
-			CourseBoard.Total_Homework += CourseList.Total_Homework
-			CourseBoard.Total_Level_Difficulty += CourseList.Total_Level_Difficulty
-			CourseBoard.Total_StarPoint+= CourseList.Total_StarPoint
-			CourseBoard.Total_Mix += CourseList.Total_Mix
-			CourseBoard.Total_Short_Answer += CourseList.Total_Short_Answer
-			CourseBoard.Total_Long_Answer += CourseList.Total_Long_Answer
-			CourseBoard.Total_Unknown_Answer += CourseList.Total_Unknown_Answer
+		for Course in CourseBoardList:
+			CourseBoard.Total_Speedy += Course.Total_Speedy
+			CourseBoard.Total_Homework += Course.Total_Homework
+			CourseBoard.Total_Level_Difficulty += Course.Total_Level_Difficulty
+			CourseBoard.Total_StarPoint += Course.Total_StarPoint
+			CourseBoard.Total_Count += Course.Total_Count
+			CourseBoard.Total_Recommend += Course.Total_Recommend
+			CourseBoard.Total_Mix += Course.Total_Mix
+			CourseBoard.Total_Long_Answer += Course.Total_Long_Answer
+			CourseBoard.Total_Unknown_Answer += Course.Total_Unknown_Answer
+			CourseBoard.Total_Book_Like += Course.Total_Book_Like
+			CourseBoard.Total_Ppt_Like += Course.Total_Ppt_Like
+			CourseBoard.Total_Practice_Like += Course.Total_Practice_Like
+
+
 		if CourseBoard.Total_Count!=0:
 			CourseBoard.Total_Speedy = CourseBoard.Total_Speedy/CourseBoard.Total_Count
 			CourseBoard.Total_Homework = CourseBoard.Total_Homework/CourseBoard.Total_Count
 			CourseBoard.Total_Level_Difficulty = CourseBoard.Total_Level_Difficulty/CourseBoard.Total_Count
 			CourseBoard.Total_StarPoint = CourseBoard.Total_StarPoint/CourseBoard.Total_Count
-		
-		return CourseBoard
-		'''
-		return CourseBoard
+			
+			CourseBoard.Total_Mix = CourseBoard.Total_Mix/CourseBoard.Total_Count
+			CourseBoard.Total_Long_Answer = CourseBoard.Total_Long_Answer/CourseBoard.Total_Count
+			CourseBoard.Total_Unknown_Answer = CourseBoard.Total_Unknown_Answer/CourseBoard.Total_Count
+			CourseBoard.Total_Book_Like = CourseBoard.Total_Book_Like/CourseBoard.Total_Count
+			CourseBoard.Total_Ppt_Like = CourseBoard.Total_Ppt_Like/CourseBoard.Total_Count
+			CourseBoard.Total_Practice_Like = CourseBoard.Total_Practice_Like/CourseBoard.Total_Count
+			
+		return [CourseBoard,CourseBoardList]

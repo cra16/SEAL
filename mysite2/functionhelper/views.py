@@ -252,6 +252,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	for lec in temp: 
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0
+			lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Professor
 			TotalBoard[2].append(lec)
 			try:
 				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
@@ -259,6 +260,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 						total += Ev.Total_Count
 			except:
 					continue
+
 			TotalAdd[2].append(total)
 	TotalBoard[2]= VacationSemesterChange(TotalBoard[2])
 	temp=[]
@@ -518,220 +520,297 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	#각 강의 전공에 해당하는 DB 정보 저장 함 
 	TotalBoard = [[],[],[],[],[]]
 	goodList= [[],[],[],[],[]]
-	if CourseCode[0] !="ENG":
-		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
-		temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
-		i=0
-		for t in temp:
-			for lec in t:
-					try:
-						TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
-					except:
-						TotalDic = Total_Evaluation()
-						TotalDic.Total_Speedy =0
-						TotalDic.Total_Homework = 0
-						TotalDic.Total_Level_Difficulty = 0
-						TotalDic.Total_Count =0
-
-					TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Level_Difficulty = 0
-					TempTotal.Total_Homework = 0
-					TempTotal.Total_Count =0
-					TempTotal.Total_StarPoint = 0
-					TempTotal.Total_Mix=0
-					TempTotal.Total_Short_Answer=0
-					TempTotal.Total_Long_Answer=0
-					TempTotal.Total_Unknown_Answer=0
-					try:
-						good_count=Course_Evaluation.objects.filter(Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
-					except:
-						goodList[i].append(0)
-					TempInt=0
-					for goodcount in good_count:
-							if goodcount.Check==True:
-								TempInt+=1
-					goodList[i].append(TempInt)
-					
-					for T in TotalDic:
-						TempTotal.Total_Count += T.Total_Count
-						TempTotal.Total_Speedy +=T.Total_Speedy
-						TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
-						TempTotal.Total_Homework +=T.Total_Homework
-						TempTotal.Total_StarPoint += T.Total_StarPoint
-						TempTotal.Total_Mix +=T.Total_Mix
-						TempTotal.Total_Short_Answer += T.Total_Short_Answer
-						TempTotal.Total_Long_Answer += T.Total_Long_Answer
-						TempTotal.Total_Unknown_Answer+= T.Total_Unknown_Answer
-					if TempTotal.Total_Count==0:
-						TotalBoard[i].append(TempTotal)
-						continue
-					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-					TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
-					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
-					TotalBoard[i].append(TempTotal)
-					
-			i+=1
-
-
-	else:		
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
-		temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
-		i=0
-		for t in temp:
-			for lec in t:
-					try:
-						TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
-					except:
-						TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-						TotalDic.Total_Speedy =0
-						TotalDic.Total_Level_Difficulty = 0
-						TotalDic.Total_Homework = 0
-						TotalDic.Total_Count =0
-					TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-					TempTotal.Total_Speedy =0
-					TempTotal.Total_Level_Difficulty = 0
-					TempTotal.Total_Homework = 0
-					TempTotal.Total_Count =0
-					TempTotal.Total_StarPoint=0
-					TempTotal.Total_Mix =0
-					TempTotal.Total_Short_Answer =0
-					TempTotal.Total_Long_Answer =0
-					TempTotal.Total_Unknown_Answer=0
-					for T in TotalDic:
-						TempTotal.Total_Count += T.Total_Count
-						TempTotal.Total_Speedy +=T.Total_Speedy
-						TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
-						TempTotal.Total_Homework +=T.Total_Homework
-						TempTotal.Total_StarPoint += T.Total_StarPoint
-						TempTotal.Total_Mix +=T.Total_Mix
-						TempTotal.Total_Short_Answer += T.Total_Short_Answer
-						TempTotal.Total_Long_Answer += T.Total_Long_Answer
-						TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+	# if CourseCode[0] !="ENG":
+	# 	temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
+	# 	temp.append(Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct())
+	# 	i=0
+	# 	for t in temp:
+	# 		collect_professor=[]
+	# 		for lec in t:
+	# 			if lec['Professor'].split("외")[0] != None:
+			
+	# 				collect_professor.append(lec['Professor'].split("외")[0])
+	# 			else:
+	# 				collect_professor.append(lec['Professor'])
+	# 			j=0
+	# 			for pro in collect_professor:
+	# 				if lec['Professor'].find(pro) != -1:
+	# 					lec['Professor']=pro
 						
-					try:
-						good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
-					except:
-						goodList[i].append(0)
-					TempInt=0
-					for goodcount in good_count:
-							if goodcount.Check==True:
-								TempInt+=1
-					goodList[i].append(TempInt)
+	# 					j=1
+	# 					break
+	# 			if j==1:
+	# 				continue
+			
+	# 			try:
+	# 				TotalDic=Total_Evaluation.objects.filter(Course__Professor__contains=lec['Professor'], Course__CourseName=PostDic['Course'])
+	# 			except:
+	# 				TotalDic = Total_Evaluation()
+	# 				TotalDic.Total_Speedy =0
+	# 				TotalDic.Total_Homework = 0
+	# 				TotalDic.Total_Level_Difficulty = 0
+	# 				TotalDic.Total_Count =0
 
-					if TempTotal.Total_Count==0:
-						TotalBoard[i].append(TempTotal)
-						continue
-					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-					TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
-					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
-					TotalBoard[i].append(TempTotal)
+	# 			TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+	# 			TempTotal.Total_Speedy =0
+	# 			TempTotal.Total_Level_Difficulty = 0
+	# 			TempTotal.Total_Homework = 0
+	# 			TempTotal.Total_Count =0
+	# 			TempTotal.Total_StarPoint = 0
+	# 			TempTotal.Total_Mix=0
+	# 			TempTotal.Total_Short_Answer=0
+	# 			TempTotal.Total_Long_Answer=0
+	# 			TempTotal.Total_Unknown_Answer=0
+	# 			try:
+	# 				good_count=Course_Evaluation.objects.filter(Course__CourseName = PostDic['Course'], Course__Professor__contains=lec['Professor'])
+	# 			except:
+	# 				goodList[i].append(0)
+	# 			TempInt=0		
+	# 			for goodcount in good_count:
+	# 					if goodcount.Check==True:
+	# 						TempInt+=1
+	# 			goodList[i].append(TempInt)
+				
+	# 			for T in TotalDic:
+	# 				TempTotal.Total_Count += T.Total_Count
+	# 				TempTotal.Total_Speedy +=T.Total_Speedy
+	# 				TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+	# 				TempTotal.Total_Homework +=T.Total_Homework
+	# 				TempTotal.Total_StarPoint += T.Total_StarPoint
+	# 				TempTotal.Total_Mix +=T.Total_Mix
+	# 				TempTotal.Total_Short_Answer += T.Total_Short_Answer
+	# 				TempTotal.Total_Long_Answer += T.Total_Long_Answer
+	# 				TempTotal.Total_Unknown_Answer+= T.Total_Unknown_Answer
+	# 			if TempTotal.Total_Count==0:
+	# 				TempTotal.Course.CourseName = lec['Professor']
+	# 				TotalBoard[i].append(TempTotal)
+	# 				continue
+	# 			TempTotal.Course.CourseName = lec['Professor']
+	# 			TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
+	# 			TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+	# 			TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+	# 			TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
+	# 			TotalBoard[i].append(TempTotal)
 					
-					
-			i+=1
+	# 		i+=1
+
+
+	# else:		
+	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
+	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
+	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
+	
+	i=0
+	for t in temp:
+		collect_professor=[]
+		for lec in t:
+			if lec['Professor'].split("외")[0] != None:
+			
+				collect_professor.append(lec['Professor'].split("외")[0])
+			else:
+		
+				collect_professor.append(lec['Professor'])
+		collect_professor=list(set(collect_professor))
+		for lec in t:
+			
+			j=0
+			for pro in collect_professor:
+				if lec['Professor'].find(pro) != -1:
+					lec['Professor']=pro
+					collect_professor.remove(pro)
+					j=1
+					break
+			if j==0:
+				continue	
+			try:
+				TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor__contains=lec['Professor'], Course__CourseName=PostDic['Course'])
+			except:
+				TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code= PostDic['Code'],CourseName = lec['CourseName'],Professor__contains=lec['Professor'])[0])
+				TotalDic.Total_Speedy =0
+				TotalDic.Total_Level_Difficulty = 0
+				TotalDic.Total_Homework = 0
+				TotalDic.Total_Count =0
+			TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code= PostDic['Code'],CourseName__contains = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+			TempTotal.Total_Speedy =0
+			TempTotal.Total_Level_Difficulty = 0
+			TempTotal.Total_Homework = 0
+			TempTotal.Total_Count =0
+			TempTotal.Total_StarPoint=0
+			TempTotal.Total_Mix =0
+			TempTotal.Total_Short_Answer =0
+			TempTotal.Total_Long_Answer =0
+			TempTotal.Total_Unknown_Answer=0
+			for T in TotalDic:
+				TempTotal.Total_Count += T.Total_Count
+				TempTotal.Total_Speedy +=T.Total_Speedy
+				TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+				TempTotal.Total_Homework +=T.Total_Homework
+				TempTotal.Total_StarPoint += T.Total_StarPoint
+				TempTotal.Total_Mix +=T.Total_Mix
+				TempTotal.Total_Short_Answer += T.Total_Short_Answer
+				TempTotal.Total_Long_Answer += T.Total_Long_Answer
+				TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+				
+			try:
+				good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__CourseName = PostDic['Course'], Course__Professor__contains=lec['Professor'])
+			except:
+				goodList[i].append(0)
+			TempInt=0
+			for goodcount in good_count:
+					if goodcount.Check==True:
+						TempInt+=1
+			goodList[i].append(TempInt)
+
+			if TempTotal.Total_Count==0:
+				TempTotal.Course.Professor = lec['Professor']
+				TotalBoard[i].append(TempTotal)
+				continue
+			TempTotal.Course.Professor = lec['Professor']
+			TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
+			TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+			TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+			TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
+			TotalBoard[i].append(TempTotal)
+		i+=1
 		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
 		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) | Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	temp = Lecture.objects.filter(CourseName = PostDic['Course']).values("Professor","CourseName","Code").distinct()
-	for lec in temp:
-						try:
-							TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
-						except:
-							TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-							TotalDic.Total_Speedy =0
-							TotalDic.Total_Level_Difficulty = 0
-							TotalDic.Total_Homework = 0
-							TotalDic.Total_Count =0
-						TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Level_Difficulty = 0
-						TempTotal.Total_Homework = 0
-						TempTotal.Total_Count =0
-						TempTotal.Total_StarPoint=0
-						TempTotal.Total_Mix =0
-						TempTotal.Total_Short_Answer =0
-						TempTotal.Total_Long_Answer = 0
-						TempTotal.Total_Unknown_Answer=0
-						for T in TotalDic:
-							TempTotal.Total_Count += T.Total_Count
-							TempTotal.Total_Speedy +=T.Total_Speedy
-							TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
-							TempTotal.Total_Homework +=T.Total_Homework
-							TempTotal.Total_StarPoint += T.Total_StarPoint
-							TempTotal.Total_Mix +=T.Total_Mix
-							TempTotal.Total_Short_Answer += T.Total_Short_Answer
-							TempTotal.Total_Long_Answer += T.Total_Long_Answer
-							TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
-						try:
-							good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'], Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
-						except:
-							goodList[2].append(0)
-						TempInt=0
-						for goodcount in good_count:
-								if goodcount.Check==True:
-									TempInt+=1
-						goodList[2].append(TempInt)
+	# temp = Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).values("Professor","CourseName","Code").distinct()
+	
+	# collect_professor=[]
+	# for lec in temp:
+	# 			if lec['Professor'].split("외")[0] != None:
+	# 				collect_professor.append(lec['Professor'].split("외")[0])
+				
+	# 			else:
+	# 				collect_professor.append(lec['Professor'])
+				
+	# for lec in temp:
+	# 					j=0
+	# 					for pro in collect_professor:
+	# 						if lec['Professor'].find(pro) != -1:
+	# 							lec['Professor']=pro
+								
+	# 							j=1
+	# 							break
+	# 					if j==1:
+	# 						continue	
+	# 					try:
+	# 						TotalDic=Total_Evaluation.objects.filter(Course__Code = PostDic['Code'],Course__Professor__contains=lec['Professor'], Course__CourseName=PostDic['Course'])
+	# 					except:
+	# 						TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+	# 						TotalDic.Total_Speedy =0
+	# 						TotalDic.Total_Level_Difficulty = 0
+	# 						TotalDic.Total_Homework = 0
+	# 						TotalDic.Total_Count =0
+	# 					TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code= PostDic['Code'],CourseName = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+	# 					TempTotal.Total_Speedy =0
+	# 					TempTotal.Total_Level_Difficulty = 0
+	# 					TempTotal.Total_Homework = 0
+	# 					TempTotal.Total_Count =0
+	# 					TempTotal.Total_StarPoint=0
+	# 					TempTotal.Total_Mix =0
+	# 					TempTotal.Total_Short_Answer =0
+	# 					TempTotal.Total_Long_Answer = 0
+	# 					TempTotal.Total_Unknown_Answer=0
+	# 					for T in TotalDic:
+	# 						TempTotal.Total_Count += T.Total_Count
+	# 						TempTotal.Total_Speedy +=T.Total_Speedy
+	# 						TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+	# 						TempTotal.Total_Homework +=T.Total_Homework
+	# 						TempTotal.Total_StarPoint += T.Total_StarPoint
+	# 						TempTotal.Total_Mix +=T.Total_Mix
+	# 						TempTotal.Total_Short_Answer += T.Total_Short_Answer
+	# 						TempTotal.Total_Long_Answer += T.Total_Long_Answer
+	# 						TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+	# 					try:
+	# 						good_count=Course_Evaluation.objects.filter(Course__Code = PostDic['Code'], Course__CourseName = PostDic['Course'], Course__Professor__contains=lec['Professor'])
+	# 					except:
+	# 						goodList[2].append(0)
+	# 					TempInt=0
+	# 					for goodcount in good_count:
+	# 							if goodcount.Check==True:
+	# 								TempInt+=1
+	# 					goodList[2].append(TempInt)
 
-						if TempTotal.Total_Count==0:
-							TotalBoard[2].append(TempTotal)
-							break
-						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
-						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
-						TotalBoard[2].append(TempTotal)
+	# 					if TempTotal.Total_Count==0:
+	# 						TempTotal.Course.CourseName = lec['Professor']
+	# 						TotalBoard[2].append(TempTotal)
+	# 						continue
+	# 					TempTotal.Course.CourseName = lec['Professor']
+	# 					TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
+	# 					TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+	# 					TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+	# 					TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
+	# 					TotalBoard[2].append(TempTotal)
 
-	temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).values("Professor","CourseName","Code").distinct()
-	for lec in temp:
-						try:
-							TotalDic=Total_Evaluation.objects.filter(Course__Professor=lec['Professor'], Course__CourseName=lec['CourseName'])
-						except:
-							TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-							TotalDic.Total_Speedy =0
-							TotalDic.Total_Level_Difficulty = 0
-							TotalDic.Total_Homework = 0
-							TotalDic.Total_Count =0
-						TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=lec['Code'],CourseName = lec['CourseName'],Professor=lec['Professor'])[0])
-						TempTotal.Total_Speedy =0
-						TempTotal.Total_Level_Difficulty = 0
-						TempTotal.Total_Homework = 0
-						TempTotal.Total_Count =0
-						TempTotal.Total_StarPoint=0
-						TempTotal.Total_Mix =0
-						TempTotal.Total_Short_Answer =0
-						TempTotal.Total_Long_Answer = 0
-						TempTotal.Total_Unknown_Answer=0
+	# temp=Lecture.objects.filter(CourseName = PostDic['Course'],Code__contains=PostDic['Code']).values("Professor","CourseName","Code").distinct()
+	# collect_professor=[]
+	# for lec in temp:
+	# 			if lec['Professor'].split("외")[0] != None:
+	# 				collect_professor.append(lec['Professor'].split("외")[0])
+					
+	# 			else:
+	# 				collect_professor.append(lec['Professor'])
+	# for lec in t:
+	# 			j=0
+	# 			for pro in collect_professor:
+	# 				if lec['Professor'].find(pro) != -1:
+	# 					lec['Professor']=pro
 						
-						for T in TotalDic:
-							TempTotal.Total_Count += T.Total_Count
-							TempTotal.Total_Speedy +=T.Total_Speedy
-							TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
-							TempTotal.Total_Homework +=T.Total_Homework
-							TempTotal.Total_StarPoint += T.Total_StarPoint
-							TempTotal.Total_Mix +=T.Total_Mix
-							TempTotal.Total_Short_Answer += T.Total_Short_Answer
-							TempTotal.Total_Long_Answer += T.Total_Long_Answer
-							TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
-						
-						try:
-							good_count=Course_Evaluation.objects.filter(Course__CourseName = lec['CourseName'], Course__Professor=lec['Professor'])
-						except:
-							goodList[3].append(0)
-						TempInt=0
-						for goodcount in good_count:
-								if goodcount.Check==True:
-									TempInt+=1
-						goodList[3].append(TempInt)
+	# 					j=1
+	# 					break
+	# 			if j==1:
+	# 				continue
+	# 			try:
+	# 				TotalDic=Total_Evaluation.objects.filter(Course__Professor__contains=lec['Professor'], Course__CourseName=lec['CourseName'])
+	# 			except:
+	# 				TotalDic = Total_Evaluation(Course=Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+	# 				TotalDic.Total_Speedy =0
+	# 				TotalDic.Total_Level_Difficulty = 0
+	# 				TotalDic.Total_Homework = 0
+	# 				TotalDic.Total_Count =0
+	# 			TempTotal = Total_Evaluation(Course=Lecture.objects.filter(Code=PostDic['Code'],CourseName = PostDic['Course'],Professor__contains=lec['Professor'])[0])
+	# 			TempTotal.Total_Speedy =0
+	# 			TempTotal.Total_Level_Difficulty = 0
+	# 			TempTotal.Total_Homework = 0
+	# 			TempTotal.Total_Count =0
+	# 			TempTotal.Total_StarPoint=0
+	# 			TempTotal.Total_Mix =0
+	# 			TempTotal.Total_Short_Answer =0
+	# 			TempTotal.Total_Long_Answer = 0
+	# 			TempTotal.Total_Unknown_Answer=0
+				
+	# 			for T in TotalDic:
+	# 				TempTotal.Total_Count += T.Total_Count
+	# 				TempTotal.Total_Speedy +=T.Total_Speedy
+	# 				TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
+	# 				TempTotal.Total_Homework +=T.Total_Homework
+	# 				TempTotal.Total_StarPoint += T.Total_StarPoint
+	# 				TempTotal.Total_Mix +=T.Total_Mix
+	# 				TempTotal.Total_Short_Answer += T.Total_Short_Answer
+	# 				TempTotal.Total_Long_Answer += T.Total_Long_Answer
+	# 				TempTotal.Total_Unknown_Answer += T.Total_Unknown_Answer
+				
+	# 			try:
+	# 				good_count=Course_Evaluation.objects.filter(Course__CourseName = PostDic['Course'], Course__Professor__contains=lec['Professor'])
+	# 			except:
+	# 				goodList[3].append(0)
+	# 			TempInt=0
+	# 			for goodcount in good_count:
+	# 					if goodcount.Check==True:
+	# 						TempInt+=1
+	# 			goodList[3].append(TempInt)
 
-						if TempTotal.Total_Count==0:
-							TotalBoard[3].append(TempTotal)
-							continue
-						TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
-						TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
-						TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
-						TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
-						TotalBoard[3].append(TempTotal)
+	# 			if TempTotal.Total_Count==0:
+	# 				TempTotal.Course.CourseName = lec['Professor']
+	# 				TotalBoard[3].append(TempTotal)
+	# 				continue
+	# 			TempTotal.Course.CourseName = lec['Professor']
+	# 			TempTotal.Total_Speedy = TempTotal.Total_Speedy/TempTotal.Total_Count
+	# 			TempTotal.Total_Homework = TempTotal.Total_Homework/TempTotal.Total_Count
+	# 			TempTotal.Total_Level_Difficulty = TempTotal.Total_Level_Difficulty/TempTotal.Total_Count
+	# 			TempTotal.Total_StarPoint = TempTotal.Total_StarPoint/TempTotal.Total_Count
+	# 			TotalBoard[3].append(TempTotal)
 					
 	#2차원 list로 각 전공당 총 페이지 수 저장
 	T_Count=[[] ,[] ,[],[],[]]
@@ -809,7 +888,8 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		   'BestBoard':BestBoard,
 		   'CourseName':PostDic['Course'],
 		   'ProSelect' :int(PostDic['ProSelect']),
-		   'GoodCount' :  goodList
+		   'GoodCount' :  goodList,
+		   'pro':collect_professor
 		   }
 
 	return dic

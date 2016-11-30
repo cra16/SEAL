@@ -19,6 +19,6 @@ class Lecture(models.Model):
 	CategoryDetail = models.CharField(max_length=20, null=True, blank=True, default=None)
 
 	def __unicode__(self):
-		rt_name = "%s" % (self.CourseName, )
+		rt_name = "%s %s %s" % (self.CourseName, self.Professor, self.Code )
 		return rt_name
 	

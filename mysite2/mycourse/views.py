@@ -11,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 from functionhelper.views import *
 import datetime
 
+import sys
+
+reload(sys)  
+sys.setdefaultencoding('utf8')
 #현재 내가 추천한 강의 보여주는 함수
 def MyCourse(request):
 		if CheckingLogin(request.user.username):
@@ -45,11 +49,25 @@ def MyCoursePage(request,Page,Mobile):
 	Recommend = Recommend_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]			
 	
 	for Board in Recommend:
-			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
+			renew_professor=Board.Course.Course.Professor.split("외")[0] !=0 and Board.Course.Course.Professor.split("외")[0] or Board.Course.Course.Professor
+			a=Lecture.objects.filter(Semester=Board.Course.Course.Semester,CourseName=Board.Course.Course.CourseName,Professor__contains = renew_professor, Code = Board.Course.Course.Code)[0]
+			RecommendData =Total_Evaluation(Course =a)
+			RecommendDataList = Total_Evaluation.objects.filter(Course__CourseName=Board.Course.Course.CourseName,Course__Professor__contains = renew_professor, Course__Code = Board.Course.Course.Code)
+			for ReData in RecommendDataList:
+				RecommendData.Total_Speedy+=ReData.Total_Speedy
+				RecommendData.Total_Homework +=ReData.Total_Homework
+				RecommendData.Total_Level_Difficulty+=ReData.Total_Level_Difficulty
+				RecommendData.Total_StarPoint += ReData.Total_StarPoint
+				RecommendData.Total_Count+= ReData.Total_Count
+				RecommendData.Total_Recommend += ReData.Total_Recommend
+
 			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
 			RecommendData.Total_Homework =RecommendData.Total_Homework/RecommendData.Total_Count
 			RecommendData.Total_Level_Difficulty=RecommendData.Total_Level_Difficulty/RecommendData.Total_Count
 			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
+			
+			RecommendData.Course.Professor=renew_professor
+
 			RecommendPage.append(RecommendData)	
 			
 	Like=Like_Course.objects.filter(CreatedID = MyProfile)[PageFirst:PageLast]
@@ -67,7 +85,7 @@ def MyCoursePage(request,Page,Mobile):
 				LikePage.append(LikeData)
 				break
 	
-			LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
+			#LikeData.Total_Speedy=LikeData.Total_Speedy/LikeData.Total_Count
 			LikeData.Total_Homework =LikeData.Total_Homework/LikeData.Total_Count
 			LikeData.Total_Level_Difficulty=LikeData.Total_Level_Difficulty/LikeData.Total_Count
 			LikeData.Total_StarPoint = LikeData.Total_StarPoint/LikeData.Total_Count
@@ -103,7 +121,7 @@ def MyCoursePage(request,Page,Mobile):
 						'PageInformation' : PageInformation,
 						'TotalCount':TotalCount,
 						'Page':Page,
-						'Recommend':Recommend
+			
 						}
 	return MyCoursePageData
 #MyCourse쪽 비동기식 구현
@@ -150,27 +168,44 @@ def CourseDelete(request):
 			PageLast =5*(int(Page)-1)+5	
 
 		
-		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor)[0]
+		LectureData=Lecture.objects.filter(Semester= Semester,Code = Code, CourseName=CourseName, Professor__contains = Professor)[0]
 		UserData = Profile.objects.get(User = request.user)
 		try:
 		 	Group_Total = Group_Total_Evaluation.objects.get(Code=Code,CourseName=CourseName)
 		except:
 			Group_Total = None
-		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor, CreatedID=UserData)[0]
+		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor, CreatedID=UserData,Course__Semester = Semester)[0]
 		
-		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
-		UpdateData=Total_Evaluation.objects.get(Course__Code = Code, Course__CourseName=CourseName, Course__Professor = Professor)
+		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
+		UpdateData=Total_Evaluation.objects.get(Course__Code = Code, Course__CourseName=CourseName, Course__Professor__contains = Professor)
 
 		
 		
 			
-		UpdateData.Total_Speedy -= DeleteData.Speedy
+		#UpdateData.Total_Speedy -= DeleteData.Speedy
 		UpdateData.Total_Homework -= DeleteData.Homework
 		UpdateData.Total_Level_Difficulty -= DeleteData.Level_Difficulty
 		UpdateData.Total_StarPoint -= DeleteData.StarPoint
+		if DeleteData.Check is True:
+			UpdateData.Total_Recommend -=1
 
+		if DeleteData.What_Answer == 1:
+			UpdateData.Total_Mix += 1
+		elif DeleteData.What_Answer ==2:
+			UpdateData.Total_Short_Answer +=1
+		elif DeleteData.What_Answer ==3:
+			UpdateData.Total_Long_Answer +=1
+		elif DeleteData.What_Answer ==4:
+			UpdateData.Total_Unknown_Answer +=1
+		if DeleteData.Course_Answer == 1:
+			UpdateData.Total_Book_Like += 1
+		elif DeleteData.Course_Answer ==2:
+			UpdateData.Total_Ppt_Like+=1
+		elif DeleteData.Course_Answer ==3:
+			UpdateData.Total_Practice_Like +=1
 		
 		UpdateData.Total_Count -=1
+
 		if UpdateData.Total_Count ==0:
 			UpdateData.delete()
 			Delete_Dis.delete()
@@ -186,13 +221,25 @@ def CourseDelete(request):
 		Recommend = Recommend_Course.objects.filter(CreatedID = UserData)[PageFirst:PageLast]			
 		RecommendPage =[]
 		for Board in Recommend:
-			RecommendData = Total_Evaluation.objects.get(Course__CourseName=Board.Course.Course.CourseName,Course__Professor = Board.Course.Course.Professor, Course__Code = Board.Course.Course.Code)
+			renew_professor=Board.Course.Course.Professor.split("외")[0] !=0 and Board.Course.Course.Professor.split("외")[0] or Board.Course.Course.Professor
+			a=Lecture.objects.filter(Semester=Board.Course.Course.Semester,CourseName=Board.Course.Course.CourseName,Professor__contains = renew_professor, Code = Board.Course.Course.Code)[0]
+			RecommendData =Total_Evaluation(Course =a)
+			RecommendDataList = Total_Evaluation.objects.filter(Course__CourseName=Board.Course.Course.CourseName,Course__Professor__contains = renew_professor, Course__Code = Board.Course.Course.Code)
+			for ReData in RecommendDataList:
+				RecommendData.Total_Speedy+=ReData.Total_Speedy
+				RecommendData.Total_Homework +=ReData.Total_Homework
+				RecommendData.Total_Level_Difficulty+=ReData.Total_Level_Difficulty
+				RecommendData.Total_StarPoint += ReData.Total_StarPoint
+				RecommendData.Total_Count+= ReData.Total_Count
+				RecommendData.Total_Recommend += ReData.Total_Recommend
+
 			RecommendData.Total_Speedy=RecommendData.Total_Speedy/RecommendData.Total_Count
 			RecommendData.Total_Homework =RecommendData.Total_Homework/RecommendData.Total_Count
 			RecommendData.Total_Level_Difficulty=RecommendData.Total_Level_Difficulty/RecommendData.Total_Count
 			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
-			RecommendData.Total_Recommend = RecommendData.Total_Recommend/RecommendData.Total_Count
-			RecommendPage.append(RecommendData)
+			
+			RecommendData.Course.Professor=renew_professor
+			RecommendPage.append(RecommendData)	
 		Count = [[],[]]
 		Eval_Count=Course_Evaluation.objects.filter(CreatedID = UserData).count()
 		Like_Count=Like_Course.objects.filter(CreatedID = UserData).count()
@@ -242,18 +289,18 @@ def UpdateRedirect(request):
 		Semester=request.POST['Semester']
 		Professor=request.POST['Professor']
 	UserProfile=Profile.objects.get(User = request.user)
-	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor,Semester=Semester)[0]
-	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor=Professor).order_by('-Semester')
+	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor__contains=Professor,Semester=Semester)[0]
+	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor__contains=Professor).order_by('-Semester')
 	SemesterList=list()
 	for semester in SemesterData:
 		if semester.Semester not in SemesterList:
 			SemesterList.append(semester.Semester)
 
-	CourseBoard = Course_Evaluation.objects.get(Course__Code = CourseCode, Course__CourseName=CourseName, Course__Professor=Professor,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
+	CourseBoard = Course_Evaluation.objects.get(Course__Code = CourseCode, Course__CourseName=CourseName, Course__Professor__contains=Professor,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
 	
 	totalcount=0
 	MyCourseBoard = None
-	
+	CourseBoard.Course.Professor=Professor
 	Description=Description_Answer.objects.filter(Course=LectureData,CreatedID=UserProfile)
 			
 	dic = {'user':request.user,
@@ -271,7 +318,7 @@ def CourseUpdate(request):
 	if CheckingLogin(request.user.username):
 			return HttpResponseRedirect("/")
 	if request.method == "POST":
-		new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
+		#new_Speedy= (request.POST['sl1'] !="" and int(request.POST['sl1']) or 5)
 		new_Homework= (request.POST['sl2'] !="" and int(request.POST['sl2']) or 5)
 		
 		new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
@@ -282,18 +329,20 @@ def CourseUpdate(request):
 		new_Satisfy = float(request.POST['StarValue'])
 		new_Answer_list = request.POST.getlist('mytext[]')
 		new_Who = request.POST['who']
+
 		new_Url = request.POST['url']
 		new_paper_value= int(request.POST['paper_value'])
+		new_course_value =request.POST['course_value']
 		CourseName=request.POST['HCourseName']
 		Code=request.POST['HCourseCode']
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
 
-		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor = Professor, Semester =Semester)[0]
+		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor__contains = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
-		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
-		UpdateTotalEval = Total_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor)
-		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,Course__Semester =Semester,CreatedID=UserData)
+		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
+		UpdateTotalEval = Total_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor)
+		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,Course__Semester =Semester,CreatedID=UserData)
 
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy
 		UpdateTotalEval.Total_Homework -= UpdateCourseEval.Homework
@@ -307,14 +356,21 @@ def CourseUpdate(request):
 			UpdateTotalEval.Total_Long_Answer -=1
 		elif UpdateCourseEval.What_Answer ==4:
 			UpdateTotalEval.Total_Unknown_Answer -=1
-
-		UpdateCourseEval.Speedy = new_Speedy
+		if UpdateCourseEval.Course_Answer == 1:
+			UpdateTotalEval.Total_Book_Like -= 1
+		elif UpdateCourseEval.Course_Answer ==2:
+			UpdateTotalEval.Total_Ppt_Like-=1
+		elif UpdateCourseEval.Course_Answer ==3:
+			UpdateTotalEval.Total_Practice_Like -=1
+		
+		#UpdateCourseEval.Speedy = new_Speedy
 		UpdateCourseEval.Homework =new_Homework
 		UpdateCourseEval.Level_Difficulty = new_Level_Difficulty
 		UpdateCourseEval.StarPoint =new_Satisfy
 		UpdateCourseEval.Check = new_Check
 		UpdateCourseEval.StarPoint = new_Satisfy
 		UpdateCourseEval.What_Answer = new_paper_value
+		UpdateCourseEval.Course_Answer = new_course_value
 		UpdateCourseEval.Who_Answer = new_Who
 		UpdateCourseEval.Url_Answer = new_Url
 		UpdateCourseEval.CourseComment = new_CourseComment
@@ -327,6 +383,12 @@ def CourseUpdate(request):
 			UpdateTotalEval.Total_Long_Answer +=1
 		elif UpdateCourseEval.What_Answer ==4:
 			UpdateTotalEval.Total_Unknown_Answer +=1
+		if UpdateCourseEval.Course_Answer == 1:
+			UpdateTotalEval.Total_Book_Like += 1
+		elif UpdateCourseEval.Course_Answer ==2:
+			UpdateTotalEval.Total_Ppt_Like+=1
+		elif UpdateCourseEval.Course_Answer ==3:
+			UpdateTotalEval.Total_Practice_Like +=1
 
 		UpdateTotalEval.Total_Speedy += UpdateCourseEval.Speedy
 		UpdateTotalEval.Total_Homework += UpdateCourseEval.Homework
@@ -363,7 +425,7 @@ def LikeDelete(request):
 		PageLast =10*(int(Page)-1)+10
 
 		UserData = Profile.objects.get(User = request.user)
-		DeleteData = Like_Course.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor=Professor,CreatedID=UserData)
+		DeleteData = Like_Course.objects.get(Semester=Semester,Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
 		
 		DeleteData.delete()
 		UserData.LikeCount =Like_Course.objects.filter(CreatedID=UserData).count()

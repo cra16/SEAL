@@ -12,6 +12,11 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 from django.db.models import Q
 from functionhelper.views import *
+import sys  
+
+reload(sys)  
+sys.setdefaultencoding('utf8')
+
 @csrf_exempt
 def Recommend(request, offset): #강의 추천 스크롤 기능
 			
@@ -26,7 +31,7 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	LectureData= Lecture.objects.get(id=offset)
 	try:
 		
-		RecommendData=Recommend_Course.objects.get(Course__Course__CourseName=LectureData.CourseName,Course__Course__Code = LectureData.Code, Course__Course__Professor=LectureData.Professor,CreatedID =UserProfile) 
+		RecommendData=Recommend_Course.objects.get(Course__Course__CourseName=LectureData.CourseName,Course__Course__Code = LectureData.Code, Course__Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
 		
 	except:
 			RecommendData=None
@@ -40,13 +45,15 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 			return  HttpResponseRedirect("/NotEmptyRecommend")
 
 	else:
-		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor=LectureData.Professor).order_by('-Semester')
+		renew_professor= LectureData.Professor.split("외")[0] != None and LectureData.Professor.split("외")[0] or LectureData.Professor
+		SemesterData = Lecture.objects.filter(Code = LectureData.Code, CourseName=LectureData.CourseName, Professor__contains=renew_professor).order_by('-Semester')
 		SemesterList=list()
 		for semester in SemesterData:
 			if semester.Semester not in SemesterList:
 				SemesterList.append(semester.Semester)
 
-		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색		
+		CourseBoard = Lecture.objects.get(id=offset) #DB 고유 ID로 접근해서 검색	
+		CourseBoard.Professor = renew_professor	
 		request.session['Recommend_ID'] = offset #offset 미리 저장
 		dic = {'user':request.user,
               'BestBoard':BestBoardView(),
@@ -79,9 +86,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
 
+		renew_professor= Professor.split("외")[0] != None and Professor.split("외")[0] or Professor
 
 		try:
-			RecommendData=Course_Evaluation.objects.get(Course__CourseName=LectureData.CourseName,Course__Code = LectureData.Code, Course__Professor=LectureData.Professor,CreatedID =UserProfile) 
+			RecommendData=Recommend_Course.objects.filter(Course__CourseName=CourseName,Course__Code = CourseCode, Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
 
 			if(RecommendData != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
@@ -126,7 +134,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 #			new_Homework=5
 		
-		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor=Professor)[0]
+		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor)[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 		for new_Answer in new_Answer_list:#서술형 답변
 			if new_Answer =="":
@@ -140,7 +148,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Recommend.save()
 
 		try:
-			T_Eval=Total_Evaluation.objects.get(Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor=Professor)#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
+			T_Eval=Total_Evaluation.objects.filter(Course__Semester=Semester , Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor__contains=renew_professor)[0]
+			#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
 		except:
 			T_Eval =None 
 
@@ -169,7 +178,6 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Eval.Total_Practice_Like+=1
 			Total_Eval.save()
 		else: #update
-	
 			#T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Homework += int(new_Homework)
 			#T_Eval.Total_Exam += int(new_Question)

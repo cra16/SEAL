@@ -83,24 +83,7 @@
           <input id="HCourseProfessor"  name="HCourseProfessor" type="hidden" value ="{{CourseBoard.Course.Professor}}">
         <br>
 
-          <div id="h_innersectiondivider" class="ui section divider"></div>
-
-
-          <div class="ui grid">
-            <div id="firstcolumn" class="left floated center aligned three wide column"><b>진도 속도</b></div>
-            <div class="left floated center aligned two wide column">
-               <a id="tooltips" data-toggle="tooltip" title="활성/비활성"><button type ="button" id="enable1" class="circular ui icon button"><i class="glyphicon glyphicon-ok"></i></button></a>
-            </div>
-            <div class="left floated right aligned two wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림">느림</a>
-            </div>
-            <div class="left floated center aligned six wide column">
-              <input type="text" id="sl1" name ="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C" data-slider-disabled="false" value="{{CourseBoard.Speedy}}"/>	
-            </div>
-            <div class="three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름">빠름</a>
-            </div>
-          </div>
+     
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -178,11 +161,47 @@
                     <button type ="button" class="ui toggle button paper_button" value="3" >혼합형</button>
                     <button type ="button" class="ui toggle button paper_button active" value="4" >해당없음</button>
                   </div>
+
+                  
+            </div>
               {%endif%}
+
+
                 <input type="hidden" id="paper_value" name = "paper_value" class="paper_value" value ="{{CourseBoard.What_Answer}}">
+                
 
               </div>
+
             </div>
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+            <div class="ui grid">
+               <div id="fourthcolumn" class="left floated center aligned three wide column"><b>시험 방식</b></div>
+
+            <div class="right floated center aligned twelve wide column">
+                    {% if CourseBoard.Course_Answer == 1%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                       <button type ="button" class="ui button toggle course_button active" value="1">교재 중심</button>
+                      <button type ="button" class="ui button toggle course_button" value="2">ppt 중심</button>
+                      <button type ="button" class="ui button toggle course_button" value="3">실습 중심</button>
+                    </div>
+                    {% elif CourseBoard.Course_Answer == 2%}
+                      <div class="ui buttons" style="margin-top:-10px">
+                       <button type ="button" class="ui button toggle course_button" value="1">교재 중심</button>
+                      <button type ="button" class="ui button toggle course_button active" value="2">ppt 중심</button>
+                      <button type ="button" class="ui button toggle course_button" value="3">실습 중심</button>
+                    </div>
+                    {% elif CourseBoard.Course_Answer == 3%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                       <button type ="button" class="ui button toggle course_button" value="1">교재 중심</button>
+                      <button type ="button" class="ui button toggle course_button" value="2">ppt 중심</button>
+                      <button type ="button" class="ui button toggle course_button active" value="3">실습 중심</button>
+                    </div>
+                    {%endif%}
+              </div>
+                <input type="hidden" id="course_value" name = "course_value" class="course_value" value ="{{CourseBoard.Course_Answer}}"> 
+              </div>
+              
+
           </div>
 
           <div class="ui center aligned piled segment">
@@ -218,10 +237,6 @@
               
             <br>
 
-            <div class="field">
-              <h2 style="text-align:left; margin-left:10px; padding-bottom:10px"><i class="glyphicon glyphicon-globe" style="color:teal"></i></h2>
-              <input type="text" name="url" label="참고하면 좋은 사이트 URL(선택)" active-color='#3F51B5' class="demo-form" value="{{CourseBoard.Url_Answer}}">
-            </div>
 
             </div>
             <div class="four wide column">

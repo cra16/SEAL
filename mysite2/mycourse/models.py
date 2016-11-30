@@ -16,7 +16,7 @@ class Recommend_Course(models.Model):
 	CreatedID = models.ForeignKey(Profile)
 
 	def __unicode__(self):
-		return u'%s %s' % (self.Course.Course, self.CreatedID.UserName)
+		return u'%s %s %s' % (self.Course.Course.CourseName,self.Course.Course.Professor, self.CreatedID.UserName)
 
 class Like_Course(models.Model):
 	Course = models.ForeignKey(Lecture)

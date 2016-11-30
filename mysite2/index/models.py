@@ -22,12 +22,14 @@ class Course_Evaluation(models.Model):
 	What_Answer = models.IntegerField(default=0)
 	Exam_Answer = models.ManyToManyField(Description_Answer)
 	Who_Answer = models.TextField(max_length=200, null=True)
+	
 	Course_Answer = models.IntegerField(default=0)
 	Url_Answer = models.TextField(max_length=200, null=True)
 	create_date = models.DateTimeField(default=datetime.datetime.today())
 	update_date = models.DateTimeField(default=datetime.datetime.today())
 	def __unicode__(self):
-		return self.Course.CourseName
+			return '%s %s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.CreatedID)
+
 
 class Total_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
@@ -46,7 +48,7 @@ class Total_Evaluation(models.Model):
 	Total_Practice_Like = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return self.Course.Code
+		return '%s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName)
 
 class Group_Total_Evaluation(models.Model):
 	Code = models.CharField(max_length=20, null=False)

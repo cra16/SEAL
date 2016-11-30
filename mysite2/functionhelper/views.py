@@ -259,7 +259,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 				for Ev in Eval:
 						total += Ev.Total_Count
 			except:
-					continue
+					total=0
 
 			TotalAdd[2].append(total)
 	TotalBoard[2]= VacationSemesterChange(TotalBoard[2])

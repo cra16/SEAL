@@ -252,7 +252,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	for lec in temp: 
 			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
 			total=0
-			lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Professor
+			lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Course.Professor
 			TotalBoard[2].append(lec)
 			try:
 				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor__contains=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)

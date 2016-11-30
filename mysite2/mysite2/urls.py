@@ -62,7 +62,8 @@ urlpatterns += patterns('index.views',
 	url(r'^Category_Search/','search_subject_list'),
 	url(r'^SubjectSearchPage/','search_subject_page'),
 	url(r'^LikeSugangPage/','Page'),
-	url(r'^TotalDBCountUpdate/','GroupTotalCountRenew')
+	url(r'^TotalDBCountUpdate/','GroupTotalCountRenew'),
+	url(r'^RenewDB/','renewDB')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',
@@ -73,7 +74,7 @@ urlpatterns += patterns('mypage.views',
 urlpatterns += patterns('recommend.views',
 	url(r'^Recommend/(\d+)$','Recommend'),
 	url(r'^Recommend/Recommend_Write$','Recommend_Write'),
-	url(r'^Like/$','Like'),
+	#url(r'^Like/$','Like'),
 	url(r'^NotEmptyRecommend/$','Recommend_NotEmpty'),
 
 

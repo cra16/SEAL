@@ -177,7 +177,7 @@ def CourseDelete(request):
 		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor, CreatedID=UserData,Course__Semester = Semester)[0]
 		
 		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
-		UpdateData=Total_Evaluation.objects.get(Course__Code = Code, Course__CourseName=CourseName, Course__Professor__contains = Professor)
+		UpdateData=Total_Evaluation.objects.filter(Course__Code = Code, Course__CourseName=CourseName, Course__Professor__contains = Professor)[0]
 
 		
 		
@@ -341,7 +341,7 @@ def CourseUpdate(request):
 		LectureData=Lecture.objects.filter(Code = Code, CourseName=CourseName, Professor__contains = Professor, Semester =Semester)[0]
 		UserData = Profile.objects.get(User = request.user)
 		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
-		UpdateTotalEval = Total_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor)
+		UpdateTotalEval = Total_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor)[0]
 		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,Course__Semester =Semester,CreatedID=UserData)
 
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy

@@ -536,58 +536,54 @@ def renewDB(request):
 	if not request.user.username=='admin_seal':
 		return HttpResponseRedirect('/')
 
-	Total_EvalList = Total_Evaluation.objects.all()
 	Course_EvalList = Course_Evaluation.objects.all()
-
-	for Total_Eval in Total_EvalList:
-		Total_Eval.Total_Homework=0
-		Total_Eval.Total_Level_Difficulty=0
-		Total_Eval.Total_Count =0
-		Total_Eval.Total_StarPoint=0
-		Total_Eval.Total_Mix=0
-		Total_Eval.Total_Short_Answer=0
-		Total_Eval.Total_Long_Answer =0
-		Total_Eval.Unknown_Answer=0
-		Total_Eval.Total_Book_Like=0
-		Total_Eval.Total_Ppt_Like=0
-		Total_Eval.Total_Practice_Like=0
-		Total_Professor = Total_Eval.Course.Professor.split("외")[0] != None and Total_Eval.Course.Professor.split("외")[0] or Total_Eval.Course.Professor
-		for Course_Eval in Course_EvalList:
-			Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
-
-			if Total_Eval.Course.CourseName ==Course_Eval.Course.CourseName and Total_Eval.Course.Code ==Course_Eval.Course.Code and Total_Professor == Course_Professor:
-				Total_Eval.Total_Homework+=Course_Eval.Homework
-				Total_Eval.Total_Level_Difficulty+=Course_Eval.Level_Difficulty
-				Total_Eval.Total_Count += 1
-				Total_Eval.Total_StarPoint+=Course_Eval.StarPoint
-				if Course_Eval.Check ==True:
-					Total_Eval.Total_Recommend +=1
-				if Course_Eval.What_Answer ==1:
-					Total_Eval.Total_Long_Answer +=1
-					
-				elif Course_Eval.What_Answer ==2:
-					Total_Eval.Total_Short_Answer+=1
-				elif Course_Eval.What_Answer ==3:
-					Total_Eval.Total_Mix+=1
-				elif Course_Eval.What_Answer ==4:
-					Total_Eval.Unknown_Answer+=1
-				
-				if Course_Eval.Course_Answer ==1:
-					Total_Eval.Total_Book_Like+=1
-				elif Course_Eval.Course_Answer ==2:
-					Total_Eval.Total_Ppt_Like+=1
-				elif Course_Eval.Course_Answer ==3:
-					Total_Eval.Total_Practice_Like+=1
+	Total_Eval_List = Total_Evaluation.objects.all().delete()
+	for Course_Eval in Course_EvalList:
+		Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
+		try:
+			Total_Eval = Total_Evaluation.objects.filter(Course__Code=Course_Eval.Course.Code, Course__Professor__contains=Course_Professor,Course__CourseName=Course_Eval.Course.CourseName)[0]
 			
-			Total_Eval.save()
+		except:
+			Total_Eval=None
+		if Total_Eval == None:
+			a=Lecture.objects.filter(Code=Course_Eval.Course.Code, Professor__contains=Course_Professor,CourseName=Course_Eval.Course.CourseName).order_by("-Semester")[0]
+			Total_Eval = Total_Evaluation(Course=a)
+		Total_Professor = Total_Eval.Course.Professor.split("외")[0] != None and Total_Eval.Course.Professor.split("외")[0] or Total_Eval.Course.Professor
+		if Total_Eval.Course.CourseName ==Course_Eval.Course.CourseName and Total_Eval.Course.Code ==Course_Eval.Course.Code and Total_Professor == Course_Professor:
+			Total_Eval.Total_Homework+=Course_Eval.Homework
+			Total_Eval.Total_Level_Difficulty+=Course_Eval.Level_Difficulty
+			Total_Eval.Total_Count += 1
+			Total_Eval.Total_StarPoint+=Course_Eval.StarPoint
+			if Course_Eval.Check ==True:
+				Total_Eval.Total_Recommend +=1
+			if Course_Eval.What_Answer ==1:
+				Total_Eval.Total_Long_Answer +=1
+				
+			elif Course_Eval.What_Answer ==2:
+				Total_Eval.Total_Short_Answer+=1
+			elif Course_Eval.What_Answer ==3:
+				Total_Eval.Total_Mix+=1
+			elif Course_Eval.What_Answer ==4:
+				Total_Eval.Total_Unknown_Answer+=1
+			
+			if Course_Eval.Course_Answer ==1:
+				Total_Eval.Total_Book_Like+=1
+			elif Course_Eval.Course_Answer ==2:
+				Total_Eval.Total_Ppt_Like+=1
+			elif Course_Eval.Course_Answer ==3:
+				Total_Eval.Total_Practice_Like+=1
+		
+		Total_Eval.save()
 
 	Total_EvalList=Total_Evaluation.objects.all()
 
 	for Total_Eval in Total_EvalList:
-
 		Total_Eval.Total_Homework=Total_Eval.Total_Homework/Total_Eval.Total_Count
 		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty/Total_Eval.Total_Count
 
 		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint/Total_Eval.Total_Count
 		Total_Eval.save()
-	return HttpResponseRedirect("/")
+
+
+	
+	return HttpResponseRedirect("/")	

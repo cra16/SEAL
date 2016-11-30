@@ -581,7 +581,7 @@ def renewDB(request):
 		Total_Eval.Total_Homework=Total_Eval.Total_Homework/Total_Eval.Total_Count
 		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty/Total_Eval.Total_Count
 
-		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint/Total_Eval.Total_Count
+		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint
 		Total_Eval.save()
 
 

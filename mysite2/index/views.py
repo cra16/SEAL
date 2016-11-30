@@ -563,11 +563,12 @@ def renewDB(request):
 				if Course_Eval.Check ==True:
 					Total_Eval.Total_Recommend +=1
 				if Course_Eval.What_Answer ==1:
-					Total_Eval.Total_Mix+=1
+					Total_Eval.Total_Long_Answer +=1
+					
 				elif Course_Eval.What_Answer ==2:
 					Total_Eval.Total_Short_Answer+=1
 				elif Course_Eval.What_Answer ==3:
-					Total_Eval.Total_Long_Answer +=1
+					Total_Eval.Total_Mix+=1
 				elif Course_Eval.What_Answer ==4:
 					Total_Eval.Unknown_Answer+=1
 				

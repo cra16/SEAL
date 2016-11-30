@@ -104,6 +104,8 @@ for(var i=0; i<ccode.length; i++)
   $("#recommend_form").submit(function(){
     var HSemester = $("#HSemester").val();
     var paper_value =$("#paper_value").val();
+    var course_value =$("#course_value").val();
+
     var CourseComment = $("#CourseComment").val().length;
     var StarValue = $("#StarValue").val();
     //check if there is nothing
@@ -122,6 +124,11 @@ for(var i=0; i<ccode.length; i++)
     {
       alert("시험방식을 클릭하지 않으셨습니다.");
       return false;
+    }
+    else if(course_value==0)
+    {
+      alert("수업방식을 클릭하지 않으셨습니다.")
+      return false
     }
     else if(StarValue==0)
     {
@@ -139,6 +146,7 @@ for(var i=0; i<ccode.length; i++)
     var paper_value =$("#paper_value").val();
     var CourseComment = $("#CourseComment").val().length;
     var StarValue = $("#StarValue").val();
+    var course_value =$("#course_value").val();
     //check if there is nothing
     if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
@@ -155,6 +163,11 @@ for(var i=0; i<ccode.length; i++)
     {
       alert("시험방식을 클릭하지 않으셨습니다.");
       return false;
+    }
+      else if(course_value==0)
+    {
+      alert("수업방식을 클릭하지 않으셨습니다.")
+      return false
     }
     else if(StarValue==0)
     {

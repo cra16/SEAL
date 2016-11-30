@@ -194,7 +194,7 @@ def Search(request): #과목 검색 기능
 								for Ev in Eval:
 									total += Ev.Total_Count  
 						except:
-							continue
+							pass
 						TotalAdd.append(total)
 	
 		except:
@@ -230,6 +230,7 @@ def Search(request): #과목 검색 기능
 				'PageInformation' : PageInformation,
 				'TotalCount':T_Count,
 				'TotalAdd':TotalAdd,
+
 
 			}
 		if request.flavour =='full':
@@ -285,7 +286,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 						for Ev in Eval:
 							total += Ev.Total_Count  
 				except:
-					continue
+					pass
 				TotalAdd.append(total)
 
 	L_Data=PageView(LectureData)
@@ -304,7 +305,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
 				'TotalAdd':TotalAdd,
-				'temp':Lecture.objects.filter(Q(CourseName__icontains=SearchData) | Q(Professor__icontains=SearchData)).values("Code").distinct()[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+				'Test':Total_Evaluation.objects.filter(Course__Code="GEK10041")
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)
@@ -528,4 +529,64 @@ def GroupTotalCountRenew(request):
 		else:
 			Group_Total.GroupTotalCount +=Total_Eval.Total_Count
 		Group_Total.save()
+	return HttpResponseRedirect("/")
+
+def renewDB(request):
+	#이건 되도록 쓰지마세요
+	if not request.user.username=='admin_seal':
+		return HttpResponseRedirect('/')
+
+	Total_EvalList = Total_Evaluation.objects.all()
+	Course_EvalList = Course_Evaluation.objects.all()
+
+	for Total_Eval in Total_EvalList:
+		Total_Eval.Total_Homework=0
+		Total_Eval.Total_Level_Difficulty=0
+		Total_Eval.Total_Count =0
+		Total_Eval.Total_StarPoint=0
+		Total_Eval.Total_Mix=0
+		Total_Eval.Total_Short_Answer=0
+		Total_Eval.Total_Long_Answer =0
+		Total_Eval.Unknown_Answer=0
+		Total_Eval.Total_Book_Like=0
+		Total_Eval.Total_Ppt_Like=0
+		Total_Eval.Total_Practice_Like=0
+		Total_Professor = Total_Eval.Course.Professor.split("외")[0] != None and Total_Eval.Course.Professor.split("외")[0] or Total_Eval.Course.Professor
+		for Course_Eval in Course_EvalList:
+			Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
+
+			if Total_Eval.Course.CourseName ==Course_Eval.Course.CourseName and Total_Eval.Course.Code ==Course_Eval.Course.Code and Total_Professor == Course_Professor:
+				Total_Eval.Total_Homework+=Course_Eval.Homework
+				Total_Eval.Total_Level_Difficulty+=Course_Eval.Level_Difficulty
+				Total_Eval.Total_Count += 1
+				Total_Eval.Total_StarPoint+=Course_Eval.StarPoint
+				if Course_Eval.Check ==True:
+					Total_Eval.Total_Recommend +=1
+				if Course_Eval.What_Answer ==1:
+					Total_Eval.Total_Mix+=1
+				elif Course_Eval.What_Answer ==2:
+					Total_Eval.Total_Short_Answer+=1
+				elif Course_Eval.What_Answer ==3:
+					Total_Eval.Total_Long_Answer +=1
+				elif Course_Eval.What_Answer ==4:
+					Total_Eval.Unknown_Answer+=1
+				
+				if Course_Eval.Course_Answer ==1:
+					Total_Eval.Total_Book_Like+=1
+				elif Course_Eval.Course_Answer ==2:
+					Total_Eval.Total_Ppt_Like+=1
+				elif Course_Eval.Course_Answer ==3:
+					Total_Eval.Total_Practice_Like+=1
+			
+			Total_Eval.save()
+
+	Total_EvalList=Total_Evaluation.objects.all()
+
+	for Total_Eval in Total_EvalList:
+
+		Total_Eval.Total_Homework=Total_Eval.Total_Homework/Total_Eval.Total_Count
+		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty/Total_Eval.Total_Count
+
+		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint/Total_Eval.Total_Count
+		Total_Eval.save()
 	return HttpResponseRedirect("/")

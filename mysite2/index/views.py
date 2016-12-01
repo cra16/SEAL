@@ -517,7 +517,7 @@ def GroupTotalCountRenew(request):
 		return HttpResponseRedirect('/')
 
 	Total_Eval_List = Total_Evaluation.objects.all()
-
+	Group_Total_Evaluation.objects.all().delete()
 	for Total_Eval in Total_Eval_List:
 		try:
 			Group_Total = Group_Total_Evaluation.objects.get(CourseName = Total_Eval.Course.CourseName,Code = Total_Eval.Course.Code)
@@ -578,12 +578,12 @@ def renewDB(request):
 	Total_EvalList=Total_Evaluation.objects.all()
 
 	for Total_Eval in Total_EvalList:
-		Total_Eval.Total_Homework=Total_Eval.Total_Homework/Total_Eval.Total_Count
-		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty/Total_Eval.Total_Count
+		Total_Eval.Total_Homework=Total_Eval.Total_Homework
+		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty
 
 		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint
 		Total_Eval.save()
 
 
 	
-	return HttpResponseRedirect("/")	
+	return HttpResponseRedirect("/")

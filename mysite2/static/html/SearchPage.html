@@ -2,7 +2,7 @@
 {% load app_filter %}
 
   {% if CourseName == None %}
- 
+
         {% for SBoard in Search.0%}
              {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -48,12 +48,15 @@
               </a>
             </div></center>
     {% elif ProSelect == 1 %}
-    {{pro}}
+
     {% for SBoard in PageBoard.0%}
+
     {% if forloop.counter0|divisibleby:"2" %}
+   
         <div class="ui stackable two column grid">
 
           {% endif %}
+
           <div  class="column">
              <div class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">

@@ -81,7 +81,7 @@ $(window).load(function()
         $('div').on('click',"#CoursePagePrevious",function(event){
           event.stopPropagation();
           $(this).unbind("click");
-           var cssdata=$("#starsize").css("width");
+  
 
 
         $.ajax(
@@ -95,6 +95,8 @@ $(window).load(function()
               async:true,
               success:function(resp){     
                   $('#CoursePage').html(resp);
+                  $.fn.initSlide();
+                  $('span.starvalue').starvalue();
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -104,7 +106,7 @@ $(window).load(function()
             
           
           });
-           $("#starpoint").text(parseFloat(cssdata)/30.0);
+
       });  
 
 
@@ -112,7 +114,7 @@ $(window).load(function()
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id");
-            var cssdata=$("#starsize").css("width");
+
 
         $.ajax(
             { url : "/CoursePageNation"+cURL,
@@ -125,6 +127,8 @@ $(window).load(function()
               async:true,
               success:function(resp){     
                  $('#CoursePage').html(resp);
+                 $.fn.initSlide();
+                 $('span.starvalue').starvalue();
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -134,7 +138,7 @@ $(window).load(function()
             
           
           });
-        $("#starpoint").text(parseFloat(cssdata)/30.0);
+
 
 
 });
@@ -143,7 +147,7 @@ $(window).load(function()
           event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().attr("id");
-           var cssdata=$("#starsize").css("width");
+
         $.ajax(
             { url : "/CoursePageNation"+cURL,
               data : {'Page': $(this).attr("name"),
@@ -155,6 +159,8 @@ $(window).load(function()
               async:true,
               success:function(resp){     
                   $('#CoursePage').html(resp);
+                  $.fn.initSlide();
+                  $('span.starvalue').starvalue();
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -164,7 +170,7 @@ $(window).load(function()
             
             
           });
-         $("#starpoint").text(parseFloat(cssdata)/30.0);
+
 
 });
 

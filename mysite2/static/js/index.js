@@ -95,7 +95,10 @@ $("div").on('click',"#cname",function(event){
                     $('#SubjectSearch').html(resp);   
                   else if(CurrentPage=="LikeSugangPage")
                     $("#LikeSugangPage").html(resp);
-               
+                  
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -145,7 +148,9 @@ $("div").on('click',"#cname",function(event){
                     $('#SugangPage').html(resp);     
                
                  
-               
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -182,6 +187,9 @@ $("div").on('click',"#cname",function(event){
 
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
 
                 },
                 error: function(xhr, option, error){
@@ -222,6 +230,10 @@ $("div").on('click',"#cname",function(event){
                         $('#SugangPage').html(resp);     
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
 
                 },
                 error: function(xhr, option, error){
@@ -266,6 +278,10 @@ $("div").on('click',"#cname",function(event){
                         $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
 
@@ -311,6 +327,10 @@ $("div").on('click',"#cname",function(event){
                         $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -356,6 +376,10 @@ $("div").on('click',"#cname",function(event){
 
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -399,6 +423,10 @@ $("div").on('click',"#cname",function(event){
                         $('#LikeSugangPage').html(resp);   
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -438,6 +466,10 @@ $("div").on('click',"#cname",function(event){
 
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드

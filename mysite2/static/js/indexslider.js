@@ -13,7 +13,17 @@ $.fn.slider.Constructor.prototype.enable = function () {
     });
   }
 }	
-for(var i=1; i<=10; i++)
+
+
+
+
+$("[data-toggle=tooltip]").tooltip();
+
+});
+
+$.fn.initSlide=function()
+{
+  for(var i=1; i<=10; i++)
 {
     for(var j=1; j<=5;j++)
     {
@@ -25,9 +35,4 @@ for(var i=1; i<=10; i++)
         $('#sk'+i+''+j).slider('disable');
     }
 }
-
-
-
-$("[data-toggle=tooltip]").tooltip();
-
-});
+}

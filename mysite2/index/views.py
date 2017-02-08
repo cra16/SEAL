@@ -537,6 +537,18 @@ def renewDB(request):
 		return HttpResponseRedirect('/')
 
 	Course_EvalList = Course_Evaluation.objects.all()
+	'''
+	for Course_Eval in Course_EvalList:
+		Course_Professor = Course_Eval.Course.Professor.split("외")[0] !=None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
+		Course_Code = Course_Eval.Course.Code
+		Course_CourseName = Course_Eval.Course.CourseName
+		LectureObject=Lecture.objects.filter(Code=Course_Code, Professor__contains=Course_Professor, CourseName=Course_CourseName).order_by("Semester")[0]
+		Course_Eval.Course = LectureObject
+		Course_Eval.save()
+	'''
+	
+
+
 	Total_Eval_List = Total_Evaluation.objects.all().delete()
 	for Course_Eval in Course_EvalList:
 		Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor

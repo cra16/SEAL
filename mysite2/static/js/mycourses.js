@@ -440,7 +440,7 @@ $("[data-toggle=tooltip]").tooltip();
 
     });
 
-$('div').on('click','#edit',function(event){
+$('body').on('click','.edit',function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var CurrentPage=$(this).parent().parent().attr("id")
@@ -474,6 +474,7 @@ $('div').on('click','#edit',function(event){
               input.type="hidden";
               form.appendChild(input);
             }
+            $("body").append(form);
             form.submit();    
              
           
@@ -481,7 +482,7 @@ $('div').on('click','#edit',function(event){
 
 
     });
-    $('div').on('click','#like_delete',function(event){
+    $('div').on('click','.like_delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var confirm1 = window.confirm("이 강의를 삭제하시겠습니까?");

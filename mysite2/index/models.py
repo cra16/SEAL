@@ -28,7 +28,7 @@ class Course_Evaluation(models.Model):
 	create_date = models.DateTimeField(default=datetime.datetime.today())
 	update_date = models.DateTimeField(default=datetime.datetime.today())
 	def __unicode__(self):
-			return '%s %s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.CreatedID)
+			return '%s %s %s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.CreatedID,self.Course.Semester)
 
 
 class Total_Evaluation(models.Model):

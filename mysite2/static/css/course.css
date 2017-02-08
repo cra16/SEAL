@@ -827,3 +827,8 @@
 #sl6C .slider-selection{
 	background: #ba55d3;
 }
+
+.qna_border_a p, .qna_border_a h5
+{
+	font-size:20px;
+}

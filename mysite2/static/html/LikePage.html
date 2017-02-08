@@ -6,7 +6,7 @@
           {% endif %}
           <div  class="column">
             <div class="ui raised segment">
-                <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+              <div id="likebtn2{{forloop.counter}}"  class="left floated ui compact segment">
 
 
                 <center><button id="likebutton" name="{{PageBoard2.Course.id}}"><img src="{% static "css/seal.png" %}" height="45px" width="45px"></button></center>
@@ -28,7 +28,7 @@
               </div>
             
             <div class="left floated center aligned sixteen wide column">                
-                <button type="button" id="thumbs_up" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>
+                <button type="button" id="thumbs_up" data-toggle="tooltip" data-original-title="해당 교수님이 연 과목에 대한 학생들의 추천 수 입니다." class="circular ui icon button" ><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>
                  <div class="right floated right aligned sixteen wide column" style="margin-left:15px; margin-bottom:-15px;"><span class="starvalue">{{PageBoard2.Total_StarPoint}}</span></div>  
               </div>
 

@@ -7,6 +7,7 @@ from django.db.models import Q #데이터 베이스 OR 기능 구현
 from django.db.models import Count#Group By 쓰기 위해 해야함
 from index.models import * #아직 시험중		
 from login.models import *
+from notice.models import *
 from django import template
 # Create your views here.
 
@@ -297,6 +298,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 
 	BestBoard = BestBoardView()
 	
+	NoticeBoard = NoticeBoardView();
+
 	dic = {'user':User,
 		   'PageBoard':TotalBoard,
 		   'TotalCount' : TotalCount,
@@ -310,7 +313,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'LikeList':LikeDataList,
 		   'CourseName':None,
 		   'ProSelect' :PageInformation,
-
+		   'NoticeBoard':NoticeBoard
 			  }
 
 	return dic
@@ -1044,3 +1047,9 @@ def VacationSemesterChange(Board):
 			Board[i].Course.Semester = str(Board[i].Course.Semester[0:3])+"Winter"
 
 	return Board
+
+def NoticeBoardView():
+	 NoticeBoard=Notice_Board.objects.order_by("id")[0:2]
+	 
+	 return NoticeBoard
+

@@ -21,7 +21,7 @@ $(document).ready(function()
     $('.fullscreen.modal').modal('show');
 
 $("div").on('click',"#cname",function(event){
-        event.stopPropagation();
+        event.stopPropagation(); 
         $(this).unbind("click");
         var CurrentPage = null
         if($(".course_data").length != 0)
@@ -98,6 +98,7 @@ $("div").on('click',"#cname",function(event){
                   
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -150,6 +151,7 @@ $("div").on('click',"#cname",function(event){
                  
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -190,6 +192,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -233,6 +236,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
 
 
                 },
@@ -281,6 +285,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -330,6 +335,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -379,6 +385,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -426,6 +433,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){
@@ -469,6 +477,7 @@ $("div").on('click',"#cname",function(event){
 
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
 
                 },
                 error: function(xhr, option, error){

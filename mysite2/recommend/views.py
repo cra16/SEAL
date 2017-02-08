@@ -89,7 +89,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		renew_professor= Professor.split("외")[0] != None and Professor.split("외")[0] or Professor
 
 		try:
-			RecommendData=Recommend_Course.objects.filter(Course__CourseName=CourseName,Course__Code = CourseCode, Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
+			RecommendData=Recommend_Course.objects.filter(Course__Semester=Semester,Course__CourseName=CourseName,Course__Code = CourseCode, Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
 
 			if(RecommendData != None):
 				return HttpResponseRedirect('/NotEmptyRecommend')
@@ -134,7 +134,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			
 #			new_Homework=5
 		
-		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("-Semester")[0]
+		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
 		for new_Answer in new_Answer_list:#서술형 답변
 			if new_Answer =="":
@@ -148,7 +148,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Recommend.save()
 
 		try:
-			T_Eval=Total_Evaluation.objects.filter(Course__Semester=Semester , Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor__contains=renew_professor)[0]
+			T_Eval=Total_Evaluation.objects.filter(Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor__contains=renew_professor)[0]
 			#위에서 부른 강의 정보를 바탕으로 해당 강의의 총 평가 Data 불러옴
 		except:
 			T_Eval =None 

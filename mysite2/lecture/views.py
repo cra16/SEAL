@@ -47,7 +47,7 @@ def AutoFastLecUpdate(request):
 		hisnet_id = request.POST['HisnetID']
 		hisnet_pw = request.POST['HisnetPassword']
 		
-		hak_lst = ['2010-2','2010-3','2010-4']
+		hak_lst = ['2016-4','2017-1']
 		# cur_semester_lst = ['15-1', '15-3', '15-2', '15-4', '16-1', '16-3', '16-2']
 		hakbu_lst = [
 			'0001', '0007','0008','0009', '0010', '0011',

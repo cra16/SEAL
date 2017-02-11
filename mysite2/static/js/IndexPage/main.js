@@ -419,7 +419,7 @@
     
      $('div').on('click',"#Close",function(event){
          event.stopPropagation();
-          $(this).unbind("click");
+        $(this).unbind("click");
         var Find = $(this).parent().find("[id=Open]");
 
         $(this).hide();
@@ -427,12 +427,50 @@
     });
     $('div').on('click',"#Open",function(event){
        event.stopPropagation();
-          $(this).unbind("click");
+        $(this).unbind("click");
         var Find = $(this).parent().find("[id=Close]");
 
         $(this).hide();
         $(Find).show();
     });    
+    $('body').on('click','.course_edit',function(event){
+        event.stopPropagation();
+          $(this).unbind("click");
+            var Parent = $(this).closest(".sugang-box")
+            var Code = Parent.find("[name=ccode]").text();
+            var CourseName=Parent.find("[name=cname]").text();
+            var prof = Parent.find("[name=cprof]").attr("value");
+            var period = Parent.find("[name=period]").attr("value");
+            var semester = Parent.find("[name=csem]").attr("value");
+            var CourseID = $(this).parent().attr("id");
+
+            var form =document.createElement("form");
+            form.method ="POST";
+            form.action = "/UpdateCourse/"
+            var inputdata ={
+              'Code':Code,
+                      'CourseName': CourseName,
+                      'Professor':prof,
+                      'Semester':semester,
+                      'CourseID':CourseID,
+            }
+            var input; 
+            for(key in inputdata)
+            {
+              input= document.createElement("input");
+              input.name =key;
+              input.value=inputdata[key];
+              input.type="hidden";
+              form.appendChild(input);
+            }
+            $("body").append(form);
+            form.submit();    
+             
+          
+
+
+
+    });
 
 });
 

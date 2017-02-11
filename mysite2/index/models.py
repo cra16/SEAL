@@ -12,6 +12,7 @@ class Description_Answer(models.Model):
 
 class Course_Evaluation(models.Model):
 	Course = models.ForeignKey(Lecture)
+	Total_Course_id = models.IntegerField(null=False)
 	CreatedID = models.ForeignKey(Profile)
 	Speedy = models.PositiveSmallIntegerField(default=5, null=False)
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
@@ -28,7 +29,7 @@ class Course_Evaluation(models.Model):
 	create_date = models.DateTimeField(default=datetime.datetime.today())
 	update_date = models.DateTimeField(default=datetime.datetime.today())
 	def __unicode__(self):
-			return '%s %s %s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.CreatedID,self.Course.Semester)
+			return '%s %s %s %s %s %d' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.CreatedID,self.Course.Semester,self.Total_Course_id)
 
 
 class Total_Evaluation(models.Model):

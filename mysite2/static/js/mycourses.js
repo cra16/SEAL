@@ -443,27 +443,23 @@ $("[data-toggle=tooltip]").tooltip();
 $('body').on('click','.edit',function(event){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().attr("id")
-           var Parent=$(this).parent().parent().parent();
-            var Code = Parent.find("[name=ccode]").text();
-            var CourseName=Parent.find("[id=cname]").text();
-            var prof = Parent.find("[id=professor]").val();
-            var period = Parent.find("[id=period]").val();
-            var semester = Parent.find("[id=semester]").val();
-            var pagenation=$('body').find('[id=RecommendPageNation]');
-            var CurrentPage = pagenation.find('.active','item').attr('name');
-          
-
-            var form =document.createElement("form");
-            form.method ="POST";
-            form.action = "/UpdateCourse/"
+          var Parent = $(this).closest(".sugang-box")
+          var Code = Parent.find("[name=ccode]").text();
+          var CourseName=Parent.find("[name=cname]").text();
+          var prof = Parent.find("[name=cprof]").attr("value");
+          var period = Parent.find("[name=period]").attr("value");
+          var semester = Parent.find("[name=csem]").attr("value");
+          var CourseID = $(this).parent().attr("id");
+          var form =document.createElement("form");
+          form.method ="POST";
+          form.action = "/UpdateCourse/"
             var inputdata ={
               'Code':Code,
                       'CourseName': CourseName,
                       'Professor':prof,
                       'Period':period,
                       'Semester':semester,
-                      'CurrentPage':CurrentPage
+                      'CourseID':CourseID,
             }
             var input; 
             for(key in inputdata)

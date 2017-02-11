@@ -24,41 +24,11 @@ $("div").on('click',"#cname",function(event){
         event.stopPropagation(); 
         $(this).unbind("click");
         var CurrentPage = null
-        if($(".course_data").length != 0)
-        {
-          $(".course_data").each(function()
-          {   
-              temp = $(this).attr("class");
-              splitdata=temp.split(" ");
-              for(var i=0; i<splitdata.length; i++)
-              {
-                  if(splitdata[i] =="active")
-                  {
-                      CurrentPage =$(this).attr("id");
-                      break;
-                  }
-              }
-              
-                
-
-          });
-        }
-        else
-        {
-
-          if($(this).parent().parent().parent().parent().parent().parent().attr('id') =="SubjectSearch")
-          {
-            CurrentPage ="SubjectSearch"; 
-          }
-       
-
-        }
+        CurrentPage =$(this).closest(".course_data").attr("id");
+        alert(CurrentPage);
+     
         
-        if(CurrentPage==null)
-        {
-          CurrentPage="Search_Page";
-        }
-       
+        
         var Parent=$(this).parent().parent().parent();
         var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();

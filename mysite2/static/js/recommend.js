@@ -103,8 +103,8 @@ for(var i=0; i<ccode.length; i++)
 
   $("#recommend_form").submit(function(){
     var HSemester = $("#HSemester").val();
-    var paper_value =$("#paper_value").val();
-    var course_value =$("#course_value").val();
+    var paper_value =$(".paper_value");
+    var course_value =$(".course_value");
 
     var CourseComment = $("#CourseComment").val().length;
     var StarValue = $("#StarValue").val();
@@ -115,38 +115,44 @@ for(var i=0; i<ccode.length; i++)
       $("#text_semester").css("border", "2px solid red");
       return false;
     } 
-    else if(CourseComment<30)
+    if(CourseComment<30)
     {
       alert("comment의 길이는 30자 이상 이어야 합니다.");
       return false;
     }
-    else if(paper_value==0)
+    paper_value.each(function()
     {
-      alert("시험방식을 클릭하지 않으셨습니다.");
-      return false;
-    }
-    else if(course_value==0)
+        if($(this).val()==0)
+        {
+          alert("시험방식을 클릭하지 않으셨습니다.");
+          return false;
+        }
+    })
+    course_value.each(function()
     {
-      alert("수업방식을 클릭하지 않으셨습니다.")
-      return false
-    }
-    else if(StarValue==0)
+        if($(this).val()==0)
+        {
+           alert("수업방식을 클릭하지 않으셨습니다.")
+          return false
+        }
+    })
+    if(StarValue==0)
     {
       alert("별점 0점은 줄 수 없습니다.");
       return false;
     }
 
-    else {
+    {
       $('#recommend_form').attr({action:'/Recommend/Recommend_Write'}).submit();
     }
   });
 
   $("#Update_form").submit(function(){
     var HSemester = $("#HSemester").val();
-    var paper_value =$("#paper_value").val();
+    var paper_value =$(".paper_value");
+    var course_value =$(".course_value");
     var CourseComment = $("#CourseComment").val().length;
     var StarValue = $("#StarValue").val();
-    var course_value =$("#course_value").val();
     //check if there is nothing
     if(HSemester == "0" || HSemester == ""){
       window.scrollTo(0, 200);
@@ -154,28 +160,34 @@ for(var i=0; i<ccode.length; i++)
       $("#text_semester").css("border", "2px solid red");
       return false;
     } 
-    else if(CourseComment<30)
+    if(CourseComment<30)
     {
       alert("comment의 길이는 30자 이상 이어야 합니다.");
       return false;
     }
-    else if(paper_value==0)
+    paper_value.each(function()
     {
-      alert("시험방식을 클릭하지 않으셨습니다.");
-      return false;
-    }
-      else if(course_value==0)
+        if($(this).val()==0)
+        {
+          alert("시험방식을 클릭하지 않으셨습니다.");
+          return false;
+        }
+    })
+    course_value.each(function()
     {
-      alert("수업방식을 클릭하지 않으셨습니다.")
-      return false
-    }
-    else if(StarValue==0)
+        if($(this).val()==0)
+        {
+           alert("수업방식을 클릭하지 않으셨습니다.")
+          return false
+        }
+    })
+    if(StarValue==0)
     {
       alert("별점 0점은 줄 수 없습니다.");
       return false;
     }
 
-    else {
+    {
       $('#Update_form').attr({action:'/UpdateWrite/'}).submit();
     }
   });
@@ -188,11 +200,11 @@ $(document).ready(function(){
     });
   $('div').on("click",".paper_button",function()
   {
-    $(".paper_value").val($(this).val());
+    $(this).next().val($(this).val());
   });
    $('div').on("click",".course_button",function()
   {
-    $(".course_value").val($(this).val());
+    $(this).next().val($(this).val());
   });
 });
 

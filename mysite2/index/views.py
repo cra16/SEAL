@@ -546,9 +546,6 @@ def renewDB(request):
 		Course_Eval.Course = LectureObject
 		Course_Eval.save()
 	'''
-	
-
-
 	Total_Eval_List = Total_Evaluation.objects.all().delete()
 	for Course_Eval in Course_EvalList:
 		Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
@@ -586,6 +583,8 @@ def renewDB(request):
 				Total_Eval.Total_Practice_Like+=1
 		
 		Total_Eval.save()
+		Course_Eval.Total_Course_id=Total_Eval.id
+		Course_Eval.save() 
 
 	Total_EvalList=Total_Evaluation.objects.all()
 

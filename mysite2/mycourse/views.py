@@ -289,20 +289,20 @@ def UpdateRedirect(request):
 		CourseCode=request.POST['Code']
 		Semester=request.POST['Semester']
 		Professor=request.POST['Professor']
+		Course_ID=request.POST['CourseID']
 	UserProfile=Profile.objects.get(User = request.user)
-	LectureData= Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor__contains=Professor,Semester=Semester)[0]
 	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor__contains=Professor).order_by('-Semester')
 	SemesterList=list()
 	for semester in SemesterData:
 		if semester.Semester not in SemesterList:
 			SemesterList.append(semester.Semester)
 
-	CourseBoard = Course_Evaluation.objects.get(Course__Code = CourseCode, Course__CourseName=CourseName, Course__Professor__contains=Professor,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
+	CourseBoard = Course_Evaluation.objects.get(id=Course_ID,CreatedID=UserProfile) #DB 고유 ID로 접근해서 검색		
 	
 	totalcount=0
 	MyCourseBoard = None
 	CourseBoard.Course.Professor=Professor
-	Description=Description_Answer.objects.filter(Course=LectureData,CreatedID=UserProfile)
+	Description=Description_Answer.objects.filter(Course__id=Course_ID,CreatedID=UserProfile)
 			
 	dic = {'user':request.user,
           'BestBoard':BestBoardView(),
@@ -331,7 +331,7 @@ def CourseUpdate(request):
 		new_Answer_list = request.POST.getlist('mytext[]')
 		new_Who = request.POST['who']
 
-		new_Url = request.POST['url']
+#		new_Url = request.POST['url']
 		new_paper_value= int(request.POST['paper_value'])
 		new_course_value =request.POST['course_value']
 		CourseName=request.POST['HCourseName']
@@ -374,7 +374,7 @@ def CourseUpdate(request):
 		UpdateCourseEval.What_Answer = new_paper_value
 		UpdateCourseEval.Course_Answer = new_course_value
 		UpdateCourseEval.Who_Answer = new_Who
-		UpdateCourseEval.Url_Answer = new_Url
+		#UpdateCourseEval.Url_Answer = new_Url
 		UpdateCourseEval.CourseComment = new_CourseComment
 		
 		if UpdateCourseEval.What_Answer == 1:
@@ -406,6 +406,7 @@ def CourseUpdate(request):
 			temp.save()
 		
 		UpdateTotalEval.save()
+		UpdateCourseEval.Total_Course_ID=UpdateTotalEval.id
 		UpdateCourseEval.save()
 		return HttpResponseRedirect("/MyCourse")
 

@@ -85,6 +85,13 @@ def Recommend_Write(request): #추천 강의 DB입력
 		CourseCode=request.POST['HCourseCode']
 		Semester=request.POST['HSemester']
 		Professor=request.POST['HCourseProfessor']
+		new_CourseComment=request.POST['CourseComment']
+		new_Check = request.POST['ButtonCheck'] =="True" and True or False
+		new_Satisfy = float(request.POST['StarValue'])
+		new_Answer_list = request.POST.getlist('mytext[]')
+		new_Who = request.POST['who']
+		new_paper_value= int(request.POST.getlist(['paper_value']))
+		new_course_value= int(request.POST.getlist(['course_value']))
 
 		renew_professor= Professor.split("외")[0] != None and Professor.split("외")[0] or Professor
 
@@ -102,30 +109,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Level_Difficulty=(request.POST['sl3'] !="" and int(request.POST['sl3']) or 5)
 		
 #			
-		new_CourseComment=request.POST['CourseComment']
-		new_Check = request.POST['ButtonCheck'] =="True" and True or False
-		new_Satisfy = float(request.POST['StarValue'])
-		new_Answer_list = request.POST.getlist('mytext[]')
-		new_Who = request.POST['who']
-		#new_Url = request.POST['url']
-		new_paper_value= int(request.POST['paper_value'])
-		new_course_value= int(request.POST['course_value'])
-		#if new_Url.find("http://")==-1:
-		#	new_Url="http://"+new_Url
-		'''
-		except:
-			new_Speedy=5
-			new_Level_Difficulty=5
-			new_Homework=5
-			new_CourseComment=request.POST['CourseComment']
-			new_Check = request.POST['ButtonCheck'] == "True" and True or False
-			new_Satisfy = float(request.POST['StarValue'])
-			new_Answer_list = request.POST.getlist('mytext[]')
-			new_Who = request.POST['who']
-			new_Url = request.POST['url']
-			new_paper_value= int(request.POST['paper_value'])
-		'''
-		# 추천 여부에 따라 1 or 0
+		
+		
+		
+		
 		is_recommend = ( request.POST['ButtonCheck'] == "True" )
 		if is_recommend:
 			recommend_cnt = 1
@@ -143,9 +130,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 			temp.save()
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Course_Answer=new_course_value)
-		new_Eval.save()
-		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
-		new_Recommend.save()
+		
+		
 
 		try:
 			T_Eval=Total_Evaluation.objects.filter(Course__Code=CourseCode, Course__CourseName = CourseName, Course__Professor__contains=renew_professor)[0]
@@ -163,20 +149,22 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Homework = new_Homework, Total_Level_Difficulty = new_Level_Difficulty,  Total_Count = 1,
 				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0,Total_Book_Like=0, Total_Ppt_Like=0, Total_Practice_Like=0
 			)
-			if new_paper_value==1:
-				Total_Eval.Total_Long_Answer+=1
-			elif new_paper_value ==2:
-				Total_Eval.Total_Short_Answer+=1
-			elif new_paper_value ==3:
-				Total_Eval.Total_Mix+=1
-			elif new_paper_value ==4:
-				Total_Eval.Total_Unknown_Answer+=1
-			if new_course_value==1:
-				Total_Eval.Total_Book_Like+=1
-			elif new_course_value==2:
-				Total_Eval.Total_Ppt_Like+=1
-			elif new_course_value==3:
-				Total_Eval.Total_Practice_Like+=1
+			for new_papar in new_paper_value:
+				if new_papar==1:
+					Total_Eval.Total_Long_Answer+=1
+				elif new_papar ==2:
+					Total_Eval.Total_Short_Answer+=1
+				elif new_papar ==3:
+					Total_Eval.Total_Mix+=1
+				elif new_papar ==4:
+					Total_Eval.Total_Unknown_Answer+=1
+			for new_course in new_course_value:
+				if new_course==1:
+					Total_Eval.Total_Book_Like+=1
+				elif new_course==2:
+					Total_Eval.Total_Ppt_Like+=1
+				elif new_course==3:
+					Total_Eval.Total_Practice_Like+=1
 			Total_Eval.save()
 		else: #update
 			#T_Eval.Total_Helper += int(new_Helper)
@@ -211,6 +199,12 @@ def Recommend_Write(request): #추천 강의 DB입력
 			Group_Total.GroupTotalCount+=1
 			Group_Total.save()	
 
+		new_Eval.Total_Course_id=T_Eval.id
+		new_Eval.save()
+
+		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
+		new_Recommend.save()
+		
 		URL = "/CourseProfessor/"+str(new_Course.id)
 		return HttpResponseRedirect(URL)
 

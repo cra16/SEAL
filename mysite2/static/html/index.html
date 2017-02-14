@@ -10,7 +10,6 @@
     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
     <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
     <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
-    <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/indexslider.css" %}">
     <script type="text/javascript" src="{% static "js/index.js" %}"></script>
     <script type="text/javascript" src="{% static "js/IndexPage/commenthide.js" %}"></script>
@@ -18,47 +17,13 @@
     {% endblock%}
     
  
-  <body  onload="onLoad()">
+  <body >
     {% block content %}  
     
     
 
     <div class="containerss"></div>
-     <div class="container" style="display:flex; justify-content: space-between;">
-
-        <div class="col-md-6 Notice_List ui column" style="width:100%; display:flex; justify-content: center; padding-bottom:30px;">   
-
-         <div style="display:flex; flex-direction: column;" id="qna_board">
-              사용방법
-              <img width="100px" height="100px">
-          </div>
-        </div>
-        <div class="col-md-6 Notice_List ui column" style="width:100%; display:flex; justify-content: center; padding-bottom:30px;">   
-
-         <div id="qna_board">
-              <table class="ui table">
-                <thead>
-                  <tr>공지사항
-                  </tr>
-                </thead>
-                <tbody class="qna_sub">
-                {%for Board in NoticeBoard%}
-                <tr id="qna1">
-                          <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
-                          <td class="qna_title"><a href="/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
-                          {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
-                          <img src="{% static "fonts/latest.gif"%}"></span></td>
-                          {%endif%}
-                          <td><center>{{Board.TextWriter}}</center></td>
-                          <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
-                          <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
-                </tr>
-                {%endfor%}
-                </tbody>
-              </table>
-          </div>
-        </div>
-      </div>
+    
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
     <div class="col-md-8 col-sm-12 col-xs-12">
@@ -137,7 +102,7 @@
           {% endif %}
       {%endfor%}
                         
-      <center><div id ="FirstPageNation" class="course_data ui borderless pagination menu">
+      <center><div id ="FirstPageNation" class=" ui borderless pagination menu">
               <a id ="Previous" name="{{PageInformation.0.0}}" class="item" herf="#FirstPage" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
@@ -288,7 +253,7 @@
                  <p ><a style="cursor:pointer" href="/CourseProfessor/{{SuBoard.Course.id}}"><span id = "last_cname"  class="cname" name="cname" value = "">{{SuBoard.Course.CourseName}}</span></a></p>
                 <input type = "hidden" id="period" value = "{{SuBoard.Period}}">
                 <p><span id="cprof1" name = "cprof">{{SuBoard.Course.Professor}} 교수님</span></p>
-                <p id="title_s"><span id="csem1" name = "cprof">{{SuBoard.Course.Semester}} 학기</span></p>
+                <p id="title_s"><span id="csem1" name = "csem">{{SuBoard.Course.Semester}} 학기</span></p>
 
             {% if SuBoard.Check == True %}
           <button type ="button" data-toggle="tooltip" data-original-title="해당 과목에 대한 해당 학생의 추천입니다."  id="enable6" style="background-color:#FFEB3B; margin-left:22px; font-size:18px;" class="circular ui icon button" ><i class="glyphicon glyphicon-thumbs-up"></i></button>
@@ -449,7 +414,7 @@
             {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}
-          <div class="column">
+          <div class="column sugang-box">
              <div class="ui raised segment">
               <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
                 <center><img src="{% static "css/seal.png" %}" height="45px" width="45px"></center>

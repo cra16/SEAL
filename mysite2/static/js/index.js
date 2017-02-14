@@ -25,9 +25,7 @@ $("div").on('click',"#cname",function(event){
         $(this).unbind("click");
         var CurrentPage = null
         CurrentPage =$(this).closest(".course_data").attr("id");
-        alert(CurrentPage);
      
-        
         
         var Parent=$(this).parent().parent().parent();
         var Code = Parent.find("[name=ccode]").text();

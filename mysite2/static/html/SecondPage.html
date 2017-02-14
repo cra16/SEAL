@@ -1,6 +1,6 @@
 {% load app_filter %}
 {%load staticfiles%}
-<script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+
 
        {% if CourseName == None%}
        {% for PBoard2 in PageBoard.1%}
@@ -55,10 +55,10 @@
             <div class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
                 <center><button id="likebutton" name = "{{PBoard2.Course.id}}" ><img src="{% static "css/write.png" %} " height="45px" width="45px">
-                  <div style="margin-top:16px; color:teal"><b><u>WRITE</u></b></div></button></center>
+                <div style="margin-top:16px; color:teal"><b><u>WRITE</u></b></div></button></center>
               </div>
               {% if PBoard2.CreatedID.User.username == user.profile.User.username %}             
-              <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PBoard3.Course.id}}"><i class="glyphicon glyphicon-edit" class="course_edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
+              <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PBoard2.Course.id}}"><i class="glyphicon glyphicon-edit" class="course_edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
               {% endif %}
               <div class="sixteen wide column">
   
@@ -87,7 +87,7 @@
                   <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
               </div>
             </div>
-            </div>
+          </div>
             {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
         </div>
         <div class="ui divider"></div>

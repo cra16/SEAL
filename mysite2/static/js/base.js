@@ -1,7 +1,7 @@
 $(document).ready(function()
 {
 
-	 $('div').on('click','#category-subject',function()
+	 $('body').on('click','#category-subject',function()
   { 
     event.stopPropagation();
     
@@ -24,7 +24,7 @@ $(document).ready(function()
     });
     return false;
   });
-  $('div').on('click','.category_item',function()
+  $('body').on('click','.category_item',function()
   { 
       var data_value=$(this).attr("data-value");
    
@@ -60,7 +60,7 @@ $(document).ready(function()
 
     });
 
-    $('div').on('click','.detail_item',function()
+    $('body').on('click','.detail_item',function()
   {
  
       event.stopPropagation();
@@ -92,12 +92,12 @@ $(document).ready(function()
           });
          
   });
-  $('div').on('click','.subject_item',function()
+  $('body').on('click','.subject_item',function()
   {  event.stopPropagation();
      var category_name = $(this).parent().parent().find('.text').eq(0).text();
     $('#major_category').val(category_name);
   });
-  $('div').on('click','.category-search',function()
+  $('body').on('click','.category-search',function()
   {
        $.ajax(
             { url : "/Search_Category_Subject/",

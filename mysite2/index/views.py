@@ -537,6 +537,24 @@ def renewDB(request):
 		return HttpResponseRedirect('/')
 
 	Course_EvalList = Course_Evaluation.objects.all()
+	for Course_Eval in Course_EvalList:
+		if Course_Eval.What_Answer == 1:
+			Course_Eval.What_Answer =1000
+		elif Course_Eval.What_Answer == 2:
+			Course_Eval.What_Answer = 100
+		elif Course_Eval.What_Answer ==3 :
+			Course_Eval.What_Answer=10
+		elif Course_Eval.What_Answer ==4 :
+			Course_Eval.What_Answer =5
+		if Course_Eval.Course_Answer == 1:
+			Course_Eval.Course_Answer =100
+		elif Course_Eval.Course_Answer == 2:
+			Course_Eval.Course_Answer = 10
+		elif Course_Eval.Course_Answer ==3 :
+			Course_Eval.Course_Answer=5
+		Course_Eval.save()
+
+
 	'''
 	for Course_Eval in Course_EvalList:
 		Course_Professor = Course_Eval.Course.Professor.split("외")[0] !=None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
@@ -565,21 +583,21 @@ def renewDB(request):
 			Total_Eval.Total_StarPoint+=Course_Eval.StarPoint
 			if Course_Eval.Check ==True:
 				Total_Eval.Total_Recommend +=1
-			if Course_Eval.What_Answer ==1:
-				Total_Eval.Total_Long_Answer +=1
-				
-			elif Course_Eval.What_Answer ==2:
+
+			if Course_Eval.What_Answer-1000 >=0:
+				Total_Eval.Total_Long_Answer +=1				
+			elif Course_Eval.What_Answer%1000-100 >=0:
 				Total_Eval.Total_Short_Answer+=1
-			elif Course_Eval.What_Answer ==3:
+			elif Course_Eval.What_Answer%100-10 >=0:
 				Total_Eval.Total_Mix+=1
-			elif Course_Eval.What_Answer ==4:
+			elif Course_Eval.What_Answer%10-1 >=0:
 				Total_Eval.Total_Unknown_Answer+=1
 			
-			if Course_Eval.Course_Answer ==1:
+			if Course_Eval.Course_Answer%1000-100>=0:
 				Total_Eval.Total_Book_Like+=1
-			elif Course_Eval.Course_Answer ==2:
+			elif Course_Eval.Course_Answer%100-10 >=0:
 				Total_Eval.Total_Ppt_Like+=1
-			elif Course_Eval.Course_Answer ==3:
+			elif Course_Eval.Course_Answer%10-1>=0:
 				Total_Eval.Total_Practice_Like+=1
 		
 		Total_Eval.save()

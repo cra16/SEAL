@@ -36,71 +36,7 @@
         <i class="glyphicon glyphicon-book"></i> My Courses
       </h2>
 
-<!--
-      <div class="ui small form">
-        <div class="four fields">
-          <div class="field">
-            <label>학기 선택</label>
-            <div class="ui selection dropdown">
-              <div class="default text">---전체---</div>
-              <i class="dropdown icon"></i>
-              <input name="hidden-field" type="hidden">
-              <div class="menu">
-                <div class="item" data-value="전체">---전체---</div>
-                <div class="item" data-value="2016-2">2016 / 1</div>
-                <div class="item" data-value="2016-1">2016 / Winter</div>
-                <div class="item" data-value="2015-4">2015 / 2</div>
-                <div class="item" data-value="2015-3">2015 / Summer</div>
-                <div class="item" data-value="2015-2">2015 / 1</div>
-                <div class="item" data-value="2015-1">2015 / Winter</div>
-                <div class="item" data-value="2014-4">2014 / 2</div>
-                <div class="item" data-value="2014-3">2014 / Summer</div>
-                <div class="item" data-value="2014-2">2014 / 1</div>
-                <div class="item" data-value="2014-1">2014 / Winter</div>
-                <div class="item" data-value="2013-4">2013 / 2</div>
-                <div class="item" data-value="2013-3">2013 / Summer</div>
-                <div class="item" data-value="2013-2">2013 / 1</div>
-                <div class="item" data-value="2013-1">2013 / Winter</div>
-                <div class="item" data-value="2012-4">2012 / 2</div>
-                <div class="item" data-value="2012-3">2012 / Summer</div>
-                <div class="item" data-value="2012-2">2012 / 1</div>
-                <div class="item" data-value="2012-1">2012 / Winter</div>
-                <div class="item" data-value="2011-4">2011 / 2</div>
-                <div class="item" data-value="2011-3">2011 / Summer</div>
-                <div class="item" data-value="2011-2">2011 / 1</div>
-                <div class="item" data-value="2011-1">2011 / Winter</div>
-              </div>
-            </div> 
-          </div>
-          <div class="field">
-            <label>학부 선택</label>
-            <div class="ui selection dropdown">
-              <div class="default text">---전체---</div>
-              <i class="dropdown icon"></i>
-              <input name="hidden-field" type="hidden">
-              <div class="menu">
-                <div class="item" data-value="전체">---전체---</div>
-                <div class="item" data-value="0001">글로벌리더십학부</div>
-                <div class="item" data-value="0009">창의융합교육원</div>
-                <div class="item" data-value="0010">Global Edison Academy</div>
-                <div class="item" data-value="0011">국제어문학부</div>
-                <div class="item" data-value="0012">언론정보문화학부</div>
-                <div class="item" data-value="0021">경영경제학부</div>
-                <div class="item" data-value="0022">법학부</div>
-                <div class="item" data-value="0024">상담심리사회복지학부</div>
-                <div class="item" data-value="0033">생명과학부</div>
-                <div class="item" data-value="0071">전산전자공학부</div>
-                <div class="item" data-value="0074">콘텐츠융합디자인학부</div>
-                <div class="item" data-value="0077">기계제어공학부</div>
-                <div class="item" data-value="0078">공간환경시스템공학부</div>
-                <div class="item" data-value="0090">산업교육학부</div>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div>
-    -->
-    {{Recommend}}
+
       <div class="ui small tabular filter menu">
         <a class="active item" data-tab="unread">내가 평가한 강의</a>
         <a class="item" data-tab="saved">듣고 싶은 강의</a>
@@ -114,7 +50,7 @@
            <div class="ui stackable two column grid">
 
           {% endif %}
-          <div  class="column">
+          <div  class="sugang-box column">
             <div  class="ui raised segment">
                 <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
 
@@ -126,10 +62,10 @@
 
                 [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
                 <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="course_delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
-                <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-edit edit"  style="font-size:12px; cursor:pointer"><b st yle="font-size:12px;">수정 </b></i></a></div>
-                <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
+                <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PageBoard.id}}"><i class="glyphicon glyphicon-edit edit"  style="font-size:12px; cursor:pointer"><b st yle="font-size:12px;">수정 </b></i></a></div>
+                <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="{{PageBoard.Course.CourseName}}">{{PageBoard.Course.CourseName}}</span></a></p>
 
-                <p id="title_s"><span id="cprof1" name="cprof">{{PageBoard.Course.Professor}} 교수님</span></p>
+                <p id="title_s"><span id="cprof1" name="cprof" value="{{PageBoard.Course.Professor}} ">{{PageBoard.Course.Professor}} 교수님</span></p>
                 <input type = "hidden" id="period" value = "{{PageBoard.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{PageBoard.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PageBoard.Course.Professor}}">

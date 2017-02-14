@@ -90,9 +90,10 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Satisfy = float(request.POST['StarValue'])
 		new_Answer_list = request.POST.getlist('mytext[]')
 		new_Who = request.POST['who']
-		new_paper_value= int(request.POST.getlist(['paper_value']))
-		new_course_value= int(request.POST.getlist(['course_value']))
-
+		new_paper_value= request.POST.getlist('paper_value[]')
+		new_course_value= request.POST.getlist('course_value[]')
+		total_paper_value=0
+		total_course_value=0
 		renew_professor= Professor.split("외")[0] != None and Professor.split("외")[0] or Professor
 
 		try:
@@ -118,8 +119,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 			recommend_cnt = 1
 		else:
 			recommend_cnt = 0
-			
-#			new_Homework=5
+		
 		
 		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
@@ -128,9 +128,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 				continue
 			temp=Description_Answer(CreatedID=new_CreatedID,Answer = new_Answer,Course=new_Course)
 			temp.save()
-		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
-			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=new_paper_value,Who_Answer=new_Who,Course_Answer=new_course_value)
-		
+	
 		
 
 		try:
@@ -149,7 +147,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 				Total_Homework = new_Homework, Total_Level_Difficulty = new_Level_Difficulty,  Total_Count = 1,
 				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0,Total_Book_Like=0, Total_Ppt_Like=0, Total_Practice_Like=0
 			)
-			for new_papar in new_paper_value:
+			for new_paper_item in new_paper_value:
+				new_paper=int(new_paper_item)
 				if new_papar==1:
 					Total_Eval.Total_Long_Answer+=1
 				elif new_papar ==2:
@@ -158,7 +157,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 					Total_Eval.Total_Mix+=1
 				elif new_papar ==4:
 					Total_Eval.Total_Unknown_Answer+=1
-			for new_course in new_course_value:
+			for new_course_item in new_course_value:
+				new_course=int(new_course_item)
 				if new_course==1:
 					Total_Eval.Total_Book_Like+=1
 				elif new_course==2:
@@ -174,20 +174,26 @@ def Recommend_Write(request): #추천 강의 DB입력
 			T_Eval.Total_StarPoint += float(new_Satisfy)
 			T_Eval.Total_Count += 1
 			T_Eval.Total_Recommend += recommend_cnt
-			if new_paper_value==1:
-				T_Eval.Total_Long_Answer+=1
-			elif new_paper_value ==2:
-				T_Eval.Total_Short_Answer+=1
-			elif new_paper_value ==3:
-				T_Eval.Total_Mix+=1
-			elif new_paper_value ==4:
-				T_Eval.Total_Unknown_Answer+=1			
-			if new_course_value==1:
-				T_Eval.Total_Book_Like+=1
-			elif new_course_value==2:
-				T_Eval.Total_Ppt_Like+=1
-			elif new_course_value==3:
-				T_Eval.Total_Practice_Like+=1
+			for new_paper_item in new_paper_value:
+				new_paper=int(new_paper_item)
+				if new_paper_item==1000:
+					T_Eval.Total_Long_Answer+=1
+				elif new_paper_item ==100:
+					T_Eval.Total_Short_Answer+=1
+				elif new_paper_item ==10:
+					T_Eval.Total_Mix+=1
+				elif new_paper_item ==1:
+					T_Eval.Total_Unknown_Answer+=1
+				total_paper_value+=new_paper
+			for new_course_item in new_course_value:
+				new_course=int(new_course_item)			
+				if new_course_item==100:
+					T_Eval.Total_Book_Like+=1
+				elif new_course_item==10:
+					T_Eval.Total_Ppt_Like+=1
+				elif new_course_item==1:
+					T_Eval.Total_Practice_Like+=1
+				total_course_value += new_course
 			T_Eval.save()
 		try:
 			Group_Total = Group_Total_Evaluation.objects.get(CourseName=new_Course.Coursename,Code = new_Course.Code)
@@ -199,9 +205,14 @@ def Recommend_Write(request): #추천 강의 DB입력
 			Group_Total.GroupTotalCount+=1
 			Group_Total.save()	
 
+		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
+			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=total_paper_value,Who_Answer=new_Who,Course_Answer=total_course_value)
+		
+
 		new_Eval.Total_Course_id=T_Eval.id
 		new_Eval.save()
-
+		UserData.RecommendCount+=1
+		UserData.save()
 		new_Recommend = Recommend_Course(Course = new_Eval, CreatedID = new_CreatedID)
 		new_Recommend.save()
 		

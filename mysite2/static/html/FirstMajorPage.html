@@ -34,14 +34,14 @@
               </a>
 			
 				{% for i in TotalCount.0%}
-        				 
-        {%if i == Page %}
-         <a id ="Page" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
-        
-        {%else%}
-         <a id ="Page" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
-        {%endif%}
-{%endfor%}
+            				 
+            {%if i == Page %}
+             <a id ="Page" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
+            
+            {%else%}
+             <a id ="Page" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
+            {%endif%}
+        {%endfor%}
               <a id ="Next" name = "{{PageInformation.0.2}}" class="item" herf="#FirstPage" >
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
@@ -62,6 +62,8 @@
               {% if PBoard1.CreatedID.User.username == user.profile.User.username %}             
               <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a href="id="{{PBoard3.Course.id}}"><i class="glyphicon glyphicon-edit" class="course_edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
               {% endif %}
+
+              
               <div class="sixteen wide column">
                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
                 <p><a style="cursor:pointer" href ="/CourseProfessor/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
@@ -73,7 +75,7 @@
                  <div class="right floated right aligned sixteen wide column" style="margin-left:30px; margin-bottom:-15px;"><span class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>  
               </div>
 
-              <br><br>
+               <br><br>
               <div class="ui section divider" style="border: none;"></div>
                  <div class="center aligned sixteen wide column" style="margin-top:-10px;">
       

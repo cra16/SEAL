@@ -65,7 +65,7 @@ def MyCoursePage(request,Page,Mobile):
 			RecommendData.Total_Homework =RecommendData.Total_Homework/RecommendData.Total_Count
 			RecommendData.Total_Level_Difficulty=RecommendData.Total_Level_Difficulty/RecommendData.Total_Count
 			RecommendData.Total_StarPoint = RecommendData.Total_StarPoint/RecommendData.Total_Count 
-			
+			RecommendData.id =Board.id
 			RecommendData.Course.Professor=renew_professor
 
 			RecommendPage.append(RecommendData)	
@@ -168,13 +168,12 @@ def CourseDelete(request):
 			PageLast =5*(int(Page)-1)+5	
 
 		
-		LectureData=Lecture.objects.filter(Semester= Semester,Code = Code, CourseName=CourseName, Professor__contains = Professor)[0]
 		UserData = Profile.objects.get(User = request.user)
 		try:
 		 	Group_Total = Group_Total_Evaluation.objects.get(Code=Code,CourseName=CourseName)
 		except:
 			Group_Total = None
-		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor, CreatedID=UserData,Course__Semester = Semester)[0]
+		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor, CreatedID=UserData)[0]
 		
 		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
 		UpdateData=Total_Evaluation.objects.filter(Course__Code = Code, Course__CourseName=CourseName, Course__Professor__contains = Professor)[0]
@@ -332,8 +331,8 @@ def CourseUpdate(request):
 		new_Who = request.POST['who']
 
 #		new_Url = request.POST['url']
-		new_paper_value= int(request.POST['paper_value'])
-		new_course_value =request.POST['course_value']
+		new_paper_value= request.POST.getlist('paper_value[]')
+		new_course_value =request.POST.getlist('course_value[]')
 		CourseName=request.POST['HCourseName']
 		Code=request.POST['HCourseCode']
 		Semester=request.POST['HSemester']
@@ -343,55 +342,71 @@ def CourseUpdate(request):
 		UserData = Profile.objects.get(User = request.user)
 		UpdateCourseEval=Course_Evaluation.objects.get(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
 		UpdateTotalEval = Total_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor)[0]
-		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,Course__Semester =Semester,CreatedID=UserData)
+		Update_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
+
 
 		UpdateTotalEval.Total_Speedy -= UpdateCourseEval.Speedy
 		UpdateTotalEval.Total_Homework -= UpdateCourseEval.Homework
 		UpdateTotalEval.Total_Level_Difficulty -= UpdateCourseEval.Level_Difficulty
 		UpdateTotalEval.Total_StarPoint -= UpdateCourseEval.StarPoint
-		if UpdateCourseEval.What_Answer == 1:
+
+
+		if UpdateCourseEval.What_Answer-1000 >= 0:
 			UpdateTotalEval.Total_Long_Answer -=1
-		elif UpdateCourseEval.What_Answer ==2:
+		elif UpdateCourseEval.What_Answer%1000 -100 >=0:
 			UpdateTotalEval.Total_Short_Answer-=1
-		elif UpdateCourseEval.What_Answer ==3:
+		elif UpdateCourseEval.What_Answer%100 - 10 >=0:
 			UpdateTotalEval.Total_Mix -= 1
-			
-		elif UpdateCourseEval.What_Answer ==4:
+		elif UpdateCourseEval.What_Answer%10 -1>=0:
 			UpdateTotalEval.Total_Unknown_Answer -=1
-		if UpdateCourseEval.Course_Answer == 1:
+
+		if UpdateCourseEval.Course_Answer-100 >= 0:
 			UpdateTotalEval.Total_Book_Like -= 1
-		elif UpdateCourseEval.Course_Answer ==2:
+		elif UpdateCourseEval.Course_Answer%100 -10 >=0:
 			UpdateTotalEval.Total_Ppt_Like-=1
-		elif UpdateCourseEval.Course_Answer ==3:
+		elif UpdateCourseEval.Course_Answer%10 -1 >=0:
 			UpdateTotalEval.Total_Practice_Like -=1
 		
-		#UpdateCourseEval.Speedy = new_Speedy
+		if UpdateCourseEval.Check==True:
+			UpdateTotalEval.Total_Recommend -=1
+
+		total_new_paper_value=0
+		total_new_course_value=0
+
+		for new_paper_item in new_paper_value:
+			total_new_paper_value += int(new_paper_item)
+		for new_course_item in new_course_value:
+			total_new_course_value += int(new_course_item)
+
+	
 		UpdateCourseEval.Homework =new_Homework
 		UpdateCourseEval.Level_Difficulty = new_Level_Difficulty
 		UpdateCourseEval.StarPoint =new_Satisfy
 		UpdateCourseEval.Check = new_Check
-		UpdateCourseEval.StarPoint = new_Satisfy
-		UpdateCourseEval.What_Answer = new_paper_value
-		UpdateCourseEval.Course_Answer = new_course_value
+
+		UpdateCourseEval.What_Answer = total_new_paper_value
+		UpdateCourseEval.Course_Answer = total_new_course_value
 		UpdateCourseEval.Who_Answer = new_Who
-		#UpdateCourseEval.Url_Answer = new_Url
 		UpdateCourseEval.CourseComment = new_CourseComment
 		
-		if UpdateCourseEval.What_Answer == 1:
+		if UpdateCourseEval.What_Answer-1000 >= 0:
 			UpdateTotalEval.Total_Long_Answer +=1
-		elif UpdateCourseEval.What_Answer ==2:
-			UpdateTotalEval.Total_Short_Answer +=1
-		elif UpdateCourseEval.What_Answer ==3:
+		elif UpdateCourseEval.What_Answer%1000 -100 >=0:
+			UpdateTotalEval.Total_Short_Answer+=1
+		elif UpdateCourseEval.What_Answer%100 - 10 >=0:
 			UpdateTotalEval.Total_Mix += 1
-			
-		elif UpdateCourseEval.What_Answer ==4:
+		elif UpdateCourseEval.What_Answer%10 -1>=0:
 			UpdateTotalEval.Total_Unknown_Answer +=1
-		if UpdateCourseEval.Course_Answer == 1:
+
+		if UpdateCourseEval.Course_Answer-100 >= 0:
 			UpdateTotalEval.Total_Book_Like += 1
-		elif UpdateCourseEval.Course_Answer ==2:
+		elif UpdateCourseEval.Course_Answer%100 -10 >=0:
 			UpdateTotalEval.Total_Ppt_Like+=1
-		elif UpdateCourseEval.Course_Answer ==3:
+		elif UpdateCourseEval.Course_Answer%10 -1 >=0:
 			UpdateTotalEval.Total_Practice_Like +=1
+
+		if UpdateCourseEval.Check == True:
+			UpdateTotalEval.Total_Recommend +=1
 
 		UpdateTotalEval.Total_Speedy += UpdateCourseEval.Speedy
 		UpdateTotalEval.Total_Homework += UpdateCourseEval.Homework

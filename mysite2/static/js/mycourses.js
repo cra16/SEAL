@@ -397,9 +397,9 @@ $("[data-toggle=tooltip]").tooltip();
             return;
           }
           var CurrentPage=$(this).parent().attr("id")
-           var Parent=$(this).parent().parent();
+           var Parent = $(this).closest(".sugang-box")
             var Code = Parent.find("[name=ccode]").text();
-            var CourseName=Parent.find("[id=cname]").text();
+            var CourseName=Parent.find("[id=cname]").val();
             var prof = Parent.find("[id=professor]").val();
             var period = Parent.find("[id=period]").val();
             var semester = Parent.find("[id=semester]").val();
@@ -445,10 +445,10 @@ $('body').on('click','.edit',function(event){
           $(this).unbind("click");
           var Parent = $(this).closest(".sugang-box")
           var Code = Parent.find("[name=ccode]").text();
-          var CourseName=Parent.find("[name=cname]").text();
-          var prof = Parent.find("[name=cprof]").attr("value");
-          var period = Parent.find("[name=period]").attr("value");
-          var semester = Parent.find("[name=csem]").attr("value");
+          var CourseName=Parent.find("[id=cname]").text();
+          var prof = Parent.find("[id=professor]").val();
+          var period = Parent.find("[name=period]").val();
+          var semester = Parent.find("[id=semester]").val();
           var CourseID = $(this).parent().attr("id");
           var form =document.createElement("form");
           form.method ="POST";

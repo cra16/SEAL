@@ -10,14 +10,7 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
-			if (username == "admin_seal" ){
-				document.loginForm.action = "/";
-				alert("관리자 계정 접속");
-			}
-			else{
-				// document.loginForm.action = "http://igo.handong.edu/hisnetAPI.php";
-				document.loginForm.action = "/";
-			}
+			
 			document.loginForm.submit();
 		}
 	});

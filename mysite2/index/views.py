@@ -111,7 +111,7 @@ def Page(request): #Main Page를 보여주는 함수
 
 	else: #반대의 경우
 		target = TargetTemplate(PostDic['Current'])
-		template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic,mobile)
+		#template = SelectPageView(request.user,  request.session['PageInformation'],int(PostDic['Page']),int(Page),PostDic,mobile)
 	
 	#왜 했는지 기억안남...
 	request.session['PageInformation'] = template['PageInformation']

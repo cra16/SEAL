@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function()
+{
 
     $('.message .glyphicon').css('cursor','pointer');
     
@@ -20,9 +21,12 @@ $(document).ready(function() {
     $('.fullscreen.modal').modal('show');
 
 $("div").on('click',"#cname",function(event){
-        event.stopPropagation();
+        event.stopPropagation(); 
         $(this).unbind("click");
-        CurrentPage=$(this).parent().parent().parent().parent().parent().parent().attr("id");
+        var CurrentPage = null
+        CurrentPage =$(this).closest(".course_data").attr("id");
+     
+        
         var Parent=$(this).parent().parent().parent();
         var Code = Parent.find("[name=ccode]").text();
         var prof = Parent.find("[id=professor]").val();
@@ -43,18 +47,27 @@ $("div").on('click',"#cname",function(event){
               async : false,
               type : "POST",
               success:function(resp){  
-
+                  
                   if(CurrentPage=="FirstPage")
                     $('#FirstPage').html(resp);
                   else if(CurrentPage=="SecondPage")
                     $('#SecondPage').html(resp);
-                  else if(CurrentPage=="ThirdPage")
-                    $('#ThirdPage').html(resp);
+                  else if(CurrentPage=="ThirdPage"){
+                    //$('#ThirdPage').html(resp);
+                  }
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
                   else if(CurrentPage=="SugangPage")
-                    $("#SugangPage").html(resp);
-               
+                    $('#SugangPage').html(resp);  
+                  else if(CurrentPage=='SubjectSearch')
+                    $('#SubjectSearch').html(resp);   
+                  else if(CurrentPage=="LikeSugangPage")
+                    $("#LikeSugangPage").html(resp);
+                  
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -100,8 +113,14 @@ $("div").on('click',"#cname",function(event){
                     $('#ThirdPage').html(resp);
                   else if(CurrentPage=="Search_Page")
                     $('#Search_Page').html(resp);
-                 
+                  else if(CurrentPage=="SugangPage")
+                    $('#SugangPage').html(resp);     
                
+                 
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -133,8 +152,16 @@ $("div").on('click',"#cname",function(event){
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPage")
                         $('#SecondPage').html(resp);
+                  else if(CurrentPage=="SugangPage")
+                    $('#SugangPage').html(resp);     
+
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -170,8 +197,16 @@ $("div").on('click',"#cname",function(event){
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPage")
                         $('#SecondPage').html(resp);
+                  else if(CurrentPage=="SugangPage")
+                        $('#SugangPage').html(resp);     
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
+
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -209,10 +244,17 @@ $("div").on('click',"#cname",function(event){
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
-                  else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
-                        $('#SugangPage').html(resp);    
+                  else if(CurrentPage=="SugangPage" || CurrentPage =="SugangPageNation")
+                    $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                   $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
 
@@ -232,7 +274,7 @@ $("div").on('click',"#cname",function(event){
           event.stopPropagation();
           $(this).unbind("click");
 
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -253,9 +295,16 @@ $("div").on('click',"#cname",function(event){
                   else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
-                        $('#SugangPage').html(resp);
+                        $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);    
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -274,7 +323,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#ProNext',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -295,9 +344,17 @@ $("div").on('click',"#cname",function(event){
                   else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
                   else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
-                        $('#SugangPage').html(resp);    
+                        $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);     
+
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -315,7 +372,7 @@ $("div").on('click',"#cname",function(event){
     $('div').on('click','#ProPrevious',function(){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().parent().attr("id");
+          var CurrentPage=$(this).parent().attr("id");
           var CurrentCourse = $(this).parent().find("[id=CourseHidden]").val();
         $.ajax(
             { url : "/Select_Professor/",
@@ -335,10 +392,17 @@ $("div").on('click',"#cname",function(event){
                         $('#SecondPage').html(resp);
                   else if(CurrentPage =="ThirdPageNation" || CurrentPage == "ThirdPage")
                         $('#ThirdPage').html(resp);
-                  else if(CurrentPage=="SugangPage" || CurrentPage=="SugangPageNation")
-                        $('#SugangPage').html(resp);
+                  else if(CurrentPage=="SugangPage" || CurrentPage =="SugangPageNation")
+                    $('#SugangPage').html(resp);     
+                  else if(CurrentPage=="LikeSugangPageNation" || CurrentPage=="LikeSugangPage")
+                        $('#LikeSugangPage').html(resp);   
                   else
                     $("#Search_Page").html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -373,8 +437,16 @@ $("div").on('click',"#cname",function(event){
                        $('#FirstPage').html(resp);
                   else if(CurrentPage =="SecondPage")
                         $('#SecondPage').html(resp);
+                  else if(CurrentPage=="SugangPage")
+                    $('#SugangPage').html(resp);     
+
                   else
                         $('#ThirdPage').html(resp);
+
+                  $('span.starvalue').starvalue();
+                  $.fn.initSlide();
+                  $('[data-toggle="tooltip"]').tooltip(); 
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -388,12 +460,10 @@ $("div").on('click',"#cname",function(event){
 
     });
 
+ 
 
 
-    $(document).keydown(function(e){
-
-     
-    });
+  
 
   $('.ui.sticky').sticky({
       context: '#sticky',
@@ -402,26 +472,5 @@ $("div").on('click',"#cname",function(event){
 
 });
 
-
-$(function(){
-
-
-$.fn.starvalue = function() {
-    return $(this).each(function() {
-        // Get the value
-        var val = parseFloat($(this).html());
-        // Make sure that the value is in 0 - 5 range, multiply to get width
-        var size = Math.max(0, (Math.min(5, val))) * 16;
-        // Create stars holder
-        var $span = $('<span />').width(size);
-        // Replace the numerical value with stars
-        $(this).html($span);
-    });
-}
-
-$('span.starvalue').starvalue();
-
-
-});
 
 

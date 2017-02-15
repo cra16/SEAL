@@ -4,7 +4,6 @@ $(document).ready(function()
          event.stopPropagation();
           $(this).unbind("click");
         var Find = $(this).parent().find("[id=open]");
-
         $(this).hide();
         $(Find).show();
     });

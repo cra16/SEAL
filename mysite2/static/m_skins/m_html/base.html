@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/seal_menubar.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_profile.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_bestc.css"%}">    
-    <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
     
     <script type="text/javascript" src="{% static "js/jquery.js"%}"></script>
      
@@ -93,15 +93,17 @@
       <div class="container-fluid">
         <div class="col-md-1 col-sm-0"></div>
         <div class="col-md-10 col-sm-12">
-          <div class="navbar-header">
+          <div class="navbar-header custom-nav-header">
             <a class="navbar-brand" style="margin-top:3px; margin-left:-33px;" href="/">SEAL</a>
-
-            <form id = "form" class="navbar-form navbar-left col-xs-6 form-inline" style="margin-top:10px;" role="search" action="/Search/" method = "POST" >{%csrf_token%}
-                <input type="text" id="search" name="search" class="form-control" placeholder="Search">
-                <button type="submit" id ="SearchButton" class="btn btn-info" style="margin-top:-53px; margin-left:123px;" onclick=""><i class="glyphicon glyphicon-search"></i></button>
-      
-             </form>
-
+            <div class="custom-search-bar">
+              <form id = "form" class="navbar-form navbar-left col-xs-6 form-inline" style="margin-top:10px;" role="search" action="/Search/" method = "POST" >{%csrf_token%}
+                  <div>
+                      <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                      <button type="submit" id ="SearchButton" class="btn btn-info" style="float:right" onclick=""><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+        
+              </form>
+            </div>
             <button type="button" class="navbar-toggle" data-toggle="collapse" style="margin-right:-18px; margin-top:10px;" data-target=".navbar-menubuilder">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>

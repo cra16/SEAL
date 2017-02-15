@@ -10,7 +10,8 @@ $(document).ready(function(){
 			return false;
 		}
 		else{
-
+			
+			document.loginForm.submit();
 		}
 	});
 

@@ -61,7 +61,7 @@ $(function(){
       }
     }
   });
- $('div').on("click", "#update_button", function () {
+  $('div').on("click", "#update_button", function () {
     $(".ui.modal").modal("setting", {
         closable: true,
         onApprove: function () {
@@ -83,9 +83,9 @@ $('form').on("click",'.submit_hisnet',function()
               data : $("#hisnet_form").serialize(),
               type : "POST",
               success:function(resp){  
-                  alert("정보 변경이 완료 되었습니다.");
-                   location.reload();
+                  alert("성공하였습니다");
                   $(".ui.modal").modal("hide");
+                   location.reload();
 
                   } ,
               error: function(xhr, option, error){
@@ -96,6 +96,7 @@ $('form').on("click",'.submit_hisnet',function()
   });return false;
 
 })
+
   $('#btnnum4').click(function(){
       var NicknameDiv = $(' <div id ="NickDiv" class="left floated left aligned nine wide column"><input type="text" id="Nickname"></div> ');
           

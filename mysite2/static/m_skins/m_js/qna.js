@@ -52,7 +52,7 @@ $(document).ready(function(event) {
               type : "POST",
               async:true,
               success:function(resp){     
-                 $('#QnA_List').html(resp);
+             		 $('#QnA_List').html(resp);
                   
                 },
                 error: function(xhr, option, error){

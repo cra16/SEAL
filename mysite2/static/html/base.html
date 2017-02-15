@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {% load staticfiles %} 
+    {% load static from staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
        <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
 
@@ -93,9 +93,10 @@
         <div class="col-md-1 col-sm-0 col-xs-0"></div>
         <div class="col-md-10 col-sm-12 col-xs-12">
           <div class=" custom-nav-header" >
-            <a class="navbar-brand" href="/"><img src="{% static "css/seal_logo.png" %} " height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
+            <div class="custom-nav-box">
+              <a class="navbar-brand" href="/"><img src="{% static "css/seal_logo.png" %} " height="40px" width="40px" style="display:inline; margin-top:-10px; margin-right:5px;">SEAL</a>
    
-              <form style ="width:100%" id = "form" class="navbar-left custom-search-bar form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
+              <form style ="" id = "form" class="navbar-left custom-search-bar form-inline" role="search"  action="/Search/" method = "POST" >{%csrf_token%}
                   
         
         
@@ -103,7 +104,24 @@
                     <button type="submit" id ="SearchButton" class="btn btn-info" style="" onclick=""><i class="glyphicon glyphicon-search"></i></button>
           
               </form>
-        
+            </div>
+              <div class="collapse navbar-collapse navbar-menubuilder">
+                <ul class="nav navbar-nav navbar-right">
+                 
+                  <li><a href="/MyPage">MY PAGE</a></li>
+                  <li><a href="/Notice">공지사항</a></li>
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="/QnA">Q&A</a></li>
+                      <li><a href="/About">ABOUT</a></li>
+                      <li><a href="/Judgement">신고</a></li>
+                      <li><a href="/SubScript">개선요구사항</a></li>
+                      <li><a href="/SiteMap">SITEMAP</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
@@ -111,31 +129,7 @@
               <span class="icon-bar"></span>
             </button>
           </div>
-          <div class="collapse navbar-collapse navbar-menubuilder">
-            <ul class="nav navbar-nav navbar-right">
-              <!--<li style="margin-top:13px">
-                <img style="margin-top:-10px" src="{% static "css/notice.png" %}">&nbsp;
-                <marquee loop="infinite" bgcolor="#87cefa" width="180" height="20" direction="left" style="height: 20px; width: 200px; background-color: transparent;">
-                <font size="2" color="white">현재까지 총 <font size="4" style="border:1"><blink><b>38</b></blink></font>개의 강의 평가가 등록되었습니다.
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                총 <font size="4" style="border:1"><blink><b>121</b></blink></font>명의 학생이 SEAL에 가입하였습니다.
-                </font>
-                </marquee>
-              </li>-->
-              <li><a href="/MyPage">MY PAGE</a></li>
-              <li><a href="/Notice">공지사항</a></li>
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="/QnA">Q&A</a></li>
-                  <li><a href="/About">ABOUT</a></li>
-                  <li><a href="/Judgement">신고</a></li>
-                  <li><a href="/SubScript">개선요구사항</a></li>
-                  <li><a href="/SiteMap">SITEMAP</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+          
         </div>
         <div class="col-md-1 col-sm-0"></div>
       </div>

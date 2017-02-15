@@ -27,7 +27,7 @@
         <div class="ui divider"></div>
           {% endif %}
       {%endfor%}
-                        
+      {{PageInformation.4}}
       <center><div id ="LikeSugangPageNation" class="course_data ui borderless pagination menu">
               <a id ="Previous" name="{{PageInformation.4.0}}" class="item" herf="#FirstPage" >
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
@@ -46,8 +46,8 @@
               </a>
       </div></center>
 {% elif ProSelect == 1 %}
-      {{Page}}
-      {% for PBoard1 in PageBoard.4%}
+
+      {% for PBoard1 in PageBoard.3%}
       
        {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
@@ -66,14 +66,14 @@
                 <p><a style="cursor:pointer" href ="/CourseProfessor/{{PBoard1.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
                 <p id="title_s"><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>  
               </div>
-                          
-               <div class="left floated center aligned sixteen wide column">                
+                             <br><br>
+                             
                 <button type="button" id="thumbs_up" data-toggle="tooltip" data-original-title="해당 교수님이 연 과목에 대한 학생들의 추천 수 입니다." class="circular ui icon button" ><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{GoodCount.0|lookup:forloop.counter0}}</b></span></button>
-                 <div class="right floated right aligned sixteen wide column" style="margin-left:30px; margin-bottom:-15px;"><span class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>  
-              </div>
+                 <div class="center aligned sixteen wide column" style="margin-top:-35px; margin-bottom: 15px;"><span  style="display:inline-block" class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>  
+            
 
-              <br><br>
-              <div class="ui section divider" style="border: none;"></div>
+           
+               <div class="ui section divider" style="border: none;"></div>
                  <div class="center aligned sixteen wide column" style="margin-top:-10px;">
                   
                   <center><b>과제</b></center>
@@ -94,11 +94,11 @@
             {%endfor%}
 
       <center><div id ="LikeSugangPageNation" name="LikeSugangPageNation" class="ui borderless pagination menu">
-              <a id ="ProPrevious" name="{{PageInformation.4.0}}" class="item" herf="#FirstPage">
+              <a id ="ProPrevious" name="{{PageInformation.3.0}}" class="item" herf="#FirstPage">
                 <i class="glyphicon glyphicon-menu-left"></i> Previous
               </a>
       
-        {% for i in TotalCount.1%}
+        {% for i in TotalCount.3%}
          
         {%if i == Page %}
          <a id ="ProPage" name ="{{i}}" class="active item" herf="#FirstPage">{{i}}</a>
@@ -107,7 +107,7 @@
          <a id ="ProPage" name ="{{i}}" class="item" herf="#FirstPage">{{i}}</a>
         {%endif%}
         {%endfor%}
-              <a id ="ProNext" name = "{{PageInformation.4.2}}" class="item" herf="#FirstPage">
+              <a id ="ProNext" name = "{{PageInformation.3.2}}" class="item" herf="#FirstPage">
                 Next <i class="glyphicon glyphicon-menu-right"></i>
               </a>
 

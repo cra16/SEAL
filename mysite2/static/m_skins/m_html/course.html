@@ -4,6 +4,7 @@
    
 <html lang='ko'>
   <head>
+   {% load app_filter %}
   {% load staticfiles%}
   {% block head%}
     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
@@ -18,6 +19,7 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/course.css" %}">
+    <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
     <script type="text/javascript" src="{% static "js/course.js" %}">history.go(-2);</script>
   
   {%endblock%}  
@@ -89,18 +91,7 @@
 
           <div id="blankspace" class="ui column"></div>
 
-          <div class="ui grid">
-            <div id="firstcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">진도 속도</div>
-            <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
-            </div>
-            <div id="avgsldbr" class="center aligned nine wide column">
-              <input type="text" id="sl1" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl1C"/>
-            </div>
-            <div id="rchoice" class="center floated left aligned three wide column">
-              <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
-            </div>
-          </div>
+        
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -140,48 +131,79 @@
           <div id="h_innersectiondivider" class="ui section divider"></div>
 
 
-          <div class="ui grid">
+          <div class="ui grid" style="display:flex; flex-direction:row;">
             <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
 
-            <div class="ui stackable center floated center aligned ten wide column">
+            <div class="ui stackable center floated center aligned ten wide column" style="display:flex; flex-direction:column; ">
             
               {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
               {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Unknown_Answer%}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
               {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
               {% elif CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Long_Answer%}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  <button style="width:70%;" type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
               {%endif%}
             </div>
+          </div>
+
+          <div class="ui grid" style="display:flex; flex-direction:row;">
+              <div id="fourthcolumn" class="center floated right aligned six wide column"  style="margin-top:40px">수업 방식</div>
+              <div class="ui stackable center floated center aligned ten wide column" >
+
+              {% if CourseBoard.Total_Book_Like >= CourseBoard.Total_Ppt_Like and                   CourseBoard.Total_Book_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;" >
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+            
+                    </div>
+              {% elif CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Book_Like and CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;">
+                      <button type ="button" class="ui toggle button " value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                    </div>
+              {% elif CourseBoard.Total_Practice_Like >= CourseBoard.Total_Ppt_Like and CourseBoard.Total_Practice >= CourseBoard.Total_Book_Like %}
+                    <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                    </div>
+              {%else%}
+                    <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                   </div>
+              {%endif%}
+              </div>
           </div>
 
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
           <br><br>
-
           <div class="ui grid">
-
             <div class="left floated center aligned five wide column" style="color:purple; margin-left:6px;"><h4><b>추천</b></h4></div>
             <button type ="button" style="background-color:#FFEB3B; font-size:22px; margin-left:10px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{CourseBoard.Total_Recommend}}</b></h4>
-
           </div>
+          
 
-          <div class="ui grid">
-
+          <div  class="ui grid">
+            
             <div class="left floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
            <div class="floated left aligned two wide column" style="margin-left:-5px;"><span id="starpoint" class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
          
@@ -206,18 +228,7 @@
           <h4><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
             <div class="ui divider"></div>
 
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">진도 속도</div>
-              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
-                <a id="tooltips"  data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
-              </div>
-              <div id="mysldbr" class="center aligned nine wide column">
-                <input type="text" id="sl{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}1C"/>
-              </div>
-              <div id="rchoice" class="center floated left aligned three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
-              </div>
-            </div>
+          
 
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -255,32 +266,57 @@
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
-            <div class="ui grid">
+            <div class="ui grid" style="display:flex; flex-direction:row;">
               <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
 
-              <div class="ui stackable center floated center aligned ten wide column">
+              <div class="ui stackable center floated center aligned ten wide column" style="display:flex; flex-direction:column; width:70%;">
 
-                  {% if MyCourseBoard.What_Answer == 1%}
-                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-                  {% elif MyCourseBoard.What_Answer == 2%}
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-                  {% elif MyCourseBoard.What_Answer == 3%}
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
+                  {% if MyCourseBoard.What_Answer|calculateData:1000 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
                   {%else%}
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                    <button type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
                   {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:100 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:10 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:1 == 1 %}
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  {%else%}
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  {%endif%}
+                  </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="ui stackable center floated center aligned ten wide column" style="display:flex; flex-direction:column; width:70%;">
+                  <div class="ui buttons" style="margin-top:-10px">
+
+                  {% if MyCourseBoard.Course_Answer|calculateData:100 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                  {%else%}
+                     <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                  {%endif%}
+                  {% if MyCourseBoard.Course_Answer|calculateData:10  == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                  {%endif%}
+                  {% if MyCourseBoard.Course_Answer|calculateData:1  == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                  {%endif%}
+
+                 </div>
               </div>
             </div>
 
@@ -322,18 +358,7 @@
             <h4><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4>
             <div class="ui divider"></div>
 
-            <div class="ui grid">
-              <div id="firstcolumn" class="left floated center aligned sixteen wide column" style="margin-bottom:-15px;">진도 속도</div>
-              <div id="lchoice" class="center floated right aligned three wide column" style="margin-left:10px;">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 느림 &nbsp;">느림</a>
-              </div>
-              <div id="sldbr" class="center aligned nine wide column">
-                <input type="text" id="sa{{forloop.counter}}1" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Speedy}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}1C"/>
-              </div>
-              <div id="rchoice" class="center floated left aligned three wide column">
-                <a id="tooltips" data-toggle="tooltip" title="강의속도가 빠름 &nbsp;">빠름</a>
-              </div>
-            </div>
+           
 
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
@@ -371,34 +396,60 @@
 
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
-            <div class="ui grid">
+            <div class="ui grid" style="display:flex; flex-direction:row;" >
+              <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
+
+              <div class="ui stackable center floated center aligned ten wide column"  >
+                <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;" >
+  
+                  {% if OtherBoard.What_Answer|calculateData:1000 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                  {%else%}
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:100 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:10 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:1 == 1 %}
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  {%else%}
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  {%endif%}
+                </div>
+              </div>
+            </div>
+            <div class="ui grid" style="display:flex; flex-direction:row;" >
               <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
 
               <div class="ui stackable center floated center aligned ten wide column">
 
-              {% if OtherBoard.What_Answer == 1%}
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-              {% elif OtherBoard.What_Answer == 2%}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-              {% elif OtherBoard.What_Answer == 3%}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>해당 없음</button>
-              {%else%}
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;서술형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;단답형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button" value="" disabled>&nbsp;&nbsp;&nbsp;혼합형&nbsp;&nbsp;&nbsp;</button>
-                  <button type ="button" class="ui toggle button active" value="" disabled>해당 없음</button>
-              {%endif%}
+                <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;" >
+                  {% if OtherBoard.Course_Answer|calculateData:100 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                  {%else%}
+                     <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                  {%endif%}
+                  {% if OtherBoard.Course_Answer|calculateData:10  == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                  {%endif%}
+                  {% if OtherBoard.Course_Answer|calculateData:1  == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                  {%endif%}
+                  </div>
               </div>
             </div>
+             
 
             <div class="ui piled segment">
               <h4 style="font-family:mono; margin-left:5px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <br><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{OtherBoard.Who_Answer}}</b></h4>
@@ -445,8 +496,7 @@
               </a>
             </div></center>   
         {%endif%}
-        <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+       
       </div>
       {%endblock%}
 

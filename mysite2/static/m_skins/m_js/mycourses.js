@@ -199,6 +199,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                         $('#LikePageMain').html(resp);
+                        $.fn.initSlide();
+                        $('span.starvalue').starvalue();
+
                  },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -231,6 +234,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                     $('#LikePageMain').html(resp);
+                    $.fn.initSlide();
+                    $('span.starvalue').starvalue();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -260,6 +266,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
               $('#LikePageMain').html(resp);
+              $.fn.initSlide();
+              $('span.starvalue').starvalue();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -294,6 +303,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                   $('#RecommendPageMain').html(resp);
+                  $.fn.initSlide();
+                  $('span.starvalue').starvalue();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -326,6 +338,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                $('#RecommendPageMain').html(resp);
+               $.fn.initSlide();
+               $('span.starvalue').starvalue();
+
                 
                 },
                 error: function(xhr, option, error){
@@ -356,6 +371,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                $('#RecommendPageMain').html(resp);
+               $.fn.initSlide();
+               $('span.starvalue').starvalue();
+
                 
                 },
                 error: function(xhr, option, error){
@@ -369,6 +387,7 @@ $("[data-toggle=tooltip]").tooltip();
 
 
     });
+
     $('div').on('click','#course_delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
@@ -378,9 +397,9 @@ $("[data-toggle=tooltip]").tooltip();
             return;
           }
           var CurrentPage=$(this).parent().attr("id")
-           var Parent=$(this).parent().parent();
+           var Parent = $(this).closest(".sugang-box")
             var Code = Parent.find("[name=ccode]").text();
-            var CourseName=Parent.find("[id=cname]").text();
+            var CourseName=Parent.find("[id=cname]").val();
             var prof = Parent.find("[id=professor]").val();
             var period = Parent.find("[id=period]").val();
             var semester = Parent.find("[id=semester]").val();
@@ -404,7 +423,9 @@ $("[data-toggle=tooltip]").tooltip();
               async:true,
               success:function(resp){     
                $('#RecommendPageMain').html(resp);
-                
+                $.fn.initSlide();
+                $('span.starvalue').starvalue();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -416,32 +437,29 @@ $("[data-toggle=tooltip]").tooltip();
 
 
 
+
     });
 
-$('div').on('click','#edit',function(event){
+$('body').on('click','.edit',function(event){
         event.stopPropagation();
           $(this).unbind("click");
-          var CurrentPage=$(this).parent().parent().attr("id")
-           var Parent=$(this).parent().parent().parent();
-            var Code = Parent.find("[name=ccode]").text();
-            var CourseName=Parent.find("[id=cname]").text();
-            var prof = Parent.find("[id=professor]").val();
-            var period = Parent.find("[id=period]").val();
-            var semester = Parent.find("[id=semester]").val();
-            var pagenation=$('body').find('[id=RecommendPageNation]');
-            var CurrentPage = pagenation.find('.active','item').attr('name');
-          
-
-            var form =document.createElement("form");
-            form.method ="POST";
-            form.action = "/UpdateCourse/"
+          var Parent = $(this).closest(".sugang-box")
+          var Code = Parent.find("[name=ccode]").text();
+          var CourseName=Parent.find("[id=cname]").text();
+          var prof = Parent.find("[id=professor]").val();
+          var period = Parent.find("[name=period]").val();
+          var semester = Parent.find("[id=semester]").val();
+          var CourseID = $(this).parent().attr("id");
+          var form =document.createElement("form");
+          form.method ="POST";
+          form.action = "/UpdateCourse/"
             var inputdata ={
               'Code':Code,
                       'CourseName': CourseName,
                       'Professor':prof,
                       'Period':period,
                       'Semester':semester,
-                      'CurrentPage':CurrentPage
+                      'CourseID':CourseID,
             }
             var input; 
             for(key in inputdata)
@@ -452,6 +470,7 @@ $('div').on('click','#edit',function(event){
               input.type="hidden";
               form.appendChild(input);
             }
+            $("body").append(form);
             form.submit();    
              
           
@@ -459,7 +478,7 @@ $('div').on('click','#edit',function(event){
 
 
     });
-$('div').on('click','#like_delete',function(event){
+    $('div').on('click','.like_delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var confirm1 = window.confirm("이 강의를 삭제하시겠습니까?");
@@ -467,7 +486,6 @@ $('div').on('click','#like_delete',function(event){
           {
             return;
           }
-
           var CurrentPage=$(this).parent().attr("id")
            var Parent=$(this).parent().parent();
             var Code = Parent.find("[name=ccode]").text();
@@ -495,7 +513,9 @@ $('div').on('click','#like_delete',function(event){
               async:true,
               success:function(resp){     
                $('#LikePageMain').html(resp);
-                
+                $.fn.initSlide();
+                $('span.starvalue').starvalue();
+
                 },
                 error: function(xhr, option, error){
                   alert(xhr.status); //오류코드
@@ -509,5 +529,6 @@ $('div').on('click','#like_delete',function(event){
 
 
     });
+
 
 });

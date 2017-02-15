@@ -53,7 +53,7 @@ def MobileFirstPageView(Count):
 #로그인 혹은 처음으로 특정 페이지를 도달 했을 때를 제외한 경우 pagenation의 prev next 현재 페이지 값 설정 함수 
 def CurrentPageView(T_Count,offset):
 	PageInformation =[1,1,1]
-	#페이지가 0으로 떨어질때 필요한 조건
+	#페이지가 0으로 떨어질때 필요한 조건SelectPageView
 	Condition =((offset%10) !=0 )and offset%10 or 10
 	
 	#Pagenation 하는 부분의 수가 11개 이상일 경우(즉 1,2,3,4,5,6.... 11일 경우 11,12,13...20으로 맞추기 위해 필요한 조건)
@@ -169,7 +169,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 	ProfileData=Profile.objects.get(User=User)
 	SugangDataList=ProfileData.LectureRecord.split("$$")
 	DBCount4=len(SugangDataList)
-	DBCount5=Total_Evaluation.objects.count()
+	DBCount5=Group_Total_Evaluation.objects.count()
 	if Mobile=="full":
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
@@ -312,7 +312,7 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'SugangList':Sugang,
 		   'LikeList':LikeDataList,
 		   'CourseName':None,
-		   'ProSelect' :PageInformation,
+		   'SelectPageView' :PageInformation,
 		   'NoticeBoard':NoticeBoard
 			  }
 
@@ -528,6 +528,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
 	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
 	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
+	temp.append(Lecture.objects.filter(CourseName = PostDic['Course'],Code=PostDic['Code']).values("Professor","CourseName","Code").distinct())
 	
 	i=0
 	for t in temp:
@@ -570,7 +571,6 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 			TempTotal.Total_Unknown_Answer=0
 			for T in TotalDic:
 				TempTotal.Total_Count += T.Total_Count
-				#TempTotal.Total_Speedy +=T.Total_Speedy
 				TempTotal.Total_Level_Difficulty += T.Total_Level_Difficulty
 				TempTotal.Total_Homework +=T.Total_Homework
 				TempTotal.Total_StarPoint += T.Total_StarPoint
@@ -627,7 +627,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 	else:
 		T_Count[2] = DataCount(5,DBCount3)
 	DBCount4=len(TotalBoard[3])
-	DBCount5=Total_Evaluation.objects.count()
+	DBCount5=len(TotalBoard[4])
 	if Mobile == 'full':
 		T_Count[3] = DataCount(10,DBCount4)
 	else:
@@ -650,6 +650,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10]
 		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
 		TotalBoard[3] = TotalBoard[3][(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]
+		TotalBoard[4] = TotalBoard[4][(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
 		for i in range(0,len(T_Count)):
 			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
 
@@ -658,6 +659,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		TotalBoard[1] = TotalBoard[1][(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
 		TotalBoard[2] = TotalBoard[2][(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 		TotalBoard[3] = TotalBoard[3][(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]
+		TotalBoard[4] = TotalBoard[4][(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5]
 		for i in range(0,len(T_Count)):
 			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
 
@@ -671,7 +673,7 @@ def SelectProfessorView(user, pageinformation, PageNumber,MajorNumber,PostDic,Mo
 		   'TotalCount' : TotalCount,
 		   'PageInformation' : PageInformation,
 		   'SearchTotal':TotalCount[0],
-		   'Page':PageNumber,
+		   'Page':MajorNumber,
 		   'BestBoard':BestBoard,
 		   'CourseName':PostDic['Course'],
 		   'ProSelect' :int(PostDic['ProSelect']),

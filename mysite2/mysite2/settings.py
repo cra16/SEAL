@@ -25,11 +25,11 @@ SECRET_KEY = '(5x0pq$7_%f(m4+8hw38ad37+$-c#3^uikh$04!m-1l7t=53t$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 # Application definition
 
 INSTALLED_APPS = (
@@ -118,7 +118,7 @@ STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static'
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
 ('css', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/css'),
 ('js', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/js'),
 ('img', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/img'),
@@ -126,7 +126,7 @@ STATICFILES_DIRS = (
 ('m_html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_html'),
 ('m_css','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_css'),
 ('m_js','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_js')
-)
+]
 
 
 TEMPLATE_DIRS = (

@@ -140,7 +140,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData = Profile.objects.get(User = request.user)
 		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=new_CreatedID).count()
 		UserData.save()
-		new_Course=Lecture.objects.filter(Semester=Semester, Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
+		new_Course=Lecture.objects.filter(Semester=Semester,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(
 				Course = new_Course,
@@ -149,13 +149,13 @@ def Recommend_Write(request): #추천 강의 DB입력
 			)
 			for new_paper_item in new_paper_value:
 				new_paper=int(new_paper_item)
-				if new_papar==1:
+				if new_paper==1:
 					Total_Eval.Total_Long_Answer+=1
-				elif new_papar ==2:
+				elif new_paper ==2:
 					Total_Eval.Total_Short_Answer+=1
-				elif new_papar ==3:
+				elif new_paper ==3:
 					Total_Eval.Total_Mix+=1
-				elif new_papar ==4:
+				elif new_paper ==4:
 					Total_Eval.Total_Unknown_Answer+=1
 			for new_course_item in new_course_value:
 				new_course=int(new_course_item)

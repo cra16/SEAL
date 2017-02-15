@@ -573,7 +573,7 @@ def renewDB(request):
 		except:
 			Total_Eval=None
 		if Total_Eval == None:
-			a=Lecture.objects.filter(Code=Course_Eval.Course.Code, Professor__contains=Course_Professor,CourseName=Course_Eval.Course.CourseName).order_by("-Semester")[0]
+			a=Lecture.objects.filter(Code=Course_Eval.Course.Code, Professor__contains=Course_Professor,CourseName=Course_Eval.Course.CourseName).order_by("Semester")[0]
 			Total_Eval = Total_Evaluation(Course=a)
 		Total_Professor = Total_Eval.Course.Professor.split("외")[0] != None and Total_Eval.Course.Professor.split("외")[0] or Total_Eval.Course.Professor
 		if Total_Eval.Course.CourseName ==Course_Eval.Course.CourseName and Total_Eval.Course.Code ==Course_Eval.Course.Code and Total_Professor == Course_Professor:
@@ -604,14 +604,6 @@ def renewDB(request):
 		Course_Eval.Total_Course_id=Total_Eval.id
 		Course_Eval.save() 
 
-	Total_EvalList=Total_Evaluation.objects.all()
-
-	for Total_Eval in Total_EvalList:
-		Total_Eval.Total_Homework=Total_Eval.Total_Homework
-		Total_Eval.Total_Level_Difficulty=Total_Eval.Total_Level_Difficulty
-
-		Total_Eval.Total_StarPoint=Total_Eval.Total_StarPoint
-		Total_Eval.save()
 
 
 	

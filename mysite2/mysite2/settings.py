@@ -69,7 +69,7 @@ MIDDLEWARE_CLASSES = (
 
 )
 
-DBBACKUP_STORAGE = 'dbbackup.storage.filesystem_storage'
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': '/my/backup/dir/'}
 
 ROOT_URLCONF = 'mysite2.urls'

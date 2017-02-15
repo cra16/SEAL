@@ -388,7 +388,7 @@ $("[data-toggle=tooltip]").tooltip();
 
     });
 
-    $('div').on('click','#course_delete',function(event){
+    $('div').on('click','.course_delete',function(event){
         event.stopPropagation();
           $(this).unbind("click");
           var confirm1 = window.confirm("이 강의를 삭제하시겠습니까?");

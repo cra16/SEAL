@@ -140,7 +140,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData = Profile.objects.get(User = request.user)
 		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=new_CreatedID).count()
 		UserData.save()
-		new_Course=Lecture.objects.filter(Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
+		new_Course=Lecture.objects.filter(Semester=Semester, Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		if T_Eval is None: #데이터 없을시 Table 생성
 			Total_Eval = Total_Evaluation(
 				Course = new_Course,

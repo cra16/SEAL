@@ -267,10 +267,10 @@
             <div id="h_innersectiondivider" class="ui section divider"></div>
 
             <div class="ui grid" style="display:flex; flex-direction:row;">
-              <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
+              <div id="fourthcolumn" class="center floated center aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
 
-              <div class="ui stackable center floated center aligned ten wide column" style="display:flex; flex-direction:column; width:70%;">
-
+              <div class="ui stackable center floated center aligned ten wide column" >
+                <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;">
                   {% if MyCourseBoard.What_Answer|calculateData:1000 == 1 %}
                       <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
                   {%else%}
@@ -292,13 +292,14 @@
                     <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
                   {%endif%}
                   </div>
+                </div>
               </div>
-            </div>
+            
 
-            <div class="ui grid">
-              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
-              <div class="ui stackable center floated center aligned ten wide column" style="display:flex; flex-direction:column; width:70%;">
-                  <div class="ui buttons" style="margin-top:-10px">
+            <div class="ui grid" style="display:flex; flex-direction:row;" >
+              <div id="fourthcolumn" class="center floated center aligned six wide column"  style="margin-top:40px">수업 방식</div>
+              <div class="ui stackable center floated center aligned ten wide column" >
+                  <div class="ui buttons" style="display:flex; flex-direction:column; width:70%;">
 
                   {% if MyCourseBoard.Course_Answer|calculateData:100 == 1%}
                       <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
@@ -426,7 +427,7 @@
               </div>
             </div>
             <div class="ui grid" style="display:flex; flex-direction:row;" >
-              <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>시험 방식</b></div>
+              <div id="fourthcolumn" class="center floated right aligned six wide column" style="margin-top:60px"><b>수업 방식</b></div>
 
               <div class="ui stackable center floated center aligned ten wide column">
 

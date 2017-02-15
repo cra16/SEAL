@@ -25,9 +25,9 @@ SECRET_KEY = '(5x0pq$7_%f(m4+8hw38ad37+$-c#3^uikh$04!m-1l7t=53t$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 # Application definition
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'mysite2.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CustomDB',
-        'HOST': '127.0.0.1',
+        'NAME': 'customdb',
+        'HOST': 'master.c2dds86ijl9h.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'bitnami'
+        'USER': 'master',
+        'PASSWORD': 'dnwnchlrkd206'
       
       }
 }

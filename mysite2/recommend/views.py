@@ -142,7 +142,7 @@ def Recommend_Write(request): #추천 강의 DB입력
 		UserData.save()
 		new_Course=Lecture.objects.filter(Semester=Semester,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		if T_Eval is None: #데이터 없을시 Table 생성
-			Total_Eval = Total_Evaluation(
+			T_Eval = Total_Evaluation(
 				Course = new_Course,
 				Total_Homework = new_Homework, Total_Level_Difficulty = new_Level_Difficulty,  Total_Count = 1,
 				Total_StarPoint = new_Satisfy, Total_Recommend = recommend_cnt, Total_Mix=0, Total_Short_Answer=0, Total_Long_Answer=0,Total_Book_Like=0, Total_Ppt_Like=0, Total_Practice_Like=0
@@ -150,22 +150,22 @@ def Recommend_Write(request): #추천 강의 DB입력
 			for new_paper_item in new_paper_value:
 				new_paper=int(new_paper_item)
 				if new_paper==1:
-					Total_Eval.Total_Long_Answer+=1
+					T_Eval.Total_Long_Answer+=1
 				elif new_paper ==2:
-					Total_Eval.Total_Short_Answer+=1
+					T_Eval.Total_Short_Answer+=1
 				elif new_paper ==3:
-					Total_Eval.Total_Mix+=1
+					T_Eval.Total_Mix+=1
 				elif new_paper ==4:
-					Total_Eval.Total_Unknown_Answer+=1
+					T_Eval.Total_Unknown_Answer+=1
 			for new_course_item in new_course_value:
 				new_course=int(new_course_item)
 				if new_course==1:
-					Total_Eval.Total_Book_Like+=1
+					T_Eval.Total_Book_Like+=1
 				elif new_course==2:
-					Total_Eval.Total_Ppt_Like+=1
+					T_Eval.Total_Ppt_Like+=1
 				elif new_course==3:
-					Total_Eval.Total_Practice_Like+=1
-			Total_Eval.save()
+					T_Eval.Total_Practice_Like+=1
+			T_Eval.save()
 		else: #update
 			#T_Eval.Total_Helper += int(new_Helper)
 			T_Eval.Total_Homework += int(new_Homework)

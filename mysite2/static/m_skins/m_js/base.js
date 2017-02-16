@@ -24,10 +24,10 @@ $(document).ready(function()
     });
     return false;
   });
-  $('body').on('click','.category_item',function()
+  $('body').on('click','.category_item',function(event)
   { 
       var data_value=$(this).attr("data-value");
-   
+     
       event.stopPropagation();
      
       var category_name = $(this).parent().parent().find('.text').eq(0).text();
@@ -60,7 +60,7 @@ $(document).ready(function()
 
     });
 
-    $('body').on('click','.detail_item',function()
+    $('body').on('click','.detail_item',function(event)
   {
  
       event.stopPropagation();
@@ -92,12 +92,12 @@ $(document).ready(function()
           });
          
   });
-  $('body').on('click','.subject_item',function()
+  $('body').on('click','.subject_item',function(event)
   {  event.stopPropagation();
      var category_name = $(this).parent().parent().find('.text').eq(0).text();
     $('#major_category').val(category_name);
   });
-  $('body').on('click','.category-search',function()
+  $('body').on('click','.category-search',function(event)
   {
        $.ajax(
             { url : "/Search_Category_Subject/",

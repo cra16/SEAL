@@ -23,13 +23,13 @@ CSRF_COOKIE_AGE = 10800
 SECRET_KEY = '(5x0pq$7_%f(m4+8hw38ad37+$-c#3^uikh$04!m-1l7t=53t$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -119,13 +119,13 @@ STATIC_ROOT = '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-('css', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/css'),
-('js', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/js'),
-('img', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/img'),
-('html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/html'),
-('m_html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_html'),
-('m_css','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_css'),
-('m_js','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/static/m_skins/m_js')
+('css', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/css'),
+('js', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/js'),
+('img', '/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/img'),
+('html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/html'),
+('m_skins/m_html','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/m_skins/m_html'),
+('m_skins/m_css','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/m_skins/m_css'),
+('m_skins/m_js','/opt/bitnami/apps/django/django_projects/darkzero/mysite2/custom/m_skins/m_js')
 ]
 
 

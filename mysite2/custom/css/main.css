@@ -1,0 +1,316 @@
+#Swan {
+    font-family: 'Fredoka One', cursive;
+    color: #87CEFA;
+    font-size: 30px;
+}
+
+@media (min-width:769px)
+
+{
+    .custom-nav-header
+    {
+        display:flex;
+        flex-direction:row; 
+        justify-content: space-between;
+
+    }
+    .custom-nav-box
+    {
+        display:flex;
+        align-items: center;
+    }
+    .custom-search-bar{
+       display:flex;
+        flex-direction:row; 
+        align-items: center; 
+        align-self: center;
+}
+}
+
+
+#title_s {
+    height:25px;
+    margin-bottom:15px;
+}
+
+#thumbs_up {
+    display:inline;
+    background-color:#FFEB3B;
+    margin-left:10px;
+    font-size:15px;
+}
+
+#recommendtop > a {
+    text-decoration: none;
+}
+
+#likebtn1{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn2{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn3{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn4{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn5{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn6{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn11{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn12{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn13{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn14{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+#likebtn15{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+#likebtn21{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn22{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+
+#likebtn23{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn24{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn25{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn26{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn27{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn28{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn29{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+#likebtn210{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
+
+#likebutton
+{
+    border: none;
+    background-color: white;
+}
+
+button.likebutton
+{
+    border: none;
+    background-color: white;
+}
+
+#likebutton2
+{
+    border: none;
+    background-color: white;
+}
+#likebutton3
+{
+    border: none;
+    background-color: white;
+}
+#likebutton4
+{
+    border: none;
+    background-color: white;
+}
+#likebutton5
+{
+    border: none;
+    background-color: white;
+}
+#likebutton6
+{
+    border: none;
+    background-color: white;
+}
+
+#likebutton11
+{
+    border: none;
+    background-color: white;
+}
+#likebutton12
+{
+    border: none;
+    background-color: white;
+}
+#likebutton13
+{
+    border: none;
+    background-color: white;
+}
+#likebutton14
+{
+    border: none;
+    background-color: white;
+}
+#likebutton15
+{
+    border: none;
+    background-color: white;
+}
+
+#likebutton21
+{
+    border: none;
+    background-color: white;
+}
+#likebutton22
+{
+    border: none;
+    background-color: white;
+}
+#likebutton23
+{
+    border: none;
+    background-color: white;
+}
+#likebutton24
+{
+    border: none;
+    background-color: white;
+}
+#likebutton25
+{
+    border: none;
+    background-color: white;
+}
+
+
+
+/* Preloader */
+
+#preloader {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff; /* change if the mask should have another color then white */
+    z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%; /* centers the loading animation horizontally one the screen */
+    top:50%; /* centers the loading animation vertically one the screen */
+    background-image:url(../loader.gif); /* path to your loading animation */
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+
+#contents {
+    padding-top: 60px;
+    padding-bottom: 200px;
+}
+
+div {
+display: block;
+}
+
+.cname {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.glyphicon.glyphicon-heart {
+    font-size: 40px;
+    color: red;
+}
+
+#book > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#pencil > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#heart > i {
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#eye > i{
+    font-size: 50px;
+    color: #87cefa;
+}
+
+#logout {
+    font-size: 12px;
+    font-weight: normal;
+    color: red;
+}
+
+#firstcourse, #secondcourse, #thirdcourse, #fourthcourse, #fifthcourse, #sixthcourse, #seventhcourse {
+    float: left;
+    margin-right: 20px;
+}
+
+#recommendtop {
+    margin-bottom: 20px;
+}
+

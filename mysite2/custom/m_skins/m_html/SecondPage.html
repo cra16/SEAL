@@ -1,0 +1,114 @@
+{% load app_filter %}
+{%load staticfiles%}
+
+
+       {% if CourseName == None%}
+       {% for PBoard2 in PageBoard.1%}
+        {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
+          {% endif %}
+          <div class="column">
+             <div class="ui raised segment">
+              <div id="likebtn2{{forloop.counter}}" data-toggle="tooltip" data-original-title="해당 과목에 대한 전체 평가 갯수입니다." class="left floated ui compact segment">
+                <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.1|lookup:forloop.counter0}}</span> SEALS</center>
+              </div>
+              
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Code}}</span>]
+                 <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard2.CourseName}}</span></a></p>
+                
+                <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
+                <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
+                <input type = "hidden" id="professor" value = "{{PBoard1.Professor}}">
+                </div>
+            </div>
+           {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+        {% endif %}
+      {% endfor%}
+        <div class="ui divider"></div>
+
+        <center><div id ="SecondPageNation" class="ui borderless pagination menu">
+              <a id ="Previous" class="item" name="{{PageInformation.1.0}}">
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+      
+        {% for i in TotalCount.1%}
+        {%if i == Page %}
+         <a id ="Page" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="Page" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}{%endfor%}
+              <a id = "Next" name = "{{PageInformation.1.2}}" class="item">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+        {% elif ProSelect == 1 %}
+          {% for PBoard2 in PageBoard.1%}
+          {% if forloop.counter0|divisibleby:"2" %}
+        <div class="ui stackable two column grid">
+
+          {% endif %}
+        <div class="column">
+          <div class="ui raised segment">
+              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment">
+                <center><button id="likebutton" name = "{{PBoard2.Course.id}}" ><img src="{% static "m_skins/m_css/write.png" %} " height="45px" width="45px">
+                  <div style="margin-top:14px; color:teal"><b><u>WRITE</u></b></div></button></center>
+              </div>
+              {% if PBoard2.CreatedID.User.username == user.profile.User.username %}             
+              <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PBoard2.Course.id}}"><i class="glyphicon glyphicon-edit" class="course_edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
+              {% endif %}
+              <div class="sixteen wide column">  
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard2.Course.Code}}</span>]
+                <p><a style="cursor:pointer" href ="/CourseProfessor/{{PBoard2.Course.id}}"><span class="cname" name="cname" value = "">{{PBoard2.Course.CourseName}}</span></a></p>
+                <p id="title_s"><span id="cprof1" name = "cprof">{{PBoard2.Course.Professor}} 교수님</span></p>
+              </div>
+
+              <br><br>
+
+              <button type ="button" data-toggle="tooltip" data-original-title="해당 과목에 대한 전체 평가 갯수입니다."  id="thumbs_up" class="circular ui icon button" style="margin-left:10px;" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{GoodCount.1|lookup:forloop.counter0}}</b></span></button>
+
+              <div class="center aligned sixteen wide column" style="margin-top:-35px; margin-bottom: 15px;">
+                <span class="starvalue" style="display:inline-block" >{{PBoard2.Total_StarPoint}}</span>       
+              </div>
+
+              <div class="center aligned sixteen wide column">
+                  <center><b>과제</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
+                  <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Homework}}" data-slider-id="sa{{forloop.counter}}2C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a><br />
+                  <center><b>난이도</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
+                  <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-value="{{PBoard2.Total_Level_Difficulty}}" data-slider-id="sa{{forloop.counter}}3C"/>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
+              </div>
+          </div>
+        </div>
+          {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+          </div>
+          {% endif %}
+              {% endfor%}
+              <div class="ui divider"></div>
+
+      <center><div id ="SecondPageNation" name="AllPageNation" class="ui borderless pagination menu">
+              <a id ="ProPrevious" name="{{PageInformation.1.0}}" class="item" >
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+      
+        {% for i in TotalCount.1%}
+         
+        {%if i == Page %}
+         <a id ="ProPage" name ="{{i}}" class="active item" >{{i}}</a>
+        
+        {%else%}
+         <a id ="ProPage" name ="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
+      {%endfor%}
+              <a id ="ProNext" name = "{{PageInformation.1.2}}" class="item" >
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+              <input type = "hidden" id="CourseHidden" value = "{{CourseName}}">
+            </div></center>    
+        
+        {%endif%}

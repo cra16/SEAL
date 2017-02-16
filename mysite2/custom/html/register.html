@@ -1,0 +1,96 @@
+{% extends "html/base.html" %}
+
+   
+
+  <head>
+	{% load staticfiles%}
+	{% block head%}
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/register.css"%}" />
+    <script type="text/javascript" src="{% static "js/LoginPage/register.js"%}"></script>
+
+    <title>{% block title %}SEAL - Login{% endblock %}</title>
+	{% endblock %}
+  </head>
+  <body>
+  {% block content%}
+
+    <div  class="container" style="padding:100px 0">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="registercontainer">
+
+        <div class="box" id="mycontent-left-register">
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+            <p class="detail">Students' Excellent Achievements in Learning</p>
+            <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+            <p class="detail2">강의추천 및 강의정보 열람서비스입니다.</p>
+            <br/><br/>
+            <p>Powered by CRA</p>
+        </div>
+
+        <div class="box" id="mycontent-right">
+
+          <form method ="POST" action="/Register/">
+
+            <div class="form-group" method="post" action="#">
+              <label class="control-label" for="stu_num">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;아이디는 학번으로 일괄 적용됩니다.
+             <br/><br/>
+              <label class="control-label" for="stu_num"><h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{stu_num}}</h4></label>
+              <input type="hidden" id="stu_num" class="form-control" name="stu_num" value="{{stu_num}}">
+
+             <br/><br/>
+              <label class="control-label" for="user_pw" style="padding-top: 15px;">비밀번호</label>
+              <input type="password" id="password" class="form-control" name="user_pw" placeholder="비밀번호">
+
+              <label class="control-label" for="repassword" style="padding-top: 15px;">비밀번호 재입력</label>
+              <input type="password" id="repassword" class="form-control" name="repassword" placeholder="비밀번호">
+
+              <label class="control-label" for="user_email" style="padding-top: 15px;">E-mail 주소</label>
+              <input type="text" id="user_email" class="form-control" name="user_email" placeholder="E-mail 주소">
+
+              <label class="control-label" for="user_name" style="padding-top: 15px;">이름</label>
+              <label class="control-label" for="user_name" style="padding-top: 15px;">{{stu_name}}</label>
+              <input type="hidden" id="user_name" class="form-control" name="user_name" value="{{stu_name}}">
+
+              <label class="control-label" for="first_major" style="padding-top: 15px;">1전공</label>
+              <label class="control-label" for="first_major" style="padding-top: 15px;">{{first_major}}</label>
+              <input type="hidden" id="first_major" class="form-control" name="first_major" value="{{first_major}}">
+
+              <label class="control-label" for="second_major" style="padding-top: 15px;">2전공</label>
+              <label class="control-label" for="second_major" style="padding-top: 15px;">{{second_major}}</label>
+              <input type="hidden" id="second_major" class="form-control" name="second_major" value="{{second_major}}">
+
+            </div>
+
+            <div class="form-group" method="post" action="#">
+              <div class="ui medium buttons">
+                <input type="submit" id="register" value="Register" class="ui blue button">
+                <div class="or"></div>
+                <input type="button" id="cancel" value="Cancel" class="ui blue button">
+              </div>
+            </div>                
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-sm-2"></div>      
+    </div>
+	{%endblock%}
+    </body>
+    <script type="text/javascript">
+      //<![CDATA[
+      $(window).load(function() { // makes sure the whole site is loaded
+        $('#status').fadeIn(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({'overflow':'visible'});
+      });
+      //]]>
+    </script>
+</html>

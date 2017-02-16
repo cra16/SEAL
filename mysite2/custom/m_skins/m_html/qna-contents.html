@@ -1,0 +1,79 @@
+<!doctype html>
+{% extends "m_skins/m_html/base.html" %}
+
+   
+
+  {% block head%}
+  {% load staticfiles%}  
+    <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/qna.css" %}">
+    <script type="text/javascript" src="{% static "js/qna.js" %}"></script>
+    
+  {% endblock%}
+
+  {% block content%}
+
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A)
+        {% if user.username == "admin_seal" or user.username == Current.TextWriter.User.username%}
+        <a href="/QnA/Reply/{{Current.id}}"> <div class="ui right floated tiny blue button">          
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Reply</div> </a>
+        <div class="ui section divider" style="margin-top: 40px;"></div>
+ 
+          {% endif %}
+        <a href="/QnA"> <div class="ui right floated tiny teal button" style="margin-top:-10px;">
+          <i style="margin-left:-6px;" class="glyphicon glyphicon-list"></i>　목록으로</div> </a></h2>
+          <br>
+            <div id="qna_border_q" class="ui raised segment">
+              <div class="ui large blue ribbon label">{{Current.TextName}}</div>
+              <p></p>
+              <div class="ui tiny black ribbon label">{{Current.TextWriter.UserName}}　{{Current.created|date:"Y.m.d"}} {{Current.created|time:"H:i"}} </div>
+              <p style="qna_content">
+              <PRE style="background-color:#fff; width:90%">{{Current.Text}}</PRE></p>
+            </div>  
+            {%for QnA in QnA_Reply%}
+            
+            <p>&nbsp;</p>
+      <div id="subscribe" class="ui column">
+        
+      	
+      </div>
+            
+            <div id="qna_border_a" class="ui raised segment">
+              <div class="ui large red right ribbon label">{{QnA.TextName}}</div>
+              <p></p>
+              <div class="ui tiny black right ribbon label">{{QnA.TextWriter.UserName}} {{QnA.created|date:"Y.m.d"}} {{QnA.created|time:"H:i"}}</div>
+              <p class="reply">
+              <PRE style="background-color:#fff; width:90%; float:right">{{QnA.Text}}</PRE></p>
+            </div>       
+            {%endfor%}
+                                          
+              <center>
+              <div class="ui buttons">
+              <a class="ui red inverted button" href = "/QnA/{{Previous}}">
+                <i class="glyphicon glyphicon-menu-left"></i>Prev
+              </a>
+                <div class="or"></div>
+              <a class="ui blue inverted button" href = "/QnA/{{Next}}">
+                Next<i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+                        
+             
+        <div class="ui section divider" style="border-color: lightgray; margin-top: 30px; margin-bottom: 0px;"></div>
+ 
+     {% endblock%}       
+</html>

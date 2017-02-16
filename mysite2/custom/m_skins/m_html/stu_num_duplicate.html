@@ -1,0 +1,64 @@
+{% extends "html/base.html" %}
+
+   
+ <head>
+  {%load staticfiles%}
+  {% block head%}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/confirm.css"%}" />
+    <script type="text/javascript" src="{% static "js/confirm.js"%}"></script>
+
+    <title>{% block title%}SEAL - Login{%endblock%}</title>
+	{%endblock%}
+  </head>
+  <body>
+  {% block content%}
+
+    <div class="container" style="padding:100px 0">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="confirmcontainer">
+
+        <div class="box" id="mycontent-left-register">
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+            <p class="detail">Students' Excellent Achievement</p>
+            <p class="detail"> in Learning</p>
+            <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+            <p class="detail2">강의추천 및 강의정보 열람 서비스 입니다.</p>
+        </div>
+         
+
+        <div class="box" id="mycontent-right">
+
+
+          <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
+
+            <div class="form-group" method="post" action="/mysite2/Register">
+            <h3> 중복된 회원입니다. 이미 가입된 회원입니다. <br/>
+              문의: cra.handong@gmail.com </h3>
+          
+             <p>&nbsp;</p>
+              <div class="ui medium buttons">
+                  <input type="button" id="return" value="돌아가기" class="ui blue button" onclick="window.history.back();">
+                  <div class="or"></div>
+                  <a href = "/"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-sm-2"></div>      
+    </div>
+
+  {%endblock%}
+  </body>
+
+</html>

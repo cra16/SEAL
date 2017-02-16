@@ -1,0 +1,81 @@
+{% load staticfiles%}
+       <script type="text/javascript" src="{% static "js/schedule-table.js" %}"></script>
+        <div id="rt_table" class="bootstrap-table">
+         <div class="fixed-table-container">
+             <div class="fixed-table-header" style="height: 40px; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(221, 221, 221); margin-right:0px;">
+                
+             </div>
+            <div class="fixed-table-body">
+                
+                <table id="table" class="table table-hover" style="margin-top: -40px;"></div>
+                     <thead>
+                        <tr>
+                        <th>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>월</center>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>화</center>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>수</center>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>목</center>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>금</center>
+                        </th>
+                        <th class="col-xs-2">
+                            <center>토</center>
+                        </th>
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        {% for period in my_lec_table %}
+                         <tr data-index="{{forloop.counter}}">
+                             {% if forloop.counter == 1 %}
+                             <th style><p>&nbsp;</p>1st</th>
+                             {% elif forloop.counter == 2 %}
+                             <th style><p>&nbsp;</p>2nd</th>
+                             {% elif forloop.counter == 3 %}
+                             <th style><p>&nbsp;</p>3rd</th>
+                             {% elif forloop.counter == 4 %}
+                             <th style><p>&nbsp;</p>4th</th>
+                             {% elif forloop.counter == 5 %}
+                             <th style><p>&nbsp;</p>5th</th>
+                             {% elif forloop.counter == 6 %}
+                             <th style><p>&nbsp;</p>6th</th>
+                             {% elif forloop.counter == 7 %}
+                             <th style><p>&nbsp;</p>7th</th>
+                             {% elif forloop.counter == 8 %}
+                             <th style><p>&nbsp;</p>8th</th>
+                             {% elif forloop.counter == 9 %}
+                             <th style><p>&nbsp;</p>9th</th>
+                             {% elif forloop.counter == 10 %}
+                             <th style><p>&nbsp;</p>10th</th>
+                             {% elif forloop.counter == 11 %}
+                             <th style><p>&nbsp;</p>11th</th>
+                             {% endif %}
+
+                             {% for lec in period %}
+                             {% if lec %}
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                              <span id="table-ccode{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-ccode">{{ lec.Code }}</span><br/>
+                              {{ lec.CourseName }}
+                              <span id="table-cclass{{forloop.parentloop.counter}}-{{forloop.counter}}" name="table-cclass">({{ lec.Class }})</span><br/>
+                              {{ lec.Professor }}<br/>
+                              <button type="button" id="del-my-lec{{forloop.parentloop.counter}}-{{forloop.counter}}" class="close" aria-label="Close">&times;</button>
+                             </td>
+                             {% else %}
+                             <td id="day{{forloop.parentloop.counter}}-{{forloop.counter}}"></td>
+                             {% endif %}
+                             {% endfor %}
+                         </tr>
+                         {% endfor %}
+                     </tbody>
+                 </table>
+             </div>
+         </div>

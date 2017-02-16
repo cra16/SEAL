@@ -1,0 +1,245 @@
+
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% load staticfiles %} 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+       <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/semantic.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css"%}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/slider.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/feed.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/seal_menubar.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_profile.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/seal_bestc.css"%}">    
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+    
+    <script type="text/javascript" src="{% static "js/jquery.js"%}"></script>
+     
+    <script type="text/javascript" src="{% static "js/jquery-2.1.3.js"%}"></script>
+    
+    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/bootstrap-slider.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/feed.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/semantic.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>
+    <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-67134263-1', 'auto');
+          ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+      function blink() {
+        var blinks = document.getElementsByTagName('blink');
+        for (var i = blinks.length - 1; i >= 0; i--) {
+          var s = blinks[i];
+          s.style.visibility = (s.style.visibility === 'visible') ? 'hidden' : 'visible';
+        }
+        window.setTimeout(blink, 450);
+      }
+      if (document.addEventListener) document.addEventListener("DOMContentLoaded", blink, false);
+      else if (window.addEventListener) window.addEventListener("load", blink, false);
+      else if (window.attachEvent) window.attachEvent("onload", blink);
+      else window.onload = blink;
+    </script>
+
+   <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+      #bottom {
+        margin-top: 10px;
+        background-color: #ffffff;
+        width: 100%;
+      }
+
+      #bottomtxt {
+        font-weight: bold;
+        color: #87cefa;
+      }
+    </style>
+    
+    {% block head %}
+     
+    {% endblock%}
+
+    <title> {% block title %} SEAL - Login {% endblock %}</title>
+    <link rel="shortcut icon" href="{% static "m_skins/m_css/seal_title.png" %}">
+  
+
+
+  </head>
+  <body>
+
+ <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+   {% if not user == None%}
+    <!-- Preloader -->
+    
+
+
+    <div id="menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="col-md-1 col-sm-0"></div>
+        <div class="col-md-10 col-sm-12">
+          <div class="navbar-header custom-nav-header">
+            <a class="navbar-brand" style="margin-top:3px; margin-left:-33px;" href="/">SEAL</a>
+            <div class="custom-search-bar">
+              <form id = "form" class="navbar-form navbar-left col-xs-6 form-inline" style="margin-top:10px;" role="search" action="/Search/" method = "POST" >{%csrf_token%}
+                  <div>
+                      <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                      <button type="submit" id ="SearchButton" class="btn btn-info" style="float:right" onclick=""><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+        
+              </form>
+            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" style="margin-right:-18px; margin-top:10px;" data-target=".navbar-menubuilder">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+          </div>
+          <div class="collapse navbar-collapse navbar-menubuilder">
+            <ul class="nav navbar-nav navbar-right">
+              <!--<li style="margin-top:13px">
+                <img style="margin-top:-10px" src="{% static "css/notice.png" %}">&nbsp;
+                <marquee loop="infinite" bgcolor="#87cefa" width="230" height="20" direction="left" style="height: 20px; width: 260px; background-color: transparent;">
+                <font size="2" color="white">현재까지 총 <font size="4" style="border:1"><blink><b>38</b></blink></font>개의 강의 평가가 등록되었습니다.
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                총 <font size="4" style="border:1"><blink><b>121</b></blink></font>명의 학생이 SEAL에 가입하였습니다.
+                </font>
+                </marquee>
+              </li>-->
+              <li><a href="/MyPage">MY PAGE</a></li>
+              <li><a href="/Notice">공지사항</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="/QnA">Q&A</a></li>
+                  <li><a href="/About">ABOUT</a></li>
+                  <li><a href="/Judgement">신고</a></li>
+                  <li><a href="/SubScript">개선요구사항</a></li>
+                  <li><a href="/SiteMap">SITEMAP</a></li>
+                </ul>
+              </li>
+              <li><a href="/Logout">LOGOUT</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-1 col-sm-0"></div>
+      </div>
+    </div>
+   {%endif%}
+
+    {% block content %} {% endblock %}
+
+
+    {% if not user == None%}
+      
+     
+    </div>
+
+            <div class="wrapper">
+              <profile id="profile" class="col-md-12 col-sm-12 col-xs-12">
+                      
+                <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a><a href="/Logout"><span id="logout">LOGOUT&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                  <span id="detail"><br /><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
+
+                <p><span id="label"><a href="/MyCourse">내가 평가한 강의 &nbsp;</a> </span> <span id="num"><span id="num1">{{user.profile.RecommendCount}}</span> 개</span></p>
+
+                <p id="last"><span id="label"><a href="/MyCourse">듣고 싶은 강의 &nbsp;</a> </span> <span id="num"><span id="num2">{{user.profile.LikeCount}}</span> 개</span></p>
+
+                <a href="/Schedule"><button class="btn btn-info" style="position:relative; left:19%"><span id="btntext">My Schedule</span></button></a>
+
+              </profile>
+            </div>
+
+            <div class="wrapper">
+              <best id="best" class="col-md-2 col-sm-2 col-xs-2">
+                    
+                <h3 id="best-title">HOT COURSES</h3>
+
+                <span id="best-list">   
+                  <h3 class="col-md-1 col-sm-1 col-xs-1">
+                    <span id="num1"><a href="/CourseProfessor/{{BestBoard.0.Course.id}}">1</a></span>
+                    <span id="num2"><a href="/CourseProfessor/{{BestBoard.1.Course.id}}">2</a></span>
+                    <span id="num3"><a href="/CourseProfessor/{{BestBoard.2.Course.id}}">3</a></span>
+                  </h3>
+
+                <p id="first-place" class="col-md-9 col-sm-9 col-xs-9">
+                  <span id="coursename1">{{BestBoard.0.Course.CourseName|truncatechars:10}}</span><br />
+                  <span id="pname1">{{BestBoard.0.Course.Professor}} 교수님</span><br />
+                  <span id="rnumall1"><img src="{% static "m_skins/m_css/seal_mini.png" %}"><span id="rnum1">{{BestBoard.0.Total_Count}} </span>Seals</span>
+                </p>
+
+                <p id="second-place" class="col-md-9 col-sm-9 col-xs-9">
+                  <span id="coursename2">{{BestBoard.1.Course.CourseName|truncatechars:10}}</span><br />
+                  <span id="pname2">{{BestBoard.1.Course.Professor}} 교수님</span><br />
+                  <span id="rnumall2"><img src="{% static "m_skins/m_css/seal_mini.png" %}"><span id="rnum2">{{BestBoard.1.Total_Count}} </span>Seals</span>
+                </p>
+
+                <p id="third-place" class="col-md-9 col-sm-9 col-xs-9">
+                  <span id="coursename3">{{BestBoard.2.Course.CourseName|truncatechars:10}}</span><br />
+                  <span id="pname3">{{BestBoard.2.Course.Professor}} 교수님</span><br />
+                  <span id="rnumall3"><img src="{% static "m_skins/m_css/seal_mini.png" %}"><span id="rnum3">{{BestBoard.2.Total_Count}} </span>Seals</span>
+                </p>
+                    
+                </span>
+
+              </best>
+            </div>
+ 
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+
+  <div>
+    
+  <div class="ui footer">
+      <div class="container">
+          <div class="ui stackable inverted divided relaxed grid">
+          </div>
+      </div>
+  </div>
+    
+  <br></br>
+
+    <div class="ui blue inverted alternate stripe vertical segment">
+        <div class="ui stackable center aligned page grid">
+            <div class="fourteen wide column">
+                <h4>Powered by CRA</h4>
+            </div>
+        </div>
+    </div>
+  
+  </div>
+
+    
+{%endif%}
+   <!-- Preloader -->
+    <script type="text/javascript">
+      //<![CDATA[
+      $(window).load(function() { // makes sure the whole site is loaded
+        $('#status').fadeIn(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({'overflow':'visible'});
+      });
+      //]]>
+    </script>
+  </body>
+</html>
+

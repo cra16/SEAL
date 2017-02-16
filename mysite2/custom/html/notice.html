@@ -1,0 +1,107 @@
+{% extends "html/base.html" %}
+
+   
+  <head>
+    {% load staticfiles%}
+    {% block head%}
+	 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+    <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
+
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{%static "css/notice.css"%}">
+    <script type="text/javascript" src="{% static "js/notice.js"%}"></script>
+    
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+  
+    
+    
+   {%endblock%}
+  <body>
+    {%block content%}
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-8 col-sm-12 col-xs-12">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항
+           {% if user.profile.UserName == "SEAL"%}
+        <a href="/Notice/Write"> <div style="margin-top:20px" class="ui right floated tiny blue button">
+          
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a>
+          {% endif %}
+         </h2>
+
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+        
+        <div id="Notice_List" class="ui column">
+          <div id="qna_board">
+              
+              <table class="ui table">
+                 <thead>
+                  <tr>
+                      <th class="two wide"><center>번호</center></th>
+                      <th class="eight wide"><center>제목</center></th>
+                      <th class="two wide"><center>작성자</center></th>
+                      <th class="two wide"><center>날짜</center></th>
+                      <th class="two wide"><center>조회수</center></th>
+                  </tr>
+                </thead>
+                
+                
+                
+                <tbody class="qna_sub">
+                  {%for Board in PageBoard%}
+				  
+				  <tr id="qna1">
+                    <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
+                    <td class="qna_title"><a href="/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
+                    {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
+                    <img src="{% static "fonts/latest.gif"%}"></span></td>
+                    {%endif%}
+                    <td><center>{{Board.TextWriter}}</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
+                  </tr>
+				  {%endfor%}
+                  
+                </tbody>
+              </table>
+      
+               
+                                          
+              <center><div class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.0}}" class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+        
+        {% for i in TotalCount %}
+    
+             {%if PageInformation.1 == i%}
+
+                <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+            {%else%}
+             <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
+             {%endif%}
+              {%endfor%}
+         
+              <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+              
+          </div>
+        </div>
+
+     {% endblock%}
+  </body>
+</html>

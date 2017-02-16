@@ -1,0 +1,20 @@
+/* My Schedule css */
+
+td:hover{
+    background-color: #4f7cc5;
+}
+
+thead tr{
+    background-color: #f0f0ff;
+}
+
+.cperiod{
+    background-color: #f0fff0;
+    margin-left: 20px;
+}
+
+td {
+    text-align: center;
+    height: 80px;
+    border: solid 1px #ddd;
+}

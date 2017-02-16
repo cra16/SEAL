@@ -1,0 +1,128 @@
+<!doctype html>
+
+{% extends "m_skins/m_html/base.html" %}
+
+   
+   {%block head%}
+    {%load staticfiles%}
+   <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+        <link rel="shortcut icon" href="{% static "m_skins/m_css/seal_title.png" %}">
+
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+ 
+
+    <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/about.css" %}">
+    {%endblock%}
+  </head>
+
+  <body>
+    <!-- Preloader -->
+    {% block content%}
+    <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-11 col-sm-11 col-xs-11">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-globe"></i> About SEAL</h2>
+
+        <div class="ui section divider"></div>
+
+        <div class="ui column">
+          <h1>What is SEAL?</h1>
+          <div id="about_detail"><p><span id="sealcap">SEAL</span>은 한동대학교 학생이라면 누구든지 자신이 들은 수업을 '강의 평가 하기'로 평가하고, 평가 결과를 보기 쉽게 모아서 더 많은 학생들이 한 단계 업그레이드 된 학문적 성취를 할 수 있도록 돕는 강의 평가 사이트입니다.</p></div>
+        </div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <div id="about_sub" class="ui stackable center aligned grid" style="padding-left: 30px">
+          <div id="section" class="sixteen wide column">
+            <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> FAQ</h2>
+            <p>SEAL에서 사용하는 기능 중 잘 이해가 안되는 기능이 있나요? SEAL에 대하여 궁금한 점이 있다면 언제든지 FAQ게시판에 올려주세요! 저희가 가능한 빠른 시일 내에 성실한 답장을 드리겠습니다!</p>
+            <a href="/QnA"><button class="btn btn-info btn-lg">FAQ</button></a>
+          </div>
+
+          <div id="h_sectiondivider" class="ui section divider"></div>
+
+          <div id="section" class="sixteen wide column">
+            <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항</h2>
+            <p>SEAL은 아직 성장 중인 사이트입니다! SEAL에 업데이트나 변경사항, 관리자가 전하고 싶은 사항들은 공지사항에서 알려드리겠습니다. 꼭 체크해주세요!</p>
+            <a href="/Notice"><button class="btn btn-info btn-lg">공지사항</button></a>
+          </div>
+        </div>
+
+        <div id="h_sectiondivider" class="ui section divider"></div>
+        <br></br>
+
+        <div id="about_sub" class="ui stackable center aligned grid" style="padding-left: 30px">
+          <div id="section" class="sixteen wide column">
+            <h2 class="ui header"><i class="glyphicon glyphicon-warning-sign"></i> 신고</h2>
+            <p>SEAL은 한동대학생이라면 누구든지 자신이 들은 수업에 대하여 평가를 할 수 있게 열어놓았습니다. 같은 수업이라도 학생별로 평가 내용은 다를 수 있습니다. 하지만 그 중에서도 만약 수업의 특징에 너무 반대인 성향으로 평가 또는 코멘트를 한 사람이 있다면 여기에 신고를 하시면 됩니다. 관리자가 다른 사람들의 평가와 비교하여 신고접수 후 처리하겠습니다.</p>
+            <a href="/Judgement"><button class="btn btn-info btn-lg">신고</button></a>
+          </div>
+          
+          <div id="h_sectiondivider" class="ui section divider"></div>
+
+          <div id="section" class="sixteen wide column">
+            <h2 class="ui header"><i class="glyphicon glyphicon-comment"></i> 개선요구사항</h2>
+            <p>SEAL은 한동대학교의 전산동아리 CRA의 학생들이 만들고 관리하는 사이트입니다! 만약 SEAL 페이지에 문제가 있거나 학우분들 중 'SEAL에 이걸 더하면 좋을텐데', '평가하고 싶은 criteria가 따로 더 있는데'라는 분들이 계시다면 저희에게 개선요구사항 페이지를 통해 알려주세요! 저희가 검토 후 개선하도록 하겠습니다.</p>
+            <a href="/SubScript"><button class="btn btn-info btn-lg">개선요구사항</button></a>
+          </div>
+        </div>
+
+        <div class="ui section divider"></div>
+
+        <div class="wrapper" style="padding-left: 30px;">
+      <div class="ui vertical feature segment">
+        <div class="ui very relaxed column grid">   
+          <div class="wide column">
+            <div class="ui four column center aligned stackable divided grid">
+
+              <div class="column">
+                <div id="book" class="ui icon header">
+                  <i class="glyphicon glyphicon-book"></i><br />STRONG Students
+                </div>
+                <p>SEAL is here for the best achievements of Handong students!</p>
+                <a class="ui button" href="http://sugang.handong.edu/">Register Courses NOW</a>
+              </div>
+
+              <div class="column">
+                <div id="pencil" class="ui icon header">
+                  <i class="glyphicon glyphicon-pencil"></i><br />Wanted Features
+                </div>
+                <p>We provide valid information of powerful and suitable courses just for you.</p>
+                <a class="ui button" href="http://seal.handong.edu/">SEAL.handong.edu</a>
+              </div>
+                          
+              <div class="column">
+                <div id="heart" class="ui icon header">
+                  <i class="glyphicon glyphicon-heart"></i><br />Agreeable Contents
+                </div>
+                <p>Check out the reliable comments from your professors and TA's!</p>
+                <p><a class="ui button">Check it out</a></p>
+              </div>
+
+              <div class="column">
+                <div id="eye" class="ui icon header">
+                  <i class="glyphicon glyphicon-eye-open"></i><br />Need your attention
+                </div>
+                <p>Why not change the world? We respect the <b>Honor Code</b>.</p>
+                <a class="ui button" href="https://www.handong.edu/about/vision/declar/">Honor Code</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+   {%endblock%}
+  </body>
+</html>

@@ -1,0 +1,57 @@
+   {% load staticfiles%}
+
+ <div id="qna_board">
+              
+              <table class="ui table">
+                 <thead>
+                  <tr>
+                      <th class="two wide"><center>번호</center></th>
+                      <th class="eight wide"><center>제목</center></th>
+                      <th class="two wide"><center>작성자</center></th>
+                      <th class="two wide"><center>날짜</center></th>
+                      <th class="two wide"><center>조회수</center></th>
+                  </tr>
+                </thead>
+                
+                
+                
+                <tbody class="qna_sub">
+                  {%for Board in PageBoard%}
+				  
+				  <tr id="qna1">
+                    <td><center><span id="qna_num7">{{Board.id}}</span></center></td>
+                    <td class="qna_title"><a href="/Notice/{{Board.id}}">{{Board.TextName}}</a><span>
+                    {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
+                    <img src="{% static "fonts/latest.gif"%}"></span></td>
+                    {%endif%}
+                    <td><center>{{Board.TextWriter}}</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
+                  </tr>
+				  {%endfor%}
+                  
+                </tbody>
+              </table>
+      
+               
+                                          
+              <center><div class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.0}}" class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+        
+        {% for i in  TotalCount %}
+    
+            {%if PageInformation.1 == i%}
+
+              <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+             {%else%}
+              <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
+            {%endif%}
+         {%endfor%}
+              <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+              
+          </div>
+        </div>

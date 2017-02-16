@@ -1,0 +1,112 @@
+	<!doctype html>
+
+{% extends "html/base.html" %}
+
+   
+  
+ {% load staticfiles %}
+  {% block head %}
+   
+    <title>▒ SEAL ▒</title>
+    <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
+
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+
+    </script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static "css/IndexPage/main.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/mypage.css" %}">
+    <script type="text/javascript" src="{% static "js/mypage.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
+   
+  {% endblock%}
+
+  <body>
+  {% block content%}
+   {{first_major}}
+    <div class="containerss"></div>
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <h2 class="ui header"><i class="glyphicon glyphicon-user"></i> My Page <button id="update_button" class="btn btn-info">UPDATE</button></h2>
+        <div style="width:500px; height:300px;" class="ui long modal scrolling transition">
+            <div class="header"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;hisnet check</div>
+             <div class="ui segment" style="padding:18px 20px 3px 20px">
+                <form id="hisnet_form" method = "POST">{%csrf_token%}
+                       <label style="display:block;" class="control-label" for="UserID" style="float:left">아이디(Hisnet)</label>
+                      <input type="text" id="UserID" name ="hisnet_id" class="form-control" placeholder="아이디(Hisnet)">
+                      <label class="control-label" for="password" style="padding-top: 15px; float:left">비밀번호</label>
+                      <input type="password" id="password" name ="hisnet_password" class="form-control" placeholder="비밀번호">
+                      <br>
+                   <button style="width:100%;" class="btn btn-info submit_hisnet">check</button>
+                   
+                 
+                </form>
+              <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
+            
+               </div>
+            </div>
+  
+
+      <div id="myprofile" class="ui column">
+        
+        <div id="myname" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">닉네임</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column">
+            <form id = "NicknameChange" method = "POST">
+           {%csrf_token%}
+          <div class="right floated three wide column">
+            <button id="btnnum4" type = "button" class="btn btn-info">닉네임변경</button>
+          </div> 
+          </form>
+            <span id="thirdcolumn">{{user.profile.UserName}}</span>
+          </div> 
+          
+        </div>
+
+        <div id="yrnum" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">학번</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.username}}</span></div>  
+        </div>
+
+        <div id="firstmajor" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">제1전공</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn">{{user.profile.FirstMajor}}</span></div>
+        </div>
+
+        <div id="secondmajor" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">제2전공</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned twelve wide column"><span id="thirdcolumn"></span>{{user.profile.SecondMajor}}</div>
+        </div>
+        
+        <div id="recomcourse" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 평가한 강의</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.RecommendCount}}개</span></div>
+          <div class="right floated three wide column"><a href = "/MyCourse"><button  class="btn btn-info">목록으로 가기</button></a></div> 
+        </div>
+
+        <div id="wantcourse" class="ui grid">
+          <div class="left floated right aligned three wide column"><span id="firstcolumn">내가 듣고 싶은 강의</span></div>
+          <div class="left floated center aligned one wide column"><span id="secondcolumn">:</span></div>
+          <div class="left floated left aligned nine wide column"><span id="thirdcolumn">{{user.profile.LikeCount}}개</span></div>
+          <div class="right floated three wide column"><a href = "/MyCourse"><button class="btn btn-info"> 목록으로 가기</button></a></div>
+        </div>
+
+      </div>
+	 
+     
+   {%endblock%}
+  </body>
+</html>

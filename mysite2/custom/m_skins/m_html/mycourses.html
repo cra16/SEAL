@@ -1,0 +1,276 @@
+
+<!doctype html>
+{% extends "m_skins/m_html/base.html" %}
+{% load staticfiles%}
+<html lang='ko'>
+  <head>
+  {% block head%}
+     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
+       <link rel="shortcut icon" href="{% static "m_skins/m_css/seal_title.png" %}">
+
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+       <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+       <link rel="stylesheet" type="text/css" href="{% static "m_skins/m_css/mycourses.css" %}">
+
+   <script type="text/javascript" src="{% static "m_skins/m_js/mycourses.js" %}"></script>
+
+  <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+
+
+
+
+
+{%endblock%}
+  </head>
+
+  <body>
+
+    {% block content%}
+
+    <div class="containerss"></div>
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+      <h2 class="ui header">
+        <i class="glyphicon glyphicon-book"></i> My Courses
+      </h2>
+
+<!--
+      <div class="ui small form">
+        <div class="four fields">
+          <div class="field">
+            <label>학기 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="전체">---전체---</div>
+                <div class="item" data-value="2016-2">2016 / 1</div>
+                <div class="item" data-value="2016-1">2016 / Winter</div>
+                <div class="item" data-value="2015-4">2015 / 2</div>
+                <div class="item" data-value="2015-3">2015 / Summer</div>
+                <div class="item" data-value="2015-2">2015 / 1</div>
+                <div class="item" data-value="2015-1">2015 / Winter</div>
+                <div class="item" data-value="2014-4">2014 / 2</div>
+                <div class="item" data-value="2014-3">2014 / Summer</div>
+                <div class="item" data-value="2014-2">2014 / 1</div>
+                <div class="item" data-value="2014-1">2014 / Winter</div>
+                <div class="item" data-value="2013-4">2013 / 2</div>
+                <div class="item" data-value="2013-3">2013 / Summer</div>
+                <div class="item" data-value="2013-2">2013 / 1</div>
+                <div class="item" data-value="2013-1">2013 / Winter</div>
+                <div class="item" data-value="2012-4">2012 / 2</div>
+                <div class="item" data-value="2012-3">2012 / Summer</div>
+                <div class="item" data-value="2012-2">2012 / 1</div>
+                <div class="item" data-value="2012-1">2012 / Winter</div>
+                <div class="item" data-value="2011-4">2011 / 2</div>
+                <div class="item" data-value="2011-3">2011 / Summer</div>
+                <div class="item" data-value="2011-2">2011 / 1</div>
+                <div class="item" data-value="2011-1">2011 / Winter</div>
+              </div>
+            </div> 
+          </div>
+          <div class="field">
+            <label>학부 선택</label>
+            <div class="ui selection dropdown">
+              <div class="default text">---전체---</div>
+              <i class="dropdown icon"></i>
+              <input name="hidden-field" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="전체">---전체---</div>
+                <div class="item" data-value="0001">글로벌리더십학부</div>
+                <div class="item" data-value="0009">창의융합교육원</div>
+                <div class="item" data-value="0010">Global Edison Academy</div>
+                <div class="item" data-value="0011">국제어문학부</div>
+                <div class="item" data-value="0012">언론정보문화학부</div>
+                <div class="item" data-value="0021">경영경제학부</div>
+                <div class="item" data-value="0022">법학부</div>
+                <div class="item" data-value="0024">상담심리사회복지학부</div>
+                <div class="item" data-value="0033">생명과학부</div>
+                <div class="item" data-value="0071">전산전자공학부</div>
+                <div class="item" data-value="0074">콘텐츠융합디자인학부</div>
+                <div class="item" data-value="0077">기계제어공학부</div>
+                <div class="item" data-value="0078">공간환경시스템공학부</div>
+                <div class="item" data-value="0090">산업교육학부</div>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+    -->
+
+      <div class="ui small tabular filter menu">
+        <a class="active item" data-tab="unread"><h5>내가 평가한 강의</h5></a>
+        <a class="item" data-tab="saved"><h5>듣고 싶은 강의</h5></a>
+      </div>
+
+       
+        <div class="column">
+          <div id ="RecommendPageMain" class="ui divided very relaxed selection inbox list active tab" data-tab="unread">
+                {%for PageBoard in RecommendPage%}
+                {% if forloop.counter0|divisibleby:"2" %}
+           <div class="ui stackable two column grid">
+
+          {% endif %}
+          <div  class="column sugang-box">                
+            <div class="ui raised segment">
+                <div class="left floated ui compact segment">
+
+                  <center><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></center>
+                  <center><span id="likenum{{forloop.counter}} name="likenum>{{PageBoard.Total_Count}}</span> SEALS</center>
+                </div>
+
+                <div class="sixteen wide column">
+
+                  [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard.Course.Code}}</span>]
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i  class="glyphicon glyphicon-remove course_delete" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PageBoard.Course.id}}"><i class="glyphicon glyphicon-edit" id="edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
+                
+                  <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard.Course.id}}"><span class="cname" id="cname" value="">{{PageBoard.Course.CourseName}}</span></a></p>
+                  <p id="title_s"><span id="cprof1">{{PageBoard.Course.Professor}} 교수님</span></p>
+                  <input type = "hidden" id="period" value = "{{PageBoard.Course.Period}}">
+                  <input type = "hidden" id="semester" value = "{{PageBoard.Course.Semester}}">
+                  <input type = "hidden" id="professor" value = "{{PageBoard.Course.Professor}}">
+                </div>
+
+                <br><br>
+
+              <button type ="button" id="thumbs_up" class="circular ui icon button" style="margin-left:10px;" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard.Total_Recommend}}</b></span></button>
+
+              <div class="center aligned sixteen wide column" style="margin-top:-35px; margin-bottom: 15px;">
+                <span class="starvalue" style="display:inline-block" >{{PageBoard.Total_StarPoint}}</span>       
+              </div>
+
+              <div class="center aligned sixteen wide column">
+                
+                  <center><b>과제</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
+                  <input type="text" id="sl1{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}2C" data-slider-value ="{{PageBoard.Total_Homework}}"/>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a><br />
+                  <center><b>난이도</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title= "전반적 수업 난이도가 낮음 &nbsp;">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
+                  <input type="text" id="sl1{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl1{{forloop.counter}}3C" data-slider-value = "{{PageBoard.Total_Level_Difficulty}}"/>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
+              </div>
+            </div>
+          </div>
+          {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+        <div class="ui divider"></div>
+        {% endif %}
+        {% endfor%}
+
+         <center><div id ="RecommendPageNation" class="ui borderless pagination menu">
+              <a id ="RecommendPrevious" name = "{{PageInformation.0.0}}" class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+              {% for i in TotalCount.0%}
+              {% if PageInformation.0.1 == i %}
+              <a id = "RecommendPage" name = "{{i}}" class="active item">{{i}}</a>
+              {%else%}
+              <a id = "RecommendPage" name = "{{i}}" class="item">{{i}}</a>
+              {%endif%}
+              {%endfor%}
+              <a id = "RecommendNext" name = "{{PageInformation.0.2}}" class="item">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+
+          </div>
+
+
+
+
+
+          <div id = "LikePageMain" class="ui divided very relaxed inbox selection list tab" data-tab="saved">
+          {% for PageBoard2 in LikePage%}
+          {% if forloop.counter0|divisibleby:"2" %}
+          <div class="ui stackable two column grid">
+            {% endif %}
+            <div class="column">
+            <div class="ui raised segment">
+                <div class="left floated ui compact segment two wide column">
+
+                  <center><a href="/Recommend/{{PageBoard2.Course.id}}"><img src="{% static "m_skins/m_css/seal.png" %}" height="45px" width="45px"></a></center>
+                  <center><span id="likenum11">{{PageBoard2.Total_Count}}</span> SEALS</center>
+                </div>
+                    
+                <div class="sixteen wide column">    
+
+                  [<span id="ccode{{forloop.counter}}" name="ccode" value="a">{{PageBoard2.Course.Code}}</span>]
+                  <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px;"><i id="like_delete" class="glyphicon glyphicon-remove" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">삭제</b></i></div>
+                  <p><a style="cursor:pointer" href="/CourseProfessor/{{PageBoard2.Course.id}}"><span class="cname" id="cname">{{PageBoard2.Course.CourseName}}</span></a></p>
+                  <p id="title_s"><span id="cprof11">{{PageBoard2.Course.Professor}} 교수님</span></p>
+                  <input type = "hidden" id="period" value = "{{PageBoard2.Course.Period}}">
+                  <input type = "hidden" id="semester" value = "{{PageBoard2.Course.Semester}}">
+                  <input type = "hidden" id="professor" value = "{{PageBoard2.Course.Professor}}">
+                </div>
+
+
+                <br><br>
+
+              <button type ="button" id="thumbs_up" class="circular ui icon button" style="margin-left:10px;" disabled><i class="glyphicon glyphicon-thumbs-up"></i><span><b>&nbsp;{{PageBoard2.Total_Recommend}}</b></span></button>
+
+              <div class="center aligned sixteen wide column" style="margin-top:-35px; margin-bottom: 15px;">
+                <span class="starvalue" style="display:inline-block" >{{PageBoard2.Total_StarPoint}}</span>       
+              </div>
+
+              <div class="center aligned sixteen wide column">
+                <center><b>진도</b></center>
+                
+                  <center><b>과제</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴 &nbsp;">적음</a>
+                  <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}2C" data-slider-value ="{{PageBoard2.Total_Homework}}"/>
+                  <a id="tooltips" data-toggle="tooltip" title="과제가 많이 나옴 &nbsp;">많음</a><br />
+                  <center><b>난이도</b></center>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음 &nbsp;">&nbsp;&nbsp;&nbsp;&nbsp;쉬움</a>
+                  <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-disabled="false" data-slider-id="sl{{forloop.counter}}3C" data-slider-value ="{{PageBoard2.Total_Level_Diffculty}}"/>
+                  <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음 &nbsp;">어려움</a>
+              </div>
+            </div>
+          </div>
+          {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+        </div>
+        <div class="ui divider"></div>
+        {% endif %}
+		        {%endfor%}
+
+
+           <center><div id ="LikePageNation" class="ui borderless pagination menu">
+              <a id = "LikePrevious" name ="{{PageInformation.1.0}}" class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+              {% for i in TotalCount.1%}
+              {%if Page == i%}
+              <a id ="LikePage" name="{{i}}" class="active item">{{i}}</a>
+              {%else%}
+              <a id ="LikePage" name="{{i}}" class="item">{{i}}</a>
+              
+              {%endif%}
+              {%endfor%}
+              <a id = "LikeNext" name = "{{PageInformation.1.2}}" class="item">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+          </div>
+
+          
+            
+        <div class="ui divider"></div>
+
+                              
+        </div>
+     
+
+    {%endblock%}
+
+  </body>
+</html>

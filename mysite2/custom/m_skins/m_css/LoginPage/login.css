@@ -1,0 +1,45 @@
+#logincontainer{
+	border-radius: 25px;
+	border-color: #87cefa;
+	display: flex;
+}
+
+body{
+	 background-color:#f9f9f9 !important;
+}
+
+.box{
+	float: center;
+}
+
+#login{
+	width: 100%;
+}
+
+.title1{
+	font-family: 'Fredoka One', cursive;
+	color: #87cefa;
+	font-size: 64px;
+
+}
+
+.title2{
+	font-family: 'Fredoka One', cursive;
+	color: #87cefa;
+	font-size: 40px;
+
+}
+
+label{
+	color: #87cefa;
+}
+
+.detail{
+	font-size: 16px;
+	color: #87cefa;
+	font-weight: bold;
+}
+
+.detail2{
+	font-size: 12px;
+}

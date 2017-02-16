@@ -1,0 +1,34 @@
+<div class="field new_field">
+            <label>{{category_name}}</label>
+            <div class="ui selection dropdown all_course">
+              <div class="text">{{category_list.0}}</div>
+              <i class="dropdown icon"></i>
+              <input id="major_category"  name="major_category" type="hidden" value ="{{category_list.0}}">
+              <div class="menu">
+              
+                {% for lec in category_list%}
+                <div class="item detail_item">{{lec}}</div>
+                {%endfor%}
+              </div>
+            </div> 
+          </div>
+{% if subject_list != None %}
+<div class="field new_field">
+  <label>과목</label>
+  <div class="ui selection dropdown all_course">
+    <div class="text">{{subject_list.0.Code}}-{{subject_list.0.CourseName}}</div>
+    <i class="dropdown icon"></i>
+    <input id="subject_category"  name="subject_category" type="hidden" value ="{{subject_list.0.Code}}-{{subject_list.0.CourseName}}">
+    <div class="menu">
+    
+      {% for lec in subject_list%}
+      <div class="item subject_item">{{lec.Code}}-{{lec.CourseName}}</div>
+      {%endfor%}
+    </div>
+  </div> 
+</div>
+<div class="field new_field">
+            <label>&nbsp;</label>
+            <button type="button" id="category-subject" class="btn btn-info" style="float:left"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+{%endif%}

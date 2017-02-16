@@ -1,0 +1,62 @@
+{% extends "html/base.html" %}
+
+   
+ <head>
+  {%load staticfiles%}
+  {% block head%}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/confirm.css"%}" />
+    <script type="text/javascript" src="{% static "js/confirm.js"%}"></script>
+
+    <title>{% block title%}SEAL - Login{%endblock%}</title>
+	{%endblock%}
+  </head>
+  <body>
+  {% block content%}
+
+    <div class="container" style="padding:100px 0">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="confirmcontainer">
+
+        <div class="box" id="mycontent-left-register">
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+            <p class="detail">Students' Excellent Achievements in Learning</p>
+        </div>
+         
+
+        <div class="box" id="mycontent-right">
+
+
+          <form method ="POST" action="/mysite2/HisnetCheck/">{%csrf_token%}
+
+            <div class="form-group" method="post" action="/mysite2/Register">
+            <h3> 로그인 오류가 발생했습니다. <br/>
+              iGO 에서 다시 로그인 하시던지 새로고침을 통해 직접 SEAL 사이트를 접속해주세요. <br/>
+              문의: cra.handong@gmail.com </h3>
+          
+             <p>&nbsp;</p>
+              <div class="ui medium buttons">
+                  <input type="button" id="return" value="돌아가기" class="ui blue button" onclick="window.history.back();">
+                  <div class="or"></div>
+                  <a href = "/"><input type="button" id="cancel" value="Cancel" class="ui blue button"></a>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-sm-2"></div>      
+    </div>
+
+  {%endblock%}
+  </body>
+
+</html>

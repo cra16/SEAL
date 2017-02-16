@@ -1,0 +1,61 @@
+/*------------------Menu navbar's css----------------------*/
+
+
+#menu.navbar-default .navbar-brand {
+    color: #ffffff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 40px;
+}
+
+#menu.navbar-default .navbar-form {
+    border: 0;
+    padding: 0 15px;
+    box-shadow: none;
+}
+
+#menu.navbar-default {
+    font-size: 14px;
+    background-color: #87cefa;
+    border-width: 0px;
+}
+
+#menu.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+    background-color: #87cefa;
+}
+
+#menu.navbar-default .navbar-nav>li>a:hover,
+#menu.navbar-default .navbar-nav>li>a:focus {
+    color: #000;
+    background-color: #f8f8f8;
+}
+
+#menu.navbar-default .navbar-nav>.active>a,
+#menu.navbar-default .navbar-nav>.active>a:hover,
+#menu.navbar-default .navbar-nav>.active>a:focus {
+    color: #ffffff;
+    background-color: #3faff5;
+}
+
+#menu.navbar-default .navbar-toggle {
+    border-color: #3faff5;
+}
+
+#menu.navbar-default .navbar-toggle:hover,
+#menu.navbar-default .navbar-toggle:focus {
+    background-color: #3faff5;
+}
+
+#menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #3faff5;
+}
+
+#menu.navbar-default .navbar-toggle:hover .icon-bar,
+#menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #87cefa;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }

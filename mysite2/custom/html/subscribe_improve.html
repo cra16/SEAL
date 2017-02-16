@@ -1,0 +1,50 @@
+<!doctype html>
+{% extends "html/base.html" %}
+
+   
+<html lang='ko'>
+  <head>
+  {% block head%}
+ <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+  {% endblock%}
+  </head>
+
+  <body>
+    {% block content%}
+    <div class="containerss"></div>
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">
+
+      <h2 class="ui header"><i class="glyphicon glyphicon-comment"></i> 개선사항</h2>
+
+      <div id="subscribe" class="ui column">
+        
+      	<form class="ui form" method="post" action="/SubScriptWrite/">
+          <h4 class="ui dividing header">글쓰기</h4>
+          <div class="field">
+          	<label for="msg-title-label">제목 : </label>
+          	<input type="text" name="msg-title-input" placeholder="Title">
+          </div>
+          <div class="field">
+          	<label for="msg-body-label">본문 : </label>
+          	<textarea name="msg-body-txtarea" id="msg-body-txtarea" cols="30" rows="10" placeholder="Body" maxlength="500"></textarea>
+          </div>
+
+        <input type="submit" id="submit_improve" value="등록"  class="ui floated blue button">
+        <input type="button" id="cancel" value="취소" class="ui floated red button" onclick="window.history.back();">
+
+        </form>
+
+      </div>
+
+{%endblock%}
+  </body>
+</html>

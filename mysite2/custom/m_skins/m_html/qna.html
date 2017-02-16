@@ -1,0 +1,121 @@
+<!doctype html>
+{% extends "m_skins/m_html/base.html" %}
+
+   
+<html lang='ko'>
+  <head>
+{% load staticfiles%}
+	{% block head%}
+
+    <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+        <link rel="shortcut icon" href="{% static "m_skins/m_css/seal_title.png" %}">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{%static "m_skins/m_css/qna.css"%}">
+    
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    
+    {% endblock%}
+  </head>
+  
+  <body>
+	{%block content%}
+
+
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-question-sign"></i> 질문 게시판 (Q&A) <a href="/QnA/Write"> <div class="ui right floated tiny blue button">
+          <i style="margin-left:-6px" class="glyphicon glyphicon-edit"></i>　Write</div> </a></h2>
+        
+        <div class="ui section divider" style="margin-top: 40px;"></div>
+        
+        <div id="QnA_List" class="ui column">
+        <div id="qna_board">
+              
+              <table class="ui unstackable table">
+                 <thead>
+                  <tr>
+                      <th class="one wide"><center>번호</center></th>
+                      <th class="eleven wide"><center>제목</center></th>
+                      <th class="three wide"><center>작성자</center></th>
+                      <th class="one wide"><center>날짜</center></th>
+                      <th class="one wide"><center>조회</center></th>
+                  </tr>
+                </thead>
+                            
+                <tbody class="qna_sub">
+                  
+      {% for Board in PageBoard%} 
+      <tr id="qna{{Board.id}}">
+                    <td><center><span id="qna_num{{Board.id}}">{{Board.id}}</span></center></td>
+                   
+                    <td class="qna_title"><a href="/QnA/{{Board.id}}">{{Board.TextName}}</a><span>  {% if Board.created|date:"Y-m-d" == Today|date:"Y-m-d"%}
+                    <img src="{% static "fonts/latest.gif"%}"> {% endif%}</span></td>
+                   
+                    <td><center>{{Board.TextWriter.UserName}}</center></td>
+                    <td><center>{{Board.created|date:"Y-m-d"}}</center></td>
+                    <td><center><span id="qna_click1">{{Board.ClickScore}}</span></center></td>
+                  </tr>
+                  {% if not ReplyBoard == None%}
+                     {% for ReplyData in ReplyBoard%}
+                        {%for Reply in ReplyData%}
+                          {% if Reply.QuestionID == Board.id%}
+                         
+                      
+                  <tr class="ans" id="ans{{Board.id}}">
+                      
+                      <td></td>
+                      <td><img src="{% static "fonts/reply.gif"%}"><a href="/QnA/{{Board.id}}">{{Reply.TextName}}</a></td>
+                      <td><center>{{Reply.TextWriter.UserName}}</center></td>
+                      <td><center>{{Reply.created|date:"Y-m-d"}}</center></td>
+                  
+                      <td></td>
+                      
+                  </tr>
+                           {%endif%}
+                            {%endfor%}
+                      {%endfor%}
+                 {%endif%}
+                      
+     {%endfor%}
+    </tbody>
+              </table>
+      
+                                                 
+                                          
+              <center><div class="ui borderless pagination menu">
+              <a id ="Previous" name="{{PageInformation.0}}" class="item">
+                <i class="glyphicon glyphicon-menu-left"></i> Prev
+              </a>
+        
+        {% for i in  TotalCount %}
+        {%if PageInformation.1 == i%}
+
+              <a id ="Page" name="{{i}}" class="active item" >{{i}}</a>
+        {%else%}
+        <a id ="Page" name="{{i}}" class="item" >{{i}}</a>
+        {%endif%}
+              {% endfor%}
+         
+              <a id ="Next" name ="{{PageInformation.2}}" class="item" >  Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+
+          </div>
+        </div>
+
+        <div class="ui section divider" style="margin-top: 30px;"></div>
+
+	  <script type="text/javascript" src="{%static "js/qna.js"%}"></script>
+
+  {%endblock%}
+</html>

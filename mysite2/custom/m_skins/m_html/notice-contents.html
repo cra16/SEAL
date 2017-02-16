@@ -1,0 +1,68 @@
+<!doctype html>
+{% extends "m_skins/m_html/base.html" %}
+
+   
+<html lang='ko'>
+  {% load staticfiles%}
+   {% block head%}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>{%block title%}▒ SEAL ▒{%endblock%}</title>
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>
+   
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/notice.css"%}">
+    <script type="text/javascript" src="{%static "js/qna.js"%}"></script>
+    
+   {% endblock%}
+  <body>
+	{%block content%}
+      </div>
+
+      <div class="containerss"></div>
+
+      <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <h2 class="ui header"><i class="glyphicon glyphicon-info-sign"></i> 공지사항
+           <span> <a href="/Notice/">
+           <div class="ui right floated tiny teal button">
+            <i style="margin-left:-6px;" class="glyphicon glyphicon-list"></i>　목록으로</div>
+            </a> </span> </h2>
+            
+        <div class="qna_div">                          
+            <div class="ui raised segment" style="border: 3px solid #84bde0;">
+
+              <div class="ui large blue ribbon label" style="font-size:1.0rem">{{Board.TextName}}</div>
+              <p></p>
+              <div class="ui small purple ribbon label">{{Board.TextWriter.UserName}}　{{Board.created|date:"Y.m.d"}} {{Board.created|time:"H:i"}}</div>
+              <div></div>
+              <br>
+              <PRE style="background-color:#fff">{{Board.Text}}</PRE>
+            </div>  
+                                                      
+              <center>
+              <div class="ui buttons" style="padding-top:10px">
+              <a class="ui large purple inverted button" href ="/Notice/{{Previous}}">
+                <i class="glyphicon glyphicon-menu-left"></i>Prev
+              </a>
+                <div class="or"></div>
+              <a class="ui large blue inverted button" href ="/Notice/{{Next}}">
+                Next<i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>
+        </div>
+        
+        <div style="padding-bottom:50px"></div>
+              
+	{% endblock%} 
+  </body>
+</html>

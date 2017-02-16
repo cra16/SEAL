@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends "html/base.html" %}
+
+   
+  {% load staticfiles %}
+   {% block head %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/LoginPage/login.css" %}" />
+    <script type="text/javascript" src="{% static "js/LoginPage/login.js" %}"></script>
+
+    <title>SEAL - Login</title>
+   {% endblock%}
+  </head>
+  <body>
+  {% block content%}
+   <div style="bgcolor:#f9f9f9">
+    <div class="container" style="padding:100px 0;">
+      <div class="col-sm-2"></div>
+
+      <div class="col-sm-8" id="logincontainer">
+
+        <div class="box" style="margin:0 auto; text-align:center">
+          <center><img src="{% static "css/seal_title.png" %}" height="100px" width="100px" style="margin-bottom:-15px"></center>
+
+            <h class="title1 hidden-xs">SEAL</h>
+            <p class="title2 visible-xs">SEAL</p>
+               <br/><br/>
+
+               <div class="ui segment" style="padding:18px 20px 3px 20px">
+
+                 <form id="loginForm" name="loginForm" method ="POST">{%csrf_token%}
+                  <input type="hidden" name="rtnURL" value="http://seal.handong.edu/">
+
+                    <div class="form-group" method="post">
+                      <label class="control-label" for="username" style="float:left">아이디(Hisnet)</label>
+                      <input type="text" id="UserID" name ="id" class="form-control" placeholder="아이디(Hisnet)">
+                      <label class="control-label" for="password" style="padding-top: 15px; float:left">비밀번호</label>
+                      <input type="password" id="UserPassword" name ="pw" class="form-control" placeholder="비밀번호">
+                    </div>
+
+                      <p></p>
+                    <div class="form-group" method="post">   
+                        <input type="submit" id="login" value="Login" class="btn btn-info">
+                    </div>
+                 </form>
+
+               </div>
+
+              <div class="ui segment" style="background:transparent">
+                <p class="detail2">한동대학교 학생들의 학업성취도 향상을 위한</p>
+                <p class="detail2">강의평가 및 강의정보 열람 서비스 입니다.</p>
+              </div>
+              <br/><br/><br/><br/>
+            <p style="color:#888">Powered by CRA</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  {%endblock%}
+  </body>
+</html>

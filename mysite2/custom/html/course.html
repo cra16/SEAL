@@ -1,0 +1,552 @@
+<!doctype html>
+{% extends "html/base.html" %}
+
+   
+<html lang='ko'>
+  <head>
+  {% load app_filter %}
+  {% load staticfiles%}
+  {% block head%}
+    <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
+         <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
+
+  <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
+    <style>
+      body, input {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+      }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/course.css" %}">
+       <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/course.js" %}"></script>
+    <script>
+
+    
+    </script>
+  {%endblock%}  
+  </head>
+
+  <body>
+    {% block content%}
+
+    <div class="containerss"></div>
+
+    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">
+
+      <h1 class="ui header"><img src="{% static "css/seal.png" %}" height="60px" width="60px"> Evaluation Result</h1>
+
+      <div class="ui section divider"></div>
+
+      <div class="ui column">
+         
+        <p id="ccode_p">[<span id="ccode">{{CourseBoard.Course.Code}}</span>]<br />
+        <span id="cname">{{CourseBoard.Course.CourseName}}</span> <br/>
+       
+     
+        <span id="cprof">{{CourseBoard.Course.Professor}} 교수님</span></p>
+
+      </div>
+
+          <a href="/Recommend/{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-danger">평가하기!</button></a>
+          <a id="listenButton" name = "{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-info">듣고싶어!</button></a>
+          <button style="float:left; margin-right:3px" class="btn btn-warning show" id="exam">출제유형!</button>
+          <button style="float:left; margin-right:3px" class="btn btn-warning show">코멘트란</button>
+
+        <div class="ui long modal scrolling transition">
+            <div class="header"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
+            <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
+
+              <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
+              {% for Answer_List in Answer_Dis %}
+                {% for Answer in Answer_List %}
+                {%if forloop.counter|divisibleby:2 %}
+                <div class="column" style="padding-left:10px;">
+                  <div class="ui segment" style="margin-right:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {% else %}
+                <div class="column" style="padding-right:10px;">
+                  <div class="ui segment" style="margin-left:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+              {%endfor%}
+            </div>
+                
+            <div class="actions">
+                <div class="ui button approve orange" data-value="close">닫기</div>
+            </div>
+        </div>
+
+
+      <div id="h_sectiondivider" class="ui section divider"></div>
+      <div id="CoursePage" name="CoursePage">
+      <div class="ui column">
+      <br>
+        <h3><b>전체 평균 : </b></h3>
+
+        <div id="recommending" class="ui column">
+
+          <div id="blankspace" class="ui column"></div>
+
+         
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="secondcolumn" class="left floated center aligned four wide column">과제량</div>
+            <div class="left floated right aligned three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+              <input type="text" id="sl2" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl2C"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+          <div class="ui grid">
+            <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
+            <div class="left floated right aligned three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+            </div>
+            <div class="left floated center aligned six wide column">
+               <input type="text" id="sl3" data-slider-min="1" data-slider-max="9" data-slider-value="{{CourseBoard.Total_Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl3C"/>
+            </div>
+            <div class="three wide column">
+              <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+            </div>
+          </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <div class="ui grid">
+            <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+            <div class="right floated center aligned twelve wide column">
+           
+              {% if CourseBoard.Total_Mix >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Mix >= CourseBoard.Total_Unknown_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Short_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Long_Answer and CourseBoard.Total_Short_Answer >= CourseBoard.Total_Unknown_Answer%}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Long_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Long_Answer >= CourseBoard.Total_Unknown_Answer %}
+                  <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  </div>
+              {% elif CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Mix and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Short_Answer and CourseBoard.Total_Unknown_Answer >= CourseBoard.Total_Long_Answer%}
+               <div class="ui buttons" style="margin-top:-10px">
+                    <button type ="button" class="ui toggle button " value="" disabled>서술형</button>
+                    <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                    <button type ="button" class="ui toggle button " value="" disabled>혼합형</button>
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  </div>
+              {%endif%}
+            </div>
+          </div>
+
+          <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+
+              {% if CourseBoard.Total_Book_Like >= CourseBoard.Total_Ppt_Like and                   CourseBoard.Total_Book_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+            
+                    </div>
+              {% elif CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Book_Like and CourseBoard.Total_Ppt_Like >= CourseBoard.Total_Practice_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button " value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                    </div>
+              {% elif CourseBoard.Total_Practice_Like >= CourseBoard.Total_Ppt_Like and CourseBoard.Total_Practice >= CourseBoard.Total_Book_Like %}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                    </div>
+              {%else%}
+                    <div class="ui buttons" style="margin-top:-10px">
+                      <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                      <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                   </div>
+              {%endif%}
+              </div>
+            </div>
+
+
+          <div id="h_innersectiondivider" class="ui section divider"></div>
+
+          <br><br>
+
+          <div class="ui grid">
+
+            <div class="left floated right aligned four wide column" style="color:purple; margin-left:-40px; margin-right: 20px;"><h4><b>추천</b></h4></div>
+            <button type ="button" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{CourseBoard.Total_Recommend}}</b></h4>
+
+            <div class="floated right aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+           <div class="center left aligned two wide column"><span id="starpoint" class="starvalue">{{CourseBoard.Total_StarPoint}}</span></div>
+          
+      
+        </div>
+
+      </div>
+      <div class="ui column">
+
+      {% if MyCourseBoard.0 != None %}
+      <br>
+      <h3><b>나의 평가 : </b></h3>
+          {%endif%}
+        
+     {%for MyCourseBoard in MyCourseBoard%}
+     <h4 style="display:inline;"><b>{{user.profile.UserName}}/{{user.profile.FirstMajor}}/{{MyCourseBoard.Course.Semester}}</b></h4>
+     <G style="float:right;">{{MyCourseBoard.create_date|date:"Y-m-d"}}</G>
+     <div id="recommending" class="ui column">
+               
+            <div id="blankspace" class="ui column"></div>
+
+
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+            <div class="ui grid">
+              <div id="secondcolumn" class="left floated center aligned four wide column">과제량</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sl{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}2C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
+              </div>
+            </div>
+
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+            <div class="ui grid">
+              <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sl{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{MyCourseBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sl{{forloop.counter}}3C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+              </div>
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+              <div class="right floated center aligned twelve wide column">
+                 <div class="ui buttons" style="margin-top:-10px">
+                  {% if MyCourseBoard.What_Answer|calculateData:1000 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                  {%else%}
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:100 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:10 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  {%endif%}
+                  {% if MyCourseBoard.What_Answer|calculateData:1 == 1 %}
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  {%else%}
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  {%endif%}
+                  </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+                  <div class="ui buttons" style="margin-top:-10px">
+
+                  {% if MyCourseBoard.Course_Answer|calculateData:100 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                  {%else%}
+                     <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                  {%endif%}
+                  {% if MyCourseBoard.Course_Answer|calculateData:10  == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                  {%endif%}
+                  {% if MyCourseBoard.Course_Answer|calculateData:1  == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                  {%endif%}
+
+                 </div>
+              </div>
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            
+            <div class="ui piled segment">
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <b>{{MyCourseBoard.Who_Answer}}</b></h4>
+              <br>
+           
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>            
+
+            <div class="ui grid">
+            <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
+            {% if MyCourseBoard.Check == True %}
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
+            {% else %}
+           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           {%endif%}
+
+
+          <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>
+
+           <div class="center aligned two wide column"><span class="starvalue">{{MyCourseBoard.StarPoint}}</span></div>
+           
+          </div>
+                      
+            <div id="qna_border_a" class="ui raised segment">
+                 <pre style="font-family: mono; font-size:11px; color:#727272; background-color:#f5f5f5"><span style="font-size:15px">** 평가 가이드라인 **</span>
+자체적으로 제시하는 가이드 라인입니다. 아래 질문지에 맞춰 선택적으로 작성하시면 됩니다.(30자 이상)
+
+1.  수업 외 도움 받을 수 있는 기회가 있나요? (TA세션, 교수님 면담, 멘토링 등)
+2.  교수님의 강의 방식은 어땠나요?
+3.  기억에 남는 강의 내용은 무엇인가요?
+4.  어떤 방식의 과제가 몇 번 주어졌나요?
+5.  과제, 퀴즈, 시험, 팀 프로젝트 중 실질적으로 비중이 높은 부분은 무엇인가요?
+6.  과목 특성 상 이 과목을 어떻게 공부하면 좋을까요?
+7.  본 강의를 통해 가장 크게 얻은 부분은 무엇인가요?
+8.  기타 의견</pre>
+               <h5><b>Comment</b></h5>
+               <p>{{MyCourseBoard.CourseComment|linebreaks}}</p>
+            </div>
+          </div>
+          <br>
+ 
+	  {%endfor%} 
+
+    {% if OtherCourseBoard.0 != None %}
+        <br>
+        <h3><b>개인 평가 : </b></h3>
+      {%endif%}
+    
+		{%for OtherBoard in OtherCourseBoard%}
+        <h4 style="display:inline;"><b>{{OtherBoard.CreatedID.UserName}} / {{OtherBoard.CreatedID.FirstMajor}}/{{OtherBoard.Course.Semester}}</b></h4><G style="float:right;">{{OtherBoard.create_date|date:"Y-m-d"}}</G>
+        <div id="recommending" class="ui column">
+          
+         
+            <div id="blankspace" class="ui column"></div>
+
+          
+
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+            <div class="ui grid">
+              <div id="secondcolumn" class="left floated center aligned four wide column">과제량</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips"  data-toggle="tooltip" title="과제가 적게 나옴">적음</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}2" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Homework}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}2C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="과제가 적게 나옴">많음</a>
+              </div>
+            </div>
+
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+
+            <div class="ui grid">
+              <div id="thirdcolumn" class="left floated center aligned four wide column">난이도</div>
+              <div class="left floated right aligned three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 낮음">쉬움</a>
+              </div>
+              <div class="left floated center aligned six wide column">
+                <input type="text" id="sa{{forloop.counter}}3" data-slider-min="1" data-slider-max="9" data-slider-value="{{OtherBoard.Level_Difficulty}}" data-slider-orientation="horizontal" data-slider-tooltip="hide" data-slider-id="sa{{forloop.counter}}3C"/>
+              </div>
+              <div class="three wide column">
+                <a id="tooltips" data-toggle="tooltip" title="전반적 수업 난이도가 높음">어려움</a>
+              </div>
+            </div>
+
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">시험 방식</div>
+              <div class="right floated center aligned twelve wide column">
+                 <div class="ui buttons" style="margin-top:-10px">
+                  {% if OtherBoard.What_Answer|calculateData:1000 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>서술형</button>
+                  {%else%}
+                      <button type ="button" class="ui toggle button" value="" disabled>서술형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:100 == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>단답형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>단답형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:10 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>혼합형</button>
+                  {% else %}
+                      <button type ="button" class="ui toggle button" value="" disabled>혼합형</button>
+                  {%endif%}
+                  {% if OtherBoard.What_Answer|calculateData:1 == 1 %}
+                    <button type ="button" class="ui toggle button active" value="" disabled>해당없음</button>
+                  {%else%}
+                    <button type ="button" class="ui toggle button" value="" disabled>해당없음</button>
+                  {%endif%}
+                  </div>
+              </div>
+            </div>
+
+            <div class="ui grid">
+              <div id="fourthcolumn" class="left floated center aligned four wide column">수업 방식</div>
+              <div class="right floated center aligned twelve wide column">
+                  <div class="ui buttons" style="margin-top:-10px">
+
+                  {% if OtherBoard.Course_Answer|calculateData:100 == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>교재 중심</button>
+                  {%else%}
+                     <button type ="button" class="ui toggle button" value="" disabled>교재 중심</button>
+                  {%endif%}
+                  {% if OtherBoard.Course_Answer|calculateData:10  == 1 %}
+                      <button type ="button" class="ui toggle button active" value="" disabled>ppt 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>ppt 중심</button>
+                  {%endif%}
+                  {% if OtherBoard.Course_Answer|calculateData:1  == 1%}
+                      <button type ="button" class="ui toggle button active" value="" disabled>실습 중심</button>
+                  {% else %}
+                     <button type ="button" class="ui toggle button" value="" disabled>실습 중심</button>
+                  {%endif%}
+
+                 </div>
+              </div>
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div class="ui piled segment">
+              <h4 style="font-family:mono; margin-left:10px"><i class="glyphicon glyphicon-user" style="color:orange"></i>&nbsp; Recommended to: <b>{{OtherBoard.Who_Answer}}</b></h4>
+              <br>
+         
+            </div>
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>            
+
+           <div class="ui grid">
+            <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
+            {% if OtherBoard.Check == True %}
+          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
+            {% else %}
+           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
+           {%endif%}
+
+            <div class="floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
+           <div class="center aligned two wide column"><span class="starvalue">{{OtherBoard.StarPoint}}</span></div>
+         
+          </div>
+                           
+
+            <div id="h_innersectiondivider" class="ui section divider"></div>
+
+            <div id="qna_border_a" class="ui raised segment">
+               <pre style="font-family: mono; font-size:11px; color:#727272; background-color:#f5f5f5"><span style="font-size:15px">** 평가 가이드라인 **</span>
+자체적으로 제시하는 가이드 라인입니다. 아래 질문지에 맞춰 선택적으로 작성하시면 됩니다.(30자 이상)
+
+1.  수업 외 도움 받을 수 있는 기회가 있나요? (TA세션, 교수님 면담, 멘토링 등)
+2.  교수님의 강의 방식은 어땠나요?
+3.  기억에 남는 강의 내용은 무엇인가요?
+4.  어떤 방식의 과제가 몇 번 주어졌나요?
+5.  과제, 퀴즈, 시험, 팀 프로젝트 중 실질적으로 비중이 높은 부분은 무엇인가요?
+6.  과목 특성 상 이 과목을 어떻게 공부하면 좋을까요?
+7.  본 강의를 통해 가장 크게 얻은 부분은 무엇인가요?
+8.  기타 의견</pre>
+               <h5><b>Comment</b></h5>
+               <p>{{OtherBoard.CourseComment|linebreaks}}</p>
+            </div>
+        
+         </div>     
+
+         <div id="h_innersectiondivider" class="ui section divider"></div>
+        {%endfor%}      
+        
+      </div>
+      <div id="h_sectiondivider" class="ui section divider"></div>
+
+        <br><br>
+       
+      
+      {% if OtherCount.0 != None%}
+		<div class="ui section divider"></div>
+      <center><div id = "CoursePagenation" class="ui borderless pagination menu">
+              <a id ="CoursePagePrevious" name = "{{PageInformation.0}}" class="item"  herf="#CoursePage">
+                <i class="glyphicon glyphicon-menu-left"></i> Previous
+              </a>
+              {%for i in OtherCount%}
+              <a id = "CoursePageNumber" name ="{{i}}" class="item" herf="#CoursePage">{{i}}</a>
+              {%endfor%}
+              <a id = "CoursePageNext" name ="{{PageInformation.2}}" class="item"  herf="#CoursePage">
+                Next <i class="glyphicon glyphicon-menu-right"></i>
+              </a>
+            </div></center>   
+        {%endif%}
+
+        </div>
+        </div>
+         
+      {%endblock%}
+
+  </body>
+</html>

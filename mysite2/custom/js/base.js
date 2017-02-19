@@ -1,6 +1,12 @@
 $(document).ready(function()
 {
-
+  $("div").on("click",".dropdown-toggle",function()
+  {
+    if($(".dropdown-toggle .dropdown-menu").css("display","block"))
+      $(".dropdown-toggle .dropdown-menu").fadeIn("slow")
+    else
+      $(".dropdown-toggle .dropdown-menu").fadeOut("slow")
+  })
 	$('body').on('click','#category-subject',function(event)
   { 
       event.stopPropagation();

@@ -1,6 +1,18 @@
 $(document).ready(function()
 {
+    $("body").on("click","#menu-dropdown-button",function()
+  {
+    if($("#menu-dropdown-list").css("display")=="block")
+    {
+      $("#menu-dropdown-list").css("display","none")  
+      $("#menu-dropdown-list").fadeOut("slow")
+    }
+    else 
+    {
 
+      $("#menu-dropdown-list").fadeIn("slow")
+    }
+  })
 	 $('body').on('click','#category-subject',function()
   { 
     event.stopPropagation();

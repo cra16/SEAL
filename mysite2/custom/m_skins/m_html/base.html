@@ -26,6 +26,7 @@
     <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/bootstrap-slider.js" %}"></script>
     <script type="text/javascript" src="{% static "js/feed.js" %}"></script>
+    <script type="text/javascript" src="{% static "m_skins/m_js/base.js"%}"></script>
     <script type="text/javascript" src="{% static "js/semantic.js" %}"></script>
     <script type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     <script type="text/javascript" src="{% static "js/likebtn.js" %}"></script>
@@ -127,8 +128,8 @@
               <li><a href="/MyPage">MY PAGE</a></li>
               <li><a href="/Notice">공지사항</a></li>
               <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
+                <a  id="menu-dropdown-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HELP<span class="caret"></span></a>
+                <ul style="display:none;" id="menu-dropdown-list" class="dropdown-menu" role="menu">
                   <li><a href="/QnA">Q&A</a></li>
                   <li><a href="/About">ABOUT</a></li>
                   <li><a href="/Judgement">신고</a></li>

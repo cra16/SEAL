@@ -166,7 +166,7 @@
                   <button type ="button" class="ui toggle button paper_button active" value="10">혼합형</button>
                   <input type="hidden" id="paper_value" name = "paper_value[]" class="paper_value" value ="10">    
                 {%else%}
-                 <button type ="button" class="ui toggle button paper_button active" value="10">혼합형</button>
+                 <button type ="button" class="ui toggle button paper_button" value="10">혼합형</button>
                  <input type="hidden" id="paper_value" name = "paper_value[]" class="paper_value" value ="0">    
                 {%endif%}
       
@@ -303,7 +303,7 @@
 6.  과목 특성 상 이 과목을 어떻게 공부하면 좋을까요?
 7.  본 강의를 통해 가장 크게 얻은 부분은 무엇인가요?
 8.  기타 의견</pre>
-                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="500">{{CourseBoard.CourseComment}}</textarea>
+                <textarea id = "CourseComment" name="CourseComment" placeholder="교수님을 비하하거나 자극적이고 부적절한 언어를 사용하는 경우, 경고 없이 삭제됩니다." maxlength="1000">{{CourseBoard.CourseComment}}</textarea>
                 </div>
               </div>
 

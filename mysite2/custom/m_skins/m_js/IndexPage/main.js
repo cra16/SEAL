@@ -55,7 +55,7 @@
                   else
                       $('#Search_Page').html(resp);
                   $('[data-toggle="tooltip"]').tooltip(); 
-                    $.fn.initSlide();
+                   $('span.starvalue').starvalue();
 
                 },
                 error: function(xhr, option, error){
@@ -106,7 +106,7 @@
                   else
                       $('#Search_Page').html(resp);
                   $('[data-toggle="tooltip"]').tooltip(); 
-                    $.fn.initSlide();
+                   $('span.starvalue').starvalue();
 
                 },
                 error: function(xhr, option, error){
@@ -154,7 +154,7 @@
                   else
                         $('#Search_Page').html(resp);
                   $('[data-toggle="tooltip"]').tooltip(); 
-                    $.fn.initSlide();
+                   $('span.starvalue').starvalue();
 
                 },
                 error: function(xhr, option, error){
@@ -223,7 +223,7 @@
               success:function(resp){     
                   $('#Search_Page').html(resp);
                   $('[data-toggle="tooltip"]').tooltip(); 
-                    $.fn.initSlide();
+                   $('span.starvalue').starvalue();
 
                 },
                 error: function(xhr, option, error){
@@ -256,7 +256,7 @@
               success:function(resp){     
                   $('#Search_Page').html(resp);
                   $('[data-toggle="tooltip"]').tooltip(); 
-                    $.fn.initSlide();
+                   $('span.starvalue').starvalue();
 
                 },
                 error: function(xhr, option, error){
@@ -286,7 +286,7 @@
               success:function(resp){     
                        $('#FirstPage').html(resp);
                        $('[data-toggle="tooltip"]').tooltip(); 
-                         $.fn.initSlide();
+                        $('span.starvalue').starvalue();
 
                  },
                 error: function(xhr, option, error){
@@ -316,8 +316,8 @@
               async:false,
               success:function(resp){     
                        $('#SecondPage').html(resp);
-                       $('[data-toggle="tooltip"]').tooltip(); 
-                         $.fn.initSlide();
+                       $('[data-toggle="tooltip"]').tooltip();
+                        $('span.starvalue').starvalue(); 
 
                  },
                 error: function(xhr, option, error){
@@ -348,7 +348,6 @@
                         $('#ThirdPage').html(resp);
                         $('span.starvalue').starvalue();
                         $('[data-toggle="tooltip"]').tooltip(); 
-                          $.fn.initSlide();
 
                    },
                 error: function(xhr, option, error){
@@ -378,7 +377,7 @@
               success:function(resp){     
                         $('#SugangPage').html(resp);
                         $('[data-toggle="tooltip"]').tooltip(); 
-                          $.fn.initSlide();
+                         $('span.starvalue').starvalue();
 
                    },
                 error: function(xhr, option, error){
@@ -410,7 +409,7 @@
               success:function(resp){     
                         $('#LikeSugangPage').html(resp);
                         $('[data-toggle="tooltip"]').tooltip(); 
-                          $.fn.initSlide();
+                         $('span.starvalue').starvalue();
 
                    },
                 error: function(xhr, option, error){

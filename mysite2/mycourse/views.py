@@ -289,6 +289,8 @@ def UpdateRedirect(request):
 		Semester=request.POST['Semester']
 		Professor=request.POST['Professor']
 		Course_ID=request.POST['CourseID']
+	else:
+		return HttpResponseRedirect("/")
 	UserProfile=Profile.objects.get(User = request.user)
 	SemesterData = Lecture.objects.filter(Code = CourseCode, CourseName=CourseName, Professor__contains=Professor).order_by('-Semester')
 	SemesterList=list()

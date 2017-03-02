@@ -136,51 +136,17 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		PageInformation=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		PageNumber=1
 		MajorNumber=2
-
+	T_Count=[[],[],[],[],[]]
+	temp=[]
+	Sugang=[]
+	
+	#각 강의 전공에 해당하는 DB 정보 저장 함 
+	TotalBoard = [[],[],[],[]]
+	TotalAdd =[[],[],[],[]]
+	SugangDataList=[]
+	LikeDataList=[]
 	#user의 전공에 따른 전공 코드를 뿌려줌
 	CourseCode = MajorSelect(User)
-	
-	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
-	T_Count=[[] ,[] ,[],[],[]]
-	if CourseCode[0] !="ENG":
-		DBCount1 = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])).values("CourseName").distinct().count()
-		DBCount2 = Lecture.objects.filter(Q(Code__contains =CourseCode[2]) |Q(Code__contains=CourseCode[3])).values("CourseName").distinct().count()
-		if Mobile=="full":
-			T_Count[0] = DataCount(10,DBCount1)
-			T_Count[1] = DataCount(10,DBCount2)
-		else:
-			T_Count[0] = DataCount(5,DBCount1)
-			T_Count[1] = DataCount(5,DBCount2)
-	else:
-		DBCount1=Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct().count()
-		if Mobile=="full":
-			T_Count[0] = DataCount(10,DBCount1)
-			T_Count[1] = DataCount(10,DBCount1)
-		else:
-			T_Count[0] = DataCount(5,DBCount1)
-			T_Count[1] = DataCount(5,DBCount1)
-	
-	#현재 페이지 위치정보
-	DBCount3=Course_Evaluation.objects.count()
-	if Mobile=="full":
-		T_Count[2] = DataCount(10,DBCount3)
-	else:
-		T_Count[2] = DataCount(5,DBCount3)
-	ProfileData=Profile.objects.get(User=User)
-	SugangDataList=ProfileData.LectureRecord.split("$$")
-	DBCount4=len(SugangDataList)
-	DBCount5=Group_Total_Evaluation.objects.count()
-	if Mobile=="full":
-		T_Count[3] = DataCount(10,DBCount4)
-	else:
-		T_Count[3] = DataCount(5,DBCount4)
-	if Mobile=="full":
-		T_Count[4] = DataCount(10,DBCount5)
-	else:
-		T_Count[4] = DataCount(5,DBCount5)
-
-	
-		#현재 페이지 위치정보
 	if Mobile == 'full':
 		PageInformation[MajorNumber] = CurrentPageView(T_Count[MajorNumber],PageNumber)
 		PageInformation[MajorNumber][1] = PageNumber
@@ -188,111 +154,133 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		PageInformation[MajorNumber] = MobileCurrentPageView(T_Count[MajorNumber],PageNumber)
 		PageInformation[MajorNumber][1] = PageNumber
 
-	temp=[]
-	#각 강의 전공에 해당하는 DB 정보 저장 함 
-	TotalBoard = [[],[],[],[]]
-	TotalAdd =[[],[],[],[]]
-	if CourseCode[0] !="ENG":
+	if MajorNumber == 0:
+		if CourseCode[0] !="ENG":
+			DBCount1 = Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])).count()
+			if Mobile=="full":
+				T_Count[0] = DataCount(10,DBCount1)
+			else:
+				T_Count[0] = DataCount(5,DBCount1)
+		else:
+			DBCount1=Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])|Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])|Q(Course__Code__contains=CourseCode[4])|Q(Course__Code__contains=CourseCode[5])).count()
+			if Mobile=="full":
+				T_Count[0] = DataCount(10,DBCount1)
+			else:
+				T_Count[0] = DataCount(5,DBCount1)
+		if CourseCode[0] !="ENG":
+			if Mobile == 'full':
+				TotalBoard[0]=(Total_Evaluation.objects.filter(Q(Course__Code__contains=CourseCode[0])|Q(Course__Code__contains=CourseCode[1])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			else :
+				TotalBoard[0]=(Total_Evaluation.objects.filter(Q(Course__Code__contains=CourseCode[0])|Q(Course__Code__contains=CourseCode[1])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+		else:
+			if Mobile == "full":
+				TotalBoard[0]=(Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])|Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])|Q(Course__Code__contains=CourseCode[4])|Q(Course__Code__contains=CourseCode[5])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			else:
+				TotalBoard[0]=(Total_Evaluation.objects.filter(Q(Course__Code__contains=CourseCode[0])|Q(Course__Code__contains=CourseCode[1])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+	#각 페이지의 나타낼 수 있는 총 페이지 수를 출력하기 위한 기능	
+	elif MajorNumber == 1:
+		if CourseCode[0] !="ENG":
+			DBCount2 = Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[2]) |Q(Course__Code__contains=CourseCode[3])).count()
+			if Mobile=="full":
+				T_Count[1] = DataCount(10,DBCount2)
+			else:
+				T_Count[1] = DataCount(5,DBCount2)
+			if Mobile == 'full':
+				TotalBoard[1]=(Total_Evaluation.objects.filter(Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])).order_by("Course__CourseName")[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
+			
+			else :
+				TotalBoard[1]=(Total_Evaluation.objects.filter(Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])).order_by("Course__CourseName")[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
+
+		else:
+			DBCount2=Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])|Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])|Q(Course__Code__contains=CourseCode[4])|Q(Course__Code__contains=CourseCode[5])).count()
+			if Mobile=="full":
+				T_Count[1] = DataCount(10,DBCount2)
+			else:
+				T_Count[1] = DataCount(5,DBCount2)
+			if Mobile == 'full':
+				TotalBoard[1]=(Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])|Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])|Q(Course__Code__contains=CourseCode[4])|Q(Course__Code__contains=CourseCode[5])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
+			else :
+				TotalBoard[1]=(Total_Evaluation.objects.filter(Q(Course__Code__contains =CourseCode[0]) |Q(Course__Code__contains=CourseCode[1])|Q(Course__Code__contains=CourseCode[2])|Q(Course__Code__contains=CourseCode[3])|Q(Course__Code__contains=CourseCode[4])|Q(Course__Code__contains=CourseCode[5])).order_by("Course__CourseName")[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
+	elif MajorNumber == 2:
+		DBCount3=Course_Evaluation.objects.count()
+		if Mobile=="full":
+			T_Count[2] = DataCount(10,DBCount3)
+		else:
+			T_Count[2] = DataCount(5,DBCount3)
 		if Mobile == 'full':
-			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1])).values("CourseName").distinct()[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])).values("CourseName").distinct()[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
-		else :
-			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[0])|Q(Code__contains=CourseCode[1])).values("CourseName").distinct()[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
-			temp.append(Lecture.objects.filter(Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])).values("CourseName").distinct()[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
-	
-		i=0
+			temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
+		else:
+			temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
 		
-		for t in temp:
-				for lec in t:
-						A=Lecture.objects.filter(CourseName=lec['CourseName'])
-						TotalBoard[i].append(A[0])
-				
-						total=0	
-						try:
-								Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
-								for Ev in Eval:
-									total += Ev.Total_Count  
-						except:
-							pass
-						TotalAdd[i].append(total)
-				i+=1	
-	else:
-		if Mobile == 'full':
-			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[0][1]-1)*10:(PageInformation[0][1]-1)*10+10])
-			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[1][1]-1)*10:(PageInformation[1][1]-1)*10+10])
-		else :
-			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5])
-			temp.append(Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).values("CourseName").distinct()[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5])
-	
-		i=0
-		
-		for t in temp: 
-			for lec in t:
-						A=Lecture.objects.filter(CourseName=lec['CourseName'])
-						TotalBoard[i].append(A[0])
-						
-						total=0	
-						try:
-							Eval=Total_Evaluation.objects.filter(Course__CourseName=lec['CourseName'])
-							for Ev in Eval:
-								total += Ev.Total_Count 
-						except:
-								pass
-						TotalAdd[i].append(total)
 
-						
-			i+=1
-		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
-		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
-	if Mobile == 'full':
-		temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*10:(PageInformation[2][1]-1)*10+10]
-	else:
-		temp = Course_Evaluation.objects.all().order_by('-id')[(PageInformation[2][1]-1)*5:(PageInformation[2][1]-1)*5+5]
-	
-
-	for lec in temp: 
-			A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
-			total=0
-			lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Course.Professor
-			TotalBoard[2].append(lec)
-			try:
-				Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor__contains=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
-				for Ev in Eval:
-						total += Ev.Total_Count
-			except:
-				pass
-
-			TotalAdd[2].append(total)
-	TotalBoard[2]= VacationSemesterChange(TotalBoard[2])
-	temp=[]
-	Sugang=[]
-	if Mobile == "full":
+		for lec in temp: 
+				A=Lecture.objects.filter(CourseName=lec.Course.CourseName)		
+				total=0
+				lec.Course.Professor = lec.Course.Professor.split("외")[0] !=None and lec.Course.Professor.split("외")[0] or lec.Course.Professor
+				TotalBoard[2].append(lec)
+				try:
+					Eval=Total_Evaluation.objects.filter(Course__Code =lec.Course.Code,Course__Professor__contains=lec.Course.Professor,Course__CourseName=lec.Course.CourseName)
+					for Ev in Eval:
+							total += Ev.Total_Count
+				except:
+					pass
+				TotalBoard[2]= VacationSemesterChange(TotalBoard[2])
+				TotalAdd[2].append(total)
+	elif MajorNumber == 3:
+		ProfileData=Profile.objects.get(User=User)
+		SugangDataList=ProfileData.LectureRecord.split("$$")
+		DBCount4=len(SugangDataList)
+		if Mobile=="full":
+			T_Count[3] = DataCount(10,DBCount4)
+		else:
+			T_Count[3] = DataCount(5,DBCount4)
+		if Mobile == "full":
 			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*10:(PageInformation[3][1]-1)*10+10]	
-	else:
+		else:
 			SugangDataList = SugangDataList[(PageInformation[3][1]-1)*5:(PageInformation[3][1]-1)*5+5]
-
-	if Mobile == "full":
-			LikeDataList = 	Group_Total_Evaluation.objects.all().order_by('-GroupTotalCount')[(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
-	else:
-			LikeDataList = 	Group_Total_Evaluation.objects.all().order_by('-GroupTotalCount')[(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5] 	
-
-	for SugangData in SugangDataList:
+		for SugangData in SugangDataList:
 			if SugangData =="":
 				continue
 
 			Sugang.append(SugangData.split('->'))
 
+
+	elif MajorNumber == 4:
+		DBCount5=Total_Evaluation.objects.count()
+		if Mobile=="full":
+			T_Count[4] = DataCount(10,DBCount5)
+		else:
+			T_Count[4] = DataCount(5,DBCount5)
+		if Mobile == "full":
+			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*10:(PageInformation[4][1]-1)*10+10]
+		else:
+			LikeDataList = 	Total_Evaluation.objects.all().order_by('-Total_Count')[(PageInformation[4][1]-1)*5:(PageInformation[4][1]-1)*5+5] 	
+	
+	
+	
+		#현재 페이지 위치정보
+	
+
+	
+		
+	
+		#TotalBoard[0] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester',)[(PageInformation[0][1]-1)*5:(PageInformation[0][1]-1)*5+5]
+		#TotalBoard[1] = Lecture.objects.filter(Q(Code__contains =CourseCode[0]) |Q(Code__contains=CourseCode[1])|Q(Code__contains=CourseCode[2])|Q(Code__contains=CourseCode[3])|Q(Code__contains=CourseCode[4])|Q(Code__contains=CourseCode[5])).order_by('CourseName','-Professor','-Semester')[(PageInformation[1][1]-1)*5:(PageInformation[1][1]-1)*5+5]
+	
+	
+	
+	
+
+	
 	
 	# 페이지 총 수(페이지 넘길 때)
-	TotalCount=list()
+	TotalCount=[[],[],[],[],[]]
 		
 	if Mobile == 'full':
-		for i in range(0,len(T_Count)):
-			TotalCount.append(PageTotalCount(T_Count[i],PageInformation[i]))
+		TotalCount[MajorNumber]=(PageTotalCount(T_Count[MajorNumber],PageInformation[MajorNumber]))
 
 	else :
-		for i in range(0,len(T_Count)):
-			TotalCount.append(MobilePageTotalCount(T_Count[i],PageInformation[i],3))
+		TotalCount[MajorNumber]=(MobilePageTotalCount(T_Count[MajorNumber],PageInformation[MajorNumber],3))
 
 	#추천많이받은 순으로 보여주는 Board
 

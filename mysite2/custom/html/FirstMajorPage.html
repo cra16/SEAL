@@ -7,22 +7,27 @@
            {% if forloop.counter0|divisibleby:"2" %}
         <div class="ui stackable two column grid">
           {% endif %}
-            <div class="column">
+          <div class="column">
              <div class="ui raised segment">
-              <div id="likebtn2{{forloop.counter}}" class="left floated ui compact segment" data-toggle="tooltip" data-original-title="해당 과목에 대한 전체 평가 갯수입니다.">
-                <center><img src="{% static "css/seal.png" %} " height="45px" width="45px"></center>
-                <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.0|lookup:forloop.counter0}}</span> SEALS</center>
+
+              <div id="likebtn2{{forloop.counter}}" data-toggle="tooltip" data-original-title="해당 교수님이 한 강의에 대한 평가 갯수입니다." class="left floated ui compact segment" style="margin-bottom:23px">
+                <center><img src="{% static "css/seal.png" %}" height="45px" width="45px"></center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum"></span>{{PBoard1.Total_Count}} SEALS</center>
               </div>
+                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
+                 <p ><a style="cursor:pointer" href="/CourseProfessor/{{PBoard1.Course.id}}"><span id = "last_cname"  class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                <input type = "hidden" id="period" value = "{{PBoard3.Period}}">                
+                <p><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>
+                <p id="title_s"><span id="csem1" name = "cprof">&nbsp;</span></p>
+
               
-                 [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
-                 <p ><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
-                
-                <input type = "hidden" id="period" value = "{{PBoard1.Period}}">
-                <input type = "hidden" id="semester" value = "{{PBoard1.Semester}}">
-                <input type = "hidden" id="professor" value = "{{PBoard1.Professor}}">
-                </div>
+             <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom:10px;"><span class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>        
+              
+
+
             </div>
-           {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
+          </div>
+        {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
         </div>
         <div class="ui divider"></div>
           {% endif %}

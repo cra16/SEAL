@@ -553,7 +553,16 @@ def renewDB(request):
 		elif Course_Eval.Course_Answer ==3 :
 			Course_Eval.Course_Answer=5
 		Course_Eval.save()
+	Lecture_List = Lecture.objects.all().order_by("Semester")
+	Total_Eval_List = Total_Evaluation.objects.all().delete()
+	for lec in Lecture_List:
+		pro = lec.Professor.split(" 외")!=None and lec.Professor.split(" 외")[0] or lec.Professor
+		pro = pro.split("외")!=None and pro.split("외")[0] or pro
 
+		lec.save()
+		temp_total= Total_Evaluation.objects.filter(Course__Code=lec.Code,Course__CourseName=lec.CourseName,Course__Professor__contains=pro).count()
+		if(temp_total ==0):
+			Total_Evaluation(Course=lec).save()
 
 	'''
 	for Course_Eval in Course_EvalList:
@@ -564,17 +573,14 @@ def renewDB(request):
 		Course_Eval.Course = LectureObject
 		Course_Eval.save()
 	'''
-	Total_Eval_List = Total_Evaluation.objects.all().delete()
+	
 	for Course_Eval in Course_EvalList:
-		Course_Professor = Course_Eval.Course.Professor.split("외")[0] != None and Course_Eval.Course.Professor.split("외")[0] or Course_Eval.Course.Professor
-		try:
-			Total_Eval = Total_Evaluation.objects.filter(Course__Code=Course_Eval.Course.Code, Course__Professor__contains=Course_Professor,Course__CourseName=Course_Eval.Course.CourseName)[0]
-			
-		except:
-			Total_Eval=None
-		if Total_Eval == None:
-			a=Lecture.objects.filter(Code=Course_Eval.Course.Code, Professor__contains=Course_Professor,CourseName=Course_Eval.Course.CourseName).order_by("Semester")[0]
-			Total_Eval = Total_Evaluation(Course=a)
+		temp_pro=Course_Eval.Course.Professor.split(" 외")[0] != None and Course_Eval.Course.Professor.split(" 외")[0] or Course_Eval.Course.Professor
+		Course_Professor = temp_pro.split("외")[0] != None and temp_pro.split("외")[0] or temp_pro
+		
+		Total_Eval = Total_Evaluation.objects.get(Course__Code=Course_Eval.Course.Code, Course__Professor__contains=Course_Professor,Course__CourseName=Course_Eval.Course.CourseName)
+		
+	
 		Total_Professor = Total_Eval.Course.Professor.split("외")[0] != None and Total_Eval.Course.Professor.split("외")[0] or Total_Eval.Course.Professor
 		if Total_Eval.Course.CourseName ==Course_Eval.Course.CourseName and Total_Eval.Course.Code ==Course_Eval.Course.Code and Total_Professor == Course_Professor:
 			Total_Eval.Total_Homework+=Course_Eval.Homework

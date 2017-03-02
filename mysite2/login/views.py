@@ -92,7 +92,7 @@ def loginCheck(request):
 			user.backend = 'django.contrib.auth.backends.ModelBackend'	# To login without password
 			auth_login(request, user)
 			#메인페이지 보여줄 함수 호출
-			UserData = MainPageView(request.user,None,None,None,Mobile)
+			UserData = MainPageView(request.user,None,None,2,Mobile)
 			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 			if request.flavour =='full':
 				return render_to_response('html/index.html',UserData)
@@ -111,7 +111,7 @@ def loginCheck(request):
 			
 	#이미 로그인 되어있으면 
 	else:
-		UserData = MainPageView(request.user,None,None,None,Mobile)
+		UserData = MainPageView(request.user,None,None,2,Mobile)
 		request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		if request.flavour =='full':
 			return render_to_response('html/index.html',UserData)

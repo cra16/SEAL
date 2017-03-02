@@ -10,12 +10,16 @@
              <div class="ui raised segment">
               <div id="likebtn2{{forloop.counter}}"  data-toggle="tooltip" data-original-title="해당 과목에 대한 전체 평가 갯수입니다." class="left floated ui compact segment">
                 <center><img src="{% static "css/seal.png" %}" height="45px" width="45px"></center>
-                <center><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard1.GroupTotalCount}}</span> SEALS</center>
+                <center><span id="likenum{{forloop.counter}}" name="likenum">{{PBoard1.Total_Count}}</span> SEALS</center>
               </div>
               
-                 [<span id="ccode" name ="ccode" value ="a">{{PBoard1.Code}}</span>]
-                 <p><a style="cursor:pointer"><span id = "cname"  class="cname" name="cname" value = "">{{PBoard1.CourseName}}</span></a></p>
-
+                [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard1.Course.Code}}</span>]
+                 <p ><a style="cursor:pointer" href="/CourseProfessor/{{PBoard1.Course.id}}"><span id = "last_cname"  class="cname" name="cname" value = "">{{PBoard1.Course.CourseName}}</span></a></p>
+                <input type = "hidden" id="period" value = "{{PBoard3.Period}}">                
+                <p><span id="cprof1" name = "cprof">{{PBoard1.Course.Professor}} 교수님</span></p>
+                <p id="title_s"><span id="csem1" name = "cprof">&nbsp;</span></p>
+                
+                <div class="center aligned sixteen wide column" style="margin-left:155px; margin-top:-35px; margin-bottom:10px;"><span class="starvalue">{{PBoard1.Total_StarPoint}}</span></div>        
                 <input type = "hidden" id="period" value = "{{PBoard1.Course.Period}}">
                 <input type = "hidden" id="semester" value = "{{PBoard1.Course.Semester}}">
                 <input type = "hidden" id="professor" value = "{{PBoard1.Course.Professor}}">

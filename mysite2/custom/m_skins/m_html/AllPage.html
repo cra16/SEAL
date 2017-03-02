@@ -15,7 +15,7 @@
                 <center><span id="likenum{{forloop.counter}}" name="likenum">{{TotalAdd.2|lookup:forloop.counter0}}</span> SEALS</center>
               </div>
               {% if PBoard3.CreatedID.User.username == user.profile.User.username %}             
-              <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PBoard3.Course.id}}"><i class="glyphicon glyphicon-edit" class="course_edit" style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
+              <div class="right floated right aligned one wide column" style="display:inline; margin-top:-6px; margin-right:6px"><a id="{{PBoard3.Course.id}}"><i class="glyphicon glyphicon-edit course_edit"  style="font-size:12px; cursor:pointer"><b style="font-size:12px;">수정 </b></i></a></div>
               {% endif %}
                  [<span id="ccode{{forloop.counter}}" name ="ccode" value ="a">{{PBoard3.Course.Code}}</span>]
                  <p ><a style="cursor:pointer" href="/CourseProfessor/{{PBoard3.Course.id}}"><span id = "last_cname"  class="cname" name="cname" value = "">{{PBoard3.Course.CourseName}}</span></a></p>

@@ -207,7 +207,7 @@ def CourseDelete(request):
 		UpdateData.Total_Count -=1
 
 		if UpdateData.Total_Count ==0:
-			UpdateData.delete()
+			UpdateData.save()
 			Delete_Dis.delete()
 			DeleteData.delete()
 		else:

@@ -35,7 +35,7 @@
             
         }
      
-});
+};
 </script>
  
   <body onload="onLoad()">
@@ -439,6 +439,27 @@
                               
       </div>        
     </div>
+     <div id="pop" style="background:white; 
+        position:fixed; top:10px; left:100px; 
+        border:2px solid #000;z-index:9999">
+                   <div>
+                      <div>
+                    <p style="color:rgb(50,50,50);">팝업 공지 </p>
+                    <a href="/Notice/13">♡♡♡♡♡ [EVENT] 강의평가를 나눠주고 카카오톡 이모티콘을 받아요 ♡♡♡♡♡</a>
+                    
+                   </div>
+                    
+                    
+        <button class="btn popup_close">close</button>
+        </div>
+        </div>
+         <script type="text/javascript">
+    $(document).ready(function() {
+      $('.popup_close').click(function() {
+        $('#pop').hide();
+      });
+    });
+ </script>
 
     <script type="text/javascript" src="{% static "m_skins/m_js/starjs.js" %}"></script>
    <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>

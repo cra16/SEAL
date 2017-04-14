@@ -325,7 +325,7 @@ def TargetTemplate(Current):
 		target[1]="4"
 	elif Current=="SubjectSearch" or Current=="SubjectSearchPageNation":
 		target[0] = "FirstMajorPage.html"
-		target[1] = "5"
+		target[1] = "0"
 	else:
 		target[0] = "SearchPage.html"
 		target[1] = "0"

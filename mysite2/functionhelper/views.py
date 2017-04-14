@@ -323,6 +323,9 @@ def TargetTemplate(Current):
 	elif Current =="LikeSugangPageNation" or Current=="LikeSugangPage":
 		target[0]="LikeSugangPage.html"
 		target[1]="4"
+	elif Current=="SubjectSearch" or Current=="SubjectSearchPageNation":
+		target[0] = "FirstMajorPage.html"
+		target[1] = "5"
 	else:
 		target[0] = "SearchPage.html"
 		target[1] = "0"

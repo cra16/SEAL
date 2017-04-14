@@ -439,7 +439,7 @@ def search_subject_list(request):
 	if request.flavour =='full':
 		return render_to_response('html/Search_Category_Page.html',dic)
 	else:
-		return render_to_response('m_skins/m_html/earch_Category_Page.html',dic)
+		return render_to_response('m_skins/m_html/Search_Category_Page.html',dic)
 def search_subject_page(request):
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")

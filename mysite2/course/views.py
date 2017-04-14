@@ -138,14 +138,6 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			UserData =None
 		
 		#강의 추천 1번이상 안했을 시 정보 안 보여줌
-		if UserData.RecommendCount <1:
-			if UserData.User.username[1:3]=="16":
-				pass
-			elif request.flavour =='full':
-				return render_to_response("html/Course_error.html")
-			else:
-				return render_to_response("m_skins/m_html/Course_error.html")
-
 		
 		try:
 			offset = int(offset)

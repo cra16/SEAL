@@ -139,9 +139,9 @@ for(var i=0; i<ccode.length; i++)
       $("#text_semester").css("border", "2px solid red");
       return false;
     } 
-    else if(CourseComment<30)
+    else if(CourseComment<200)
     {
-      alert("comment의 길이는 30자 이상 이어야 합니다.");
+      alert("comment의 길이는 200자 이상 이어야 합니다.");
       return false;
     }
     else if(paper_result==0)

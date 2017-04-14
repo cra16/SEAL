@@ -94,7 +94,7 @@ def Page(request): #Main Page를 보여주는 함수
 		Page="3"
 	elif PostDic['Current'] =="LikeSugangPage" or PostDic['Current'] =="LikeSugangPageNation":
 		Page="4"
-	elif PostDic['Current'] =="SubjectSearch" or PostDic['SubjectSearch'] =="SubjectSearchPageNation":
+	elif PostDic['Current'] =="SubjectSearch" or PostDic['Current'] =="SubjectSearchPageNation":
 		Page ="5" #어디쪽에 뿌릴지 결정함
 	else:
 		Page ="0"

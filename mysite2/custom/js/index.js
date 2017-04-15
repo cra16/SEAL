@@ -63,7 +63,8 @@ $("div").on('click',"#cname",function(event){
                     $('#SubjectSearch').html(resp);   
                   else if(CurrentPage=="LikeSugangPage")
                     $("#LikeSugangPage").html(resp);
-                  
+                  else if(CurrentPage=="SubjectSearch")
+                    $("#SubjectSearch").html(resp);
                   $('span.starvalue').starvalue();
                   $.fn.initSlide();
                   $('[data-toggle="tooltip"]').tooltip(); 

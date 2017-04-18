@@ -49,7 +49,7 @@
         <a id="listenButton" name = "{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-info">듣고싶어!</button></a>
         <button style="float:left; margin-right:3px" class="btn btn-warning show" id="exam">출제유형!</button>
 
-        <div class="ui long modal scrolling transition" style="width:300px">
+        <div class="ui long modal scrolling transition problem-modal" style="width:300px">
             <div class="header" style="margin-top:35px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
@@ -78,7 +78,35 @@
                 <div class="ui button approve orange" data-value="close">닫기</div>
             </div>
         </div>
+        <div class="ui long modal scrolling transition comment-modal" style="width:300px">
+            <div class="header" style="margin-top:35px"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
+            <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
+              <!--column 2개씩 for문. (여기는 두개 마진 설정 똑같음!)-->
+              {% for Answer_List in Answer_Dis%}
+                {% for Answer in Answer_List%}
+                {%if forloop.counter|divisibleby:2 %}
+                <div class="column">
+                  <div class="ui segment" style="margin-left:10px; margin-right:10px">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {% else %}
+                <div class="column">
+                  <div class="ui segment" style="margin-left:10px; margin-right:10px">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+              {%endfor%}
+              
+            </div>
+                
+            <div class="actions">
+                <div class="ui button approve orange" data-value="close">닫기</div>
+            </div>
+        </div>
       <div id="h_sectiondivider" class="ui section divider"></div>
 
         <br><br>
@@ -196,10 +224,7 @@
 
           <div id="h_innersectiondivider" class="ui section divider"></div>
           <br><br>
-          <div class="ui grid">
-            <div class="left floated center aligned five wide column" style="color:purple; margin-left:6px;"><h4><b>추천</b></h4></div>
-            <button type ="button" style="background-color:#FFEB3B; font-size:22px; margin-left:10px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button><h4 style="display:inline"><b>{{CourseBoard.Total_Recommend}}</b></h4>
-          </div>
+        
           
 
           <div  class="ui grid">
@@ -327,14 +352,7 @@
            
             </div>
 
-          <div class="ui grid">
-            <div class="left floated center aligned five wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if MyCourseBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:20px; margin-top:8px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-            {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; font-size:20px; margin-top:8px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-           {%endif%}
-          </div>
+       
 
           <div class="ui grid">
             <div class="left floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            
@@ -458,14 +476,7 @@
               
             </div>
 
-          <div class="ui grid">
-            <div class="left floated center aligned five wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if OtherBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:20px; margin-top:8px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-            {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; font-size:20px; margin-top:8px" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-           {%endif%}
-          </div>
+       
             
           <div class="ui grid">
             <div class="left floated center aligned five wide column" style="color:orange"><h4><b>만족도</b></h4></div>            

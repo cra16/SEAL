@@ -31,14 +31,14 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
 	LectureData= Lecture.objects.get(id=offset)
 	try:
 		
-		RecommendData=Recommend_Course.objects.get(Course__Course__CourseName=LectureData.CourseName,Course__Course__Code = LectureData.Code, Course__Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
+		RecommendData=Recommend_Course.objects.filter(Course__Course__CourseName=LectureData.CourseName,Course__Course__Code = LectureData.Code, Course__Course__Professor__contains=renew_professor,CreatedID =UserProfile).count()
 		
 	except:
 			RecommendData=None
 	
 
 
-	if RecommendData != None:
+	if RecommendData >0:
 		if request.flavour =='full':
 			return HttpResponseRedirect('/NotEmptyRecommend')
 		else:
@@ -98,9 +98,9 @@ def Recommend_Write(request): #추천 강의 DB입력
 		renew_professor= Professor.split("외")[0] != None and Professor.split("외")[0] or Professor
 
 		try:
-			RecommendData=Recommend_Course.objects.filter(Course__Semester=Semester,Course__CourseName=CourseName,Course__Code = CourseCode, Course__Professor__contains=renew_professor,CreatedID =UserProfile) 
+			RecommendData=Recommend_Course.objects.filter(Course__CourseName=CourseName,Course__Code = CourseCode, Course__Professor__contains=renew_professor,CreatedID =UserProfile).count() 
 
-			if(RecommendData != None):
+			if(RecommendData > 0):
 				return HttpResponseRedirect('/NotEmptyRecommend')
 		except:
 			RecommendData=None

@@ -86,7 +86,8 @@ def SelectPeriod(request, period, page):
 			'BestBoard':BestBoardView(),
 			'SelectMajor':major,
 			'SelectCategory':category,
-			'SearchName':SearchName
+			'SearchName':SearchName,
+			'TotalCountBoard':TotalEvalutionCount()
 		
 		}
 
@@ -169,7 +170,8 @@ def SearchSelectPeriod(request):
 			'BestBoard':BestBoardView(),
 			'SelectMajor':major,
 			'SelectCategory':category,
-			'SearchName':SearchName
+			'SearchName':SearchName,
+			'TotalCountBoard':TotalEvalutionCount()
 		}
 
 		# request.session['cur_page'] = cur_page + 1
@@ -236,7 +238,7 @@ def SelectLecture(request):
 
 			Dic = {
 			"my_lec_table": my_lec_table,
-			'BestBoard':BestBoardView()
+			'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()
 		
 			}
 			if request.flavour =='full':
@@ -253,7 +255,8 @@ def SelectLecture(request):
 
 		Dic = {
 			"my_lec_table": my_lec_table,
-			'BestBoard':BestBoardView()
+			'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()
+
 		
 		}
 		if request.flavour =='full':
@@ -354,8 +357,8 @@ def SearchSubject(request):
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
 				"TotalBoard": TotalBoard,
-				'BestBoard':BestBoardView()
-		
+				'BestBoard':BestBoardView(),
+				'TotalCountBoard':TotalEvalutionCount()
 		}
 		if request.flavour =='full':
 			return render_to_response('html/scheduleTemplate.html',Dic)
@@ -368,7 +371,8 @@ def SearchSubject(request):
 				'user': request.user,
 				"my_lec_table": my_lec_table,
 				"my_profile": my_profile,
-				'BestBoard':BestBoardView()
+				'BestBoard':BestBoardView(),
+				'TotalCountBoard':TotalEvalutionCount()
 		}
 		if request.flavour =='full':
 			return render_to_response('html/schedule.html',Dic)

@@ -177,37 +177,7 @@ def CourseDelete(request):
 		DeleteData=Course_Evaluation.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor, CreatedID=UserData)[0]
 		
 		Delete_Dis = Description_Answer.objects.filter(Course__CourseName=CourseName, Course__Code = Code, Course__Professor__contains=Professor,CreatedID=UserData)
-		CTable = CountTable.objects.all()[0]
-		CTable.TotalCount-=1
-
-		Code = DeleteData.Course.Code[0:3]
-		if Code == "ENG" or Code == "GEK" or Code == "GCS" or Code == "PCO" or Code == "ISL" or Code == "PST":
-			CTable.GLS+=1 
-		elif Code =="ISE":
-			CTable.ISL += 1
-		elif Code =="GMP" or Code == "MEC":
-			CTable.ME += 1
-		elif Code =="LAW" or Code == "UIL":
-			CTable.SOF +=1
-		elif Code =="CCC":
-			CTable.SOCAS += 1
-		elif Code =="CUE":
-			CTable.SESE +=1
-		elif Code =="HMM":
-			CTable.MCE += 1
-		elif Code =="IID":
-			CTable.CCD +=1
-		elif Code =="BFT":
-			CTable.LS += 1
-		elif Code =="ECE" or Code =="ITP":
-			CTable.CSEE+=1
-		elif Code =="CSW":
-			CTable.CPSW +=1
-		elif Code =="SIE":
-			CTable.ICT +=1
-		elif Code =="SIE":
-			CTable.SCEE+=1
-		CTable.save()
+		
 
 		UpdateData=Total_Evaluation.objects.filter(Course__Code = Code, Course__CourseName=CourseName, Course__Professor__contains = Professor)[0]
 
@@ -299,6 +269,38 @@ def CourseDelete(request):
 		UserData = Profile.objects.get(User = request.user)
 		UserData.RecommendCount = Course_Evaluation.objects.filter(CreatedID=UserData).count()
 		UserData.save()
+
+		CTable = CountTable.objects.all()[0]
+		CTable.TotalCount-=1
+
+		Code = DeleteData.Course.Code[0:3]
+		if Code == "ENG" or Code == "GEK" or Code == "GCS" or Code == "PCO" or Code == "ISL" or Code == "PST":
+			CTable.GLS+=1 
+		elif Code =="ISE":
+			CTable.ISL += 1
+		elif Code =="GMP" or Code == "MEC":
+			CTable.ME += 1
+		elif Code =="LAW" or Code == "UIL":
+			CTable.SOF +=1
+		elif Code =="CCC":
+			CTable.SOCAS += 1
+		elif Code =="CUE":
+			CTable.SESE +=1
+		elif Code =="HMM":
+			CTable.MCE += 1
+		elif Code =="IID":
+			CTable.CCD +=1
+		elif Code =="BFT":
+			CTable.LS += 1
+		elif Code =="ECE" or Code =="ITP":
+			CTable.CSEE+=1
+		elif Code =="CSW":
+			CTable.CPSW +=1
+		elif Code =="SIE":
+			CTable.ICT +=1
+		elif Code =="SIE":
+			CTable.SCEE+=1
+		CTable.save()
 		Data={
 
 		'User':UserData,

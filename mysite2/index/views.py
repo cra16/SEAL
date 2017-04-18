@@ -21,7 +21,7 @@ sys.setdefaultencoding("utf-8")
 def MyPage(request):	#MyPage 루트
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-	dic = {'user':request.user,'BestBoard':BestBoardView()}
+	dic = {'user':request.user,'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 		
 	if request.flavour =='full':
 			return render_to_response('html/sealmypage.html',dic)
@@ -32,7 +32,7 @@ def About(request): #About template 루트
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 
-	dic = {'user':request.user, 'BestBoard':BestBoardView()}
+	dic = {'user':request.user, 'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 	
 	if request.flavour =='full':
 			return render_to_response('html/about.html',dic)
@@ -43,7 +43,7 @@ def Schedule(request): #Schedule template 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 	
-	dic={'user':request.user,'BestBoard':BestBoardView()}
+	dic={'user':request.user,'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 
 	if request.flavour =='full':
 		return render_to_response('html/schedule.html',dic)
@@ -54,7 +54,7 @@ def Judgement(request): # 신고 게시판 기능
 
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-	dic = {'user':request.user,'BestBoard':BestBoardView()}
+	dic = {'user':request.user,'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_report.html',dic)
 	else:
@@ -81,7 +81,7 @@ def Page(request): #Main Page를 보여주는 함수
 				PostDic['Course']= ""
 			if 'ProSelect' not in request.POST.keys():
 				PostDic['ProSelect'] = 0
-			
+			 
 	except ValueError:
 			raise Http404() 
 	if PostDic['Current'] =="FirstPage" or PostDic['Current'] =="FirstPageNation":
@@ -95,7 +95,7 @@ def Page(request): #Main Page를 보여주는 함수
 	elif PostDic['Current'] =="LikeSugangPage" or PostDic['Current'] =="LikeSugangPageNation":
 		Page="4"
 	elif PostDic['Current'] =="SubjectSearch" or PostDic['Current'] =="SubjectSearchPageNation":
-		Page ="5" #어디쪽에 뿌릴지 결정함
+		Page ="0 " #어디쪽에 뿌릴지 결정함
 	else:
 		Page ="0"
 
@@ -126,7 +126,7 @@ def SubScript(request): #아직 뭐하는 기능인지 모르겠음
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
 
-	dic = {'user':request.user,'BestBoard':BestBoardView()}
+	dic = {'user':request.user,'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_improve.html',dic)
@@ -154,7 +154,7 @@ def MyCourse(request): #내가 추천한 목록 보여주는 페이지로 감
 		dic = {'user':request.user, 
 				'RecommendPage':RecommendPage,
 				'LikePage':LikePage,
-				'BestBoard':BestBoardView()}
+				'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 		if request.flavour =='full':
 			return render_to_response('html/mycourses.html',dic)
 		else:
@@ -232,6 +232,7 @@ def Search(request): #과목 검색 기능
 				'PageInformation' : PageInformation,
 				'TotalCount':T_Count,
 				'TotalAdd':TotalAdd,
+				'TotalCountBoard':TotalEvalutionCount()
 
 
 			}
@@ -307,7 +308,7 @@ def SearchPage(request):#Search부분 ajax pagenation을 위해 만든 부분
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
 				'TotalAdd':TotalAdd,
-				'Test':Total_Evaluation.objects.filter(Course__Code="GEK10041")
+				'TotalCountBoard':TotalEvalutionCount()
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)
@@ -507,7 +508,7 @@ def search_subject_page(request):
 				'PageInformation' : PageInformation,
 				'TotalCount' : T_Count,
 				'TotalAdd':TotalAdd,
-				'temp':Lecture.objects.filter(Q(CourseName__icontains=Course)).values("Code").distinct()[(PageInformation[1]-1)*5:(PageInformation[1]-1)*5+5]
+				'TotalCountBoard':TotalEvalutionCount()
 			}
 	if request.flavour =='full':
 			return render_to_response('html/SearchPage.html',dic)
@@ -615,4 +616,92 @@ def renewDB(request):
 
 
 	
+	return HttpResponseRedirect("/")
+def renewTableCount(request):
+	if not request.user.username=='admin_seal':
+		return HttpResponseRedirect('/')
+
+	Course_Eval=Course_Evaluation.objects
+	Count=CountTable.objects.count()
+	if Count==0:
+		CTable=CountTable(TotalCount=Course_Eval.count())
+	else:
+		CTable = CountTable.objects.all()[0:1]
+		
+
+	CourseList=Course_Eval.all()
+	GLS = 0
+	ISL = 0
+	ME = 0
+	SOF = 0
+	SOCAS = 0
+	SESE =0
+	MCE = 0
+	CCD = 0
+	LS = 0
+	CSEE = 0
+	CPSW = 0
+	ICT = 0
+	SCCE = 0
+	for Course in CourseList:
+		Code = Course.Course.Code[0:3]
+		if Code == "ENG" or Code == "GEK" or Code == "GCS" or Code == "PCO" or Code == "ISL" or Code == "PST":
+			GLS += 1
+		elif Code =="ISE":
+			ISL += 1
+		elif Code =="GMP" or Code == "MEC":
+			ME += 1
+		elif Code =="LAW" or Code == "UIL":
+			SOF +=1
+		elif Code =="CCC":
+			SOCAS += 1
+		elif Code =="CUE":
+			SESE +=1
+		elif Code =="HMM":
+			MCE += 1
+		elif Code =="IID":
+			CCD +=1
+		elif Code =="BFT":
+			LS += 1
+		elif Code =="ECE" or Code =="ITP":
+			CSEE+=1
+		elif Code =="CSW":
+			CPSW +=1
+		elif Code =="SIE":
+			ICT +=1
+		elif Code =="SIE":
+			SCEE+=1
+	if Count==0:
+		CTable.GLS=GLS 
+		CTable.ISL=ISL
+		CTable.ME=ME 
+		CTable.SOF=SOF 
+		CTable.SOCAS=SOCAS 
+		CTable.SESE=SESE 
+		CTable.MCE=MCE 
+		CTable.CCD=CCD 
+		CTable.LS=LS
+		CTable.CSEE=CSEE 
+		CTable.CPSW=CPSW
+		CTable.ICT=ICT 
+		CTable.SCCE=SCCE
+		CTable.save()
+	else:
+		for C in CTable:
+			C.TotalCount= Course_Eval.count()
+			C.GLS=GLS 
+			C.ISL=ISL
+			C.ME=ME 
+			C.SOF=SOF 
+			C.SOCAS=SOCAS 
+			C.SESE=SESE 
+			C.MCE=MCE 
+			C.CCD=CCD 
+			C.LS=LS
+			C.CSEE=CSEE 
+			C.CPSW=CPSW
+			C.ICT=ICT 
+			C.SCCE=SCCE
+			C.save()
+
 	return HttpResponseRedirect("/")

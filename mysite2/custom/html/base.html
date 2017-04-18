@@ -188,8 +188,31 @@
                 </span>
 
               </best>
- 
+   
+    <div class="col-md-2 col-sm-6 col-xs-12">
+     {% for Board in TotalCountBoard %}
+      <p>총 평가 수 : {{Board.TotalCount}}</p>
+      <p>전공 별 평가:</p>
+     
+      <p>글로벌리더십학부 :{{Board.GLS}}</p>
 
+      <p>국제어문학부 : {{Board.ISL}}</p>
+      <p>경영경제 : {{Board.ME}}</p>
+      <p>법학부 : {{Board.SOF}}</p>
+      <p>언론정보 : {{Board.SOCAS}}</p>
+      <p>공간환경 : {{Board.SESE}}</p>
+      <p>기계제어 : {{Board.MCE}}</p>
+      <p>콘텐츠융합디자인학부 : {{Board.CCD}}</p>
+      <p>생명과학부 : {{Board.LS}}</p>
+      <p>전산전자 : {{Board.CSEE}}</p>
+      <p>삼당심리 : {{Board.CPSW}}</p>
+      <p>ICT : {{Board.ICT}}</p>
+      <p>창의융합교육원 : {{Board.SCCE}}</p>
+      {%endfor%}
+
+
+      <p></p>
+    </div>
     <div class="col-md-1 col-sm-0 col-xs-0"></div>
 
 

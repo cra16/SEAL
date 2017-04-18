@@ -286,7 +286,7 @@
               success:function(resp){     
                        $('#FirstPage').html(resp);
                        $('[data-toggle="tooltip"]').tooltip(); 
-                        $('span.starvalue').starvalue();
+                       $('span.starvalue').starvalue();
 
                  },
                 error: function(xhr, option, error){

@@ -8,18 +8,20 @@
   {% load staticfiles%}
   {% block head%}
     <title>{%block title %} ▒ SEAL ▒{%endblock%} </title>
-         <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
+    <link rel="shortcut icon" href="{% static "css/seal_title.png" %}">
 
-  <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
+    <link href='http://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy' rel='stylesheet' type='text/css'>  
+    
     <style>
       body, input {
         font-family: Helvetica, sans-serif;
         font-size: 12px;
       }
     </style>
-
+    <link rel="stylesheet" type="text/css" href="{% static "css/fancybox.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/course.css" %}">
-       <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/fancybox.js" %}"></script>
     <script type="text/javascript" src="{% static "js/course.js" %}"></script>
     <script>
 
@@ -53,10 +55,10 @@
 
           <a href="/Recommend/{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-danger">평가하기!</button></a>
           <a id="listenButton" name = "{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-info">듣고싶어!</button></a>
-          <button style="float:left; margin-right:3px" class="btn btn-warning show" id="exam">출제유형!</button>
-          <button style="float:left; margin-right:3px" class="btn btn-warning show">코멘트란</button>
+          <button data-fancybox data-src="#hidden-content-2" style="float:left; margin-right:3px" class="btn btn-warning show" id="exam">출제유형!</button>
+          <button data-fancybox data-src="#hidden-content-1" style="float:left; margin-right:3px" class="btn btn-warning comment_show">코멘트란</button>
 
-        <div class="ui long modal scrolling transition">
+        <div id="hidden-content-2" style="display:none;" class="caption1">
             <div class="header"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
 
@@ -81,7 +83,36 @@
             </div>
                 
             <div class="actions">
-                <div class="ui button approve orange" data-value="close">닫기</div>
+                <div class="ui button approve orange close" data-value="close">닫기</div>
+            </div>
+        </div>
+
+        <div  id="hidden-content-1" style="display:none;" class="caption2">
+            <div class="header"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
+            <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">
+
+              <!--여기서부터 column 2개씩 for문. 홀수로 끝나면 위에 column으로 끝나게. (두개 column 패딩이랑 마진 설정 다름!)-->
+              {% for Answer_List in Answer_Dis %}
+                {% for Answer in Answer_List %}
+                {%if forloop.counter|divisibleby:2 %}
+                <div class="column" style="padding-left:10px;">
+                  <div class="ui segment" style="margin-right:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {% else %}
+                <div class="column" style="padding-right:10px;">
+                  <div class="ui segment" style="margin-left:15px;">
+                    <div class="content">ㆍ{{Answer.Answer}}</div>
+                  </div>
+                </div>
+                {%endif%}
+                {%endfor%}
+              {%endfor%}
+            </div>
+                
+            <div class="actions">
+                <div class="ui button approve orange comment-close" data-value="close">닫기</div>
             </div>
         </div>
 
@@ -337,12 +368,7 @@
             <div id="h_innersectiondivider" class="ui section divider"></div>            
 
             <div class="ui grid">
-            <div class="left floated center aligned four wide column" style="color:purple"><h4><b>추천</b></h4></div>
-            {% if MyCourseBoard.Check == True %}
-          <button type ="button" id="enable6" style="background-color:#FFEB3B; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-            {% else %}
-           <button type ="button" id="enable6" style="background-color:#CCC; font-size:18px;" class="circular ui icon button" disabled><i class="glyphicon glyphicon-thumbs-up"></i></button>
-           {%endif%}
+        
 
 
           <div class="floated center aligned four wide column" style="color:orange"><h4><b>만족도</b></h4></div>

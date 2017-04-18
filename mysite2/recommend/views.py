@@ -59,7 +59,8 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
               'BestBoard':BestBoardView(),
                'CourseBoard':CourseBoard,
                'Recommend':RecommendData,
-               'SemesterData':SemesterList
+               'SemesterData':SemesterList,
+               'TotalCountBoard':TotalEvalutionCount()
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)
@@ -123,6 +124,8 @@ def Recommend_Write(request): #추천 강의 DB입력
 		
 		new_Course=Lecture.objects.filter(Semester=Semester ,Code=CourseCode, CourseName = CourseName, Professor__contains=renew_professor).order_by("Semester")[0]
 		new_CreatedID = Profile.objects.get(User= request.user)
+		CTable = CountTable.objects.all()[0]
+
 		for new_Answer in new_Answer_list:#서술형 답변
 			if new_Answer =="":
 				continue
@@ -208,6 +211,36 @@ def Recommend_Write(request): #추천 강의 DB입력
 		new_Eval = Course_Evaluation(Course = new_Course, CreatedID = new_CreatedID, Homework = new_Homework, Level_Difficulty = new_Level_Difficulty,
 			CourseComment=new_CourseComment,Check =new_Check,StarPoint=new_Satisfy,What_Answer=total_paper_value,Who_Answer=new_Who,Course_Answer=total_course_value)
 		
+		CTable.TotalCount+=1
+
+		Code = new_Course.Code[0:3]
+		if Code == "ENG" or Code == "GEK" or Code == "GCS" or Code == "PCO" or Code == "ISL" or Code == "PST":
+			CTable.GLS+=1 
+		elif Code =="ISE":
+			CTable.ISL += 1
+		elif Code =="GMP" or Code == "MEC":
+			CTable.ME += 1
+		elif Code =="LAW" or Code == "UIL":
+			CTable.SOF +=1
+		elif Code =="CCC":
+			CTable.SOCAS += 1
+		elif Code =="CUE":
+			CTable.SESE +=1
+		elif Code =="HMM":
+			CTable.MCE += 1
+		elif Code =="IID":
+			CTable.CCD +=1
+		elif Code =="BFT":
+			CTable.LS += 1
+		elif Code =="ECE" or Code =="ITP":
+			CTable.CSEE+=1
+		elif Code =="CSW":
+			CTable.CPSW +=1
+		elif Code =="SIE":
+			CTable.ICT +=1
+		elif Code =="SIE":
+			CTable.SCEE+=1
+		CTable.save()
 
 		new_Eval.Total_Course_id=T_Eval.id
 		new_Eval.save()

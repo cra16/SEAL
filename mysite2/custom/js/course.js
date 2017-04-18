@@ -1,4 +1,4 @@
-$(function(){
+  $(function(){
   $.fn.slider.Constructor.prototype.disable = function () {this.picker.off();}
   $.fn.slider.Constructor.prototype.enable = function () {
     if (this.touchCapable) {
@@ -18,20 +18,8 @@ $(function(){
   $(".ui.modal").modal("hide");
 });
 
-$(document).on("click", ".show", function () {
-    $(".ui.modal").modal("setting", {
-        closable: true,
-        onApprove: function () {
-            return false;
-        }
-    }).modal("show");
-}).on("click", ".ui.button", function () {
-    switch ($(this).data("value")) {
-        case 'close':
-            $(".ui.modal").modal("hide");
-            break;
-    }
-});
+
+
   for(var i=1; i<=10; i++)
   {
     for(var j=1; j<=5; j++)
@@ -197,6 +185,6 @@ $(window).load(function()
                 });
                 
             });
-
+        
            
-        });
+});

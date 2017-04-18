@@ -46,6 +46,7 @@ def QnAMain(request): #Q&A 메인
 		   'TotalCount' : TotalCount, 
 		   'PageInformation' : PageInformation,
 		   'Today' : Today,
+		   'TotalCountBoard':TotalEvalutionCount()
 		   }
 	if request.flavour =='full':
 		return render_to_response('html/QnA.html',dic)
@@ -95,6 +96,7 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 		   'TotalCount' : TotalCount, 
 		   'PageInformation' : PageInformation,
 		   'Today' : Today,
+		   'TotalCountBoard':TotalEvalutionCount()
 		   }
 
 	if request.flavour =='full':
@@ -105,7 +107,7 @@ def QnA(request): #Q&A 페이지로 넘겼을때 나오는 기능
 def QnAWrite(request): #Q&A Write 기능
 	if CheckingLogin(request.user.username):
 		return HttpResponseRedirect("/")
-	dic = {'user':request.user, 'BestBoard':BestBoardView()}
+	dic = {'user':request.user, 'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 	if request.flavour =='full':
 		return render_to_response('html/subscribe_faq.html',dic)
 	else:
@@ -160,7 +162,7 @@ def QnARead(request, offset): #Q&A read 기능
 			'QnA_Reply' : QnA_Reply,
 			'Previous' : Previous,
 			'Next':Next,
-			'BestBoard':BestBoardView(),}
+			'BestBoard':BestBoardView(),'TotalCountBoard':TotalEvalutionCount()}
 
 		if request.flavour =='full':
 			return render_to_response('html/qna-contents.html',dic)

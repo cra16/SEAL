@@ -118,7 +118,8 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			'OtherCourseBoard':OtherCourseBoard,
 			'PageInformation':PageInformation,
 			'OtherCount':OtherCount,
-			'Count':totalcount		
+			'Count':totalcount,
+			'TotalCountBoard':TotalEvalutionCount()
 			}
 	if request.flavour =='full':
 		return render_to_response('html/coursepage.html',dic)
@@ -228,7 +229,7 @@ def CourseProfessor(request, offset): #해당 수업에 대한 강의 추천 모
 			'OtherCount':OtherCount,
 			'PageInformation':PageInformation,
 			'Answer_Dis' : Description,
-			'test':CourseBoard[1]	
+			'TotalCountBoard':TotalEvalutionCount()
 
 			
 			

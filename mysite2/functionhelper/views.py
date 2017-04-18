@@ -301,7 +301,8 @@ def MainPageView(user, pageinformation,PageNumber,MajorNumber,Mobile):
 		   'LikeList':LikeDataList,
 		   'CourseName':None,
 		   'SelectPageView' :PageInformation,
-		   'NoticeBoard':NoticeBoard
+		   'NoticeBoard':NoticeBoard,
+		    'TotalCountBoard':TotalEvalutionCount()
 			  }
 
 	return dic
@@ -688,3 +689,6 @@ def NoticeBoardView():
 	 
 	 return NoticeBoard
 
+def TotalEvalutionCount():
+	
+	return CountTable.objects.all()[0:1]

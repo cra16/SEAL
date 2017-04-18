@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
 from django.db import models
 from login.models import Profile
 from lecture.models import Lecture
@@ -49,7 +51,7 @@ class Total_Evaluation(models.Model):
 	Total_Practice_Like = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return '%s %s %s' % (self.Course.Code,self.Course.Professor, self.Course.CourseName)
+		return '%s %s %s %d' % (self.Course.Code,self.Course.Professor, self.Course.CourseName,self.Course.id)
 
 class Group_Total_Evaluation(models.Model):
 	Code = models.CharField(max_length=20, null=False)
@@ -58,5 +60,24 @@ class Group_Total_Evaluation(models.Model):
 
 	def __unicode__(self):
 		  return '%s %s %d' % (self.CourseName, self.Code,self.GroupTotalCount)
+
+class CountTable(models.Model):
+	TotalCount= models.IntegerField(default=0)
+	WeekCount = models.IntegerField(default=0)
+	GLS = models.IntegerField(default=0)#GLS
+	ISL = models.IntegerField(default=0)#국제어문
+	ME = models.IntegerField(default=0)#경영경제
+	SOF = models.IntegerField(default=0)#법학부
+	SOCAS = models.IntegerField(default=0)#언론정보
+	SESE = models.IntegerField(default=0)#공간환경
+	MCE = models.IntegerField(default=0)#기계제어
+	CCD = models.IntegerField(default=0)#콘텐츠융합디자인학부
+	LS = models.IntegerField(default=0)#생명과학부
+	CSEE = models.IntegerField(default=0)#전산전자
+	CPSW = models.IntegerField(default=0)#상사
+	ICT = models.IntegerField(default=0)#ICT
+	SCCE = models.IntegerField(default=0)#창의융합교육원
+
+
 
 # Create your models here.

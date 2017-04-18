@@ -36,7 +36,8 @@ def NoticeMain(request):#Notice 기능
 		   'PageBoard':PageBoard, 
 		   'PageInformation':PageInformation,
 		   'TotalCount' : PageTotalCount(T_Count,PageInformation),
-		   'Today':Today 
+		   'Today':Today,
+		   'TotalCountBoard':TotalEvalutionCount()
 			}
 	if request.flavour =='full':
 			return render_to_response('html/notice.html',dic)
@@ -74,7 +75,8 @@ def Notice(request): #Notice Page 넘겨졌을때 나오는 페이지
 				   'PageBoard':PageBoard,
 				   'TotalCount' : TotalCount,
 				   'Today' :Today,
-				   'PageInformation':PageInformation
+				   'PageInformation':PageInformation,
+				   'TotalCountBoard':TotalEvalutionCount()
        			  }
 	if request.flavour =='full':
 			return render_to_response('html/NoticeList.html',dic)
@@ -108,7 +110,8 @@ def Notice_Read(request, offset): #Notice Read 기능
 		'BestBoard':BestBoardView(),
 		'Previous' :Previous,
 		'Next' :Next,
-		'Board':Current}
+		'Board':Current,
+		'TotalCountBoard':TotalEvalutionCount()}
 	if request.flavour =='full':
 			return render_to_response('html/notice-contents.html',dic)
 	else:

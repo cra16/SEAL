@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 	url(r'^update/$','lecture.views.lec_update'),
 	url(r'^DBUpdate/$','lecture.views.UpdateLogin'),
 	url(r'^CurUpdate/$','lecture.views.AutoFastLecUpdate'),
+	url(r'^upload/$','course.views.UploadFile'),
+	url(r'^download/','course.views.download')
 
 	
 )
@@ -64,7 +66,8 @@ urlpatterns += patterns('index.views',
 	url(r'^LikeSugangPage/','Page'),
 	url(r'^TotalDBCountUpdate/','GroupTotalCountRenew'),
 	url(r'^RenewDB/','renewDB'),
-	url(r'^RenewCount/','renewTableCount')
+	url(r'^RenewCount/','renewTableCount'),
+	url(r'^EVENT/','ShowEvent')
 )#mainPage view
 
 urlpatterns += patterns('mypage.views',

@@ -3,11 +3,12 @@
 
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404,HttpResponse,FileResponse
+
 from index.models import *
 from lecture.models import *
 from login.models import *
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 import datetime
 from django.db.models import Q		
 
@@ -111,7 +112,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 		PageInformation[1]=offset2
 		OtherCount=MobilePageTotalCount(O_Count,PageInformation,3)
 	OtherCourseBoard=OtherCourseBoard[PageFirst:PageLast]
-	dic ={'user':request.user,
+	dic = RequestContext ({'user':request.user,
 			'BestBoard':BestBoardView(),
 			'CourseBoard':CourseBoard,
 			'MyCourseBoard':MyCourseBoard,
@@ -120,7 +121,7 @@ def CoursePage(request, offset): #해당 수업에 대한 강의 추천 모두 �
 			'OtherCount':OtherCount,
 			'Count':totalcount,
 			'TotalCountBoard':TotalEvalutionCount()
-			}
+			})
 	if request.flavour =='full':
 		return render_to_response('html/coursepage.html',dic)
 	else:
@@ -399,6 +400,27 @@ def PeriodCoursePage(request,offset): #학기별로 나뉘어진 강의 눌렀�
 				else:
 					return render_to_response("m_skins/m_html/coursepage.html",dic)
 '''
+@csrf_exempt
+def UploadFile(request):
+    if request.method == 'POST':
+        if 'file' in request.FILES:
+            file = request.FILES['file']
+            filename = file._name
+
+            fp = open('%s/%s' % ("/opt/bitnami/apps/django/django_projects/darkzero/mysite2/db", filename) , 'wb')
+            for chunk in file.chunks():
+                fp.write(chunk)
+            fp.close()
+            return HttpResponse('File Uploaded')
+    return HttpResponse('Failed to Upload File')
+@csrf_exempt
+def download(request):
+    file_name = request.GET['filename']
+    path_to_file = "/opt/bitnami/apps/django/django_projects/darkzero/mysite2/"
+    response = FileResponse(open(path_to_file+request.GET['filename'], 'rb'))
+    response['Content-Disposition'] = 'attachment; filename=%s' % str(file_name)
+    #response['X-Sendfile'] = str(path_to_file)
+    return response
 #해당 강의 총 평가 데이터 모음을 구현 하기 위한 함수
 def TotalCourse(offset):
 	

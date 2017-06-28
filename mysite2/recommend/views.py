@@ -60,7 +60,8 @@ def Recommend(request, offset): #강의 추천 스크롤 기능
                'CourseBoard':CourseBoard,
                'Recommend':RecommendData,
                'SemesterData':SemesterList,
-               'TotalCountBoard':TotalEvalutionCount()
+               'TotalCountBoard':TotalEvalutionCount(),
+               
 				}
 		if request.flavour =='full':
 			return render_to_response('html/recommend.html',dic)

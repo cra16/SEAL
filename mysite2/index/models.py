@@ -20,7 +20,7 @@ class Course_Evaluation(models.Model):
 	Homework = models.PositiveSmallIntegerField(default=5, null=False)
 	Level_Difficulty = models.PositiveSmallIntegerField(default=5, null=False)
 	Check = models.BooleanField(default=False)
-	CourseComment = models.TextField(max_length=1000)
+	CourseComment = models.TextField(max_length=2000)
 	StarPoint =models.FloatField(default=0)
 	What_Answer = models.IntegerField(default=0)
 	Exam_Answer = models.ManyToManyField(Description_Answer)

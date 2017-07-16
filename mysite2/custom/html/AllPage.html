@@ -2,9 +2,6 @@
 {%load staticfiles%}
 			 {% if CourseName == None %}
        {% for PBoard3 in PageBoard.2%}
-          {% if forloop.counter0|divisibleby:"2" %}
-        <div class="ui stackable two column grid">
-          {% endif %}
           <div class="column">
              <div class="ui raised segment">
 
@@ -42,10 +39,8 @@
 
             </div>
           </div>
-        {% if not forloop.counter0|divisibleby:"2" or forloop.last %}
-        </div>
         <div class="ui divider"></div>
-          {% endif %}
+       
       {% endfor%} 
 
 			  <center><div id ="ThirdPageNation" class="ui borderless pagination menu">

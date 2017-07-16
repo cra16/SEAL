@@ -133,7 +133,6 @@
           </div>
           
         </div>
-        <div class="col-md-1 col-sm-0"></div>
       </div>
     </div>
    {%endif%}
@@ -144,9 +143,8 @@
     {% if not user == None%}
       
       <div id="h_sectiondivider" class="ui section divider"></div>
-    </div>
-    <div>{{TotalCountBoard.0.TotalCount}}</div>
-    <div class="btn chart_view" data-fancybox data-options="{css:{display:'flex'}}" data-src="#hidden-content-1" >차트 보기</div>
+      </div>
+    
       <div style="display:none; width:100%;" id="hidden-content-1" class="course-total-chart-view caption1">
         <div style="display:flex; justify-content: center;">
           <canvas id="batteryChart" width="250" height="700"></canvas>
@@ -213,6 +211,7 @@
       </div>
       </div>
    </div>
+   <div class="col-md-3">
               <profile id="profile" class="col-md-2 col-sm-6 col-xs-12">
                    
                 <h3><a href="/MyPage"><span id="name">{{user.profile.UserName}}</span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/Logout"><span id="logout">LOGOUT</span></a><span id="detail"><br /><span id="year">{{user.username.1}}{{user.username.2}}</span>학번 / <span id="major">{{user.profile.FirstMajor}}</span></span></h3>
@@ -257,14 +256,9 @@
                 </span>
 
               </best>
-   
-    <div class="col-md-2 col-sm-6 col-xs-12">
-    
-
-
-      <p></p>
-    </div>
-    <div class="col-md-1 col-sm-0 col-xs-0"></div>
+              <div class="col-md-12">총 강의 평가 수 : {{TotalCountBoard.0.TotalCount}}</div>
+              <div class=" btn chart_view" data-fancybox data-options="{css:{display:'flex'}}" data-src="#hidden-content-1" >강의평가 차트 보기</div>
+  </div>
 
 
   <div>

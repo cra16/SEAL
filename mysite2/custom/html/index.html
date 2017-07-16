@@ -168,7 +168,7 @@
           </div>
          
 	<div id ="ThirdPage" name="ThirdPage" class="course_data ui divided very relaxed selection inbox list active tab col-md-12" style="margin: 0em 0em;" data-tab="all">
-    <div class="col-md-6">
+    <div class="col-md-12">
     {% for PBoard3 in PageBoard.2%}
           <div class="column sugang-box">
              <div class="ui raised segment">
@@ -211,82 +211,6 @@
           </div>
          <div class="ui divider"></div>
       {% endfor%} 
-    </div>
-    <div class="col-md-4">
-    	<canvas id="batteryChart" width="250" height="700"></canvas>
-    </div>
-    <script>
-    
-           var ctx = $("#batteryChart");
-                            
-              new Chart(ctx, {
-              type: 'horizontalBar',
-              data: {
-
-                  labels: ["글로벌리더십학부","국제어문학부","경영경제","법학부","언론정보","공간환경","기계제어","콘텐츠융합디자인학부","생명과학부","전산전자","삼당심리","ICT","창의융합교육원"],
-                  datasets: [{
-                    data: 
-                       [
-                        {% for Board in TotalCountBoard %} 
-                        {{Board.GLS}},{{Board.ISL}},{{Board.ME}},{{Board.SOF}},{{Board.SOCAS}},{{Board.SESE}},{{Board.MCE}},{{Board.CCD}},{{Board.LS}},{{Board.CSEE}},{{Board.CPSW}},{{Board.ICT}},{{Board.SCCE}}
-                        {%endfor%}
-                      ],
-                      "backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],"borderColor":["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],"borderWidth":1
-                      
-                    }]
-                  },
-              
-
-                options: {
-                  responsive: false,
-                  legend: {
-                 display: false,
-
-              },
-              scales: {
-                  xAxes: [{
-                      stacked: true,
-                      ticks:{
-                          fontSize:15
-                      }
-                  }],
-                  yAxes: [{
-                       display: true,
-                   
-                       ticks: {
-                        stepSize: 100 
-                         
-                     },
-                    
-                  }]
-              },
-              
-
-          
-               }
-              });
-
-    </script>
-    <div class="col-md-2">
-     {% for Board in TotalCountBoard %}
-      <p>총 평가 수 : {{Board.TotalCount}}</p>
-      <p>전공 별 평가:</p>
-     
-      <p>글로벌리더십학부 :{{Board.GLS}}</p>
-
-      <p>국제어문학부 : {{Board.ISL}}</p>
-      <p>경영경제 : {{Board.ME}}</p>
-      <p>법학부 : {{Board.SOF}}</p>
-      <p>언론정보 : {{Board.SOCAS}}</p>
-      <p>공간환경 : {{Board.SESE}}</p>
-      <p>기계제어 : {{Board.MCE}}</p>
-      <p>콘텐츠융합디자인학부 : {{Board.CCD}}</p>
-      <p>생명과학부 : {{Board.LS}}</p>
-      <p>전산전자 : {{Board.CSEE}}</p>
-      <p>삼당심리 : {{Board.CPSW}}</p>
-      <p>ICT : {{Board.ICT}}</p>
-      <p>창의융합교육원 : {{Board.SCCE}}</p>
-      {%endfor%}
     </div>
         <center><div id ="ThirdPageNation" class="ui borderless pagination menu">
               <a id ="Previous" class="item" name="{{PageInformation.2.0}}">
@@ -565,10 +489,10 @@ CRA와 총학생회 '기대'가 협력하여 준비한 이벤트!
 대상: 많은 강의평가를 남겨주신 학우님(최소 7개 이상) 
 
 *이벤트는 중간고사이후 9주차에도 다시한번 진행이 될 예정이니 
-많은 관심 부탁드립니다 :)</pre></div>-->
+많은 관심 부탁드립니다 :)</pre></div>
                     
                     
-        <button class="btn popup_close">close</button>
+        <button class="btn popup_close">close</button>-->
          <script type="text/javascript">
     $(document).ready(function() {
       $('.popup_close').click(function() {
@@ -579,7 +503,10 @@ CRA와 총학생회 '기대'가 협력하여 준비한 이벤트!
 
     </div>
 
-     <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
+    
+
+
+    <script type="text/javascript" src="{% static "js/starjs.js" %}"></script>
     <script type="text/javascript" src="{% static "js/IndexPage/main.js" %}"></script>
     <script id="indexslider" type="text/javascript" src="{% static "js/indexslider.js" %}"></script>
     {%endblock%}

@@ -57,7 +57,17 @@
           <a id="listenButton" name = "{{CourseBoard.Course.id}}"><button style="float:left; margin-right:3px" class="btn btn-info">듣고싶어!</button></a>
           <button data-fancybox data-src="#hidden-content-2" style="float:left; margin-right:3px" class="btn btn-warning show" id="exam">출제유형!</button>
           <button data-fancybox data-src="#hidden-content-1" style="float:left; margin-right:3px" class="btn btn-warning comment_show">코멘트란</button>
+           <form action="/upload/"
+              method="post"
+              enctype="multipart/form-data"> 
+              {%csrf_token%}
+             <input type="file"
+                   name="file"
+                   id="id_file" />
 
+            <input type="submit" value="UPLOAD" /> 
+            </form>
+            <a href="/download/?filename=c.zip">파일 테스트</a>
         <div id="hidden-content-2" style="display:none;" class="caption1">
             <div class="header"><i class="glyphicon glyphicon-list-alt" style="color:grey"></i>&nbsp;&nbsp;&nbsp;출제유형</div>
             <div class="ui stackable two column grid" style="margin-top:10px; margin-bottom:10px">

@@ -705,3 +705,8 @@ def renewTableCount(request):
 			C.save()
 
 	return HttpResponseRedirect("/")
+def ShowEvent(request):
+	if not request.user.username=='admin_seal':
+		return HttpResponseRedirect('/')
+	Course_Eval =Course_Evaluation.objects.filter().values("CreatedID__User__username","CreatedID__UserName","CreatedID__RecommendCount").annotate(countId=Count("id")).filter(countId__gte=6)
+	return render_to_response("html/event.html",{"GG":Course_Eval,"Count":Course_Eval.count()})

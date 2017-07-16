@@ -3,6 +3,7 @@
 
 # login app 정리 부분적으로 완료(2/22)
 
+from django.views.generic import TemplateView
 from lecture.models import *#강의 목록
 from django.contrib.auth.decorators import login_required#로그인 허용기능
 from django.contrib.auth import logout #로그아웃 기능
@@ -17,6 +18,7 @@ from django.db.models import Q #데이터 베이스 OR 기능 구현
 from index.models import * #아직 시험중
 from index.views import MajorSelect, PageView#전공 선택 및 페이지 메인 페이지 보여주는 함수를 불러옴
 from django.core.exceptions import PermissionDenied
+from django.core.context_processors import csrf
 
 # from selenium import webdriver	# 히스넷 체크를 위한 크롤링 모듈
 from login.models import Profile	# 회원 추가 정보 model
@@ -27,9 +29,11 @@ from bs4 import BeautifulSoup
 # django encoding
 from django.utils.encoding import smart_str, smart_unicode
 
-@csrf_exempt
+@csrf_protect
 def loginCheck(request):
 	##로그인 할때 체킹하는 부분
+	template_name = 'html/login.html'
+	m_template_name = "m_skins/m_html/login.html"
 	Mobile = request.flavour
 	if request.method == 'POST':
 		if request.POST.get('id', 'None') == 'admin_seal':
@@ -56,7 +60,7 @@ def loginCheck(request):
 		elif request.POST.get('id', 'None'):
 			username = request.POST['id']		# 여기서 username은 학번이 아닌 입력받은 히스넷 아이디
 			password = request.POST['pw']
-
+			
 			# 크롤링 Configuration
 			browser = mechanize.Browser()
 			browser.set_handle_robots(False)
@@ -95,9 +99,9 @@ def loginCheck(request):
 			UserData = MainPageView(request.user,None,None,2,Mobile)
 			request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 			if request.flavour =='full':
-				return render_to_response('html/index.html',UserData)
+				return render(request,'html/index.html',UserData)
 			else:
-				return render_to_response("m_skins/m_html/index.html",UserData)
+				return render(request,"m_skins/m_html/index.html",UserData)
 
 		else:
 			return LoginError(request)
@@ -105,24 +109,28 @@ def loginCheck(request):
 	#로그인 되지 않았을 경우 다시 로그인페이지로
 	elif request.user.username =="":
 		if request.flavour =='full':
-			return render_to_response('html/login.html')
+			return render(request,'html/login.html',{'user':None})
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return render(request,'m_skins/m_html/login.html',{'user':None})
 			
 	#이미 로그인 되어있으면 
 	else:
 		UserData = MainPageView(request.user,None,None,2,Mobile)
 		request.session['PageInformation']=[[1,1,1],[1,1,1],[1,1,1],[1,1,1],[1,1,1]]
 		if request.flavour =='full':
-			return render_to_response('html/index.html',UserData)
+			return render(request,'html/index.html',UserData)
 		else:
-			return render_to_response("m_skins/m_html/index.html", UserData)
+			return render(request,"m_skins/m_html/index.html", UserData)
 #로그인 페이지	
-def login(request):
-	if request.flavour =='full':
-		return render_to_response('html/login.html')
-	else:
-		return render_to_response('m_skins/m_html/login.html')
+class LoginView(TemplateView):
+	def login(request):
+		template_name = 'html/login.html'
+		m_template_name = "m_skins/m_html/login.html"
+		if request.flavour =='full':
+			 
+			return render(request,template_name,{"user":request.user})
+		else:
+			return render_to_response(request,m_template_name,{"user":request.user})
 #로그아웃
 def logout_page(request):
     logout(request)
@@ -130,15 +138,15 @@ def logout_page(request):
 
 def LoginError(request):
 	if request.flavour =='full':
-		return render_to_response('html/login_error.html')
+		return render(request,'html/login_error.html')
 	else:
-		return render_to_response("m_skins/m_html/login_error.html")
+		return render(request,"m_skins/m_html/login_error.html")
 
 def Confirm(request):
 	if request.flavour =='full':
-		return render_to_response('html/confirm.html')
+		return render(request,'html/confirm.html')
 	else:
-		return render_to_response('m_skins/m_html/confirm.html')
+		return render(request,'m_skins/m_html/confirm.html')
 
 @csrf_exempt
 def HisnetCheck(request):
@@ -162,9 +170,9 @@ def HisnetCheck(request):
 			}
 
 			if request.flavour =='full':
-				return render_to_response('html/agree_reg.html', ctx)
+				return render(request,'html/agree_reg.html', ctx)
 			else:
-				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
+				return render(request,'m_skins/m_html/agree_reg.html', ctx)
 
 		else:
 			hisnet_id = request.POST['id']
@@ -222,16 +230,16 @@ def HisnetCheck(request):
 			}
 
 			if request.flavour =='full':
-				return render_to_response('html/agree_reg.html', ctx)
+				return render(request,'html/agree_reg.html', ctx)
 			else:
-				return render_to_response('m_skins/m_html/agree_reg.html', ctx)
+				return render(request,'m_skins/m_html/agree_reg.html', ctx)
 	else:
 		if request.flavour =='full':
-			return render_to_response('html/login.html')
+			return render(request,'html/login.html')
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return render(request,'m_skins/m_html/login.html')
 
-@csrf_exempt
+@csrf_protect
 def Register(request):
 	if request.method=='POST':
 		stu_num = request.POST['stu_num']
@@ -255,21 +263,21 @@ def Register(request):
 			if e_user:
 				e_user.delete()
 			if request.flavour =='full':
-				render_to_response('html/error.html')
+				render(request,'html/error.html')
 			else:
-				render_to_response('m_skins/m_html/error.html')
+				render(request,'m_skins/m_html/error.html')
 		if request.flavour =='full':
 			return HttpResponseRedirect('/')
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return render(request,'m_skins/m_html/login.html')
 		
 	else:
 		if request.flavour =='full':
-			return render_to_response('html/login.html')
+			return render(request,'html/login.html')
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return render(request,'m_skins/m_html/login.html')
 
-@csrf_exempt
+@csrf_protect
 def RegisterInfo(request):
 	if request.method=='POST':
 		stu_num = request.POST['stu_num']
@@ -296,9 +304,9 @@ def RegisterInfo(request):
 				e_user.delete()
 
 			if request.flavour =='full':
-				return render_to_response('html/stu_num_duplicate.html')
+				return render(request,'html/stu_num_duplicate.html')
 			else:
-				return render_to_response('m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
+				return render(request,'m_skins/m_html/stu_num_duplicate.html')	# m_skin 없음
 
 		if request.flavour =='full':
 			return loginCheck(request)
@@ -307,8 +315,8 @@ def RegisterInfo(request):
 
 	else:
 		if request.flavour =='full':
-			return render_to_response('html/login.html')
+			return render(request,'html/login.html')
 		else:
-			return render_to_response('m_skins/m_html/login.html')
+			return render(request,'m_skins/m_html/login.html')
 def static_forbidden(request):
 	raise  PermissionDenied
